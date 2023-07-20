@@ -17,11 +17,8 @@ app.use(express.urlencoded({ extended: true })); // to accept form data
 app.use(cookieParser()); // to parse cookie data
 
 // Routes
-app.use("/api/auth", authRoutes);
 
 // Error Handlers
-app.use(customError);
-app.use(errorHandler);
 
 // Listeners
 app.listen(PORT, () => console.log("Server started at port 5000"));
