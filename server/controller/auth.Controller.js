@@ -3,14 +3,27 @@ import adminModel from "../models/adminModel.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+
+  res.status(200).json({
+    message: "User logged in successfully",
+  });
 });
 export const registerUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, contact } = req.body;
 
-  const user = await adminModel.findOne({ email }).select("_id");
-  if (user) {
+  const emailExist = await adminModel.findOne({ email }).select("_id").lean();
+  if (emailExist) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error("Email already exists, please Try again");
+  }
+
+  const contactExist = await adminModel
+    .findOne({ contact })
+    .lean()
+    .select("_id");
+  if (contactExist) {
+    res.status(400);
+    throw new Error("Contact Already exist, please try again");
   }
 
   const newUser = await adminModel.create(...req.body);
