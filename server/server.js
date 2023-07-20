@@ -2,8 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
-import { authRoutes } from "./routes/index.js";
-import { customError, errorHandler } from "./middleware/errorHandler.js";
 
 // Configuration
 dotenv.config();
@@ -20,6 +18,7 @@ app.use(cookieParser()); // to parse cookie data
 
 // Routes
 app.use("/api/auth", authRoutes);
+
 // Error Handlers
 app.use(customError);
 app.use(errorHandler);
