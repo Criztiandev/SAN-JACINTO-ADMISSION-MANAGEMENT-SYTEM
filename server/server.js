@@ -24,4 +24,4 @@ app.use(customError);
 app.use(errorHandler);
 
 // Listeners
-app.listen(PORT, () => console.log("Server started at port 5000"));
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
