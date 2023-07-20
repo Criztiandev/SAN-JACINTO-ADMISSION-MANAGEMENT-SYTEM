@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from "bcrypt";
 export const adminSchema = mongoose.Schema(
   {
     fullName: { type: String, require: true },
@@ -11,5 +11,17 @@ export const adminSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Middleware to hash password before saving
+adminSchema.pre("save", async function (next) {
+  // Check if password is modified
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 export default mongoose.model("admin", adminSchema);
