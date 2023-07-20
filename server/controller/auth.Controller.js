@@ -8,10 +8,12 @@ export const loginUser = asyncHandler(async (req, res) => {
     message: "User logged in successfully",
   });
 });
+
 export const registerUser = asyncHandler(async (req, res) => {
-  const { email, password, contact } = req.body;
+  const { email, contact } = req.body;
 
   const emailExist = await adminModel.findOne({ email }).select("_id").lean();
+
   if (emailExist) {
     res.status(400);
     throw new Error("Email already exists, please Try again");
@@ -26,7 +28,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Contact Already exist, please try again");
   }
 
-  const newUser = await adminModel.create(...req.body);
+  const newUser = await adminModel.create({ ...req.body });
   if (!newUser) {
     res.status(400);
     throw new Error("Invalid user data");
