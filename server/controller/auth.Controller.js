@@ -1,14 +1,13 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
+import { generateToken } from "../utils/token.utils.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await adminModel
-    .findOne({
-      $or: [{ email: email }, { contact: email }],
-    })
-    .select("_id");
+  const user = await adminModel.findOne({
+    $or: [{ email: email }, { contact: email }],
+  });
 
   if (!user) {
     res.status(400);
@@ -21,6 +20,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   }
 
   // Generate token
+  generateToken(res, user._id);
 
   res.status(200).json({
     message: "User logged in successfully",
