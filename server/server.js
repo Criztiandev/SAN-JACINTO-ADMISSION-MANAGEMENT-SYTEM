@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
-
+import { notFound, errorHandler } from "./middleware/errorHandler.js";
+import { authRoutes } from "./routes/index.js";
 // Configuration
 dotenv.config();
 connectDb();
@@ -20,8 +21,7 @@ app.use(cookieParser()); // to parse cookie data
 app.use("/api/auth", authRoutes);
 
 // Error Handlers
-app.use(customError);
+app.use(notFound);
 app.use(errorHandler);
-
 // Listeners
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
