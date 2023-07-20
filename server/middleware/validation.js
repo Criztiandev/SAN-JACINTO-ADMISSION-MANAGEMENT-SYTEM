@@ -1,9 +1,7 @@
 export const requestBodyValidation = (req, res, next) => {
-  console.log(req.body.length);
-  if (Object.keys(req.body).length === 0 || req.body.constructor === Object) {
+  if (Object.keys(req.body).length === 0) {
     res.status(400);
     throw new Error("Invalid request body");
   }
-
-  next();
+  return next();
 };
