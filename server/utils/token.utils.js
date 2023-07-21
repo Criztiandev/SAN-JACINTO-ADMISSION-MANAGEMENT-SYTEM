@@ -5,7 +5,7 @@ export const generateToken = (res, UID) => {
   const token = jwt.sign({ UID }, process.env.JWT_SECRET, { expiresIn: "30d" });
 
   // storing token in cookie
-  res.cookie("aut", token, {
+  res.cookie(process.env.TOKEN_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: "strict",
@@ -15,4 +15,12 @@ export const generateToken = (res, UID) => {
 
 export const verifyToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
+};
+
+// delete token
+export const deleteToken = (res) => {
+  res.cookie(process.env.TOKEN_NAME, "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
 };
