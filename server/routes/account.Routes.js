@@ -12,6 +12,6 @@ router
   .route("/profile")
   .get([protect], viewProfile)
   .put([validation, protect], updateProfile)
-  .delete([validation, protect], deleteProfile);
+  .delete([protect], deleteProfile);
 
 export default router;
