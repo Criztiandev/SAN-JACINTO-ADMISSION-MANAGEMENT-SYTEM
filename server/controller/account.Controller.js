@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
+import { deleteToken } from "../utils/token.utils.js";
 
 export const viewProfile = asyncHandler(async (req, res) => {
   const user = req.user;
@@ -16,16 +17,13 @@ export const viewProfile = asyncHandler(async (req, res) => {
 export const updateProfile = asyncHandler(async (req, res) => {
   const { _id } = req.user;
 
-  // update user credentials
   const updated = await adminModel.updateOne({ _id: _id }, req.body);
-
   if (!updated) {
     res.status(400);
     throw new Error("Update Credentials Failed");
   }
-
   res.status(200).json({
-    id: updated._id,
+    id: _id,
     message: "Updated Successfully",
   });
 });
@@ -33,14 +31,11 @@ export const updateProfile = asyncHandler(async (req, res) => {
 export const deleteProfile = asyncHandler(async (req, res) => {
   const { _id } = req.user;
 
-  const user = await adminModel.findByIdAndDelete(_id).select("_id").lean();
-  if (!user) {
-    res.status(400);
-    throw new Error("Deleting Credetials Failed");
-  }
+  await adminModel.deleteOne({ _id: _id });
+  deleteToken(res);
 
   res.status(200).json({
-    id: user._id,
+    id: _id,
     message: "Deleted Succesfully",
   });
 });
