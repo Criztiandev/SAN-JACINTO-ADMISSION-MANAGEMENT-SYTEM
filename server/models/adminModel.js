@@ -24,6 +24,12 @@ adminSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+adminSchema.pre("updateOne", async function (next) {
+  const data = this.getUpdate();
+  const salt = await bcrypt.genSalt(10);
+  data.password = await bcrypt.hash(data.password, salt);
+});
+
 // Method to compare password
 adminSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
