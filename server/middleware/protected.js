@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import { verifyToken } from "../utils/token.utils.js";
 
-export const protectedRoute = asyncHandler(async (req, res, next) => {
+export const protect = asyncHandler(async (req, res, next) => {
   let token = req.cookies.aut || null;
 
   if (!token) {
