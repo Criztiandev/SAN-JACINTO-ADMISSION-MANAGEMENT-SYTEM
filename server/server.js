@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
+import { accountRoutes, authRoutes } from "./routes/index.js";
 
 // Configuration
 dotenv.config();
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: true })); // to accept form data
 app.use(cookieParser()); // to parse cookie data
 
 // Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/account", accountRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
