@@ -10,8 +10,8 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
-    res.status(400);
-    throw new Error("Invalid email or contact, please try again");
+    res.status(404);
+    throw new Error("User Not Found");
   }
 
   if (!(await user.matchPassword(password))) {
@@ -57,5 +57,6 @@ export const registerUser = asyncHandler(async (req, res) => {
     message: "User created successfully",
   });
 });
+
 export const forgotPassword = asyncHandler(async (req, res) => {});
 export const checkPoint = asyncHandler(async (req, res) => {});
