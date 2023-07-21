@@ -39,3 +39,14 @@ export const deleteProfile = asyncHandler(async (req, res) => {
     message: "Deleted Succesfully",
   });
 });
+
+export const logout = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+
+  deleteToken(res);
+
+  res.status(200).json({
+    id: _id,
+    message: "Logout User",
+  });
+});
