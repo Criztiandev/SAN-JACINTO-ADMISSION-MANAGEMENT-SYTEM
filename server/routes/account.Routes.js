@@ -2,6 +2,7 @@ import express from "express";
 import { validation } from "../middleware/validation.js";
 import {
   deleteProfile,
+  logout,
   updateProfile,
   viewProfile,
 } from "../controller/account.Controller.js";
@@ -13,5 +14,7 @@ router
   .get([protect], viewProfile)
   .put([validation, protect], updateProfile)
   .delete([protect], deleteProfile);
+
+router.post("/profile/logout", [protect], logout);
 
 export default router;
