@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 import { authRoutes } from "./routes/index.js";
-
 // Configuration
 dotenv.config();
 connectDb();
