@@ -13,6 +13,8 @@ export const generateToken = (res, UID) => {
   });
 };
 
+export const generateMagicToken = (data) => {};
+
 export const verifyToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
