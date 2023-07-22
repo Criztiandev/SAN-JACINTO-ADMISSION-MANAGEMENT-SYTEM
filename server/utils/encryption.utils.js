@@ -20,8 +20,6 @@ export const encryptData = (data) => {
   // Configuration
   const { algorithm, iv, secret } = encryptionConfig;
 
-  console.log(encryptionConfig);
-
   const cipher = crypto.createCipheriv(algorithm, secret(), iv);
 
   // Encrypt the given text
