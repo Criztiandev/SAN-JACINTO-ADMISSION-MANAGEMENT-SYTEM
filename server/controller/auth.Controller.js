@@ -7,6 +7,7 @@ import {
 } from "../utils/token.utils.js";
 import { sendEmail } from "../utils/email.uitls.js";
 import bcypt from "bcrypt";
+import { decryptData, encryptData } from "../utils/encryption.utils.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -108,10 +109,9 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 export const getResetToken = asyncHandler(async (req, res, next) => {
   const { id, token } = req.params;
 
-  console.log(req.params);
-
+  const decrypt = decryptData(id);
+  console.log(decrypt);
   try {
-    // verify if user exist
   } catch (error) {
     res.status(400);
     throw new Error("Invalud Token");
