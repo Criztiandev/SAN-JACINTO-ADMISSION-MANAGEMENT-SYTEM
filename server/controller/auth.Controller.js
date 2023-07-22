@@ -1,6 +1,10 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
-import { generateMagicToken } from "../utils/token.utils.js";
+import {
+  generateMagicSecret,
+  generateMagicToken,
+  verifyMagicToken,
+} from "../utils/token.utils.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
