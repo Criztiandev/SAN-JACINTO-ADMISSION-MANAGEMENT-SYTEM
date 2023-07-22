@@ -58,8 +58,18 @@ export const registerUser = asyncHandler(async (req, res) => {
   });
 });
 
-export const forgotPassword = asyncHandler(async (req, res) => {});
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
 
+  // check if the user exist
+  const user = await adminModel.findOne({ emai: email }).lean().select("_id");
+  if (!user) {
+    res.status(400);
+    throw new Error("User Doesnt Exist");
+  }
+
+  // create a one time password link that is valid for 15 minutes
+});
 export const resetPassword = asyncHandler(async (req, res, next) => {});
 
 export const checkPoint = asyncHandler(async (req, res) => {});
