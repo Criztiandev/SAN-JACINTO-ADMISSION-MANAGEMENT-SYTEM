@@ -59,4 +59,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 });
 
 export const forgotPassword = asyncHandler(async (req, res) => {});
+
+export const resetPassword = asyncHandler(async (req, res, next) => {});
+
 export const checkPoint = asyncHandler(async (req, res) => {});
