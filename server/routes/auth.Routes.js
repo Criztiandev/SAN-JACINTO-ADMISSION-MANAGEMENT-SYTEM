@@ -12,6 +12,6 @@ router.post("/login", [validation], loginUser);
 router.post("/register", [validation], registerUser);
 
 router.post("/forgot-password", forgotPassword);
-router.get("/reset-password/:id/:token", getResetToken);
+router.get("/checkpoint/:id/:token", getResetToken);
 
 export default router;
