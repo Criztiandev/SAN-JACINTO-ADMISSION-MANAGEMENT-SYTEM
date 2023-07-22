@@ -13,7 +13,9 @@ export const generateToken = (res, UID) => {
   });
 };
 
-export const generateMagicToken = (data) => {};
+export const generateMagicToken = (payload, secret) => {
+  return jwt.sign(payload, secret, { expiresIn: "15m" });
+};
 
 export const verifyToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
