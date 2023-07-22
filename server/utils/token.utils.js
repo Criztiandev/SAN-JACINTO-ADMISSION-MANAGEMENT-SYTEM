@@ -17,6 +17,18 @@ export const verifyToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
 
+export const generateMagicSecret = (password) => {
+  return process.env.MAGIC_SECRET + password + 10000;
+};
+
+export const generateMagicToken = (payload, secret) => {
+  return jwt.sign(payload, secret, { expiresIn: "15m" });
+};
+
+export const verifyMagicToken = (token, secret) => {
+  return jwt.verify(token, secret);
+};
+
 // delete token
 export const deleteToken = (res) => {
   res.cookie(process.env.TOKEN_NAME, "", {
