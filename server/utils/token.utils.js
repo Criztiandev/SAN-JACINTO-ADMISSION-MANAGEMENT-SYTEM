@@ -18,7 +18,7 @@ export const verifyToken = (token) => {
 };
 
 export const generateMagicSecret = (password) => {
-  return process.env.MAGIC_SECRET + password;
+  return process.env.MAGIC_SECRET + password + 10000;
 };
 
 export const generateMagicToken = (payload, secret) => {
