@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
-import { generateToken } from "../utils/token.utils.js";
+import { generateMagicToken } from "../utils/token.utils.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -65,7 +65,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   const user = await adminModel
     .findOne({ emai: email })
     .lean()
-    .select("_id password");
+    .select("_id email password");
   if (!user) {
     res.status(400);
     throw new Error("User Doesnt Exist");
@@ -73,8 +73,17 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   // create a one time password link that is valid for 15 minutes
   const secret = process.env.MAGIC_SECRET + user.password;
+  const payload = {
+    _id: user._id,
+    email: user.email,
+  };
 
-  console.log(secret);
+  const token = generateMagicToken(payload, secret);
+  const link = `http://localhost:4000/auth/forgot-password/${user._id}/${token}`;
+
+  res.status(200).json({
+    resetLink: link,
+  });
 });
 export const resetPassword = asyncHandler(async (req, res, next) => {});
 
