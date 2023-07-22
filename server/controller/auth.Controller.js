@@ -83,10 +83,9 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   const token = generateMagicToken(payload, secret);
 
-  const salt = await bcypt.genSalt(10);
-  const hashedID = await bcypt.hash(user._id.toString(), salt);
+  const encryptedID = encryptData(user._id.toString());
 
-  const link = `http://localhost:4000/api/auth/reset-password/${hashedID}/${token}`;
+  const link = `http://localhost:4000/api/auth/checkpoint/${encryptedID}/${token}`;
 
   // const content = {
   //   target: email,
