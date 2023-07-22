@@ -76,19 +76,54 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   // create a one time password link that is valid for 15 minutes
-  const secret = process.env.MAGIC_SECRET + user.password;
+  const secret = generateMagicSecret(user.password);
   const payload = {
     _id: user._id,
     email: user.email,
   };
 
   const token = generateMagicToken(payload, secret);
-  const link = `http://localhost:4000/auth/forgot-password/${user._id}/${token}`;
+  const link = `http://localhost:4000/api/auth/reset-password/${user._id}/${token}`;
 
   res.status(200).json({
     resetLink: link,
   });
 });
-export const resetPassword = asyncHandler(async (req, res, next) => {});
+
+export const getResetToken = asyncHandler(async (req, res, next) => {
+  const { id, token } = req.params;
+
+  // check if the user exist
+  const user = await adminModel.findById(id).lean().select("_id  password");
+
+  if (!user) {
+    res.status(400);
+    throw new Error("Invalid User");
+  }
+
+  // generate a new token and compare it with the old one
+  const secret = generateMagicSecret(user.password);
+
+  // verify the token and check if it is valid
+  try {
+    const decoded = verifyMagicToken(token, secret);
+
+    // check if the token tampered
+    if (decoded._id !== user._id.toString()) {
+      res.status(400);
+      throw new Error("Invalid Token, please try again");
+    }
+
+    res.status(200).json({
+      email: decoded.email,
+      message: "Token verified",
+    });
+  } catch (e) {
+    res.status(400);
+    throw new Error("Invalid Token");
+  }
+});
+
+export const verifyResetToken = asyncHandler(async (req, res, next) => {});
 
 export const checkPoint = asyncHandler(async (req, res) => {});
