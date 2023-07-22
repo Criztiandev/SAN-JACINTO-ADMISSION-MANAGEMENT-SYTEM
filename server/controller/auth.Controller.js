@@ -62,13 +62,19 @@ export const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   // check if the user exist
-  const user = await adminModel.findOne({ emai: email }).lean().select("_id");
+  const user = await adminModel
+    .findOne({ emai: email })
+    .lean()
+    .select("_id password");
   if (!user) {
     res.status(400);
     throw new Error("User Doesnt Exist");
   }
 
   // create a one time password link that is valid for 15 minutes
+  const secret = process.env.MAGIC_SECRET + user.password;
+
+  console.log(secret);
 });
 export const resetPassword = asyncHandler(async (req, res, next) => {});
 
