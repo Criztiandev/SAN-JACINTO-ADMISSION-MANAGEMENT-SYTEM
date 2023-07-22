@@ -5,6 +5,8 @@ import {
   generateMagicToken,
   verifyMagicToken,
 } from "../utils/token.utils.js";
+import { sendEmail } from "../utils/email.uitls.js";
+import bcypt from "bcrypt";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
