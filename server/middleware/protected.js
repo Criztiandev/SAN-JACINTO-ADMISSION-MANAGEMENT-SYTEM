@@ -26,6 +26,12 @@ export const protect = asyncHandler(async (req, res, next) => {
     }
 
     req.user = user;
+
+    if (!req.user) {
+      res.status(401);
+      throw new Error("Request not authorized");
+    }
+
     next();
   } catch (error) {
     res.status(401);
