@@ -4,9 +4,10 @@ import {
   generateMagicSecret,
   generateMagicToken,
   verifyMagicToken,
+  generateToken,
 } from "../utils/token.utils.js";
 import { sendEmail } from "../utils/email.uitls.js";
-import bcypt from "bcrypt";
+import { decryptData, encryptData } from "../utils/encryption.utils.js";
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -69,36 +70,34 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   // check if the user exist
   const user = await adminModel
-    .findOne({ emai: email })
+    .findOne({ $or: [{ email: email }, { contact: email }] })
     .lean()
-    .select("_id email password");
+    .select("_id updatedAt");
   if (!user) {
     res.status(400);
     throw new Error("Invalid email or password");
   }
 
   // create a one time password link that is valid for 15 minutes
-  const secret = generateMagicSecret(user.password);
   const payload = { _id: user._id };
 
+  const secret = generateMagicSecret(user.updatedAt);
   const token = generateMagicToken(payload, secret);
+  const encryptedID = encryptData(user._id.toString());
 
-  const salt = await bcypt.genSalt(10);
-  const hashedID = await bcypt.hash(user._id.toString(), salt);
+  const link = `http://localhost:4000/api/auth/checkpoint/${encryptedID}/${token}`;
 
-  const link = `http://localhost:4000/api/auth/reset-password/${hashedID}/${token}`;
+  const content = {
+    target: email,
+    title: "Forgot Password Verfication",
+    body: link,
+  };
 
-  // const content = {
-  //   target: email,
-  //   title: "Forgot Password Verfication",
-  //   body: link,
-  // };
-
-  // const mail = await sendEmail(res, content);
-  // if (!mail) {
-  //   res.status(400);
-  //   throw new Error("Email not sent, please try again");
-  // }
+  const mail = await sendEmail(res, content);
+  if (!mail) {
+    res.status(400);
+    throw new Error("Email not sent, please try again");
+  }
 
   res.status(200).json({
     link: link,
@@ -109,43 +108,76 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 export const getResetToken = asyncHandler(async (req, res, next) => {
   const { id, token } = req.params;
 
-  console.log(req.params);
-
   try {
-    // verify if user exist
+    const decrypt = decryptData(id);
+    const user = await adminModel
+      .findById(decrypt)
+      .lean()
+      .select("_id email updatedAt");
+
+    if (!user) {
+      res.status(400);
+      throw new Error("Unauthorized access, User Not Found");
+    }
+
+    const secret = generateMagicSecret(user.updatedAt);
+    const decoded = verifyMagicToken(token, secret);
+
+    if (decoded._id !== user._id.toString()) {
+      res.status(400);
+      throw new Error("Invalid Token, please try again");
+    }
+
+    // generate a new token and compare it with the old one
+    const newToken = generateMagicToken(
+      { _id: user._id },
+      process.env.MAGIC_SECRET
+    );
+
+    res.cookie("prch", newToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: "strict",
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+
+    res.status(200).json({
+      id: user._id,
+      email: user.email,
+      message: "Reset Password",
+    });
   } catch (error) {
     res.status(400);
-    throw new Error("Invalud Token");
+    console.log(error);
+    throw new Error(error);
   }
 });
 
 export const verifyResetToken = asyncHandler(async (req, res, next) => {
-  const { id, token } = req.params;
+  const data = req.prot;
   const { password } = req.body;
 
-  // check if the user exist
-  const user = await adminModel.findById(id).lean().select("_id password");
+  // update the password
+  const updatedCredentials = await adminModel.updateOne(
+    { _id: data._id },
+    { password: password }
+  );
 
-  if (!user) {
+  if (!updatedCredentials) {
     res.status(400);
-    throw new Error("Invalid User");
+    throw new Error("Update Credentials Failed");
   }
 
-  // check if the token tampered
-  if (id !== user._id.toString()) {
-    res.status(400);
-    throw new Error("Invalid Token, please try again");
-  }
+  //kill the token
+  res.cookie("prch", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
 
-  // generate a new token and compare it with the old one
-  const secret = generateMagicSecret(user.password);
-
-  try {
-    const decoded = verifyMagicToken(token, secret);
-  } catch (e) {
-    res.status(400);
-    throw new Error("Invalid Token");
-  }
+  res.status(200).json({
+    id: data._id,
+    message: "Reset Password Successfully",
+  });
 });
 
 export const checkPoint = asyncHandler(async (req, res) => {});

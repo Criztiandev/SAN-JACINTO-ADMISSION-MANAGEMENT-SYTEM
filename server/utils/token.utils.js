@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-
+import crypto from "crypto";
 export const generateToken = (res, UID) => {
   // generating token
   const token = jwt.sign({ UID }, process.env.JWT_SECRET, { expiresIn: "30d" });
@@ -14,11 +14,17 @@ export const generateToken = (res, UID) => {
 };
 
 export const verifyToken = (token) => {
-  return jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET, {
+      ignoreExpiration: false,
+    });
+  } catch (error) {
+    throw new Error("Invalid or Expired Token");
+  }
 };
 
-export const generateMagicSecret = (password) => {
-  return process.env.MAGIC_SECRET + password + 10000;
+export const generateMagicSecret = (token) => {
+  return process.env.MAGIC_SECRET + token + 10000;
 };
 
 export const generateMagicToken = (payload, secret) => {
