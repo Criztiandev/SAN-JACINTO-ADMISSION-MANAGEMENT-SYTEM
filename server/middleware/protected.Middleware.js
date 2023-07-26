@@ -14,8 +14,8 @@ export const protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    const res = validateTokenFromCookies(name, token);
-    req.session.id = res;
+    const result = validateTokenFromCookies(name, token);
+    req.session = { id: result._id };
     next();
   } catch (error) {
     res.status(401);
