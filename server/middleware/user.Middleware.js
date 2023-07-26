@@ -14,5 +14,6 @@ export const validateUser = asyncHandler(async (req, res, next) => {
   }
 
   req.session = { user: user };
+
   next();
 });
