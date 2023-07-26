@@ -1,9 +1,13 @@
 import asyncHandler from "express-async-handler";
-import { verifyMagicToken, verifyToken } from "../utils/token.utils.js";
+import {
+  getTokenFromCookies,
+  validateTokenFromCookies,
+} from "../utils/token.utils.js";
 import adminModel from "../models/adminModel.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  let token = req.cookies.aut || null;
+  const cookieNames = ["aut", "prch"];
+  let { name, token } = getTokenFromCookies(req.cookies, cookieNames);
 
   if (!token) {
     res.status(401);
