@@ -42,3 +42,22 @@ export const deleteToken = (res) => {
     expires: new Date(0),
   });
 };
+
+// Protected Route Token Utils
+
+export const getTokenFromCookies = (cookies, cookieNames) => {
+  for (const name of cookieNames) {
+    const token = cookies[name];
+    if (token) return { name, token };
+  }
+
+  return null;
+};
+
+export const validateTokenFromCookies = (name, token) => {
+  try {
+    return name === "aut" ? verifyToken(token) : verifyMagicToken(token);
+  } catch (e) {
+    throw new Error("Invalid Token, Please Try Again");
+  }
+};
