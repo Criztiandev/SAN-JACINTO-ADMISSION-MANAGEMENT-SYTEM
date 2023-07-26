@@ -1,17 +1,21 @@
 import express from "express";
-import { validation } from "../middleware/validation.js";
 import {
   deleteProfile,
   logout,
   updateProfile,
   viewProfile,
 } from "../controller/account.Controller.js";
-import { protect } from "../middleware/protected.js";
+import {
+  protect,
+  validateSession,
+  validateUser,
+  validation,
+} from "../middleware/_index.js";
 const router = express.Router();
 
 router
   .route("/profile")
-  .get([protect], viewProfile)
+  .get([protect, validateSession, validateUser], viewProfile)
   .put([validation, protect], updateProfile)
   .delete([protect], deleteProfile);
 

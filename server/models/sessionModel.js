@@ -5,17 +5,15 @@ const sessionSchema = mongoose.Schema(
     UID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      require: true,
+      required: true,
       unique: true,
     },
 
-    agent: [{ type: String, require: true }],
+    agent: [{ type: String, required: true }],
     status: { type: Boolean, default: false },
-    expiratiom: { type: Date, require: true },
+    expiresAt: { type: Date, default: Date.now, expires: 60 },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 export default mongoose.model("session", sessionSchema);

@@ -6,7 +6,7 @@ import {
   // getResetToken,
   // verifyResetToken,
 } from "../controller/auth.Controller.js";
-import { validation } from "../middleware/validation.js";
+import { validation } from "../middleware/_index.js";
 // import { protect } from "../middleware/protected.js";
 const router = express.Router();
 
