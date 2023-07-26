@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
-import { deleteToken } from "../utils/token.utils.js";
+import { deleteTokenFromCookies } from "../utils/token.utils.js";
 
 export const viewProfile = asyncHandler(async (req, res) => {
   const user = req.user;
@@ -32,7 +32,7 @@ export const deleteProfile = asyncHandler(async (req, res) => {
   const { _id } = req.user;
 
   await adminModel.deleteOne({ _id: _id });
-  deleteToken(res);
+  deleteTokenFromCookies(res);
 
   res.status(200).json({
     id: _id,
