@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
-import { notFound, errorHandler } from "./middleware/errorHandler.js";
 import { accountRoutes, authRoutes } from "./routes/index.js";
+import { errorHandler, notFound } from "./middleware/_index.js";
 // Configuration
 dotenv.config();
 connectDb();
