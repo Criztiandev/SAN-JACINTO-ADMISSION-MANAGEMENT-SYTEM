@@ -16,9 +16,13 @@ const router = express.Router();
 router
   .route("/profile")
   .get([protect, validateSession, validateUser], viewProfile)
-  .put([validation, protect], updateProfile)
-  .delete([protect], deleteProfile);
+  .put([validation, protect, validateSession, validateUser], updateProfile)
+  .delete([protect, validateSession, validateUser], deleteProfile);
 
-router.post("/profile/logout", [protect], logout);
+router.post(
+  "/profile/logout",
+  [protect, validateSession, validateUser],
+  logout
+);
 
 export default router;
