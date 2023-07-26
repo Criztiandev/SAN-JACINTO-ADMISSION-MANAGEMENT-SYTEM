@@ -2,8 +2,7 @@ import asyncHandler from "express-async-handler";
 import {
   getTokenFromCookies,
   validateTokenFromCookies,
-} from "../utils/token.utils.js";
-import adminModel from "../models/adminModel.js";
+} from "../utils/cookie.utils.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
   const cookieNames = ["aut", "prch"];
@@ -15,7 +14,8 @@ export const protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    req.session.user = validateTokenFromCookies(name, token);
+    const res = validateTokenFromCookies(name, token);
+    req.session.id = res;
     next();
   } catch (error) {
     res.status(401);
