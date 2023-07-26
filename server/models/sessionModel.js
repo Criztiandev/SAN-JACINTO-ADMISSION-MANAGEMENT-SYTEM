@@ -11,16 +11,9 @@ const sessionSchema = mongoose.Schema(
 
     agent: [{ type: String, required: true }],
     status: { type: Boolean, default: false },
-    expiration: {
-      type: Date,
-      expires: "1m",
-      default: Date.now,
-      required: true,
-    },
+    expiresAt: { type: Date, default: Date.now, expires: 60 },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 export default mongoose.model("session", sessionSchema);
