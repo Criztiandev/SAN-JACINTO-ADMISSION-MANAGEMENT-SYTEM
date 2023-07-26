@@ -5,12 +5,17 @@ import {
   updateProfile,
   viewProfile,
 } from "../controller/account.Controller.js";
-import { protect, validation } from "../middleware/_index.js";
+import {
+  protect,
+  validateSession,
+  validateUser,
+  validation,
+} from "../middleware/_index.js";
 const router = express.Router();
 
 router
   .route("/profile")
-  .get([protect], viewProfile)
+  .get([protect, validateSession, validateUser], viewProfile)
   .put([validation, protect], updateProfile)
   .delete([protect], deleteProfile);
 
