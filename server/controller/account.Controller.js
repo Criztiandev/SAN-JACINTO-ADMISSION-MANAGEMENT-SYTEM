@@ -3,15 +3,8 @@ import adminModel from "../models/adminModel.js";
 import { deleteTokenFromCookies } from "../utils/token.utils.js";
 
 export const viewProfile = asyncHandler(async (req, res) => {
-  const user = req.user;
-
-  res.status(200).json({
-    id: user._id,
-    name: user.fullName,
-    email: user.email,
-    contact: user.contact,
-    message: "Profile view",
-  });
+  const user = req.session.user;
+  res.status(200).json(user);
 });
 
 export const updateProfile = asyncHandler(async (req, res) => {
