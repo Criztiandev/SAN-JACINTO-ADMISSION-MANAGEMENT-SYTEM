@@ -29,30 +29,36 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid password, please try again");
   }
 
-  // create session
-  const agent = req.get("User-Agent");
-  const session = await sessionModel.create({
-    UID: user._id,
-    agent: agent,
-    expiration: Date.now() + 24 * 60 * 60 * 1000,
-    status: true,
-  });
-
-  if (!session) {
+  const sessionExist = await sessionModel.findOne({ UID: user._id }).lean();
+  if (sessionExist) {
     res.status(400);
-    throw new Error("Session creation failed");
+    throw new Error("User already logged in");
+  } else {
+    // create session
+    const agent = req.get("User-Agent");
+    const session = await sessionModel.create({
+      UID: user._id,
+      agent: agent,
+      expiration: Date.now() + 24 * 60 * 60 * 1000,
+      status: true,
+    });
+
+    if (!session) {
+      res.status(400);
+      throw new Error("Session creation failed");
+    }
+
+    // store the token in the cookies
+    const token = generateToken(session._id, process.env.JWT_SECRET);
+    storeTokenToCookies(res, "aut", token);
+
+    res.status(200).json({
+      id: user._id,
+      email: user.email,
+
+      message: "User logged in successfully",
+    });
   }
-
-  // store the token in the cookies
-  const token = generateToken(session._id, process.env.JWT_SECRET);
-  storeTokenToCookies(res, "aut", token);
-
-  res.status(200).json({
-    id: user._id,
-    email: user.email,
-
-    message: "User logged in successfully",
-  });
 });
 
 export const registerUser = asyncHandler(async (req, res) => {
