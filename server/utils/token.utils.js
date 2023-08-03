@@ -1,10 +1,15 @@
 import jwt from "jsonwebtoken";
 
-export const generateSecret = (token, secret) => {
-  return secret + token + 10000;
+export const generateSecret = ({ token, secret }) => {
+  if (!secret) throw new Error("Secret is required");
+
+  return token === null || !token ? secret + 10000 : secret + token + 10000;
 };
 
 export const generateToken = (UID, secret, expires) => {
+  if (!UID || !secret)
+    throw new Error("Please provide the required parameters");
+
   return jwt.sign({ _id: UID }, secret, { expiresIn: expires || "1d" });
 };
 
