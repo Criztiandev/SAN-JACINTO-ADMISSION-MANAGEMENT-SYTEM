@@ -7,14 +7,10 @@ import sessionModel from "../../models/sessionModel.js";
 const loginFeature = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await adminModel.findOne({
-    $or: [{ email: email }, { contact: email }],
-  });
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User Not Found");
-  }
+  const user = await adminModel.findUser(
+    { email, password },
+    { exist: true, select: "all" }
+  );
 
   //* check if the password is correct
   if (!(await user.matchPassword(password))) {

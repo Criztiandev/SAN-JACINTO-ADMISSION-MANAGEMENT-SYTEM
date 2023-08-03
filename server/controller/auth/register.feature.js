@@ -3,7 +3,7 @@ import adminModel from "../../models/adminModel.js";
 
 // Admin
 export const registerFeature = asyncHandler(async (req, res) => {
-  const newUser = await adminModel.create({ ...req.body });
+  const newUser = await adminModel.create(req.registration.payload);
   if (!newUser) {
     res.status(400);
     throw new Error("Invalid user data");
