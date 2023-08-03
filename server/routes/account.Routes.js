@@ -1,28 +1,31 @@
 import express from "express";
 import {
-  deleteProfile,
-  logout,
-  updateProfile,
-  viewProfile,
-} from "../controller/account.Controller.js";
-import {
   protect,
   validateSession,
   validateAdmin,
   validation,
 } from "../middleware/_index.js";
+import {
+  updateAccountFeature,
+  viewAccountFeature,
+  deleteAccountFeature,
+  logoutAccountFeature,
+} from "../controller/account/index.js";
 const router = express.Router();
 
 router
   .route("/profile")
-  .get([protect, validateSession, validateAdmin], viewProfile)
-  .put([validation, protect, validateSession, validateAdmin], updateProfile)
-  .delete([protect, validateSession, validateAdmin], deleteProfile);
+  .get([protect, validateSession, validateAdmin], viewAccountFeature)
+  .put(
+    [validation, protect, validateSession, validateAdmin],
+    updateAccountFeature
+  )
+  .delete([protect, validateSession, validateAdmin], deleteAccountFeature);
 
 router.post(
   "/profile/logout",
   [protect, validateSession, validateAdmin],
-  logout
+  logoutAccountFeature
 );
 
 export default router;
