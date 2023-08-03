@@ -40,9 +40,40 @@ adminSchema.pre("updateOne", async function (next) {
   }
 });
 
-// Method to compare password
-adminSchema.methods.matchPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+adminSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Custome Functions
+adminSchema.statics.findUser = async function (
+  payload,
+  { exist = false, select = "-password" } = {}
+) {
+  const checkers = Object.keys(payload);
+
+  // Create a bulk query
+  const query = checkers.map((field) => ({ [field]: payload[field] }));
+
+  try {
+    // single based query to get all the necessary data
+    const user = await this.findOne({ $or: query }).select(
+      select === "all" ? `+password` : select
+    );
+
+    if (user) {
+      const field = checkers.find((e) => user[e] === payload[e]);
+
+      if (exist) return user;
+      else
+        throw new Error(
+          `${field.charAt(0).toUpperCase() + field.slice(1)} is already exist`
+        );
+    }
+
+    return null;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 export default mongoose.model("admin", adminSchema);
