@@ -1,20 +1,20 @@
 import express from "express";
+
+import { protect, validateAdmin, validation } from "../middleware/_index.js";
 import {
-  forgotPassword,
-  loginUser,
-  registerUser,
-  // getResetToken,
-  // verifyResetToken,
-} from "../controller/auth.Controller.js";
-import { protect, validation } from "../middleware/_index.js";
-// import { protect } from "../middleware/protected.js";
+  forgotPassFeature,
+  getResetToken,
+  loginFeature,
+  registerFeature,
+  verifyResetToken,
+} from "../controller/auth/index.js";
 const router = express.Router();
 
-router.post("/login", [validation], loginUser);
-router.post("/register", [validation], registerUser);
+router.post("/login", [validation], loginFeature);
+router.post("/register", [validation, validateAdmin], registerFeature);
 
-router.post("/forgot-password", forgotPassword);
-// router.get("/checkpoint/:id/:token", getResetToken);
-// router.post("/checkpoint/verify", [protect], verifyResetToken);
+router.post("/forgot-password", forgotPassFeature);
+router.get("/checkpoint/:id/:token", getResetToken);
+router.post("/checkpoint/verify", verifyResetToken);
 
 export default router;
