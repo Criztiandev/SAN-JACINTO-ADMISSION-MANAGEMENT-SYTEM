@@ -7,49 +7,33 @@ import {
 } from "../../utils/token.utils.js";
 import { storeTokenToCookies } from "../../utils/cookie.utils.js";
 import { decryptData } from "../../utils/encryption.utils.js";
+import sessionModel from "../../models/sessionModel.js";
 
 // combine the token based and session based authentication
 
 export const getResetToken = asyncHandler(async (req, res, next) => {
   const { id, token } = req.params;
 
-  try {
-    const decrypt = decryptData(id);
-    const user = await adminModel
-      .findById(decrypt)
-      .lean()
-      .select("_id email updatedAt");
+  const decrypt = decryptData(id);
+  const user = await adminModel.findUser(
+    { _id: decrypt },
+    { exist: true, select: "_id email updatedAt" }
+  );
 
-    if (!user) {
-      res.status(400);
-      throw new Error("Unauthorized access, User Not Found");
-    }
+  const session = await sessionModel.findSession({ UID: decrypt });
+  if (session) await session.deleteOne({ _id: session._id });
 
-    const secret = generateSecret({ token: null, secret: user.updatedAt });
-    const decoded = verifyToken(token, secret);
+  const secret = generateSecret({ token: null, secret: user.updatedAt });
+  const decoded = verifyToken(token, secret);
 
-    if (decoded._id !== user._id.toString()) {
-      res.status(400);
-      throw new Error("Unauthorized access, Invalid token");
-    }
+  const newToken = generateToken(decoded._id, process.env.MAGIC_SECRET, "15m");
+  storeTokenToCookies(res, "fgt", newToken);
 
-    const newToken = generateToken(
-      decoded._id,
-      process.env.MAGIC_SECRET,
-      "15m"
-    );
-    storeTokenToCookies(res, "fgt", newToken);
-
-    res.status(200).json({
-      id: user._id,
-      email: user.email,
-      message: "Reset Password",
-    });
-  } catch (error) {
-    res.status(400);
-    console.log(error);
-    throw new Error(error);
-  }
+  res.status(200).json({
+    id: user._id,
+    email: user.email,
+    message: "Reset Password",
+  });
 });
 
 export const verifyResetToken = asyncHandler(async (req, res, next) => {
