@@ -9,19 +9,16 @@ export const storeTokenToCookies = (res, name, token) => {
   });
 };
 
-export const getTokenFromCookies = (cookies, cookieNames) => {
-  for (const name of cookieNames) {
-    const token = cookies[name];
-    if (token) return { name, token };
-  }
-
-  return null;
+export const getTokenFromCookies = (req, cookieNames) => {
+  return req.cookies[cookieNames] || null;
 };
 
-export const validateTokenFromCookies = (name, token) => {
-  const secrets = { aut: "JWT_SECRET", fgt: "MAGIC_SECRET" };
-
-  return verifyToken(token, process.env[secrets[name]]);
+export const validateTokenFromCookies = (
+  name,
+  token,
+  { auth = "JWT_SECRET", fgt = "MAGIC_SECRET" } = {}
+) => {
+  return verifyToken(token, process.env[fgt || auth][name]);
 };
 
 export const removeTokenFromCookies = (res, name) => {
