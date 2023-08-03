@@ -47,7 +47,7 @@ adminSchema.methods.matchPassword = async function (enteredPassword) {
 // Custome Functions
 adminSchema.statics.findUser = async function (
   payload,
-  { exist = false, select = "-password" }
+  { exist = false, select = "-password" } = {}
 ) {
   const checkers = Object.keys(payload);
 
@@ -64,10 +64,10 @@ adminSchema.statics.findUser = async function (
       const field = checkers.find((e) => user[e] === payload[e]);
 
       if (exist) return user;
-
-      throw new Error(
-        `${field.charAt(0).toUpperCase() + field.slice(1)} is already exist`
-      );
+      else
+        throw new Error(
+          `${field.charAt(0).toUpperCase() + field.slice(1)} is already exist`
+        );
     }
 
     return null;
