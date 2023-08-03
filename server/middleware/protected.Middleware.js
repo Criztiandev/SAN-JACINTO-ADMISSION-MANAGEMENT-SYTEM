@@ -14,11 +14,12 @@ export const protect = asyncHandler(async (req, res, next) => {
     throw new Error("Unauthorized access, please login");
   }
 
+  const { name, token } = _token;
+  const result = validateTokenFromCookies(name, token);
+  console.log(result);
   try {
-    const { name, token } = _token;
-    const result = validateTokenFromCookies(name, token);
-    req.session = { id: result._id };
-    next();
+    // req.session = { id: result._id };
+    // next();
   } catch (error) {
     res.status(401);
     throw new Error("Invalid token, please login");
