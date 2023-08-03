@@ -5,7 +5,8 @@ import {
 } from "../utils/cookie.utils.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  const cookieNames = ["aut", "prch"];
+  const cookieNames = ["aut", "fgt"];
+
   let _token = getTokenFromCookies(req.cookies, cookieNames);
 
   if (!_token) {
