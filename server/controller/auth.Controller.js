@@ -19,17 +19,20 @@ export const loginUser = asyncHandler(async (req, res) => {
     throw new Error("User Not Found");
   }
 
+  //* check if the password is correct
   if (!(await user.matchPassword(password))) {
     res.status(400);
     throw new Error("Invalid password, please try again");
   }
 
+  //* Check if the session exist
   const sessionExist = await sessionModel.findOne({ UID: user._id }).lean();
+
   if (sessionExist) {
     res.status(400);
     throw new Error("User already logged in");
   } else {
-    // create session
+    //* Create a Session
     const agent = req.get("User-Agent");
     const session = await sessionModel.create({
       UID: user._id,
