@@ -5,21 +5,25 @@ import {
 } from "../utils/cookie.utils.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  const cookieNames = ["aut", "fgt"];
+  const route = req.route.path;
 
-  let _token = getTokenFromCookies(req.cookies, cookieNames);
+  //! add obfuscate to the cookie name
+  const cookieName =
+    route === "/checkpoint/verify"
+      ? process.env.FORGOT_PASS_NAME
+      : process.env.AUTH_NAME;
+
+  let _token = getTokenFromCookies(req, cookieName);
 
   if (!_token) {
     res.status(401);
     throw new Error("Unauthorized access, please login");
   }
 
-  const { name, token } = _token;
-  const result = validateTokenFromCookies(name, token);
-  console.log(result);
+  const result = validateTokenFromCookies(cookieName, _token);
   try {
-    // req.session = { id: result._id };
-    // next();
+    req.session = { _id: result._id };
+    next();
   } catch (error) {
     res.status(401);
     throw new Error("Invalid token, please login");
