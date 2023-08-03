@@ -1,15 +1,10 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
-import {
-  // generateMagicSecret,
-  // generateMagicToken,
-  // verifyMagicToken,
-  generateToken,
-} from "../utils/token.utils.js";
+import { generateToken, generateSecret } from "../utils/token.utils.js";
 import { storeTokenToCookies } from "../utils/cookie.utils.js";
 import sessionModel from "../models/sessionModel.js";
 // import { sendEmail } from "../utils/email.uitls.js";
-// import { decryptData, encryptData } from "../utils/encryption.utils.js";
+import { decryptData, encryptData } from "../utils/encryption.utils.js";
 
 // combine the token based and session based authentication
 export const loginUser = asyncHandler(async (req, res) => {
