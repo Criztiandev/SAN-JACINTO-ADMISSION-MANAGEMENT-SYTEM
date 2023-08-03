@@ -8,20 +8,20 @@ import {
 import {
   protect,
   validateSession,
-  validateUser,
+  validateAdmin,
   validation,
 } from "../middleware/_index.js";
 const router = express.Router();
 
 router
   .route("/profile")
-  .get([protect, validateSession, validateUser], viewProfile)
-  .put([validation, protect, validateSession, validateUser], updateProfile)
-  .delete([protect, validateSession, validateUser], deleteProfile);
+  .get([protect, validateSession, validateAdmin], viewProfile)
+  .put([validation, protect, validateSession, validateAdmin], updateProfile)
+  .delete([protect, validateSession, validateAdmin], deleteProfile);
 
 router.post(
   "/profile/logout",
-  [protect, validateSession, validateUser],
+  [protect, validateSession, validateAdmin],
   logout
 );
 
