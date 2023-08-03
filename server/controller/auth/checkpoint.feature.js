@@ -4,6 +4,7 @@ import {
   generateToken,
   generateSecret,
   verifyToken,
+  deleteTokenFromCookies,
 } from "../../utils/token.utils.js";
 import { storeTokenToCookies } from "../../utils/cookie.utils.js";
 import { decryptData } from "../../utils/encryption.utils.js";
@@ -23,6 +24,8 @@ export const getResetToken = asyncHandler(async (req, res, next) => {
   const session = await sessionModel.findSession({ UID: decrypt });
   if (session) await session.deleteOne({ _id: session._id });
 
+  deleteTokenFromCookies("aut", res);
+
   const secret = generateSecret({ token: null, secret: user.updatedAt });
   const decoded = verifyToken(token, secret);
 
@@ -31,18 +34,20 @@ export const getResetToken = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     id: user._id,
-    email: user.email,
     message: "Reset Password",
   });
 });
 
 export const verifyResetToken = asyncHandler(async (req, res, next) => {
-  const data = req.prot;
+  const user = await adminModel.findUser(
+    { _id: req.session._id },
+    { exist: true, select: "_id password" }
+  );
   const { password } = req.body;
 
-  // update the password
+  //   // update the password
   const updatedCredentials = await adminModel.updateOne(
-    { _id: data._id },
+    { _id: user._id },
     { password: password }
   );
 
@@ -50,15 +55,11 @@ export const verifyResetToken = asyncHandler(async (req, res, next) => {
     res.status(400);
     throw new Error("Update Credentials Failed");
   }
-
   //kill the token
-  res.cookie("prch", "", {
-    httpOnly: true,
-    expires: new Date(0),
-  });
+  deleteTokenFromCookies("fgt", res);
 
   res.status(200).json({
-    id: data._id,
+    id: user._id,
     message: "Reset Password Successfully",
   });
 });

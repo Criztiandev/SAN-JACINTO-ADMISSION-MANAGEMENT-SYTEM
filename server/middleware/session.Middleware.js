@@ -11,12 +11,6 @@ export const validateSession = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid session, please login");
   }
 
-  // check if the session is active
-  if (!session.status) {
-    res.status(401);
-    throw new Error("Session is inactive, please login");
-  }
-
   req.session = { id: SID, user: session.UID };
   next();
 });
