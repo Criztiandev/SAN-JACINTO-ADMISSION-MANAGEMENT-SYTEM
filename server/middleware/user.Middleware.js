@@ -1,31 +1,27 @@
 import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
-import { checkUserExistance } from "../utils/validate.utils.js";
 
 export const validateAdmin = asyncHandler(async (req, res, next) => {
-  // check the route that come from
   const route = req.route.path;
-  if (route === "/register") {
-    const { email, contact } = req.body;
 
-    const payload = await checkUserExistance({ email, contact }, adminModel, {
-      exist: true,
-    });
+  switch (route) {
+    // handle registration valdation
+    case "/register":
+      const { email, contact } = req.body;
 
-    if (typeof payload === "string" || payload === null) {
-      res.status(400);
-      throw new Error(payload === null ? "Invalid user data" : payload);
-    }
+      await adminModel.findUser({ email, contact });
 
-    req.registration = { payload: req.body };
+      req.registration = { payload: req.body };
+      req.body = null;
+      next();
+      break;
+
+    default:
+      const UID = req.session.user;
+      const user = await adminModel.findUser({ _id: UID });
+
+      req.session = { ...req.session, user: user };
+      next();
+      break;
   }
-
-  const UID = req.session.user;
-  const user = await checkUserExistance({ _id: UID }, adminModel, {
-    exist: true,
-    data: true,
-  });
-
-  req.session = { ...req.session, user: user };
-  next();
 });
