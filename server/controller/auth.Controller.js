@@ -46,8 +46,10 @@ export const loginUser = asyncHandler(async (req, res) => {
       throw new Error("Session creation failed");
     }
 
-    // store the token in the cookies
+    //* Geberate a token
     const token = generateToken(session._id, process.env.JWT_SECRET);
+
+    // * Store to cookies
     storeTokenToCookies(res, "aut", token);
 
     res.status(200).json({
