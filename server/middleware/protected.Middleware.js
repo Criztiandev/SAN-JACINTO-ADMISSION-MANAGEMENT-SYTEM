@@ -6,14 +6,15 @@ import {
 
 export const protect = asyncHandler(async (req, res, next) => {
   const cookieNames = ["aut", "prch"];
-  let { name, token } = getTokenFromCookies(req.cookies, cookieNames);
+  let _token = getTokenFromCookies(req.cookies, cookieNames);
 
-  if (!token) {
+  if (!_token) {
     res.status(401);
     throw new Error("Unauthorized access, please login");
   }
 
   try {
+    const { name, token } = _token;
     const result = validateTokenFromCookies(name, token);
     req.session = { id: result._id };
     next();

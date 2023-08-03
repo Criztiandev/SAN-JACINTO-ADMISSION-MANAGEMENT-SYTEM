@@ -13,7 +13,6 @@ export const validateUser = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid user, please login");
   }
 
-  req.session = { user: user };
-
+  req.session = { ...req.session, user: user };
   next();
 });
