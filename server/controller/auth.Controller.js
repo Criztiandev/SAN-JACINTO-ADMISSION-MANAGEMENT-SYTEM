@@ -121,11 +121,11 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     body: link,
   };
 
-  // const mail = await sendEmail(res, content);
-  // if (!mail) {
-  //   res.status(400);
-  //   throw new Error("Email not sent, please try again");
-  // }
+  const mail = await sendEmail(res, content);
+  if (!mail) {
+    res.status(400);
+    throw new Error("Email not sent, please try again");
+  }
 
   res.status(200).json({
     link: link,
