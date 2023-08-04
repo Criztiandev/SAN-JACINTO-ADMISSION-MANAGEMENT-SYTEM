@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import adminModel from "../models/adminModel.js";
+import adminModel from "../../models/adminModel.js";
 
 export const validateAdmin = asyncHandler(async (req, res, next) => {
   const route = req.route.path;
