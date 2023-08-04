@@ -43,7 +43,7 @@ const loginFeature = asyncHandler(async (req, res) => {
     const token = generateToken(session._id, process.env.JWT_SECRET);
 
     // * Store to cookies
-    storeTokenToCookies(res, "aut", token);
+    storeTokenToCookies(res, process.env.AUTH_NAME, token);
 
     res.status(200).json({
       id: user._id,

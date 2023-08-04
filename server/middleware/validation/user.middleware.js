@@ -18,8 +18,7 @@ export const validateAdmin = asyncHandler(async (req, res, next) => {
 
     default:
       const UID = req.session.user;
-      const user = await adminModel.findUser({ _id: UID });
-
+      const user = await adminModel.findUser({ _id: UID }, { exist: true });
       req.session = { ...req.session, user: user };
       next();
       break;
