@@ -7,7 +7,7 @@ import {
   loginFeature,
   registerFeature,
   verifyResetToken,
-} from "../controller/auth/index.js";
+} from "../controller/auth/_index.js";
 const router = express.Router();
 
 router.post("/login", [validation], loginFeature);

@@ -24,5 +24,5 @@ app.use("/api/account", accountRoutes);
 // Error Handlers
 app.use(notFound);
 app.use(errorHandler);
-// Listeners
+
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
