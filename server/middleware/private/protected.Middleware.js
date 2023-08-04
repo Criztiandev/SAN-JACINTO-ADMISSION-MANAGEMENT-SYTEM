@@ -20,8 +20,8 @@ export const protect = asyncHandler(async (req, res, next) => {
     throw new Error("Unauthorized access, please login");
   }
 
-  const result = validateTokenFromCookies(cookieName, _token);
   try {
+    const result = validateTokenFromCookies(cookieName, _token);
     req.session = { _id: result._id };
     next();
   } catch (error) {

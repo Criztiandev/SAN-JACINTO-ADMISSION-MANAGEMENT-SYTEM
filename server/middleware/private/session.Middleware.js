@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import sessionModel from "../../models/sessionModel.js";
 
 export const validateSession = asyncHandler(async (req, res, next) => {
-  const SID = req.session.id;
+  const SID = req.session._id;
 
   // check if the session is valid
   const session = await sessionModel.findOne({ _id: SID }).lean();
@@ -11,6 +11,6 @@ export const validateSession = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid session, please login");
   }
 
-  req.session = { id: SID, user: session.UID };
+  req.session = { SID: SID, user: session.UID };
   next();
 });
