@@ -13,12 +13,13 @@ export const getTokenFromCookies = (req, cookieNames) => {
   return req.cookies[cookieNames] || null;
 };
 
-export const validateTokenFromCookies = (
-  name,
-  token,
-  { auth = "JWT_SECRET", fgt = "MAGIC_SECRET" } = {}
-) => {
-  return verifyToken(token, process.env[fgt || auth][name]);
+export const validateTokenFromCookies = (name, token) => {
+  let secretKey;
+  if (name === process.env.AUTH_NAME) {
+    secretKey = process.env.JWT_SECRET;
+  }
+
+  return verifyToken(token, secretKey);
 };
 
 export const removeTokenFromCookies = (res, name) => {
