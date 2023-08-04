@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import {
   getTokenFromCookies,
   validateTokenFromCookies,
-} from "../utils/cookie.utils.js";
+} from "../../utils/cookie.utils.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
   const route = req.route.path;
