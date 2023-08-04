@@ -20,7 +20,7 @@ app.use(cookieParser()); // to parse cookie data
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
-app.use("api/schedule", scheduleRoutes);
+app.use("/api/schedule", scheduleRoutes);
 
 // Error Handlers
 app.use(notFound);
