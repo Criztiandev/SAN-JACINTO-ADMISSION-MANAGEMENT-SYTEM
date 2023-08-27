@@ -5,6 +5,7 @@ export default {
     extend: {
       gridTemplateColumns: {
         "dashboard-layout": "64px auto",
+        "content-layout": "1fr auto",
       },
     },
   },
