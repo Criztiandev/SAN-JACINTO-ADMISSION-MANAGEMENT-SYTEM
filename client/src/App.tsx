@@ -5,7 +5,7 @@ import Logo from './assets/react.svg'
 function App () {
   return (
     <>
-      <Button rounded>Submit</Button>
+      <Button variant='ghost'>Submit</Button>
       <IconButton icon={Logo} rounded />
     </>
   )
