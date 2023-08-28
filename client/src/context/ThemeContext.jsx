@@ -13,8 +13,16 @@ ThemeProvider.propTypes = {
 };
 
 function ThemeProvider({ tokens, children }) {
+  const buttonVariant = {
+    default: `rounded-[5px]`,
+    rounded: `rounded-[24px]`,
+    ghost: `border-none`,
+  };
+
+  const values = { variant: buttonVariant, tokens };
+
   return (
-    <ThemeContext.Provider value={tokens}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={values}>{children}</ThemeContext.Provider>
   );
 }
 
