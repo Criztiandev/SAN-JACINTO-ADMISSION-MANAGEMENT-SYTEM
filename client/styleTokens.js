@@ -8,4 +8,10 @@ export const styleTokens = {
     tertiary: "#FF6347",
     quaternary: "#FFD700",
   },
+
+  button: {
+    horizontal: "24px",
+    vertical: "12px",
+    gap: "0.5px",
+  },
 };
