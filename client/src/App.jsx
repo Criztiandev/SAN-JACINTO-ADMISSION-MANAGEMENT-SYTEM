@@ -1,11 +1,15 @@
-import Button from "./components/Button";
-import Input from "./components/Input";
+import Radio from "./components/Radio";
 
 function App() {
   return (
     <>
-      <Button>Reset</Button>
-      <Input title="Email" name="email" error="Invalid Email" />
+      <Radio group="favline">
+        <Radio.Title title={"Ano ang Fav Line mo ?"} />
+        <Radio.Item name="I miss you" />
+        <Radio.Item name="Balik Kana" />
+        <Radio.Item name="Teka lng i miss you" />
+        <Radio.Item name="Yes Opo Yes" />
+      </Radio>
     </>
   );
 }
