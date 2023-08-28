@@ -4,11 +4,12 @@ import { useTheme } from "../context/ThemeContext";
 const IconButton = ({ className, variants, icon, ...props }) => {
   const { variant, tokens } = useTheme();
   const { button } = tokens;
-  const base = ` p-[${button.iconP}] border border-[${button.border}]`;
+
+  const base = ` p-[${button.iconP}]`;
 
   return (
     <button {...props} className={`${base} ${variant[variants]} ${className}`}>
-      <span className="block min-w-[24px] min-h-[24px] ">{icon}</span>
+      <img className="w-[24px] h-[24px]" src={icon} alt="" />
     </button>
   );
 };
@@ -21,6 +22,7 @@ IconButton.propTypes = {
 
 IconButton.defaultProps = {
   variants: "default",
+  size: "md",
 };
 
 export default IconButton;
