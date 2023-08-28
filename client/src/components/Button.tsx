@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useTheme } from '@emotion/react'
 import { ReactNode } from 'react'
+import { Variant } from './variants/Variants'
 
 interface ButtonProps {
   variant?: 'default' | 'outlined' | 'ghost'
@@ -27,20 +28,10 @@ const BaseButton = styled.button<BaseButtonProps>`
   font-weight: 500;
 `
 
-const Outlined = styled(BaseButton)`
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-`
-
-const GhostButton = styled(BaseButton)`
-  background-color: transparent;
-  border: none;
-`
-
 interface ButtonType {
   default: typeof BaseButton
-  outlined: typeof Outlined
-  ghost: typeof GhostButton
+  outlined: any
+  ghost: any
 }
 
 const Button = ({
@@ -55,8 +46,8 @@ const Button = ({
 
   const types: ButtonType = {
     default: BaseButton,
-    outlined: Outlined,
-    ghost: GhostButton
+    outlined: Variant(BaseButton, 'outlined'),
+    ghost: Variant(BaseButton, 'ghost')
   }
   const ButtonVariant = types[variant] || BaseButton
 

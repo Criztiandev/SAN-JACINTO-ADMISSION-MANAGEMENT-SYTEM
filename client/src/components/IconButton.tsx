@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { useTheme } from '@emotion/react'
+import { Variant } from './variants/Variants'
 
 interface IconButtonProps {
   variant?: 'default' | 'outlined' | 'ghost'
@@ -16,8 +17,8 @@ interface BaseIconProps {
 
 interface IconButtonType {
   default: typeof BaseIconButton
-  outlined: typeof Outlined
-  ghost: typeof Ghost
+  outlined: any
+  ghost: any
 }
 
 const BaseIconButton = styled.button<BaseIconProps>`
@@ -26,22 +27,12 @@ const BaseIconButton = styled.button<BaseIconProps>`
   padding: ${({ size }) => (size ? `${size}px` : '4px')};
 `
 
-const Outlined = styled(BaseIconButton)`
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-`
-
-const Ghost = styled(BaseIconButton)`
-  background-color: transparent;
-  border: none;
-`
-
 const IconButton = ({ variant = 'default', ...props }: IconButtonProps) => {
   const theme = useTheme()
   const types: IconButtonType = {
     default: BaseIconButton,
-    outlined: Outlined,
-    ghost: Ghost
+    outlined: Variant(BaseIconButton, 'outlined'),
+    ghost: Variant(BaseIconButton, 'ghost')
   }
 
   const IconVariant = types[variant] || BaseIconButton
