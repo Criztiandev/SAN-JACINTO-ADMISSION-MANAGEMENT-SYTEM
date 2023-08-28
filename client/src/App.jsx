@@ -1,11 +1,11 @@
 import Button from "./components/Button";
-import IconButton from "./components/IconButton";
+import Input from "./components/Input";
 
 function App() {
   return (
     <>
       <Button>Reset</Button>
-      <IconButton icon={"T"} />
+      <Input title="Email" name="email" error="Invalid Email" />
     </>
   );
 }

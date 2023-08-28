@@ -9,11 +9,19 @@ export const styleTokens = {
     quaternary: "#FFD700",
   },
 
+  border: {
+    primary: "#D9d9d9",
+  },
+
   button: {
-    iconP: "8px",
+    iconP: "4px",
     horizontal: "24px",
-    vertical: "12px",
+    vertical: "8px",
     gap: "0.5px",
-    border: "#D9D9D9",
+  },
+
+  input: {
+    horizontal: "12px",
+    vertical: "8px",
   },
 };
