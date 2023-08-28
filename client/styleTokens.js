@@ -10,8 +10,10 @@ export const styleTokens = {
   },
 
   button: {
+    iconP: "8px",
     horizontal: "24px",
     vertical: "12px",
     gap: "0.5px",
+    border: "#D9D9D9",
   },
 };
