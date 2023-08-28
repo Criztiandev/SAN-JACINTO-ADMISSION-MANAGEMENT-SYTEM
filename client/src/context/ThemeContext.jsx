@@ -1,33 +1,29 @@
 import PropTypes from "prop-types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 
-const ThemeContext = createContext({});
+const ThemeContext = createContext();
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext);
 
-const ThemeProvider = ({ tokens, children }) => {
-  const [colors, setColors] = useState(tokens.colors);
-  const [fonts, setFonts] = useState(tokens.typograhpy);
-
-  const updateColors = (newColors) => {
-    setColors(newColors);
-  };
-
-  const updateFonts = (newFonts) => {
-    setFonts(newFonts);
-  };
-
-  return (
-    <ThemeContext.Provider value={{ colors, fonts, updateColors, updateFonts }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
+// Define PropTypes for the ThemeProvider component
 ThemeProvider.propTypes = {
   tokens: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };
+
+function ThemeProvider({ tokens, children }) {
+  const buttonVariant = {
+    default: `border ${tokens.border.primary} rounded-[5px]`,
+    rounded: `border ${tokens.border.primary} rounded-[24px]`,
+    ghost: `border-none`,
+  };
+
+  const values = { variant: buttonVariant, tokens };
+
+  return (
+    <ThemeContext.Provider value={values}>{children}</ThemeContext.Provider>
+  );
+}
 
 export default ThemeProvider;
