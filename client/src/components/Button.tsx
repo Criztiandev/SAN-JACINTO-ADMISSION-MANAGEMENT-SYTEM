@@ -1,9 +1,12 @@
 import styled from '@emotion/styled'
 import { useTheme } from '@emotion/react'
+import { ReactNode } from 'react'
 
 interface ButtonProps {
   variant?: 'default' | 'outlined' | 'ghost'
   rounded?: boolean
+  icon?: string | ReactNode
+  dir?: 'left' | 'right'
   children: string
 
   onClick?: () => void
@@ -34,14 +37,23 @@ const GhostButton = styled(BaseButton)`
   border: none;
 `
 
+interface ButtonType {
+  default: typeof BaseButton
+  outlined: typeof Outlined
+  ghost: typeof GhostButton
+}
+
 const Button = ({
   variant = 'default',
+  dir = 'left',
+  icon,
   children,
   onClick,
   rounded
 }: ButtonProps) => {
   const theme = useTheme()
-  const types: any = {
+
+  const types: ButtonType = {
     default: BaseButton,
     outlined: Outlined,
     ghost: GhostButton
@@ -50,7 +62,9 @@ const Button = ({
 
   return (
     <ButtonVariant theme={theme} rounded={rounded} onClick={onClick}>
+      {dir === 'left' && icon && <span>{icon}</span>}
       {children}
+      {dir === 'right' && icon && <span>{icon}</span>}
     </ButtonVariant>
   )
 }
