@@ -14,8 +14,8 @@ ThemeProvider.propTypes = {
 
 function ThemeProvider({ tokens, children }) {
   const buttonVariant = {
-    default: `rounded-[5px]`,
-    rounded: `rounded-[24px]`,
+    default: `border ${tokens.border.primary} rounded-[5px]`,
+    rounded: `border ${tokens.border.primary} rounded-[24px]`,
     ghost: `border-none`,
   };
 
