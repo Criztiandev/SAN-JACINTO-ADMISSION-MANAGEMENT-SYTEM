@@ -1,18 +1,30 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
-      fontFamily: {
-        primary: ["Roboto", "sans-serif"],
-        secondary: ["Roboto Slab", "serif"],
-      },
-
-      colors: {
-        primary: "#1E90FF",
-        secondary: "#FFA500",
-      },
+      // Add any theme extensions here
     },
   },
+
+  preflight: {
+    enable: true,
+    style: {
+      // Customize button background color to inherit
+      'button': {
+        backgroundColor: 'inherit',
+      },
+      // Add other preflight styles here if needed
+    },
+  },
+  
   plugins: [],
 };
+
+
+
+
+
