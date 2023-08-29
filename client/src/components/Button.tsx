@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { useTheme } from '@emotion/react'
 import { ReactNode } from 'react'
 import { Variant } from './variants/Variants'
+import tw, { theme } from 'twin.macro'
 
 interface ButtonProps {
   variant?: 'default' | 'outlined' | 'ghost'
@@ -18,15 +19,12 @@ interface BaseButtonProps {
   rounded?: boolean
 }
 
-const BaseButton = styled.button<BaseButtonProps>`
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.text};
-  border-radius: ${({ rounded }) => (rounded ? '24px' : '4px')};
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-`
+const BaseButton = styled.button<BaseButtonProps>(({ theme, rounded }) => [
+  `background: ${theme.colors.primary} !important;
+  border-radius: ${rounded ? '24px' : '4px'}
+  `,
+  tw`cursor-pointer px-4 py-2 font-bold text-lg `
+])
 
 interface ButtonType {
   default: typeof BaseButton

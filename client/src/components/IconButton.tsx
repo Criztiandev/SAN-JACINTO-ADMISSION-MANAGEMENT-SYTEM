@@ -24,7 +24,7 @@ interface IconButtonType {
 const BaseIconButton = styled.button<BaseIconProps>`
   background: ${({ theme }) => theme.colors.primary};
   border-radius: ${({ rounded }) => (rounded ? '24px' : '5px')};
-  padding: ${({ size }) => (size ? `${size}px` : '4px')};
+  padding: ${({ size }) => (size ? `${size}px` : '5px')};
 `
 
 const IconButton = ({ variant = 'default', ...props }: IconButtonProps) => {
