@@ -2,12 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
-import {
-  accountRoutes,
-  applicantRoutes,
-  authRoutes,
-  scheduleRoutes,
-} from "./routes/index.js";
+import applicantRoute from "./routes/applicantRoutes.js";
+import accountRoute from "./routes/accountRoutes.js";
+
 import { errorHandler, notFound } from "./middleware/_index.js";
 // Configuration
 dotenv.config();
@@ -23,10 +20,7 @@ app.use(express.urlencoded({ extended: true })); // to accept form data
 app.use(cookieParser()); // to parse cookie data
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/account", accountRoutes);
-app.use("/api/schedule", scheduleRoutes);
-app.use("/api/applicant", applicantRoutes);
+app.use("/api/applicant", applicantRoute);
 
 // Error Handlers
 app.use(notFound);

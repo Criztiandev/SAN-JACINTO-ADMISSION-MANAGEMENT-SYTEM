@@ -22,7 +22,7 @@ sessionSchema.statics.findSession = async function (
   { getUser = false } = {}
 ) {
   const keys = Object.keys(filter);
-  const query = keys.map((field) => ({ [field]: filter[field] }));
+  const query = keys.map(field => ({ [field]: filter[field] }));
 
   try {
     const session = await this.findOne({ $or: query });

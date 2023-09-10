@@ -40,11 +40,12 @@ adminSchema.pre("updateOne", async function (next) {
   }
 });
 
+// can be used if the model is initializar
 adminSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Custome Functions
+// Custome Functions that can be accessed using model without initialization
 adminSchema.statics.findUser = async function (
   payload,
   { exist = false, select = "-password" } = {}
@@ -52,7 +53,7 @@ adminSchema.statics.findUser = async function (
   const checkers = Object.keys(payload);
 
   // Create a bulk query
-  const query = checkers.map((field) => ({ [field]: payload[field] }));
+  const query = checkers.map(field => ({ [field]: payload[field] }));
 
   try {
     // single based query to get all the necessary data
@@ -61,7 +62,7 @@ adminSchema.statics.findUser = async function (
     );
 
     if (user) {
-      const field = checkers.find((e) => user[e] === payload[e]);
+      const field = checkers.find(e => user[e] === payload[e]);
 
       if (exist) return user;
       else
