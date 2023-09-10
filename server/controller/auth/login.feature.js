@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import adminModel from "../../models/adminModel.js";
 import { generateToken } from "../../utils/token.utils.js";
 import { storeTokenToCookies } from "../../utils/cookie.utils.js";
-import sessionModel from "../../models/sessionModel.js";
+import sessionModel from "../../models/session.Model.js";
 
 const loginFeature = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
