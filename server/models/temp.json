@@ -1,0 +1,80 @@
+{
+  "studentDetails": {
+    "LRN": "",
+    "PSA": "",
+    "yearLevel": "",
+    "track": ""
+  },
+  "personalDetails": {
+    "firstName": "",
+    "middleName": "",
+    "lastName": "",
+    "suffix": "",
+    "gender": "",
+    "birthDate": "",
+    "age": ""
+  },
+  "socials": {
+    "facebook": "",
+    "gmail": "",
+    "contact": "",
+    "preferedContact": ""
+  },
+  "addressDetails": {
+    "permanentAddress": {
+      "houseNo": "",
+      "street": "",
+      "barangay": "",
+      "municipality": "",
+      "province": "",
+      "country": "",
+      "zip": ""
+    },
+    "currentAddress": {
+      "houseNo": "",
+      "street": "",
+      "barangay": "",
+      "municipality": "",
+      "province": "",
+      "country": "",
+      "zip": ""
+    },
+    "isCurrentAddress": ""
+  },
+  "schoolDetails": {
+    "schoolID": "",
+    "schoolName": "",
+    "schoolYear": ""
+  },
+  "guardianDetails": {
+    "father": {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "contact": ""
+    },
+    "mother": {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "contact": ""
+    },
+    "legalGuardian": {
+      "firstName": "",
+      "middleName": "",
+      "lastName": "",
+      "contact": ""
+    }
+  },
+  "otherDetails": {
+    "is4psBeneficiary": "",
+    "isIndigenousPerson": "",
+    "isLWD": ""
+  },
+  "files": {
+    "sp9": "",
+    "goodMoral": "",
+    "NSO": ""
+  },
+  "signature": ""
+}

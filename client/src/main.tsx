@@ -1,15 +1,15 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { ThemeProvider } from '@emotion/react'
-import designToken from '../designTokens'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { RouterProvider } from "react-router-dom";
+import tokens from "../tokens.ts";
+import { router } from "./routes/Router.tsx";
 
-const root = createRoot(document.getElementById('root') as HTMLElement)
-root.render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ThemeProvider theme={designToken}>
-      <App />
-    </ThemeProvider>
+    <ChakraProvider theme={extendTheme(tokens)}>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
-)
+);

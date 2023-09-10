@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import sessionModel from "../../models/sessionModel.js";
+import sessionModel from "../../models/session.Model.js";
 
 export const validateSession = asyncHandler(async (req, res, next) => {
   const SID = req.session._id;

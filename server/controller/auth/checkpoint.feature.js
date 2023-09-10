@@ -8,7 +8,7 @@ import {
 } from "../../utils/token.utils.js";
 import { storeTokenToCookies } from "../../utils/cookie.utils.js";
 import { decryptData } from "../../utils/encryption.utils.js";
-import sessionModel from "../../models/sessionModel.js";
+import sessionModel from "../../models/session.Model.js";
 
 // combine the token based and session based authentication
 
