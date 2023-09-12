@@ -2,15 +2,17 @@ import { MouseEvent } from "react";
 
 interface IconProps {
   icon?: string;
+  disabled?: boolean;
   onClick?:
     | ((event: MouseEvent<HTMLButtonElement>) => void)
     | (() => void)
     | undefined;
 }
 
-const IconButton = ({ icon = "I", onClick }: IconProps) => {
+const IconButton = ({ icon = "I", onClick, disabled }: IconProps) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       className="w-8 h-8 border border-black rounded-full">
       {icon}

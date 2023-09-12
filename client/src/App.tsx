@@ -8,6 +8,7 @@ import BaseLayout from "./layouts/BaseLayout";
 import { DSApplicantInterface } from "./interface/ApplicantInterface";
 import { ColumnDef } from "@tanstack/react-table";
 import { applicantData } from "./data/applicantData";
+import { DSRecentSchedule } from "./interface/ScheduleInterface";
 interface StatsInterface {
   added: number;
   total: string;
@@ -41,6 +42,13 @@ const App = () => {
     },
     { header: "Email", accessorKey: "email" },
     { header: "Gender", accessorKey: "gender" },
+  ];
+
+  const recentSchedule: DSRecentSchedule[] = [
+    {
+      title: "Meeting with Grade 7",
+      schedule: "8:30 - 9:30",
+    },
   ];
 
   return (
@@ -86,10 +94,22 @@ const App = () => {
         <Table header={recentApplicantHeader} payload={applicantData}>
           <Table.Header />
           <Table.Content />
-          <Table.Action />
         </Table>
         <Card>
-          <Card.Header title="Blogs" icon="I"></Card.Header>
+          <Card.Header title="Events" icon="I"></Card.Header>
+
+          <Card.Content className="p-6">
+            {recentSchedule.map(sched => (
+              <div className="p-4 border rounded-[5px]">
+                <Typography className="mb-1" as="h6">
+                  {sched.title}
+                </Typography>
+                <Typography className="opacity-50" as="p">
+                  {sched.schedule}
+                </Typography>
+              </div>
+            ))}
+          </Card.Content>
         </Card>
       </section>
     </BaseLayout>
