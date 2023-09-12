@@ -1,11 +1,11 @@
-import { ComponentProps } from "../interface/CommonInterface";
+import { BaseProps } from "../interface/ComponentInterfaces";
 import { Fragment, Header } from "./fragments/Fragments";
 
-const Card = ({ className, children }: ComponentProps) => {
+const Card = ({ className, children }: BaseProps) => {
   return (
-    <Fragment className={`border border-[#cccccc] rounded-[5px] ${className}`}>
+    <div className={`border border-[#cccccc] rounded-[5px] ${className}`}>
       {children}
-    </Fragment>
+    </div>
   );
 };
 

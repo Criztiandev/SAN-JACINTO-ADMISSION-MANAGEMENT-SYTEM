@@ -8,34 +8,19 @@ import MessageIcon from "../assets/icons/Message_light.svg";
 import ToolsIcon from "../assets/icons/Structure_light.svg";
 
 import IconButton from "../components/IconButton";
-import { ComponentProps } from "../interface/CommonInterface";
-interface iconProps extends ComponentProps {
+import { BaseProps } from "../interface/ComponentInterfaces";
+interface iconProps extends BaseProps {
   path: string;
   icon: string;
 }
 
 const Nav = () => {
   const icons: iconProps[] = [
-    {
-      path: "/dashboard",
-      icon: DashboardIcon,
-    },
-    {
-      path: "/applicants",
-      icon: ApplicantIcon,
-    },
-    {
-      path: "/schedule",
-      icon: ScheduleIcon,
-    },
-    {
-      path: "/message",
-      icon: MessageIcon,
-    },
-    {
-      path: "/tools",
-      icon: ToolsIcon,
-    },
+    { path: "/dashboard", icon: DashboardIcon },
+    { path: "/applicants", icon: ApplicantIcon },
+    { path: "/schedule", icon: ScheduleIcon },
+    { path: "/message", icon: MessageIcon },
+    { path: "/tools", icon: ToolsIcon },
   ];
 
   return (

@@ -1,14 +1,9 @@
 import Card from "./components/Card";
 import ColorLabel from "./components/ColorLabel";
 import Stats from "./components/Stats";
-import Table from "./components/Table";
 import Typography from "./components/Typography";
 import BaseLayout from "./layouts/BaseLayout";
 
-import { DSApplicantInterface } from "./interface/ApplicantInterface";
-import { ColumnDef } from "@tanstack/react-table";
-import { applicantData } from "./data/applicantData";
-import { DSRecentSchedule } from "./interface/ScheduleInterface";
 import Stack from "./components/Stack";
 
 import Kebbab from "./assets/icons/Kebbab.svg";
@@ -34,27 +29,6 @@ const App = () => {
       added: 23,
       total: "18,000",
       title: "Attendies",
-    },
-  ];
-
-  const recentApplicantHeader: ColumnDef<DSApplicantInterface>[] = [
-    { header: "ID", accessorKey: "id" },
-    {
-      header: "Name",
-      accessorFn: key => `${key.last_name} ${key.first_name}`,
-    },
-    { header: "Email", accessorKey: "email" },
-    { header: "Gender", accessorKey: "gender" },
-  ];
-
-  const recentSchedule: DSRecentSchedule[] = [
-    {
-      title: "Meeting with Grade 7",
-      schedule: "8:30 - 9:30",
-    },
-    {
-      title: "Meeting with Grade 7",
-      schedule: "8:30 - 9:30",
     },
   ];
 
@@ -98,25 +72,9 @@ const App = () => {
         </Card>
       </section>
       <section className="grid grid-cols-[auto_370px] gap-4">
-        <Table header={recentApplicantHeader} payload={applicantData}>
-          <Table.Header />
-          <Table.Content />
-        </Table>
-
         <Stack>
           <Stack.Header title="Schedule" />
-          <Stack.Content dir="vertical" spacing={16}>
-            {recentSchedule.map(sched => (
-              <Stack.Items className="p-4 border rounded-[5px]">
-                <Typography className="mb-1" as="h6">
-                  {sched.title}
-                </Typography>
-                <Typography className="opacity-50" as="p">
-                  {sched.schedule}
-                </Typography>
-              </Stack.Items>
-            ))}
-          </Stack.Content>
+          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
       </section>
     </BaseLayout>

@@ -1,16 +1,16 @@
-import { ComponentProps, TypographyProps } from "../interface/CommonInterface";
+import { BaseProps, TextProps } from "../interface/ComponentInterfaces";
 import Typography from "./Typography";
 import { Fragment } from "./fragments/Fragments";
 
-interface NumberProps extends TypographyProps {
+interface NumberProps extends TextProps {
   value: number | string;
 }
-interface TypeProps extends TypographyProps {
+interface TypeProps extends TextProps {
   type?: "increase" | "decrease";
   value?: number;
 }
 
-const Label = ({ as = "h3", children }: TypographyProps) => {
+const Label = ({ as = "h3", children }: TextProps) => {
   return <Typography as={as}>{children}</Typography>;
 };
 
@@ -27,7 +27,7 @@ const Type = ({ type = "increase", value, as }: TypeProps) => {
   );
 };
 
-const Stats = ({ className, children }: ComponentProps) => {
+const Stats = ({ className, children }: BaseProps) => {
   return <div className={className}>{children}</div>;
 };
 

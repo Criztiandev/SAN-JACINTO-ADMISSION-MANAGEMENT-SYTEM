@@ -1,7 +1,7 @@
-import { ComponentProps } from "../interface/CommonInterface";
+import { BaseProps } from "../interface/ComponentInterfaces";
 import { Fragment, Header } from "./fragments/Fragments";
 
-interface StackProps extends ComponentProps {
+interface StackProps extends BaseProps {
   dir: "horizontal" | "vertical";
   spacing: number;
 }
@@ -16,7 +16,7 @@ const Content = ({ children, dir, spacing }: StackProps) => {
   );
 };
 
-const Stack = ({ children }: ComponentProps) => {
+const Stack = ({ children }: BaseProps) => {
   return (
     <div className={`border rounded-[5px] overflow-hidden `}>{children}</div>
   );

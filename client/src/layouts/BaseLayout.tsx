@@ -1,11 +1,12 @@
-import { ComponentProps } from "../interface/CommonInterface";
 import IconButton from "../components/IconButton";
 
 import Nav from "../containers/Nav";
 import Typography from "../components/Typography";
 import Notification from "../assets/icons/Bell_light.svg";
 import Settings from "../assets/icons/Setting_alt_line_light.svg";
-const BaseLayout = ({ children }: ComponentProps) => {
+import { BaseProps } from "../interface/ComponentInterfaces";
+
+const BaseLayout = ({ children }: BaseProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
     <div className=" grid grid-cols-[70px_auto]">
