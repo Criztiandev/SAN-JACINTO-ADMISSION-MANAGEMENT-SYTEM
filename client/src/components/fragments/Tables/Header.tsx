@@ -9,7 +9,7 @@ const TableHeader = () => {
       {getHeaderGroups().map(rows => (
         <tr
           key={rows.id}
-          className="w-full grid grid-cols-[30px_200px_auto_100px] gap-4">
+          className="w-full grid grid-cols-[30px_200px_auto_auto] gap-4">
           {rows.headers.map(header => (
             <th key={header.id} className="justify-self-start">
               {flexRender(header.column.columnDef.header, header.getContext())}

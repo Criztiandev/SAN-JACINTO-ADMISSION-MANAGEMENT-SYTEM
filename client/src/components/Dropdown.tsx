@@ -1,6 +1,5 @@
 import { useState } from "react";
 import IconButton from "./IconButton";
-import Kebbab from "../assets/icons/Kebbab.svg";
 
 interface DropdownProps {
   icon: string;

@@ -9,6 +9,9 @@ import { DSApplicantInterface } from "./interface/ApplicantInterface";
 import { ColumnDef } from "@tanstack/react-table";
 import { applicantData } from "./data/applicantData";
 import { DSRecentSchedule } from "./interface/ScheduleInterface";
+import Stack from "./components/Stack";
+
+import Kebbab from "./assets/icons/Kebbab.svg";
 interface StatsInterface {
   added: number;
   total: string;
@@ -49,6 +52,10 @@ const App = () => {
       title: "Meeting with Grade 7",
       schedule: "8:30 - 9:30",
     },
+    {
+      title: "Meeting with Grade 7",
+      schedule: "8:30 - 9:30",
+    },
   ];
 
   return (
@@ -76,7 +83,7 @@ const App = () => {
       {/* // Graph Section */}
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
-          <Card.Header title="Applican Graph" icon="I" />
+          <Card.Header title="Applican Graph" icon={Kebbab} />
 
           <Card.Content>
             <div className="flex  gap-4 p-4">
@@ -95,22 +102,22 @@ const App = () => {
           <Table.Header />
           <Table.Content />
         </Table>
-        <Card>
-          <Card.Header title="Events" icon="I"></Card.Header>
 
-          <Card.Content className="p-6">
+        <Stack>
+          <Stack.Header title="Schedule" />
+          <Stack.Content dir="vertical" spacing={16}>
             {recentSchedule.map(sched => (
-              <div className="p-4 border rounded-[5px]">
+              <Stack.Items className="p-4 border rounded-[5px]">
                 <Typography className="mb-1" as="h6">
                   {sched.title}
                 </Typography>
                 <Typography className="opacity-50" as="p">
                   {sched.schedule}
                 </Typography>
-              </div>
+              </Stack.Items>
             ))}
-          </Card.Content>
-        </Card>
+          </Stack.Content>
+        </Stack>
       </section>
     </BaseLayout>
   );
