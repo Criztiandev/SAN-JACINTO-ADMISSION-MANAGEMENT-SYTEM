@@ -1,14 +1,30 @@
+import { MouseEvent } from "react";
+import Kebbab from "../assets/icons/Kebbab.svg";
+
 interface IconProps {
   icon?: string;
-  onClick?: () => void;
+  disabled?: boolean;
+  type?: "outlined" | "ghost" | "contained";
+  onClick?:
+    | ((event: MouseEvent<HTMLButtonElement>) => void)
+    | (() => void)
+    | undefined;
 }
 
-const IconButton = ({ icon = "I", onClick }: IconProps) => {
+const IconButton = ({
+  icon = Kebbab,
+  onClick,
+  disabled,
+  type = "outlined",
+}: IconProps) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
-      className="w-8 h-8 border border-black rounded-full">
-      {icon}
+      className={`w-8 h-8  rounded-full flex justify-center items-center ${
+        type === "outlined" ? "border border-black" : null
+      }`}>
+      <img className="w-6 h-6" src={icon} alt="Kebbab" />
     </button>
   );
 };
