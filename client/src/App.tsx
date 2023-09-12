@@ -8,14 +8,14 @@ import BaseLayout from "./layouts/BaseLayout";
 import { DSApplicantInterface } from "./interface/ApplicantInterface";
 import { ColumnDef } from "@tanstack/react-table";
 import { applicantData } from "./data/applicantData";
-interface CardDataType {
+interface StatsInterface {
   added: number;
   total: string;
   title: string;
 }
 
 const App = () => {
-  const cardData: CardDataType[] = [
+  const statsData: StatsInterface[] = [
     {
       added: 23,
       total: "18,000",
@@ -47,7 +47,7 @@ const App = () => {
     <BaseLayout>
       {/* // Stats Section */}
       <section className="grid grid-cols-3 gap-4">
-        {cardData.map(items => (
+        {statsData.map(items => (
           <Stats
             key={items.title}
             className="flex flex-col gap-4 px-6 py-4 border border-black rounded-[5px]">
