@@ -8,14 +8,18 @@ import BaseLayout from "./layouts/BaseLayout";
 import { DSApplicantInterface } from "./interface/ApplicantInterface";
 import { ColumnDef } from "@tanstack/react-table";
 import { applicantData } from "./data/applicantData";
-interface CardDataType {
+import { DSRecentSchedule } from "./interface/ScheduleInterface";
+import Stack from "./components/Stack";
+
+import Kebbab from "./assets/icons/Kebbab.svg";
+interface StatsInterface {
   added: number;
   total: string;
   title: string;
 }
 
 const App = () => {
-  const cardData: CardDataType[] = [
+  const statsData: StatsInterface[] = [
     {
       added: 23,
       total: "18,000",
@@ -43,11 +47,22 @@ const App = () => {
     { header: "Gender", accessorKey: "gender" },
   ];
 
+  const recentSchedule: DSRecentSchedule[] = [
+    {
+      title: "Meeting with Grade 7",
+      schedule: "8:30 - 9:30",
+    },
+    {
+      title: "Meeting with Grade 7",
+      schedule: "8:30 - 9:30",
+    },
+  ];
+
   return (
     <BaseLayout>
       {/* // Stats Section */}
       <section className="grid grid-cols-3 gap-4">
-        {cardData.map(items => (
+        {statsData.map(items => (
           <Stats
             key={items.title}
             className="flex flex-col gap-4 px-6 py-4 border border-black rounded-[5px]">
@@ -68,7 +83,7 @@ const App = () => {
       {/* // Graph Section */}
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
-          <Card.Header title="Applican Graph" icon="I" />
+          <Card.Header title="Applican Graph" icon={Kebbab} />
 
           <Card.Content>
             <div className="flex  gap-4 p-4">
@@ -86,11 +101,23 @@ const App = () => {
         <Table header={recentApplicantHeader} payload={applicantData}>
           <Table.Header />
           <Table.Content />
-          <Table.Action />
         </Table>
-        <Card>
-          <Card.Header title="Blogs" icon="I"></Card.Header>
-        </Card>
+
+        <Stack>
+          <Stack.Header title="Schedule" />
+          <Stack.Content dir="vertical" spacing={16}>
+            {recentSchedule.map(sched => (
+              <Stack.Items className="p-4 border rounded-[5px]">
+                <Typography className="mb-1" as="h6">
+                  {sched.title}
+                </Typography>
+                <Typography className="opacity-50" as="p">
+                  {sched.schedule}
+                </Typography>
+              </Stack.Items>
+            ))}
+          </Stack.Content>
+        </Stack>
       </section>
     </BaseLayout>
   );
