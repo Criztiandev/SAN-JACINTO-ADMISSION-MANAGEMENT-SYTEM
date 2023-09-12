@@ -1,10 +1,13 @@
 import Card from "./components/Card";
 import ColorLabel from "./components/ColorLabel";
 import Stats from "./components/Stats";
+import Table from "./components/Table";
 import Typography from "./components/Typography";
-
 import BaseLayout from "./layouts/BaseLayout";
 
+import { DSApplicantInterface } from "./interface/ApplicantInterface";
+import { ColumnDef } from "@tanstack/react-table";
+import { applicantData } from "./data/applicantData";
 interface CardDataType {
   added: number;
   total: string;
@@ -30,9 +33,19 @@ const App = () => {
     },
   ];
 
+  const recentApplicantHeader: ColumnDef<DSApplicantInterface>[] = [
+    { header: "ID", accessorKey: "id" },
+    {
+      header: "Name",
+      accessorFn: key => `${key.last_name} ${key.first_name}`,
+    },
+    { header: "Email", accessorKey: "email" },
+    { header: "Gender", accessorKey: "gender" },
+  ];
+
   return (
     <BaseLayout>
-      // Stats Section
+      {/* // Stats Section */}
       <section className="grid grid-cols-3 gap-4">
         {cardData.map(items => (
           <Stats
@@ -52,14 +65,10 @@ const App = () => {
           </Stats>
         ))}
       </section>
-      // Graph Section
+      {/* // Graph Section */}
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
-          <Card.Header
-            className="flex justify-between items-center"
-            title="Applican Graph"
-            icon="I"
-          />
+          <Card.Header title="Applican Graph" icon="I" />
 
           <Card.Content>
             <div className="flex  gap-4 p-4">
@@ -70,7 +79,17 @@ const App = () => {
         </Card>
 
         <Card>
-          <Card.Header title="Blogs"></Card.Header>
+          <Card.Header title="Blogs" icon="I"></Card.Header>
+        </Card>
+      </section>
+      <section className="grid grid-cols-[auto_370px] gap-4">
+        <Table header={recentApplicantHeader} payload={applicantData}>
+          <Table.Header />
+          <Table.Content />
+          <Table.Action />
+        </Table>
+        <Card>
+          <Card.Header title="Blogs" icon="I"></Card.Header>
         </Card>
       </section>
     </BaseLayout>

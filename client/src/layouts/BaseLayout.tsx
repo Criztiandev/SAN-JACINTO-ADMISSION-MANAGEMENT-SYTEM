@@ -7,7 +7,7 @@ import Typography from "../components/Typography";
 const BaseLayout = ({ children }: ComponentProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
-    <div className="grid grid-cols-[70px_auto]">
+    <div className=" grid grid-cols-[70px_auto]">
       <aside>
         <Nav />
       </aside>
