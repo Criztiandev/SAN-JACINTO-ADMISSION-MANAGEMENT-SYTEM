@@ -1,6 +1,7 @@
 import { ComponentProps } from "../../interface/CommonInterface";
 import { createElement } from "react";
 import Typography from "../Typography";
+import Dropdown from "../Dropdown";
 
 interface HeaderProps extends ComponentProps {
   title?: string;
@@ -14,6 +15,7 @@ export const Header = ({ title, className }: HeaderProps) => {
       <Typography className="text-[18px] font-medium" as="h3">
         {title}
       </Typography>
+      <Dropdown />
     </header>
   );
 };

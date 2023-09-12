@@ -1,33 +1,40 @@
-import { ReactNode } from "react";
 import Avatar from "../components/Avatar";
 import Image from "../components/Image";
 
-interface iconProps {
+import DashboardIcon from "../assets/icons/Overview.svg";
+import ApplicantIcon from "../assets/icons/Applicants.svg";
+import ScheduleIcon from "../assets/icons/Calendar.svg";
+import MessageIcon from "../assets/icons/Message_light.svg";
+import ToolsIcon from "../assets/icons/Structure_light.svg";
+
+import IconButton from "../components/IconButton";
+import { ComponentProps } from "../interface/CommonInterface";
+interface iconProps extends ComponentProps {
   path: string;
-  icon: ReactNode;
+  icon: string;
 }
 
 const Nav = () => {
   const icons: iconProps[] = [
     {
       path: "/dashboard",
-      icon: <span>I</span>,
+      icon: DashboardIcon,
     },
     {
       path: "/applicants",
-      icon: <span>I</span>,
+      icon: ApplicantIcon,
     },
     {
       path: "/schedule",
-      icon: <span>I</span>,
+      icon: ScheduleIcon,
     },
     {
       path: "/message",
-      icon: <span>I</span>,
+      icon: MessageIcon,
     },
     {
       path: "/tools",
-      icon: <span>I</span>,
+      icon: ToolsIcon,
     },
   ];
 
@@ -42,9 +49,7 @@ const Nav = () => {
           <li
             key={el.path}
             className="cursor-pointer p-2  rounded-[5px] hover:bg-blue-400 active:bg-blue-400">
-            <span className="flex justify-center items-center w-6 h-6">
-              {el.icon}
-            </span>
+            <IconButton icon={el.icon} />
           </li>
         ))}
       </ul>

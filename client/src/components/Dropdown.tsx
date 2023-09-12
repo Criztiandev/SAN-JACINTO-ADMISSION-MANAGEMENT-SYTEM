@@ -2,7 +2,7 @@ import { useState } from "react";
 import IconButton from "./IconButton";
 
 interface DropdownProps {
-  icon: string;
+  icon?: string;
 }
 
 const Dropdown = ({ icon }: DropdownProps) => {
@@ -11,13 +11,10 @@ const Dropdown = ({ icon }: DropdownProps) => {
   const handleOpen = () => setOpen(prev => !prev);
 
   return (
-    <div>
+    <div className="relative">
       <IconButton onClick={handleOpen} icon={icon} />
       {open && (
-        <ul>
-          <li>Item 1</li>
-          <li>Item 1</li>
-          <li>Item 1</li>
+        <ul className="bg-white p-4 absolute  right-0 top-10 w-52 border rounded-[5px] flex flex-col gap-2 shadow-md">
           <li>Item 1</li>
           <li>Item 1</li>
         </ul>

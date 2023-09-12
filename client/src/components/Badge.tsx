@@ -1,10 +1,6 @@
-import { ReactNode } from "react";
+import { ComponentProps } from "../interface/CommonInterface";
 
-interface BadgeProps {
-  children: ReactNode;
-}
-
-const Badge = ({ children }: BadgeProps) => {
+const Badge = ({ children }: ComponentProps) => {
   return <div>{children}</div>;
 };
 

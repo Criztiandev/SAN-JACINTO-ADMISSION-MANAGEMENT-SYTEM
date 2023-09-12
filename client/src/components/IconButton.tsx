@@ -15,7 +15,7 @@ const IconButton = ({
   icon = Kebbab,
   onClick,
   disabled,
-  type = "outlined",
+  type = "ghost",
 }: IconProps) => {
   return (
     <button

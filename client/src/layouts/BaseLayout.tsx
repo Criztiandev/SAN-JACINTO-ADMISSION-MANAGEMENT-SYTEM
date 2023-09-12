@@ -3,7 +3,8 @@ import IconButton from "../components/IconButton";
 
 import Nav from "../containers/Nav";
 import Typography from "../components/Typography";
-
+import Notification from "../assets/icons/Bell_light.svg";
+import Settings from "../assets/icons/Setting_alt_line_light.svg";
 const BaseLayout = ({ children }: ComponentProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
@@ -20,8 +21,8 @@ const BaseLayout = ({ children }: ComponentProps) => {
           </span>
 
           <span className="flex gap-4">
-            <IconButton />
-            <IconButton />
+            <IconButton type="ghost" icon={Notification} />
+            <IconButton type="ghost" icon={Settings} />
           </span>
         </header>
 
