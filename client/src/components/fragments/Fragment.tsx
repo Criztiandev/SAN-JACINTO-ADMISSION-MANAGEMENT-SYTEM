@@ -2,10 +2,10 @@ import { ComponentProps } from "../../interface/CommonInterface";
 import { createElement } from "react";
 
 interface FragmentProps extends ComponentProps {
-  type: string;
+  type?: string;
 }
 
-const Fragment = ({ type, className, children }: FragmentProps) => {
+const Fragment = ({ type = "div", className, children }: FragmentProps) => {
   return createElement(type, { className }, children);
 };
 

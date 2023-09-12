@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import IconButton from "./components/IconButton";
+import ColorLabel from "./components/ColorLabel";
 import Stats from "./components/Stats";
 import Typography from "./components/Typography";
 
@@ -32,6 +32,7 @@ const App = () => {
 
   return (
     <BaseLayout>
+      // Stats Section
       <section className="grid grid-cols-3 gap-4">
         {cardData.map(items => (
           <Stats
@@ -51,24 +52,18 @@ const App = () => {
           </Stats>
         ))}
       </section>
-
+      // Graph Section
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
           <Card.Header
-            title=" Applicants Graph "
-            className="flex justify-between items-center">
-            <IconButton />
-          </Card.Header>
+            className="flex justify-between items-center"
+            title="Applican Graph"
+            icon="I"
+          />
+
           <Card.Content>
             <div className="flex  gap-4 p-4">
-              <span className="flex items-center gap-4">
-                <span className="p-4 bg-blue-400 rounded-full"></span>
-                <Typography as="p">Junior</Typography>
-              </span>
-              <span className="flex items-center gap-4">
-                <span className="p-4 bg-blue-500 rounded-full"></span>
-                <Typography as="p">Senior</Typography>
-              </span>
+              <ColorLabel title="Junior" size={16} color="#cccccc" />
             </div>
           </Card.Content>
         </Card>

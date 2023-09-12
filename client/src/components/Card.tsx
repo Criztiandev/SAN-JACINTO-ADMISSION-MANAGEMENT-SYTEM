@@ -1,23 +1,22 @@
+import Fragment from "./fragments/Fragment";
 import { ComponentProps } from "../interface/CommonInterface";
 import Typography from "./Typography";
+import IconButton from "./IconButton";
 
 interface HeaderProps extends ComponentProps {
   title?: string;
+  icon?: string;
 }
 
-const Header = ({ title, className, children }: HeaderProps) => {
+const Header = ({ title, className, icon }: HeaderProps) => {
   return (
     <header className={`bg-gray-500 p-4 rounded-t-[5px] ${className}`}>
       <Typography className="text-[18px] font-medium" as="h3">
         {title}
       </Typography>
-      {children}
+      <IconButton icon={icon} />
     </header>
   );
-};
-
-const Content = ({ children, className }: ComponentProps) => {
-  return <main className={className}>{children}</main>;
 };
 
 const Card = ({ className, children }: ComponentProps) => {
@@ -29,6 +28,6 @@ const Card = ({ className, children }: ComponentProps) => {
 };
 
 Card.Header = Header;
-Card.Content = Content;
+Card.Content = Fragment;
 
 export default Card;
