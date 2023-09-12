@@ -1,6 +1,11 @@
+import { MouseEvent } from "react";
+
 interface IconProps {
   icon?: string;
-  onClick?: () => void;
+  onClick?:
+    | ((event: MouseEvent<HTMLButtonElement>) => void)
+    | (() => void)
+    | undefined;
 }
 
 const IconButton = ({ icon = "I", onClick }: IconProps) => {

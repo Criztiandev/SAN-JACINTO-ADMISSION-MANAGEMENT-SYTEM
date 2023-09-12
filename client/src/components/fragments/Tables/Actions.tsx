@@ -4,48 +4,25 @@ import IconButton from "../../IconButton";
 
 const TableAction = () => {
   const config = useTableConfig();
-  const table = useReactTable(config);
+  const { setPageIndex, previousPage, nextPage, getPageCount } =
+    useReactTable(config);
 
-  const actions = [
-    {
-      title: "firstPage",
-      icon: "I",
-      function: () => table.setPageIndex(0),
-      active: true,
-    },
-
-    {
-      title: "prevPage",
-      icon: "I",
-      function: () => table.previousPage(),
-      active: true,
-    },
-
-    {
-      title: "nextPage",
-      icon: "I",
-      function: () => {
-        table.nextPage();
-      },
-      active: true,
-    },
-
-    {
-      title: "lastPage",
-      icon: "I",
-      function: () => table.setPageIndex(table.getPageCount() - 1),
-      active: true,
-    },
-  ];
+  const handleFirstPage = () => setPageIndex(1);
+  const handlePrevPage = () => previousPage();
+  const handleNextPage = () => nextPage();
+  const handleLastPage = () => setPageIndex(getPageCount() - 1);
 
   return (
     <tfoot className=" bg-[#cccccc]">
       <tr className="flex justify-between px-6 py-3">
-        {actions.map(items => (
-          <td key={items.title}>
-            <IconButton onClick={items.function} icon={items.icon} />
-          </td>
-        ))}
+        <td className="flex gap-4">
+          <IconButton onClick={handleFirstPage} icon={"I"} />
+          <IconButton onClick={handlePrevPage} icon={"I"} />
+        </td>
+        <td className="flex gap-4">
+          <IconButton onClick={handleNextPage} icon={"I"} />
+          <IconButton onClick={handleLastPage} icon={"I"} />
+        </td>
       </tr>
     </tfoot>
   );
