@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import Kebbab from "../assets/icons/Kebbab.svg";
 
 interface IconProps {
   icon?: string;
@@ -9,13 +10,13 @@ interface IconProps {
     | undefined;
 }
 
-const IconButton = ({ icon = "I", onClick, disabled }: IconProps) => {
+const IconButton = ({ icon = Kebbab, onClick, disabled }: IconProps) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className="w-8 h-8 border border-black rounded-full">
-      {icon}
+      className="w-8 h-8 border border-black rounded-full flex justify-center items-center">
+      <img className="w-6 h-6" src={icon} alt="Kebbab" />
     </button>
   );
 };
