@@ -1,6 +1,6 @@
 import { ComponentProps, TypographyProps } from "../interface/CommonInterface";
 import Typography from "./Typography";
-import Fragment from "./fragments/Fragment";
+import Fragment from "./Fragment";
 
 interface NumberProps extends TypographyProps {
   value: number | string;

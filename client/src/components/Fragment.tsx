@@ -1,4 +1,4 @@
-import { ComponentProps } from "../../interface/CommonInterface";
+import { ComponentProps } from "../interface/CommonInterface";
 import { createElement } from "react";
 
 interface FragmentProps extends ComponentProps {

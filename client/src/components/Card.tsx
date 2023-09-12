@@ -1,4 +1,4 @@
-import Fragment from "./fragments/Fragment";
+import Fragment from "./Fragment";
 import { ComponentProps } from "../interface/CommonInterface";
 import Typography from "./Typography";
 import IconButton from "./IconButton";
@@ -21,9 +21,9 @@ const Header = ({ title, className, icon }: HeaderProps) => {
 
 const Card = ({ className, children }: ComponentProps) => {
   return (
-    <div className={`border border-[#cccccc] rounded-[5px] ${className}`}>
+    <Fragment className={`border border-[#cccccc] rounded-[5px] ${className}`}>
       {children}
-    </div>
+    </Fragment>
   );
 };
 

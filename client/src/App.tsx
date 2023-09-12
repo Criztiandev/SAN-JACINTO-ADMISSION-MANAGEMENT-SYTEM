@@ -64,6 +64,7 @@ const App = () => {
           <Card.Content>
             <div className="flex  gap-4 p-4">
               <ColorLabel title="Junior" size={16} color="#cccccc" />
+              <ColorLabel title="Senior" size={16} color="#cccccc" />
             </div>
           </Card.Content>
         </Card>
