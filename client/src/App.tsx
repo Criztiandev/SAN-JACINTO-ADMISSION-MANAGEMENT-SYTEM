@@ -1,6 +1,6 @@
-import Badge from "./components/Badge";
 import Card from "./components/Card";
 import IconButton from "./components/IconButton";
+import Stats from "./components/Stats";
 import Typography from "./components/Typography";
 
 import BaseLayout from "./layouts/BaseLayout";
@@ -34,19 +34,21 @@ const App = () => {
     <BaseLayout>
       <section className="grid grid-cols-3 gap-4">
         {cardData.map(items => (
-          <div
+          <Stats
             key={items.title}
             className="flex flex-col gap-4 px-6 py-4 border border-black rounded-[5px]">
-            <div className="flex justify-between">
-              <Typography as="h5">Total</Typography>
-              <Badge>+{items.added}</Badge>
-            </div>
+            <Stats.Header type="header" className="flex justify-between">
+              <Stats.Label as="h5">Total</Stats.Label>
+              <Stats.Type as="h6" type="increase" value={300} />
+            </Stats.Header>
 
-            <div>
-              <Typography as="h2">{items.total}</Typography>
-              <Typography as="p">{items.title}</Typography>
-            </div>
-          </div>
+            <Stats.Content type="main">
+              <Stats.Number as="h2" value={items.total} />
+              <Stats.Helper type="div">
+                <Typography as="p">{items.title}</Typography>
+              </Stats.Helper>
+            </Stats.Content>
+          </Stats>
         ))}
       </section>
 
