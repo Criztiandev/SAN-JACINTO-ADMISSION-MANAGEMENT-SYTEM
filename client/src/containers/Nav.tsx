@@ -32,7 +32,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border border-black">
+    <nav className="sticky top-0 py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border border-black">
       <figure className="logo">
         <Image />
       </figure>

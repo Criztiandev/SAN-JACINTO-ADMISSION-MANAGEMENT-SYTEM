@@ -1,6 +1,7 @@
 import Card from "./components/Card";
 import ColorLabel from "./components/ColorLabel";
 import Stats from "./components/Stats";
+import Table from "./components/Table";
 import Typography from "./components/Typography";
 
 import BaseLayout from "./layouts/BaseLayout";
@@ -55,11 +56,7 @@ const App = () => {
       // Graph Section
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
-          <Card.Header
-            className="flex justify-between items-center"
-            title="Applican Graph"
-            icon="I"
-          />
+          <Card.Header title="Applican Graph" icon="I" />
 
           <Card.Content>
             <div className="flex  gap-4 p-4">
@@ -70,7 +67,42 @@ const App = () => {
         </Card>
 
         <Card>
-          <Card.Header title="Blogs"></Card.Header>
+          <Card.Header title="Blogs" icon="I"></Card.Header>
+        </Card>
+      </section>
+      <section>
+        <Table />
+      </section>
+      <section className="grid grid-cols-[auto_370px] gap-4">
+        <Card>
+          <Card.Header title="Applican Graph" icon="I" />
+
+          <Card.Content>
+            <div className="flex  gap-4 p-4">
+              <ColorLabel title="Junior" size={16} color="#cccccc" />
+              <ColorLabel title="Senior" size={16} color="#cccccc" />
+            </div>
+          </Card.Content>
+        </Card>
+
+        <Card>
+          <Card.Header title="Blogs" icon="I"></Card.Header>
+        </Card>
+      </section>
+      <section className="grid grid-cols-[auto_370px] gap-4">
+        <Card>
+          <Card.Header title="Applican Graph" icon="I" />
+
+          <Card.Content>
+            <div className="flex  gap-4 p-4">
+              <ColorLabel title="Junior" size={16} color="#cccccc" />
+              <ColorLabel title="Senior" size={16} color="#cccccc" />
+            </div>
+          </Card.Content>
+        </Card>
+
+        <Card>
+          <Card.Header title="Blogs" icon="I"></Card.Header>
         </Card>
       </section>
     </BaseLayout>
