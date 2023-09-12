@@ -3,9 +3,11 @@ import ColorLabel from "./components/ColorLabel";
 import Stats from "./components/Stats";
 import Table from "./components/Table";
 import Typography from "./components/Typography";
-
 import BaseLayout from "./layouts/BaseLayout";
 
+import { DSApplicantInterface } from "./interface/ApplicantInterface";
+import { ColumnDef } from "@tanstack/react-table";
+import { applicantData } from "./data/applicantData";
 interface CardDataType {
   added: number;
   total: string;
@@ -31,9 +33,19 @@ const App = () => {
     },
   ];
 
+  const recentApplicantHeader: ColumnDef<DSApplicantInterface>[] = [
+    { header: "ID", accessorKey: "id" },
+    {
+      header: "Name",
+      accessorFn: key => `${key.last_name} ${key.first_name}`,
+    },
+    { header: "Email", accessorKey: "email" },
+    { header: "Gender", accessorKey: "gender" },
+  ];
+
   return (
     <BaseLayout>
-      // Stats Section
+      {/* // Stats Section */}
       <section className="grid grid-cols-3 gap-4">
         {cardData.map(items => (
           <Stats
@@ -53,26 +65,7 @@ const App = () => {
           </Stats>
         ))}
       </section>
-      // Graph Section
-      <section className="grid grid-cols-[auto_370px] gap-4">
-        <Card>
-          <Card.Header title="Applican Graph" icon="I" />
-
-          <Card.Content>
-            <div className="flex  gap-4 p-4">
-              <ColorLabel title="Junior" size={16} color="#cccccc" />
-              <ColorLabel title="Senior" size={16} color="#cccccc" />
-            </div>
-          </Card.Content>
-        </Card>
-
-        <Card>
-          <Card.Header title="Blogs" icon="I"></Card.Header>
-        </Card>
-      </section>
-      <section>
-        <Table />
-      </section>
+      {/* // Graph Section */}
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Card>
           <Card.Header title="Applican Graph" icon="I" />
@@ -90,17 +83,11 @@ const App = () => {
         </Card>
       </section>
       <section className="grid grid-cols-[auto_370px] gap-4">
-        <Card>
-          <Card.Header title="Applican Graph" icon="I" />
-
-          <Card.Content>
-            <div className="flex  gap-4 p-4">
-              <ColorLabel title="Junior" size={16} color="#cccccc" />
-              <ColorLabel title="Senior" size={16} color="#cccccc" />
-            </div>
-          </Card.Content>
-        </Card>
-
+        <Table header={recentApplicantHeader} payload={applicantData}>
+          <Table.Header />
+          <Table.Content />
+          <Table.Action />
+        </Table>
         <Card>
           <Card.Header title="Blogs" icon="I"></Card.Header>
         </Card>
