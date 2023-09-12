@@ -10,11 +10,12 @@ interface HeaderProps extends ComponentProps {
 
 const Header = ({ title, className, icon }: HeaderProps) => {
   return (
-    <header className={`bg-gray-500 p-4 rounded-t-[5px] ${className}`}>
+    <header
+      className={`bg-gray-500 p-4 rounded-t-[5px] flex justify-between  ${className}`}>
       <Typography className="text-[18px] font-medium" as="h3">
         {title}
       </Typography>
-      <IconButton icon={icon} />
+      {icon && <IconButton icon={icon} />}
     </header>
   );
 };

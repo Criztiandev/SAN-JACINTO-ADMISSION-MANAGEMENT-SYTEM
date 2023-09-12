@@ -1,10 +1,15 @@
 interface IconProps {
   icon?: string;
+  onClick?: () => void;
 }
 
-const IconButton = ({ icon = "I" }: IconProps) => {
+const IconButton = ({ icon = "I", onClick }: IconProps) => {
   return (
-    <button className="w-8 h-8 border border-black rounded-full">{icon}</button>
+    <button
+      onClick={onClick}
+      className="w-8 h-8 border border-black rounded-full">
+      {icon}
+    </button>
   );
 };
 
