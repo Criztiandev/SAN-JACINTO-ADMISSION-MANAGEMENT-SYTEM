@@ -8,9 +8,10 @@ import { BaseProps } from "../interface/ComponentInterfaces";
 
 interface BaseLayoutProps extends BaseProps {
   title?: string;
+  action?: boolean;
 }
 
-const BaseLayout = ({ title, children }: BaseLayoutProps) => {
+const BaseLayout = ({ title, action, children }: BaseLayoutProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
     <div className=" grid grid-cols-[70px_auto]">
@@ -26,8 +27,14 @@ const BaseLayout = ({ title, children }: BaseLayoutProps) => {
           </span>
 
           <span className="flex gap-4">
-            <IconButton type="ghost" icon={Notification} />
-            <IconButton type="ghost" icon={Settings} />
+            {action ? (
+              <button>Create</button>
+            ) : (
+              <>
+                <IconButton type="ghost" icon={Notification} />
+                <IconButton type="ghost" icon={Settings} />
+              </>
+            )}
           </span>
         </header>
 

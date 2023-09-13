@@ -2,24 +2,20 @@ import Tabs from "../components/Tabs";
 import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
 
-const Applicant = () => {
+const FileManager = () => {
   const TabLists = [
     {
-      title: "Pending",
+      title: "All",
       active: true,
     },
     {
-      title: "Accepted",
-      active: false,
-    },
-    {
-      title: "Revision",
+      title: "Roles",
       active: false,
     },
   ];
 
   return (
-    <BaseLayout title="Applicants" action>
+    <BaseLayout title="Users">
       <Tabs>
         <Tabs.List className="flex">
           {TabLists.map(tabs => (
@@ -38,4 +34,4 @@ const Applicant = () => {
   );
 };
 
-export default Applicant;
+export default FileManager;
