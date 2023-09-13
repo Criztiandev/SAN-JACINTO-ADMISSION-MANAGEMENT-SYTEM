@@ -6,7 +6,11 @@ import Notification from "../assets/icons/Bell_light.svg";
 import Settings from "../assets/icons/Setting_alt_line_light.svg";
 import { BaseProps } from "../interface/ComponentInterfaces";
 
-const BaseLayout = ({ children }: BaseProps) => {
+interface BaseLayoutProps extends BaseProps {
+  title?: string;
+}
+
+const BaseLayout = ({ title, children }: BaseLayoutProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
     <div className=" grid grid-cols-[70px_auto]">
@@ -17,7 +21,7 @@ const BaseLayout = ({ children }: BaseProps) => {
       <main className="px-8 py-4 flex flex-col gap-6">
         <header className="flex justify-between items-center">
           <span>
-            <Typography as="h1">Welcome {name}</Typography>
+            <Typography as="h1">{title ? title : `Welcome ${name}`}</Typography>
             <Typography as="small">Hello there, I miss you</Typography>
           </span>
 

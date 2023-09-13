@@ -1,5 +1,7 @@
+import BaseLayout from "../layouts/BaseLayout";
+
 const Tools = () => {
-  return <div>Tools</div>;
+  return <BaseLayout title="Tools"></BaseLayout>;
 };
 
 export default Tools;

@@ -1,7 +1,7 @@
 import BaseLayout from "../layouts/BaseLayout";
 
 const Applicant = () => {
-  return <BaseLayout></BaseLayout>;
+  return <BaseLayout title="Applicants"></BaseLayout>;
 };
 
 export default Applicant;
