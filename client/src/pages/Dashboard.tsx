@@ -1,11 +1,11 @@
-import Stats from "./components/Stats";
-import Typography from "./components/Typography";
-import BaseLayout from "./layouts/BaseLayout";
+import Stats from "../components/Stats";
+import Typography from "../components/Typography";
+import BaseLayout from "../layouts/BaseLayout";
 
-import Stack from "./components/Stack";
-import { StatsInterface } from "./interface/DasboardInterface";
+import Stack from "../components/Stack";
+import { StatsInterface } from "../interface/DasboardInterface";
 
-const App = () => {
+const Dashboard = () => {
   const statsData: StatsInterface[] = [
     {
       added: 23,
@@ -23,7 +23,6 @@ const App = () => {
       title: "Attendies",
     },
   ];
-
   return (
     <BaseLayout>
       {/* // Stats Section */}
@@ -87,4 +86,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Dashboard;
