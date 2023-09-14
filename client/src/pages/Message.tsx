@@ -15,7 +15,7 @@ const Message = () => {
   ];
 
   return (
-    <BaseLayout title="Message">
+    <BaseLayout title="Message" action>
       <Tabs>
         <Tabs.List className="flex">
           {TabLists.map(tabs => (

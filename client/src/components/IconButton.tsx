@@ -21,8 +21,8 @@ const IconButton = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`w-8 h-8  rounded-full flex justify-center items-center ${
-        type === "outlined" ? "border border-black" : null
+      className={`p-2 rounded-full flex justify-center items-center ${
+        type === "outlined" ? "border border-base" : null
       }`}>
       <img className="w-6 h-6" src={icon} alt="Kebbab" />
     </button>

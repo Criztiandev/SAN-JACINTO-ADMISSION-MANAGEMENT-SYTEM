@@ -1,6 +1,11 @@
+import Button from "../components/Button";
+import SearchBar from "../components/SearchBar";
 import Tabs from "../components/Tabs";
 import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
+import CalendarIcon from "../assets/icons/Calendar.svg";
+import FilterIcon from "../assets/icons/Filter.svg";
+import Dropdown from "../components/Dropdown";
 
 const Applicant = () => {
   const TabLists = [
@@ -21,7 +26,7 @@ const Applicant = () => {
   return (
     <BaseLayout title="Applicants" action>
       <Tabs>
-        <Tabs.List className="flex">
+        <Tabs.List className="flex mb-6 border-b">
           {TabLists.map(tabs => (
             <Tabs.Link
               className={`cursor-pointer ${
@@ -31,8 +36,29 @@ const Applicant = () => {
             </Tabs.Link>
           ))}
         </Tabs.List>
+        <Tabs.Content>
+          <section className="flex justify-between items-center">
+            <SearchBar as="icon" />
 
-        <Tabs.Content></Tabs.Content>
+            <div className="flex gap-4 items-center">
+              <Button
+                dir="left"
+                title="August 23,2023"
+                type="outlined"
+                icon={CalendarIcon}
+              />
+
+              <Button
+                dir="left"
+                title="Filter"
+                type="outlined"
+                icon={FilterIcon}
+              />
+
+              <Dropdown type="outlined" />
+            </div>
+          </section>
+        </Tabs.Content>
       </Tabs>
     </BaseLayout>
   );

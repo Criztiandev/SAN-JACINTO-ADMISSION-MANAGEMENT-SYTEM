@@ -5,8 +5,8 @@ export interface BaseProps {
   children?: ReactNode;
 }
 
-export interface ComponentTyp extends BaseProps {
-  type: "contained" | "outlined" | "ghost";
+export interface ComponentType extends BaseProps {
+  type?: "contained" | "outlined" | "ghost";
 }
 
 export interface TextProps extends BaseProps {
