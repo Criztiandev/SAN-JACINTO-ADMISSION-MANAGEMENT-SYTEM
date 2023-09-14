@@ -1,12 +1,22 @@
-interface ComponentTypeProps {
-  type: "contained" | "outlined" | "ghost";
-}
+import { ComponentType } from "../interface/ComponentInterfaces";
 
-export const ComponentType = ({ type = "contained" }: ComponentTypeProps) => {
+export const ComponentStyle = ({ type = "contained" }: ComponentType) => {
   const styles = {
-    contained: "bg-[#cccccc]",
-    outlined: "border",
-    ghost: "",
+    contained: "bg-[#cccccc] px-[20px] p-3 ",
+    outlined: "border border-base px-[20px] p-3 ",
+    ghost: "px-[20px] p-3 ",
+    unstyled: "p-0",
+  };
+
+  return styles[type];
+};
+
+export const ComponentIconStyle = ({ type = "contained" }: ComponentType) => {
+  const styles = {
+    contained: "bg-[#cccccc]  ",
+    outlined: "border border-base  ",
+    ghost: "p-0",
+    unstyled: "p-0",
   };
 
   return styles[type];

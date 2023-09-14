@@ -6,7 +6,7 @@ export interface BaseProps {
 }
 
 export interface ComponentType extends BaseProps {
-  type?: "contained" | "outlined" | "ghost";
+  type?: "contained" | "outlined" | "ghost" | "unstyled";
 }
 
 export interface TextProps extends BaseProps {

@@ -1,11 +1,11 @@
 import { MouseEvent, forwardRef } from "react";
 import Kebbab from "../assets/icons/Kebbab.svg";
-import { ComponentType } from "../helper/component.helper";
+import { ComponentIconStyle } from "../helper/component.helper";
+import { ComponentType } from "../interface/ComponentInterfaces";
 
-interface IconButtonProps {
+interface IconButtonProps extends ComponentType {
   icon?: string;
   disabled?: boolean;
-  type?: "outlined" | "ghost" | "contained";
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void | (() => void);
 }
 
@@ -17,7 +17,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         disabled={disabled}
         onClick={onClick}
         className={`
-        ${ComponentType({ type })} 
+        ${ComponentIconStyle({ type })} 
         p-2 rounded-full flex justify-center items-center`}>
         <img className="w-6 h-6" src={icon} alt="Kebbab" />
       </button>

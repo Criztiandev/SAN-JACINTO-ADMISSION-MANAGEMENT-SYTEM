@@ -5,8 +5,19 @@ import BaseLayout from "../layouts/BaseLayout";
 import CalendarIcon from "../assets/icons/Calendar.svg";
 import FilterIcon from "../assets/icons/Filter.svg";
 import Dropdown from "../components/Dropdown";
+import Button from "../components/Button";
+import ApplicantIcon from "../assets/icons/Applicants.svg";
+import { useState, MouseEvent } from "react";
+
+useState;
 
 const Applicant = () => {
+  const [filterSelect, setFilterSelect] = useState<string>("");
+
+  const handleFilterSelect = (event: MouseEvent<HTMLButtonElement>) => {
+    setFilterSelect(event.currentTarget.name);
+  };
+
   const TabLists = [
     {
       title: "Pending",
@@ -19,6 +30,21 @@ const Applicant = () => {
     {
       title: "Revision",
       active: false,
+    },
+  ];
+
+  const FilterList = [
+    {
+      title: "Applicant",
+      icon: ApplicantIcon,
+    },
+    {
+      title: "Accepted",
+      icon: ApplicantIcon,
+    },
+    {
+      title: "Loved",
+      icon: ApplicantIcon,
     },
   ];
 
@@ -46,17 +72,29 @@ const Applicant = () => {
                 dir="left"
                 title="August 23,2023"
                 type="outlined"
-                icon={CalendarIcon}
-              />
+                icon={CalendarIcon}></Dropdown>
 
               <Dropdown
-                title="Filter"
+                className="min-w[137px]"
+                title={filterSelect ? filterSelect : "Filter"}
                 as="button"
                 icon={FilterIcon}
-                type="outlined"
-              />
+                type="outlined">
+                {FilterList.map(item => (
+                  <Button
+                    key={item.title}
+                    type="unstyled"
+                    className="w-full"
+                    dir="left"
+                    icon={item.icon}
+                    title={item.title}
+                    name={item.title}
+                    onClick={handleFilterSelect}
+                  />
+                ))}
+              </Dropdown>
 
-              <Dropdown type="outlined" />
+              <Dropdown as="icon" type="outlined"></Dropdown>
             </div>
           </section>
         </Tabs.Content>

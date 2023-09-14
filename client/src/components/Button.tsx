@@ -1,6 +1,7 @@
 import { forwardRef, MouseEvent } from "react";
 import { ComponentType } from "../interface/ComponentInterfaces";
 import Image from "./Image";
+import { ComponentStyle } from "../helper/component.helper";
 
 interface ButtonProps extends ComponentType {
   dir: "left" | "right";
@@ -10,21 +11,22 @@ interface ButtonProps extends ComponentType {
     | ((event: MouseEvent<HTMLButtonElement>) => void)
     | (() => void)
     | undefined;
+  name?: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ dir, title, icon, type = "contained", onClick }, ref) => {
-    const componentStyle = {
-      contained: "bg-[#cccccc]",
-      outlined: "border border-base",
-      ghost: "",
-    };
-
+  (
+    { dir, title, icon, type = "contained", onClick, className, ...props },
+    ref
+  ) => {
     return (
       <button
         ref={ref}
-        className={`${componentStyle[type]} text-[14px] flex justify-center items-center gap-2   rounded-full px-[20px] p-3 `}
-        onClick={onClick}>
+        className={`${ComponentStyle({
+          type,
+        })} ${className} text-[14px] flex gap-2 items-center   rounded-full `}
+        onClick={onClick}
+        {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
         {title}
         {dir === "right" && <Image src={icon} alt="icon" />}
