@@ -29,6 +29,7 @@ const Applicant = () => {
         <Tabs.List className="flex mb-6 border-b">
           {TabLists.map(tabs => (
             <Tabs.Link
+              key={tabs.title}
               className={`cursor-pointer ${
                 tabs.active && "border-b-[1.5px] border-black"
               } px-6 py-2`}>
