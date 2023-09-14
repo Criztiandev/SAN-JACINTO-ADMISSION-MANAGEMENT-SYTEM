@@ -1,7 +1,7 @@
 import { forwardRef, MouseEvent } from "react";
-import { ComponentType } from "../interface/ComponentInterfaces";
+import { ComponentType } from "../interface/componentInterface";
 import Image from "./Image";
-import { ComponentStyle } from "../helper/component.helper";
+import { ComponentStyle } from "../helper/componentHelper";
 
 interface ButtonProps extends ComponentType {
   dir: "left" | "right";

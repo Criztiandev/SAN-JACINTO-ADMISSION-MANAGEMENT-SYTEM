@@ -1,6 +1,6 @@
 import Typography from "../Typography";
 import Dropdown from "../Dropdown";
-import { BaseProps } from "../../interface/ComponentInterfaces";
+import { BaseProps } from "../../interface/componentInterface";
 import { createElement } from "react";
 
 interface HeaderProps extends BaseProps {

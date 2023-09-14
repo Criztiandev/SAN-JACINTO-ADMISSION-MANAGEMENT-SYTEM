@@ -1,4 +1,4 @@
-import { ComponentType } from "../interface/ComponentInterfaces";
+import { ComponentType } from "../interface/componentInterface";
 
 export const ComponentStyle = ({ type = "contained" }: ComponentType) => {
   const styles = {

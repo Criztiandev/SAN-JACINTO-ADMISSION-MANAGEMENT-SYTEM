@@ -7,7 +7,7 @@ import {
   Fragment,
 } from "react";
 import IconButton from "./IconButton";
-import { ComponentType } from "../interface/ComponentInterfaces";
+import { ComponentType } from "../interface/componentInterface";
 import Button from "./Button";
 
 interface DropdownProps extends ComponentType {

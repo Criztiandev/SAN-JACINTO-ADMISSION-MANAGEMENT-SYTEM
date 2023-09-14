@@ -8,8 +8,7 @@ import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
 import ApplicantIcon from "../assets/icons/Applicants.svg";
 import { useState, MouseEvent } from "react";
-
-useState;
+import Table from "../components/Table";
 
 const Applicant = () => {
   const [filterSelect, setFilterSelect] = useState<string>("");
@@ -96,6 +95,9 @@ const Applicant = () => {
 
               <Dropdown as="icon" type="outlined"></Dropdown>
             </div>
+          </section>
+          <section>
+            <Table />
           </section>
         </Tabs.Content>
       </Tabs>

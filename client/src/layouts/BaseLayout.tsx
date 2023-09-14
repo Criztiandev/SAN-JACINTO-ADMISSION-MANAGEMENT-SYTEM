@@ -4,7 +4,7 @@ import Nav from "../containers/Nav";
 import Typography from "../components/Typography";
 import Notification from "../assets/icons/Bell_light.svg";
 import Settings from "../assets/icons/Setting_alt_line_light.svg";
-import { BaseProps } from "../interface/ComponentInterfaces";
+import { BaseProps } from "../interface/componentInterface";
 import Button from "../components/Button";
 import CreateIcon from "../assets/icons/Create Applicant.svg";
 

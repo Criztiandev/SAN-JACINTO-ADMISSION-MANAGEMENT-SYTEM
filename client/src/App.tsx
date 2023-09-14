@@ -3,7 +3,7 @@ import Typography from "./components/Typography";
 import BaseLayout from "./layouts/BaseLayout";
 
 import Stack from "./components/Stack";
-import { StatsInterface } from "./interface/DasboardInterface";
+import { StatsInterface } from "./interface/dashboardInterface";
 
 const App = () => {
   const statsData: StatsInterface[] = [

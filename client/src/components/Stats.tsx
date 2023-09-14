@@ -1,4 +1,4 @@
-import { BaseProps, TextProps } from "../interface/ComponentInterfaces";
+import { BaseProps, TextProps } from "../interface/componentInterface";
 import Typography from "./Typography";
 import { Fragment } from "./fragments/Fragments";
 

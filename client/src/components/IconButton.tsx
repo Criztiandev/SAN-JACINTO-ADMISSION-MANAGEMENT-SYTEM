@@ -1,7 +1,7 @@
 import { MouseEvent, forwardRef } from "react";
 import Kebbab from "../assets/icons/Kebbab.svg";
-import { ComponentIconStyle } from "../helper/component.helper";
-import { ComponentType } from "../interface/ComponentInterfaces";
+import { ComponentIconStyle } from "../helper/componentHelper";
+import { ComponentType } from "../interface/componentInterface";
 
 interface IconButtonProps extends ComponentType {
   icon?: string;
