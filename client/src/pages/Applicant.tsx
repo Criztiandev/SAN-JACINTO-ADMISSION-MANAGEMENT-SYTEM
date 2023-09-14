@@ -1,4 +1,3 @@
-import Button from "../components/Button";
 import SearchBar from "../components/SearchBar";
 import Tabs from "../components/Tabs";
 import Typography from "../components/Typography";
@@ -39,21 +38,22 @@ const Applicant = () => {
         </Tabs.List>
         <Tabs.Content>
           <section className="flex justify-between items-center">
-            <SearchBar as="icon" />
+            <SearchBar />
 
             <div className="flex gap-4 items-center">
-              <Button
+              <Dropdown
+                as="button"
                 dir="left"
                 title="August 23,2023"
                 type="outlined"
                 icon={CalendarIcon}
               />
 
-              <Button
-                dir="left"
+              <Dropdown
                 title="Filter"
-                type="outlined"
+                as="button"
                 icon={FilterIcon}
+                type="outlined"
               />
 
               <Dropdown type="outlined" />

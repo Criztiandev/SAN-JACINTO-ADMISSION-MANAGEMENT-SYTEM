@@ -9,33 +9,35 @@ interface SearchBarProps extends ComponentType {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  as,
+  as = "normal",
   dir = "left",
 }: SearchBarProps) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState<boolean>(as === "normal");
   const searchBarRef = useRef<HTMLLabelElement | null>(null);
 
   const handleActive = () => {
     if (as === "icon") setActive(prev => !prev);
   };
 
-  // Turn off if the user clic outside
+  // Handle Click outside to turn off the searchbar
   useEffect(() => {
-    const handleClickOutSide = (event: MouseEvent) => {
-      if (
-        searchBarRef.current &&
-        !searchBarRef.current.contains(event.target as Node)
-      ) {
-        setActive(false);
-      }
-    };
+    if (as === "icon") {
+      const handleClickOutSide = (event: MouseEvent) => {
+        if (
+          searchBarRef.current &&
+          !searchBarRef.current.contains(event.target as Node)
+        ) {
+          setActive(false);
+        }
+      };
 
-    document.addEventListener("click", handleClickOutSide);
+      document.addEventListener("click", handleClickOutSide);
 
-    return () => {
-      document.removeEventListener("click", handleClickOutSide);
-    };
-  }, []);
+      return () => {
+        document.removeEventListener("click", handleClickOutSide);
+      };
+    }
+  }, [as]);
 
   return (
     <label
@@ -46,9 +48,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
       {dir === "left" && (
         <img src={SearchIcon} alt="Magnifying Glass" onClick={handleActive} />
       )}
-      {active ? (
+      {active && (
         <input className="h-fit w-fit outline-none" placeholder="Search here" />
-      ) : null}
+      )}
       {dir === "right" && (
         <img src={SearchIcon} alt="Magnifying Glass" onClick={handleActive} />
       )}

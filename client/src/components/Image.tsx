@@ -3,8 +3,8 @@ const Image = ({
   alt,
   className,
 }: {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   className?: string;
 }) => {
   return <img src={src} alt={alt} className={className} />;
