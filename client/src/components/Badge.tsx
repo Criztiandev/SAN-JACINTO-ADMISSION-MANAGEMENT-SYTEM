@@ -1,6 +1,6 @@
-import { ComponentProps } from "../interface/CommonInterface";
+import { BaseProps } from "../interface/componentInterface";
 
-const Badge = ({ children }: ComponentProps) => {
+const Badge = ({ children }: BaseProps) => {
   return <div>{children}</div>;
 };
 

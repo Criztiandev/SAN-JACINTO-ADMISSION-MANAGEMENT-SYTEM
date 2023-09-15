@@ -1,11 +1,7 @@
 import { createElement } from "react";
-import { ComponentProps } from "../interface/CommonInterface";
+import { TextProps } from "../interface/componentInterface";
 
-interface TypographyProps extends ComponentProps {
-  as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "small" | "p";
-}
-
-const Typography = ({ as, className, children }: TypographyProps) => {
+const Typography = ({ as, className, children }: TextProps) => {
   return createElement(as, { className: className }, children);
 };
 

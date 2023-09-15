@@ -1,9 +1,9 @@
-import { ComponentProps } from "../../interface/CommonInterface";
-import { createElement } from "react";
 import Typography from "../Typography";
 import Dropdown from "../Dropdown";
+import { BaseProps } from "../../interface/componentInterface";
+import { createElement } from "react";
 
-interface HeaderProps extends ComponentProps {
+interface HeaderProps extends BaseProps {
   title?: string;
   icon?: string;
 }
@@ -20,7 +20,7 @@ export const Header = ({ title, className }: HeaderProps) => {
   );
 };
 
-interface FragmentProps extends ComponentProps {
+interface FragmentProps extends BaseProps {
   type?: string;
 }
 

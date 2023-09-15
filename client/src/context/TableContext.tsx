@@ -1,51 +1,84 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, createContext, useContext, useMemo } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  TableOptions,
-  ColumnDef,
+  useContext,
+  createContext,
+  useState,
+  useMemo,
+  ChangeEvent,
+} from "react";
+import {
+  useReactTable,
   getCoreRowModel,
+  Table,
   getPaginationRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
+import { BaseProps } from "../interface/componentInterface";
 
-interface ApplicantData {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  gender: string;
-  university: string;
+interface TableProviderProps extends BaseProps {
+  data: any[]; // Change this to the appropriate type for your data
+  config: any[]; // Change this to the appropriate type for your config
+  layout: string;
 }
 
-interface TableProviderProps {
-  payload: ApplicantData[]; // Corrected payload type
-  header: ColumnDef<ApplicantData>[]; // Corrected headers type
-  children: ReactNode;
+interface TableContextValue {
+  table: Table<any>; // Change this to the appropriate type for your data
+  filter: string;
+  handleFilter: (event: ChangeEvent<HTMLInputElement>) => void;
+  setFilter: (value: string) => void;
+  tableLayout: string;
+  setTableLayout: (value: string) => void;
 }
 
-const TableContext = createContext<TableOptions<ApplicantData> | null>(null); // Define the context with the correct type
-export const useTableConfig = () => {
+const TableContext = createContext<TableContextValue | undefined>(undefined);
+
+export const useTableContext = (): TableContextValue => {
   const context = useContext(TableContext);
-  if (!context) {
-    throw new Error("useTableConfig must be used within a TableProvider");
-  }
+  if (!context)
+    throw new Error("useTableContext must be used within a TableProvider");
   return context;
 };
 
-const TableProvider = ({ payload, header, children }: TableProviderProps) => {
-  const data = useMemo(() => payload, [payload]);
-  const columns: ColumnDef<ApplicantData>[] = useMemo(() => header, [header]);
+const TableProvider = ({
+  data,
+  config,
+  children,
+  layout,
+}: TableProviderProps) => {
+  const [filter, setFilter] = useState<string>("");
+  const memoizedData = useMemo(() => data, [data]);
+  const [tableLayout, setTableLayout] = useState(layout);
 
-  const tableOptions: TableOptions<ApplicantData> = {
-    data,
-    columns,
+  // Filter Configuration
+
+  // Table Configuration
+  const table = useReactTable({
+    data: memoizedData,
+    columns: config,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      globalFilter: filter,
+    },
+    onGlobalFilterChange: (value: string) => setFilter(value),
+  });
+
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.currentTarget.value);
   };
 
+  const value: TableContextValue = {
+    table,
+    filter,
+    handleFilter: handleFilterChange,
+    setFilter,
+    tableLayout,
+    setTableLayout,
+  };
   return (
-    <TableContext.Provider value={tableOptions}>
-      {children}
-    </TableContext.Provider>
+    <TableContext.Provider value={value}>{children}</TableContext.Provider>
   );
 };
 
