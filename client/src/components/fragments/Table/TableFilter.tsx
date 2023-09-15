@@ -29,7 +29,7 @@ const TableFilter = ({ lists }: FilterProps) => {
       {lists.map(item => (
         <Button
           key={item.title}
-          type="unstyled"
+          type="ghost"
           className="w-full"
           dir="left"
           icon={item.icon}

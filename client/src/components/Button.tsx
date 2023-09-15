@@ -16,19 +16,19 @@ interface ButtonProps extends ComponentType {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { dir, title, icon, type = "contained", onClick, className, ...props },
+    { dir, title, icon, type = "contained", onClick, className = "", ...props },
     ref
   ) => {
     return (
       <button
         ref={ref}
-        className={`${ComponentStyle({
-          type,
-        })} ${className} text-[14px] flex gap-2 items-center   rounded-full `}
+        className={`
+        text-[14px]rounded-full rounded-full grid grid-cols-[32px_auto] justify-start
+        ${ComponentStyle({ type })} ${className}`}
         onClick={onClick}
         {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
-        {title}
+        <span className="w-full">{title}</span>
         {dir === "right" && <Image src={icon} alt="icon" />}
       </button>
     );

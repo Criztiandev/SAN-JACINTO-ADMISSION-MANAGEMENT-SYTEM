@@ -11,28 +11,23 @@ import TableFilter from "./fragments/Table/TableFilter";
 interface TableProps extends BaseProps {
   data: any[];
   config: any[];
+  layout: string;
 }
 
-interface ContainerProps extends BaseProps {
-  col: string | number | Array<string>;
-}
-
-const Table = ({ data, config, children }: TableProps) => {
+const Table = ({ data, config, children, layout }: TableProps) => {
   return (
     <>
-      <TableProvider data={data} config={config}>
+      <TableProvider data={data} config={config} layout={layout}>
         {children}
       </TableProvider>
     </>
   );
 };
 
-const Container = ({ children, col }: ContainerProps) => {
-  const transformer = Array.isArray(col) && col.join("_");
-  console.log(transformer);
+const Container = ({ children }: BaseProps) => {
   return (
     <div
-      className={`relative border overflow-x-scroll grid grid-cols-[${transformer}] h-[450px] rounded-[5px] scroll`}>
+      className={`relative border overflow-x-scroll  h-[400px] rounded-[5px] scroll`}>
       {children}
     </div>
   );

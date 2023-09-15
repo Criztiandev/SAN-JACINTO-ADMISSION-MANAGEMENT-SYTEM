@@ -1,6 +1,6 @@
 import SearchBar from "../../SearchBar";
 import { useTableContext } from "../../../context/TableContext";
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 
 const TableSearchBar = () => {
   const [search, setSearch] = useState<string>("");
@@ -13,24 +13,24 @@ const TableSearchBar = () => {
     setFilter(value);
   };
 
-  // When the user clicks outside, it will return an empty string
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchbarRef.current &&
-        !searchbarRef.current.contains(event.target as Node)
-      ) {
-        setSearch("");
-        setFilter(""); // Clear the filter
-      }
-    };
+  // // When the user clicks outside, it will return an empty string
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (
+  //       searchbarRef.current &&
+  //       !searchbarRef.current.contains(event.target as Node)
+  //     ) {
+  //       setSearch("");
+  //       setFilter(""); // Clear the filter
+  //     }
+  //   };
 
-    document.addEventListener("click", handleClickOutside);
+  //   document.addEventListener("click", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [setFilter]);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, [setFilter]);
 
   return (
     <SearchBar ref={searchbarRef} value={search} onChange={handleChange} />

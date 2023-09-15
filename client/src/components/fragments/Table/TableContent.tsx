@@ -2,12 +2,12 @@ import { useTableContext } from "../../../context/TableContext";
 import { flexRender } from "@tanstack/react-table";
 
 const TableContent = () => {
-  const { table } = useTableContext();
+  const { table, tableLayout } = useTableContext();
   const { getRowModel } = table;
   return (
-    <>
+    <div className={`grid grid-rows-1 border`}>
       {getRowModel().rows.map(row => (
-        <>
+        <div className={`grid grid-cols-[${tableLayout}]`}>
           {row.getVisibleCells().map((cell, index) => (
             <span
               key={cell.id}
@@ -17,9 +17,9 @@ const TableContent = () => {
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </span>
           ))}
-        </>
+        </div>
       ))}
-    </>
+    </div>
   );
 };
 

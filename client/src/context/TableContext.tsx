@@ -19,6 +19,7 @@ import { BaseProps } from "../interface/componentInterface";
 interface TableProviderProps extends BaseProps {
   data: any[]; // Change this to the appropriate type for your data
   config: any[]; // Change this to the appropriate type for your config
+  layout: string;
 }
 
 interface TableContextValue {
@@ -26,6 +27,8 @@ interface TableContextValue {
   filter: string;
   handleFilter: (event: ChangeEvent<HTMLInputElement>) => void;
   setFilter: (value: string) => void;
+  tableLayout: string;
+  setTableLayout: (value: string) => void;
 }
 
 const TableContext = createContext<TableContextValue | undefined>(undefined);
@@ -37,9 +40,15 @@ export const useTableContext = (): TableContextValue => {
   return context;
 };
 
-const TableProvider = ({ data, config, children }: TableProviderProps) => {
+const TableProvider = ({
+  data,
+  config,
+  children,
+  layout,
+}: TableProviderProps) => {
   const [filter, setFilter] = useState<string>("");
   const memoizedData = useMemo(() => data, [data]);
+  const [tableLayout, setTableLayout] = useState(layout);
 
   // Filter Configuration
 
@@ -65,6 +74,8 @@ const TableProvider = ({ data, config, children }: TableProviderProps) => {
     filter,
     handleFilter: handleFilterChange,
     setFilter,
+    tableLayout,
+    setTableLayout,
   };
   return (
     <TableContext.Provider value={value}>{children}</TableContext.Provider>

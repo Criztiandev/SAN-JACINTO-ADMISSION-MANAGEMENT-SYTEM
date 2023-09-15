@@ -32,7 +32,7 @@ export const applicantData = [
     LRN: 1919293,
     first_name: "Isador",
     middle_name: "Mitra",
-    last_name: "Kruger",
+    last_name: "Criztian",
     gender: "Male",
     BOD: "05/20/21",
     age: "21",

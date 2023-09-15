@@ -56,7 +56,7 @@ const Dropdown = ({ as, type, title, icon, children }: DropdownProps) => {
         onClick={handleOpen}
       />
       {open && (
-        <ul className="p-4 absolute right-0 top-[3.5rem] w-52 border rounded-[5px] flex flex-col items-start gap-2 shadow-md">
+        <ul className="z-20 bg-white w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md">
           {children}
         </ul>
       )}

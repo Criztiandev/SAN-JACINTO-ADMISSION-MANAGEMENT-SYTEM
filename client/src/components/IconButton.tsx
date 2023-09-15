@@ -10,7 +10,10 @@ interface IconButtonProps extends ComponentType {
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon = Kebbab, onClick, disabled, type = "ghost" }, ref) => {
+  (
+    { icon = Kebbab, onClick, disabled, type = "ghost", className = "" },
+    ref
+  ) => {
     return (
       <button
         ref={ref}
@@ -18,7 +21,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         onClick={onClick}
         className={`
         ${ComponentIconStyle({ type })} 
-        p-2 rounded-full flex justify-center items-center`}>
+        p-2 rounded-full flex justify-center items-center ${className}`}>
         <img className="w-6 h-6" src={icon} alt="Kebbab" />
       </button>
     );
