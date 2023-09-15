@@ -13,6 +13,10 @@ interface TableProps extends BaseProps {
   config: any[];
 }
 
+interface ContainerProps extends BaseProps {
+  col: string | number | Array<string>;
+}
+
 const Table = ({ data, config, children }: TableProps) => {
   return (
     <>
@@ -23,9 +27,12 @@ const Table = ({ data, config, children }: TableProps) => {
   );
 };
 
-const Container = ({ children }: BaseProps) => {
+const Container = ({ children, col }: ContainerProps) => {
+  const transformer = Array.isArray(col) && col.join("_");
+  console.log(transformer);
   return (
-    <div className="relative border overflow-x-scroll grid grid-cols-[250px_150px_100px_150px_100px_200px_200px_100px_150px_100px] h-[400px] rounded-[5px] scroll">
+    <div
+      className={`relative border overflow-x-scroll grid grid-cols-[${transformer}] h-[450px] rounded-[5px] scroll`}>
       {children}
     </div>
   );
