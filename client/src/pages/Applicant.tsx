@@ -1,50 +1,41 @@
-import SearchBar from "../components/SearchBar";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Tabs from "../components/Tabs";
 import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
 import CalendarIcon from "../assets/icons/Calendar.svg";
-import FilterIcon from "../assets/icons/Filter.svg";
 import Dropdown from "../components/Dropdown";
-import Button from "../components/Button";
 import ApplicantIcon from "../assets/icons/Applicants.svg";
-import { useState, MouseEvent } from "react";
 import Table from "../components/Table";
+import { applicantData } from "../data/applicantData";
 
 const Applicant = () => {
-  const [filterSelect, setFilterSelect] = useState<string>("");
-
-  const handleFilterSelect = (event: MouseEvent<HTMLButtonElement>) => {
-    setFilterSelect(event.currentTarget.name);
-  };
-
   const TabLists = [
-    {
-      title: "Pending",
-      active: true,
-    },
-    {
-      title: "Accepted",
-      active: false,
-    },
-    {
-      title: "Revision",
-      active: false,
-    },
+    { title: "Pending", active: true },
+    { title: "Accepted", active: false },
+    { title: "Revision", active: false },
   ];
 
   const FilterList = [
+    { title: "Kruger", icon: ApplicantIcon },
+    { title: "Accepted", icon: ApplicantIcon },
+    { title: "Loved", icon: ApplicantIcon },
+  ];
+
+  const TableConfig: any[] = [
     {
-      title: "Applicant",
-      icon: ApplicantIcon,
+      header: "Name",
+      accessorFn: ({ last_name, first_name, middle_name }: any) =>
+        `${last_name}, ${first_name} ${middle_name}`,
     },
-    {
-      title: "Accepted",
-      icon: ApplicantIcon,
-    },
-    {
-      title: "Loved",
-      icon: ApplicantIcon,
-    },
+    { header: "LRN", accessorKey: "LRN" },
+    { header: "Gender", accessorKey: "gender" },
+    { header: "BOD", accessorKey: "BOD" },
+    { header: "Age", accessorKey: "age" },
+    { header: "Guarduan", accessorKey: "guardian.legal" },
+    { header: "Contact", accessorKey: "contact" },
+    { header: "Ave", accessorKey: "remarks" },
+    { header: "Status", accessorKey: "status" },
+    { header: "Action", accessorKey: "Status" },
   ];
 
   return (
@@ -62,42 +53,34 @@ const Applicant = () => {
           ))}
         </Tabs.List>
         <Tabs.Content>
-          <section className="flex justify-between items-center">
-            <SearchBar />
+          <section className="max-w-[1129px] overflow-hidden flex flex-col gap-4">
+            <Table data={applicantData} config={TableConfig} col={9}>
+              <Table.Parts
+                type="div"
+                className="flex justify-between items-center">
+                <Table.SearchBar />
 
-            <div className="flex gap-4 items-center">
-              <Dropdown
-                as="button"
-                dir="left"
-                title="August 23,2023"
-                type="outlined"
-                icon={CalendarIcon}></Dropdown>
-
-              <Dropdown
-                className="min-w[137px]"
-                title={filterSelect ? filterSelect : "Filter"}
-                as="button"
-                icon={FilterIcon}
-                type="outlined">
-                {FilterList.map(item => (
-                  <Button
-                    key={item.title}
-                    type="unstyled"
-                    className="w-full"
+                <Table.Parts className="flex justify-between gap-4">
+                  <Dropdown
+                    as="button"
                     dir="left"
-                    icon={item.icon}
-                    title={item.title}
-                    name={item.title}
-                    onClick={handleFilterSelect}
-                  />
-                ))}
-              </Dropdown>
+                    title="August 23,2023"
+                    type="outlined"
+                    icon={CalendarIcon}></Dropdown>
 
-              <Dropdown as="icon" type="outlined"></Dropdown>
-            </div>
-          </section>
-          <section>
-            <Table />
+                  <Table.Filter lists={FilterList} />
+
+                  <Dropdown as="icon" type="outlined"></Dropdown>
+                </Table.Parts>
+              </Table.Parts>
+
+              <Table.Container>
+                <Table.Header />
+                <Table.Body />
+              </Table.Container>
+
+              <Table.Action />
+            </Table>
           </section>
         </Tabs.Content>
       </Tabs>
