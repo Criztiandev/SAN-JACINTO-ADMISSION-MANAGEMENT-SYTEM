@@ -1,5 +1,5 @@
 import { BaseProps } from "../interface/componentInterface";
-import { Fragment } from "./fragments/Fragments";
+import { Fragment } from "./Fragments";
 
 const Tabs = ({ children }: BaseProps) => {
   return <div>{children}</div>;

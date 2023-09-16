@@ -46,7 +46,4 @@ p {
   line-height: 155%;
 }
 
-.tableDes:first-child {
-  position: sticky;
-  left: 0;
-}
+/* Calendar Style */
