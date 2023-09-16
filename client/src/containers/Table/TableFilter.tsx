@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, MouseEvent } from "react";
+import { MouseEvent, useRef } from "react";
 import Dropdown from "../../components/Dropdown";
 import FilterIcon from "../../assets/icons/Filter.svg";
 import Button from "../../components/Button";
@@ -10,23 +10,32 @@ interface FilterProps {
 }
 
 const TableFilter = ({ lists }: FilterProps) => {
-  const [select, setSelect] = useState<string>("");
-  const { setFilter } = useTableContext();
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const { filterSelect, dispatch } = useTableContext();
+
   const handleSelection = (event: MouseEvent<HTMLButtonElement>) => {
     const target = event.currentTarget.name;
-    setSelect(target);
-    setFilter(target.toLowerCase());
+
+    if (target === "Default") {
+      dispatch({ type: "SET_FILTER", payload: "" });
+      dispatch({ type: "SET_FILTER_SELECT", payload: "Filter" });
+    } else {
+      dispatch({ type: "SET_FILTER", payload: target.toLowerCase() });
+      dispatch({ type: "SET_FILTER_SELECT", payload: target });
+      dispatch({ type: "SET_SEARCH", payload: "" });
+    }
   };
 
   return (
     <Dropdown
       className="z-50 min-w-[150px]"
-      title={select ? select : "Filter"}
+      title={filterSelect ? filterSelect : "Filter"}
       as="button"
       icon={FilterIcon}
       type="outlined">
       {lists.map(item => (
         <Button
+          ref={buttonRef}
           key={item.title}
           type="ghost"
           dir="left"

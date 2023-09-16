@@ -15,8 +15,7 @@ interface ActionProps {
 
 const ActionColumn = ({ row, disabled }: ActionProps) => {
   const { handleAcceptApplicant } = useTableContext();
-
-  const handleSelectApplicant = () => {
+  const handleAccept = () => {
     handleAcceptApplicant(row.id);
   };
 
@@ -25,7 +24,7 @@ const ActionColumn = ({ row, disabled }: ActionProps) => {
       <IconButton
         disabled={disabled}
         icon={AcceptIcon}
-        onClick={handleSelectApplicant}
+        onClick={handleAccept}
         type="ghost"
       />
       <IconButton disabled={disabled} icon={EditIcon} type="ghost" />
