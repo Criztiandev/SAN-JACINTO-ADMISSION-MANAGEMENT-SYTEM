@@ -1,5 +1,5 @@
 import { BaseProps } from "../interface/componentInterface";
-import { Fragment, Header } from "./fragments/Fragments";
+import { Fragment, Header } from "./Fragments";
 
 interface StackProps extends BaseProps {
   dir: "horizontal" | "vertical";

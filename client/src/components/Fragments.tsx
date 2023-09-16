@@ -1,6 +1,6 @@
-import Typography from "../Typography";
-import Dropdown from "../Dropdown";
-import { BaseProps } from "../../interface/componentInterface";
+import Typography from "./Typography";
+import Dropdown from "./Dropdown";
+import { BaseProps } from "../interface/componentInterface";
 import { createElement } from "react";
 
 interface HeaderProps extends BaseProps {
@@ -25,7 +25,7 @@ interface FragmentProps extends BaseProps {
 }
 
 export const Fragment = ({
-  type = "div",
+  type = "section",
   className,
   children,
 }: FragmentProps) => {

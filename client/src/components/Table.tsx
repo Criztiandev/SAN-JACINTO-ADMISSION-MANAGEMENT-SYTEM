@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Fragment } from "./fragments/Fragments";
+import { Fragment } from "./Fragments";
 import { BaseProps } from "../interface/componentInterface";
 import TableProvider from "../context/TableContext";
-import TableHeader from "./fragments/Table/TableHeader";
-import TableContent from "./fragments/Table/TableContent";
-import TableAction from "./fragments/Table/TableAction";
-import TableSearchBar from "./fragments/Table/TableSearchBar";
-import TableFilter from "./fragments/Table/TableFilter";
+import TableHeader from "../containers/Table/TableHeader";
+import TableContent from "../containers/Table/TableContent";
+import TableAction from "../containers/Table/TableAction";
+import TableSearchBar from "../containers/Table/TableSearchBar";
+import TableFilter from "../containers/Table/TableFilter";
 
 interface TableProps extends BaseProps {
   data: any[];
@@ -27,7 +27,7 @@ const Table = ({ data, config, children, layout }: TableProps) => {
 const Container = ({ children }: BaseProps) => {
   return (
     <div
-      className={`relative border overflow-x-scroll  h-[400px] rounded-[5px] scroll`}>
+      className={`relative border overflow-x-scroll h-[400px] rounded-[5px]`}>
       {children}
     </div>
   );

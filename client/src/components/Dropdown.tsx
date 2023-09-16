@@ -17,7 +17,14 @@ interface DropdownProps extends ComponentType {
   title?: string;
 }
 
-const Dropdown = ({ as, type, title, icon, children }: DropdownProps) => {
+const Dropdown = ({
+  as,
+  type,
+  title,
+  icon,
+  children,
+  className,
+}: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
   // Mouse event handle to open the dropdown
@@ -34,12 +41,20 @@ const Dropdown = ({ as, type, title, icon, children }: DropdownProps) => {
       if (current && !current.contains(target)) setOpen(false);
     };
 
+    const handleScroll = () => {
+      if (window.screenY > 0) {
+        setOpen(false);
+      }
+    };
+
     // Mount the Listener
     document.addEventListener("click", handleClickOutside);
+    document.addEventListener("scroll", handleScroll);
 
     // clean up the event listener
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -56,7 +71,10 @@ const Dropdown = ({ as, type, title, icon, children }: DropdownProps) => {
         onClick={handleOpen}
       />
       {open && (
-        <ul className="z-20 bg-white w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md">
+        <ul
+          className={`${
+            className ? className : ""
+          } bg-white w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md overflow-y-scroll max-h-[350px]`}>
           {children}
         </ul>
       )}

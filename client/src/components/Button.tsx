@@ -4,7 +4,7 @@ import Image from "./Image";
 import { ComponentStyle } from "../helper/componentHelper";
 
 interface ButtonProps extends ComponentType {
-  dir: "left" | "right";
+  dir?: "left" | "right";
   icon?: string;
   title?: string;
   onClick?:
@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
-        <span className="w-full">{title}</span>
+        <span className="w-full flex justify-between">{title}</span>
         {dir === "right" && <Image src={icon} alt="icon" />}
       </button>
     );

@@ -10,7 +10,7 @@ export interface ComponentType extends BaseProps {
 }
 
 export interface TextProps extends BaseProps {
-  as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "small" | "p";
+  as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "small" | "p" | "span";
 }
 
 export interface ProviderProps extends BaseProps {

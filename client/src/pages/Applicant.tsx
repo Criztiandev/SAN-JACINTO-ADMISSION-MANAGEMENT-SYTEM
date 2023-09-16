@@ -2,7 +2,6 @@
 import Tabs from "../components/Tabs";
 import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
-import CalendarIcon from "../assets/icons/Calendar.svg";
 import Dropdown from "../components/Dropdown";
 import Table from "../components/Table";
 import { applicantData } from "../data/applicantData";
@@ -14,6 +13,9 @@ import DeleteIcon from "../assets/icons/Delete.svg";
 import EditIcon from "../assets/icons/Edit_light.svg";
 import Button from "../components/Button";
 import MessageIcon from "../assets/icons/Message_light.svg";
+import MonthPicker from "../containers/MonthPicker";
+import Badge from "../components/Badge";
+import Avatar from "../components/Avatar";
 
 const Config = {
   TableList: [
@@ -27,6 +29,13 @@ const Config = {
       header: "Name",
       accessorFn: ({ last_name, first_name, middle_name }: any) =>
         `${last_name}, ${first_name} ${middle_name}`,
+      cell: (key: any) => (
+        <div className="grid grid-cols-[16px_auto_auto] gap-4 px-4 items-center">
+          <input type="checkbox" className="w-full h-full" />
+          <Avatar />
+          <span>{key.getValue()}</span>
+        </div>
+      ),
     },
     { header: "LRN", accessorKey: "LRN" },
     { header: "Gender", accessorKey: "gender" },
@@ -35,14 +44,18 @@ const Config = {
     { header: "Guardian", accessorKey: "guardian.legal" },
     { header: "Contact", accessorKey: "contact" },
     { header: "Ave", accessorKey: "remarks" },
-    { header: "Status", accessorKey: "status" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: (key: any) => <Badge title={key.getValue()} />,
+    },
     {
       header: "Action",
       cell: () => (
         <span className="flex gap-4">
           <IconButton icon={AcceptIcon} type="ghost" />
           <IconButton icon={EditIcon} type="ghost" />
-          <Dropdown as="icon" type={"ghost"}>
+          <Dropdown as="icon" type={"ghost"} className="z-20">
             <Button
               dir="left"
               icon={MessageIcon}
@@ -90,24 +103,19 @@ const Applicant = () => {
         </Tabs.List>
 
         <Tabs.Content>
-          <section className="max-w-[1129px] overflow-hidden flex flex-col gap-4">
+          <div className="max-w-[1129px] overflow-hidden flex flex-col gap-4">
             {/* Table Component */}
             <Table
               data={applicantData}
               config={TableConfig}
               layout={
-                "300px_100px_150px_100px_100px_200px_150px_100px_100px_200px"
+                "270px 150px 100px 100px 100px 200px 150px 100px 100px 200px"
               }>
               <div className="flex justify-between items-center">
                 <Table.SearchBar />
 
                 <div className="flex justify-between gap-4">
-                  <Dropdown
-                    as="button"
-                    dir="left"
-                    title="August 23,2023"
-                    type="outlined"
-                    icon={CalendarIcon}></Dropdown>
+                  <MonthPicker />
 
                   <Table.Filter lists={FilterConfig} />
 
@@ -122,7 +130,7 @@ const Applicant = () => {
 
               <Table.Action />
             </Table>
-          </section>
+          </div>
         </Tabs.Content>
       </Tabs>
     </BaseLayout>

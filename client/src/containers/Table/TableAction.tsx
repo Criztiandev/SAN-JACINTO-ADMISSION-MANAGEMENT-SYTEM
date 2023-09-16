@@ -1,8 +1,8 @@
-import { useTableContext } from "../../../context/TableContext";
-import IconButton from "../../IconButton";
-import ArrowLeftIcon from "../../../assets/icons/Arrow Left.svg";
-import ArrowRightIcon from "../../../assets/icons/Arrow Right.svg";
-import Button from "../../Button";
+import { useTableContext } from "../../context/TableContext";
+import IconButton from "../../components/IconButton";
+import ArrowLeftIcon from "../../assets/icons/Arrow Left.svg";
+import ArrowRightIcon from "../../assets/icons/Arrow Right.svg";
+import Button from "../../components/Button";
 
 const TableAction = () => {
   const { table } = useTableContext();

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, MouseEvent } from "react";
-import Dropdown from "../../Dropdown";
-import FilterIcon from "../../../assets/icons/Filter.svg";
-import Button from "../../Button";
-import { useTableContext } from "../../../context/TableContext";
+import Dropdown from "../../components/Dropdown";
+import FilterIcon from "../../assets/icons/Filter.svg";
+import Button from "../../components/Button";
+import { useTableContext } from "../../context/TableContext";
 
 interface FilterProps {
   lists: any[];
@@ -21,7 +21,7 @@ const TableFilter = ({ lists }: FilterProps) => {
 
   return (
     <Dropdown
-      className="min-w[137px]"
+      className="min-w[137px] z-50"
       title={select ? select : "Filter"}
       as="button"
       icon={FilterIcon}
