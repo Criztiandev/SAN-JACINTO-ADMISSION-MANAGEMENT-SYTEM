@@ -1,59 +1,36 @@
-import { useTableContext } from "../../context/TableContext";
 import IconButton from "../../components/IconButton";
-import ArrowLeftIcon from "../../assets/icons/Arrow Left.svg";
-import ArrowRightIcon from "../../assets/icons/Arrow Right.svg";
-import Button from "../../components/Button";
+import AcceptIcon from "../../assets/icons/Done_light.svg";
+import SelectAllIcon from "../../assets/icons/Select_All.svg";
+import CloseIcon from "../../assets/icons/Close_round_light.svg";
+import MessageIcon from "../../assets/icons/Message_light.svg";
+import { useTableContext } from "../../context/TableContext";
 
-const TableAction = () => {
-  const { table } = useTableContext();
+interface TableActionProps {
+  close: () => void;
+}
 
-  const {
-    setPageIndex,
-    getCanPreviousPage,
-    previousPage,
-    nextPage,
-    getCanNextPage,
-    getPageCount,
-  } = table;
+const TableAction = ({ close }: TableActionProps) => {
+  const { table, handleAcceptApplicant, rowSelection } = useTableContext();
+  const { getToggleAllRowsSelectedHandler } = table;
+
+  const allSelectedApplicants = Object.keys(rowSelection).map(Number);
 
   return (
-    <div className="flex justify-between">
-      <div className="flex gap-4">
-        <Button
-          dir="left"
-          title="Previuos"
-          type="outlined"
-          icon={ArrowLeftIcon}
-          onClick={() => setPageIndex(0)}
-        />
-
-        <IconButton
-          type="outlined"
-          className="px-[0.7rem]"
-          icon={ArrowLeftIcon}
-          disabled={!getCanPreviousPage()}
-          onClick={() => previousPage()}
-        />
-      </div>
-
-      <div className="flex gap-4">
-        <IconButton
-          className="px-[0.7rem]"
-          type="outlined"
-          icon={ArrowRightIcon}
-          disabled={!getCanNextPage()}
-          onClick={() => nextPage()}
-        />
-
-        <Button
-          dir="right"
-          title="Last"
-          type="outlined"
-          icon={ArrowRightIcon}
-          onClick={() => setPageIndex(getPageCount() - 1)}
-        />
-      </div>
-    </div>
+    <>
+      <IconButton
+        type="outlined"
+        icon={AcceptIcon}
+        onClick={() => handleAcceptApplicant(allSelectedApplicants)}
+      />
+      <IconButton type="outlined" icon={MessageIcon} />
+      <IconButton
+        type="outlined"
+        icon={SelectAllIcon}
+        onClick={getToggleAllRowsSelectedHandler()}
+      />
+      <IconButton type="outlined" icon={CloseIcon} onClick={close} />
+    </>
   );
 };
+
 export default TableAction;

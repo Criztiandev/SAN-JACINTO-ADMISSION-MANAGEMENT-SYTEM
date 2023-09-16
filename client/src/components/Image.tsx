@@ -7,7 +7,7 @@ const Image = ({
   alt?: string;
   className?: string;
 }) => {
-  return <img src={src} alt={alt} className={className} />;
+  return <img src={src} alt={alt} className={`${className} `} />;
 };
 
 export default Image;

@@ -7,6 +7,7 @@ import TableContent from "../containers/Table/TableContent";
 import TableAction from "../containers/Table/TableAction";
 import TableSearchBar from "../containers/Table/TableSearchBar";
 import TableFilter from "../containers/Table/TableFilter";
+import TablePagination from "../containers/Table/TablePagination";
 
 interface TableProps extends BaseProps {
   data: any[];
@@ -14,17 +15,15 @@ interface TableProps extends BaseProps {
   layout: string;
 }
 
-const Table = ({ data, config, children, layout }: TableProps) => {
+const Table = ({ data, config, children, layout, className }: TableProps) => {
   return (
-    <>
-      <TableProvider data={data} config={config} layout={layout}>
-        {children}
-      </TableProvider>
-    </>
+    <TableProvider data={data} config={config} layout={layout}>
+      <section className={className}>{children}</section>
+    </TableProvider>
   );
 };
 
-const Container = ({ children }: BaseProps) => {
+const BaseContent = ({ children }: BaseProps) => {
   return (
     <div
       className={`relative border overflow-x-scroll h-[400px] rounded-[5px]`}>
@@ -33,13 +32,23 @@ const Container = ({ children }: BaseProps) => {
   );
 };
 
-Table.Container = Container;
-Table.Header = TableHeader;
-Table.Body = TableContent;
-Table.Action = TableAction;
-Table.Parts = Fragment;
+Table.Container = {
+  Header: Fragment,
+  Content: BaseContent,
+  Footer: Fragment,
+};
 
-Table.SearchBar = TableSearchBar;
-Table.Filter = TableFilter;
+Table.Head = TableHeader;
+Table.Body = TableContent;
+Table.Footer = Fragment;
+
+Table.Separator = Fragment;
+
+Table.Tools = {
+  SearchBar: TableSearchBar,
+  Filter: TableFilter,
+  Action: TableAction,
+  Pagination: TablePagination,
+};
 
 export default Table;

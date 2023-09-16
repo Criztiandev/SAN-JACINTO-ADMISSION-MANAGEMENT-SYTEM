@@ -12,16 +12,15 @@ interface FilterProps {
 const TableFilter = ({ lists }: FilterProps) => {
   const [select, setSelect] = useState<string>("");
   const { setFilter } = useTableContext();
-
   const handleSelection = (event: MouseEvent<HTMLButtonElement>) => {
     const target = event.currentTarget.name;
     setSelect(target);
-    setFilter("Kruger");
+    setFilter(target.toLowerCase());
   };
 
   return (
     <Dropdown
-      className="min-w[137px] z-50"
+      className="z-50 min-w-[150px]"
       title={select ? select : "Filter"}
       as="button"
       icon={FilterIcon}
@@ -30,7 +29,6 @@ const TableFilter = ({ lists }: FilterProps) => {
         <Button
           key={item.title}
           type="ghost"
-          className="w-full"
           dir="left"
           icon={item.icon}
           title={item.title}

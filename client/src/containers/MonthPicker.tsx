@@ -44,7 +44,7 @@ const MonthPicker = () => {
       type="outlined"
       icon={CalendarIcon}>
       {monthPairs.map(month => (
-        <li>
+        <li key={month.prevMonth}>
           <button
             className="w-full p-4 grid grid-cols-[auto_32px_auto] justify-center items-center border"
             onClick={() =>

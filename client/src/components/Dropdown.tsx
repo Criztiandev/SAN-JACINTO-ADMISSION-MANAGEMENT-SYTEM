@@ -15,6 +15,7 @@ interface DropdownProps extends ComponentType {
   icon?: string;
   dir?: "left" | "right";
   title?: string;
+  disabled?: boolean;
 }
 
 const Dropdown = ({
@@ -24,6 +25,7 @@ const Dropdown = ({
   icon,
   children,
   className,
+  disabled,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
@@ -63,6 +65,7 @@ const Dropdown = ({
   return (
     <div className="relative">
       <ComponentRender
+        disabled={disabled}
         ref={buttonRef}
         title={title}
         dir="left"
@@ -73,8 +76,8 @@ const Dropdown = ({
       {open && (
         <ul
           className={`${
-            className ? className : ""
-          } bg-white w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md overflow-y-scroll max-h-[350px]`}>
+            className ? className : "z-50"
+          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md overflow-y-scroll`}>
           {children}
         </ul>
       )}
