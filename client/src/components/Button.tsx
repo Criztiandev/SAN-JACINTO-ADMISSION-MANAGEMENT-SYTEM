@@ -2,9 +2,10 @@ import { forwardRef, MouseEvent } from "react";
 import { ComponentType } from "../interface/componentInterface";
 import Image from "./Image";
 import { ComponentStyle } from "../helper/componentHelper";
+import Typography from "./Typography";
 
 interface ButtonProps extends ComponentType {
-  dir: "left" | "right";
+  dir?: "left" | "right";
   icon?: string;
   title?: string;
   onClick?:
@@ -12,23 +13,38 @@ interface ButtonProps extends ComponentType {
     | (() => void)
     | undefined;
   name?: string;
+  disabled?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { dir, title, icon, type = "contained", onClick, className = "", ...props },
+    {
+      dir,
+      title,
+      icon,
+      type = "contained",
+      onClick,
+      className = "",
+      disabled,
+      name,
+    },
     ref
   ) => {
     return (
       <button
         ref={ref}
         className={`
-        text-[14px]rounded-full rounded-full grid grid-cols-[32px_auto] justify-start
+        grid grid-cols-[32px_auto] justify-start rounded-full items-center 
         ${ComponentStyle({ type })} ${className}`}
         onClick={onClick}
-        {...props}>
+        disabled={disabled}
+        name={name}>
         {dir === "left" && <Image src={icon} alt="icon" />}
-        <span className="w-full">{title}</span>
+        <Typography
+          as="span"
+          className="text-[14px] w-full flex justify-between">
+          {title}
+        </Typography>
         {dir === "right" && <Image src={icon} alt="icon" />}
       </button>
     );

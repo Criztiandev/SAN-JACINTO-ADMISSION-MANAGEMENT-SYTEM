@@ -25,10 +25,17 @@ interface TableProviderProps extends BaseProps {
 interface TableContextValue {
   table: Table<any>; // Change this to the appropriate type for your data
   filter: string;
-  handleFilter: (event: ChangeEvent<HTMLInputElement>) => void;
+
   setFilter: (value: string) => void;
+  handleFilter: (event: ChangeEvent<HTMLInputElement>) => void;
+
   tableLayout: string;
   setTableLayout: (value: string) => void;
+
+  rowSelection: any;
+  setRowSelection: any;
+
+  handleAcceptApplicant: (value: number | Array<number>) => void;
 }
 
 const TableContext = createContext<TableContextValue | undefined>(undefined);
@@ -46,36 +53,59 @@ const TableProvider = ({
   children,
   layout,
 }: TableProviderProps) => {
+  const [rowSelection, setRowSelection] = useState({});
   const [filter, setFilter] = useState<string>("");
   const memoizedData = useMemo(() => data, [data]);
   const [tableLayout, setTableLayout] = useState(layout);
-
-  // Filter Configuration
 
   // Table Configuration
   const table = useReactTable({
     data: memoizedData,
     columns: config,
+
+    state: {
+      globalFilter: filter,
+      rowSelection: rowSelection,
+    },
+
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      globalFilter: filter,
-    },
     onGlobalFilterChange: (value: string) => setFilter(value),
+
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    debugTable: true,
   });
 
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilter(e.currentTarget.value);
   };
 
+  const handleAcceptApplicant = (value: number | Array<number>) => {
+    if (Array.isArray(value)) {
+      const applicants = value.map((id: number) => memoizedData[id]);
+      console.log(applicants);
+      return;
+    }
+
+    console.log(memoizedData[value]);
+  };
+
   const value: TableContextValue = {
     table,
     filter,
-    handleFilter: handleFilterChange,
+
     setFilter,
+    handleFilter: handleFilterChange,
+
     tableLayout,
     setTableLayout,
+
+    rowSelection,
+    setRowSelection,
+
+    handleAcceptApplicant,
   };
   return (
     <TableContext.Provider value={value}>{children}</TableContext.Provider>

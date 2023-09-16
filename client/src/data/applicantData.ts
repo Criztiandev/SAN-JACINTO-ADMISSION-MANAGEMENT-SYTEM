@@ -2,6 +2,7 @@ export const applicantData = [
   {
     id: 0,
     LRN: 1919293,
+    yearLevel: "grade 7",
     first_name: "Criztian",
     middle_name: "Mitra",
     last_name: "Kruger",

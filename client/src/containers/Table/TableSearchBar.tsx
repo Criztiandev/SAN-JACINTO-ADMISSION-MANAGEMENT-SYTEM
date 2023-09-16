@@ -1,5 +1,5 @@
-import SearchBar from "../../SearchBar";
-import { useTableContext } from "../../../context/TableContext";
+import SearchBar from "../../components/SearchBar";
+import { useTableContext } from "../../context/TableContext";
 import { useState, useRef, ChangeEvent } from "react";
 
 const TableSearchBar = () => {
