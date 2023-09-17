@@ -1,6 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { createContext, useContext, useMemo, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -22,7 +28,8 @@ interface TableContextValue {
   search: string;
   filterSelect: string;
   tableLayout: string;
-  rowSelection: any;
+  rowSelected: any;
+  viewProfile: boolean;
   handleAcceptApplicant: (value: number | Array<number>) => void;
   dispatch: React.Dispatch<Action>;
 }
@@ -33,22 +40,20 @@ const initialState = {
   filter: "",
   search: "",
   filterSelect: "",
-  rowSelection: {},
+  viewProfile: false,
 };
 
 type Action =
   | { type: "SET_FILTER"; payload: string }
-  | { type: "SET_ROW_SELECT"; payload: any }
   | { type: "SET_SEARCH"; payload: string }
   | { type: "SET_FILTER_SELECT"; payload: string }
-  | { type: "SET_TABLE_LAYOUT"; payload: string };
+  | { type: "SET_TABLE_LAYOUT"; payload: string }
+  | { type: "SET_VIEW_PROFILE"; payload?: boolean };
 
 const reducer = (state: typeof initialState, action: Action) => {
   switch (action.type) {
     case "SET_FILTER":
       return { ...state, filter: action.payload };
-    case "SET_ROW_SELECT":
-      return { ...state, rowSelection: action.payload };
 
     case "SET_FILTER_SELECT":
       return { ...state, filterSelect: action.payload };
@@ -58,6 +63,9 @@ const reducer = (state: typeof initialState, action: Action) => {
 
     case "SET_TABLE_LAYOUT":
       return { ...state, tableLayout: action.payload };
+
+    case "SET_VIEW_PROFILE":
+      return { ...state, viewProfile: !state.viewProfile };
 
     default:
       return state;
@@ -77,6 +85,7 @@ const TableProvider = ({
   children,
   layout,
 }: TableProviderProps) => {
+  const [rowSelected, setRowSelected] = useState({});
   const [state, dispatch] = useReducer(reducer, initialState);
   const memoizedData = useMemo(() => data, [data]);
 
@@ -86,7 +95,7 @@ const TableProvider = ({
     columns: config,
     state: {
       globalFilter: state.filter,
-      rowSelection: state.rowSelection,
+      rowSelection: rowSelected,
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -96,8 +105,7 @@ const TableProvider = ({
       dispatch({ type: "SET_FILTER", payload: value }),
     enableRowSelection: true,
 
-    onRowSelectionChange: (newSelection: any) =>
-      dispatch({ type: "SET_ROW_SELECT", payload: newSelection }),
+    onRowSelectionChange: setRowSelected,
     debugTable: true,
   });
 
@@ -116,6 +124,7 @@ const TableProvider = ({
     handleAcceptApplicant,
     dispatch,
     tableLayout: layout,
+    rowSelected,
   };
 
   return (

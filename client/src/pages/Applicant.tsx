@@ -39,8 +39,9 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
   return [
     {
       header: "Name",
-      accessorFn: ({ last_name, first_name, middle_name }: any) =>
+      accessorFn: ({ last_name, first_name, middle_name }) =>
         `${last_name}, ${first_name} ${middle_name}`,
+
       cell: ({ row, getValue }: any) => (
         <FirstColumn
           isSelection={selection}
@@ -77,69 +78,73 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
 
 const Applicant = () => {
   const [selection, setSelection] = useState(false);
-
   return (
-    <BaseLayout
-      title="Applicants"
-      header={
-        <>
-          <IconButton type="ghost" icon={ArchievedIcon} />
-          <Button dir="left" title="Create" icon={CreateApplicantIcon} />
-        </>
-      }
-      action>
-      {/* Table Container */}
-      <Table
-        className="max-w-[1129px] overflow-hidden flex flex-col gap-4"
-        data={applicantData}
-        config={HeaderConfig(selection)}
-        layout={
-          "270px 150px 150px 100px 100px 100px 200px 150px 100px 100px 200px"
-        }>
-        <Table.Container.Header className="flex justify-between items-center">
-          <Table.Tools.SearchBar />
+    <>
+      <BaseLayout
+        title="Applicants"
+        header={
+          <>
+            <IconButton type="ghost" icon={ArchievedIcon} />
+            <Button dir="left" title="Create" icon={CreateApplicantIcon} />
+          </>
+        }
+        action>
+        {/* Table Container */}
+        <Table
+          className="overflow-y-auto flex flex-col gap-4"
+          data={applicantData}
+          config={HeaderConfig(selection)}
+          layout={
+            "270px 150px 150px 100px 100px 100px 200px 150px 100px auto 200px"
+          }>
+          <Table.Container.Header className="flex justify-between items-center">
+            <Table.Tools.SearchBar />
 
-          <Table.Separator className="flex gap-4">
-            {selection ? (
-              <Table.Tools.Action close={() => setSelection(false)} />
-            ) : (
-              <>
-                <MonthPicker />
-                <Table.Tools.Filter lists={FilterConfig} />
+            <Table.Separator className="flex gap-4">
+              {selection ? (
+                <Table.Tools.Action close={() => setSelection(false)} />
+              ) : (
+                <>
+                  <MonthPicker />
+                  <Table.Tools.Filter lists={FilterConfig} />
 
-                <Dropdown as="icon" type="outlined">
-                  <Button
-                    dir="left"
-                    icon={SelectAllIcon}
-                    title="Selection"
-                    type="ghost"
-                    onClick={() => setSelection(prev => !prev)}
-                  />
+                  <Dropdown as="icon" type="outlined">
+                    <Button
+                      dir="left"
+                      icon={SelectAllIcon}
+                      title="Selection"
+                      type="ghost"
+                      onClick={() => setSelection(prev => !prev)}
+                    />
 
-                  <Button
-                    dir="left"
-                    icon={ImportIcon}
-                    title="Import"
-                    type="ghost"
-                  />
+                    <Button
+                      dir="left"
+                      icon={ImportIcon}
+                      title="Import"
+                      type="ghost"
+                    />
 
-                  <Button title="Import" type="ghost" />
-                </Dropdown>
-              </>
-            )}
-          </Table.Separator>
-        </Table.Container.Header>
+                    <Button title="Import" type="ghost" />
+                  </Dropdown>
+                </>
+              )}
+            </Table.Separator>
+          </Table.Container.Header>
 
-        <Table.Container.Content>
-          <Table.Head />
-          <Table.Body />
-        </Table.Container.Content>
+          <Table.Container.Content>
+            <Table.Head />
+            <Table.Body />
+          </Table.Container.Content>
 
-        <Table.Container.Footer>
-          <Table.Tools.Pagination />
-        </Table.Container.Footer>
-      </Table>
-    </BaseLayout>
+          <Table.Container.Footer>
+            <Table.Tools.Pagination />
+          </Table.Container.Footer>
+
+          <Table.Tools.Drawer />
+        </Table>
+      </BaseLayout>
+      {/* <Drawer /> */}
+    </>
   );
 };
 

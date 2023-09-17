@@ -5,8 +5,16 @@ import Applicant from "../pages/Applicant";
 import Schedule from "../pages/Schedule";
 import Message from "../pages/Message";
 import Tools from "../pages/Tools";
+import LadingPage from "../pages/LadingPage";
+import Register from "../pages/Register";
+import LoginPage from "../pages/LoginPage";
+import CheckPoint from "../pages/CheckPoint";
 
 export const router = createBrowserRouter([
+  { path: "/", element: <LadingPage />, errorElement: <ErrorPage /> },
+  { path: "/register", element: <Register />, errorElement: <ErrorPage /> },
+  { path: "/login", element: <LoginPage />, errorElement: <ErrorPage /> },
+  { path: "/checkpont", element: <CheckPoint />, errorElement: <ErrorPage /> },
   {
     path: "/dashboard",
     element: <App />,

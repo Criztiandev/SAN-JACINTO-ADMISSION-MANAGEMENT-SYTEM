@@ -10,11 +10,11 @@ interface TableActionProps {
 }
 
 const TableAction = ({ close }: TableActionProps) => {
-  const { table, handleAcceptApplicant, rowSelection, dispatch } =
+  const { table, handleAcceptApplicant, rowSelected, dispatch } =
     useTableContext();
   const { getToggleAllRowsSelectedHandler } = table;
 
-  const allSelectedApplicants = Object.keys(rowSelection).map(Number);
+  const allSelectedApplicants = Object.keys(rowSelected).map(Number);
 
   const handleAccept = () => {
     handleAcceptApplicant(allSelectedApplicants);

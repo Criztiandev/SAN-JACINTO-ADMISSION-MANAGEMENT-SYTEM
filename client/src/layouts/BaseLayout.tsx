@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import IconButton from "../components/IconButton";
 
 import Nav from "../containers/Nav";
@@ -5,8 +7,6 @@ import Typography from "../components/Typography";
 import Notification from "../assets/icons/Bell_light.svg";
 import Settings from "../assets/icons/Setting_alt_line_light.svg";
 import { BaseProps } from "../interface/componentInterface";
-
-import { ReactNode } from "react";
 
 interface BaseLayoutProps extends BaseProps {
   title?: string;
@@ -22,7 +22,7 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
         <Nav />
       </aside>
 
-      <main className="px-8 py-4 flex flex-col gap-6">
+      <main className="flex flex-col gap-6 overflow-hidden px-8 py-4">
         <header className="flex justify-between items-center">
           <span>
             <Typography as="h1">{title ? title : `Welcome ${name}`}</Typography>
