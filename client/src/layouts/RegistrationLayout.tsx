@@ -4,7 +4,23 @@ import LogonIcon from "../assets/icons/Arhive_light.svg";
 import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 
-const RegistrationLayout = ({ children }: BaseProps) => {
+interface RegistrationLayoutProps extends BaseProps {
+  panels: string;
+}
+
+interface SpecifiedProps {
+  Checkpoint: string;
+  "Application Form": string;
+  "Thank you": string;
+}
+
+const RegistrationLayout = ({ panels, children }: RegistrationLayoutProps) => {
+  const SpecifiedPanel: SpecifiedProps = {
+    Checkpoint: "Please Fill all necessary input",
+    "Application Form": "This is your Application Form",
+    "Thank you": "Welcome to the SJNHS",
+  };
+
   return (
     <div className="grid grid-cols-[500px_auto] h-[100vh] ">
       <aside className="bg-backgroundImage bg-cover bg-no-repeat object-cover flex flex-col p-6 gap-4 justify-between">
@@ -23,7 +39,9 @@ const RegistrationLayout = ({ children }: BaseProps) => {
           </Typography>
 
           <Typography className="text-white" as="h3">
-            Tell us about your Grade Level
+            {SpecifiedPanel[panels]
+              ? SpecifiedPanel[panels]
+              : `Tell us about your ${panels}`}
           </Typography>
 
           <Typography className="text-white" as="p">
