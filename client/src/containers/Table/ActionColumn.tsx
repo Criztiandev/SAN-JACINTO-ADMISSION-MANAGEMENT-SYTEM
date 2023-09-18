@@ -3,6 +3,7 @@ import AcceptIcon from "../../assets/icons/Done_light.svg";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import MessageIcon from "../../assets/icons/Message_light.svg";
+import Archive from "../../assets/icons/Arhive_light.svg";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
 import { useTableContext } from "../../context/TableContext";
@@ -42,6 +43,13 @@ const ActionColumn = ({ row, disabled }: ActionProps) => {
           title="Delete"
           type="ghost"
           name="delete"
+        />
+        <Button
+          dir="left"
+          icon={Archive}
+          title="Archive"
+          type="ghost"
+          name="archive"
         />
       </Dropdown>
     </span>
