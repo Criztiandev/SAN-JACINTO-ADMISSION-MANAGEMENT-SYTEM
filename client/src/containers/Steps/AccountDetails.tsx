@@ -1,56 +1,35 @@
-import { useState } from "react";
-import IconButton from "../../components/IconButton";
 import Typography from "../../components/Typography";
-import ArrowLeft from "../../assets/icons/Expand_left_light.svg";
-import ArrowRight from "../../assets/icons/Expand_right_light.svg";
-
+import SeachIcon from "../../assets/icons/Search.svg";
+import IconButton from "../../components/IconButton";
+import { useState } from "react";
 const AccountDetails = () => {
-  const platforms = [
-    {
-      icon: "blue",
-      title: "Facebook",
-      sub: "Social Media Platform",
-    },
-    {
-      icon: "red",
-      title: "Gmail",
-      sub: "Emailing Platform",
-    },
-  ];
-  const [pageIndex, setPageIndex] = useState(0);
-
-  console.log(platforms[0]);
-
-  const handleNextPage = () =>
-    setPageIndex(prev => (prev >= platforms.length - 1 ? prev : prev + 1));
-
-  const handlePrevPage = () =>
-    setPageIndex(prev => (prev <= 0 ? prev : prev - 1));
+  const [searchAccount, setSearchAccount] = useState("");
 
   return (
-    <section className="">
-      <div className="flex justify-between items-center">
-        <IconButton type="outlined" onClick={handlePrevPage} icon={ArrowLeft} />
-
-        <div className="cursor-pointer  m-auto w-[300px] h-[300px] flex flex-col justify-center items-center gap-4 p-4 border border-gray-500 rounded-[5px]">
+    <section className="flex justify-center items-center h-full">
+      <div className="flex flex-col gap-4">
+        <div className="m-auto w-[300px] h-[300px] flex flex-col justify-center items-center gap-4 p-4   rounded-[5px] shadow-md ">
           {/* Logo */}
           <div className="w-32 h-32 rounded-full bg-sky-300"></div>
 
           {/* Content */}
           <div className="text-center">
-            <Typography as="h6">{platforms[pageIndex].title}</Typography>
+            <Typography as="h5">Facebook</Typography>
             <Typography as="span" className="text-sm text-gray-400">
-              {platforms[pageIndex].sub}
+              Social Media Platform
             </Typography>
           </div>
         </div>
 
-        <IconButton
-          as="button"
-          type="outlined"
-          onClick={handleNextPage}
-          icon={ArrowRight}
-        />
+        <div className="flex gap-4 items-center">
+          <input
+            type="text"
+            className="py-2 px-4 rounded-[5px] border border-gray-300 outline-none"
+            value={searchAccount}
+            onChange={e => setSearchAccount(e.target.value)}
+          />
+          <IconButton icon={SeachIcon} type="outlined" />
+        </div>
       </div>
     </section>
   );

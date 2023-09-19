@@ -1,6 +1,6 @@
 import Image from "../components/Image";
 import { BaseProps } from "../interface/componentInterface";
-import LogonIcon from "../assets/icons/Arhive_light.svg";
+import Logo from "../assets/image/Logo.png";
 import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 import { PanelContent } from "../interface/registrationInterface";
@@ -28,10 +28,10 @@ const RegistrationLayout = ({
       <div className="relative">
         <aside className="sticky h-[100vh] top-0 bg-backgroundImage bg-cover bg-no-repeat object-cover flex flex-col p-6 gap-4 justify-between">
           <div className="flex items-center gap-4">
-            <figure className="w-9 h-9 rounded-full border flex justify-center items-center">
-              <Image src={LogonIcon} alt="Logo Icon" />
+            <figure className="w-16 h-16">
+              <Image src={Logo} alt="Logo Icon" />
             </figure>
-            <Typography className="text-white " as="h2">
+            <Typography className="text-white " as="h3">
               SJNHS
             </Typography>
           </div>

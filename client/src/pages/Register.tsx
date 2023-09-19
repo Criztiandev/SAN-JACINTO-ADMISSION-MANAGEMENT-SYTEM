@@ -1,71 +1,75 @@
 import { ReactElement } from "react";
-import { Form, Formik } from "formik";
-import Button from "../components/Button";
-import Typography from "../components/Typography";
-import useMultipleForm from "../hooks/useMultipleForm";
-import RegistrationLayout from "../layouts/RegistrationLayout";
-import PrevIcon from "../assets/icons/Expand_left_light.svg";
-import NextIcon from "../assets/icons/Expand_right_light.svg";
-import applicantSchema from "../schema/applicantSchema";
-import { applicantInitialValue } from "../models/applicantModel";
+import { Form, Formik, FormikHelpers } from "formik";
+import { Button, Typography } from "../components/index";
 
-import GradeLevel from "../containers/Steps/GradeLevel";
-import AccountDetails from "../containers/Steps/AccountDetails";
-import StudentDetails from "../containers/Steps/StudentDetails";
-import PersonalDetails from "../containers/Steps/PersonalDetails";
-import PermanentAddress from "../containers/Steps/PermanentAddress";
-import GuardianDetails from "../containers/Steps/GuardianDetails";
-import OtherDetails from "../containers/Steps/OtherDetails";
-import CheckPoint from "../containers/Steps/CheckPoint";
-import ApplicationForm from "../containers/Steps/ApplicationForm";
-import Outro from "../containers/Steps/Outro";
-const registrationPanels: string[] = [
-  "Grade Level",
-  "Student Details",
-  "Personal Details",
-  "Permanent Address",
-  "Guardian Details",
-  "Other Details",
-  "Account Details",
-  "Checkpoint",
-  "Application Form",
-  "Thank You",
+import RegistrationLayout from "../layouts/RegistrationLayout";
+import useMultipleForm from "../hooks/useMultipleForm";
+
+import { NextIcon, PrevIcon } from "../assets/icons";
+
+import applicantSchema from "../schema/applicantSchema";
+import applicantTemplate from "../models/applicantModel";
+import { applicantModelInterface } from "../interface/modelInterface";
+
+import {
+  GradeLevel,
+  StudentDetails,
+  PermanentAddress,
+  PersonalDetails,
+  GuardianDetails,
+  OtherDetails,
+  AccountDetails,
+  CheckPoint,
+  ApplicationForm,
+  Outro,
+} from "../containers/Steps";
+
+interface PanelInterface {
+  title: string;
+  component: ReactElement;
+}
+
+const registrationPanels: PanelInterface[] = [
+  { title: "Grade Level", component: <GradeLevel /> },
+  { title: "Student Details", component: <StudentDetails /> },
+  { title: "Personal Details", component: <PersonalDetails /> },
+  { title: "Permanent Address", component: <PermanentAddress /> },
+  { title: "Guardian Details", component: <GuardianDetails /> },
+  { title: "Other Details", component: <OtherDetails /> },
+  { title: "Account Details", component: <AccountDetails /> },
+  { title: "CheckPoint", component: <CheckPoint /> },
+  { title: "Application Form", component: <ApplicationForm /> },
+  { title: "thank you", component: <Outro /> },
 ];
 
 const Register = () => {
-  const registrationStepsComponents: ReactElement[] = [
-    <GradeLevel />,
-    <StudentDetails />,
-    <PersonalDetails />,
-    <PermanentAddress />,
-    <GuardianDetails />,
-    <OtherDetails />,
-    <AccountDetails />,
-    <CheckPoint />,
-    <ApplicationForm />,
-    <Outro />,
-  ];
+  // Use a custom hook to manage form steps and navigation
   const { steps, currentIndex, isFirstStep, isLastStep, next, back } =
-    useMultipleForm(registrationStepsComponents);
+    useMultipleForm(registrationPanels.map(items => items.component));
+
+  // Formik Submission Handler
+  const handleSubmit = (
+    values: applicantModelInterface,
+    actions: FormikHelpers<applicantModelInterface>
+  ) => {
+    console.log(values);
+    console.log(actions);
+  };
 
   return (
-    <RegistrationLayout activePanel={registrationPanels[currentIndex]}>
+    <RegistrationLayout activePanel={registrationPanels[currentIndex].title}>
       <section className="flex items-center justify-between">
-        <Typography as="h1">{registrationPanels[currentIndex]}</Typography>
+        <Typography as="h1">
+          {registrationPanels[currentIndex].title}
+        </Typography>
         <span>
-          {currentIndex + 1} / {registrationStepsComponents.length}
+          {currentIndex + 1} / {registrationPanels.length}
         </span>
       </section>
 
       <Formik
-        initialValues={applicantInitialValue}
-        onSubmit={(values, actions) => {
-          console.log(values);
-          console.log(actions);
-          // console.log({ values, actions });
-          // alert(JSON.stringify(values, null, 2));
-          // actions.setSubmitting(false);
-        }}
+        initialValues={applicantTemplate}
+        onSubmit={handleSubmit}
         validationSchema={applicantSchema}>
         <Form className="flex flex-col justify-between h-full">
           {steps}

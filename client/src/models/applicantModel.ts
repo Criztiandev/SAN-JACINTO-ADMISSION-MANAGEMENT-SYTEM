@@ -1,5 +1,4 @@
-// Define reusable address object
-const addressObject = {
+const addressTemplate = {
   houseNo: "",
   street: "",
   barangay: "",
@@ -10,14 +9,14 @@ const addressObject = {
 };
 
 // Define reusable guardian object
-const guardianObject = {
+const guardianTemplate = {
   firstName: "",
   middleName: "",
   lastName: "",
   contact: "",
 };
 
-export const applicantInitialValue = {
+const applicantTemplate = {
   studentDetails: {
     LRN: "",
     PSA: "",
@@ -43,8 +42,8 @@ export const applicantInitialValue = {
 
   // Use the addressObject for both permanent and current addresses
   addressDetails: {
-    permanentAddress: { ...addressObject },
-    currentAddress: { ...addressObject },
+    permanentAddress: { ...addressTemplate },
+    currentAddress: { ...addressTemplate },
   },
 
   schoolDetails: {
@@ -55,9 +54,9 @@ export const applicantInitialValue = {
 
   // Use the guardianObject for father, mother, and legal guardian
   guardianDetails: {
-    father: { ...guardianObject },
-    mother: { ...guardianObject },
-    legalGuardian: { ...guardianObject },
+    father: { ...guardianTemplate },
+    mother: { ...guardianTemplate },
+    legalGuardian: { ...guardianTemplate },
   },
 
   otherDetails: {
@@ -66,3 +65,5 @@ export const applicantInitialValue = {
     isLWD: "",
   },
 };
+
+export default applicantTemplate;
