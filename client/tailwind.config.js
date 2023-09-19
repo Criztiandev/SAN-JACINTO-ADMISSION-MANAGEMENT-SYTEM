@@ -10,6 +10,10 @@ export default {
       borderColor: {
         "border-base": "#cccccc",
       },
+      backgroundImage: {
+        backgroundImage:
+          " linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('./src/assets/image/schoolBuilding.jpg');",
+      },
     },
   },
   plugins: [],

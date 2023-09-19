@@ -16,6 +16,7 @@ interface DropdownProps extends ComponentType {
   dir?: "left" | "right";
   title?: string;
   disabled?: boolean;
+  name?: string;
 }
 
 const Dropdown = ({
@@ -26,6 +27,7 @@ const Dropdown = ({
   children,
   className,
   disabled,
+  name,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
@@ -43,20 +45,12 @@ const Dropdown = ({
       if (current && !current.contains(target)) setOpen(false);
     };
 
-    const handleScroll = () => {
-      if (window.screenY > 0) {
-        setOpen(false);
-      }
-    };
-
     // Mount the Listener
     document.addEventListener("click", handleClickOutside);
-    document.addEventListener("scroll", handleScroll);
 
     // clean up the event listener
     return () => {
       document.removeEventListener("click", handleClickOutside);
-      document.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -72,6 +66,7 @@ const Dropdown = ({
         type={type}
         icon={icon}
         onClick={handleOpen}
+        name={name}
       />
       {open && (
         <ul

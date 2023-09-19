@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Avatar from "../../components/Avatar";
+import { useTableContext } from "../../context/TableContext";
 
 interface FirstColumnProps {
   row: any;
@@ -8,12 +9,17 @@ interface FirstColumnProps {
 }
 
 const FirstColumn = ({ isSelection = true, row, value }: FirstColumnProps) => {
+  const { dispatch } = useTableContext();
+
+  const handleViewProfile = () => {
+    console.log("Clicked");
+    if (!isSelection) dispatch({ type: "SET_VIEW_PROFILE" });
+  };
+
   return (
     <label
       className="cursor-pointer flex gap-4 px-4 items-center"
-      onClick={() => {
-        !isSelection && alert("Nice");
-      }}>
+      onClick={handleViewProfile}>
       {isSelection ? (
         <input
           type="checkbox"

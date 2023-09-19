@@ -16,3 +16,9 @@ export interface TextProps extends BaseProps {
 export interface ProviderProps extends BaseProps {
   data: JSON;
 }
+
+export interface InputInterface {
+  label?: string;
+  name?: string;
+  placeholder?: string;
+}

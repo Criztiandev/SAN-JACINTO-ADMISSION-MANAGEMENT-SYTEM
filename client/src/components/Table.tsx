@@ -24,9 +24,10 @@ const Table = ({ data, config, children, layout, className }: TableProps) => {
 };
 
 const BaseContent = ({ children }: BaseProps) => {
+  // md:min-h-[500px] responsiveness
   return (
     <div
-      className={`relative border overflow-x-scroll h-[400px] rounded-[5px]`}>
+      className={`relative h-[400px]  border overflow-x-scroll rounded-[5px]`}>
       {children}
     </div>
   );

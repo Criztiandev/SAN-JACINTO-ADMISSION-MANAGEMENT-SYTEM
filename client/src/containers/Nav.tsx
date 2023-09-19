@@ -23,7 +23,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="sticky top-0 py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border ">
+    <nav className=" sticky top-0 py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border ">
       <figure className="logo">
         <Link to="/">
           <Image src={DashboardIcon} alt="logo" />

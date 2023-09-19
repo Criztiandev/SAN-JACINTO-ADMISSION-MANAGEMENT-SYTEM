@@ -5,6 +5,7 @@ import { ComponentStyle } from "../helper/componentHelper";
 import Typography from "./Typography";
 
 interface ButtonProps extends ComponentType {
+  as?: "button" | "submit";
   dir?: "left" | "right";
   icon?: string;
   title?: string;
@@ -19,6 +20,7 @@ interface ButtonProps extends ComponentType {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      as = "button",
       dir,
       title,
       icon,
@@ -32,6 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <button
+        type={as}
         ref={ref}
         className={`
         grid grid-cols-[32px_auto] justify-start rounded-full items-center 
