@@ -8,7 +8,6 @@ import TableAction from "../containers/Table/TableAction";
 import TableSearchBar from "../containers/Table/TableSearchBar";
 import TableFilter from "../containers/Table/TableFilter";
 import TablePagination from "../containers/Table/TablePagination";
-import TableDrawer from "../containers/Table/TableDrawer";
 
 interface TableProps extends BaseProps {
   data: any[];
@@ -51,7 +50,6 @@ Table.Tools = {
   Filter: TableFilter,
   Action: TableAction,
   Pagination: TablePagination,
-  Drawer: TableDrawer,
 };
 
 export default Table;

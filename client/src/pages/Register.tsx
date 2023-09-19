@@ -7,62 +7,70 @@ import RegistrationLayout from "../layouts/RegistrationLayout";
 import PrevIcon from "../assets/icons/Expand_left_light.svg";
 import NextIcon from "../assets/icons/Expand_right_light.svg";
 import applicantSchema from "../schema/applicantSchema";
-import Registration from "../containers/Registration";
+import { applicantInitialValue } from "../models/applicantModel";
 
-const Panels = [
+import GradeLevel from "../containers/Steps/GradeLevel";
+import AccountDetails from "../containers/Steps/AccountDetails";
+import StudentDetails from "../containers/Steps/StudentDetails";
+import PersonalDetails from "../containers/Steps/PersonalDetails";
+import PermanentAddress from "../containers/Steps/PermanentAddress";
+import GuardianDetails from "../containers/Steps/GuardianDetails";
+import OtherDetails from "../containers/Steps/OtherDetails";
+import CheckPoint from "../containers/Steps/CheckPoint";
+import ApplicationForm from "../containers/Steps/ApplicationForm";
+import Outro from "../containers/Steps/Outro";
+const registrationPanels: string[] = [
   "Grade Level",
   "Student Details",
-  "Pesonal Details",
+  "Personal Details",
   "Permanent Address",
   "Guardian Details",
   "Other Details",
   "Account Details",
   "Checkpoint",
   "Application Form",
-  "Thank you",
+  "Thank You",
 ];
 
 const Register = () => {
-  const stepsComponent: ReactElement[] = [
-    <Registration.Steps.GradeLevel />,
-    <Registration.Steps.StudentDetails />,
-    <Registration.Steps.PersonalDetails />,
-    <Registration.Steps.PermanentAddress />,
-    <Registration.Steps.GuardianDetails />,
-    <Registration.Steps.OtherDetails />,
-    <Registration.Steps.AccountDetails />,
-    <Registration.Steps.CheckPoint />,
-    <Registration.Steps.ApplicationForm />,
-    <Registration.Steps.Outro />,
+  const registrationStepsComponents: ReactElement[] = [
+    <GradeLevel />,
+    <StudentDetails />,
+    <PersonalDetails />,
+    <PermanentAddress />,
+    <GuardianDetails />,
+    <OtherDetails />,
+    <AccountDetails />,
+    <CheckPoint />,
+    <ApplicationForm />,
+    <Outro />,
   ];
   const { steps, currentIndex, isFirstStep, isLastStep, next, back } =
-    useMultipleForm(stepsComponent);
+    useMultipleForm(registrationStepsComponents);
 
   return (
-    <RegistrationLayout panels={Panels[currentIndex]}>
-      <section className="flex items-center justify-between ">
-        <Typography as="h1">{Panels[currentIndex]}</Typography>
+    <RegistrationLayout activePanel={registrationPanels[currentIndex]}>
+      <section className="flex items-center justify-between">
+        <Typography as="h1">{registrationPanels[currentIndex]}</Typography>
         <span>
-          {currentIndex + 1} / {stepsComponent.length}
+          {currentIndex + 1} / {registrationStepsComponents.length}
         </span>
       </section>
 
       <Formik
-        initialValues={{
-          firstName: "",
-          middleName: "",
-          lastName: "",
-        }}
+        initialValues={applicantInitialValue}
         onSubmit={(values, actions) => {
+          console.log(values);
+          console.log(actions);
           // console.log({ values, actions });
           // alert(JSON.stringify(values, null, 2));
           // actions.setSubmitting(false);
         }}
         validationSchema={applicantSchema}>
-        <Form className="flex  flex-col justify-between h-full">
+        <Form className="flex flex-col justify-between h-full">
           {steps}
 
-          <div className="flex  justify-between items-center">
+          <div className="flex justify-between items-center">
             {!isFirstStep && (
               <Button
                 type="outlined"
@@ -73,7 +81,6 @@ const Register = () => {
               />
             )}
             <Button
-              as="button"
               type="outlined"
               dir="right"
               icon={NextIcon}
