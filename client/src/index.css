@@ -13,24 +13,25 @@
   box-sizing: border-box;
 }
 
+/* Headings */
 h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 600; /* Use 600 for consistency */
 }
 
 h3 {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 600; /* Use 600 for consistency */
 }
 
 h4 {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 600; /* Use 600 for consistency */
 }
 
 h5 {
@@ -43,9 +44,10 @@ h6 {
   font-weight: 400;
 }
 
+/* Paragraphs */
 p {
   font-size: 16px;
-  line-height: 155%;
+  line-height: 1.5; /* Use a unitless value for line-height */
 }
 
 /* Calendar Style */

@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import { Button, Typography } from "../components/index";
 
@@ -23,13 +22,9 @@ import {
   ApplicationForm,
   Outro,
 } from "../containers/Steps";
+import { panelTemplate } from "../interface/registrationInterface";
 
-interface PanelInterface {
-  title: string;
-  component: ReactElement;
-}
-
-const registrationPanels: PanelInterface[] = [
+const registrationPanels: panelTemplate[] = [
   { title: "Grade Level", component: <GradeLevel /> },
   { title: "Student Details", component: <StudentDetails /> },
   { title: "Personal Details", component: <PersonalDetails /> },
@@ -58,8 +53,8 @@ const Register = () => {
 
   return (
     <RegistrationLayout activePanel={registrationPanels[currentIndex].title}>
-      <section className="flex items-center justify-between">
-        <Typography as="h1">
+      <section className="flex items-center justify-between border-b p-2">
+        <Typography as="h3">
           {registrationPanels[currentIndex].title}
         </Typography>
         <span>

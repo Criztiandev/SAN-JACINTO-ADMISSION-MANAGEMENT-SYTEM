@@ -1,4 +1,5 @@
 import { BaseProps } from "./componentInterface";
+import { ReactElement } from "react";
 
 // Layout Props
 export interface panelTitleInterface {
@@ -12,6 +13,18 @@ export interface panelTitleInterface {
   Checkpoint?: string;
   "Application Form"?: string;
   "Thank you"?: string;
+}
+
+// Panel Stepper Template
+export interface panelTemplate {
+  title: string;
+  component: ReactElement;
+}
+
+export interface ItemSelection {
+  cover: string;
+  title: string;
+  subtitle: string;
 }
 
 // Registration layout props
