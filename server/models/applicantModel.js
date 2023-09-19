@@ -87,13 +87,6 @@ const applicantSchema = mongoose.Schema(
       isLWD: { type: String, require: true },
     },
 
-    files: {
-      sp9: { type: String, require: true },
-      goodMoral: { type: String, require: true },
-      NSO: { type: String, require: true },
-    },
-
-    signature: { type: String, require: true },
     status: {
       type: String,
       enum: ["pending", "revision", "accepted"],

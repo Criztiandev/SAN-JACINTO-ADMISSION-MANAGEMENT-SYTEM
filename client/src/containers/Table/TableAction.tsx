@@ -10,25 +10,39 @@ interface TableActionProps {
 }
 
 const TableAction = ({ close }: TableActionProps) => {
-  const { table, handleAcceptApplicant, rowSelection } = useTableContext();
+  const { table, handleAcceptApplicant, rowSelected, dispatch } =
+    useTableContext();
   const { getToggleAllRowsSelectedHandler } = table;
 
-  const allSelectedApplicants = Object.keys(rowSelection).map(Number);
+  const allSelectedApplicants = Object.keys(rowSelected).map(Number);
+
+  const handleAccept = () => {
+    handleAcceptApplicant(allSelectedApplicants);
+    dispatch({ type: "SET_FILTER", payload: "" });
+  };
+
+  const handleClose = () => {
+    close();
+    dispatch({ type: "SET_FILTER", payload: "" });
+    dispatch({ type: "SET_FILTER_SELECT", payload: "Filter" });
+    dispatch({ type: "SET_SEARCH", payload: "" });
+  };
 
   return (
     <>
-      <IconButton
-        type="outlined"
-        icon={AcceptIcon}
-        onClick={() => handleAcceptApplicant(allSelectedApplicants)}
-      />
+      <IconButton type="outlined" icon={AcceptIcon} onClick={handleAccept} />
       <IconButton type="outlined" icon={MessageIcon} />
       <IconButton
         type="outlined"
         icon={SelectAllIcon}
         onClick={getToggleAllRowsSelectedHandler()}
       />
-      <IconButton type="outlined" icon={CloseIcon} onClick={close} />
+      <IconButton
+        type="outlined"
+        name="close"
+        icon={CloseIcon}
+        onClick={handleClose}
+      />
     </>
   );
 };
