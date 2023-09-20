@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Card, Typography } from "../../components";
+import { Radio, Typography } from "../../components";
+import useRadioSelect from "../../hooks/userRadioSelect";
 import { ItemSelection } from "../../interface/registrationInterface";
-import { useState } from "react";
 
 const GradeLevel = () => {
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null
-  );
   const yearLevelSelection: ItemSelection[] = [
     {
       cover: "null",
@@ -39,21 +36,21 @@ const GradeLevel = () => {
       subtitle: "Freshies",
     },
   ];
-
-  const handleSelected = (index: number) => setSelectedCardIndex(index);
+  const { data, currentSelectedIndex, handleSelectItem } =
+    useRadioSelect(yearLevelSelection);
 
   return (
     <section className="flex justify-center items-center  h-full mb-4">
-      <Card.Select.Container className="grid grid-cols-4 gap-4  w-full h-full  justify-center">
-        {yearLevelSelection.map((track, index) => (
-          <Card.Select.Items
+      <Radio.Select.Group className="grid grid-cols-4 gap-4  w-full h-full  justify-center">
+        {data.map((track, index) => (
+          <Radio.Select.Item
             key={track.title}
             name="studentDetails.yearLevel"
             id={track.title}
             value={track.title}
-            onClick={() => handleSelected(index)}
-            className={`cursor-pointer border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === selectedCardIndex ? "border-2 border-black" : ""
+            onClick={() => handleSelectItem(index)}
+            className={`cursor-pointer  border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
+              index === currentSelectedIndex ? "border-2 border-black" : ""
             }`}>
             <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
             <div className="text-center">
@@ -62,9 +59,9 @@ const GradeLevel = () => {
                 {track.subtitle}
               </Typography>
             </div>
-          </Card.Select.Items>
+          </Radio.Select.Item>
         ))}
-      </Card.Select.Container>
+      </Radio.Select.Group>
     </section>
   );
 };

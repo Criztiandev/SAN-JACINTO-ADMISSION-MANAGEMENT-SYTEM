@@ -32,17 +32,18 @@ const guardianSchema: Yup.Schema<Guardian> = Yup.object().shape({
   contact: baseValidation(3, 12, true),
 });
 
-const studentDetailsSchema: Yup.Schema<StudentDetails> = Yup.object().shape({
-  LRN: baseValidation(3, 12, true),
-  PSA: baseValidation(3, 100, true),
-  yearLevel: Yup.string()
-    .oneOf(YearLevelEnum)
-    .required("Year level is required"),
-  track: Yup.string()
-    .oneOf(["regular", "spe", "spj", "gas", "stem", "tvl"])
-    .required("Track is required"),
-  schoolYear: baseValidation(3, 100, true),
-});
+export const studentDetailsSchema: Yup.Schema<StudentDetails> =
+  Yup.object().shape({
+    LRN: baseValidation(3, 12, true),
+    PSA: baseValidation(3, 100, true),
+    yearLevel: Yup.string()
+      .oneOf(YearLevelEnum)
+      .required("Year level is required"),
+    track: Yup.string()
+      .oneOf(["regular", "spe", "spj", "gas", "stem", "tvl"])
+      .required("Track is required"),
+    schoolYear: baseValidation(3, 100, true),
+  });
 
 const personalDetailsSchema: Yup.Schema<PersonalDetails> = Yup.object().shape({
   firstName: baseValidation(3, 100, true),
