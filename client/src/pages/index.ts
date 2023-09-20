@@ -3,7 +3,7 @@ export { default as ArchivePage } from "./Archieve";
 export { default as AnnoucementPage } from "./Annoucement";
 export { default as BotManagerPage } from "./BotManager";
 export { default as CheckPointPage } from "./CheckPoint";
-export { default as DashboardPage } from "./Dasboard";
+export { default as DashboardPage } from "./Dashboard";
 export { default as ErrorPage } from "./ErrorPage";
 export { default as LandingPage } from "./LandingPage";
 export { default as LoginPage } from "./LoginPage";

@@ -1,5 +1,6 @@
+import { Typography, Image } from ".";
+import { DecreaseIcon, IncreaseIcon } from "../assets/icons";
 import { BaseProps, TextProps } from "../interface/componentInterface";
-import Typography from "./Typography";
 import { Fragment } from "./Fragments";
 
 interface NumberProps extends TextProps {
@@ -21,7 +22,11 @@ const Number = ({ as, value }: NumberProps) => {
 const Type = ({ type = "increase", value, as }: TypeProps) => {
   return (
     <div className="flex gap-4">
-      {type === "increase" ? <span>Increase</span> : <span>Decrease</span>}
+      {type === "increase" ? (
+        <Image src={IncreaseIcon} alt="Increase" />
+      ) : (
+        <Image src={DecreaseIcon} alt="decrease" />
+      )}
       <Typography as={as}>{value}</Typography>
     </div>
   );
