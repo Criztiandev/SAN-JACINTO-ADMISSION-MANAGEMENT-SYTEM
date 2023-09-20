@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import IconButton from "../components/IconButton";
 
-import Nav from "../containers/Nav";
+import Nav from "./Nav";
 import Typography from "../components/Typography";
 import Notification from "../assets/icons/Bell_light.svg";
 import Settings from "../assets/icons/Setting_alt_line_light.svg";

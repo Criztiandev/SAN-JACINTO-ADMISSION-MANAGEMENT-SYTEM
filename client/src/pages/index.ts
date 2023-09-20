@@ -1,0 +1,14 @@
+export { default as ApplicantPage } from "./Applicant";
+export { default as ArchivePage } from "./Archieve";
+export { default as AnnoucementPage } from "./Annoucement";
+export { default as BotManagerPage } from "./BotManager";
+export { default as CheckPointPage } from "./CheckPoint";
+export { default as DashboardPage } from "./Dasboard";
+export { default as ErrorPage } from "./ErrorPage";
+export { default as LandingPage } from "./LandingPage";
+export { default as LoginPage } from "./LoginPage";
+export { default as MasterListPage } from "./MasterList";
+export { default as RegisterPage } from "./Register";
+export { default as SchedulePage } from "./Schedule";
+export { default as ToolPage } from "./Tools";
+export { default as UserPage } from "./User";
