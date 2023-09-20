@@ -1,4 +1,4 @@
-interface Address {
+export interface Address {
   houseNo: string;
   street: string;
   barangay: string;
@@ -8,21 +8,22 @@ interface Address {
   zip: string;
 }
 
-interface Guardian {
+export interface Guardian {
   firstName: string;
   middleName: string;
   lastName: string;
   contact: string;
 }
 
-interface StudentDetails {
+export interface StudentDetails {
   LRN: string;
   PSA: string;
   yearLevel: string;
   track: string;
+  schoolYear: string;
 }
 
-interface PersonalDetails {
+export interface PersonalDetails {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -30,35 +31,44 @@ interface PersonalDetails {
   gender: string;
   birthDate: string;
   age: string;
+  gmail: string;
+  contact: string;
+  montherTounge: string;
 }
 
-interface Socials {
+export interface Account {
   facebook: string;
-  gmail: string;
+}
+
+export interface AddressDetails {
+  permanent: Address;
+  current: Address;
+}
+
+export interface SchoolDetails {
+  ID: string;
+  name: string;
   contact: string;
 }
 
-export interface applicantModelInterface {
+export interface GuardianDetails {
+  father: Guardian;
+  mother: Guardian;
+  legalGuardian: Guardian;
+}
+
+export interface OtherDetails {
+  is4psBeneficiary: string;
+  isIndigenousPerson: string;
+  isLWD: string;
+}
+
+export interface ApplicantModelInterface {
   studentDetails: StudentDetails;
   personalDetails: PersonalDetails;
-  socials: Socials;
-  addressDetails: {
-    permanentAddress: Address;
-    currentAddress: Address;
-  };
-  schoolDetails: {
-    ID: string;
-    name: string;
-    contact: string;
-  };
-  guardianDetails: {
-    father: Guardian;
-    mother: Guardian;
-    legalGuardian: Guardian;
-  };
-  otherDetails: {
-    is4psBeneficiary: string;
-    isIndigenousPerson: string;
-    isLWD: string;
-  };
+  accountDetails: Account;
+  addressDetails: AddressDetails;
+  schoolDetails: SchoolDetails;
+  guardianDetails: GuardianDetails;
+  otherDetails: OtherDetails;
 }

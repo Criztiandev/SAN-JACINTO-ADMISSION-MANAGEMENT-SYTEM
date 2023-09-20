@@ -50,4 +50,12 @@ p {
   line-height: 1.5; /* Use a unitless value for line-height */
 }
 
-/* Calendar Style */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}

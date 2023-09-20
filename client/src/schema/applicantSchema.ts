@@ -117,18 +117,15 @@ const applicantSchema = Yup.object().shape({
       .required("Contact is required"),
   }),
 
-  socials: Yup.object().shape({
-    facebook: Yup.object().shape({
-      id: Yup.string()
-        .min(3, "Must be at least 3 characters long")
-        .max(15, "Facebook ID should be 15 characters max")
-        .required("Facebook ID is required"),
-      link: Yup.string()
-        .min(3, "Must be at least 3 characters long")
-        .max(100, "Too long")
-        .required("Last name is required"),
-    }),
-  }),
+  facebook: Yup.string()
+    .min(3, "Must be at least 3 characters long")
+    .max(15, "Account Link should be 15 characters max")
+    .required("Account Link is required"),
+
+  OTP: Yup.string()
+    .min(3, "Must be atleast 3 character long")
+    .max(6, "OTP is too long")
+    .required("OTP is Requred"),
 
   // Use the addressSchema for both permanent and current addresses
   addressDetails: Yup.object().shape({
