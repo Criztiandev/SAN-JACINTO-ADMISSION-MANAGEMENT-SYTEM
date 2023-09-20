@@ -6,9 +6,8 @@ import useMultipleForm from "../hooks/useMultipleForm";
 
 import { NextIcon, PrevIcon } from "../assets/icons";
 
-import applicantSchema from "../schema/applicantSchema";
 import applicantTemplate from "../models/applicantModel";
-import { applicantModelInterface } from "../interface/modelInterface";
+import { ApplicantModelInterface } from "../interface/applicantModelInterface";
 
 import {
   GradeLevel,
@@ -42,8 +41,8 @@ const Register = () => {
 
   // // Formik Submission Handler
   const handleSubmit = async (
-    values: applicantModelInterface,
-    actions: FormikHelpers<applicantModelInterface>
+    values: ApplicantModelInterface,
+    actions: FormikHelpers<ApplicantModelInterface>
   ) => {
     console.log(values);
     console.log(actions);

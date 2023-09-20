@@ -2,13 +2,14 @@ import {
   Account,
   Address,
   AddressDetails,
+  ApplicantModelInterface,
   Guardian,
   GuardianDetails,
   OtherDetails,
   PersonalDetails,
   SchoolDetails,
   StudentDetails,
-} from "../interface/modelInterface";
+} from "../interface/applicantModelInterface";
 
 const addressTemplate: Address = {
   houseNo: "",
@@ -43,10 +44,10 @@ const personalDetails: PersonalDetails = {
   suffix: "",
   gender: "",
   birthDate: "",
-  age: "",
+  age: 0,
   gmail: "",
   contact: "",
-  montherTounge: "",
+  motherTounge: "",
 };
 
 const accountDetails: Account = {
@@ -76,7 +77,7 @@ const otherDetails: OtherDetails = {
   isLWD: "",
 };
 
-const applicantTemplate = {
+const applicantTemplate: ApplicantModelInterface = {
   studentDetails,
   schoolDetails,
   personalDetails,

@@ -29,11 +29,11 @@ export interface PersonalDetails {
   lastName: string;
   suffix: string;
   gender: string;
-  birthDate: string;
-  age: string;
+  birthDate: Date | null | undefined | string;
+  age: number;
   gmail: string;
   contact: string;
-  montherTounge: string;
+  motherTounge: string;
 }
 
 export interface Account {
