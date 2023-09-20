@@ -22,3 +22,10 @@ export interface InputInterface {
   name?: string;
   placeholder?: string;
 }
+
+// dashboard
+export interface StatsInterface {
+  added: number;
+  total: string;
+  title: string;
+}

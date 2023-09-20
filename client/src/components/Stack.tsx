@@ -1,5 +1,5 @@
 import { BaseProps } from "../interface/componentInterface";
-import { Fragment, Header } from "./Fragments";
+import { Fragment } from "./Fragments";
 
 interface StackProps extends BaseProps {
   dir: "horizontal" | "vertical";
@@ -22,7 +22,6 @@ const Stack = ({ children }: BaseProps) => {
   );
 };
 
-Stack.Header = Header;
 Stack.Items = Fragment;
 Stack.Content = Content;
 

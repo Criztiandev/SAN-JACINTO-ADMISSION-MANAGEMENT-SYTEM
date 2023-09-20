@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import { Button, Typography } from "../components/index";
 
@@ -7,9 +6,8 @@ import useMultipleForm from "../hooks/useMultipleForm";
 
 import { NextIcon, PrevIcon } from "../assets/icons";
 
-import applicantSchema from "../schema/applicantSchema";
 import applicantTemplate from "../models/applicantModel";
-import { applicantModelInterface } from "../interface/modelInterface";
+import { ApplicantModelInterface } from "../interface/applicantModelInterface";
 
 import {
   GradeLevel,
@@ -19,27 +17,21 @@ import {
   GuardianDetails,
   OtherDetails,
   AccountDetails,
-  CheckPoint,
   ApplicationForm,
   Outro,
 } from "../containers/Steps";
+import { panelTemplate } from "../interface/registrationInterface";
 
-interface PanelInterface {
-  title: string;
-  component: ReactElement;
-}
-
-const registrationPanels: PanelInterface[] = [
+const registrationPanels: panelTemplate[] = [
   { title: "Grade Level", component: <GradeLevel /> },
   { title: "Student Details", component: <StudentDetails /> },
   { title: "Personal Details", component: <PersonalDetails /> },
   { title: "Permanent Address", component: <PermanentAddress /> },
   { title: "Guardian Details", component: <GuardianDetails /> },
   { title: "Other Details", component: <OtherDetails /> },
-  { title: "Account Details", component: <AccountDetails /> },
-  { title: "CheckPoint", component: <CheckPoint /> },
+  { title: "Facebook Account", component: <AccountDetails /> },
   { title: "Application Form", component: <ApplicationForm /> },
-  { title: "thank you", component: <Outro /> },
+  { title: "Thank you", component: <Outro /> },
 ];
 
 const Register = () => {
@@ -47,19 +39,21 @@ const Register = () => {
   const { steps, currentIndex, isFirstStep, isLastStep, next, back } =
     useMultipleForm(registrationPanels.map(items => items.component));
 
-  // Formik Submission Handler
-  const handleSubmit = (
-    values: applicantModelInterface,
-    actions: FormikHelpers<applicantModelInterface>
+  // // Formik Submission Handler
+  const handleSubmit = async (
+    values: ApplicantModelInterface,
+    actions: FormikHelpers<ApplicantModelInterface>
   ) => {
     console.log(values);
     console.log(actions);
+
+    actions.resetForm();
   };
 
   return (
     <RegistrationLayout activePanel={registrationPanels[currentIndex].title}>
-      <section className="flex items-center justify-between">
-        <Typography as="h1">
+      <section className="flex items-center justify-between border-b p-2">
+        <Typography as="h3" className="font-semibold">
           {registrationPanels[currentIndex].title}
         </Typography>
         <span>
@@ -67,14 +61,14 @@ const Register = () => {
         </span>
       </section>
 
-      <Formik
-        initialValues={applicantTemplate}
-        onSubmit={handleSubmit}
-        validationSchema={applicantSchema}>
+      <Formik initialValues={applicantTemplate} onSubmit={handleSubmit}>
         <Form className="flex flex-col justify-between h-full">
           {steps}
 
-          <div className="flex justify-between items-center">
+          <div
+            className={`flex items-center ${
+              isFirstStep ? "justify-end" : "justify-between"
+            }`}>
             {!isFirstStep && (
               <Button
                 type="outlined"
@@ -84,11 +78,13 @@ const Register = () => {
                 onClick={back}
               />
             )}
+
             <Button
+              as="submit"
               type="outlined"
               dir="right"
               icon={NextIcon}
-              title={isLastStep ? "Finish" : "Next"}
+              title={`${isLastStep ? "Finish" : "Next"}`}
               onClick={next}
             />
           </div>

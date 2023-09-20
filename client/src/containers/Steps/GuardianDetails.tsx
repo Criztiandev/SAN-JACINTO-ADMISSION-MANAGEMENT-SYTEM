@@ -2,6 +2,7 @@ import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import { InputInterface } from "../../interface/componentInterface";
 import { useState, ChangeEvent } from "react";
+import { ItemSelection } from "../../interface/registrationInterface";
 const getGuardianInput = (name: string): InputInterface[] => [
   {
     label: `First Name`,
@@ -30,10 +31,10 @@ const getGuardianInput = (name: string): InputInterface[] => [
 
 const GuardianDetails = () => {
   const [selectedGuardian, setSelectedGuardian] = useState<string>("");
-  const GuardianSelection = [
-    { cover: null, title: "Father", desc: "Strong" },
-    { cover: null, title: "Mother", desc: "Caring" },
-    { cover: null, title: "Other", desc: "Prefered" },
+  const GuardianSelection: ItemSelection[] = [
+    { cover: "null", title: "Father", subtitle: "Strong" },
+    { cover: "null", title: "Mother", subtitle: "Caring" },
+    { cover: "null", title: "Other", subtitle: "Prefered" },
   ];
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +56,7 @@ const GuardianDetails = () => {
               <div className="text-center">
                 <Typography as="h6">{track.title}</Typography>
                 <Typography as="span" className="text-sm text-gray-400">
-                  {track.desc}
+                  {track.subtitle}
                 </Typography>
               </div>
               <input

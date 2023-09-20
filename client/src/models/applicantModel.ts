@@ -1,4 +1,17 @@
-const addressTemplate = {
+import {
+  Account,
+  Address,
+  AddressDetails,
+  ApplicantModelInterface,
+  Guardian,
+  GuardianDetails,
+  OtherDetails,
+  PersonalDetails,
+  SchoolDetails,
+  StudentDetails,
+} from "../interface/applicantModelInterface";
+
+const addressTemplate: Address = {
   houseNo: "",
   street: "",
   barangay: "",
@@ -9,61 +22,69 @@ const addressTemplate = {
 };
 
 // Define reusable guardian object
-const guardianTemplate = {
+const guardianTemplate: Guardian = {
   firstName: "",
   middleName: "",
   lastName: "",
   contact: "",
 };
 
-const applicantTemplate = {
-  studentDetails: {
-    LRN: "",
-    PSA: "",
-    yearLevel: "",
-    track: "",
-  },
+const studentDetails: StudentDetails = {
+  LRN: "",
+  PSA: "",
+  yearLevel: "",
+  track: "",
+  schoolYear: "",
+};
 
-  personalDetails: {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    suffix: "",
-    gender: "",
-    birthDate: "",
-    age: "",
-  },
+const personalDetails: PersonalDetails = {
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  suffix: "",
+  gender: "",
+  birthDate: "",
+  age: 0,
+  gmail: "",
+  contact: "",
+  motherTounge: "",
+};
 
-  socials: {
-    facebook: "",
-    gmail: "",
-    contact: "",
-  },
+const accountDetails: Account = {
+  facebook: "",
+};
 
-  // Use the addressObject for both permanent and current addresses
-  addressDetails: {
-    permanentAddress: { ...addressTemplate },
-    currentAddress: { ...addressTemplate },
-  },
+const addressDetails: AddressDetails = {
+  permanent: { ...addressTemplate },
+  current: { ...addressTemplate },
+};
 
-  schoolDetails: {
-    ID: "",
-    name: "",
-    contact: "",
-  },
+const schoolDetails: SchoolDetails = {
+  ID: "",
+  name: "",
+  contact: "",
+};
 
-  // Use the guardianObject for father, mother, and legal guardian
-  guardianDetails: {
-    father: { ...guardianTemplate },
-    mother: { ...guardianTemplate },
-    legalGuardian: { ...guardianTemplate },
-  },
+const guardianDetails: GuardianDetails = {
+  father: { ...guardianTemplate },
+  mother: { ...guardianTemplate },
+  legalGuardian: { ...guardianTemplate },
+};
 
-  otherDetails: {
-    is4psBeneficiary: "",
-    isIndigenousPerson: "",
-    isLWD: "",
-  },
+const otherDetails: OtherDetails = {
+  is4psBeneficiary: "",
+  isIndigenousPerson: "",
+  isLWD: "",
+};
+
+const applicantTemplate: ApplicantModelInterface = {
+  studentDetails,
+  schoolDetails,
+  personalDetails,
+  addressDetails,
+  guardianDetails,
+  otherDetails,
+  accountDetails,
 };
 
 export default applicantTemplate;
