@@ -1,10 +1,6 @@
-import Typography from "../../components/Typography";
 import SeachIcon from "../../assets/icons/Search.svg";
-import IconButton from "../../components/IconButton";
-import { useState } from "react";
+import { Typography, Input, IconButton } from "../../components";
 const AccountDetails = () => {
-  const [searchAccount, setSearchAccount] = useState("");
-
   return (
     <section className="flex justify-center items-center h-full">
       <div className="flex flex-col gap-4">
@@ -21,13 +17,8 @@ const AccountDetails = () => {
           </div>
         </div>
 
-        <div className="flex gap-4 items-center">
-          <input
-            type="text"
-            className="py-2 px-4 rounded-[5px] border border-gray-300 outline-none"
-            value={searchAccount}
-            onChange={e => setSearchAccount(e.target.value)}
-          />
+        <div className="flex gap-4 items-start">
+          <Input name="facebook" placeholder="Enter your FB Profile Link" />
           <IconButton icon={SeachIcon} type="outlined" />
         </div>
       </div>

@@ -34,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <button
-        type={as}
+        type={"submit"}
         ref={ref}
         className={`
         grid grid-cols-[32px_auto] justify-start rounded-full items-center 

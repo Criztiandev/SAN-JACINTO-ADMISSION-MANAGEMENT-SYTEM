@@ -139,8 +139,6 @@ const Applicant = () => {
           <Table.Container.Footer>
             <Table.Tools.Pagination />
           </Table.Container.Footer>
-
-          <Table.Tools.Drawer />
         </Table>
       </BaseLayout>
       {/* <Drawer /> */}

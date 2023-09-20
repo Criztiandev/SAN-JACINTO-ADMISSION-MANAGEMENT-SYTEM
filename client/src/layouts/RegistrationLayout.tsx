@@ -1,15 +1,12 @@
-import Image from "../components/Image";
-import { BaseProps } from "../interface/componentInterface";
+import { Typography, Image } from "../components";
 import Logo from "../assets/image/Logo.png";
-import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
-import { PanelContent } from "../interface/registrationInterface";
+import {
+  panelTitleInterface,
+  registrationLayoutProps,
+} from "../interface/registrationInterface";
 
-interface RegistrationLayoutProps extends BaseProps {
-  activePanel: string;
-}
-
-const defaultPanelContent: PanelContent = {
+const defaultPanelContent: panelTitleInterface = {
   Checkpoint: "Please Fill all necessary input",
   "Application Form": "This is your Application Form",
   "Thank you": "Welcome to the SJNHS",
@@ -18,9 +15,9 @@ const defaultPanelContent: PanelContent = {
 const RegistrationLayout = ({
   activePanel,
   children,
-}: RegistrationLayoutProps) => {
+}: registrationLayoutProps) => {
   const panelContent: string =
-    defaultPanelContent[activePanel as keyof PanelContent] ||
+    defaultPanelContent[activePanel as keyof panelTitleInterface] ||
     `Tell us about your ${activePanel}`;
 
   return (
