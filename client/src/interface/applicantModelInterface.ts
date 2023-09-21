@@ -31,9 +31,10 @@ export interface PersonalDetails {
   gender: string;
   birthDate: Date | null | undefined | string;
   age: number;
-  gmail: string;
-  contact: string;
+
   motherTounge: string;
+  email: string;
+  contact: string;
 }
 
 export interface Account {

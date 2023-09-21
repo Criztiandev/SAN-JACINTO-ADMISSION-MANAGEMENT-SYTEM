@@ -18,12 +18,12 @@ const Dashboard = () => {
         {stats.map(items => (
           <Stats
             key={items.title}
-            className="flex flex-col gap-4 px-6 py-4 border border-black rounded-[5px]">
+            className="flex flex-col gap-4 px-6 py-4 rounded-[5px] bg-white border border-gray-200 shadow-[0px_0px_3px_##919eab29]">
             {/* Stats Header */}
 
             <Stats.Header type="header" className="flex justify-between">
               <Stats.Label as="h5">Total</Stats.Label>
-              <Stats.Type as="h6" type="increase" value={300} />
+              <Stats.Type as="h6" type={items.type} value={300} />
             </Stats.Header>
 
             <Stats.Content type="main">

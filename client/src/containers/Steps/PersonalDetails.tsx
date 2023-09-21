@@ -44,7 +44,7 @@ const PersonalDetails = () => {
 
       <Input
         label="Email"
-        name="personalDetails.email"
+        name="personalDetails.gmail"
         placeholder="Enter your email"
       />
 

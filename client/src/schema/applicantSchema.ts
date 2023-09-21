@@ -65,7 +65,7 @@ const personalDetailsSchema: Yup.Schema<PersonalDetails> = Yup.object().shape({
     .max(120, "Age cannot exceed 120 years")
     .required("Age is required"),
 
-  gmail: Yup.string()
+  email: Yup.string()
     .email("Invalid Email format")
     .required("Email is required"),
   contact: baseValidation(3, 12, true),

@@ -14,6 +14,9 @@ const TrackSelection: ItemSelection[] = [
 const StudentDetails = () => {
   const { data, currentSelectedIndex, handleSelectItem } =
     useRadioSelect(TrackSelection);
+
+  console.log(currentSelectedIndex);
+
   return (
     <section className="mb-4">
       <Typography as="h5" className="mb-4">
@@ -23,16 +26,20 @@ const StudentDetails = () => {
         {data.map((track, index) => (
           <Radio.Select.Item
             key={track.title}
-            name="studentDetails.yearLevel"
+            name="studentDetails.track"
             id={track.title}
             value={track.title}
             onClick={() => handleSelectItem(index)}
-            className={`cursor-pointer w-[200px] py-12 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === currentSelectedIndex ? "border-2 border-black" : ""
+            className={`bg-white cursor-pointer w-[200px] py-12 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
+              index === currentSelectedIndex
+                ? "border-2 border-black"
+                : "border-gray-300 "
             }`}>
             <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
             <div className="text-center">
-              <Typography as="h6">Grade {track.title}</Typography>
+              <Typography as="h5" className="capitalize">
+                {track.title}
+              </Typography>
               <Typography as="span" className="text-sm text-gray-400">
                 {track.subtitle}
               </Typography>

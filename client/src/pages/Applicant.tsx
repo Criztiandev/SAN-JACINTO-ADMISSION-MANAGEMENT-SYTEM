@@ -66,7 +66,7 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
       header: "Status",
       accessorKey: "status",
       cell: ({ getValue }: any) => (
-        <Badge type={getValue()} title={getValue()} />
+        <Badge as="neutral" type={getValue()} title={getValue()} />
       ),
     },
     {

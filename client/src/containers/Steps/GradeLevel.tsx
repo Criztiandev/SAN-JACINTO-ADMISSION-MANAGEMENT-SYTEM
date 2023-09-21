@@ -49,12 +49,14 @@ const GradeLevel = () => {
             id={track.title}
             value={track.title}
             onClick={() => handleSelectItem(index)}
-            className={`cursor-pointer  border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === currentSelectedIndex ? "border-2 border-black" : ""
+            className={`bg-white border  shadow-[0px_0px_3px_##919eab29] cursor-pointer flex flex-col justify-center items-center gap-4 rounded-[5px] ${
+              index === currentSelectedIndex
+                ? "border-2 border-gray-200 shadow-lg"
+                : "border-gray-300"
             }`}>
             <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
             <div className="text-center">
-              <Typography as="h6">Grade {track.title}</Typography>
+              <Typography as="h5">Grade {track.title}</Typography>
               <Typography as="span" className="text-sm text-gray-400">
                 {track.subtitle}
               </Typography>

@@ -2,16 +2,19 @@
   {
     "added": 23,
     "total": "18,000",
-    "title": "Junior"
+    "title": "Junior",
+    "type": "increase"
   },
   {
     "added": 23,
     "total": "18,000",
-    "title": "Senior"
+    "title": "Senior",
+    "type": "decrease"
   },
   {
     "added": 23,
     "total": "18,000",
-    "title": "Attendies"
+    "title": "Attendies",
+    "type": "increase"
   }
 ]

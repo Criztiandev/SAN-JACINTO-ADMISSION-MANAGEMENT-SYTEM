@@ -13,6 +13,11 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #f9fafb;
+  /* color: #80808021; */
+}
+
 /* Headings */
 h1 {
   font-size: 36px;
