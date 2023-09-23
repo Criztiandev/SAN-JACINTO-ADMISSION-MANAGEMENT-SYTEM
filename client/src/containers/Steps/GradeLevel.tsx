@@ -2,7 +2,6 @@
 import { Radio, Typography } from "../../components";
 import useRadioSelect from "../../hooks/userRadioSelect";
 import { ItemSelection } from "../../interface/registrationInterface";
-
 const GradeLevel = () => {
   const yearLevelSelection: ItemSelection[] = [
     {
@@ -69,9 +68,3 @@ const GradeLevel = () => {
 };
 
 export default GradeLevel;
-// className={`cursor-pointer border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-//   index === selectedCardIndex
-//     ? "active:border-2 hover:border-blue-400 hover:border-1 hover:bg-gray-50 hover:shadow-lg"
-//     : ""
-// }`}
-// onClick={() => handleSelected(index)}

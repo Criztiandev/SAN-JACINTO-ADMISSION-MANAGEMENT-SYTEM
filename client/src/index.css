@@ -20,7 +20,7 @@ body {
 
 /* Headings */
 h1 {
-  font-size: 36px;
+  font-size: clamp(2rem, 2.5vw, 5rem);
   font-weight: bold;
 }
 
