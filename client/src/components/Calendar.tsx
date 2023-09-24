@@ -1,26 +1,21 @@
-import { useMemo } from "react";
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import { Calendar as BigCalendar, CalendarProps } from "react-big-calendar";
+import { Event as CustomEvent } from "../interface/dateInterface";
 
-interface CalendarProps {
-  events: Event[];
-  onSelectEvent: (event: Event) => void;
-  onSelectSlot: (slotInfo: { start: Date; end: Date }) => void;
+interface CalendarCustomProps
+  extends Omit<CalendarProps<CustomEvent>, "events"> {
+  events: CustomEvent[];
+  onSelectEvent?: (event: CustomEvent) => void;
+  onSelectSlot?: (slotInfo: { start: Date; end: Date }) => void;
 }
 
-const Calendar = ({ events, onSelectEvent, onSelectSlot }: CalendarProps) => {
-  const localizer = momentLocalizer(moment);
-  const memoizedEvents = useMemo(() => events, [events]);
-
+const Calendar = ({ events, ...props }: CalendarCustomProps) => {
   return (
     <BigCalendar
-      defaultView="month"
-      views={["month", "week", "day"]}
-      localizer={localizer}
-      events={memoizedEvents}
-      onSelectEvent={onSelectEvent}
-      onSelectSlot={onSelectSlot}
       selectable
+      defaultView="month"
+      views={["month", "agenda"]}
+      events={events}
+      {...props} // Spread the rest of the props
     />
   );
 };
