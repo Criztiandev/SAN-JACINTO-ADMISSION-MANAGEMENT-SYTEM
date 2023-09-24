@@ -2,6 +2,7 @@ import {
   Drawer,
   Image,
   Input,
+  Radio,
   SearchBar,
   Select,
   Switch,
@@ -10,7 +11,7 @@ import {
 import { useId } from "react";
 import { DateFormat } from "../helper/dateHelper";
 import { momentLocalizer } from "react-big-calendar";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import Calendar from "../components/Calendar";
 import useEvent from "../hooks/useEvent";
 import BaseLayout from "../layouts/BaseLayout";
@@ -18,6 +19,7 @@ import CalendarIcon from "../assets/icons/Calendar.svg";
 import moment from "moment";
 import useDrawer from "../hooks/useDrawer";
 import scheduleModel from "../models/scheduleModel";
+import Textarea from "../components/Textarea";
 
 const Schedule = () => {
   const { active, setActive } = useDrawer();
@@ -108,7 +110,9 @@ const Schedule = () => {
                 <Switch />
               </section>
 
-              <section className="h-[300px] border"></section>
+              <section className="h-[300px]">
+                <Textarea label="Content" name="content" />
+              </section>
             </Form>
           </Formik>
         </Drawer>
