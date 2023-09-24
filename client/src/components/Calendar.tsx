@@ -9,6 +9,8 @@ interface CalendarCustomProps
 }
 
 const Calendar = ({ events, ...props }: CalendarCustomProps) => {
+  // sort the event based on the
+
   return (
     <BigCalendar
       selectable
