@@ -1,7 +1,5 @@
-import React from "react";
-
 const ApplicationForm = () => {
-  return <div>ApplicationForm</div>;
+  return <section>ApplicationForm</section>;
 };
 
 export default ApplicationForm;

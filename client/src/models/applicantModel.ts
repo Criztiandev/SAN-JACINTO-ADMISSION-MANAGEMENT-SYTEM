@@ -45,9 +45,9 @@ const personalDetails: PersonalDetails = {
   gender: "",
   birthDate: "",
   age: 0,
-  gmail: "",
-  contact: "",
   motherTounge: "",
+  email: "",
+  contact: "",
 };
 
 const accountDetails: Account = {

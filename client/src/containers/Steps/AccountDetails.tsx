@@ -1,5 +1,4 @@
-import SeachIcon from "../../assets/icons/Search.svg";
-import { Typography, Input, IconButton } from "../../components";
+import { Typography, Input } from "../../components";
 const AccountDetails = () => {
   return (
     <section className="flex justify-center items-center h-full">
@@ -17,9 +16,8 @@ const AccountDetails = () => {
           </div>
         </div>
 
-        <div className="flex gap-4 items-start">
+        <div className="flex justify-center items-center">
           <Input name="facebook" placeholder="Enter your FB Profile Link" />
-          <IconButton icon={SeachIcon} type="outlined" />
         </div>
       </div>
     </section>

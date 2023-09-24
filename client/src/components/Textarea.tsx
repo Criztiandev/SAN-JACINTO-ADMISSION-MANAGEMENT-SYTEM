@@ -7,7 +7,7 @@ interface FieldProps extends InputInterface {
   type?: string;
 }
 
-const Input = ({ label, name = "", ...props }: FieldProps) => {
+const Textarea = ({ label, name = "", ...props }: FieldProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -15,14 +15,14 @@ const Input = ({ label, name = "", ...props }: FieldProps) => {
   });
   const errorClass = meta.touched && meta.error ? "border-red-500" : "";
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       {label && (
         <label htmlFor={name} className="mb-2">
           {label}
         </label>
       )}
-      <input
-        className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
+      <textarea
+        className={`border px-4 py-3 rounded-[5px] mb-2 w-full h-full ${errorClass} `}
         {...field}
         {...props}
         id={name}
@@ -36,4 +36,4 @@ const Input = ({ label, name = "", ...props }: FieldProps) => {
   );
 };
 
-export default Input;
+export default Textarea;

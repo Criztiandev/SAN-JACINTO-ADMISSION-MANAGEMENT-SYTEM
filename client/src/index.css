@@ -13,9 +13,14 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #f9fafb;
+  /* color: #80808021; */
+}
+
 /* Headings */
 h1 {
-  font-size: 36px;
+  font-size: clamp(2rem, 2.5vw, 5rem);
   font-weight: bold;
 }
 
@@ -41,12 +46,12 @@ h5 {
 
 h6 {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Paragraphs */
 p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5; /* Use a unitless value for line-height */
 }
 
@@ -58,4 +63,8 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
+}
+
+textarea {
+  resize: none;
 }

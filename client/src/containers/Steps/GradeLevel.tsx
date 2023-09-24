@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Card, Typography } from "../../components";
+import { Radio, Typography } from "../../components";
+import useRadioSelect from "../../hooks/userRadioSelect";
 import { ItemSelection } from "../../interface/registrationInterface";
-import { useState } from "react";
-
 const GradeLevel = () => {
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null
-  );
   const yearLevelSelection: ItemSelection[] = [
     {
       cover: "null",
@@ -39,40 +35,36 @@ const GradeLevel = () => {
       subtitle: "Freshies",
     },
   ];
-
-  const handleSelected = (index: number) => setSelectedCardIndex(index);
+  const { data, currentSelectedIndex, handleSelectItem } =
+    useRadioSelect(yearLevelSelection);
 
   return (
     <section className="flex justify-center items-center  h-full mb-4">
-      <Card.Select.Container className="grid grid-cols-4 gap-4  w-full h-full  justify-center">
-        {yearLevelSelection.map((track, index) => (
-          <Card.Select.Items
+      <Radio.Select.Group className="grid grid-cols-4 gap-4  w-full h-full  justify-center">
+        {data.map((track, index) => (
+          <Radio.Select.Item
             key={track.title}
             name="studentDetails.yearLevel"
             id={track.title}
             value={track.title}
-            onClick={() => handleSelected(index)}
-            className={`cursor-pointer border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === selectedCardIndex ? "border-2 border-black" : ""
+            onClick={() => handleSelectItem(index)}
+            className={`bg-white border  shadow-[0px_0px_3px_##919eab29] cursor-pointer flex flex-col justify-center items-center gap-4 rounded-[5px] ${
+              index === currentSelectedIndex
+                ? "border-2 border-gray-200 shadow-lg"
+                : "border-gray-300"
             }`}>
             <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
             <div className="text-center">
-              <Typography as="h6">Grade {track.title}</Typography>
+              <Typography as="h5">Grade {track.title}</Typography>
               <Typography as="span" className="text-sm text-gray-400">
                 {track.subtitle}
               </Typography>
             </div>
-          </Card.Select.Items>
+          </Radio.Select.Item>
         ))}
-      </Card.Select.Container>
+      </Radio.Select.Group>
     </section>
   );
 };
 
 export default GradeLevel;
-// className={`cursor-pointer border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-//   index === selectedCardIndex
-//     ? "active:border-2 hover:border-blue-400 hover:border-1 hover:bg-gray-50 hover:shadow-lg"
-//     : ""
-// }`}
-// onClick={() => handleSelected(index)}

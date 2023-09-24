@@ -1,7 +1,10 @@
 import Input from "../../components/Input";
 import Select from "../../components/Select";
+// import { useFormikContext } from "formik";
 
 const PersonalDetails = () => {
+  // const { values } = useFormikContext();
+
   return (
     <section className="grid grid-cols-2 gap-4 items-center justify-center ">
       <Input
@@ -40,11 +43,15 @@ const PersonalDetails = () => {
         placeholder="Enter your Age"
       />
 
-      <Input label="Mother Tounge" name="personalDetails.motherTounge" />
+      <Input
+        label="Mother Tounge"
+        name="personalDetails.motherTounge"
+        placeholder="Enter your Mother Tounge"
+      />
 
       <Input
         label="Email"
-        name="personalDetails.email"
+        name="personalDetails.gmail"
         placeholder="Enter your email"
       />
 

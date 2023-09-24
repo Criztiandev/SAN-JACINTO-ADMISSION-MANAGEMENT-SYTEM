@@ -6,8 +6,8 @@ import { ComponentType } from "../interface/componentInterface";
 interface SearchBarProps extends ComponentType {
   as?: "icon" | "normal";
   dir?: "left" | "right";
-  value: string | number;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(

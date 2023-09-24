@@ -45,9 +45,6 @@ const Register = () => {
     actions: FormikHelpers<ApplicantModelInterface>
   ) => {
     console.log(values);
-    console.log(actions);
-
-    actions.resetForm();
   };
 
   return (

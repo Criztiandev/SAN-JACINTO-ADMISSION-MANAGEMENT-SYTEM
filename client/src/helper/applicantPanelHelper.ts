@@ -10,9 +10,9 @@ export const TabLists = [
 
 // Filter Items
 export const FilterList = [
-  { title: "Kruger", icon: ApplicantIcon },
+  { title: "Pending", icon: ApplicantIcon },
+  { title: "Update", icon: ApplicantIcon },
   { title: "Accepted", icon: ApplicantIcon },
-  { title: "Loved", icon: ApplicantIcon },
 ];
 
 // Table Column Config

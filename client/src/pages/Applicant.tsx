@@ -4,20 +4,16 @@ import { applicantData } from "../data/applicantData";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
 
-import FirstColumn from "../containers/Table/FirstColumn";
-import Badge from "../components/Badge";
-import Button from "../components/Button";
+import { Badge, Button, Dropdown, Table, IconButton } from "../components";
 import MonthPicker from "../containers/MonthPicker";
+import FirstColumn from "../containers/Table/FirstColumn";
 import ActionColumn from "../containers/Table/ActionColumn";
 import BaseLayout from "../layouts/BaseLayout";
-import Dropdown from "../components/Dropdown";
-import Table from "../components/Table";
 
 import ApplicantIcon from "../assets/icons/Applicants.svg";
 import SelectAllIcon from "../assets/icons/Select_All.svg";
 import ImportIcon from "../assets/icons/Import_light.svg";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-import IconButton from "../components/IconButton";
 import ArchievedIcon from "../assets/icons/Arhive_light.svg";
 
 interface FilterConfigItem {
@@ -66,7 +62,7 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
       header: "Status",
       accessorKey: "status",
       cell: ({ getValue }: any) => (
-        <Badge type={getValue()} title={getValue()} />
+        <Badge as="neutral" type={getValue()} title={getValue()} />
       ),
     },
     {
