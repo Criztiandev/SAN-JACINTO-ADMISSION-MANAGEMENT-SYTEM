@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import IconButton from "./IconButton";
-import QuestionIcon from "../assets/icons/Question_light.svg";
 import { useField } from "formik";
 import Typography from "./Typography";
 import { BaseProps } from "../interface/componentInterface";
@@ -24,13 +22,9 @@ const Select = ({ label, name = "", ...props }: FieldProps) => {
   return (
     <div className="flex flex-col ">
       {label && (
-        <span
-          className={`flex justify-between items-center ${
-            meta.touched ? "" : "text-gray-400"
-          }`}>
-          <label htmlFor={name}>{label}</label>
-          <IconButton icon={QuestionIcon} />
-        </span>
+        <label htmlFor={name} className="mb-2">
+          {label}
+        </label>
       )}
       <select
         className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
@@ -44,5 +38,11 @@ const Select = ({ label, name = "", ...props }: FieldProps) => {
     </div>
   );
 };
+
+const Option = ({ label, value }: { label: string; value: string }) => {
+  return <option value={value}>{label}</option>;
+};
+
+Select.Option = Option;
 
 export default Select;

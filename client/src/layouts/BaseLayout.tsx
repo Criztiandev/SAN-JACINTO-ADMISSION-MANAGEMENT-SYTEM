@@ -1,12 +1,9 @@
 import { ReactNode } from "react";
 
-import IconButton from "../components/IconButton";
-
-import Nav from "../containers/Nav";
-import Typography from "../components/Typography";
-import Notification from "../assets/icons/Bell_light.svg";
-import Settings from "../assets/icons/Setting_alt_line_light.svg";
+import { Typography, IconButton } from "../components";
 import { BaseProps } from "../interface/componentInterface";
+import Nav from "./Nav";
+import { SettingsIcon, NotifIcon } from "../assets/icons";
 
 interface BaseLayoutProps extends BaseProps {
   title?: string;
@@ -34,8 +31,8 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
               <>{header}</>
             ) : (
               <>
-                <IconButton type="ghost" icon={Notification} />
-                <IconButton type="ghost" icon={Settings} />
+                <IconButton type="ghost" icon={NotifIcon} />
+                <IconButton type="ghost" icon={SettingsIcon} />
               </>
             )}
           </span>

@@ -15,3 +15,4 @@ export { default as Switch } from "./Switch";
 export { default as Table } from "./Table";
 export { default as Tabs } from "./Tabs";
 export { default as Typography } from "./Typography";
+export { default as Radio } from "./Radio";

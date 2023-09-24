@@ -1,41 +1,29 @@
 import Stats from "../components/Stats";
 import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
+import statsData from "../data/statsData.json";
 
 import Stack from "../components/Stack";
-import { StatsInterface } from "../interface/dashboardInterface";
+import useStats from "../hooks/useStats";
+import { StatsInterface } from "../interface/componentInterface";
 
 const Dashboard = () => {
-  const statsData: StatsInterface[] = [
-    {
-      added: 23,
-      total: "18,000",
-      title: "Junior",
-    },
-    {
-      added: 23,
-      total: "18,000",
-      title: "Senior",
-    },
-    {
-      added: 23,
-      total: "18,000",
-      title: "Attendies",
-    },
-  ];
+  const currentData: StatsInterface[] = statsData;
+  const { stats } = useStats(currentData);
+
   return (
     <BaseLayout>
       {/* // Stats Section */}
       <section className="grid grid-cols-3 gap-4">
-        {statsData.map(items => (
+        {stats.map(items => (
           <Stats
             key={items.title}
-            className="flex flex-col gap-4 px-6 py-4 border border-black rounded-[5px]">
+            className="flex flex-col gap-4 px-6 py-4 rounded-[5px] bg-white border border-gray-200 shadow-[0px_0px_3px_##919eab29]">
             {/* Stats Header */}
 
             <Stats.Header type="header" className="flex justify-between">
               <Stats.Label as="h5">Total</Stats.Label>
-              <Stats.Type as="h6" type="increase" value={300} />
+              <Stats.Type as="h6" type={items.type} value={300} />
             </Stats.Header>
 
             <Stats.Content type="main">
@@ -50,22 +38,18 @@ const Dashboard = () => {
       {/* // Graph Section */}
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Stack>
-          <Stack.Header title="Applicant Graph" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
 
         <Stack>
-          <Stack.Header title="Schedule" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
       </section>
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Stack>
-          <Stack.Header title="Schedule" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
         <Stack>
-          <Stack.Header title="Schedule" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
       </section>
@@ -74,11 +58,9 @@ const Dashboard = () => {
 
       <section className="grid grid-cols-[auto_370px] gap-4">
         <Stack>
-          <Stack.Header title="Recent Files" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
         <Stack>
-          <Stack.Header title="Messages" />
           <Stack.Content dir="vertical" spacing={16}></Stack.Content>
         </Stack>
       </section>

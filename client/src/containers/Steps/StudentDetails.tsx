@@ -1,10 +1,9 @@
-import { Field } from "formik";
-import Card from "../../components/Card";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 
-import { useState } from "react";
 import { ItemSelection } from "../../interface/registrationInterface";
+import useRadioSelect from "../../hooks/userRadioSelect";
+import { Radio } from "../../components";
 
 const TrackSelection: ItemSelection[] = [
   { cover: "null", title: "Regular", subtitle: "Regular Student" },
@@ -13,50 +12,41 @@ const TrackSelection: ItemSelection[] = [
 ];
 
 const StudentDetails = () => {
-  // get the fomik value
+  const { data, currentSelectedIndex, handleSelectItem } =
+    useRadioSelect(TrackSelection);
 
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null
-  );
-
-  const handleSelected = (index: number) => {
-    setSelectedCardIndex(index);
-  };
+  console.log(currentSelectedIndex);
 
   return (
     <section className="mb-4">
       <Typography as="h5" className="mb-4">
         Select your Track
       </Typography>
-      <div className="grid grid-cols-3 gap-4">
-        {TrackSelection.map((track, index) => (
-          <Card
+      <Radio.Select.Group className="flex justify-between gap-4">
+        {data.map((track, index) => (
+          <Radio.Select.Item
             key={track.title}
-            as="label"
-            className={`cursor-pointer p-8 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === selectedCardIndex
-                ? "active:border-2 hover:border-blue-400 hover:border-1 hover:bg-gray-50 hover:shadow-lg"
-                : ""
-            }`}
-            onClick={() => handleSelected(index)}>
+            name="studentDetails.track"
+            id={track.title}
+            value={track.title}
+            onClick={() => handleSelectItem(index)}
+            className={`bg-white cursor-pointer w-[200px] py-12 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
+              index === currentSelectedIndex
+                ? "border-2 border-black"
+                : "border-gray-300 "
+            }`}>
             <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
             <div className="text-center">
-              <Typography as="h6">{track.title}</Typography>
+              <Typography as="h5" className="capitalize">
+                {track.title}
+              </Typography>
               <Typography as="span" className="text-sm text-gray-400">
                 {track.subtitle}
               </Typography>
             </div>
-
-            <Field
-              type="radio"
-              name="studentDetails.track"
-              id={track.title}
-              value={track.title}
-              className="hidden"
-            />
-          </Card>
+          </Radio.Select.Item>
         ))}
-      </div>
+      </Radio.Select.Group>
 
       <Typography as="h5" className="mb-4 mt-6">
         Details
