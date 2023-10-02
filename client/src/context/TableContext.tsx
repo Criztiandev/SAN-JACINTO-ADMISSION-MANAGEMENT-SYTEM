@@ -115,7 +115,7 @@ const TableProvider = ({
       console.log(applicants);
       return;
     }
-    console.log(memoizedData[value]);
+    alert(JSON.stringify(memoizedData[value]));
   };
 
   const value: TableContextValue = {

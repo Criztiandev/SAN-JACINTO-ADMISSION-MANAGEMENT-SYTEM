@@ -55,6 +55,10 @@ p {
   line-height: 1.5; /* Use a unitless value for line-height */
 }
 
+input {
+  background: inherit;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -67,4 +71,31 @@ input[type="number"] {
 
 textarea {
   resize: none;
+}
+
+/* Set the size of the scrollbar */
+*::-webkit-scrollbar {
+  height: 13px;
+  width: 10px;
+}
+
+/* Hide the scrollbar buttons (arrows) */
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Remove the default scrollbar track background */
+*::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Style the scrollbar thumb with rounded corners and a smooth transition */
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  transition: all 5s ease-in; /* Smooth transition for background color */
+}
+
+/* Change the thumb background color on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: darkgrey;
 }

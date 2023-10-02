@@ -1,15 +1,11 @@
 import { useState } from "react";
 
 const useDrawer = () => {
-  const [data, setData] = useState<Array<object>>([]);
-  const [active, setActive] = useState<boolean>(false);
+  const [active, setActive] = useState(false);
 
-  return {
-    data,
-    active,
-    setData,
-    setActive,
-  };
+  const toggleDrawer = () => setActive(prev => !prev);
+
+  return { active, toggleDrawer, setActive };
 };
 
 export default useDrawer;

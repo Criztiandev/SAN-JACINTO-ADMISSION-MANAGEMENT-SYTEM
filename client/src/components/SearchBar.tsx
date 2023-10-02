@@ -8,10 +8,14 @@ interface SearchBarProps extends ComponentType {
   dir?: "left" | "right";
   value?: string | number;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (event: any) => void;
 }
 
 const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
-  ({ as = "normal", dir = "left", value, onChange }: SearchBarProps, ref) => {
+  (
+    { as = "normal", dir = "left", value, onChange, onClick }: SearchBarProps,
+    ref
+  ) => {
     const [active, setActive] = useState<boolean>(as === "normal");
     const searchBarRef = useRef<HTMLLabelElement | null>(null);
 
@@ -44,7 +48,8 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
         ref={searchBarRef}
         className={`cursor-pointer flex gap-2 border rounded-full w-fit ${
           active ? "px-[20px] py-3" : "p-3"
-        }`}>
+        }`}
+        onClick={onClick}>
         {dir === "left" && (
           <img src={SearchIcon} alt="Magnifying Glass" onClick={handleActive} />
         )}

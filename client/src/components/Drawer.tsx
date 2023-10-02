@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseProps } from "../interface/componentInterface";
 import { Typography } from ".";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Fragment } from "./Fragments";
 
 interface DrawerProps extends BaseProps {
-  title: string;
+  title: string | boolean;
   subtitle: string;
   handleToggle: () => void;
+  active: boolean;
   anchor?: "left" | "right";
 }
 
@@ -16,10 +17,25 @@ const Drawer = ({
   title,
   subtitle,
   children,
+
+  active,
   handleToggle,
 }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
   const anchorDir = { left: "left-0", right: "right-0" };
+
+  // Use useEffect to control the body overflow based on the 'active' prop
+  useEffect(() => {
+    if (active) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling when the drawer is active
+    } else {
+      document.body.style.overflow = "scroll"; // Allow scrolling when the drawer is not active
+    }
+    // Cleanup function when the component unmounts or 'active' prop changes
+    return () => {
+      document.body.style.overflow = "unset"; // Restore default body overflow
+    };
+  }, [active]);
 
   return (
     <div ref={drawerRef} className="fixed w-full h-full top-0 z-50">

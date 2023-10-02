@@ -16,3 +16,5 @@ export { default as Table } from "./Table";
 export { default as Tabs } from "./Tabs";
 export { default as Typography } from "./Typography";
 export { default as Radio } from "./Radio";
+export { default as Calendar } from "./Calendar";
+export { default as Textarea } from "./Textarea";
