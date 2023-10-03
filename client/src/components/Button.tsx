@@ -13,6 +13,7 @@ interface ButtonProps extends ComponentType {
   onClick?: any;
   name?: string;
   disabled?: boolean;
+  value?: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -26,7 +27,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       className = "",
       disabled,
-      name,
+      ...props
     },
     ref
   ) => {
@@ -39,7 +40,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ${ComponentStyle({ type })} ${className}`}
         onClick={onClick}
         disabled={disabled}
-        name={name}>
+        {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
         <Typography
           as="span"

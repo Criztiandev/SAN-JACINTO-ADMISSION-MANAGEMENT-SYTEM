@@ -9,6 +9,7 @@ import {
   getSortedRowModel,
   ColumnSort,
   getFilteredRowModel,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
 import PrevIcon from "../assets/icons/Expand_left_light.svg";
 import NextIcon from "../assets/icons/Expand_right_light.svg";
@@ -19,22 +20,36 @@ import { IconButton, Typography, Image } from ".";
 interface TableProps extends BaseProps {
   data: any[];
   config: any[];
-  filter: string;
+  search: string;
+  columnSearch: any;
 }
 
 type SortingState = ColumnSort[];
 
-const Table = ({ data, config, filter }: TableProps) => {
-  const [currentFilter, setCurrentFilter] = useState("");
+const Table = ({ data, config, search, columnSearch }: TableProps) => {
+  const [globalFilter, setGlobalFilter] = useState("");
+
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilter] = useState<ColumnFiltersState>([]);
   const memoizedData = useMemo(() => data, [data]);
 
   useEffect(() => {
-    if (filter) setCurrentFilter(filter);
+    if (search) setGlobalFilter(search);
+    if (columnSearch)
+      setColumnFilter(prev => [
+        ...prev,
+        { ...columnSearch.status },
+        { ...columnSearch.yearLevel },
+      ]);
 
-    return () => setCurrentFilter("");
-  }, [filter, setCurrentFilter]);
+    return () => {
+      setGlobalFilter("");
+      setColumnFilter([]);
+    };
+  }, [search, columnSearch]);
+
+  useEffect(() => {});
 
   const table = useReactTable({
     data: memoizedData,
@@ -43,12 +58,14 @@ const Table = ({ data, config, filter }: TableProps) => {
     state: {
       rowSelection,
       sorting,
-      globalFilter: currentFilter,
+      globalFilter,
+      columnFilters: columnFilters,
     },
 
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
-    onGlobalFilterChange: setCurrentFilter,
+    onGlobalFilterChange: setGlobalFilter,
+    onColumnFiltersChange: setColumnFilter,
 
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -107,7 +124,7 @@ const Table = ({ data, config, filter }: TableProps) => {
                         key={id}
                         className={`px-4 py-2 text-sm font-light ${
                           index === 0 &&
-                          "left-0 z-10 p-0 w-full h-full flex justify-center items-center bg-[#f9fafb]"
+                          "left-0 z-10 p-0 w-full h-full bg-[#f9fafb]"
                         }`}
                         style={{
                           position: index === 0 ? "sticky" : "relative",

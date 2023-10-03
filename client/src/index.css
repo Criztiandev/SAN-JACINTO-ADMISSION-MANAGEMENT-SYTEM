@@ -91,11 +91,7 @@ textarea {
 
 /* Style the scrollbar thumb with rounded corners and a smooth transition */
 *::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
   border-radius: 20px;
   transition: all 5s ease-in; /* Smooth transition for background color */
-}
-
-/* Change the thumb background color on hover */
-*::-webkit-scrollbar-thumb:hover {
-  background-color: darkgrey;
 }

@@ -67,7 +67,7 @@ const Dropdown = ({
         <ul
           className={`${
             className ? className : "z-50"
-          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md overflow-y-scroll`}
+          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md`}
           style={style}>
           {children}
         </ul>
