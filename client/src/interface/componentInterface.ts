@@ -18,8 +18,10 @@ export interface ProviderProps extends BaseProps {
 }
 
 export interface InputInterface {
+  type?: string;
   label?: string;
   name?: string;
+  value?: string;
   placeholder?: string;
 }
 

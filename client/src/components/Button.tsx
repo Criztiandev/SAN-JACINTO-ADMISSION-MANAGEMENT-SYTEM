@@ -1,20 +1,19 @@
-import { forwardRef, MouseEvent } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { forwardRef } from "react";
 import { ComponentType } from "../interface/componentInterface";
 import Image from "./Image";
 import { ComponentStyle } from "../helper/componentHelper";
 import Typography from "./Typography";
 
 interface ButtonProps extends ComponentType {
-  as?: "button" | "submit";
+  as?: "button" | "submit" | "reset";
   dir?: "left" | "right";
   icon?: string;
   title?: string;
-  onClick?:
-    | ((event: MouseEvent<HTMLButtonElement>) => void)
-    | (() => void)
-    | undefined;
+  onClick?: any;
   name?: string;
   disabled?: boolean;
+  value?: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -28,20 +27,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       className = "",
       disabled,
-      name,
+      ...props
     },
     ref
   ) => {
     return (
       <button
-        type={"submit"}
+        type={as}
         ref={ref}
         className={`
-        grid grid-cols-[32px_auto] justify-start rounded-full items-center 
+        flex rounded-full gap-2 items-center justify-center
         ${ComponentStyle({ type })} ${className}`}
         onClick={onClick}
         disabled={disabled}
-        name={name}>
+        {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
         <Typography
           as="span"

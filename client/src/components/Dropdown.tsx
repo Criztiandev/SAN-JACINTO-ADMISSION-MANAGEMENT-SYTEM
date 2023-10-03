@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useEffect,
-  useRef,
-  useState,
-  MouseEventHandler,
-  Fragment,
-} from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import IconButton from "./IconButton";
 import { ComponentType } from "../interface/componentInterface";
 import Button from "./Button";
@@ -17,6 +11,7 @@ interface DropdownProps extends ComponentType {
   title?: string;
   disabled?: boolean;
   name?: string;
+  style?: any;
 }
 
 const Dropdown = ({
@@ -28,18 +23,18 @@ const Dropdown = ({
   className,
   disabled,
   name,
+  style,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
   // Mouse event handle to open the dropdown
-  const handleOpen: MouseEventHandler<HTMLButtonElement> = () =>
-    setOpen(prev => !prev);
+  const handleOpen = () => setOpen(prev => !prev);
 
   // forward ref to the comonent
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: any) => {
       const current = buttonRef.current;
       const target = event.target as Node;
       if (current && !current.contains(target)) setOpen(false);
@@ -72,7 +67,8 @@ const Dropdown = ({
         <ul
           className={`${
             className ? className : "z-50"
-          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md overflow-y-scroll`}>
+          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md`}
+          style={style}>
           {children}
         </ul>
       )}

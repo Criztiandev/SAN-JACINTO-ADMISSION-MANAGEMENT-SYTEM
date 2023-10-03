@@ -1,0 +1,5602 @@
+[
+  {
+    "_id": "651a85b8b49fb87f8b3160a2",
+    "LRN": 6466016,
+    "yearLevel": "Grade 7",
+    "first_name": "Anna",
+    "middle_name": "Weiss",
+    "last_name": "Roy",
+    "gender": "Male",
+    "BOD": "12/11/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 770,
+      "brgy": "Downtown",
+      "municipality": "Bynum",
+      "province": "Texas"
+    },
+    "guardian": {
+      "fatherName": "Fulton, Shelly",
+      "motherName": "Harvey, Padilla",
+      "legal": "Moore, Doreen"
+    },
+    "contact": 9205636232,
+    "remarks": 100,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8806fc83650eaec9b",
+    "LRN": 7755887,
+    "yearLevel": "Grade 12",
+    "first_name": "Townsend",
+    "middle_name": "Preston",
+    "last_name": "Fitzpatrick",
+    "gender": "Female",
+    "BOD": "07/23/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 217,
+      "brgy": "Rural",
+      "municipality": "Cazadero",
+      "province": "South Dakota"
+    },
+    "guardian": {
+      "fatherName": "Turner, Holder",
+      "motherName": "Juarez, Claudine",
+      "legal": "Barton, Aline"
+    },
+    "contact": 9462817942,
+    "remarks": 88,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8e00eae86d51adcdf",
+    "LRN": 1881498,
+    "yearLevel": "Grade 12",
+    "first_name": "Cooper",
+    "middle_name": "Collier",
+    "last_name": "Fry",
+    "gender": "Male",
+    "BOD": "01/28/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 560,
+      "brgy": "Downtown",
+      "municipality": "Shaft",
+      "province": "Maine"
+    },
+    "guardian": {
+      "fatherName": "Figueroa, Mullins",
+      "motherName": "Morgan, Janna",
+      "legal": "Kim, Caldwell"
+    },
+    "contact": 9579296250,
+    "remarks": 51,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8de774b5cfb9e8273",
+    "LRN": 2206055,
+    "yearLevel": "Grade 9",
+    "first_name": "Sheri",
+    "middle_name": "Frederick",
+    "last_name": "Mooney",
+    "gender": "Female",
+    "BOD": "08/29/yyyy",
+    "age": 22,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 757,
+      "brgy": "Rural",
+      "municipality": "Grahamtown",
+      "province": "Colorado"
+    },
+    "guardian": {
+      "fatherName": "Jordan, Murray",
+      "motherName": "Evans, Perry",
+      "legal": "Pope, Ford"
+    },
+    "contact": 9325377718,
+    "remarks": 61,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8610907f801d54da8",
+    "LRN": 4025591,
+    "yearLevel": "Grade 11",
+    "first_name": "Paula",
+    "middle_name": "Finley",
+    "last_name": "Hebert",
+    "gender": "Male",
+    "BOD": "01/30/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 370,
+      "brgy": "Rural",
+      "municipality": "Robinson",
+      "province": "Indiana"
+    },
+    "guardian": {
+      "fatherName": "Cross, Jodi",
+      "motherName": "Russell, Marilyn",
+      "legal": "Noble, Brianna"
+    },
+    "contact": 9571836059,
+    "remarks": 79,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b899eebebcd2bb8141",
+    "LRN": 3683310,
+    "yearLevel": "Grade 11",
+    "first_name": "Maria",
+    "middle_name": "Ray",
+    "last_name": "May",
+    "gender": "Male",
+    "BOD": "10/18/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 914,
+      "brgy": "Suburb",
+      "municipality": "Albrightsville",
+      "province": "Missouri"
+    },
+    "guardian": {
+      "fatherName": "Woodard, Leona",
+      "motherName": "Walsh, Rosa",
+      "legal": "Reese, Blair"
+    },
+    "contact": 9215013818,
+    "remarks": 98,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8553e6af2d00fcc58",
+    "LRN": 6516959,
+    "yearLevel": "Grade 7",
+    "first_name": "Frankie",
+    "middle_name": "Diaz",
+    "last_name": "Beach",
+    "gender": "Male",
+    "BOD": "12/14/yyyy",
+    "age": 24,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 583,
+      "brgy": "Downtown",
+      "municipality": "Hiko",
+      "province": "Kansas"
+    },
+    "guardian": {
+      "fatherName": "Hoover, Eve",
+      "motherName": "Gray, Tabitha",
+      "legal": "Noel, Robin"
+    },
+    "contact": 9277934571,
+    "remarks": 50,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b85d94e9e408c15167",
+    "LRN": 1451553,
+    "yearLevel": "Grade 12",
+    "first_name": "Chapman",
+    "middle_name": "Herrera",
+    "last_name": "Chavez",
+    "gender": "Female",
+    "BOD": "05/20/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 186,
+      "brgy": "Downtown",
+      "municipality": "Barronett",
+      "province": "Palau"
+    },
+    "guardian": {
+      "fatherName": "Thomas, Concepcion",
+      "motherName": "Talley, Earnestine",
+      "legal": "Franco, Bauer"
+    },
+    "contact": 9468656657,
+    "remarks": 79,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8e8f761c6bfa4ccf4",
+    "LRN": 9731589,
+    "yearLevel": "Grade 11",
+    "first_name": "Twila",
+    "middle_name": "Morin",
+    "last_name": "Zamora",
+    "gender": "Female",
+    "BOD": "10/04/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 783,
+      "brgy": "Rural",
+      "municipality": "Coultervillle",
+      "province": "Puerto Rico"
+    },
+    "guardian": {
+      "fatherName": "Byrd, Sheena",
+      "motherName": "Glenn, Shari",
+      "legal": "Villarreal, Booker"
+    },
+    "contact": 9368054588,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b82b5e6e2088baa63e",
+    "LRN": 6709394,
+    "yearLevel": "Grade 7",
+    "first_name": "Barnes",
+    "middle_name": "Jimenez",
+    "last_name": "Christian",
+    "gender": "Female",
+    "BOD": "06/04/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 640,
+      "brgy": "Rural",
+      "municipality": "Moraida",
+      "province": "Kentucky"
+    },
+    "guardian": {
+      "fatherName": "Harper, Ronda",
+      "motherName": "Ross, Melendez",
+      "legal": "Alvarado, Christina"
+    },
+    "contact": 9436412780,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8d5d3b627468cb824",
+    "LRN": 1975429,
+    "yearLevel": "Grade 11",
+    "first_name": "Heath",
+    "middle_name": "Bishop",
+    "last_name": "Sherman",
+    "gender": "Female",
+    "BOD": "04/30/yyyy",
+    "age": 20,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 713,
+      "brgy": "Downtown",
+      "municipality": "Lorraine",
+      "province": "Vermont"
+    },
+    "guardian": {
+      "fatherName": "Alvarez, Lesa",
+      "motherName": "Cline, Wilder",
+      "legal": "Collins, Allison"
+    },
+    "contact": 9922869552,
+    "remarks": 73,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b890a90910244808e2",
+    "LRN": 4572599,
+    "yearLevel": "Grade 7",
+    "first_name": "Barnett",
+    "middle_name": "Bridges",
+    "last_name": "Patterson",
+    "gender": "Male",
+    "BOD": "09/26/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 178,
+      "brgy": "Suburb",
+      "municipality": "Edneyville",
+      "province": "New Mexico"
+    },
+    "guardian": {
+      "fatherName": "Wolfe, Bowman",
+      "motherName": "Carr, Velasquez",
+      "legal": "Farrell, Ofelia"
+    },
+    "contact": 9489444445,
+    "remarks": 50,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b81a65ac9c618de144",
+    "LRN": 7604263,
+    "yearLevel": "Grade 10",
+    "first_name": "Sylvia",
+    "middle_name": "Brewer",
+    "last_name": "Olson",
+    "gender": "Male",
+    "BOD": "08/10/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 974,
+      "brgy": "Suburb",
+      "municipality": "Bartonsville",
+      "province": "Louisiana"
+    },
+    "guardian": {
+      "fatherName": "Merrill, Lara",
+      "motherName": "Bradford, Dunn",
+      "legal": "Peck, Richards"
+    },
+    "contact": 9947618242,
+    "remarks": 66,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b800d86c9bc61ee825",
+    "LRN": 9908219,
+    "yearLevel": "Grade 7",
+    "first_name": "Nichole",
+    "middle_name": "Dickson",
+    "last_name": "Rosa",
+    "gender": "Female",
+    "BOD": "08/10/yyyy",
+    "age": 18,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 197,
+      "brgy": "Rural",
+      "municipality": "Winesburg",
+      "province": "Idaho"
+    },
+    "guardian": {
+      "fatherName": "Little, Strong",
+      "motherName": "Barnes, Mckay",
+      "legal": "Cole, Tammy"
+    },
+    "contact": 9572327976,
+    "remarks": 81,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8530162750680a138",
+    "LRN": 5141119,
+    "yearLevel": "Grade 8",
+    "first_name": "Tracey",
+    "middle_name": "Riley",
+    "last_name": "Wilson",
+    "gender": "Female",
+    "BOD": "01/20/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 579,
+      "brgy": "Suburb",
+      "municipality": "Jacksonwald",
+      "province": "Marshall Islands"
+    },
+    "guardian": {
+      "fatherName": "Joseph, Juanita",
+      "motherName": "Allen, Soto",
+      "legal": "Beard, Marisa"
+    },
+    "contact": 9875395063,
+    "remarks": 92,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b87f1aa0478706e8e3",
+    "LRN": 2519015,
+    "yearLevel": "Grade 7",
+    "first_name": "Jeri",
+    "middle_name": "Herman",
+    "last_name": "Rollins",
+    "gender": "Female",
+    "BOD": "08/28/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 552,
+      "brgy": "Suburb",
+      "municipality": "Harviell",
+      "province": "California"
+    },
+    "guardian": {
+      "fatherName": "Burks, Shelby",
+      "motherName": "Powers, Greer",
+      "legal": "Clark, Valdez"
+    },
+    "contact": 9688423859,
+    "remarks": 61,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b89d390421c8c687be",
+    "LRN": 5262221,
+    "yearLevel": "Grade 8",
+    "first_name": "Jolene",
+    "middle_name": "Burch",
+    "last_name": "Ryan",
+    "gender": "Male",
+    "BOD": "07/04/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 689,
+      "brgy": "Suburb",
+      "municipality": "Logan",
+      "province": "Utah"
+    },
+    "guardian": {
+      "fatherName": "Combs, Oliver",
+      "motherName": "Bennett, Terra",
+      "legal": "Mccarty, Weaver"
+    },
+    "contact": 9859174892,
+    "remarks": 53,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8eef6ec7e10783ffd",
+    "LRN": 3290487,
+    "yearLevel": "Grade 10",
+    "first_name": "Bailey",
+    "middle_name": "Mclaughlin",
+    "last_name": "Gutierrez",
+    "gender": "Female",
+    "BOD": "03/21/yyyy",
+    "age": 24,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 815,
+      "brgy": "Downtown",
+      "municipality": "Chilton",
+      "province": "New Hampshire"
+    },
+    "guardian": {
+      "fatherName": "Gaines, Lara",
+      "motherName": "Arnold, Dunlap",
+      "legal": "Leach, Bettye"
+    },
+    "contact": 9159737920,
+    "remarks": 99,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8479bea60f98bb12d",
+    "LRN": 9242589,
+    "yearLevel": "Grade 11",
+    "first_name": "Maritza",
+    "middle_name": "Trujillo",
+    "last_name": "Stuart",
+    "gender": "Male",
+    "BOD": "10/19/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 280,
+      "brgy": "Rural",
+      "municipality": "Gilgo",
+      "province": "New Jersey"
+    },
+    "guardian": {
+      "fatherName": "Herring, Raquel",
+      "motherName": "Whitney, Weeks",
+      "legal": "Hess, Tyson"
+    },
+    "contact": 9054198397,
+    "remarks": 98,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8258dda0a49fdaef3",
+    "LRN": 5507024,
+    "yearLevel": "Grade 11",
+    "first_name": "Georgia",
+    "middle_name": "Rich",
+    "last_name": "Whitehead",
+    "gender": "Female",
+    "BOD": "08/29/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 276,
+      "brgy": "Rural",
+      "municipality": "Gilmore",
+      "province": "Guam"
+    },
+    "guardian": {
+      "fatherName": "Chapman, Olive",
+      "motherName": "Wilkinson, Evangeline",
+      "legal": "Velasquez, Beach"
+    },
+    "contact": 9358116945,
+    "remarks": 68,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b83280e8cec334e797",
+    "LRN": 5302513,
+    "yearLevel": "Grade 9",
+    "first_name": "Briggs",
+    "middle_name": "Vincent",
+    "last_name": "Hunt",
+    "gender": "Male",
+    "BOD": "04/23/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 417,
+      "brgy": "Downtown",
+      "municipality": "Sugartown",
+      "province": "Florida"
+    },
+    "guardian": {
+      "fatherName": "Davidson, Walker",
+      "motherName": "Ford, Imogene",
+      "legal": "Price, Juana"
+    },
+    "contact": 9316445029,
+    "remarks": 79,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8673186a70df9337a",
+    "LRN": 7383676,
+    "yearLevel": "Grade 10",
+    "first_name": "Barr",
+    "middle_name": "Boone",
+    "last_name": "Hampton",
+    "gender": "Female",
+    "BOD": "05/28/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 248,
+      "brgy": "Downtown",
+      "municipality": "Windsor",
+      "province": "Wyoming"
+    },
+    "guardian": {
+      "fatherName": "Huber, Bernard",
+      "motherName": "Owen, Sharlene",
+      "legal": "Bean, Atkins"
+    },
+    "contact": 9269907308,
+    "remarks": 55,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b870fff3e4e12bc325",
+    "LRN": 2266015,
+    "yearLevel": "Grade 7",
+    "first_name": "Rose",
+    "middle_name": "Peters",
+    "last_name": "Sanford",
+    "gender": "Female",
+    "BOD": "01/06/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 468,
+      "brgy": "Downtown",
+      "municipality": "Whitmer",
+      "province": "Alaska"
+    },
+    "guardian": {
+      "fatherName": "Clayton, Melanie",
+      "motherName": "Wilder, Emerson",
+      "legal": "Lindsey, Madeleine"
+    },
+    "contact": 9594371952,
+    "remarks": 70,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b810808cf627ab9613",
+    "LRN": 9766321,
+    "yearLevel": "Grade 8",
+    "first_name": "Sellers",
+    "middle_name": "Langley",
+    "last_name": "Nguyen",
+    "gender": "Female",
+    "BOD": "02/27/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 953,
+      "brgy": "Downtown",
+      "municipality": "Kent",
+      "province": "Oregon"
+    },
+    "guardian": {
+      "fatherName": "Sears, Kane",
+      "motherName": "Osborne, Sherman",
+      "legal": "Mckay, Marks"
+    },
+    "contact": 9849000072,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b87b68acc0043d6bdc",
+    "LRN": 2176456,
+    "yearLevel": "Grade 8",
+    "first_name": "Teresa",
+    "middle_name": "Keller",
+    "last_name": "Palmer",
+    "gender": "Male",
+    "BOD": "07/21/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 568,
+      "brgy": "Rural",
+      "municipality": "Allamuchy",
+      "province": "Michigan"
+    },
+    "guardian": {
+      "fatherName": "Knight, Garrison",
+      "motherName": "Solomon, Dominguez",
+      "legal": "Young, Mcgee"
+    },
+    "contact": 9669849836,
+    "remarks": 86,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b81aa890097e5c9a5c",
+    "LRN": 7229889,
+    "yearLevel": "Grade 11",
+    "first_name": "Marsh",
+    "middle_name": "Sweet",
+    "last_name": "Moss",
+    "gender": "Female",
+    "BOD": "07/16/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 876,
+      "brgy": "Downtown",
+      "municipality": "Boyd",
+      "province": "Washington"
+    },
+    "guardian": {
+      "fatherName": "Richmond, Patrice",
+      "motherName": "Bates, Tami",
+      "legal": "Gamble, Schmidt"
+    },
+    "contact": 9059562560,
+    "remarks": 54,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b840fb78ee51444344",
+    "LRN": 9277054,
+    "yearLevel": "Grade 8",
+    "first_name": "Kennedy",
+    "middle_name": "Williamson",
+    "last_name": "Crane",
+    "gender": "Female",
+    "BOD": "01/05/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 687,
+      "brgy": "Rural",
+      "municipality": "Goodville",
+      "province": "Tennessee"
+    },
+    "guardian": {
+      "fatherName": "Terry, Brandy",
+      "motherName": "Matthews, Meadows",
+      "legal": "Howell, Adrian"
+    },
+    "contact": 9393120361,
+    "remarks": 57,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b86a4cfdbdbc522e8d",
+    "LRN": 1239847,
+    "yearLevel": "Grade 9",
+    "first_name": "Joyner",
+    "middle_name": "Gonzales",
+    "last_name": "Valentine",
+    "gender": "Male",
+    "BOD": "01/26/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 761,
+      "brgy": "Downtown",
+      "municipality": "Tilleda",
+      "province": "North Dakota"
+    },
+    "guardian": {
+      "fatherName": "Erickson, Noble",
+      "motherName": "Bray, Rogers",
+      "legal": "Pennington, Effie"
+    },
+    "contact": 9387441490,
+    "remarks": 50,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8313bbb14c902b7b6",
+    "LRN": 8038545,
+    "yearLevel": "Grade 7",
+    "first_name": "Santiago",
+    "middle_name": "Jennings",
+    "last_name": "Ball",
+    "gender": "Female",
+    "BOD": "09/20/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 178,
+      "brgy": "Suburb",
+      "municipality": "Newry",
+      "province": "Virginia"
+    },
+    "guardian": {
+      "fatherName": "Goodwin, Fowler",
+      "motherName": "Puckett, Lenore",
+      "legal": "Mcmillan, Briana"
+    },
+    "contact": 9004575889,
+    "remarks": 82,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8a8693014b68e5ebf",
+    "LRN": 2464885,
+    "yearLevel": "Grade 9",
+    "first_name": "Smith",
+    "middle_name": "Mcknight",
+    "last_name": "Ratliff",
+    "gender": "Male",
+    "BOD": "05/06/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 531,
+      "brgy": "Rural",
+      "municipality": "Greenbackville",
+      "province": "Montana"
+    },
+    "guardian": {
+      "fatherName": "Pugh, Alejandra",
+      "motherName": "Mason, Kerry",
+      "legal": "Melendez, Dotson"
+    },
+    "contact": 9845661173,
+    "remarks": 98,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b89a22d7f2d9a19f35",
+    "LRN": 7389038,
+    "yearLevel": "Grade 12",
+    "first_name": "Carol",
+    "middle_name": "Harding",
+    "last_name": "Gentry",
+    "gender": "Male",
+    "BOD": "12/17/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 506,
+      "brgy": "Downtown",
+      "municipality": "Nadine",
+      "province": "Virgin Islands"
+    },
+    "guardian": {
+      "fatherName": "Gill, Amparo",
+      "motherName": "Downs, Shaffer",
+      "legal": "Keith, Hardy"
+    },
+    "contact": 9592061820,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8e4285b7884f565cc",
+    "LRN": 6441302,
+    "yearLevel": "Grade 8",
+    "first_name": "Branch",
+    "middle_name": "Watts",
+    "last_name": "Cannon",
+    "gender": "Male",
+    "BOD": "04/01/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 790,
+      "brgy": "Rural",
+      "municipality": "Woodlands",
+      "province": "West Virginia"
+    },
+    "guardian": {
+      "fatherName": "Sparks, James",
+      "motherName": "Mills, Serena",
+      "legal": "Pitts, Herrera"
+    },
+    "contact": 9676214226,
+    "remarks": 52,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8f2a2288ad201bd8e",
+    "LRN": 2196793,
+    "yearLevel": "Grade 8",
+    "first_name": "Cardenas",
+    "middle_name": "Randolph",
+    "last_name": "Whitaker",
+    "gender": "Male",
+    "BOD": "07/26/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 628,
+      "brgy": "Downtown",
+      "municipality": "Datil",
+      "province": "Iowa"
+    },
+    "guardian": {
+      "fatherName": "Sosa, Kelley",
+      "motherName": "Barr, Morgan",
+      "legal": "Hull, Lopez"
+    },
+    "contact": 9466313087,
+    "remarks": 68,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b85e7ff8db4b61aeb5",
+    "LRN": 3553646,
+    "yearLevel": "Grade 12",
+    "first_name": "Tammi",
+    "middle_name": "Olsen",
+    "last_name": "Jacobson",
+    "gender": "Female",
+    "BOD": "02/14/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 793,
+      "brgy": "Suburb",
+      "municipality": "Vale",
+      "province": "Northern Mariana Islands"
+    },
+    "guardian": {
+      "fatherName": "Tillman, Lidia",
+      "motherName": "Mckee, Marcella",
+      "legal": "Todd, Savannah"
+    },
+    "contact": 9325248990,
+    "remarks": 79,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b847a9ef338bebb95e",
+    "LRN": 7241679,
+    "yearLevel": "Grade 7",
+    "first_name": "Dorothy",
+    "middle_name": "Kline",
+    "last_name": "Goff",
+    "gender": "Female",
+    "BOD": "06/24/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 723,
+      "brgy": "Suburb",
+      "municipality": "Madaket",
+      "province": "Mississippi"
+    },
+    "guardian": {
+      "fatherName": "Lee, Colette",
+      "motherName": "French, Chandler",
+      "legal": "Bell, Cohen"
+    },
+    "contact": 9095317883,
+    "remarks": 59,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8f6c6dfed65011f16",
+    "LRN": 9523644,
+    "yearLevel": "Grade 12",
+    "first_name": "Hobbs",
+    "middle_name": "Glover",
+    "last_name": "Bond",
+    "gender": "Female",
+    "BOD": "03/26/yyyy",
+    "age": 20,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 233,
+      "brgy": "Downtown",
+      "municipality": "Bordelonville",
+      "province": "District Of Columbia"
+    },
+    "guardian": {
+      "fatherName": "Gilmore, Marcie",
+      "motherName": "Cotton, Gordon",
+      "legal": "Manning, Bishop"
+    },
+    "contact": 9205411331,
+    "remarks": 92,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8f0afe78f6b5918e1",
+    "LRN": 6149011,
+    "yearLevel": "Grade 11",
+    "first_name": "Janette",
+    "middle_name": "Hamilton",
+    "last_name": "Kramer",
+    "gender": "Female",
+    "BOD": "10/12/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 788,
+      "brgy": "Rural",
+      "municipality": "Strykersville",
+      "province": "Arizona"
+    },
+    "guardian": {
+      "fatherName": "Stewart, Erika",
+      "motherName": "Petty, Carmela",
+      "legal": "Parks, Lena"
+    },
+    "contact": 9256596941,
+    "remarks": 95,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b83ca574ec7fa79fa1",
+    "LRN": 7083955,
+    "yearLevel": "Grade 9",
+    "first_name": "Zelma",
+    "middle_name": "Grimes",
+    "last_name": "Camacho",
+    "gender": "Female",
+    "BOD": "06/22/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 124,
+      "brgy": "Downtown",
+      "municipality": "Taft",
+      "province": "Connecticut"
+    },
+    "guardian": {
+      "fatherName": "Berger, Estrada",
+      "motherName": "Hopper, Payne",
+      "legal": "Hanson, Maureen"
+    },
+    "contact": 9052568020,
+    "remarks": 66,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b85e4379ae99008c80",
+    "LRN": 2264236,
+    "yearLevel": "Grade 7",
+    "first_name": "Alford",
+    "middle_name": "Lamb",
+    "last_name": "Barlow",
+    "gender": "Female",
+    "BOD": "11/30/yyyy",
+    "age": 24,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 148,
+      "brgy": "Downtown",
+      "municipality": "Nicholson",
+      "province": "Nevada"
+    },
+    "guardian": {
+      "fatherName": "Berry, Esther",
+      "motherName": "Wagner, Francesca",
+      "legal": "Stone, Tamera"
+    },
+    "contact": 9924926233,
+    "remarks": 79,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8cac556afdc00e055",
+    "LRN": 7674390,
+    "yearLevel": "Grade 8",
+    "first_name": "Albert",
+    "middle_name": "Riggs",
+    "last_name": "Waller",
+    "gender": "Female",
+    "BOD": "01/29/yyyy",
+    "age": 20,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 200,
+      "brgy": "Suburb",
+      "municipality": "Homeworth",
+      "province": "Hawaii"
+    },
+    "guardian": {
+      "fatherName": "Hall, Audra",
+      "motherName": "Osborn, Osborn",
+      "legal": "Daugherty, Paulette"
+    },
+    "contact": 9782787611,
+    "remarks": 97,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b872d48663d61fd548",
+    "LRN": 5737094,
+    "yearLevel": "Grade 7",
+    "first_name": "John",
+    "middle_name": "Wright",
+    "last_name": "Orr",
+    "gender": "Male",
+    "BOD": "09/07/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 968,
+      "brgy": "Downtown",
+      "municipality": "Harrison",
+      "province": "Massachusetts"
+    },
+    "guardian": {
+      "fatherName": "Campos, Oneill",
+      "motherName": "Rivera, Carmen",
+      "legal": "Rutledge, Coleen"
+    },
+    "contact": 9464438592,
+    "remarks": 86,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b81868cfdab9248dfa",
+    "LRN": 8719845,
+    "yearLevel": "Grade 12",
+    "first_name": "Torres",
+    "middle_name": "Key",
+    "last_name": "Hicks",
+    "gender": "Female",
+    "BOD": "07/11/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 477,
+      "brgy": "Downtown",
+      "municipality": "Trexlertown",
+      "province": "Ohio"
+    },
+    "guardian": {
+      "fatherName": "Bass, Delia",
+      "motherName": "Willis, Wilkins",
+      "legal": "Nixon, Gertrude"
+    },
+    "contact": 9588690453,
+    "remarks": 61,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b83fe9fbafb9a8c1a6",
+    "LRN": 8158379,
+    "yearLevel": "Grade 11",
+    "first_name": "Jill",
+    "middle_name": "Marsh",
+    "last_name": "Tate",
+    "gender": "Male",
+    "BOD": "05/07/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 289,
+      "brgy": "Suburb",
+      "municipality": "Bancroft",
+      "province": "South Carolina"
+    },
+    "guardian": {
+      "fatherName": "Heath, Jeannine",
+      "motherName": "Holt, Palmer",
+      "legal": "Michael, Moore"
+    },
+    "contact": 9587224936,
+    "remarks": 68,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8d1ce589546627dc1",
+    "LRN": 7736915,
+    "yearLevel": "Grade 8",
+    "first_name": "Berger",
+    "middle_name": "Hood",
+    "last_name": "Wiggins",
+    "gender": "Female",
+    "BOD": "10/24/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 601,
+      "brgy": "Suburb",
+      "municipality": "Cashtown",
+      "province": "Alabama"
+    },
+    "guardian": {
+      "fatherName": "Barrera, Beck",
+      "motherName": "Whitley, Juarez",
+      "legal": "Stafford, Cross"
+    },
+    "contact": 9156720904,
+    "remarks": 63,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8d759fc21ffd2e8a4",
+    "LRN": 5417212,
+    "yearLevel": "Grade 9",
+    "first_name": "Raymond",
+    "middle_name": "Blackwell",
+    "last_name": "Baxter",
+    "gender": "Male",
+    "BOD": "08/20/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 267,
+      "brgy": "Suburb",
+      "municipality": "Greenock",
+      "province": "American Samoa"
+    },
+    "guardian": {
+      "fatherName": "Robertson, Gillespie",
+      "motherName": "Berg, Brennan",
+      "legal": "Spears, Alfreda"
+    },
+    "contact": 9783360162,
+    "remarks": 67,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b89c33fe4d44135ffd",
+    "LRN": 5622146,
+    "yearLevel": "Grade 10",
+    "first_name": "Selma",
+    "middle_name": "Carlson",
+    "last_name": "Gordon",
+    "gender": "Male",
+    "BOD": "10/30/yyyy",
+    "age": 23,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 471,
+      "brgy": "Suburb",
+      "municipality": "Kohatk",
+      "province": "Minnesota"
+    },
+    "guardian": {
+      "fatherName": "Mcgee, Villarreal",
+      "motherName": "Horn, Peterson",
+      "legal": "Holden, Juliet"
+    },
+    "contact": 9116903518,
+    "remarks": 86,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b894939d0345d0bc8c",
+    "LRN": 5265398,
+    "yearLevel": "Grade 11",
+    "first_name": "Mercedes",
+    "middle_name": "Butler",
+    "last_name": "Phillips",
+    "gender": "Male",
+    "BOD": "02/15/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 568,
+      "brgy": "Rural",
+      "municipality": "Grapeview",
+      "province": "Georgia"
+    },
+    "guardian": {
+      "fatherName": "Compton, Gates",
+      "motherName": "Salazar, Gretchen",
+      "legal": "Roberson, Ora"
+    },
+    "contact": 9079867256,
+    "remarks": 98,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b84a21528c3adb451a",
+    "LRN": 3560075,
+    "yearLevel": "Grade 9",
+    "first_name": "Thornton",
+    "middle_name": "Mercer",
+    "last_name": "Maynard",
+    "gender": "Male",
+    "BOD": "08/12/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 720,
+      "brgy": "Downtown",
+      "municipality": "Irwin",
+      "province": "Oklahoma"
+    },
+    "guardian": {
+      "fatherName": "Mcfadden, Whitley",
+      "motherName": "Snider, Melissa",
+      "legal": "Lopez, Poole"
+    },
+    "contact": 9718597193,
+    "remarks": 98,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8e0d306d3f6cf51ad",
+    "LRN": 3294470,
+    "yearLevel": "Grade 9",
+    "first_name": "Taylor",
+    "middle_name": "Elliott",
+    "last_name": "Mack",
+    "gender": "Female",
+    "BOD": "12/07/yyyy",
+    "age": 24,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 352,
+      "brgy": "Downtown",
+      "municipality": "Calpine",
+      "province": "Pennsylvania"
+    },
+    "guardian": {
+      "fatherName": "Marks, Collier",
+      "motherName": "Floyd, Joyce",
+      "legal": "Jackson, Estela"
+    },
+    "contact": 9513997168,
+    "remarks": 64,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8bf876ec5748a1412",
+    "LRN": 2098802,
+    "yearLevel": "Grade 7",
+    "first_name": "Susana",
+    "middle_name": "Lawson",
+    "last_name": "Bartlett",
+    "gender": "Female",
+    "BOD": "07/22/yyyy",
+    "age": 19,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 858,
+      "brgy": "Rural",
+      "municipality": "Clarksburg",
+      "province": "North Carolina"
+    },
+    "guardian": {
+      "fatherName": "Castaneda, Lilly",
+      "motherName": "Ruiz, Green",
+      "legal": "Mullins, Isabella"
+    },
+    "contact": 9496795161,
+    "remarks": 79,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8d5368e1b5a4a60fe",
+    "LRN": 4455525,
+    "yearLevel": "Grade 11",
+    "first_name": "Jennifer",
+    "middle_name": "William",
+    "last_name": "Haynes",
+    "gender": "Female",
+    "BOD": "07/24/yyyy",
+    "age": 22,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 744,
+      "brgy": "Downtown",
+      "municipality": "Lithium",
+      "province": "Federated States Of Micronesia"
+    },
+    "guardian": {
+      "fatherName": "Decker, Adriana",
+      "motherName": "Frost, Boyd",
+      "legal": "Castillo, Luisa"
+    },
+    "contact": 9602220067,
+    "remarks": 95,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b87b3fda1d42e6d2f1",
+    "LRN": 7422568,
+    "yearLevel": "Grade 7",
+    "first_name": "Merle",
+    "middle_name": "Lane",
+    "last_name": "Porter",
+    "gender": "Female",
+    "BOD": "12/05/yyyy",
+    "age": 24,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 311,
+      "brgy": "Suburb",
+      "municipality": "Bowmansville",
+      "province": "Arkansas"
+    },
+    "guardian": {
+      "fatherName": "Buckner, Curtis",
+      "motherName": "Hendrix, Lacey",
+      "legal": "Clements, Haley"
+    },
+    "contact": 9727788105,
+    "remarks": 90,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8573f737d1e7f0964",
+    "LRN": 3326529,
+    "yearLevel": "Grade 11",
+    "first_name": "Letha",
+    "middle_name": "Foreman",
+    "last_name": "Hudson",
+    "gender": "Female",
+    "BOD": "05/21/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 905,
+      "brgy": "Rural",
+      "municipality": "Basye",
+      "province": "New York"
+    },
+    "guardian": {
+      "fatherName": "Merritt, Angeline",
+      "motherName": "Delacruz, Anthony",
+      "legal": "Hensley, Tricia"
+    },
+    "contact": 9629987976,
+    "remarks": 62,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b839a6cbe688d7b23b",
+    "LRN": 9046436,
+    "yearLevel": "Grade 8",
+    "first_name": "Rosalyn",
+    "middle_name": "Jarvis",
+    "last_name": "Strickland",
+    "gender": "Male",
+    "BOD": "05/13/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 142,
+      "brgy": "Downtown",
+      "municipality": "Gorham",
+      "province": "Maryland"
+    },
+    "guardian": {
+      "fatherName": "Rosario, Imelda",
+      "motherName": "Alston, Laura",
+      "legal": "Santos, Nita"
+    },
+    "contact": 9497052100,
+    "remarks": 54,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8225c7871357c5d0d",
+    "LRN": 3476252,
+    "yearLevel": "Grade 11",
+    "first_name": "Owen",
+    "middle_name": "Lowery",
+    "last_name": "Mitchell",
+    "gender": "Male",
+    "BOD": "12/21/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 699,
+      "brgy": "Downtown",
+      "municipality": "Urbana",
+      "province": "Illinois"
+    },
+    "guardian": {
+      "fatherName": "Wilkins, Dominique",
+      "motherName": "Stephenson, Lisa",
+      "legal": "Wilcox, Yolanda"
+    },
+    "contact": 9156643630,
+    "remarks": 91,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8acd16056362ca4bd",
+    "LRN": 9316702,
+    "yearLevel": "Grade 12",
+    "first_name": "Beard",
+    "middle_name": "Mccray",
+    "last_name": "Crawford",
+    "gender": "Male",
+    "BOD": "03/19/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 398,
+      "brgy": "Downtown",
+      "municipality": "Roeville",
+      "province": "Delaware"
+    },
+    "guardian": {
+      "fatherName": "Morse, Mccarthy",
+      "motherName": "Hutchinson, Carey",
+      "legal": "Nielsen, Tonia"
+    },
+    "contact": 9251008286,
+    "remarks": 96,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8898d6dcc1a11ecb6",
+    "LRN": 9180437,
+    "yearLevel": "Grade 7",
+    "first_name": "Lewis",
+    "middle_name": "Strong",
+    "last_name": "Perry",
+    "gender": "Male",
+    "BOD": "04/08/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 979,
+      "brgy": "Suburb",
+      "municipality": "Russellville",
+      "province": "Nebraska"
+    },
+    "guardian": {
+      "fatherName": "Ward, Bright",
+      "motherName": "Patrick, Kristie",
+      "legal": "Carpenter, Roberts"
+    },
+    "contact": 9619050071,
+    "remarks": 56,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b843c1590a9c8c95eb",
+    "LRN": 6029299,
+    "yearLevel": "Grade 11",
+    "first_name": "Felicia",
+    "middle_name": "Oneill",
+    "last_name": "English",
+    "gender": "Male",
+    "BOD": "12/28/yyyy",
+    "age": 20,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 608,
+      "brgy": "Rural",
+      "municipality": "Eastmont",
+      "province": "Wisconsin"
+    },
+    "guardian": {
+      "fatherName": "Moreno, Flynn",
+      "motherName": "Schwartz, Kim",
+      "legal": "Ramirez, Goldie"
+    },
+    "contact": 9208398188,
+    "remarks": 79,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b82d8e0fed4260fcca",
+    "LRN": 7612322,
+    "yearLevel": "Grade 11",
+    "first_name": "Dodson",
+    "middle_name": "Leon",
+    "last_name": "Andrews",
+    "gender": "Male",
+    "BOD": "09/08/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 917,
+      "brgy": "Downtown",
+      "municipality": "Imperial",
+      "province": "Texas"
+    },
+    "guardian": {
+      "fatherName": "Nieves, Arnold",
+      "motherName": "Leonard, Hill",
+      "legal": "Poole, Lenora"
+    },
+    "contact": 9251405899,
+    "remarks": 71,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b818c2a46e3c165411",
+    "LRN": 6700846,
+    "yearLevel": "Grade 11",
+    "first_name": "Hines",
+    "middle_name": "Mcintosh",
+    "last_name": "Valencia",
+    "gender": "Male",
+    "BOD": "02/13/yyyy",
+    "age": 20,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 438,
+      "brgy": "Downtown",
+      "municipality": "Escondida",
+      "province": "South Dakota"
+    },
+    "guardian": {
+      "fatherName": "Williams, Schwartz",
+      "motherName": "Joyner, Cook",
+      "legal": "Lara, Cantu"
+    },
+    "contact": 9797608088,
+    "remarks": 96,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b854f85be6640e98bc",
+    "LRN": 6701611,
+    "yearLevel": "Grade 11",
+    "first_name": "Weber",
+    "middle_name": "Lloyd",
+    "last_name": "Farmer",
+    "gender": "Male",
+    "BOD": "10/30/yyyy",
+    "age": 20,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 278,
+      "brgy": "Downtown",
+      "municipality": "Orick",
+      "province": "Maine"
+    },
+    "guardian": {
+      "fatherName": "Sampson, Laverne",
+      "motherName": "Hawkins, Butler",
+      "legal": "Baldwin, Amber"
+    },
+    "contact": 9981803784,
+    "remarks": 58,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b85cc6758644acd762",
+    "LRN": 7554607,
+    "yearLevel": "Grade 8",
+    "first_name": "Kirkland",
+    "middle_name": "Lewis",
+    "last_name": "Mendez",
+    "gender": "Female",
+    "BOD": "05/22/yyyy",
+    "age": 21,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 316,
+      "brgy": "Rural",
+      "municipality": "Gardiner",
+      "province": "Colorado"
+    },
+    "guardian": {
+      "fatherName": "Boyd, Pearlie",
+      "motherName": "Patton, Katherine",
+      "legal": "Moon, Potter"
+    },
+    "contact": 9080500685,
+    "remarks": 73,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b82d18bc73fb87e9a1",
+    "LRN": 7337112,
+    "yearLevel": "Grade 12",
+    "first_name": "Wiley",
+    "middle_name": "Terrell",
+    "last_name": "Yang",
+    "gender": "Female",
+    "BOD": "03/26/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 575,
+      "brgy": "Downtown",
+      "municipality": "National",
+      "province": "Indiana"
+    },
+    "guardian": {
+      "fatherName": "Hill, Carla",
+      "motherName": "Mcgowan, Lessie",
+      "legal": "Hobbs, Leach"
+    },
+    "contact": 9331706756,
+    "remarks": 91,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8c391f112ab5bc986",
+    "LRN": 3245110,
+    "yearLevel": "Grade 11",
+    "first_name": "Rivers",
+    "middle_name": "Johnston",
+    "last_name": "Levy",
+    "gender": "Female",
+    "BOD": "10/03/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 127,
+      "brgy": "Suburb",
+      "municipality": "Harleigh",
+      "province": "Missouri"
+    },
+    "guardian": {
+      "fatherName": "Kirk, Kellie",
+      "motherName": "Lucas, Joann",
+      "legal": "Rogers, Lucy"
+    },
+    "contact": 9366905357,
+    "remarks": 82,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8ce66b136c2619b98",
+    "LRN": 3486105,
+    "yearLevel": "Grade 9",
+    "first_name": "Mccormick",
+    "middle_name": "Knowles",
+    "last_name": "Stokes",
+    "gender": "Female",
+    "BOD": "11/09/yyyy",
+    "age": 24,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 117,
+      "brgy": "Suburb",
+      "municipality": "Bagtown",
+      "province": "Kansas"
+    },
+    "guardian": {
+      "fatherName": "Griffin, Boone",
+      "motherName": "Edwards, Woodward",
+      "legal": "Ellis, Jeanine"
+    },
+    "contact": 9395962351,
+    "remarks": 100,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8b3f22d7b09faf9fb",
+    "LRN": 6487451,
+    "yearLevel": "Grade 9",
+    "first_name": "Jeannie",
+    "middle_name": "Long",
+    "last_name": "Hart",
+    "gender": "Male",
+    "BOD": "11/29/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 385,
+      "brgy": "Suburb",
+      "municipality": "Caledonia",
+      "province": "Palau"
+    },
+    "guardian": {
+      "fatherName": "Maddox, Cynthia",
+      "motherName": "Avila, Gloria",
+      "legal": "Ferguson, Carrie"
+    },
+    "contact": 9320907961,
+    "remarks": 99,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8813107b586f6c13c",
+    "LRN": 4052337,
+    "yearLevel": "Grade 11",
+    "first_name": "White",
+    "middle_name": "Fischer",
+    "last_name": "Mays",
+    "gender": "Female",
+    "BOD": "07/08/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 553,
+      "brgy": "Suburb",
+      "municipality": "Lisco",
+      "province": "Puerto Rico"
+    },
+    "guardian": {
+      "fatherName": "Mcclure, Johnston",
+      "motherName": "Blevins, Tran",
+      "legal": "Ortega, Freeman"
+    },
+    "contact": 9083945793,
+    "remarks": 77,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8405fa10b582c494f",
+    "LRN": 3242572,
+    "yearLevel": "Grade 10",
+    "first_name": "Bethany",
+    "middle_name": "Dillard",
+    "last_name": "King",
+    "gender": "Female",
+    "BOD": "06/12/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 758,
+      "brgy": "Downtown",
+      "municipality": "Dola",
+      "province": "Kentucky"
+    },
+    "guardian": {
+      "fatherName": "Albert, Virginia",
+      "motherName": "Bolton, Janie",
+      "legal": "Larsen, Blake"
+    },
+    "contact": 9485550840,
+    "remarks": 94,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b805fa9ac5b8b8cf23",
+    "LRN": 5509290,
+    "yearLevel": "Grade 12",
+    "first_name": "Helen",
+    "middle_name": "Ware",
+    "last_name": "Maldonado",
+    "gender": "Male",
+    "BOD": "06/07/yyyy",
+    "age": 20,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 527,
+      "brgy": "Suburb",
+      "municipality": "Konterra",
+      "province": "Vermont"
+    },
+    "guardian": {
+      "fatherName": "Shannon, Sherri",
+      "motherName": "Conrad, Hoffman",
+      "legal": "Sharp, Hope"
+    },
+    "contact": 9364970046,
+    "remarks": 50,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8b0e6ede42be6c540",
+    "LRN": 2335624,
+    "yearLevel": "Grade 10",
+    "first_name": "Young",
+    "middle_name": "Winters",
+    "last_name": "Garza",
+    "gender": "Female",
+    "BOD": "07/06/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 101,
+      "brgy": "Suburb",
+      "municipality": "Farmers",
+      "province": "New Mexico"
+    },
+    "guardian": {
+      "fatherName": "Dudley, Shepard",
+      "motherName": "Simpson, Combs",
+      "legal": "Mccarthy, Maricela"
+    },
+    "contact": 9255864208,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8932a708b032e69d6",
+    "LRN": 1342486,
+    "yearLevel": "Grade 11",
+    "first_name": "Chambers",
+    "middle_name": "Hardin",
+    "last_name": "Parker",
+    "gender": "Female",
+    "BOD": "09/24/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 939,
+      "brgy": "Rural",
+      "municipality": "Fivepointville",
+      "province": "Louisiana"
+    },
+    "guardian": {
+      "fatherName": "Suarez, Dyer",
+      "motherName": "Fisher, Ramsey",
+      "legal": "Frank, Glover"
+    },
+    "contact": 9836347774,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8954b3f1f3884a7eb",
+    "LRN": 7136751,
+    "yearLevel": "Grade 12",
+    "first_name": "Juliana",
+    "middle_name": "Rivers",
+    "last_name": "Hopkins",
+    "gender": "Male",
+    "BOD": "06/04/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 139,
+      "brgy": "Rural",
+      "municipality": "Heil",
+      "province": "Idaho"
+    },
+    "guardian": {
+      "fatherName": "Delgado, Antonia",
+      "motherName": "Watson, Myers",
+      "legal": "Blankenship, Cristina"
+    },
+    "contact": 9392957200,
+    "remarks": 61,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b81f802030675a07a3",
+    "LRN": 8889045,
+    "yearLevel": "Grade 10",
+    "first_name": "Lola",
+    "middle_name": "Gibbs",
+    "last_name": "York",
+    "gender": "Male",
+    "BOD": "09/22/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 338,
+      "brgy": "Downtown",
+      "municipality": "Yukon",
+      "province": "Marshall Islands"
+    },
+    "guardian": {
+      "fatherName": "Clay, Wyatt",
+      "motherName": "Mcleod, Landry",
+      "legal": "Welch, Pittman"
+    },
+    "contact": 9115454355,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8cf7bca870335af2b",
+    "LRN": 6300759,
+    "yearLevel": "Grade 7",
+    "first_name": "Holly",
+    "middle_name": "Taylor",
+    "last_name": "Bailey",
+    "gender": "Male",
+    "BOD": "09/22/yyyy",
+    "age": 25,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 382,
+      "brgy": "Suburb",
+      "municipality": "Adamstown",
+      "province": "California"
+    },
+    "guardian": {
+      "fatherName": "Holloway, Liza",
+      "motherName": "Conway, Duran",
+      "legal": "Callahan, Letitia"
+    },
+    "contact": 9274549595,
+    "remarks": 50,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8433a1728344c7711",
+    "LRN": 2120353,
+    "yearLevel": "Grade 10",
+    "first_name": "Shawna",
+    "middle_name": "Maxwell",
+    "last_name": "Everett",
+    "gender": "Male",
+    "BOD": "07/25/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 266,
+      "brgy": "Suburb",
+      "municipality": "Yardville",
+      "province": "Utah"
+    },
+    "guardian": {
+      "fatherName": "Warren, Sims",
+      "motherName": "Roman, Everett",
+      "legal": "Mendoza, Kate"
+    },
+    "contact": 9224107228,
+    "remarks": 65,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b862f58ba47189ab8a",
+    "LRN": 6691068,
+    "yearLevel": "Grade 11",
+    "first_name": "Janis",
+    "middle_name": "Martin",
+    "last_name": "Shepard",
+    "gender": "Female",
+    "BOD": "01/10/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 359,
+      "brgy": "Downtown",
+      "municipality": "Hampstead",
+      "province": "New Hampshire"
+    },
+    "guardian": {
+      "fatherName": "Franks, Cherry",
+      "motherName": "Richards, Grimes",
+      "legal": "Madden, Tamra"
+    },
+    "contact": 9166088207,
+    "remarks": 82,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8db3a07461c9c067c",
+    "LRN": 8924672,
+    "yearLevel": "Grade 9",
+    "first_name": "Desiree",
+    "middle_name": "Sims",
+    "last_name": "Chase",
+    "gender": "Male",
+    "BOD": "10/03/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 996,
+      "brgy": "Rural",
+      "municipality": "Zeba",
+      "province": "New Jersey"
+    },
+    "guardian": {
+      "fatherName": "Molina, Tucker",
+      "motherName": "Mayer, Jan",
+      "legal": "Sullivan, Doris"
+    },
+    "contact": 9339595722,
+    "remarks": 86,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b869b623b958b6b5c9",
+    "LRN": 2590713,
+    "yearLevel": "Grade 7",
+    "first_name": "Rosetta",
+    "middle_name": "Buchanan",
+    "last_name": "Mcguire",
+    "gender": "Female",
+    "BOD": "10/13/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 678,
+      "brgy": "Suburb",
+      "municipality": "Neahkahnie",
+      "province": "Guam"
+    },
+    "guardian": {
+      "fatherName": "Richardson, Jannie",
+      "motherName": "Cortez, Higgins",
+      "legal": "Knapp, Vaughan"
+    },
+    "contact": 9093817643,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8a9191b82868bc02a",
+    "LRN": 4337783,
+    "yearLevel": "Grade 12",
+    "first_name": "Leonor",
+    "middle_name": "Atkins",
+    "last_name": "Avery",
+    "gender": "Female",
+    "BOD": "05/21/yyyy",
+    "age": 23,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 423,
+      "brgy": "Suburb",
+      "municipality": "Wyano",
+      "province": "Florida"
+    },
+    "guardian": {
+      "fatherName": "Higgins, Kelli",
+      "motherName": "Hahn, Noemi",
+      "legal": "Sloan, Blackwell"
+    },
+    "contact": 9411163550,
+    "remarks": 70,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b83d9579c216d56d41",
+    "LRN": 2631924,
+    "yearLevel": "Grade 11",
+    "first_name": "Lillie",
+    "middle_name": "Wallace",
+    "last_name": "Jones",
+    "gender": "Female",
+    "BOD": "09/08/yyyy",
+    "age": 21,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 809,
+      "brgy": "Rural",
+      "municipality": "Harmon",
+      "province": "Wyoming"
+    },
+    "guardian": {
+      "fatherName": "Montoya, Huff",
+      "motherName": "Guerra, Evelyn",
+      "legal": "Hays, Rosanna"
+    },
+    "contact": 9718113020,
+    "remarks": 95,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8366c4d2d1d446d33",
+    "LRN": 7445014,
+    "yearLevel": "Grade 11",
+    "first_name": "Hess",
+    "middle_name": "Hancock",
+    "last_name": "Harris",
+    "gender": "Female",
+    "BOD": "11/02/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 189,
+      "brgy": "Downtown",
+      "municipality": "Eagleville",
+      "province": "Alaska"
+    },
+    "guardian": {
+      "fatherName": "Espinoza, Lane",
+      "motherName": "Cooper, Estes",
+      "legal": "Garcia, Dona"
+    },
+    "contact": 9854229697,
+    "remarks": 65,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b889031f8bd34055d5",
+    "LRN": 3062720,
+    "yearLevel": "Grade 10",
+    "first_name": "Janet",
+    "middle_name": "Kelly",
+    "last_name": "Kerr",
+    "gender": "Male",
+    "BOD": "08/09/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 630,
+      "brgy": "Suburb",
+      "municipality": "Malo",
+      "province": "Oregon"
+    },
+    "guardian": {
+      "fatherName": "David, Schultz",
+      "motherName": "Riddle, Leanna",
+      "legal": "Singleton, Mcclure"
+    },
+    "contact": 9203603021,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b86ac514a648b59042",
+    "LRN": 9422952,
+    "yearLevel": "Grade 10",
+    "first_name": "Dorthy",
+    "middle_name": "Nichols",
+    "last_name": "Christensen",
+    "gender": "Female",
+    "BOD": "10/18/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 146,
+      "brgy": "Downtown",
+      "municipality": "Healy",
+      "province": "Michigan"
+    },
+    "guardian": {
+      "fatherName": "Mccormick, Welch",
+      "motherName": "Shaw, Mcfadden",
+      "legal": "Hayden, Shana"
+    },
+    "contact": 9622993846,
+    "remarks": 73,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8044dca55db01be71",
+    "LRN": 2382717,
+    "yearLevel": "Grade 12",
+    "first_name": "Jimenez",
+    "middle_name": "Fox",
+    "last_name": "Rodgers",
+    "gender": "Male",
+    "BOD": "12/25/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 550,
+      "brgy": "Downtown",
+      "municipality": "Rose",
+      "province": "Washington"
+    },
+    "guardian": {
+      "fatherName": "Fuller, Cantrell",
+      "motherName": "Horne, Marshall",
+      "legal": "Phelps, Roslyn"
+    },
+    "contact": 9819374819,
+    "remarks": 55,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8950d01a999cab1fd",
+    "LRN": 4551376,
+    "yearLevel": "Grade 10",
+    "first_name": "Josefa",
+    "middle_name": "Chaney",
+    "last_name": "Dean",
+    "gender": "Female",
+    "BOD": "07/09/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 256,
+      "brgy": "Suburb",
+      "municipality": "Omar",
+      "province": "Tennessee"
+    },
+    "guardian": {
+      "fatherName": "Spencer, Daniel",
+      "motherName": "Durham, Renee",
+      "legal": "Reed, Lakisha"
+    },
+    "contact": 9291622902,
+    "remarks": 56,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8f06621da9eab630f",
+    "LRN": 8778439,
+    "yearLevel": "Grade 7",
+    "first_name": "Bonner",
+    "middle_name": "Dotson",
+    "last_name": "Pena",
+    "gender": "Male",
+    "BOD": "05/05/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 577,
+      "brgy": "Downtown",
+      "municipality": "Edgar",
+      "province": "North Dakota"
+    },
+    "guardian": {
+      "fatherName": "Mcdonald, Ina",
+      "motherName": "Kent, Chaney",
+      "legal": "Adkins, Cecile"
+    },
+    "contact": 9707390227,
+    "remarks": 69,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8cb194ea5030ce760",
+    "LRN": 8218862,
+    "yearLevel": "Grade 9",
+    "first_name": "Amanda",
+    "middle_name": "Black",
+    "last_name": "Webster",
+    "gender": "Male",
+    "BOD": "10/26/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 646,
+      "brgy": "Suburb",
+      "municipality": "Barstow",
+      "province": "Virginia"
+    },
+    "guardian": {
+      "fatherName": "Burris, Holcomb",
+      "motherName": "Cardenas, Bonita",
+      "legal": "Fuentes, Kenya"
+    },
+    "contact": 9117884214,
+    "remarks": 95,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8f3e771369575eaac",
+    "LRN": 8149178,
+    "yearLevel": "Grade 11",
+    "first_name": "Ruby",
+    "middle_name": "Bullock",
+    "last_name": "Romero",
+    "gender": "Male",
+    "BOD": "12/26/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 414,
+      "brgy": "Rural",
+      "municipality": "Vivian",
+      "province": "Montana"
+    },
+    "guardian": {
+      "fatherName": "Meadows, Minerva",
+      "motherName": "Mcclain, Williamson",
+      "legal": "Tran, Etta"
+    },
+    "contact": 9660827566,
+    "remarks": 51,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b84538aa434895db91",
+    "LRN": 4865524,
+    "yearLevel": "Grade 9",
+    "first_name": "Cecelia",
+    "middle_name": "Mcconnell",
+    "last_name": "Gallagher",
+    "gender": "Male",
+    "BOD": "12/27/yyyy",
+    "age": 24,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 444,
+      "brgy": "Rural",
+      "municipality": "Hilltop",
+      "province": "Virgin Islands"
+    },
+    "guardian": {
+      "fatherName": "Frazier, Carson",
+      "motherName": "Cote, Thelma",
+      "legal": "Castro, Elisa"
+    },
+    "contact": 9929134890,
+    "remarks": 74,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b83a735057bc69a40b",
+    "LRN": 5717635,
+    "yearLevel": "Grade 10",
+    "first_name": "Buck",
+    "middle_name": "Fleming",
+    "last_name": "Monroe",
+    "gender": "Male",
+    "BOD": "01/22/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 139,
+      "brgy": "Downtown",
+      "municipality": "Thynedale",
+      "province": "West Virginia"
+    },
+    "guardian": {
+      "fatherName": "Brady, Rita",
+      "motherName": "Valdez, Love",
+      "legal": "Oneil, Hudson"
+    },
+    "contact": 9748904291,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b857699f7f7f6217ad",
+    "LRN": 7925643,
+    "yearLevel": "Grade 11",
+    "first_name": "Lilian",
+    "middle_name": "Case",
+    "last_name": "Wells",
+    "gender": "Male",
+    "BOD": "06/21/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 578,
+      "brgy": "Downtown",
+      "municipality": "Darbydale",
+      "province": "Iowa"
+    },
+    "guardian": {
+      "fatherName": "Sharpe, Candice",
+      "motherName": "Mclean, Deanna",
+      "legal": "Vasquez, Martina"
+    },
+    "contact": 9714950786,
+    "remarks": 61,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b84999bad3e8ed5b11",
+    "LRN": 6505670,
+    "yearLevel": "Grade 10",
+    "first_name": "Strickland",
+    "middle_name": "Solis",
+    "last_name": "Woods",
+    "gender": "Male",
+    "BOD": "04/15/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 399,
+      "brgy": "Rural",
+      "municipality": "Columbus",
+      "province": "Northern Mariana Islands"
+    },
+    "guardian": {
+      "fatherName": "Cruz, Gilliam",
+      "motherName": "Stanton, Chase",
+      "legal": "Donovan, Vilma"
+    },
+    "contact": 9908615288,
+    "remarks": 54,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b862876eaa118825f2",
+    "LRN": 4925815,
+    "yearLevel": "Grade 8",
+    "first_name": "Oconnor",
+    "middle_name": "Raymond",
+    "last_name": "Lowe",
+    "gender": "Male",
+    "BOD": "02/25/yyyy",
+    "age": 24,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 913,
+      "brgy": "Suburb",
+      "municipality": "Marenisco",
+      "province": "Mississippi"
+    },
+    "guardian": {
+      "fatherName": "Bruce, Fannie",
+      "motherName": "Hewitt, Little",
+      "legal": "Cobb, Nash"
+    },
+    "contact": 9779575543,
+    "remarks": 56,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b804dd27653e341b04",
+    "LRN": 3881687,
+    "yearLevel": "Grade 9",
+    "first_name": "Rosales",
+    "middle_name": "Cameron",
+    "last_name": "Carter",
+    "gender": "Female",
+    "BOD": "12/23/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 399,
+      "brgy": "Downtown",
+      "municipality": "Clinton",
+      "province": "District Of Columbia"
+    },
+    "guardian": {
+      "fatherName": "Wolf, Le",
+      "motherName": "Calderon, Griffith",
+      "legal": "Walter, Myrtle"
+    },
+    "contact": 9940305145,
+    "remarks": 64,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b85efd6c82bdfbd94f",
+    "LRN": 1515591,
+    "yearLevel": "Grade 12",
+    "first_name": "Nielsen",
+    "middle_name": "Barron",
+    "last_name": "Acosta",
+    "gender": "Female",
+    "BOD": "07/15/yyyy",
+    "age": 20,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 808,
+      "brgy": "Rural",
+      "municipality": "Crumpler",
+      "province": "Arizona"
+    },
+    "guardian": {
+      "fatherName": "Robles, Pat",
+      "motherName": "Dale, Jayne",
+      "legal": "Blake, Parsons"
+    },
+    "contact": 9051160406,
+    "remarks": 67,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8e39d83819feb598b",
+    "LRN": 2494043,
+    "yearLevel": "Grade 12",
+    "first_name": "Lina",
+    "middle_name": "Bird",
+    "last_name": "Hammond",
+    "gender": "Female",
+    "BOD": "08/14/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 228,
+      "brgy": "Downtown",
+      "municipality": "Valmy",
+      "province": "Connecticut"
+    },
+    "guardian": {
+      "fatherName": "Sandoval, Melton",
+      "motherName": "Wheeler, Pauline",
+      "legal": "Mathis, Celia"
+    },
+    "contact": 9156889463,
+    "remarks": 93,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b890425d575feb7631",
+    "LRN": 5195102,
+    "yearLevel": "Grade 9",
+    "first_name": "Diaz",
+    "middle_name": "Roberts",
+    "last_name": "Cantu",
+    "gender": "Female",
+    "BOD": "06/10/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 604,
+      "brgy": "Downtown",
+      "municipality": "Neibert",
+      "province": "Nevada"
+    },
+    "guardian": {
+      "fatherName": "Gould, Holmes",
+      "motherName": "Richard, Margret",
+      "legal": "Cooke, Eleanor"
+    },
+    "contact": 9653756815,
+    "remarks": 74,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b852daab052bb85a77",
+    "LRN": 5968022,
+    "yearLevel": "Grade 9",
+    "first_name": "Randolph",
+    "middle_name": "Mueller",
+    "last_name": "Chan",
+    "gender": "Male",
+    "BOD": "03/07/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 827,
+      "brgy": "Rural",
+      "municipality": "Ruckersville",
+      "province": "Hawaii"
+    },
+    "guardian": {
+      "fatherName": "Paul, Rosemarie",
+      "motherName": "Mann, Olga",
+      "legal": "Dyer, Anastasia"
+    },
+    "contact": 9392912682,
+    "remarks": 78,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b821b8e11b7c99ef01",
+    "LRN": 8084460,
+    "yearLevel": "Grade 11",
+    "first_name": "Stephenson",
+    "middle_name": "Schneider",
+    "last_name": "Mcdaniel",
+    "gender": "Male",
+    "BOD": "12/28/yyyy",
+    "age": 25,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 664,
+      "brgy": "Rural",
+      "municipality": "Hayden",
+      "province": "Massachusetts"
+    },
+    "guardian": {
+      "fatherName": "Johnson, Wong",
+      "motherName": "Schultz, Beulah",
+      "legal": "Tucker, Wynn"
+    },
+    "contact": 9733420311,
+    "remarks": 81,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b87a487f0e93804f6e",
+    "LRN": 7857995,
+    "yearLevel": "Grade 10",
+    "first_name": "Burt",
+    "middle_name": "Eaton",
+    "last_name": "Hartman",
+    "gender": "Female",
+    "BOD": "09/24/yyyy",
+    "age": 20,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 621,
+      "brgy": "Suburb",
+      "municipality": "Sims",
+      "province": "Ohio"
+    },
+    "guardian": {
+      "fatherName": "Cherry, Fleming",
+      "motherName": "Sexton, Sheree",
+      "legal": "Walton, Farley"
+    },
+    "contact": 9070841412,
+    "remarks": 82,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8af55d9c5535ed703",
+    "LRN": 2088747,
+    "yearLevel": "Grade 7",
+    "first_name": "Cindy",
+    "middle_name": "Macias",
+    "last_name": "Carey",
+    "gender": "Female",
+    "BOD": "11/14/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 568,
+      "brgy": "Rural",
+      "municipality": "Hinsdale",
+      "province": "South Carolina"
+    },
+    "guardian": {
+      "fatherName": "Benson, Annette",
+      "motherName": "Rasmussen, Karen",
+      "legal": "Pollard, Perez"
+    },
+    "contact": 9497464886,
+    "remarks": 98,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8f1ac4ec8ad3f63ee",
+    "LRN": 3807482,
+    "yearLevel": "Grade 10",
+    "first_name": "Carlson",
+    "middle_name": "Whitfield",
+    "last_name": "Bender",
+    "gender": "Female",
+    "BOD": "04/18/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 574,
+      "brgy": "Downtown",
+      "municipality": "Blue",
+      "province": "Alabama"
+    },
+    "guardian": {
+      "fatherName": "Wise, Alexandria",
+      "motherName": "Booker, Mcneil",
+      "legal": "Dorsey, Anita"
+    },
+    "contact": 9487075556,
+    "remarks": 72,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8fdb36b0f0057c971",
+    "LRN": 5667156,
+    "yearLevel": "Grade 11",
+    "first_name": "Ines",
+    "middle_name": "Daniels",
+    "last_name": "Potts",
+    "gender": "Male",
+    "BOD": "01/07/yyyy",
+    "age": 20,
+    "MOT": "French",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 149,
+      "brgy": "Downtown",
+      "municipality": "Springhill",
+      "province": "American Samoa"
+    },
+    "guardian": {
+      "fatherName": "Carrillo, Bolton",
+      "motherName": "Campbell, Hollie",
+      "legal": "Houston, Cheri"
+    },
+    "contact": 9501758163,
+    "remarks": 99,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8098551cc28b7aaf0",
+    "LRN": 9029822,
+    "yearLevel": "Grade 8",
+    "first_name": "Suzanne",
+    "middle_name": "Boyer",
+    "last_name": "Salas",
+    "gender": "Male",
+    "BOD": "08/18/yyyy",
+    "age": 25,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 786,
+      "brgy": "Downtown",
+      "municipality": "Sunnyside",
+      "province": "Minnesota"
+    },
+    "guardian": {
+      "fatherName": "Newton, Dorothea",
+      "motherName": "Haney, Addie",
+      "legal": "Roach, Jones"
+    },
+    "contact": 9360056393,
+    "remarks": 61,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b891be6f16acfcc080",
+    "LRN": 5630492,
+    "yearLevel": "Grade 9",
+    "first_name": "Kaitlin",
+    "middle_name": "Peterson",
+    "last_name": "Burns",
+    "gender": "Male",
+    "BOD": "08/23/yyyy",
+    "age": 23,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 365,
+      "brgy": "Rural",
+      "municipality": "Trucksville",
+      "province": "Georgia"
+    },
+    "guardian": {
+      "fatherName": "Goodman, Wilkinson",
+      "motherName": "Townsend, Hallie",
+      "legal": "Hubbard, Selena"
+    },
+    "contact": 9904175364,
+    "remarks": 93,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8b0e792c18eed42ef",
+    "LRN": 9768662,
+    "yearLevel": "Grade 12",
+    "first_name": "Rowe",
+    "middle_name": "Dejesus",
+    "last_name": "Hunter",
+    "gender": "Female",
+    "BOD": "03/23/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 749,
+      "brgy": "Rural",
+      "municipality": "Colton",
+      "province": "Oklahoma"
+    },
+    "guardian": {
+      "fatherName": "Macdonald, Kristine",
+      "motherName": "Schmidt, Mai",
+      "legal": "Austin, Gould"
+    },
+    "contact": 9429363343,
+    "remarks": 63,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8e84123658cd8078f",
+    "LRN": 7797819,
+    "yearLevel": "Grade 7",
+    "first_name": "Carey",
+    "middle_name": "Cummings",
+    "last_name": "Trevino",
+    "gender": "Female",
+    "BOD": "02/27/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 425,
+      "brgy": "Downtown",
+      "municipality": "Joes",
+      "province": "Pennsylvania"
+    },
+    "guardian": {
+      "fatherName": "Cooley, Lourdes",
+      "motherName": "Simmons, Obrien",
+      "legal": "Lyons, Flora"
+    },
+    "contact": 9119230723,
+    "remarks": 86,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b860dc52bec0cfd426",
+    "LRN": 7902541,
+    "yearLevel": "Grade 10",
+    "first_name": "Fields",
+    "middle_name": "Neal",
+    "last_name": "Shields",
+    "gender": "Male",
+    "BOD": "05/20/yyyy",
+    "age": 23,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 561,
+      "brgy": "Downtown",
+      "municipality": "Cutter",
+      "province": "North Carolina"
+    },
+    "guardian": {
+      "fatherName": "Pickett, Kayla",
+      "motherName": "Drake, Velez",
+      "legal": "Branch, Daniels"
+    },
+    "contact": 9104163214,
+    "remarks": 100,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8dae9b07ad9abd632",
+    "LRN": 4704977,
+    "yearLevel": "Grade 12",
+    "first_name": "Hart",
+    "middle_name": "Forbes",
+    "last_name": "Pittman",
+    "gender": "Female",
+    "BOD": "06/22/yyyy",
+    "age": 25,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 957,
+      "brgy": "Rural",
+      "municipality": "Dixie",
+      "province": "Federated States Of Micronesia"
+    },
+    "guardian": {
+      "fatherName": "Smith, Austin",
+      "motherName": "Cash, Porter",
+      "legal": "Scott, Stevenson"
+    },
+    "contact": 9291860988,
+    "remarks": 89,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8f4f33f3d5e97203b",
+    "LRN": 8322256,
+    "yearLevel": "Grade 7",
+    "first_name": "Wallace",
+    "middle_name": "Washington",
+    "last_name": "Rowland",
+    "gender": "Male",
+    "BOD": "04/28/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 838,
+      "brgy": "Suburb",
+      "municipality": "Williams",
+      "province": "Arkansas"
+    },
+    "guardian": {
+      "fatherName": "Lawrence, Todd",
+      "motherName": "Hayes, Wilcox",
+      "legal": "Munoz, Silva"
+    },
+    "contact": 9413255625,
+    "remarks": 73,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8e5213ab990ab5af5",
+    "LRN": 9554229,
+    "yearLevel": "Grade 10",
+    "first_name": "Margaret",
+    "middle_name": "Miranda",
+    "last_name": "Hansen",
+    "gender": "Male",
+    "BOD": "10/11/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 193,
+      "brgy": "Downtown",
+      "municipality": "Savage",
+      "province": "New York"
+    },
+    "guardian": {
+      "fatherName": "Carver, Clara",
+      "motherName": "Woodward, Reyna",
+      "legal": "Duncan, Ingram"
+    },
+    "contact": 9281800819,
+    "remarks": 95,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8bde2dccc40d76f7e",
+    "LRN": 9184274,
+    "yearLevel": "Grade 11",
+    "first_name": "Terrie",
+    "middle_name": "Rosales",
+    "last_name": "Sawyer",
+    "gender": "Male",
+    "BOD": "03/10/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 321,
+      "brgy": "Suburb",
+      "municipality": "Bellamy",
+      "province": "Maryland"
+    },
+    "guardian": {
+      "fatherName": "Browning, Stefanie",
+      "motherName": "Odonnell, Finch",
+      "legal": "Cantrell, Alyce"
+    },
+    "contact": 9560681353,
+    "remarks": 50,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b89dfe9d67c9d53e44",
+    "LRN": 7731984,
+    "yearLevel": "Grade 8",
+    "first_name": "Millie",
+    "middle_name": "Beasley",
+    "last_name": "Roth",
+    "gender": "Male",
+    "BOD": "04/06/yyyy",
+    "age": 21,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 519,
+      "brgy": "Downtown",
+      "municipality": "Sussex",
+      "province": "Illinois"
+    },
+    "guardian": {
+      "fatherName": "Good, Elva",
+      "motherName": "Banks, Glenna",
+      "legal": "Parrish, Cortez"
+    },
+    "contact": 9727962184,
+    "remarks": 94,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b87b2f074af457933c",
+    "LRN": 6485821,
+    "yearLevel": "Grade 7",
+    "first_name": "Ida",
+    "middle_name": "Cleveland",
+    "last_name": "Vance",
+    "gender": "Male",
+    "BOD": "05/12/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 595,
+      "brgy": "Downtown",
+      "municipality": "Rockbridge",
+      "province": "Delaware"
+    },
+    "guardian": {
+      "fatherName": "George, Fitzgerald",
+      "motherName": "Morrison, Forbes",
+      "legal": "Wiley, Humphrey"
+    },
+    "contact": 9440283420,
+    "remarks": 71,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8e6ea47f6cc74ea16",
+    "LRN": 2790070,
+    "yearLevel": "Grade 9",
+    "first_name": "Monique",
+    "middle_name": "Newman",
+    "last_name": "Hurst",
+    "gender": "Female",
+    "BOD": "12/14/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 479,
+      "brgy": "Downtown",
+      "municipality": "Soham",
+      "province": "Nebraska"
+    },
+    "guardian": {
+      "fatherName": "Waters, Helene",
+      "motherName": "Brock, Lancaster",
+      "legal": "Dennis, Wooten"
+    },
+    "contact": 9358497873,
+    "remarks": 72,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8665f7e6681d3a509",
+    "LRN": 2144219,
+    "yearLevel": "Grade 11",
+    "first_name": "Cotton",
+    "middle_name": "Burke",
+    "last_name": "Estrada",
+    "gender": "Male",
+    "BOD": "11/21/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 305,
+      "brgy": "Suburb",
+      "municipality": "Sharon",
+      "province": "Wisconsin"
+    },
+    "guardian": {
+      "fatherName": "Short, Debra",
+      "motherName": "Thompson, Leanne",
+      "legal": "Bonner, Isabelle"
+    },
+    "contact": 9248870734,
+    "remarks": 90,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b85ea8bab93cd2c08c",
+    "LRN": 4108438,
+    "yearLevel": "Grade 7",
+    "first_name": "Pierce",
+    "middle_name": "Hodge",
+    "last_name": "Aguilar",
+    "gender": "Male",
+    "BOD": "09/09/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 308,
+      "brgy": "Downtown",
+      "municipality": "Jamestown",
+      "province": "Texas"
+    },
+    "guardian": {
+      "fatherName": "Flynn, Preston",
+      "motherName": "Lindsay, Johns",
+      "legal": "Graham, Emily"
+    },
+    "contact": 9883522211,
+    "remarks": 70,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8b725ee8d0b71c080",
+    "LRN": 6220457,
+    "yearLevel": "Grade 7",
+    "first_name": "Salas",
+    "middle_name": "Greene",
+    "last_name": "Dunlap",
+    "gender": "Male",
+    "BOD": "06/01/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 155,
+      "brgy": "Downtown",
+      "municipality": "Bangor",
+      "province": "South Dakota"
+    },
+    "guardian": {
+      "fatherName": "Mckinney, Claudette",
+      "motherName": "Lancaster, Walter",
+      "legal": "Saunders, Iva"
+    },
+    "contact": 9389696681,
+    "remarks": 73,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b84a2fcaac82ac83dc",
+    "LRN": 1982293,
+    "yearLevel": "Grade 7",
+    "first_name": "Pugh",
+    "middle_name": "Hyde",
+    "last_name": "Anderson",
+    "gender": "Male",
+    "BOD": "07/14/yyyy",
+    "age": 25,
+    "MOT": "French",
+    "EG": "N/A",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 650,
+      "brgy": "Downtown",
+      "municipality": "Bend",
+      "province": "Maine"
+    },
+    "guardian": {
+      "fatherName": "Bernard, Elvia",
+      "motherName": "Cabrera, Hansen",
+      "legal": "Fitzgerald, Hogan"
+    },
+    "contact": 9815534545,
+    "remarks": 65,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b86ada6956e8d4a318",
+    "LRN": 2337066,
+    "yearLevel": "Grade 9",
+    "first_name": "Melody",
+    "middle_name": "Wynn",
+    "last_name": "Bryan",
+    "gender": "Male",
+    "BOD": "07/14/yyyy",
+    "age": 18,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 567,
+      "brgy": "Rural",
+      "municipality": "Sabillasville",
+      "province": "Colorado"
+    },
+    "guardian": {
+      "fatherName": "Jacobs, Jasmine",
+      "motherName": "White, Christensen",
+      "legal": "Johns, Phillips"
+    },
+    "contact": 9885800660,
+    "remarks": 87,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8bb5d18ac2378187d",
+    "LRN": 4715204,
+    "yearLevel": "Grade 12",
+    "first_name": "Kirk",
+    "middle_name": "Levine",
+    "last_name": "Ashley",
+    "gender": "Male",
+    "BOD": "05/15/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 814,
+      "brgy": "Downtown",
+      "municipality": "Macdona",
+      "province": "Indiana"
+    },
+    "guardian": {
+      "fatherName": "Bowen, Elisabeth",
+      "motherName": "Huff, Willie",
+      "legal": "Buck, Vickie"
+    },
+    "contact": 9285463243,
+    "remarks": 87,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8dc97b7af91f293d3",
+    "LRN": 3460679,
+    "yearLevel": "Grade 10",
+    "first_name": "Gabriela",
+    "middle_name": "Gardner",
+    "last_name": "Hardy",
+    "gender": "Male",
+    "BOD": "01/01/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 470,
+      "brgy": "Rural",
+      "municipality": "Kanauga",
+      "province": "Missouri"
+    },
+    "guardian": {
+      "fatherName": "Payne, Mariana",
+      "motherName": "Kirkland, Cherie",
+      "legal": "Shepherd, Mae"
+    },
+    "contact": 9447551873,
+    "remarks": 85,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8d26e52accc2e26a1",
+    "LRN": 5705908,
+    "yearLevel": "Grade 11",
+    "first_name": "Meredith",
+    "middle_name": "Salinas",
+    "last_name": "Mccullough",
+    "gender": "Male",
+    "BOD": "07/06/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 493,
+      "brgy": "Rural",
+      "municipality": "Aguila",
+      "province": "Kansas"
+    },
+    "guardian": {
+      "fatherName": "Barrett, Lucinda",
+      "motherName": "Booth, Irma",
+      "legal": "Sykes, Guadalupe"
+    },
+    "contact": 9359212691,
+    "remarks": 82,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8babe729cbb1ab900",
+    "LRN": 7383520,
+    "yearLevel": "Grade 12",
+    "first_name": "Garcia",
+    "middle_name": "Hale",
+    "last_name": "Holder",
+    "gender": "Male",
+    "BOD": "11/06/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 178,
+      "brgy": "Rural",
+      "municipality": "Tolu",
+      "province": "Palau"
+    },
+    "guardian": {
+      "fatherName": "Mcmahon, Bettie",
+      "motherName": "Pate, Massey",
+      "legal": "Vazquez, Sally"
+    },
+    "contact": 9660290384,
+    "remarks": 99,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b839e52e353cd2254d",
+    "LRN": 4187723,
+    "yearLevel": "Grade 8",
+    "first_name": "Rose",
+    "middle_name": "Hurley",
+    "last_name": "Gibson",
+    "gender": "Female",
+    "BOD": "10/16/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 460,
+      "brgy": "Suburb",
+      "municipality": "Needmore",
+      "province": "Puerto Rico"
+    },
+    "guardian": {
+      "fatherName": "Howe, Snyder",
+      "motherName": "Guy, Dianna",
+      "legal": "Valenzuela, Riddle"
+    },
+    "contact": 9263395041,
+    "remarks": 89,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b858763a91f94ff11d",
+    "LRN": 5286947,
+    "yearLevel": "Grade 7",
+    "first_name": "Dana",
+    "middle_name": "Finch",
+    "last_name": "Lambert",
+    "gender": "Female",
+    "BOD": "08/24/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 128,
+      "brgy": "Downtown",
+      "municipality": "Rodanthe",
+      "province": "Kentucky"
+    },
+    "guardian": {
+      "fatherName": "Weaver, Castillo",
+      "motherName": "Velez, Stanley",
+      "legal": "Meyer, Janelle"
+    },
+    "contact": 9646952990,
+    "remarks": 89,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8209f962aeca5661a",
+    "LRN": 7146501,
+    "yearLevel": "Grade 10",
+    "first_name": "Kasey",
+    "middle_name": "Weeks",
+    "last_name": "Tyson",
+    "gender": "Female",
+    "BOD": "08/12/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 480,
+      "brgy": "Suburb",
+      "municipality": "Brazos",
+      "province": "Vermont"
+    },
+    "guardian": {
+      "fatherName": "Sargent, Mabel",
+      "motherName": "Reyes, Donovan",
+      "legal": "Reeves, Marquez"
+    },
+    "contact": 9304321936,
+    "remarks": 75,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8a18bc71999be9543",
+    "LRN": 1662577,
+    "yearLevel": "Grade 7",
+    "first_name": "Donaldson",
+    "middle_name": "Nash",
+    "last_name": "Chang",
+    "gender": "Male",
+    "BOD": "01/13/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 746,
+      "brgy": "Rural",
+      "municipality": "Mulberry",
+      "province": "New Mexico"
+    },
+    "guardian": {
+      "fatherName": "Acevedo, Michelle",
+      "motherName": "England, Gina",
+      "legal": "Rush, Cobb"
+    },
+    "contact": 9523476489,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8f7c7941800fd4da1",
+    "LRN": 7913384,
+    "yearLevel": "Grade 7",
+    "first_name": "Hicks",
+    "middle_name": "Bryant",
+    "last_name": "Foley",
+    "gender": "Male",
+    "BOD": "03/17/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 328,
+      "brgy": "Suburb",
+      "municipality": "Enetai",
+      "province": "Louisiana"
+    },
+    "guardian": {
+      "fatherName": "Wall, Gilmore",
+      "motherName": "Rios, Decker",
+      "legal": "Landry, Avis"
+    },
+    "contact": 9338130711,
+    "remarks": 66,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8ee49987b7273c18c",
+    "LRN": 6543881,
+    "yearLevel": "Grade 9",
+    "first_name": "Roseann",
+    "middle_name": "Holmes",
+    "last_name": "Rowe",
+    "gender": "Male",
+    "BOD": "07/30/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 935,
+      "brgy": "Suburb",
+      "municipality": "Wollochet",
+      "province": "Idaho"
+    },
+    "guardian": {
+      "fatherName": "Lang, Cannon",
+      "motherName": "Benjamin, Joy",
+      "legal": "Wooten, Dejesus"
+    },
+    "contact": 9345961170,
+    "remarks": 84,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b80249ba00b66545ab",
+    "LRN": 3644659,
+    "yearLevel": "Grade 8",
+    "first_name": "Woods",
+    "middle_name": "Small",
+    "last_name": "Donaldson",
+    "gender": "Female",
+    "BOD": "01/09/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 910,
+      "brgy": "Suburb",
+      "municipality": "Morriston",
+      "province": "Marshall Islands"
+    },
+    "guardian": {
+      "fatherName": "Green, Williams",
+      "motherName": "Craig, Jerry",
+      "legal": "Luna, Alma"
+    },
+    "contact": 9944552503,
+    "remarks": 65,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8944956a9cf50d3eb",
+    "LRN": 5035467,
+    "yearLevel": "Grade 10",
+    "first_name": "Angelita",
+    "middle_name": "Thornton",
+    "last_name": "Golden",
+    "gender": "Male",
+    "BOD": "03/25/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 727,
+      "brgy": "Suburb",
+      "municipality": "Brutus",
+      "province": "California"
+    },
+    "guardian": {
+      "fatherName": "Delaney, Simpson",
+      "motherName": "Norman, Barker",
+      "legal": "Yates, Henry"
+    },
+    "contact": 9450473788,
+    "remarks": 64,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8f4274460649ae7cc",
+    "LRN": 9888570,
+    "yearLevel": "Grade 8",
+    "first_name": "Russell",
+    "middle_name": "Marshall",
+    "last_name": "Fletcher",
+    "gender": "Female",
+    "BOD": "04/19/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 698,
+      "brgy": "Rural",
+      "municipality": "Innsbrook",
+      "province": "Utah"
+    },
+    "guardian": {
+      "fatherName": "Rocha, Nadia",
+      "motherName": "Cervantes, Blackburn",
+      "legal": "Mcdowell, Vincent"
+    },
+    "contact": 9497429639,
+    "remarks": 95,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b84e62202d7245e2a2",
+    "LRN": 6605291,
+    "yearLevel": "Grade 8",
+    "first_name": "Ava",
+    "middle_name": "Dixon",
+    "last_name": "Patel",
+    "gender": "Female",
+    "BOD": "07/13/yyyy",
+    "age": 19,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 521,
+      "brgy": "Suburb",
+      "municipality": "Monument",
+      "province": "New Hampshire"
+    },
+    "guardian": {
+      "fatherName": "Atkinson, Barbara",
+      "motherName": "Mercado, Chrystal",
+      "legal": "Becker, Fran"
+    },
+    "contact": 9484863319,
+    "remarks": 84,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b80ab29d5d390affe4",
+    "LRN": 4134536,
+    "yearLevel": "Grade 11",
+    "first_name": "Hendrix",
+    "middle_name": "Duffy",
+    "last_name": "Montgomery",
+    "gender": "Male",
+    "BOD": "05/12/yyyy",
+    "age": 18,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 999,
+      "brgy": "Downtown",
+      "municipality": "Smock",
+      "province": "New Jersey"
+    },
+    "guardian": {
+      "fatherName": "Gilbert, Tia",
+      "motherName": "Stephens, Teri",
+      "legal": "Franklin, Emma"
+    },
+    "contact": 9436584171,
+    "remarks": 68,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b80543615cedb16669",
+    "LRN": 4951763,
+    "yearLevel": "Grade 7",
+    "first_name": "Waters",
+    "middle_name": "Daniel",
+    "last_name": "Zimmerman",
+    "gender": "Female",
+    "BOD": "01/06/yyyy",
+    "age": 22,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 496,
+      "brgy": "Suburb",
+      "municipality": "Kidder",
+      "province": "Guam"
+    },
+    "guardian": {
+      "fatherName": "Bradshaw, Sargent",
+      "motherName": "Henry, Ryan",
+      "legal": "House, Trudy"
+    },
+    "contact": 9072220505,
+    "remarks": 68,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8ab11b2a6e346c984",
+    "LRN": 7702878,
+    "yearLevel": "Grade 11",
+    "first_name": "Jessie",
+    "middle_name": "Ortiz",
+    "last_name": "Oconnor",
+    "gender": "Male",
+    "BOD": "02/10/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 621,
+      "brgy": "Suburb",
+      "municipality": "Dundee",
+      "province": "Florida"
+    },
+    "guardian": {
+      "fatherName": "Gates, Mclaughlin",
+      "motherName": "Steele, Shauna",
+      "legal": "Ellison, Alissa"
+    },
+    "contact": 9995086867,
+    "remarks": 69,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8c4b2d8df321df174",
+    "LRN": 8289409,
+    "yearLevel": "Grade 12",
+    "first_name": "Bell",
+    "middle_name": "Stevenson",
+    "last_name": "Emerson",
+    "gender": "Female",
+    "BOD": "10/17/yyyy",
+    "age": 19,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 627,
+      "brgy": "Rural",
+      "municipality": "Thomasville",
+      "province": "Wyoming"
+    },
+    "guardian": {
+      "fatherName": "Vang, Yesenia",
+      "motherName": "Pace, Keller",
+      "legal": "Gregory, Frances"
+    },
+    "contact": 9557356487,
+    "remarks": 94,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8f425e3fc397c9cea",
+    "LRN": 2493216,
+    "yearLevel": "Grade 11",
+    "first_name": "Evans",
+    "middle_name": "Stein",
+    "last_name": "Abbott",
+    "gender": "Male",
+    "BOD": "03/05/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 459,
+      "brgy": "Suburb",
+      "municipality": "Advance",
+      "province": "Alaska"
+    },
+    "guardian": {
+      "fatherName": "Ramsey, Aisha",
+      "motherName": "Rojas, Regina",
+      "legal": "Flowers, Maude"
+    },
+    "contact": 9266447933,
+    "remarks": 77,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b886fc254d9741c2c9",
+    "LRN": 5107248,
+    "yearLevel": "Grade 9",
+    "first_name": "Neal",
+    "middle_name": "Colon",
+    "last_name": "Hines",
+    "gender": "Male",
+    "BOD": "05/05/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 538,
+      "brgy": "Suburb",
+      "municipality": "Chloride",
+      "province": "Oregon"
+    },
+    "guardian": {
+      "fatherName": "Pratt, Rutledge",
+      "motherName": "Chen, Audrey",
+      "legal": "Stark, Knight"
+    },
+    "contact": 9205411620,
+    "remarks": 100,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b851102797de5ef841",
+    "LRN": 3786140,
+    "yearLevel": "Grade 9",
+    "first_name": "Christa",
+    "middle_name": "Burnett",
+    "last_name": "Benton",
+    "gender": "Female",
+    "BOD": "03/05/yyyy",
+    "age": 20,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 975,
+      "brgy": "Rural",
+      "municipality": "Lewis",
+      "province": "Michigan"
+    },
+    "guardian": {
+      "fatherName": "Crosby, Alberta",
+      "motherName": "Powell, Sheila",
+      "legal": "Kaufman, Tamara"
+    },
+    "contact": 9198611862,
+    "remarks": 65,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8559b75d3e4d344a9",
+    "LRN": 1773268,
+    "yearLevel": "Grade 11",
+    "first_name": "Owens",
+    "middle_name": "Conley",
+    "last_name": "Garner",
+    "gender": "Female",
+    "BOD": "02/02/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 372,
+      "brgy": "Rural",
+      "municipality": "Ernstville",
+      "province": "Washington"
+    },
+    "guardian": {
+      "fatherName": "Livingston, Katheryn",
+      "motherName": "Savage, Becker",
+      "legal": "Harrell, Ellison"
+    },
+    "contact": 9917738783,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b822d9fe0be82ba5ef",
+    "LRN": 1152457,
+    "yearLevel": "Grade 12",
+    "first_name": "Leticia",
+    "middle_name": "Hester",
+    "last_name": "Faulkner",
+    "gender": "Male",
+    "BOD": "08/19/yyyy",
+    "age": 20,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 154,
+      "brgy": "Rural",
+      "municipality": "Hackneyville",
+      "province": "Tennessee"
+    },
+    "guardian": {
+      "fatherName": "Chandler, Rosanne",
+      "motherName": "Leblanc, Salazar",
+      "legal": "Curry, Lila"
+    },
+    "contact": 9177094066,
+    "remarks": 65,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8a9e81ebe7d14a8da",
+    "LRN": 6662758,
+    "yearLevel": "Grade 7",
+    "first_name": "Josephine",
+    "middle_name": "Dunn",
+    "last_name": "Petersen",
+    "gender": "Female",
+    "BOD": "12/25/yyyy",
+    "age": 20,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 383,
+      "brgy": "Rural",
+      "municipality": "Courtland",
+      "province": "North Dakota"
+    },
+    "guardian": {
+      "fatherName": "Joyce, Agnes",
+      "motherName": "Alexander, Darla",
+      "legal": "Adams, Calderon"
+    },
+    "contact": 9271200999,
+    "remarks": 65,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8419a2f7fdb9b0a18",
+    "LRN": 8219342,
+    "yearLevel": "Grade 9",
+    "first_name": "Clarice",
+    "middle_name": "Schroeder",
+    "last_name": "Dominguez",
+    "gender": "Female",
+    "BOD": "02/12/yyyy",
+    "age": 18,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 576,
+      "brgy": "Downtown",
+      "municipality": "Shawmut",
+      "province": "Virginia"
+    },
+    "guardian": {
+      "fatherName": "Casey, Randall",
+      "motherName": "Hinton, Watts",
+      "legal": "Odom, Hays"
+    },
+    "contact": 9285373706,
+    "remarks": 69,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b83958d4801b81b3b6",
+    "LRN": 3570738,
+    "yearLevel": "Grade 10",
+    "first_name": "Callie",
+    "middle_name": "Lynn",
+    "last_name": "Stevens",
+    "gender": "Female",
+    "BOD": "07/29/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 135,
+      "brgy": "Suburb",
+      "municipality": "Duryea",
+      "province": "Montana"
+    },
+    "guardian": {
+      "fatherName": "Bradley, Crawford",
+      "motherName": "Malone, Lucile",
+      "legal": "Nolan, Vicki"
+    },
+    "contact": 9025627548,
+    "remarks": 65,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b86a3971b74a555fb3",
+    "LRN": 2473556,
+    "yearLevel": "Grade 12",
+    "first_name": "Herminia",
+    "middle_name": "Workman",
+    "last_name": "Dickerson",
+    "gender": "Male",
+    "BOD": "03/09/yyyy",
+    "age": 22,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 731,
+      "brgy": "Suburb",
+      "municipality": "Tivoli",
+      "province": "Virgin Islands"
+    },
+    "guardian": {
+      "fatherName": "Farley, Brooke",
+      "motherName": "Brown, Polly",
+      "legal": "Kinney, Bobbie"
+    },
+    "contact": 9014901918,
+    "remarks": 82,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8695bd6394fac1ed7",
+    "LRN": 3930461,
+    "yearLevel": "Grade 10",
+    "first_name": "Odessa",
+    "middle_name": "Sanders",
+    "last_name": "Morton",
+    "gender": "Male",
+    "BOD": "10/22/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 512,
+      "brgy": "Suburb",
+      "municipality": "Tilden",
+      "province": "West Virginia"
+    },
+    "guardian": {
+      "fatherName": "Blair, Cabrera",
+      "motherName": "Navarro, Carissa",
+      "legal": "Holcomb, Hatfield"
+    },
+    "contact": 9870806113,
+    "remarks": 71,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b83aa864de2b43e2c7",
+    "LRN": 2594528,
+    "yearLevel": "Grade 7",
+    "first_name": "Santana",
+    "middle_name": "Medina",
+    "last_name": "Le",
+    "gender": "Male",
+    "BOD": "11/26/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 536,
+      "brgy": "Rural",
+      "municipality": "Wilmington",
+      "province": "Iowa"
+    },
+    "guardian": {
+      "fatherName": "Snyder, Helena",
+      "motherName": "Howard, Gilda",
+      "legal": "Bentley, Allison"
+    },
+    "contact": 9644846435,
+    "remarks": 52,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8a7d9cbc40a9d8c0f",
+    "LRN": 5134060,
+    "yearLevel": "Grade 7",
+    "first_name": "Leonard",
+    "middle_name": "West",
+    "last_name": "Miles",
+    "gender": "Male",
+    "BOD": "11/29/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "N/A",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 794,
+      "brgy": "Downtown",
+      "municipality": "Wanship",
+      "province": "Northern Mariana Islands"
+    },
+    "guardian": {
+      "fatherName": "Allison, Frye",
+      "motherName": "Guthrie, Amy",
+      "legal": "Watkins, Watson"
+    },
+    "contact": 9212779226,
+    "remarks": 58,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8c7b6e346ff795c5f",
+    "LRN": 9199380,
+    "yearLevel": "Grade 11",
+    "first_name": "Jamie",
+    "middle_name": "Justice",
+    "last_name": "Cox",
+    "gender": "Male",
+    "BOD": "01/10/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 572,
+      "brgy": "Downtown",
+      "municipality": "Retsof",
+      "province": "Mississippi"
+    },
+    "guardian": {
+      "fatherName": "Ballard, Katrina",
+      "motherName": "Mathews, Jacobson",
+      "legal": "Mayo, Willa"
+    },
+    "contact": 9855380418,
+    "remarks": 65,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8ab332978b9f892dc",
+    "LRN": 9717945,
+    "yearLevel": "Grade 9",
+    "first_name": "Elinor",
+    "middle_name": "Tanner",
+    "last_name": "Boyle",
+    "gender": "Male",
+    "BOD": "04/19/yyyy",
+    "age": 19,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 713,
+      "brgy": "Downtown",
+      "municipality": "Deputy",
+      "province": "District Of Columbia"
+    },
+    "guardian": {
+      "fatherName": "Cunningham, Millicent",
+      "motherName": "Davis, Gardner",
+      "legal": "Fields, Levine"
+    },
+    "contact": 9918946248,
+    "remarks": 70,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8be2cd7f5cef56195",
+    "LRN": 2695720,
+    "yearLevel": "Grade 7",
+    "first_name": "Simmons",
+    "middle_name": "Mullen",
+    "last_name": "Craft",
+    "gender": "Female",
+    "BOD": "06/18/yyyy",
+    "age": 19,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 398,
+      "brgy": "Suburb",
+      "municipality": "Beyerville",
+      "province": "Arizona"
+    },
+    "guardian": {
+      "fatherName": "Simon, Cara",
+      "motherName": "Church, Louise",
+      "legal": "Padilla, Lynn"
+    },
+    "contact": 9619551220,
+    "remarks": 75,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8b9661dff74d019e5",
+    "LRN": 5859805,
+    "yearLevel": "Grade 11",
+    "first_name": "Miles",
+    "middle_name": "Garrett",
+    "last_name": "Battle",
+    "gender": "Female",
+    "BOD": "12/13/yyyy",
+    "age": 24,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 339,
+      "brgy": "Downtown",
+      "municipality": "Tetherow",
+      "province": "Connecticut"
+    },
+    "guardian": {
+      "fatherName": "Tyler, Cooke",
+      "motherName": "Kirby, Robles",
+      "legal": "Ramos, Earlene"
+    },
+    "contact": 9361958731,
+    "remarks": 99,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8c5c91c6ba95bc7ba",
+    "LRN": 6896346,
+    "yearLevel": "Grade 10",
+    "first_name": "Hall",
+    "middle_name": "Koch",
+    "last_name": "Rhodes",
+    "gender": "Female",
+    "BOD": "09/03/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 244,
+      "brgy": "Suburb",
+      "municipality": "Osmond",
+      "province": "Nevada"
+    },
+    "guardian": {
+      "fatherName": "Sutton, Valerie",
+      "motherName": "Moody, Wall",
+      "legal": "Douglas, Sondra"
+    },
+    "contact": 9218770023,
+    "remarks": 94,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b89e16e84eaecd7e34",
+    "LRN": 1860417,
+    "yearLevel": "Grade 10",
+    "first_name": "Iris",
+    "middle_name": "Coffey",
+    "last_name": "Blackburn",
+    "gender": "Male",
+    "BOD": "02/14/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 704,
+      "brgy": "Suburb",
+      "municipality": "Dante",
+      "province": "Hawaii"
+    },
+    "guardian": {
+      "fatherName": "Nunez, Keith",
+      "motherName": "Warner, Stone",
+      "legal": "Randall, Edwina"
+    },
+    "contact": 9601289653,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b842de2d2ab8a14a3d",
+    "LRN": 6716772,
+    "yearLevel": "Grade 11",
+    "first_name": "Christy",
+    "middle_name": "Witt",
+    "last_name": "Ferrell",
+    "gender": "Female",
+    "BOD": "03/28/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 674,
+      "brgy": "Rural",
+      "municipality": "Hoehne",
+      "province": "Massachusetts"
+    },
+    "guardian": {
+      "fatherName": "Barker, Huffman",
+      "motherName": "Morris, Nadine",
+      "legal": "Buckley, Mara"
+    },
+    "contact": 9139951399,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b85d8aa6ec687cc2f2",
+    "LRN": 7960988,
+    "yearLevel": "Grade 9",
+    "first_name": "Louella",
+    "middle_name": "Gomez",
+    "last_name": "Cain",
+    "gender": "Female",
+    "BOD": "12/29/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 760,
+      "brgy": "Rural",
+      "municipality": "Hatteras",
+      "province": "Ohio"
+    },
+    "guardian": {
+      "fatherName": "Brennan, Mollie",
+      "motherName": "Swanson, Pruitt",
+      "legal": "Brooks, Mejia"
+    },
+    "contact": 9779161885,
+    "remarks": 100,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b873b31e1d234e0d7d",
+    "LRN": 5313855,
+    "yearLevel": "Grade 11",
+    "first_name": "Henson",
+    "middle_name": "Wilkerson",
+    "last_name": "Santana",
+    "gender": "Female",
+    "BOD": "11/29/yyyy",
+    "age": 23,
+    "MOT": "French",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 517,
+      "brgy": "Rural",
+      "municipality": "Churchill",
+      "province": "South Carolina"
+    },
+    "guardian": {
+      "fatherName": "Frye, Brigitte",
+      "motherName": "Deleon, Fuller",
+      "legal": "Fowler, Vicky"
+    },
+    "contact": 9363913164,
+    "remarks": 62,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b872557d947b1ba0bc",
+    "LRN": 7935268,
+    "yearLevel": "Grade 7",
+    "first_name": "Susie",
+    "middle_name": "Pacheco",
+    "last_name": "Beck",
+    "gender": "Male",
+    "BOD": "03/11/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 495,
+      "brgy": "Downtown",
+      "municipality": "Lutsen",
+      "province": "Alabama"
+    },
+    "guardian": {
+      "fatherName": "Davenport, Holland",
+      "motherName": "Massey, Erna",
+      "legal": "Perkins, Baldwin"
+    },
+    "contact": 9657934929,
+    "remarks": 54,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b805a720c2fe0a9f45",
+    "LRN": 1896223,
+    "yearLevel": "Grade 12",
+    "first_name": "Tillman",
+    "middle_name": "Spence",
+    "last_name": "Knox",
+    "gender": "Female",
+    "BOD": "07/09/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 637,
+      "brgy": "Rural",
+      "municipality": "Clarence",
+      "province": "American Samoa"
+    },
+    "guardian": {
+      "fatherName": "Reynolds, Katina",
+      "motherName": "Harrington, Carole",
+      "legal": "Velazquez, Keisha"
+    },
+    "contact": 9602660999,
+    "remarks": 77,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8b3f2bd6080470254",
+    "LRN": 8544887,
+    "yearLevel": "Grade 10",
+    "first_name": "Jewell",
+    "middle_name": "Pierce",
+    "last_name": "Barry",
+    "gender": "Male",
+    "BOD": "05/19/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 130,
+      "brgy": "Rural",
+      "municipality": "Onton",
+      "province": "Minnesota"
+    },
+    "guardian": {
+      "fatherName": "Kidd, Karina",
+      "motherName": "Byers, Sanford",
+      "legal": "Murray, Pollard"
+    },
+    "contact": 9006965661,
+    "remarks": 99,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b83d6729e9aa1f3629",
+    "LRN": 7345662,
+    "yearLevel": "Grade 7",
+    "first_name": "Bennett",
+    "middle_name": "Holman",
+    "last_name": "Pearson",
+    "gender": "Male",
+    "BOD": "11/25/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 627,
+      "brgy": "Rural",
+      "municipality": "Utting",
+      "province": "Georgia"
+    },
+    "guardian": {
+      "fatherName": "Blanchard, Carr",
+      "motherName": "Huffman, Robinson",
+      "legal": "Love, Mcleod"
+    },
+    "contact": 9985091865,
+    "remarks": 70,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b856721ddae4416f24",
+    "LRN": 5731692,
+    "yearLevel": "Grade 11",
+    "first_name": "Stafford",
+    "middle_name": "Burt",
+    "last_name": "Baker",
+    "gender": "Male",
+    "BOD": "10/17/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 232,
+      "brgy": "Suburb",
+      "municipality": "Shindler",
+      "province": "Oklahoma"
+    },
+    "guardian": {
+      "fatherName": "Myers, Marianne",
+      "motherName": "Aguirre, Rhonda",
+      "legal": "Lott, Carpenter"
+    },
+    "contact": 9036539544,
+    "remarks": 61,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b816703cb5d3009566",
+    "LRN": 5874583,
+    "yearLevel": "Grade 7",
+    "first_name": "Charity",
+    "middle_name": "Gallegos",
+    "last_name": "Kennedy",
+    "gender": "Male",
+    "BOD": "07/20/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 755,
+      "brgy": "Suburb",
+      "municipality": "Tryon",
+      "province": "Pennsylvania"
+    },
+    "guardian": {
+      "fatherName": "Logan, Tracy",
+      "motherName": "Potter, Nanette",
+      "legal": "Baird, Manuela"
+    },
+    "contact": 9197528532,
+    "remarks": 76,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8f0fc7fc0f5bd3f76",
+    "LRN": 3265854,
+    "yearLevel": "Grade 9",
+    "first_name": "Floyd",
+    "middle_name": "Walker",
+    "last_name": "Harmon",
+    "gender": "Female",
+    "BOD": "02/19/yyyy",
+    "age": 21,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 240,
+      "brgy": "Rural",
+      "municipality": "Kirk",
+      "province": "North Carolina"
+    },
+    "guardian": {
+      "fatherName": "Cochran, Castro",
+      "motherName": "Briggs, Bryan",
+      "legal": "Horton, Jami"
+    },
+    "contact": 9428326472,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b80a22b325a024e971",
+    "LRN": 1893624,
+    "yearLevel": "Grade 10",
+    "first_name": "Mercer",
+    "middle_name": "Sanchez",
+    "last_name": "Travis",
+    "gender": "Female",
+    "BOD": "01/21/yyyy",
+    "age": 20,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 193,
+      "brgy": "Downtown",
+      "municipality": "Munjor",
+      "province": "Federated States Of Micronesia"
+    },
+    "guardian": {
+      "fatherName": "Doyle, Deborah",
+      "motherName": "Guerrero, Huber",
+      "legal": "Carson, Patrick"
+    },
+    "contact": 9258600245,
+    "remarks": 72,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b83a676f3a0c20149b",
+    "LRN": 6343853,
+    "yearLevel": "Grade 12",
+    "first_name": "Deanne",
+    "middle_name": "Britt",
+    "last_name": "Mccall",
+    "gender": "Male",
+    "BOD": "07/18/yyyy",
+    "age": 23,
+    "MOT": "French",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 617,
+      "brgy": "Rural",
+      "municipality": "Trinway",
+      "province": "Arkansas"
+    },
+    "guardian": {
+      "fatherName": "Larson, Compton",
+      "motherName": "Cook, Winters",
+      "legal": "Norris, Marguerite"
+    },
+    "contact": 9121435470,
+    "remarks": 88,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b816adb8bcd63c6354",
+    "LRN": 1337461,
+    "yearLevel": "Grade 10",
+    "first_name": "Shanna",
+    "middle_name": "Page",
+    "last_name": "Hatfield",
+    "gender": "Male",
+    "BOD": "05/11/yyyy",
+    "age": 22,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 246,
+      "brgy": "Downtown",
+      "municipality": "Carlos",
+      "province": "New York"
+    },
+    "guardian": {
+      "fatherName": "Henson, Monroe",
+      "motherName": "Norton, Bianca",
+      "legal": "Mckenzie, Burch"
+    },
+    "contact": 9158792715,
+    "remarks": 62,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b88159ba981482d799",
+    "LRN": 2839002,
+    "yearLevel": "Grade 11",
+    "first_name": "Mendoza",
+    "middle_name": "Nicholson",
+    "last_name": "Miller",
+    "gender": "Female",
+    "BOD": "08/31/yyyy",
+    "age": 23,
+    "MOT": "French",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 580,
+      "brgy": "Downtown",
+      "municipality": "Goldfield",
+      "province": "Maryland"
+    },
+    "guardian": {
+      "fatherName": "Rodriquez, Hernandez",
+      "motherName": "Sellers, Peggy",
+      "legal": "Carroll, Harriett"
+    },
+    "contact": 9056337375,
+    "remarks": 85,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b89fe28e460706e7ee",
+    "LRN": 7836718,
+    "yearLevel": "Grade 11",
+    "first_name": "Alicia",
+    "middle_name": "Ochoa",
+    "last_name": "James",
+    "gender": "Female",
+    "BOD": "03/10/yyyy",
+    "age": 18,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 843,
+      "brgy": "Suburb",
+      "municipality": "Lowgap",
+      "province": "Illinois"
+    },
+    "guardian": {
+      "fatherName": "Mccoy, Bentley",
+      "motherName": "Kemp, Beverly",
+      "legal": "Garrison, Leon"
+    },
+    "contact": 9594447255,
+    "remarks": 71,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b80de4e8a963cf72aa",
+    "LRN": 6715181,
+    "yearLevel": "Grade 12",
+    "first_name": "Delacruz",
+    "middle_name": "Soto",
+    "last_name": "Bowers",
+    "gender": "Male",
+    "BOD": "07/17/yyyy",
+    "age": 19,
+    "MOT": "Spanish",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 160,
+      "brgy": "Suburb",
+      "municipality": "Defiance",
+      "province": "Delaware"
+    },
+    "guardian": {
+      "fatherName": "Anthony, Price",
+      "motherName": "Graves, Whitney",
+      "legal": "Dawson, Mccray"
+    },
+    "contact": 9692992289,
+    "remarks": 75,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8387138b6219b7e15",
+    "LRN": 8553263,
+    "yearLevel": "Grade 9",
+    "first_name": "Gracie",
+    "middle_name": "Alford",
+    "last_name": "Shelton",
+    "gender": "Male",
+    "BOD": "04/13/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 596,
+      "brgy": "Suburb",
+      "municipality": "Fulford",
+      "province": "Nebraska"
+    },
+    "guardian": {
+      "fatherName": "Gay, Ortega",
+      "motherName": "Bright, Alexandra",
+      "legal": "Dillon, Vanessa"
+    },
+    "contact": 9733605329,
+    "remarks": 72,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8e7f0e1cc35cafef0",
+    "LRN": 6263403,
+    "yearLevel": "Grade 11",
+    "first_name": "Consuelo",
+    "middle_name": "Weber",
+    "last_name": "Skinner",
+    "gender": "Female",
+    "BOD": "07/16/yyyy",
+    "age": 23,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 398,
+      "brgy": "Suburb",
+      "municipality": "Romeville",
+      "province": "Wisconsin"
+    },
+    "guardian": {
+      "fatherName": "Hooper, Mcclain",
+      "motherName": "Webb, Lambert",
+      "legal": "Hoffman, Mullen"
+    },
+    "contact": 9866709336,
+    "remarks": 64,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8d69a2ae3c95bddea",
+    "LRN": 3956397,
+    "yearLevel": "Grade 8",
+    "first_name": "Burgess",
+    "middle_name": "Rivas",
+    "last_name": "Melton",
+    "gender": "Male",
+    "BOD": "09/08/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 729,
+      "brgy": "Suburb",
+      "municipality": "Calvary",
+      "province": "Texas"
+    },
+    "guardian": {
+      "fatherName": "Ayala, Jarvis",
+      "motherName": "Gonzalez, Arlene",
+      "legal": "Conner, Glass"
+    },
+    "contact": 9468221372,
+    "remarks": 92,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b87d616c3065e322d9",
+    "LRN": 4505680,
+    "yearLevel": "Grade 8",
+    "first_name": "Courtney",
+    "middle_name": "Guzman",
+    "last_name": "Jenkins",
+    "gender": "Male",
+    "BOD": "08/12/yyyy",
+    "age": 25,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 788,
+      "brgy": "Downtown",
+      "municipality": "Chemung",
+      "province": "South Dakota"
+    },
+    "guardian": {
+      "fatherName": "Caldwell, Lee",
+      "motherName": "Contreras, Brady",
+      "legal": "Meyers, Edna"
+    },
+    "contact": 9756211657,
+    "remarks": 85,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8f9b66f708521e9f2",
+    "LRN": 9770923,
+    "yearLevel": "Grade 7",
+    "first_name": "Nina",
+    "middle_name": "Sweeney",
+    "last_name": "Hodges",
+    "gender": "Female",
+    "BOD": "07/13/yyyy",
+    "age": 18,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 984,
+      "brgy": "Rural",
+      "municipality": "Highland",
+      "province": "Maine"
+    },
+    "guardian": {
+      "fatherName": "Hendricks, Norman",
+      "motherName": "Park, Deena",
+      "legal": "Barber, Magdalena"
+    },
+    "contact": 9848405699,
+    "remarks": 56,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b82dd1aa95d36f9417",
+    "LRN": 4439554,
+    "yearLevel": "Grade 10",
+    "first_name": "Gaines",
+    "middle_name": "Wyatt",
+    "last_name": "Galloway",
+    "gender": "Female",
+    "BOD": "02/05/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 112,
+      "brgy": "Rural",
+      "municipality": "Roberts",
+      "province": "Colorado"
+    },
+    "guardian": {
+      "fatherName": "Harrison, Georgette",
+      "motherName": "Lynch, Sears",
+      "legal": "Duke, Betsy"
+    },
+    "contact": 9824482018,
+    "remarks": 51,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8721c5b5d358d3c19",
+    "LRN": 2859417,
+    "yearLevel": "Grade 9",
+    "first_name": "Mildred",
+    "middle_name": "Greer",
+    "last_name": "Lester",
+    "gender": "Female",
+    "BOD": "05/24/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 212,
+      "brgy": "Downtown",
+      "municipality": "Jessie",
+      "province": "Indiana"
+    },
+    "guardian": {
+      "fatherName": "Jensen, Moreno",
+      "motherName": "Reid, Marcy",
+      "legal": "Hughes, Moses"
+    },
+    "contact": 9192559913,
+    "remarks": 66,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8d7b79762f2294a6d",
+    "LRN": 5136316,
+    "yearLevel": "Grade 12",
+    "first_name": "Karla",
+    "middle_name": "Reilly",
+    "last_name": "Mcneil",
+    "gender": "Male",
+    "BOD": "08/04/yyyy",
+    "age": 20,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 778,
+      "brgy": "Downtown",
+      "municipality": "Tuskahoma",
+      "province": "Missouri"
+    },
+    "guardian": {
+      "fatherName": "Burton, Dionne",
+      "motherName": "Henderson, Rosie",
+      "legal": "Owens, Josie"
+    },
+    "contact": 9432880174,
+    "remarks": 87,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8798178d1a96a49b0",
+    "LRN": 4327429,
+    "yearLevel": "Grade 7",
+    "first_name": "Klein",
+    "middle_name": "Middleton",
+    "last_name": "Slater",
+    "gender": "Male",
+    "BOD": "02/11/yyyy",
+    "age": 20,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 214,
+      "brgy": "Suburb",
+      "municipality": "Lavalette",
+      "province": "Kansas"
+    },
+    "guardian": {
+      "fatherName": "Wong, Foreman",
+      "motherName": "Mcpherson, Koch",
+      "legal": "Gillespie, Luann"
+    },
+    "contact": 9796562479,
+    "remarks": 100,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8ded848bac59db52c",
+    "LRN": 3043085,
+    "yearLevel": "Grade 10",
+    "first_name": "Ross",
+    "middle_name": "Gilliam",
+    "last_name": "Santiago",
+    "gender": "Female",
+    "BOD": "07/19/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 390,
+      "brgy": "Rural",
+      "municipality": "Lawrence",
+      "province": "Palau"
+    },
+    "guardian": {
+      "fatherName": "Bauer, Jensen",
+      "motherName": "Murphy, Hughes",
+      "legal": "Torres, Krystal"
+    },
+    "contact": 9604825652,
+    "remarks": 90,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8ee145ca2482eea87",
+    "LRN": 2589069,
+    "yearLevel": "Grade 7",
+    "first_name": "Luz",
+    "middle_name": "Wade",
+    "last_name": "Mcfarland",
+    "gender": "Male",
+    "BOD": "12/29/yyyy",
+    "age": 21,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 880,
+      "brgy": "Suburb",
+      "municipality": "Oceola",
+      "province": "Puerto Rico"
+    },
+    "guardian": {
+      "fatherName": "Morrow, Becky",
+      "motherName": "Day, Johanna",
+      "legal": "Rice, Erickson"
+    },
+    "contact": 9218722571,
+    "remarks": 57,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b88bed9f22188b4e53",
+    "LRN": 8410612,
+    "yearLevel": "Grade 9",
+    "first_name": "Lorie",
+    "middle_name": "Gross",
+    "last_name": "Dalton",
+    "gender": "Female",
+    "BOD": "11/21/yyyy",
+    "age": 22,
+    "MOT": "German",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 668,
+      "brgy": "Suburb",
+      "municipality": "Gibsonia",
+      "province": "Kentucky"
+    },
+    "guardian": {
+      "fatherName": "Mejia, Felecia",
+      "motherName": "Carney, Valentine",
+      "legal": "Wood, Ella"
+    },
+    "contact": 9462943825,
+    "remarks": 99,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b82f22bd0f7edb4a35",
+    "LRN": 5904845,
+    "yearLevel": "Grade 8",
+    "first_name": "Marlene",
+    "middle_name": "Stanley",
+    "last_name": "Cohen",
+    "gender": "Male",
+    "BOD": "01/26/yyyy",
+    "age": 25,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 388,
+      "brgy": "Rural",
+      "municipality": "Alafaya",
+      "province": "Vermont"
+    },
+    "guardian": {
+      "fatherName": "Kelley, Wendy",
+      "motherName": "Underwood, Cathleen",
+      "legal": "Robinson, Key"
+    },
+    "contact": 9707129613,
+    "remarks": 89,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b87ba7d38b095f97f6",
+    "LRN": 8635834,
+    "yearLevel": "Grade 9",
+    "first_name": "Mia",
+    "middle_name": "Barnett",
+    "last_name": "Vaughn",
+    "gender": "Male",
+    "BOD": "01/19/yyyy",
+    "age": 25,
+    "MOT": "Spanish",
+    "EG": "N/A",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 661,
+      "brgy": "Suburb",
+      "municipality": "Baden",
+      "province": "New Mexico"
+    },
+    "guardian": {
+      "fatherName": "Stout, Good",
+      "motherName": "Best, Della",
+      "legal": "Serrano, Abby"
+    },
+    "contact": 9674844836,
+    "remarks": 54,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b82eae8bf596b16693",
+    "LRN": 3838816,
+    "yearLevel": "Grade 11",
+    "first_name": "Sophie",
+    "middle_name": "Rodriguez",
+    "last_name": "Mcintyre",
+    "gender": "Male",
+    "BOD": "07/11/yyyy",
+    "age": 18,
+    "MOT": "English",
+    "EG": "Good",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 228,
+      "brgy": "Rural",
+      "municipality": "Allison",
+      "province": "Louisiana"
+    },
+    "guardian": {
+      "fatherName": "Robbins, Flossie",
+      "motherName": "Vega, Phelps",
+      "legal": "Fernandez, Hale"
+    },
+    "contact": 9729830852,
+    "remarks": 91,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b899a1c9b7740c6fe2",
+    "LRN": 2988182,
+    "yearLevel": "Grade 8",
+    "first_name": "Rodriguez",
+    "middle_name": "Oneal",
+    "last_name": "Obrien",
+    "gender": "Male",
+    "BOD": "09/09/yyyy",
+    "age": 22,
+    "MOT": "English",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 279,
+      "brgy": "Downtown",
+      "municipality": "Brooktrails",
+      "province": "Idaho"
+    },
+    "guardian": {
+      "fatherName": "Clarke, Margo",
+      "motherName": "Nelson, Craig",
+      "legal": "Vaughan, Ophelia"
+    },
+    "contact": 9799957318,
+    "remarks": 57,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8bc4e6e6c2361bdb3",
+    "LRN": 6197905,
+    "yearLevel": "Grade 8",
+    "first_name": "Buckner",
+    "middle_name": "Head",
+    "last_name": "Sheppard",
+    "gender": "Female",
+    "BOD": "08/05/yyyy",
+    "age": 22,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 697,
+      "brgy": "Suburb",
+      "municipality": "Blackgum",
+      "province": "Marshall Islands"
+    },
+    "guardian": {
+      "fatherName": "Armstrong, Tanner",
+      "motherName": "Jefferson, Leah",
+      "legal": "Morales, Frazier"
+    },
+    "contact": 9333898273,
+    "remarks": 90,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8b9ab20903f40d60b",
+    "LRN": 1362122,
+    "yearLevel": "Grade 7",
+    "first_name": "Thompson",
+    "middle_name": "Ayers",
+    "last_name": "Snow",
+    "gender": "Male",
+    "BOD": "03/02/yyyy",
+    "age": 18,
+    "MOT": "Spanish",
+    "EG": "Good",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 252,
+      "brgy": "Suburb",
+      "municipality": "Cuylerville",
+      "province": "California"
+    },
+    "guardian": {
+      "fatherName": "Vinson, Lawson",
+      "motherName": "Humphrey, Carrillo",
+      "legal": "Walls, Figueroa"
+    },
+    "contact": 9766769009,
+    "remarks": 54,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8fce56c7011886b6e",
+    "LRN": 1634479,
+    "yearLevel": "Grade 8",
+    "first_name": "Rosario",
+    "middle_name": "Hogan",
+    "last_name": "Clemons",
+    "gender": "Male",
+    "BOD": "09/22/yyyy",
+    "age": 23,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 900,
+      "brgy": "Rural",
+      "municipality": "Groton",
+      "province": "Utah"
+    },
+    "guardian": {
+      "fatherName": "Prince, Daisy",
+      "motherName": "Griffith, Barlow",
+      "legal": "Glass, Susanna"
+    },
+    "contact": 9932982971,
+    "remarks": 80,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b85331dcf1004e82d4",
+    "LRN": 6484225,
+    "yearLevel": "Grade 9",
+    "first_name": "Hull",
+    "middle_name": "Francis",
+    "last_name": "Freeman",
+    "gender": "Male",
+    "BOD": "01/14/yyyy",
+    "age": 24,
+    "MOT": "French",
+    "EG": "Excellent",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 627,
+      "brgy": "Rural",
+      "municipality": "Guilford",
+      "province": "New Hampshire"
+    },
+    "guardian": {
+      "fatherName": "Irwin, Ayala",
+      "motherName": "Oliver, Gomez",
+      "legal": "Holland, Downs"
+    },
+    "contact": 9154090559,
+    "remarks": 86,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b8467559c0e32bc836",
+    "LRN": 4605023,
+    "yearLevel": "Grade 10",
+    "first_name": "Bullock",
+    "middle_name": "Haley",
+    "last_name": "Calhoun",
+    "gender": "Female",
+    "BOD": "05/12/yyyy",
+    "age": 23,
+    "MOT": "English",
+    "EG": "Poor",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 620,
+      "brgy": "Downtown",
+      "municipality": "Ahwahnee",
+      "province": "New Jersey"
+    },
+    "guardian": {
+      "fatherName": "Foster, Matilda",
+      "motherName": "Marquez, Randi",
+      "legal": "Coleman, Jana"
+    },
+    "contact": 9943844636,
+    "remarks": 90,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b8a50e98839a02f07a",
+    "LRN": 7048343,
+    "yearLevel": "Grade 8",
+    "first_name": "Summer",
+    "middle_name": "Curtis",
+    "last_name": "Pruitt",
+    "gender": "Female",
+    "BOD": "12/06/yyyy",
+    "age": 23,
+    "MOT": "German",
+    "EG": "Average",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 786,
+      "brgy": "Suburb",
+      "municipality": "Maxville",
+      "province": "Guam"
+    },
+    "guardian": {
+      "fatherName": "Giles, Banks",
+      "motherName": "Hernandez, Alisha",
+      "legal": "Estes, Caroline"
+    },
+    "contact": 9239395056,
+    "remarks": 89,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8d02687360837c38a",
+    "LRN": 1080406,
+    "yearLevel": "Grade 7",
+    "first_name": "Morrow",
+    "middle_name": "Quinn",
+    "last_name": "Silva",
+    "gender": "Male",
+    "BOD": "07/12/yyyy",
+    "age": 21,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 592,
+      "brgy": "Downtown",
+      "municipality": "Dotsero",
+      "province": "Florida"
+    },
+    "guardian": {
+      "fatherName": "Bush, Irwin",
+      "motherName": "Moses, Katelyn",
+      "legal": "Flores, Wilson"
+    },
+    "contact": 9068303170,
+    "remarks": 97,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8cc62475a82dc2117",
+    "LRN": 5687279,
+    "yearLevel": "Grade 12",
+    "first_name": "Gwen",
+    "middle_name": "Grant",
+    "last_name": "Ingram",
+    "gender": "Female",
+    "BOD": "12/17/yyyy",
+    "age": 22,
+    "MOT": "Spanish",
+    "EG": "Excellent",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 522,
+      "brgy": "Rural",
+      "municipality": "Topaz",
+      "province": "Wyoming"
+    },
+    "guardian": {
+      "fatherName": "Burgess, Melinda",
+      "motherName": "Perez, Henderson",
+      "legal": "Klein, Sparks"
+    },
+    "contact": 9552416781,
+    "remarks": 91,
+    "status": "pending"
+  },
+  {
+    "_id": "651a85b87c2df339259bceb9",
+    "LRN": 1520068,
+    "yearLevel": "Grade 12",
+    "first_name": "Wilma",
+    "middle_name": "Mosley",
+    "last_name": "Ewing",
+    "gender": "Male",
+    "BOD": "08/31/yyyy",
+    "age": 19,
+    "MOT": "German",
+    "EG": "Good",
+    "religion": "Buddhist",
+    "address": {
+      "houseNo": 979,
+      "brgy": "Suburb",
+      "municipality": "Sattley",
+      "province": "Alaska"
+    },
+    "guardian": {
+      "fatherName": "Mcbride, Kinney",
+      "motherName": "Charles, Conley",
+      "legal": "Copeland, Tracie"
+    },
+    "contact": 9492601599,
+    "remarks": 80,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b89c274f45afcbb96e",
+    "LRN": 8863190,
+    "yearLevel": "Grade 7",
+    "first_name": "Minnie",
+    "middle_name": "Chambers",
+    "last_name": "Hickman",
+    "gender": "Male",
+    "BOD": "06/08/yyyy",
+    "age": 20,
+    "MOT": "German",
+    "EG": "Poor",
+    "religion": "Jewish",
+    "address": {
+      "houseNo": 272,
+      "brgy": "Suburb",
+      "municipality": "Caln",
+      "province": "Oregon"
+    },
+    "guardian": {
+      "fatherName": "Martinez, Richmond",
+      "motherName": "Vargas, Charles",
+      "legal": "Russo, Sonia"
+    },
+    "contact": 9780817058,
+    "remarks": 62,
+    "status": "rejected"
+  },
+  {
+    "_id": "651a85b8da0cb1be85bd9445",
+    "LRN": 7151642,
+    "yearLevel": "Grade 7",
+    "first_name": "Phoebe",
+    "middle_name": "Duran",
+    "last_name": "Rose",
+    "gender": "Female",
+    "BOD": "04/21/yyyy",
+    "age": 21,
+    "MOT": "French",
+    "EG": "Good",
+    "religion": "Christian",
+    "address": {
+      "houseNo": 997,
+      "brgy": "Downtown",
+      "municipality": "Loretto",
+      "province": "Michigan"
+    },
+    "guardian": {
+      "fatherName": "Parsons, Woodard",
+      "motherName": "Moran, Willis",
+      "legal": "Kane, Dora"
+    },
+    "contact": 9946067858,
+    "remarks": 99,
+    "status": "accepted"
+  },
+  {
+    "_id": "651a85b811f82001aa2a9fdc",
+    "LRN": 7302069,
+    "yearLevel": "Grade 8",
+    "first_name": "Sexton",
+    "middle_name": "Dodson",
+    "last_name": "Summers",
+    "gender": "Male",
+    "BOD": "06/22/yyyy",
+    "age": 20,
+    "MOT": "Spanish",
+    "EG": "Average",
+    "religion": "Muslim",
+    "address": {
+      "houseNo": 983,
+      "brgy": "Suburb",
+      "municipality": "Jardine",
+      "province": "Washington"
+    },
+    "guardian": {
+      "fatherName": "Bowman, Terry",
+      "motherName": "Shaffer, Sonya",
+      "legal": "Weiss, House"
+    },
+    "contact": 9849589124,
+    "remarks": 55,
+    "status": "pending"
+  }
+]

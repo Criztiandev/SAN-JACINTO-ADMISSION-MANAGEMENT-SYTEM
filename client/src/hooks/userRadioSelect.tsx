@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from "react";
 import { ItemSelection } from "../interface/registrationInterface";
 
@@ -14,7 +15,7 @@ interface RadioSelectHook {
 
 const useRadioSelect = (items: ItemSelection[]): RadioSelectHook => {
   const data = useMemo(() => items, [items]);
-  const [currentSelectedIndex, setCurrentSelectedIndex] = useState(99);
+  const [currentSelectedIndex, setCurrentSelectedIndex] = useState<number>(-1);
 
   const nextItem = () =>
     setCurrentSelectedIndex(prev =>

@@ -1,36 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Avatar from "../../components/Avatar";
-import { useTableContext } from "../../context/TableContext";
+import { Avatar } from "../../components";
+import Checkbox from "../../components/Checkbox";
 
 interface FirstColumnProps {
-  row: any;
+  data: any;
   value: any;
-  isSelection: boolean;
+  viewApplicant: () => void;
 }
 
-const FirstColumn = ({ isSelection = true, row, value }: FirstColumnProps) => {
-  const { dispatch } = useTableContext();
-
-  const handleViewProfile = () => {
-    console.log("Clicked");
-    if (!isSelection) dispatch({ type: "SET_VIEW_PROFILE" });
-  };
-
+const FirstColumn = ({ data, value, viewApplicant }: FirstColumnProps) => {
   return (
-    <label
-      className="cursor-pointer flex gap-4 px-4 items-center"
-      onClick={handleViewProfile}>
-      {isSelection ? (
-        <input
-          type="checkbox"
-          checked={row.getIsSelected()}
-          disabled={!row.getCanSelect()}
-          onChange={row.getToggleSelectedHandler()}
-        />
-      ) : null}
+    <div
+      className="grid grid-cols-[16px_32px_auto] gap-4 items-center"
+      onDoubleClick={viewApplicant}>
+      <Checkbox
+        {...{
+          checked: data.getIsSelected(),
+          disabled: !data.getCanSelect(),
+          indeterminate: data.getIsSomeSelected(),
+          onChange: data.getToggleSelectedHandler(),
+        }}
+      />
+
       <Avatar />
-      <span>{value()}</span>
-    </label>
+
+      <span>{value}</span>
+    </div>
   );
 };
+
 export default FirstColumn;
