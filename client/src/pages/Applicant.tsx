@@ -1,48 +1,106 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { applicantData } from "../data/applicantData";
+import applicantData from "../data/applicantData.json";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
+import FilterIcon from "../assets/icons/Filter.svg";
 
-import { Badge, Button, Dropdown, Table, IconButton } from "../components";
-import MonthPicker from "../containers/MonthPicker";
-import FirstColumn from "../containers/Table/FirstColumn";
-import ActionColumn from "../containers/Table/ActionColumn";
+import {
+  Badge,
+  Button,
+  Table,
+  Drawer,
+  IconButton,
+  SearchBar,
+  Dropdown,
+} from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 
 import ApplicantIcon from "../assets/icons/Applicants.svg";
-import SelectAllIcon from "../assets/icons/Select_All.svg";
-import ImportIcon from "../assets/icons/Import_light.svg";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-import ArchievedIcon from "../assets/icons/Arhive_light.svg";
+import AcceptIcon from "../assets/icons/Done_light.svg";
+import EditIcon from "../assets/icons/Edit_light.svg";
+import MessageIcon from "../assets/icons/Message_light.svg";
+import useDrawer from "../hooks/useDrawer";
+import TitleHeader from "../containers/Table/TitleHeader";
+import FirstColumn from "../containers/Table/FirstColumn";
 
-interface FilterConfigItem {
+interface ListItemProps {
   title: string;
   icon: string;
+  value?: string;
 }
 
-const FilterConfig: FilterConfigItem[] = [
-  { title: "Default", icon: ApplicantIcon },
-  { title: "Grade 7", icon: ApplicantIcon },
-  { title: "Grade 8", icon: ApplicantIcon },
-  { title: "Grade 9", icon: ApplicantIcon },
-  { title: "Grade 10", icon: ApplicantIcon },
-  { title: "Grade 11", icon: ApplicantIcon },
-  { title: "Grade 12", icon: ApplicantIcon },
+interface ColumnInterface {
+  yearLevel: { id: string; value: string };
+  status: { id: string; value: string };
+}
+
+const FilterItems: ListItemProps[] = [
+  { title: "Default", icon: ApplicantIcon, value: "" },
+  { title: "Grade 7", icon: ApplicantIcon, value: "7" },
+  { title: "Grade 8", icon: ApplicantIcon, value: "8" },
+  { title: "Grade 9", icon: ApplicantIcon, value: "9" },
+  { title: "Grade 10", icon: ApplicantIcon, value: "10" },
+  { title: "Grade 11", icon: ApplicantIcon, value: "11" },
+  { title: "Grade 12", icon: ApplicantIcon, value: "12" },
 ];
 
-const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
-  return [
-    {
-      header: "Name",
-      accessorFn: ({ last_name, first_name, middle_name }) =>
-        `${last_name}, ${first_name} ${middle_name}`,
+const StatusItems: ListItemProps[] = [
+  { title: "Default", icon: ApplicantIcon, value: "" },
+  { title: "Pending", icon: ApplicantIcon, value: "Pending" },
+  { title: "Accepted", icon: ApplicantIcon, value: "Accepted" },
+  { title: "Hold", icon: ApplicantIcon, value: "Hold" },
+];
 
-      cell: ({ row, getValue }: any) => (
+const MoreItems: ListItemProps[] = [
+  { title: "Print", icon: ApplicantIcon },
+  { title: "Export", icon: ApplicantIcon },
+];
+
+const Applicant = () => {
+  const [selectedApplicant, setSelectedApplicant] = useState<any>({});
+  const [search, setSearch] = useState("");
+  const [columnSearch, setColumnSearch] = useState<ColumnInterface>({
+    yearLevel: { id: "yearLevel", value: "" },
+    status: { id: "status", value: "" },
+  });
+
+  const createApplicant = useDrawer();
+  const viewApplicant = useDrawer();
+  const editApplicant = useDrawer();
+
+  const handleViewApplicant = (data: any) => {
+    setSelectedApplicant(data);
+    viewApplicant.toggleDrawer();
+  };
+
+  const handleSelect = (name: keyof ColumnInterface, value: string) => {
+    setColumnSearch(prev => ({
+      ...prev,
+      [name]: { ...prev[name], value: value },
+    }));
+  };
+
+  const handleTitleUpdate = (_default: string, value: string) => {
+    if (value === "Default" || value === "") return _default;
+    return value;
+  };
+
+  console.log(columnSearch);
+
+  const HeaderConfig: ColumnDef<any, any>[] = [
+    {
+      id: "select",
+      header: ({ table }) => <TitleHeader data={table} />,
+      accessorFn: row =>
+        `${row.last_name}, ${row.first_name} ${row.middle_name}`,
+
+      cell: ({ row, getValue }) => (
         <FirstColumn
-          isSelection={selection}
-          row={row}
-          value={() => getValue()}
+          data={row}
+          value={getValue()}
+          viewApplicant={() => handleViewApplicant(row.original)}
         />
       ),
     },
@@ -50,7 +108,7 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
     {
       header: "Grade Level",
       accessorKey: "yearLevel",
-      cell: (row: any) => row.getValue()?.split(" ")[1],
+      accessorFn: row => `${row.yearLevel.split(" ")[1]}`,
     },
     { header: "Gender", accessorKey: "gender" },
     { header: "BOD", accessorKey: "BOD" },
@@ -67,77 +125,161 @@ const HeaderConfig = (selection: boolean): ColumnDef<any, any>[] => {
     },
     {
       header: "Action",
-      cell: ({ row }: any) => <ActionColumn row={row} disabled={selection} />,
+      cell: ({ row }) => (
+        <span className="flex gap-4">
+          <IconButton type="outlined" icon={AcceptIcon} />
+          <IconButton
+            type="outlined"
+            icon={EditIcon}
+            onClick={() => {
+              setSelectedApplicant(row.original);
+              editApplicant.toggleDrawer();
+            }}
+          />
+          <Dropdown>
+            <Button
+              title="Message"
+              type="ghost"
+              icon={MessageIcon}
+              dir="left"
+            />
+
+            <Button
+              title="Message"
+              type="ghost"
+              icon={MessageIcon}
+              dir="left"
+            />
+
+            <Button
+              title="Message"
+              type="ghost"
+              icon={MessageIcon}
+              dir="left"
+            />
+          </Dropdown>
+        </span>
+      ),
     },
   ];
-};
 
-const Applicant = () => {
-  const [selection, setSelection] = useState(false);
   return (
     <>
       <BaseLayout
         title="Applicants"
         header={
           <>
-            <IconButton type="ghost" icon={ArchievedIcon} />
-            <Button dir="left" title="Create" icon={CreateApplicantIcon} />
+            <Button
+              dir="left"
+              title="Create"
+              icon={CreateApplicantIcon}
+              onClick={createApplicant.toggleDrawer}
+            />
           </>
         }
         action>
-        {/* Table Container */}
-        <Table
-          className="overflow-y-auto flex flex-col gap-4"
-          data={applicantData}
-          config={HeaderConfig(selection)}
-          layout={
-            "270px 150px 150px 100px 100px 100px 200px 150px 100px auto 200px"
-          }>
-          <Table.Container.Header className="flex justify-between items-center">
-            <Table.Tools.SearchBar />
+        <>
+          <div className="flex justify-between items-center">
+            <SearchBar
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
 
-            <Table.Separator className="flex gap-4">
-              {selection ? (
-                <Table.Tools.Action close={() => setSelection(false)} />
-              ) : (
-                <>
-                  <MonthPicker />
-                  <Table.Tools.Filter lists={FilterConfig} />
+            <div className="flex gap-4">
+              <Dropdown
+                className="border z-50"
+                style={{ width: "150px" }}
+                as="button"
+                type="outlined"
+                title={handleTitleUpdate(
+                  "Grade",
+                  `Grade ${columnSearch.yearLevel.value}`
+                )}
+                icon={FilterIcon}>
+                {FilterItems.map(items => (
+                  <Button
+                    key={items.title}
+                    type="ghost"
+                    dir="left"
+                    value={items.value}
+                    {...items}
+                    onClick={(e: MouseEvent<HTMLButtonElement>) =>
+                      handleSelect("yearLevel", e.currentTarget.value)
+                    }
+                  />
+                ))}
+              </Dropdown>
 
-                  <Dropdown as="icon" type="outlined">
-                    <Button
-                      dir="left"
-                      icon={SelectAllIcon}
-                      title="Selection"
-                      type="ghost"
-                      onClick={() => setSelection(prev => !prev)}
-                    />
-
-                    <Button
-                      dir="left"
-                      icon={ImportIcon}
-                      title="Import"
-                      type="ghost"
-                    />
-
-                    <Button title="Import" type="ghost" />
-                  </Dropdown>
-                </>
-              )}
-            </Table.Separator>
-          </Table.Container.Header>
-
-          <Table.Container.Content>
-            <Table.Head />
-            <Table.Body />
-          </Table.Container.Content>
-
-          <Table.Container.Footer>
-            <Table.Tools.Pagination />
-          </Table.Container.Footer>
-        </Table>
+              <Dropdown
+                className="border z-50 w-[150px]"
+                as="button"
+                type="outlined"
+                title={handleTitleUpdate("Status", columnSearch.status.value)}
+                icon={FilterIcon}>
+                {StatusItems.map(items => (
+                  <Button
+                    key={items.title}
+                    type="ghost"
+                    dir="left"
+                    value={items.title}
+                    {...items}
+                    onClick={(e: MouseEvent<HTMLButtonElement>) =>
+                      handleSelect("status", e.currentTarget.value)
+                    }
+                  />
+                ))}
+              </Dropdown>
+              <Dropdown type="outlined">
+                {MoreItems.map(items => (
+                  <Button
+                    key={items.title}
+                    type="ghost"
+                    dir="left"
+                    {...items}
+                  />
+                ))}
+              </Dropdown>
+            </div>
+          </div>
+          <Table
+            data={applicantData}
+            config={HeaderConfig}
+            search={search}
+            columnSearch={columnSearch}
+          />
+        </>
       </BaseLayout>
+
       {/* <Drawer /> */}
+      {createApplicant.active && (
+        <Drawer
+          title="Create Applicant"
+          subtitle="This able you to create applicant"
+          active={createApplicant.active}
+          handleToggle={createApplicant.toggleDrawer}>
+          <h1>HI</h1>
+        </Drawer>
+      )}
+
+      {viewApplicant.active && (
+        <Drawer
+          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
+          subtitle="This able you to create applicant"
+          active={createApplicant.active}
+          handleToggle={viewApplicant.toggleDrawer}>
+          <h1>HI</h1>
+        </Drawer>
+      )}
+
+      {editApplicant.active && (
+        <Drawer
+          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
+          subtitle="This able you to create applicant"
+          active={createApplicant.active}
+          handleToggle={editApplicant.toggleDrawer}>
+          <h1>HI</h1>
+        </Drawer>
+      )}
     </>
   );
 };

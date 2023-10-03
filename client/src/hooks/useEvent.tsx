@@ -3,7 +3,13 @@ import { Event } from "../interface/dateInterface";
 
 const useEvent = () => {
   const [selected, setSelected] = useState<Event | null>(null);
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([
+    {
+      title: "Nice",
+      start: new Date(),
+      end: new Date(),
+    },
+  ]);
   const memoizedEvents = useMemo(() => events, [events]);
 
   return {

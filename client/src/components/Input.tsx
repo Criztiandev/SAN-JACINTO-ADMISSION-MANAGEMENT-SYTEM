@@ -5,6 +5,8 @@ import { InputInterface } from "../interface/componentInterface";
 
 interface FieldProps extends InputInterface {
   type?: string;
+  value?: any;
+  disabled?: any;
 }
 
 const Input = ({ label, name = "", ...props }: FieldProps) => {
@@ -22,7 +24,9 @@ const Input = ({ label, name = "", ...props }: FieldProps) => {
         </label>
       )}
       <input
-        className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
+        className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
+          props.disabled ? "text-gray-400" : ""
+        }`}
         {...field}
         {...props}
         id={name}
