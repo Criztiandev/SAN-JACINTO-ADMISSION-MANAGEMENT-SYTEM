@@ -2,7 +2,7 @@
 
 import applicantData from "../data/applicantData.json";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState, useEffect, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import FilterIcon from "../assets/icons/Filter.svg";
 
 import {
@@ -49,7 +49,7 @@ const FilterItems: ListItemProps[] = [
 const StatusItems: ListItemProps[] = [
   { title: "Default", icon: ApplicantIcon, value: "" },
   { title: "Pending", icon: ApplicantIcon, value: "Pending" },
-  { title: "Examinee", icon: ApplicantIcon, value: "Examinee" },
+  { title: "Accepted", icon: ApplicantIcon, value: "Accepted" },
   { title: "Hold", icon: ApplicantIcon, value: "Hold" },
 ];
 
