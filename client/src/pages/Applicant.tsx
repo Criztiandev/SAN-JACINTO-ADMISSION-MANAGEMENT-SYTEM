@@ -9,7 +9,6 @@ import {
   Badge,
   Button,
   Table,
-  Drawer,
   IconButton,
   SearchBar,
   Dropdown,
@@ -24,6 +23,9 @@ import MessageIcon from "../assets/icons/Message_light.svg";
 import useDrawer from "../hooks/useDrawer";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
+import ViewDrawer from "../containers/Applicants/ViewDrawer";
+import CreateDrawer from "../containers/Applicants/CreateDrawer";
+import EditDrawer from "../containers/Applicants/EditDrawer";
 
 interface ListItemProps {
   title: string;
@@ -49,7 +51,6 @@ const FilterItems: ListItemProps[] = [
 const StatusItems: ListItemProps[] = [
   { title: "Default", icon: ApplicantIcon, value: "" },
   { title: "Pending", icon: ApplicantIcon, value: "Pending" },
-  { title: "Accepted", icon: ApplicantIcon, value: "Accepted" },
   { title: "Hold", icon: ApplicantIcon, value: "Hold" },
 ];
 
@@ -86,8 +87,6 @@ const Applicant = () => {
     if (value === "Default" || value === "") return _default;
     return value;
   };
-
-  console.log(columnSearch);
 
   const HeaderConfig: ColumnDef<any, any>[] = [
     {
@@ -245,41 +244,24 @@ const Applicant = () => {
             data={applicantData}
             config={HeaderConfig}
             search={search}
-            columnSearch={columnSearch}
+            columnSearch={[
+              { ...columnSearch.yearLevel },
+              { ...columnSearch.status },
+            ]}
+            layout="250px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
           />
         </>
       </BaseLayout>
 
       {/* <Drawer /> */}
-      {createApplicant.active && (
-        <Drawer
-          title="Create Applicant"
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={createApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
 
-      {viewApplicant.active && (
-        <Drawer
-          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={viewApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
-
-      {editApplicant.active && (
-        <Drawer
-          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={editApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
+      <CreateDrawer event={createApplicant} />
+      <ViewDrawer
+        details={selectedApplicant}
+        event={viewApplicant}
+        disabled={true}
+      />
+      <EditDrawer details={selectedApplicant} event={editApplicant} />
     </>
   );
 };

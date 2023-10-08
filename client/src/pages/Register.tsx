@@ -26,7 +26,7 @@ const registrationPanels: panelTemplate[] = [
   { title: "Grade Level", component: <GradeLevel /> },
   { title: "Student Details", component: <StudentDetails /> },
   { title: "Personal Details", component: <PersonalDetails /> },
-  { title: "Permanent Address", component: <PermanentAddress /> },
+  { title: "Current Address", component: <PermanentAddress /> },
   { title: "Guardian Details", component: <GuardianDetails /> },
   { title: "Other Details", component: <OtherDetails /> },
   { title: "Facebook Account", component: <AccountDetails /> },

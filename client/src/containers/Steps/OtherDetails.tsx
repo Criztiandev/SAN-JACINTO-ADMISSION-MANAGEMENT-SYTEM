@@ -11,9 +11,9 @@ interface OtherInterface extends InputInterface {
 }
 
 const OtherDetails = () => {
-  const [is4ps, setIs4ps] = useState("");
-  const [isIndi, setIsIndi] = useState("");
-  const [isLWD, setIsLWD] = useState("");
+  const [is4ps, setIs4ps] = useState("No");
+  const [isIndi, setIsIndi] = useState("No");
+  const [isLWD, setIsLWD] = useState("No");
 
   const OtherInputTransformer: OtherInterface[] = [
     {

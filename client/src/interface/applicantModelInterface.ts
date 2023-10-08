@@ -21,6 +21,7 @@ export interface StudentDetails {
   yearLevel: string;
   track: string;
   schoolYear: string;
+  lastSchoolAttended: string;
 }
 
 export interface PersonalDetails {
@@ -56,6 +57,7 @@ export interface GuardianDetails {
   father: Guardian;
   mother: Guardian;
   legalGuardian: Guardian;
+  choosen: string;
 }
 
 export interface OtherDetails {

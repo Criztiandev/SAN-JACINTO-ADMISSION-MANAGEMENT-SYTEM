@@ -2,6 +2,7 @@ import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import { useState } from "react";
 import { InputInterface } from "../../interface/componentInterface";
+import { Switch } from "../../components";
 
 const InputTransformer = (name: string): InputInterface[] => [
   {
@@ -46,31 +47,32 @@ const InputTransformer = (name: string): InputInterface[] => [
 ];
 
 const PermanentAddress = () => {
-  const [hasCurrentAddress, setHasCurrentAddress] = useState<boolean>(false);
+  const [viewPermanentAddress, setviewPermanentAddress] =
+    useState<boolean>(false);
 
   return (
     <section>
       <div className="grid grid-cols-2 gap-4">
-        {InputTransformer("permanentAddress").map(inputs => (
+        {InputTransformer("current").map(inputs => (
           <Input key={inputs.label} {...inputs} />
         ))}
       </div>
-      <label className="flex gap-4 py-4">
-        <input
-          type="checkbox"
-          onClick={() => setHasCurrentAddress(prev => !prev)}
+      <div className="flex gap-4 py-4">
+        <Switch
+          toggle={viewPermanentAddress}
+          toggleSwitch={() => setviewPermanentAddress(prev => !prev)}
         />
-        <Typography as="span">Do you currently have an address?</Typography>
-      </label>
+        <Typography as="span">Is this your permanent address ?</Typography>
+      </div>
 
-      {hasCurrentAddress && (
+      {viewPermanentAddress && (
         <>
           <Typography className="my-4 border-b pb-2" as="h5">
-            Current Address
+            Permanent Address
           </Typography>
 
           <div className="grid grid-cols-2 gap-4 mb-6">
-            {InputTransformer("currentAddress").map(props => (
+            {InputTransformer("permanent").map(props => (
               <Input key={props.label} {...props} />
             ))}
           </div>

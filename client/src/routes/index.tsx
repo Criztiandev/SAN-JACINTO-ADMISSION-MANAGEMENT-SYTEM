@@ -1,8 +1,16 @@
 import { RouterProvider } from "react-router-dom";
 import { privateRoutes } from "./privateRoutes";
+import { useState } from "react";
+import { publicRoutes } from "./publicRoutes";
 
 const Routes = () => {
-  return <RouterProvider router={privateRoutes} />;
+  const [user, setUser] = useState("");
+
+  if (user) {
+    return <RouterProvider router={privateRoutes} />;
+  }
+
+  return <RouterProvider router={publicRoutes} />;
 };
 
 export default Routes;

@@ -22,11 +22,12 @@ interface TableProps extends BaseProps {
   config: any[];
   search: string;
   columnSearch: any;
+  layout: string;
 }
 
 type SortingState = ColumnSort[];
 
-const Table = ({ data, config, search, columnSearch }: TableProps) => {
+const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
 
   const [rowSelection, setRowSelection] = useState({});
@@ -36,12 +37,7 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
 
   useEffect(() => {
     if (search) setGlobalFilter(search);
-    if (columnSearch)
-      setColumnFilter(prev => [
-        ...prev,
-        { ...columnSearch.status },
-        { ...columnSearch.yearLevel },
-      ]);
+    if (columnSearch) setColumnFilter(prev => [...prev, ...columnSearch]);
 
     return () => {
       setGlobalFilter("");
@@ -73,13 +69,10 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const sortingIcons = {
+  const sortingIcons: any = {
     asc: <Image className="w-5 h-5" src={AscIcon} alt="asc_icon" />,
     desc: <Image className="w-5 h-5" src={DescIcon} alt="desc_icon" />,
   };
-
-  const cols =
-    "250px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px";
 
   return (
     <>
@@ -89,9 +82,13 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
             {/* Header */}
             <div
               className={`grid items-center justify-items-center sticky top-0 z-20`}
-              style={{ gridTemplateColumns: cols }}>
+              style={{ gridTemplateColumns: layout }}>
               {headers.map(
                 ({ id, column, getContext, isPlaceholder }, index) => {
+                  const sorting = column.getIsSorted();
+                  const selectedIcon =
+                    sorting === "asc" || sorting === "desc" ? sorting : "";
+
                   return (
                     <span
                       key={id}
@@ -103,8 +100,7 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
                       {isPlaceholder
                         ? null
                         : flexRender(column.columnDef.header, getContext())}
-
-                      {sortingIcons[column.getIsSorted() ?? null]}
+                      {sortingIcons[selectedIcon]}
                     </span>
                   );
                 }
@@ -117,7 +113,7 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
                 <div
                   key={id}
                   className={`grid items-center justify-items-center border-b`}
-                  style={{ gridTemplateColumns: cols }}>
+                  style={{ gridTemplateColumns: layout }}>
                   {getVisibleCells().map(
                     ({ id, column, getContext }, index) => (
                       <span

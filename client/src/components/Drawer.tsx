@@ -6,7 +6,7 @@ import { Fragment } from "./Fragments";
 
 interface DrawerProps extends BaseProps {
   title: string | boolean;
-  subtitle: string;
+  subtitle: string | number;
   handleToggle: () => void;
   active: boolean;
   anchor?: "left" | "right";

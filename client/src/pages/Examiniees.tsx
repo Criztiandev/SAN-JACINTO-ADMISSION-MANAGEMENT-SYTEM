@@ -59,7 +59,7 @@ const MoreItems: ListItemProps[] = [
   { title: "Export", icon: ApplicantIcon },
 ];
 
-const MasterList = () => {
+const Examiniees = () => {
   const [selectedApplicant, setSelectedApplicant] = useState<any>({});
   const [search, setSearch] = useState("");
   const [columnSearch, setColumnSearch] = useState<ColumnInterface>({
@@ -165,7 +165,7 @@ const MasterList = () => {
   return (
     <>
       <BaseLayout
-        title="Applicants"
+        title="Examinees"
         header={
           <>
             <Button
@@ -262,4 +262,4 @@ const MasterList = () => {
   );
 };
 
-export default MasterList;
+export default Examiniees;

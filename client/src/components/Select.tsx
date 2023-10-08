@@ -27,7 +27,7 @@ const Select = ({ label, name = "", ...props }: FieldProps) => {
         </label>
       )}
       <select
-        className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
+        className={`bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
         {...field}
         {...props}
         id={name}

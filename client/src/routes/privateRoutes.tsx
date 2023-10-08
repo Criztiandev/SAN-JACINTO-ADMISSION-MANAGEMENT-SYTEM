@@ -1,51 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
-import {
-  LandingPage,
-  RegisterPage,
-  LoginPage,
-  ErrorPage,
-  ApplicantPage,
-  SchedulePage,
-  AnnoucementPage,
-  ToolPage,
-  DashboardPage,
-} from "../pages";
+import { ErrorPage, ApplicantPage, DashboardPage } from "../pages";
+import Examiniees from "../pages/Examiniees";
 
-export const privateRoutes = createBrowserRouter([
-  { path: "/", element: <LandingPage />, errorElement: <ErrorPage /> },
-  { path: "/register", element: <RegisterPage />, errorElement: <ErrorPage /> },
+const routes = [
   {
-    path: "/login",
-    element: <LoginPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/dashboard",
+    path: "/",
     element: <DashboardPage />,
-    errorElement: <ErrorPage />,
   },
 
   {
     path: "/applicants",
     element: <ApplicantPage />,
-    errorElement: <ErrorPage />,
   },
 
   {
-    path: "/schedule",
-    element: <SchedulePage />,
-    errorElement: <ErrorPage />,
+    path: "/applicants/examinees",
+    element: <Examiniees />,
   },
+];
 
-  {
-    path: "/message",
-    element: <AnnoucementPage />,
+export const privateRoutes = createBrowserRouter(
+  routes.map(route => ({
+    path: route.path,
+    element: route.element,
     errorElement: <ErrorPage />,
-  },
-
-  {
-    path: "/tools",
-    element: <ToolPage />,
-    errorElement: <ErrorPage />,
-  },
-]);
+  }))
+);
