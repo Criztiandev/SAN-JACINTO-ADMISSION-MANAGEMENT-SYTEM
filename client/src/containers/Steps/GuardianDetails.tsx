@@ -5,7 +5,6 @@ import Typography from "../../components/Typography";
 import { InputInterface } from "../../interface/componentInterface";
 import { ItemSelection } from "../../interface/registrationInterface";
 import RadioItems from "../Register/RadioItems";
-import { useFormikContext } from "formik";
 
 const getGuardianInput = (name: string): InputInterface[] => [
   {
