@@ -9,6 +9,7 @@ import {
   PersonalDetails,
   SchoolDetails,
   StudentDetails,
+  applicantInputMapsInterface,
 } from "../interface/applicantModelInterface";
 
 const addressTemplate: Address = {
@@ -74,9 +75,9 @@ const guardianDetails: GuardianDetails = {
 };
 
 const otherDetails: OtherDetails = {
-  is4psBeneficiary: "",
-  isIndigenousPerson: "",
-  isLWD: "",
+  is4psBeneficiary: "No",
+  isIndigenousPerson: "No",
+  isLWD: "No",
 };
 
 const applicantTemplate: ApplicantModelInterface = {
@@ -89,7 +90,7 @@ const applicantTemplate: ApplicantModelInterface = {
   accountDetails,
 };
 
-export const applicantInputMaps = [
+export const applicantInputMaps: applicantInputMapsInterface[] = [
   {
     title: "Student Details",
     details: [

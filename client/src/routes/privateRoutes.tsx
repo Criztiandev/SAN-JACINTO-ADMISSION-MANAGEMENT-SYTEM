@@ -1,5 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ErrorPage, ApplicantPage, DashboardPage } from "../pages";
+import {
+  ErrorPage,
+  ApplicantPage,
+  DashboardPage,
+  SchedulePage,
+} from "../pages";
 import Examiniees from "../pages/Examiniees";
 
 const routes = [
@@ -17,6 +22,8 @@ const routes = [
     path: "/applicants/examinees",
     element: <Examiniees />,
   },
+
+  { path: "/schedule", element: <SchedulePage /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

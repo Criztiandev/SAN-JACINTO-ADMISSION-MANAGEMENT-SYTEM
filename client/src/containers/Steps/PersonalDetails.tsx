@@ -93,7 +93,7 @@ const PersonalDetails = () => {
   return (
     <section className="flex flex-col gap-4 mb-4">
       <div className="flex justify-center items-center flex-col">
-        <Carousel>
+        <Carousel direction="center">
           {gendersArr.map((gender, index) => (
             <RadioItems
               {...gender}

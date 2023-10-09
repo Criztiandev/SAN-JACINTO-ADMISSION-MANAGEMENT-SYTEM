@@ -1,23 +1,14 @@
-import { Typography, Input } from "../../components";
+import { Input, IconButton } from "../../components";
+import RadioItems from "../Register/RadioItems";
 const AccountDetails = () => {
   return (
     <section className="flex justify-center items-center h-full">
-      <div className="flex flex-col gap-4">
-        <div className="m-auto w-[300px] h-[300px] flex flex-col justify-center items-center gap-4 p-4   rounded-[5px] shadow-md ">
-          {/* Logo */}
-          <div className="w-32 h-32 rounded-full bg-sky-300"></div>
+      <div className="flex justify-center items-center flex-col gap-8">
+        <RadioItems title="Facebook" subtitle="Social Media" index={0} />
 
-          {/* Content */}
-          <div className="text-center">
-            <Typography as="h5">Facebook</Typography>
-            <Typography as="span" className="text-sm text-gray-400">
-              Social Media Platform
-            </Typography>
-          </div>
-        </div>
-
-        <div className="flex justify-center items-center">
+        <div className="flex gap-2">
           <Input name="facebook" placeholder="Enter your FB Profile Link" />
+          <IconButton type="contained" className="w-12 h-12" />
         </div>
       </div>
     </section>

@@ -7,13 +7,13 @@ import { InputInterface } from "../../interface/componentInterface";
 
 interface OtherInterface extends InputInterface {
   state?: string;
-  handler: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const OtherDetails = () => {
-  const [is4ps, setIs4ps] = useState("No");
-  const [isIndi, setIsIndi] = useState("No");
-  const [isLWD, setIsLWD] = useState("No");
+  const [is4ps, setIs4ps] = useState("");
+  const [isIndi, setIsIndi] = useState("");
+  const [isLWD, setIsLWD] = useState("");
 
   const OtherInputTransformer: OtherInterface[] = [
     {
@@ -21,7 +21,7 @@ const OtherDetails = () => {
       name: `otherDetails.is4psBeneficiary`,
       placeholder: "Enter your Reference #",
       state: is4ps,
-      handler: event => setIs4ps(event.target.value),
+      handleChange: event => setIs4ps(event.target.value),
     },
 
     {
@@ -29,15 +29,15 @@ const OtherDetails = () => {
       name: `otherDetails.isIndigenousPerson`,
       placeholder: "Please Specify",
       state: isIndi,
-      handler: event => setIsIndi(event.target.value),
+      handleChange: event => setIsIndi(event.target.value),
     },
 
     {
       label: "Are you a LWD Person ?",
-      name: `otherDetails.LWD`,
+      name: `otherDetails.isLWD`,
       placeholder: "Please Specify",
       state: isLWD,
-      handler: event => setIsLWD(event.target.value),
+      handleChange: event => setIsLWD(event.target.value),
     },
   ];
 
@@ -54,14 +54,12 @@ const OtherDetails = () => {
 
           <div
             className={`${
-              props.state === "Yes"
-                ? "grid grid-cols-[100px_auto] gap-4 items-start"
-                : ""
+              props.state === "Yes" &&
+              "grid grid-cols-[100px_auto] gap-4 items-start"
             }`}>
             <select
               className="border px-4 py-3 rounded-[5px]  w-full"
-              onChange={props.handler}
-              name={`${is4ps !== "Yes" && props.name}`}>
+              onChange={props.handleChange}>
               <option value="">Please Specify</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>

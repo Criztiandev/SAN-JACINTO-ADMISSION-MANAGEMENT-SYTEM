@@ -28,7 +28,7 @@ const RadioItems = ({
       animate={cardSelection.animate({ state, index })}
       variants={cardSelection.variant}
       whileTap={{ scale: 0.9 }}
-      className={`cursor-pointer w-[200px] h-[250px] border border-gray rounded-[5px] p-4 flex justify-center items-center flex-col gap-4 text-center shadow-lg ${
+      className={`cursor-pointer min-w-[200px] min-h-[250px] border border-gray rounded-[5px] p-4 flex justify-center items-center flex-col gap-4 text-center shadow-lg ${
         className && className
       }`}
       onClick={handleSelect}>
