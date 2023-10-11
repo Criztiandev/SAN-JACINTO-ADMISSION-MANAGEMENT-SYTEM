@@ -60,8 +60,6 @@ const StudentDetails = () => {
       )}
 
       <div className="my-8">
-        <Input />
-
         <div className="grid grid-cols-2 gap-4">
           {details.map((props: InputInterface) => (
             <Input key={props.name} {...props} />

@@ -16,7 +16,6 @@ import {
   PersonalDetails,
   GuardianDetails,
   OtherDetails,
-  AccountDetails,
   ApplicationForm,
   Outro,
 } from "../containers/Steps";
@@ -29,9 +28,8 @@ const registrationPanels: panelTemplate[] = [
   { title: "Current Address", component: <PermanentAddress /> },
   { title: "Guardian Details", component: <GuardianDetails /> },
   { title: "Other Details", component: <OtherDetails /> },
-  { title: "Facebook Account", component: <AccountDetails /> },
   { title: "Application Form", component: <ApplicationForm /> },
-  { title: "Thank you", component: <Outro /> },
+  { title: "Congratulations", component: <Outro /> },
 ];
 
 const Register = () => {
@@ -44,7 +42,8 @@ const Register = () => {
     values: ApplicantModelInterface,
     actions: FormikHelpers<ApplicantModelInterface>
   ) => {
-    console.log(values);
+    if (!isLastStep) return next();
+    alert(values);
   };
 
   return (
@@ -82,7 +81,6 @@ const Register = () => {
               dir="right"
               icon={NextIcon}
               title={`${isLastStep ? "Finish" : "Next"}`}
-              onClick={next}
             />
           </div>
         </Form>

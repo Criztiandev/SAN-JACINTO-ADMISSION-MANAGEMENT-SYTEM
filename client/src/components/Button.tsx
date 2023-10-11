@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef } from "react";
+import { motion } from "framer-motion";
 import { ComponentType } from "../interface/componentInterface";
-import Image from "./Image";
 import { ComponentStyle } from "../helper/componentHelper";
 import Typography from "./Typography";
+import Image from "./Image";
 
 interface ButtonProps extends ComponentType {
   as?: "button" | "submit" | "reset";
@@ -32,7 +33,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     return (
-      <button
+      <motion.button
+        whileTap={{ scale: 0.5 }}
         type={as}
         ref={ref}
         className={`
@@ -48,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {title}
         </Typography>
         {dir === "right" && <Image src={icon} alt="icon" />}
-      </button>
+      </motion.button>
     );
   }
 );

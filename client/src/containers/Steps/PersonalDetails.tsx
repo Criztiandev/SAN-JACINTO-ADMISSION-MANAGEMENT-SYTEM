@@ -82,6 +82,13 @@ const secondSection: InputInterface[] = [
   },
 
   {
+    type: "string",
+    label: "Facebook Link",
+    name: "personalDetails.facebookLink",
+    placeholder: "Enter your facebook link",
+  },
+
+  {
     label: "Mother Tounge",
     name: "personalDetails.motherTounge",
     placeholder: "Enter",

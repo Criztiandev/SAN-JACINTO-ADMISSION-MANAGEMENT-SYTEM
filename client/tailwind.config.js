@@ -13,6 +13,9 @@ export default {
       backgroundImage: {
         backgroundImage:
           " linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('./src/assets/image/schoolBuilding.jpg');",
+
+        coverImage:
+          "linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('./src/assets/image/cover_image.jpg');*",
       },
     },
   },

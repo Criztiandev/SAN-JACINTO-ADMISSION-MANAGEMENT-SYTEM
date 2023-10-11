@@ -17,7 +17,7 @@ const Drawer = ({
   title,
   subtitle,
   children,
-
+  className,
   active,
   handleToggle,
 }: DrawerProps) => {
@@ -50,7 +50,7 @@ const Drawer = ({
           <Typography as="p">{subtitle}</Typography>
         </header>
 
-        <main className="p-4">{children}</main>
+        <main className={`p-4 $ ${className && className}`}>{children}</main>
       </Drawer.Content>
     </div>
   );

@@ -1,4 +1,4 @@
-import { IconButton, Input, Typography } from "../../components";
+import { Avatar, IconButton, Input, Typography } from "../../components";
 import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
 import { applicantInputMaps } from "../../models/applicantModel";
 
@@ -6,10 +6,13 @@ import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { useState } from "react";
 import { InputInterface } from "../../interface/componentInterface";
+import { useFormikContext } from "formik";
+import MaleProfile from "../../assets/image/Male_profile.png";
+import FemaleProfile from "../../assets/image/Female_Profile.png";
 
 const FormSection = ({ title, details }: applicantInputMapsInterface) => {
   const [hide, setHide] = useState(false);
-  const [onEdit, setOnEdit] = useState(false);
+  const [onEdit, setOnEdit] = useState(true);
 
   return (
     <div>
@@ -42,14 +45,24 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 };
 
 const ApplicationForm = () => {
+  const { values } = useFormikContext();
+  const { firstName, middleName, lastName, gender } = values?.personalDetails;
+  const { yearLevel, track } = values?.studentDetails;
   return (
     <section>
-      <div className="bg-gray-400 w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
+      <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
         <div className="flex items-center gap-4">
-          <div className="w-[84px] h-[84px] rounded-full border"></div>
-          <div>
-            <Typography as="h4">Criztian Jade M Tuplano</Typography>
-            <Typography as="span">Grade 7 | Regular</Typography>
+          <Avatar
+            src={gender === "Male" ? MaleProfile : FemaleProfile}
+            size="84px"
+          />
+          <div className="text-white">
+            <Typography as="h4">
+              {lastName}, {firstName} {middleName}
+            </Typography>
+            <Typography as="span">
+              {yearLevel} {track && `| ${track}`}
+            </Typography>
           </div>
         </div>
       </div>
@@ -59,16 +72,6 @@ const ApplicationForm = () => {
           <FormSection {...section} />
         ))}
       </div>
-
-      {/* <FormSection
-        title={applicantInputMaps[0].title}
-        details={applicantInputMaps[0].details}
-      />
-
-      <FormSection
-        title={applicantInputMaps[1].title}
-        details={applicantInputMaps[1].details}
-      /> */}
     </section>
   );
 };

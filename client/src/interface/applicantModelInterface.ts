@@ -39,6 +39,7 @@ export interface PersonalDetails {
   motherTounge: string;
   email: string;
   contact: string;
+  facebookLink: string;
 }
 
 export interface Account {
@@ -60,7 +61,6 @@ export interface GuardianDetails {
   father: Guardian;
   mother: Guardian;
   legalGuardian: Guardian;
-  choosen: string;
 }
 
 export interface OtherDetails {
@@ -72,9 +72,7 @@ export interface OtherDetails {
 export interface ApplicantModelInterface {
   studentDetails: StudentDetails;
   personalDetails: PersonalDetails;
-  accountDetails: Account;
   addressDetails: AddressDetails;
-  schoolDetails: SchoolDetails;
   guardianDetails: GuardianDetails;
   otherDetails: OtherDetails;
 }
