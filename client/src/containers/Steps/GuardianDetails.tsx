@@ -1,9 +1,10 @@
+import { useState } from "react";
+import Carousel from "../../components/Carousel";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import { InputInterface } from "../../interface/componentInterface";
 import { ItemSelection } from "../../interface/registrationInterface";
-import useRadioSelect from "../../hooks/userRadioSelect";
-import { Radio } from "../../components";
+import RadioItems from "../Register/RadioItems";
 
 const getGuardianInput = (name: string): InputInterface[] => [
   {
@@ -28,41 +29,35 @@ const getGuardianInput = (name: string): InputInterface[] => [
   },
 ];
 
-const GuardianSelection: ItemSelection[] = [
+const GuadianChoices: ItemSelection[] = [
   { cover: "null", title: "Father", subtitle: "Strong" },
   { cover: "null", title: "Mother", subtitle: "Caring" },
   { cover: "null", title: "Other", subtitle: "Prefered" },
 ];
 
 const GuardianDetails = () => {
-  const { data, currentSelectedIndex, handleSelectItem } =
-    useRadioSelect(GuardianSelection);
+  const [selectedGuardian, setSelectedGuardian] = useState(-1);
+  const parentChoice = ["Father", "Mother", "Legal"];
+
   return (
     <section>
-      <Typography as="h5" className="pb-2 mb-6  border-b">
-        Select your preferred guardian
-      </Typography>
-      <Radio.Select.Group className="flex justify-around gap-4 items-center mb-8">
-        {data.map((item, index) => (
-          <Radio.Select.Item
-            key={item.title}
-            name="studentDetails.yearLevel"
-            id={item.title}
-            value={item.title}
-            onClick={() => handleSelectItem(index)}
-            className={`cursor-pointer w-[200px] py-12 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === currentSelectedIndex ? "border-2 border-black" : ""
-            }`}>
-            <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
-            <div className="text-center">
-              <Typography as="h5">{item.title}</Typography>
-              <Typography as="span" className="text-sm text-gray-400">
-                {item.subtitle}
-              </Typography>
-            </div>
-          </Radio.Select.Item>
-        ))}
-      </Radio.Select.Group>
+      <div className="flex justfiy-center items-center flex-col mb-4">
+        <Carousel>
+          {GuadianChoices.map((items, index) => (
+            <RadioItems
+              {...items}
+              index={index}
+              state={selectedGuardian}
+              name="guardianDetails.choosen"
+              handleSelect={() => setSelectedGuardian(index)}
+            />
+          ))}
+        </Carousel>
+
+        <Typography as="span" className="text-gray-400 pb-2 mt-4">
+          Please Select Your Preffered Guardian
+        </Typography>
+      </div>
 
       <div className="flex flex-col gap-4 mb-6">
         <Typography as="h5" className="pb-2  border-b">
@@ -83,7 +78,7 @@ const GuardianDetails = () => {
           ))}
         </div>
 
-        {currentSelectedIndex === 2 && (
+        {parentChoice[selectedGuardian] === "Legal" && (
           <>
             <Typography as="h5" className="pb-2 border-b">
               Prefered Guardian Details

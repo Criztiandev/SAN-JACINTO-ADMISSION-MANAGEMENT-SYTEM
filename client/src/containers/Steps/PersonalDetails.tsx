@@ -1,65 +1,143 @@
+import { useState } from "react";
+import Carousel from "../../components/Carousel";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
-// import { useFormikContext } from "formik";
+import { InputInterface } from "../../interface/componentInterface";
+import { ItemSelection } from "../../interface/registrationInterface";
+import RadioItems from "../Register/RadioItems";
+import { Typography } from "../../components";
+
+const parentName = "personalDetails";
+
+const suffixes = [
+  "Jr.",
+  "Sr.",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+];
+
+const gendersArr: ItemSelection[] = [
+  {
+    cover: "",
+    title: "Male",
+    subtitle: "Masculine",
+  },
+  {
+    cover: "",
+    title: "Female",
+    subtitle: "Feminine",
+  },
+];
+
+const firstSection: InputInterface[] = [
+  {
+    label: "First Name",
+    name: `${parentName}.firstName`,
+    placeholder: "Enter your First Name",
+  },
+
+  {
+    label: "Middle Name",
+    name: `${parentName}.middleName`,
+    placeholder: "Enter your First Name",
+  },
+
+  {
+    label: "Last Name",
+    name: `${parentName}.lastName`,
+    placeholder: "Enter your First Name",
+  },
+];
+
+const secondSection: InputInterface[] = [
+  {
+    type: "date",
+    label: "Birth Date",
+    name: "personalDetails.birthDate",
+  },
+  {
+    type: "number",
+    label: "Age",
+    name: "personalDetails.age",
+    placeholder: "Enter your Age",
+  },
+  {
+    type: "email",
+    label: "Email",
+    name: "personalDetails.email",
+    placeholder: "Enter your @email",
+  },
+
+  {
+    type: "number",
+    label: "Contact",
+    name: "personalDetails.contact",
+    placeholder: "Enter your phone number",
+  },
+
+  {
+    type: "string",
+    label: "Facebook Link",
+    name: "personalDetails.facebookLink",
+    placeholder: "Enter your facebook link",
+  },
+
+  {
+    label: "Mother Tounge",
+    name: "personalDetails.motherTounge",
+    placeholder: "Enter",
+  },
+];
 
 const PersonalDetails = () => {
-  // const { values } = useFormikContext();
-
+  const [genderSelect, setGenderSelect] = useState(-1);
   return (
-    <section className="grid grid-cols-2 gap-4 items-center justify-center ">
-      <Input
-        label="First Name"
-        name="personalDetails.firstName"
-        placeholder="Enter your First Name"
-      />
-      <Input
-        label="Middle Name"
-        name="personalDetails.middleName"
-        placeholder="Enter your Middle Name"
-      />
-      <Input
-        label="Last Name"
-        name="personalDetails.lastName"
-        placeholder="Enter your Last Name"
-      />
-      <Input
-        label="Suffix"
-        name="personalDetails.suffix"
-        placeholder="Enter your Suffix"
-      />
-      <Select
-        label="Gender"
-        name="personalDetails.gender"
-        placeholder="Enter your Gender">
-        <option value={""}>Please Select a Gender</option>
-        <option value={"male"}>Male</option>
-        <option value={"female"}>Female</option>
-      </Select>
-      <Input type="date" label="Birthdate" name="personalDetails.birthdate" />
+    <section className="flex flex-col gap-4 mb-4">
+      <div className="flex justify-center items-center flex-col">
+        <Carousel direction="center">
+          {gendersArr.map((gender, index) => (
+            <RadioItems
+              {...gender}
+              index={index}
+              state={genderSelect}
+              name="personalDetails.gender"
+              handleSelect={() => setGenderSelect(index)}
+            />
+          ))}
+        </Carousel>
 
-      <Input
-        label="Age"
-        name="personalDetails.age"
-        placeholder="Enter your Age"
-      />
+        <Typography as="span" className="text-gray-400 pb-2 mt-4">
+          Please Select Your Preffered Gender
+        </Typography>
+      </div>
 
-      <Input
-        label="Mother Tounge"
-        name="personalDetails.motherTounge"
-        placeholder="Enter your Mother Tounge"
-      />
+      <div className="grid grid-cols-2 gap-6 items-center justify-center">
+        {firstSection.map(props => (
+          <Input {...props} />
+        ))}
 
-      <Input
-        label="Email"
-        name="personalDetails.gmail"
-        placeholder="Enter your email"
-      />
+        <Select
+          label="Suffix"
+          name="personalDetails.suffix"
+          className="bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-[100px]">
+          <option value={""}>N/A</option>
+          {suffixes.map(suff => (
+            <option value={suff}>{suff}</option>
+          ))}
+        </Select>
+      </div>
 
-      <Input
-        label="Contact"
-        name="personalDetails.contact"
-        placeholder="Enter your number"
-      />
+      <div className="grid grid-cols-2 gap-6 items-center justify-center mb-4">
+        {secondSection.map(props => (
+          <Input {...props} />
+        ))}
+      </div>
     </section>
   );
 };

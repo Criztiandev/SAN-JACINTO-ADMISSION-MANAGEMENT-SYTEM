@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar } from "../../components";
 import Checkbox from "../../components/Checkbox";
-
+import { motion } from "framer-motion";
+import MaleProfile from "../../assets/image/Male_profile.png";
+import FemaleProfile from "../../assets/image/Female_Profile.png";
 interface FirstColumnProps {
   data: any;
   value: any;
@@ -9,9 +11,12 @@ interface FirstColumnProps {
 }
 
 const FirstColumn = ({ data, value, viewApplicant }: FirstColumnProps) => {
+  const { gender } = data.original;
+
   return (
-    <div
-      className="grid grid-cols-[16px_32px_auto] gap-4 items-center"
+    <motion.div
+      whileTap={{ scale: 0.9 }}
+      className="cursor-pointer grid grid-cols-[16px_48px_auto] gap-4 items-center"
       onDoubleClick={viewApplicant}>
       <Checkbox
         {...{
@@ -22,10 +27,13 @@ const FirstColumn = ({ data, value, viewApplicant }: FirstColumnProps) => {
         }}
       />
 
-      <Avatar />
+      <Avatar
+        src={gender === "Male" ? MaleProfile : FemaleProfile}
+        size="42px"
+      />
 
       <span>{value}</span>
-    </div>
+    </motion.div>
   );
 };
 

@@ -4,3 +4,9 @@ export interface StatsInterface {
   total: string;
   title: string;
 }
+
+export interface useDrawerProps {
+  active: boolean;
+  setActive: () => void;
+  toggleDrawer: () => void;
+}

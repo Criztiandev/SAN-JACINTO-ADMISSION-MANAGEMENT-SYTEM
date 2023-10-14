@@ -9,7 +9,6 @@ import {
   Badge,
   Button,
   Table,
-  Drawer,
   IconButton,
   SearchBar,
   Dropdown,
@@ -24,6 +23,11 @@ import MessageIcon from "../assets/icons/Message_light.svg";
 import useDrawer from "../hooks/useDrawer";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
+import CreateDrawer from "../containers/Applicants/CreateDrawer";
+import ViewDrawer from "../containers/Applicants/ViewDrawer";
+import GradeFilter from "../containers/Applicants/GradeFilter";
+import StatusFilter from "../containers/Applicants/StatusFilter";
+import MoreOption from "../containers/Applicants/MoreOption";
 
 interface ListItemProps {
   title: string;
@@ -36,28 +40,6 @@ interface ColumnInterface {
   status: { id: string; value: string };
 }
 
-const FilterItems: ListItemProps[] = [
-  { title: "Default", icon: ApplicantIcon, value: "" },
-  { title: "Grade 7", icon: ApplicantIcon, value: "7" },
-  { title: "Grade 8", icon: ApplicantIcon, value: "8" },
-  { title: "Grade 9", icon: ApplicantIcon, value: "9" },
-  { title: "Grade 10", icon: ApplicantIcon, value: "10" },
-  { title: "Grade 11", icon: ApplicantIcon, value: "11" },
-  { title: "Grade 12", icon: ApplicantIcon, value: "12" },
-];
-
-const StatusItems: ListItemProps[] = [
-  { title: "Default", icon: ApplicantIcon, value: "" },
-  { title: "Pending", icon: ApplicantIcon, value: "Pending" },
-  { title: "Accepted", icon: ApplicantIcon, value: "Accepted" },
-  { title: "Hold", icon: ApplicantIcon, value: "Hold" },
-];
-
-const MoreItems: ListItemProps[] = [
-  { title: "Print", icon: ApplicantIcon },
-  { title: "Export", icon: ApplicantIcon },
-];
-
 const Applicant = () => {
   const [selectedApplicant, setSelectedApplicant] = useState<any>({});
   const [search, setSearch] = useState("");
@@ -66,13 +48,12 @@ const Applicant = () => {
     status: { id: "status", value: "" },
   });
 
-  const createApplicant = useDrawer();
-  const viewApplicant = useDrawer();
-  const editApplicant = useDrawer();
+  const createToggel = useDrawer();
+  const viewToggle = useDrawer();
 
   const handleViewApplicant = (data: any) => {
     setSelectedApplicant(data);
-    viewApplicant.toggleDrawer();
+    viewToggle.toggleDrawer();
   };
 
   const handleSelect = (name: keyof ColumnInterface, value: string) => {
@@ -86,8 +67,6 @@ const Applicant = () => {
     if (value === "Default" || value === "") return _default;
     return value;
   };
-
-  console.log(columnSearch);
 
   const HeaderConfig: ColumnDef<any, any>[] = [
     {
@@ -133,7 +112,6 @@ const Applicant = () => {
             icon={EditIcon}
             onClick={() => {
               setSelectedApplicant(row.original);
-              editApplicant.toggleDrawer();
             }}
           />
           <Dropdown>
@@ -173,7 +151,7 @@ const Applicant = () => {
               dir="left"
               title="Create"
               icon={CreateApplicantIcon}
-              onClick={createApplicant.toggleDrawer}
+              onClick={createToggel.toggleDrawer}
             />
           </>
         }
@@ -186,100 +164,50 @@ const Applicant = () => {
             />
 
             <div className="flex gap-4">
-              <Dropdown
-                className="border z-50"
-                style={{ width: "150px" }}
-                as="button"
-                type="outlined"
-                title={handleTitleUpdate(
-                  "Grade",
-                  `Grade ${columnSearch.yearLevel.value}`
-                )}
-                icon={FilterIcon}>
-                {FilterItems.map(items => (
-                  <Button
-                    key={items.title}
-                    type="ghost"
-                    dir="left"
-                    value={items.value}
-                    {...items}
-                    onClick={(e: MouseEvent<HTMLButtonElement>) =>
-                      handleSelect("yearLevel", e.currentTarget.value)
-                    }
-                  />
-                ))}
-              </Dropdown>
+              {/* Grade Filter */}
+              <GradeFilter
+                onTitleUpdate={() =>
+                  handleTitleUpdate(
+                    "Grade",
+                    `Grade ${columnSearch.yearLevel.value}`
+                  )
+                }
+                onSelect={e => handleSelect("yearLevel", e.currentTarget.value)}
+              />
 
-              <Dropdown
-                className="border z-50 w-[150px]"
-                as="button"
-                type="outlined"
-                title={handleTitleUpdate("Status", columnSearch.status.value)}
-                icon={FilterIcon}>
-                {StatusItems.map(items => (
-                  <Button
-                    key={items.title}
-                    type="ghost"
-                    dir="left"
-                    value={items.title}
-                    {...items}
-                    onClick={(e: MouseEvent<HTMLButtonElement>) =>
-                      handleSelect("status", e.currentTarget.value)
-                    }
-                  />
-                ))}
-              </Dropdown>
-              <Dropdown type="outlined">
-                {MoreItems.map(items => (
-                  <Button
-                    key={items.title}
-                    type="ghost"
-                    dir="left"
-                    {...items}
-                  />
-                ))}
-              </Dropdown>
+              {/* // Status Filter */}
+              <StatusFilter
+                onTitleUpdate={() =>
+                  handleTitleUpdate("Status", columnSearch.status.value)
+                }
+                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
+                  handleSelect("status", e.currentTarget.value)
+                }
+              />
+
+              <MoreOption />
             </div>
           </div>
           <Table
             data={applicantData}
             config={HeaderConfig}
             search={search}
-            columnSearch={columnSearch}
+            columnSearch={[
+              { ...columnSearch.yearLevel },
+              { ...columnSearch.status },
+            ]}
+            layout="300px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
           />
         </>
       </BaseLayout>
 
       {/* <Drawer /> */}
-      {createApplicant.active && (
-        <Drawer
-          title="Create Applicant"
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={createApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
+      <CreateDrawer
+        state={createToggel.active}
+        onClick={createToggel.toggleDrawer}
+      />
 
-      {viewApplicant.active && (
-        <Drawer
-          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={viewApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
-
-      {editApplicant.active && (
-        <Drawer
-          title={`${selectedApplicant?.last_name}, ${selectedApplicant?.first_name} ${selectedApplicant?.middle_name}`}
-          subtitle="This able you to create applicant"
-          active={createApplicant.active}
-          handleToggle={editApplicant.toggleDrawer}>
-          <h1>HI</h1>
-        </Drawer>
-      )}
+      <ViewDrawer state={viewToggle.active} onClick={viewToggle.toggleDrawer} />
     </>
   );
 };

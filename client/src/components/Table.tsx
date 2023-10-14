@@ -16,17 +16,19 @@ import NextIcon from "../assets/icons/Expand_right_light.svg";
 import AscIcon from "../assets/icons/Expand_up_light.svg";
 import DescIcon from "../assets/icons/Expand_down_light.svg";
 import { IconButton, Typography, Image } from ".";
+import { motion } from "framer-motion";
 
 interface TableProps extends BaseProps {
   data: any[];
   config: any[];
   search: string;
   columnSearch: any;
+  layout: string;
 }
 
 type SortingState = ColumnSort[];
 
-const Table = ({ data, config, search, columnSearch }: TableProps) => {
+const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
 
   const [rowSelection, setRowSelection] = useState({});
@@ -36,12 +38,7 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
 
   useEffect(() => {
     if (search) setGlobalFilter(search);
-    if (columnSearch)
-      setColumnFilter(prev => [
-        ...prev,
-        { ...columnSearch.status },
-        { ...columnSearch.yearLevel },
-      ]);
+    if (columnSearch) setColumnFilter(prev => [...prev, ...columnSearch]);
 
     return () => {
       setGlobalFilter("");
@@ -73,25 +70,26 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const sortingIcons = {
+  const sortingIcons: any = {
     asc: <Image className="w-5 h-5" src={AscIcon} alt="asc_icon" />,
     desc: <Image className="w-5 h-5" src={DescIcon} alt="desc_icon" />,
   };
 
-  const cols =
-    "250px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px";
-
   return (
     <>
-      <div className="relative border overflow-scroll rounded-[5px] xl:h-[54vh] 2xl:h-[61vh]">
+      <motion.div className="relative border overflow-scroll rounded-[5px] xl:h-[54vh] 2xl:h-[61vh] ">
         {table.getHeaderGroups().map(({ id, headers }) => (
           <div key={id}>
             {/* Header */}
             <div
               className={`grid items-center justify-items-center sticky top-0 z-20`}
-              style={{ gridTemplateColumns: cols }}>
+              style={{ gridTemplateColumns: layout }}>
               {headers.map(
                 ({ id, column, getContext, isPlaceholder }, index) => {
+                  const sorting = column.getIsSorted();
+                  const selectedIcon =
+                    sorting === "asc" || sorting === "desc" ? sorting : "";
+
                   return (
                     <span
                       key={id}
@@ -103,8 +101,7 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
                       {isPlaceholder
                         ? null
                         : flexRender(column.columnDef.header, getContext())}
-
-                      {sortingIcons[column.getIsSorted() ?? null]}
+                      {sortingIcons[selectedIcon]}
                     </span>
                   );
                 }
@@ -112,33 +109,35 @@ const Table = ({ data, config, search, columnSearch }: TableProps) => {
             </div>
 
             {/* Content */}
-            <div className="w-full">
-              {table.getRowModel().rows.map(({ id, getVisibleCells }) => (
-                <div
-                  key={id}
-                  className={`grid items-center justify-items-center border-b`}
-                  style={{ gridTemplateColumns: cols }}>
-                  {getVisibleCells().map(
-                    ({ id, column, getContext }, index) => (
-                      <span
-                        key={id}
-                        className={`px-4 py-2 text-sm font-light ${
-                          index === 0 &&
-                          "left-0 z-10 p-0 w-full h-full bg-[#f9fafb]"
-                        }`}
-                        style={{
-                          position: index === 0 ? "sticky" : "relative",
-                        }}>
-                        {flexRender(column.columnDef.cell, getContext())}
-                      </span>
-                    )
-                  )}
-                </div>
-              ))}
+            <div className="relative">
+              <motion.div className="w-full">
+                {table.getRowModel().rows.map(row => (
+                  <motion.div
+                    key={row.id}
+                    className={`relative grid items-center justify-items-center border-b`}
+                    style={{ gridTemplateColumns: layout }}>
+                    {row
+                      .getVisibleCells()
+                      .map(({ id, column, getContext }, index) => (
+                        <span
+                          key={id}
+                          className={`px-4 py-2 text-sm font-light ${
+                            index === 0 &&
+                            "left-0 z-10 p-0 w-full h-full bg-[#f9fafb]"
+                          }`}
+                          style={{
+                            position: index === 0 ? "sticky" : "relative",
+                          }}>
+                          {flexRender(column.columnDef.cell, getContext())}
+                        </span>
+                      ))}
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="flex justify-end gap-16 items-center">
         <div className="flex gap-2">

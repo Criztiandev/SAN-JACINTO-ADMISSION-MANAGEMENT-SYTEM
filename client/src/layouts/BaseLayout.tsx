@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { Typography, IconButton } from "../components";
+import { Typography, IconButton, Dropdown, Button } from "../components";
 import { BaseProps } from "../interface/componentInterface";
 import Nav from "./Nav";
 import { SettingsIcon, NotifIcon } from "../assets/icons";
@@ -28,7 +28,12 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
 
           <span className="flex gap-4">
             {action ? (
-              <>{header}</>
+              <>
+                <Dropdown>
+                  <Button type="ghost" title="Master List" />
+                </Dropdown>
+                {header}
+              </>
             ) : (
               <>
                 <IconButton type="ghost" icon={NotifIcon} />

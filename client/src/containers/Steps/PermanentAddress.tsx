@@ -1,6 +1,5 @@
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import { useState } from "react";
 import { InputInterface } from "../../interface/componentInterface";
 
 const InputTransformer = (name: string): InputInterface[] => [
@@ -46,36 +45,23 @@ const InputTransformer = (name: string): InputInterface[] => [
 ];
 
 const PermanentAddress = () => {
-  const [hasCurrentAddress, setHasCurrentAddress] = useState<boolean>(false);
-
   return (
     <section>
       <div className="grid grid-cols-2 gap-4">
-        {InputTransformer("permanentAddress").map(inputs => (
+        {InputTransformer("current").map(inputs => (
           <Input key={inputs.label} {...inputs} />
         ))}
       </div>
-      <label className="flex gap-4 py-4">
-        <input
-          type="checkbox"
-          onClick={() => setHasCurrentAddress(prev => !prev)}
-        />
-        <Typography as="span">Do you currently have an address?</Typography>
-      </label>
 
-      {hasCurrentAddress && (
-        <>
-          <Typography className="my-4 border-b pb-2" as="h5">
-            Current Address
-          </Typography>
+      <Typography className="my-4 border-b pb-2" as="h5">
+        Permanent Address
+      </Typography>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            {InputTransformer("currentAddress").map(props => (
-              <Input key={props.label} {...props} />
-            ))}
-          </div>
-        </>
-      )}
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        {InputTransformer("permanent").map(props => (
+          <Input key={props.label} {...props} />
+        ))}
+      </div>
     </section>
   );
 };

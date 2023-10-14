@@ -24,7 +24,7 @@ const Input = ({ label, name = "", ...props }: FieldProps) => {
         </label>
       )}
       <input
-        className={`border px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
+        className={`border border-gray-400 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
           props.disabled ? "text-gray-400" : ""
         }`}
         {...field}

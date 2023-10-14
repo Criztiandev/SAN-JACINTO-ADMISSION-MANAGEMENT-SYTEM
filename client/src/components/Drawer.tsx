@@ -1,62 +1,81 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseProps } from "../interface/componentInterface";
-import { Typography } from ".";
 import { useEffect, useRef } from "react";
-import { Fragment } from "./Fragments";
+import { motion } from "framer-motion";
 
 interface DrawerProps extends BaseProps {
-  title: string | boolean;
-  subtitle: string;
-  handleToggle: () => void;
-  active: boolean;
+  state: boolean;
+  mode?: "light" | "dark";
   anchor?: "left" | "right";
+  onClick?: () => void;
 }
+
+const sliderVariant = {
+  open: {
+    x: 0,
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+  close: {
+    x: "100%",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+};
+
+const backdropVariant = {
+  open: {
+    display: "block",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+  close: {
+    display: "none",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.8 },
+  },
+};
 
 const Drawer = ({
   anchor = "right",
-  title,
-  subtitle,
+  mode = "light",
   children,
-
-  active,
-  handleToggle,
+  className,
+  state,
+  onClick,
 }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
-  const anchorDir = { left: "left-0", right: "right-0" };
+  const anchorDir = (dir: string) => (dir === "left" ? "left-0" : "right-0");
 
   // Use useEffect to control the body overflow based on the 'active' prop
   useEffect(() => {
-    if (active) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling when the drawer is active
-    } else {
-      document.body.style.overflow = "scroll"; // Allow scrolling when the drawer is not active
-    }
+    if (state) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+
     // Cleanup function when the component unmounts or 'active' prop changes
     return () => {
       document.body.style.overflow = "unset"; // Restore default body overflow
     };
-  }, [active]);
+  }, [state]);
 
   return (
-    <div ref={drawerRef} className="fixed w-full h-full top-0 z-50">
-      <Drawer.BackDrop
-        className="relative w-full h-full bg-[#00000080]"
-        onClick={handleToggle}></Drawer.BackDrop>
-
-      <Drawer.Content
-        className={`absolute top-0 w-[500px] bg-white h-full z-50 overflow-y-scroll ${anchorDir[anchor]}`}>
-        <header className="border-b border-gray-300 py-4 mx-4">
-          <Typography as="h1">{title}</Typography>
-          <Typography as="p">{subtitle}</Typography>
-        </header>
-
-        <main className="p-4">{children}</main>
-      </Drawer.Content>
-    </div>
+    <>
+      <motion.div
+        initial={{ opacity: "50%", display: "none" }}
+        animate={state ? "open" : "close"}
+        variants={backdropVariant}
+        className="fixed inset-0 back-drop w-full h-full bg-black z-20"
+        onClick={onClick}></motion.div>
+      <motion.aside
+        ref={drawerRef}
+        initial={{ x: "100%" }}
+        animate={state ? "open" : "close"}
+        variants={sliderVariant}
+        className={`fixed w-[400px] ${
+          mode === "light" ? "bg-white" : "bg-[#1e1e1e] "
+        } h-full top-0 p-4 z-30 ] ${anchorDir(anchor)} ${
+          className && className
+        }`}>
+        {children}
+      </motion.aside>
+    </>
   );
 };
-
-Drawer.BackDrop = Fragment;
-Drawer.Content = Fragment;
 
 export default Drawer;

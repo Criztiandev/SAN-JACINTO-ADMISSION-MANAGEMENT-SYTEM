@@ -1,93 +1,70 @@
-import Input from "../../components/Input";
-import Typography from "../../components/Typography";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
+import { useFormikContext } from "formik";
+import { Typography, Input } from "../../components";
+import { applicantInputMaps } from "../../models/applicantModel";
+import RadioItems from "../Register/RadioItems";
+import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
+import Carousel from "../../components/Carousel";
+import { InputInterface } from "../../interface/componentInterface";
 
-import { ItemSelection } from "../../interface/registrationInterface";
-import useRadioSelect from "../../hooks/userRadioSelect";
-import { Radio } from "../../components";
+type YearLevelProps = "Grade 7" | "Grade 11";
 
-const TrackSelection: ItemSelection[] = [
-  { cover: "null", title: "Regular", subtitle: "Regular Student" },
-  { cover: "null", title: "SPE", subtitle: "Regular" },
-  { cover: "null", title: "SPJ", subtitle: "Special Journalism" },
-];
+const trackMap = (yearLevel: YearLevelProps) => {
+  const track = { "Grade 7": JrTracks, "Grade 11": SHSTracks };
+  return track[yearLevel] || [];
+};
 
 const StudentDetails = () => {
-  const { data, currentSelectedIndex, handleSelectItem } =
-    useRadioSelect(TrackSelection);
+  const [selectedTrack, setSelectedTrack] = useState<number>(-1);
+  const { details } = applicantInputMaps[0];
 
-  console.log(currentSelectedIndex);
+  // Get the grade level selected
+  const { values }: any = useFormikContext();
+  const currentYearLevel: YearLevelProps = values?.studentDetails?.yearLevel;
 
   return (
-    <section className="mb-4">
-      <Typography as="h5" className="mb-4">
-        Select your Track
-      </Typography>
-      <Radio.Select.Group className="flex justify-between gap-4">
-        {data.map((track, index) => (
-          <Radio.Select.Item
-            key={track.title}
-            name="studentDetails.track"
-            id={track.title}
-            value={track.title}
-            onClick={() => handleSelectItem(index)}
-            className={`bg-white cursor-pointer w-[200px] py-12 border flex flex-col justify-center items-center gap-4 rounded-[5px] ${
-              index === currentSelectedIndex
-                ? "border-2 border-black"
-                : "border-gray-300 "
-            }`}>
-            <div className="w-[6vw] h-[6vw] rounded-full bg-sky-300"></div>
-            <div className="text-center">
-              <Typography as="h5" className="capitalize">
-                {track.title}
-              </Typography>
-              <Typography as="span" className="text-sm text-gray-400">
-                {track.subtitle}
-              </Typography>
-            </div>
-          </Radio.Select.Item>
-        ))}
-      </Radio.Select.Group>
+    <section>
+      {trackMap(currentYearLevel).length > 0 ? (
+        <div className="flex justify-center items-center flex-col ">
+          <Carousel>
+            {trackMap(currentYearLevel).map((items, index) => (
+              <RadioItems
+                {...items}
+                index={index}
+                state={selectedTrack}
+                name={"studentDetails.track"}
+                handleSelect={() => setSelectedTrack(index)}
+              />
+            ))}
+          </Carousel>
 
-      <Typography as="h5" className="mb-4 mt-6">
-        Details
-      </Typography>
+          <Typography as="span" className="text-gray-400 pb-2 mt-4">
+            Please Select Your Preffered Track
+          </Typography>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center flex-col">
+          <RadioItems
+            title="No Available Tracks"
+            subtitle="We will offer soon, stay tuned"
+            name={"studentDetails.track"}
+            className="w-[400px] opacity-50"
+            index={0}
+          />
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input
-          label="LRN"
-          name="studentDetails.LRN"
-          placeholder="Enter your Leaner's Reference Number"
-        />
+          <Typography as="span" className="text-gray-400 pb-2 mt-4">
+            Please Select Your Preffered Track
+          </Typography>
+        </div>
+      )}
 
-        <Input
-          label="PSA Reference #"
-          name="studentDetails.PSA"
-          placeholder="Enter your PSA Reference"
-        />
-
-        <Input
-          label="School ID"
-          name="schoolDetails.ID"
-          placeholder="Enter your School ID"
-        />
-
-        <Input
-          label="School Name"
-          name="schoolDetails.name"
-          placeholder="Enter your School name"
-        />
-
-        <Input
-          label="School Year"
-          name="studentDetails.schoolYear"
-          placeholder="Enter your School year"
-        />
-
-        <Input
-          label="School Contact"
-          name="schoolDetails.contact"
-          placeholder="Enter your School Contact"
-        />
+      <div className="my-8">
+        <div className="grid grid-cols-2 gap-4">
+          {details.map((props: InputInterface) => (
+            <Input key={props.name} {...props} />
+          ))}
+        </div>
       </div>
     </section>
   );
