@@ -1,11 +1,11 @@
-import { Typography, Image, Drawer, Input, IconButton } from "../components";
+import { Typography, Image, Drawer } from "../components";
 import Logo from "../assets/image/Logo.png";
 import {
   panelTitleInterface,
   registrationLayoutProps,
 } from "../interface/registrationInterface";
 import useDrawer from "../hooks/useDrawer";
-import { Form, Formik } from "formik";
+import { Link } from "react-router-dom";
 
 const defaultPanelContent: panelTitleInterface = {
   Checkpoint: "Please Fill all necessary input",
@@ -28,14 +28,16 @@ const RegistrationLayout = ({
       <div className="grid grid-cols-[500px_auto] h-[100vh] ">
         <div className="relative">
           <aside className="sticky h-[100vh] top-0 bg-backgroundImage bg-cover bg-no-repeat object-cover flex flex-col p-6 gap-4 justify-between">
-            <div className="flex items-center gap-4">
-              <figure className="w-16 h-16">
-                <Image src={Logo} alt="Logo Icon" />
-              </figure>
-              <Typography className="text-white " as="h3">
-                SJNHS
-              </Typography>
-            </div>
+            <Link to={"/"}>
+              <div className="flex items-center gap-4">
+                <figure className="w-16 h-16">
+                  <Image src={Logo} alt="Logo Icon" />
+                </figure>
+                <Typography className="text-white " as="h3">
+                  SJNHS
+                </Typography>
+              </div>
+            </Link>
 
             <section className="flex flex-col gap-4">
               <Typography as="h6" className="text-white font-medium">
@@ -67,41 +69,9 @@ const RegistrationLayout = ({
         <main className="p-6 flex flex-col gap-8">{children}</main>
       </div>
 
-      {active && (
-        <Drawer
-          title="FAQ"
-          subtitle={"You can ask things here"}
-          active={active}
-          handleToggle={() => setActive(prev => !prev)}
-          className="flex justify-between flex-col gap-4 h-[82%]">
-          <div className="chat-container h-full p-4  flex flex-col gap-4 overflow-scroll">
-            <div className="chat-heads bg-gray-200 rounded-[5px]  p-4">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis
-              doloribus ut fugit deserunt? Odit dicta maiores in, optio corrupti
-              quibusdam cupiditate sint inventore enim incidunt quasi, a
-              consectetur maxime sed fuga reiciendis amet saepe quo veniam
-              quidem sequi officia. Nihil deserunt esse quasi ad quis iusto
-              dolorum repudiandae, iure adipisci!
-            </div>
-
-            <div className="chat-heads-self p-4 rounded-[5px] bg-red-200 ">
-              What is Admission Management System ?
-            </div>
-          </div>
-          <Formik
-            onSubmit={() => {
-              alert("Submit");
-            }}
-            initialValues={{ question: "" }}>
-            <Form>
-              <div className="grid grid-cols-[auto_64px]">
-                <Input name="question" />
-                <IconButton as="submit" />
-              </div>
-            </Form>
-          </Formik>
-        </Drawer>
-      )}
+      <Drawer state={active} onClick={() => setActive(prev => !prev)}>
+        Hi
+      </Drawer>
     </>
   );
 };

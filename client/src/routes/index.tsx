@@ -4,7 +4,7 @@ import { useState } from "react";
 import { publicRoutes } from "./publicRoutes";
 
 const Routes = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("123123");
 
   if (user) {
     return <RouterProvider router={privateRoutes} />;

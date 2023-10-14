@@ -23,9 +23,6 @@ import MessageIcon from "../assets/icons/Message_light.svg";
 import useDrawer from "../hooks/useDrawer";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
-import ViewDrawer from "../containers/Applicants/ViewDrawer";
-import CreateDrawer from "../containers/Applicants/CreateDrawer";
-import EditDrawer from "../containers/Applicants/EditDrawer";
 
 interface ListItemProps {
   title: string;
@@ -254,10 +251,6 @@ const Examiniees = () => {
       </BaseLayout>
 
       {/* <Drawer /> */}
-
-      <CreateDrawer event={createApplicant} />
-      <ViewDrawer details={selectedApplicant} event={viewApplicant} />
-      <EditDrawer details={selectedApplicant} event={editApplicant} />
     </>
   );
 };

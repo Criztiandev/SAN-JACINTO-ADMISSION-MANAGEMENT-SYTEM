@@ -39,7 +39,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={`
         flex rounded-full gap-2 items-center justify-center
-        ${ComponentStyle({ type })} ${className}`}
+        ${ComponentStyle({ type })} ${className && className}`}
         onClick={onClick}
         disabled={disabled}
         {...props}>

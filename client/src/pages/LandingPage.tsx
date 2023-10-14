@@ -2,8 +2,15 @@ import { useState } from "react";
 import { IconButton } from "../components";
 import ArrowLeft from "../assets/icons/Expand_left_light.svg";
 import ArrowRight from "../assets/icons/Expand_right_light.svg";
+import HeroSection from "../containers/LandingPage/HeroSection";
+import StatsSection from "../containers/LandingPage/StatsSection";
+import { motion } from "framer-motion";
 
+import Image from "../assets/image/370590732_259434943578824_5246411036796987967_n.jpg";
+import SideNav from "../containers/LandingPage/SideNav";
+import HeaderNav from "../containers/LandingPage/HeaderNav";
 interface CardContentProps {
+  cover: string;
   title: string;
   desc: string;
 }
@@ -21,16 +28,19 @@ interface AlumniDetailsProps {
 
 const cardContent: CardContentProps[] = [
   {
+    cover: Image,
     title: "Exploring Excellence at SJNHS",
     desc: "At San Juan National High School (SJNHS), excellence is our cornerstone. We're dedicated to providing a top-tier education with a rich history of academic achievements, innovative programs, and a supportive community. From academic excellence to vibrant extracurriculars, SJNHS invites you to explore what makes us exceptional. Join us on a journey where academics and personal growth converge, empowering every student to shine.",
   },
 
   {
+    cover: Image,
     title: "Unlock your potential at SJNHS",
     desc: "at SJNHS, we  believe in creating a vibrant learning environment where student can thrive. Our enjoyable approach to knowledge encourages curiosity, creativity, and critical thinking. With dedicated teachers, state of the art facilities and supportive community, we empower students to  unlock their full potentials and achieve academic excellence",
   },
 
   {
+    cover: Image,
     title: "Life at SJNHS",
     desc: "at SJNHS, we  believe in creating a vibrant learning environment where student can thrive. Our enjoyable approach to knowledge encourages curiosity, creativity, and critical thinking. With dedicated teachers, state of the art facilities and supportive community, we empower students to  unlock their full potentials and achieve academic excellence",
   },
@@ -38,15 +48,18 @@ const cardContent: CardContentProps[] = [
 
 const cardStepper: CardContentProps[] = [
   {
+    cover: Image,
     title: "Academic Achievement and Awards",
     desc: "SJNHS has been recognized for its exceptional academic performance, receiving numerous awards and accoldes",
   },
 
   {
+    cover: Image,
     title: "Excellence in Sports",
     desc: "In addition to academic success, SJNHS has a strong sports program, with students achieving victories in various competition",
   },
   {
+    cover: Image,
     title: "Arts and Culture Recognition",
     desc: "SJNHS students excels in the arts and culture scene, receiving recognition for their talents in music, dance, and theater",
   },
@@ -134,8 +147,11 @@ const alumniDetails: AlumniDetailsProps[] = [
 ];
 
 const LandingPage = () => {
+  const [toggle, setToggle] = useState(false);
   const [selectedCard, setSelectedCard] = useState(0);
   const [selectedTestimonial, setSelectedTestimonial] = useState(0);
+
+  const handleToggle = () => setToggle(prev => !prev);
 
   const handlePrev = () => {
     setSelectedTestimonial(prev => (prev <= 0 ? prev : prev - 1));
@@ -149,35 +165,17 @@ const LandingPage = () => {
 
   return (
     <>
-      <header className="flex fixed justify-between items-center border border-black w-full p-4">
-        <span>logo</span>
+      <header className="flex fixed justify-between items-cente w-full p-4">
+        <HeaderNav state={toggle} onClick={handleToggle} />
 
-        <IconButton type="ghost" />
+        <SideNav state={toggle} onClick={handleToggle} />
       </header>
 
       <main className="">
-        <section className="h-[100vh] flex justify-center items-center gap-4 flex-col border border-black">
-          <h1 className="text-[84px] text-center font-bold">
-            San Jacinto National Highschool
-          </h1>
-          <p className="w-[700px] text-center border">
-            Where world-class professors, innovative research, and a dynamic
-            student community come together to advance education and foster
-            change in the world.
-          </p>
-        </section>
+        <HeroSection />
 
         <div className="flex flex-col gap-[150px]">
-          <section className="flex justify-center items-center gap-32 border border-black p-4">
-            {schoolStats.map(stats => (
-              <div
-                key={stats.title}
-                className="flex justify-center items-center flex-col">
-                <h3>{stats.count}</h3>
-                <span>{stats.title}</span>
-              </div>
-            ))}
-          </section>
+          <StatsSection stats={schoolStats} />
 
           <section className="px-[64px] flex flex-col gap-[150px]">
             {cardContent.map((item, index) => (
@@ -188,34 +186,48 @@ const LandingPage = () => {
                   className={`details flex flex-col gap-[24px] ${
                     index % 2 === 0 && "order-last"
                   }`}>
-                  <h2>{item.title}</h2>
+                  <h2 className="font-secondary">{item.title}</h2>
                   <p>{item.desc}</p>
 
-                  <span>Learn more about our school </span>
+                  <motion.span
+                    whileHover={{ borderBottom: "2px solid black" }}
+                    className="font-secondary cursor-not-allowed">
+                    Learn more about our school
+                  </motion.span>
                 </div>
 
-                <div className=" w-full h-[400px] border border-black rounded-[5px]"></div>
+                <div className="w-full h-[400px] overflow-hidden">
+                  <img
+                    src={item.cover}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
               </div>
             ))}
 
             <div className="grid grid-cols-2 gap-[64px] items-center">
               <div className={`details flex flex-col gap-[24px] order-last`}>
-                {cardStepper.map((items, index) => (
+                {cardStepper.map((item, index) => (
                   <div
-                    key={items.title}
+                    key={item.title}
                     className={`cursor-pointer ${
                       selectedCard === index
                         ? "border-l-2 border-black"
                         : "opacity-50"
                     } py-2 px-4`}
                     onClick={() => setSelectedCard(index)}>
-                    <h3>{items.title}</h3>
-                    <p className="text-gray-500">{items.desc}</p>
+                    <h3 className="font-secondary">{item.title}</h3>
+                    <p className="text-gray-500">{item.desc}</p>
                   </div>
                 ))}
               </div>
 
-              <div className=" w-full h-[400px] border border-black rounded-[5px]"></div>
+              <div className="w-full h-[400px] overflow-hidden rounded-[5px]">
+                <img
+                  src={cardStepper[0].cover}
+                  className="object-cover w-full h-full"
+                />
+              </div>
             </div>
           </section>
 
