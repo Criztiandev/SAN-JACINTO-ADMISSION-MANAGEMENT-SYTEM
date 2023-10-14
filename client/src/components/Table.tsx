@@ -181,6 +181,3 @@ const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
 };
 
 export default Table;
-
-{
-}
