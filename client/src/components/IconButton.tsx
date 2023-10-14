@@ -2,6 +2,7 @@ import { MouseEvent, forwardRef } from "react";
 import Kebbab from "../assets/icons/Kebbab.svg";
 import { ComponentIconStyle } from "../helper/componentHelper";
 import { ComponentType } from "../interface/componentInterface";
+import { motion } from "framer-motion";
 
 interface IconButtonProps extends ComponentType {
   as?: "button" | "submit";
@@ -25,7 +26,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     ref
   ) => {
     return (
-      <button
+      <motion.button
+        whileTap={{ scale: 0.5 }}
         type={as}
         ref={ref}
         disabled={disabled}
@@ -35,7 +37,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ${ComponentIconStyle({ type })} 
         p-2 rounded-full flex justify-center items-center ${className}`}>
         <img className="w-6 h-6" src={icon} alt="Kebbab" />
-      </button>
+      </motion.button>
     );
   }
 );

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { InputInterface } from "./componentInterface";
+
 export interface Address {
   houseNo: string;
   street: string;
@@ -21,6 +24,7 @@ export interface StudentDetails {
   yearLevel: string;
   track: string;
   schoolYear: string;
+  lastSchoolAttended: string;
 }
 
 export interface PersonalDetails {
@@ -35,6 +39,7 @@ export interface PersonalDetails {
   motherTounge: string;
   email: string;
   contact: string;
+  facebookLink: string;
 }
 
 export interface Account {
@@ -67,9 +72,12 @@ export interface OtherDetails {
 export interface ApplicantModelInterface {
   studentDetails: StudentDetails;
   personalDetails: PersonalDetails;
-  accountDetails: Account;
   addressDetails: AddressDetails;
-  schoolDetails: SchoolDetails;
   guardianDetails: GuardianDetails;
   otherDetails: OtherDetails;
+}
+
+export interface applicantInputMapsInterface {
+  title: string;
+  details?: InputInterface[] | any;
 }
