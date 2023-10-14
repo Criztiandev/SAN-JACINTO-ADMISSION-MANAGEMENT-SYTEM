@@ -81,6 +81,10 @@ export const applicantInputMaps: applicantInputMapsInterface[] = [
     title: "Student Details",
     details: [
       {
+        label: "General Average",
+        name: "studentDetails.generalAverage",
+      },
+      {
         label: "LRN",
         name: "studentDetails.LRN",
         placeholder: "Enter your LRN",
@@ -89,6 +93,17 @@ export const applicantInputMaps: applicantInputMapsInterface[] = [
         label: "PSA Ref#",
         name: "studentDetails.PSA",
         placeholder: "Enter your PSA Reference",
+      },
+      {
+        label: "Year Level",
+        name: "studentDetails.yearLevel",
+        placeholder: "Enter your Year level",
+      },
+
+      {
+        label: "Track",
+        name: "studentDetails.track",
+        placeholder: "Enter your Track",
       },
 
       {

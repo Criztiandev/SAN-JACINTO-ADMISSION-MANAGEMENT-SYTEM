@@ -11,13 +11,13 @@ interface FirstColumnProps {
 }
 
 const FirstColumn = ({ data, value, viewApplicant }: FirstColumnProps) => {
-  const { gender } = data.original;
+  const { gender } = data.original.personalDetails;
 
   return (
     <motion.div
       whileTap={{ scale: 0.9 }}
       className="cursor-pointer grid grid-cols-[16px_48px_auto] gap-4 items-center"
-      onDoubleClick={viewApplicant}>
+      onClick={viewApplicant}>
       <Checkbox
         {...{
           checked: data.getIsSelected(),

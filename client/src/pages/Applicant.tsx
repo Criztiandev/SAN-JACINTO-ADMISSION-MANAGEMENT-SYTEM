@@ -3,23 +3,12 @@
 import applicantData from "../data/applicantData.json";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, MouseEvent } from "react";
-import FilterIcon from "../assets/icons/Filter.svg";
 
-import {
-  Badge,
-  Button,
-  Table,
-  IconButton,
-  SearchBar,
-  Dropdown,
-} from "../components";
+import { Badge, Button, Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 
-import ApplicantIcon from "../assets/icons/Applicants.svg";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-import AcceptIcon from "../assets/icons/Done_light.svg";
-import EditIcon from "../assets/icons/Edit_light.svg";
-import MessageIcon from "../assets/icons/Message_light.svg";
+
 import useDrawer from "../hooks/useDrawer";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
@@ -28,12 +17,7 @@ import ViewDrawer from "../containers/Applicants/ViewDrawer";
 import GradeFilter from "../containers/Applicants/GradeFilter";
 import StatusFilter from "../containers/Applicants/StatusFilter";
 import MoreOption from "../containers/Applicants/MoreOption";
-
-interface ListItemProps {
-  title: string;
-  icon: string;
-  value?: string;
-}
+import ActionColumn from "../containers/Applicants/ActionColumn";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -41,10 +25,11 @@ interface ColumnInterface {
 }
 
 const Applicant = () => {
+  const [onEdit, setOnEdit] = useState(false);
   const [selectedApplicant, setSelectedApplicant] = useState<any>({});
   const [search, setSearch] = useState("");
   const [columnSearch, setColumnSearch] = useState<ColumnInterface>({
-    yearLevel: { id: "yearLevel", value: "" },
+    yearLevel: { id: "studentDetails.yearLevel", value: "" },
     status: { id: "status", value: "" },
   });
 
@@ -63,38 +48,53 @@ const Applicant = () => {
     }));
   };
 
-  const handleTitleUpdate = (_default: string, value: string) => {
-    if (value === "Default" || value === "") return _default;
-    return value;
+  const handleTitleUpdate = (_default: string, value: string) =>
+    value === "Default" || value === "" ? _default : value;
+
+  const handleEdit = (data: Array<object>) => {
+    setSelectedApplicant(data);
+    viewToggle.toggleDrawer();
   };
+
+  // const handleAccept = () => {};
 
   const HeaderConfig: ColumnDef<any, any>[] = [
     {
       id: "select",
       header: ({ table }) => <TitleHeader data={table} />,
-      accessorFn: row =>
-        `${row.last_name}, ${row.first_name} ${row.middle_name}`,
+      accessorFn: ({ personalDetails }) =>
+        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
 
       cell: ({ row, getValue }) => (
         <FirstColumn
           data={row}
           value={getValue()}
-          viewApplicant={() => handleViewApplicant(row.original)}
+          viewApplicant={() => handleViewApplicant(row.original._id)}
         />
       ),
     },
-    { header: "LRN", accessorKey: "LRN" },
+
+    { header: "LRN", accessorKey: "studentDetails.LRN" },
     {
       header: "Grade Level",
-      accessorKey: "yearLevel",
-      accessorFn: row => `${row.yearLevel.split(" ")[1]}`,
+      accessorKey: "studentDetails.yearLevel",
     },
-    { header: "Gender", accessorKey: "gender" },
-    { header: "BOD", accessorKey: "BOD" },
-    { header: "Age", accessorKey: "age" },
-    { header: "Guardian", accessorKey: "guardian.legal" },
-    { header: "Contact", accessorKey: "contact" },
-    { header: "Ave", accessorKey: "remarks" },
+    { header: "Gender", accessorKey: "personalDetails.gender" },
+    { header: "BOD", accessorKey: "personalDetails.birthDate" },
+    { header: "Age", accessorKey: "personalDetails.age" },
+    {
+      header: "Guardian",
+      accessorKey: "guardianDetails.legalGuardian",
+      accessorFn: ({ guardianDetails }) => {
+        const { firstName, middleName, lastName } =
+          guardianDetails.legalGuardian;
+
+        return `${lastName}, ${firstName} ${middleName[0]}.`;
+      },
+    },
+
+    { header: "Contact", accessorKey: "personalDetails.contact" },
+    { header: "Average", accessorKey: "studentDetails.generalAverage" },
     {
       header: "Status",
       accessorKey: "status",
@@ -105,38 +105,7 @@ const Applicant = () => {
     {
       header: "Action",
       cell: ({ row }) => (
-        <span className="flex gap-4">
-          <IconButton type="outlined" icon={AcceptIcon} />
-          <IconButton
-            type="outlined"
-            icon={EditIcon}
-            onClick={() => {
-              setSelectedApplicant(row.original);
-            }}
-          />
-          <Dropdown>
-            <Button
-              title="Message"
-              type="ghost"
-              icon={MessageIcon}
-              dir="left"
-            />
-
-            <Button
-              title="Message"
-              type="ghost"
-              icon={MessageIcon}
-              dir="left"
-            />
-
-            <Button
-              title="Message"
-              type="ghost"
-              icon={MessageIcon}
-              dir="left"
-            />
-          </Dropdown>
-        </span>
+        <ActionColumn onSelect={() => handleEdit(row.original)} />
       ),
     },
   ];
@@ -146,14 +115,12 @@ const Applicant = () => {
       <BaseLayout
         title="Applicants"
         header={
-          <>
-            <Button
-              dir="left"
-              title="Create"
-              icon={CreateApplicantIcon}
-              onClick={createToggel.toggleDrawer}
-            />
-          </>
+          <Button
+            dir="left"
+            title="Create"
+            icon={CreateApplicantIcon}
+            onClick={createToggel.toggleDrawer}
+          />
         }
         action>
         <>
@@ -192,11 +159,8 @@ const Applicant = () => {
             data={applicantData}
             config={HeaderConfig}
             search={search}
-            columnSearch={[
-              { ...columnSearch.yearLevel },
-              { ...columnSearch.status },
-            ]}
-            layout="300px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
+            columnSearch={[{ ...columnSearch.status }]}
+            layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
           />
         </>
       </BaseLayout>
@@ -207,7 +171,12 @@ const Applicant = () => {
         onClick={createToggel.toggleDrawer}
       />
 
-      <ViewDrawer state={viewToggle.active} onClick={viewToggle.toggleDrawer} />
+      <ViewDrawer
+        data={selectedApplicant}
+        state={viewToggle.active}
+        onClick={viewToggle.toggleDrawer}
+        onEdit={onEdit}
+      />
     </>
   );
 };
