@@ -16,7 +16,8 @@ export interface InputProps {
 
 export interface InputSectionProps {
   title: string;
-  details?: InputProps[] | Array<object>;
+  model: InputProps[] | Array<object>;
+  isEdit?: boolean;
 }
 
 export interface ItemSelectProps extends CardProps {

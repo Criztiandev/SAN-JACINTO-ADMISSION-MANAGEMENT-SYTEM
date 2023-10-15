@@ -79,7 +79,7 @@ const EditDrawer = ({ data, state, onClick }: EditDrawerProps) => {
         width="600px"
         state={state}
         onClick={onClick}>
-        <Formik
+        {/* <Formik
           initialValues={response}
           onSubmit={(values, action) => {
             // clean up
@@ -123,7 +123,7 @@ const EditDrawer = ({ data, state, onClick }: EditDrawerProps) => {
               <Button as="submit" title="Save" />
             </footer>
           </Form>
-        </Formik>
+        </Formik> */}
       </Drawer>
     </AnimatePresence>
   );

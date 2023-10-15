@@ -5,9 +5,7 @@ import RegistrationLayout from "../layouts/RegistrationLayout";
 import useMultipleForm from "../hooks/useMultipleForm";
 
 import { NextIcon } from "../assets/icons";
-
-import applicantTemplate from "../models/applicantInitialValue";
-import { ApplicantModelInterface } from "../interface/applicantModelInterface";
+import { ApplicantModelProps } from "../interface/applicantModelInterface";
 
 import {
   GradeLevel,
@@ -21,6 +19,7 @@ import {
 import { panelTemplate } from "../interface/registrationInterface";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import applicantInitialValue from "../data/initialValue/applicantInit";
 
 const registrationPanels: panelTemplate[] = [
   { title: "Grade Level", component: <GradeLevel /> },
@@ -69,7 +68,7 @@ const Register = () => {
     );
   };
 
-  const handleQuery = (values: ApplicantModelInterface) => {
+  const handleQuery = (values: ApplicantModelProps) => {
     if (index !== OutroDetails.length - 1) {
       setActive(true);
       return;
@@ -81,8 +80,8 @@ const Register = () => {
 
   // // Formik Submission Handler
   const handleSubmit = async (
-    values: ApplicantModelInterface,
-    actions: FormikHelpers<ApplicantModelInterface>
+    values: ApplicantModelProps,
+    actions: FormikHelpers<ApplicantModelProps>
   ) => {
     if (!isLastStep) return next();
     if (!Ended) {
@@ -91,6 +90,7 @@ const Register = () => {
     }
 
     handleQuery(values);
+    actions.resetForm();
   };
 
   return (
@@ -105,7 +105,7 @@ const Register = () => {
           </span>
         </section>
 
-        <Formik initialValues={applicantTemplate} onSubmit={handleSubmit}>
+        <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
           <Form className="flex flex-col justify-between h-full">
             {steps}
 

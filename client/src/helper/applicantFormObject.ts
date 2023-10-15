@@ -1,74 +1,39 @@
-import { InputProps } from "../interface/FormInterface";
+import { CardProps, InputProps } from "../interface/FormInterface";
 import { ApplicationFormModelProps } from "../interface/applicantModelInterface";
+import { OmitInputObject } from "../utils/OmitUtils";
 
-export const JrTracks = [
+export const JrTracksItemModel: CardProps[] = [
   { cover: "null", title: "Regular", subtitle: "Regular Student" },
   { cover: "null", title: "SPE", subtitle: "Regular" },
   { cover: "null", title: "SPJ", subtitle: "Special Journalism" },
 ];
 
-export const SHSTracks = [
+export const SHSTracksItemModel: CardProps[] = [
   { cover: "null", title: "GAS", subtitle: "Regular Student" },
   { cover: "null", title: "STEM", subtitle: "Regular" },
   { cover: "null", title: "ABM", subtitle: "Special Journalism" },
 ];
 
-export const personalDetailsInputModel: InputProps[] = [
-  {
-    label: "First Name",
-    name: `personalDetails.firstName`,
-    placeholder: "Enter your First Name",
-  },
+export const yearLevelsItemModel: CardProps[] = [
+  { cover: "null", title: "Grade 7", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 8", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 9", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 10", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 11", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 12", subtitle: "Freshies" },
+];
 
-  {
-    label: "Middle Name",
-    name: `personalDetails.middleName`,
-    placeholder: "Enter your First Name",
-  },
-
-  {
-    label: "Last Name",
-    name: `personalDetails.lastName`,
-    placeholder: "Enter your First Name",
-  },
-
-  {
-    type: "date",
-    label: "Birth Date",
-    name: "personalDetails.birthDate",
-  },
-  {
-    type: "number",
-    label: "Age",
-    name: "personalDetails.age",
-    placeholder: "Enter your Age",
-  },
-  {
-    type: "email",
-    label: "Email",
-    name: "personalDetails.email",
-    placeholder: "Enter your @email",
-  },
-
-  {
-    type: "number",
-    label: "Contact",
-    name: "personalDetails.contact",
-    placeholder: "Enter your phone number",
-  },
-
-  {
-    type: "string",
-    label: "Facebook Link",
-    name: "personalDetails.facebookLink",
-    placeholder: "Enter your facebook link",
-  },
-
-  {
-    label: "Mother Tounge",
-    name: "personalDetails.motherTounge",
-    placeholder: "Enter",
-  },
+export const suffixes: Array<string> = [
+  "Jr.",
+  "Sr.",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
 ];
 
 export const studenDetailsInputModel: InputProps[] = [
@@ -108,6 +73,76 @@ export const studenDetailsInputModel: InputProps[] = [
     label: "Last School Attended",
     name: "studentDetails.lastSchoolAttended",
     placeholder: "Enter your School Last Attended",
+  },
+];
+
+export const personalDetailsInputModel: InputProps[] = [
+  {
+    label: "First Name",
+    name: `personalDetails.firstName`,
+    placeholder: "Enter your First Name",
+  },
+
+  {
+    label: "Middle Name",
+    name: `personalDetails.middleName`,
+    placeholder: "Enter your First Name",
+  },
+
+  {
+    label: "Last Name",
+    name: `personalDetails.lastName`,
+    placeholder: "Enter your First Name",
+  },
+
+  {
+    label: "Suffix",
+    name: `personalDetails.suffix`,
+    placeholder: "Enter your Suffix",
+  },
+
+  {
+    label: "Gender",
+    name: `personalDetails.gender`,
+    placeholder: "Enter your Suffix",
+  },
+
+  {
+    type: "date",
+    label: "Birth Date",
+    name: "personalDetails.birthDate",
+  },
+  {
+    type: "number",
+    label: "Age",
+    name: "personalDetails.age",
+    placeholder: "Enter your Age",
+  },
+  {
+    type: "email",
+    label: "Email",
+    name: "personalDetails.email",
+    placeholder: "Enter your @email",
+  },
+
+  {
+    type: "number",
+    label: "Contact",
+    name: "personalDetails.contact",
+    placeholder: "Enter your phone number",
+  },
+
+  {
+    type: "string",
+    label: "Facebook Link",
+    name: "personalDetails.facebookLink",
+    placeholder: "Enter your facebook link",
+  },
+
+  {
+    label: "Mother Tounge",
+    name: "personalDetails.motherTounge",
+    placeholder: "Enter",
   },
 ];
 
@@ -278,5 +313,33 @@ export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
   { title: "Legal Guardians", model: legalGuardianInputDetails },
+  { title: "Other Details", model: otherInputDetails },
+];
+
+// Application Form Model
+export const ApplicaionFormInputModel: ApplicationFormModelProps[] = [
+  {
+    title: "Student Details",
+    model: OmitInputObject(["Year Level"], studenDetailsInputModel),
+  },
+  {
+    title: "Personal Details",
+    model: OmitInputObject(["Suffix"], personalDetailsInputModel),
+  },
+
+  {
+    title: "Current Address",
+    model: currentAddressInputModel,
+  },
+
+  {
+    title: "Permanent Address",
+    model: permanentAddressInputModel,
+  },
+
+  { title: "Father Details", model: fatherInputDetails },
+  { title: "Mother Details", model: motherInputDetails },
+  { title: "Legal Guardian", model: legalGuardianInputDetails },
+
   { title: "Other Details", model: otherInputDetails },
 ];

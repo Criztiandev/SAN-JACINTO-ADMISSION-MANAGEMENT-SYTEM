@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputProps, InputSectionProps } from "../../interface/FormInterface";
 import { IconButton, Input } from "../../components";
-import { DecreaseIcon } from "../../assets/icons/index";
+import { DecreaseIcon, EditIcon } from "../../assets/icons/index";
 
-const InputSections = ({ title, details }: InputSectionProps) => {
+const InputSections = ({ title, model, isEdit }: InputSectionProps) => {
   const [hide, setHide] = useState(true);
+  const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    if (isEdit) setEdit(true);
+
+    return () => {
+      setEdit(false);
+    };
+  }, [isEdit]);
 
   return (
     <div className="mb-4">
@@ -18,13 +27,20 @@ const InputSections = ({ title, details }: InputSectionProps) => {
             icon={DecreaseIcon}
             onClick={() => setHide(prev => !prev)}
           />
+
+          {edit && (
+            <IconButton
+              icon={EditIcon}
+              onClick={() => setEdit(prev => !prev)}
+            />
+          )}
         </div>
       </div>
 
       {hide && (
         <div className="grid grid-cols-2 gap-4">
-          {details?.map((props: InputProps) => (
-            <Input key={props.label} {...props} />
+          {model?.map((props: InputProps) => (
+            <Input key={props.label} {...props} disabled={edit} />
           ))}
         </div>
       )}

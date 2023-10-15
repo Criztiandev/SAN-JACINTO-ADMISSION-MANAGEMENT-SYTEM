@@ -6,7 +6,7 @@ import { applicantInputMaps } from "../../models/applicantInitialValue";
 import RadioItems from "../Register/RadioItems";
 import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
 import Carousel from "../../components/Carousel";
-import { InputInterface } from "../../interface/componentInterface";
+import { InputProps } from "../../interface/FormInterface";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
@@ -61,7 +61,7 @@ const StudentDetails = () => {
 
       <div className="my-8">
         <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputInterface) => (
+          {details.map((props: InputProps) => (
             <Input key={props.name} {...props} />
           ))}
         </div>

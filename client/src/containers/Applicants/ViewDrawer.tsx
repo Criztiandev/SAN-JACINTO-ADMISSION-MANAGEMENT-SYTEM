@@ -65,7 +65,7 @@ const ViewDrawer = ({ data, state, onClick }: ViewDrawerProps) => {
         width="600px"
         state={state}
         onClick={onClick}>
-        <Formik
+        {/* <Formik
           initialValues={response}
           onSubmit={(values, action) => {
             // clean up
@@ -113,7 +113,7 @@ const ViewDrawer = ({ data, state, onClick }: ViewDrawerProps) => {
               <Button as="submit" title="Accept" />
             </footer>
           </Form>
-        </Formik>
+        </Formik> */}
       </Drawer>
     </AnimatePresence>
   );
