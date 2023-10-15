@@ -1,8 +1,8 @@
 import { AnimatePresence } from "framer-motion";
-import { Avatar, Button, Drawer, IconButton, Input } from "../../components";
+import { Button, Drawer, IconButton, Input } from "../../components";
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import applicantData from "../../data/applicantData.json";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { applicantInputMaps } from "../../models/applicantModel";
 import { useState } from "react";
 import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
@@ -11,6 +11,11 @@ import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { InputInterface } from "../../interface/componentInterface";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
+import Carousel from "../../components/Carousel";
+import useCarousel from "../../hooks/useCarousel";
+
+import { motion } from "framer-motion";
+import RadioItems from "../Register/RadioItems";
 
 interface EditDrawerProps {
   data: Array<object>;
@@ -18,6 +23,15 @@ interface EditDrawerProps {
   onClick: () => void;
   onEdit?: boolean;
 }
+
+const yearLevels: ItemSelection[] = [
+  { cover: "null", title: "Grade 7", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 8", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 9", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 10", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 11", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 12", subtitle: "Freshies" },
+];
 
 const FormSection = ({ title, details }: applicantInputMapsInterface) => {
   const [hide, setHide] = useState(true);
@@ -54,12 +68,9 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 };
 
 const EditDrawer = ({ data, state, onClick }: EditDrawerProps) => {
+  const [selectedGender, setSelectedGender] = useState("");
+  const { carouselRef, carouselWidth } = useCarousel();
   const response = applicantData[0];
-  const { firstName, middleName, lastName, suffix, email } =
-    response.personalDetails;
-  const [fullName, setFullName] = useState(
-    `${lastName}, ${firstName} ${middleName}. ${suffix}`
-  );
 
   return (
     <AnimatePresence mode="wait">
@@ -77,45 +88,33 @@ const EditDrawer = ({ data, state, onClick }: EditDrawerProps) => {
             action.resetForm();
           }}>
           <Form>
-            <header className="flex justify-between items-start border-b border-gray-400 pb-2 mb-4">
-              <div className="flex gap-2 flex-col">
-                <div className="">
-                  <input
-                    className="border-b border-x-gray-400  font-bold text-[28px] focus:border  focus:rounded-[5px] "
-                    value={fullName}
-                    onChange={e => setFullName(e.target.value)}
-                    placeholder="Smith, John Mark Mitra. JR"
-                  />
-                </div>
-                <Field
-                  type="email"
-                  name="personalDetails.email"
-                  className=" text-gray-400 font-normal py-[2px] px-2"
-                />
+            <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
+              <div>
+                <h2 className="font-bold">Edit Applicant</h2>
+                <span className="text-gray-400 font-normal">
+                  if there is wrong you can edit their credentials
+                </span>
               </div>
-
-              <IconButton type="outlined" icon={EditIcon} />
             </header>
-
             <main>
-              <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
-                <div className="flex items-center gap-4">
-                  <Avatar src={FemaleProfile} size="84px" />
-                  <span className=" text-white">
-                    <span className="flex gap-2">
-                      <div>Grade</div>
-                      <Input
+              <div className="border overflow-hidden">
+                <motion.div
+                  ref={carouselRef}
+                  drag="x"
+                  dragConstraints={{ right: 0, left: -carouselWidth }}
+                  className="">
+                  <Carousel>
+                    {yearLevels.map((props, index) => (
+                      <RadioItems
+                        key={props.title}
+                        {...props}
+                        index={index}
                         name="studentDetails.yearLevel"
-                        unstyled
-                        disabled={true}
                       />
-                    </span>
-
-                    <Input name="studentDetails.track" unstyled />
-                  </span>
-                </div>
+                    ))}
+                  </Carousel>
+                </motion.div>
               </div>
-
               {applicantInputMaps.map(section => (
                 <FormSection {...section} />
               ))}

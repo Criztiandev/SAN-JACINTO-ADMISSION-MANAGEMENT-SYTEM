@@ -18,7 +18,7 @@ import GradeFilter from "../containers/Applicants/GradeFilter";
 import StatusFilter from "../containers/Applicants/StatusFilter";
 import MoreOption from "../containers/Applicants/MoreOption";
 import ActionColumn from "../containers/Applicants/ActionColumn";
-import EditDrawer from "../containers/Applicants/EditDrawert";
+import EditDrawer from "../containers/Applicants/EditDrawer";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -169,7 +169,7 @@ const Applicant = () => {
       {/* <Drawer /> */}
       <CreateDrawer
         state={createToggel.active}
-        onClick={createToggel.toggleDrawer}
+        onClose={createToggel.toggleDrawer}
       />
 
       <ViewDrawer

@@ -1,6 +1,6 @@
 import { CardSelectionProps } from "../../interface/animationInterface";
 
-export const cardSelection = {
+export const CardSelectionAnim = {
   animate: ({ currVal, value }: CardSelectionProps) => {
     return currVal === value ? "selected" : "unselected";
   },

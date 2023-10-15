@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
-import { cardSelection } from "../../animations/variants/selectionVariants";
-import { Radio, Typography } from "../../components";
+import { Radio, Typography } from "./";
 
-interface RadioItemsProps {
+interface CarouselCardItemProps {
   title: string;
   subtitle?: string;
   state?: number | string | any;
@@ -13,14 +12,14 @@ interface RadioItemsProps {
   className?: string;
 }
 
-const RadioItems = ({
+const CarouselCardItem = ({
   title,
   subtitle,
   select,
   onSelect,
   name,
   className,
-}: RadioItemsProps) => {
+}: CarouselCardItemProps) => {
   return (
     <motion.label
       key={title}
@@ -40,4 +39,4 @@ const RadioItems = ({
   );
 };
 
-export default RadioItems;
+export default CarouselCardItem;

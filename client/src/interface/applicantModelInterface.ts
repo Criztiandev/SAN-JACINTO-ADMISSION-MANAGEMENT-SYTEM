@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { InputInterface } from "./componentInterface";
 
 export interface Address {
   houseNo: string;
@@ -75,9 +74,4 @@ export interface ApplicantModelInterface {
   addressDetails: AddressDetails;
   guardianDetails: GuardianDetails;
   otherDetails: OtherDetails;
-}
-
-export interface applicantInputMapsInterface {
-  title: string;
-  details?: InputInterface[] | any;
 }

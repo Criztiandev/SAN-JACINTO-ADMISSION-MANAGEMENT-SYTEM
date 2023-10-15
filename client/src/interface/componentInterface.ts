@@ -17,14 +17,6 @@ export interface ProviderProps extends BaseProps {
   data: JSON;
 }
 
-export interface InputInterface {
-  type?: string;
-  label?: string;
-  name?: string;
-  value?: string;
-  placeholder?: string;
-}
-
 // dashboard
 export interface StatsInterface {
   added: number;

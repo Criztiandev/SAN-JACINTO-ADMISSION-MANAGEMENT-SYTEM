@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Button, Drawer, IconButton, Input, Select } from "../../components";
+import { Button, Drawer, Typography } from "../../components";
 import { Form, Formik } from "formik";
-import { applicantInputMaps } from "../../models/applicantModel";
-import { InputInterface } from "../../interface/componentInterface";
-import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
 
-import EditIcon from "../../assets/icons/Edit_light.svg";
-import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import applicantModel from "../../models/applicantModel";
+import Carousel from "../../components/Carousel";
+import ItemSelect from "../Form/ItemSelect";
 interface CreateDrawerProps {
   state: boolean;
-  onClick: () => void;
+  onClose: () => void;
 }
+
+const yearLevels = [
+  { cover: "null", title: "Grade 7", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 8", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 9", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 10", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 11", subtitle: "Freshies" },
+  { cover: "null", title: "Grade 12", subtitle: "Freshies" },
+];
 
 const suffixes = [
   "Jr.",
@@ -27,65 +33,53 @@ const suffixes = [
   "IX",
 ];
 
-const FormSection = ({ title, details }: applicantInputMapsInterface) => {
-  const [hide, setHide] = useState(true);
+const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
+  const [selectedYearLevel, setSelectedYearLevel] = useState("");
+  const [selectGender, setSelectGender] = useState("");
 
-  return (
-    <div className="mb-4">
-      <div className="flex justify-between items-center border-b border-gray-300 pb-2 mb-4">
-        <h4 className="cursor-pointer" onClick={() => setHide(prev => !prev)}>
-          {title}
-        </h4>
+  console.log(selectedYearLevel);
 
-        <div className="flex gap-4">
-          <IconButton
-            icon={Expand_Down}
-            onClick={() => setHide(prev => !prev)}
-          />
-        </div>
-      </div>
-
-      {hide && (
-        <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputInterface) => (
-            <Input key={props.label} {...props} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const CreateDrawer = ({ state, onClick }: CreateDrawerProps) => {
   return (
     <AnimatePresence mode="wait">
       <Drawer
         className="overflow-scroll"
         width="600px"
         state={state}
-        onClick={onClick}>
+        onClick={onClose}>
         <Formik
           initialValues={applicantModel}
           onSubmit={(values, action) => {
             // clean up
-            alert(values);
-            onClick();
+            console.log(values);
+            onClose();
             action.resetForm();
           }}>
           <Form>
             <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
               <div>
                 <h2 className="font-bold">Create Applicant</h2>
-                <span className="text-gray-400 font-medium">
-                  create applicant here
-                </span>
+                <span className="text-gray-400 font-medium"></span>
+              </div>
+            </header>
+            <main>
+              <div className="flex flex-col gap-4 justify-center items-center border">
+                <Carousel width={"500px"}>
+                  {yearLevels.map(props => (
+                    <ItemSelect
+                      key={props.title}
+                      {...props}
+                      select={selectedYearLevel}
+                      onSelect={setSelectedYearLevel}
+                      name="studentDetails.yearLevel"
+                    />
+                  ))}
+                </Carousel>
+                <Typography as="span" className="text-gray-400 pb-2 mt-4">
+                  Please Select Your Preffered Track
+                </Typography>
               </div>
 
-              <IconButton type="outlined" icon={EditIcon} />
-            </header>
-
-            <main>
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              {/* <div className="grid grid-cols-2 gap-4 mb-4">
                 <Input label="First Name" name="personalDetails.firstName" />
                 <Input
                   label="Middle Name Name"
@@ -106,7 +100,7 @@ const CreateDrawer = ({ state, onClick }: CreateDrawerProps) => {
               </div>
               {applicantInputMaps.map(section => (
                 <FormSection {...section} />
-              ))}
+              ))} */}
             </main>
             <footer className="flex justify-end items-center gap-4">
               <Button as="reset" title="Reset" />

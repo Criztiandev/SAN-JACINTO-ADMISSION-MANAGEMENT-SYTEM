@@ -31,7 +31,7 @@ const guardianTemplate: Guardian = {
 const studentDetails: StudentDetails = {
   LRN: "192193123",
   PSA: "123123123",
-  yearLevel: "Grade 7",
+  yearLevel: "Grade 12",
   track: "Regular",
   schoolYear: "2023-2024",
   lastSchoolAttended: "Nazareth Institute of Alfonzo",
