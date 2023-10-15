@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { InputProps } from "./FormInterface";
+
 export interface AddressBaseProps {
   houseNo: string;
   street: string;
@@ -66,4 +68,9 @@ export interface ApplicantModelProps {
   addressDetails: AddressDetailsProps;
   guardianDetails: GuardianDetailsProps;
   otherDetails: OtherDetailsProps;
+}
+
+export interface ApplicationFormModelProps {
+  title: string;
+  model: InputProps[];
 }

@@ -1,81 +1,4 @@
-import {
-  Address,
-  AddressDetails,
-  ApplicantModelInterface,
-  Guardian,
-  GuardianDetails,
-  OtherDetails,
-  PersonalDetails,
-  StudentDetails,
-} from "../interface/applicantModelInterface";
-
-const addressTemplate: Address = {
-  houseNo: "91",
-  street: "Rawis",
-  barangay: "Poblacion",
-  municipality: "Batuan",
-  province: "Masbate",
-  country: "Phillipines",
-  zip: "5400",
-};
-
-// Define reusable guardian object
-const guardianTemplate: Guardian = {
-  firstName: "Mareflor",
-  middleName: "Mitra",
-  lastName: "Tuplano",
-  contact: "0948828485",
-};
-
-const studentDetails: StudentDetails = {
-  LRN: "192193123",
-  PSA: "123123123",
-  yearLevel: "Grade 12",
-  track: "Regular",
-  schoolYear: "2023-2024",
-  lastSchoolAttended: "Nazareth Institute of Alfonzo",
-};
-
-const personalDetails: PersonalDetails = {
-  firstName: "Criztian Jade",
-  middleName: "Mitra",
-  lastName: "Tuplano",
-  suffix: "",
-  gender: "Male",
-  birthDate: "05/07/01",
-  age: 22,
-  motherTounge: "Filipino",
-  email: "criztiandev@gmail.com",
-  contact: "09482004868",
-  facebookLink: "https://www.facebook.com/criztiandev07",
-};
-
-const addressDetails: AddressDetails = {
-  permanent: { ...addressTemplate },
-  current: { ...addressTemplate },
-};
-
-const guardianDetails: GuardianDetails = {
-  father: { ...guardianTemplate },
-  mother: { ...guardianTemplate },
-  legalGuardian: { ...guardianTemplate },
-};
-
-const otherDetails: OtherDetails = {
-  is4psBeneficiary: "No",
-  isIndigenousPerson: "No",
-  isLWD: "No",
-};
-
-const applicantTemplate: ApplicantModelInterface = {
-  studentDetails,
-  personalDetails,
-  addressDetails,
-  guardianDetails,
-  otherDetails,
-};
-
-export const applicantInputMaps: applicantInputMapsInterface[] = [
+export const applicantInputMaps = [
   {
     title: "Student Details",
     details: [
@@ -331,5 +254,3 @@ export const applicantInputMaps: applicantInputMapsInterface[] = [
     ],
   },
 ];
-
-export default applicantTemplate;
