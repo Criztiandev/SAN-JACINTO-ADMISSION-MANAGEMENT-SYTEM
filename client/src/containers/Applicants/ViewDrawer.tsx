@@ -3,7 +3,7 @@ import { Avatar, Button, Drawer, IconButton, Input } from "../../components";
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import applicantData from "../../data/applicantData.json";
 import { Form, Formik } from "formik";
-import { applicantInputMaps } from "../../models/applicantModel";
+import { applicantInputMaps } from "../../models/applicantInitialValue";
 import { useState } from "react";
 import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
 

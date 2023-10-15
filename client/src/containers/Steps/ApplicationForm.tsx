@@ -1,6 +1,6 @@
 import { Avatar, IconButton, Input, Typography } from "../../components";
 import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
-import { applicantInputMaps } from "../../models/applicantModel";
+import { applicantInputMaps } from "../../models/applicantInitialValue";
 
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";

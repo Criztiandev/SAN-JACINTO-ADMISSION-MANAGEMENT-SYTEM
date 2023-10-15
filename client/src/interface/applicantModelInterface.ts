@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export interface Address {
+export interface AddressBaseProps {
   houseNo: string;
   street: string;
   barangay: string;
@@ -10,14 +10,15 @@ export interface Address {
   zip: string;
 }
 
-export interface Guardian {
+export interface NameBaseProps {
   firstName: string;
   middleName: string;
   lastName: string;
+  suffix?: string;
   contact: string;
 }
 
-export interface StudentDetails {
+export interface StudentDetailsProps {
   LRN: string;
   PSA: string;
   yearLevel: string;
@@ -26,52 +27,43 @@ export interface StudentDetails {
   lastSchoolAttended: string;
 }
 
-export interface PersonalDetails {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  suffix: string;
+export interface PersonalDetailsProps extends NameBaseProps {
   gender: string;
-  birthDate: Date | null | undefined | string;
+  birthDate: Date | string;
   age: number;
 
   motherTounge: string;
   email: string;
-  contact: string;
   facebookLink: string;
 }
 
-export interface Account {
-  facebook: string;
+export interface AddressDetailsProps {
+  permanent: AddressBaseProps;
+  current: AddressBaseProps;
 }
 
-export interface AddressDetails {
-  permanent: Address;
-  current: Address;
-}
-
-export interface SchoolDetails {
+export interface SchoolDetailsProps {
   ID: string;
   name: string;
   contact: string;
 }
 
-export interface GuardianDetails {
-  father: Guardian;
-  mother: Guardian;
-  legalGuardian: Guardian;
+export interface GuardianDetailsProps {
+  father: NameBaseProps;
+  mother: NameBaseProps;
+  legalGuardian: NameBaseProps;
 }
 
-export interface OtherDetails {
+export interface OtherDetailsProps {
   is4psBeneficiary: string;
   isIndigenousPerson: string;
   isLWD: string;
 }
 
-export interface ApplicantModelInterface {
-  studentDetails: StudentDetails;
-  personalDetails: PersonalDetails;
-  addressDetails: AddressDetails;
-  guardianDetails: GuardianDetails;
-  otherDetails: OtherDetails;
+export interface ApplicantModelProps {
+  studentDetails: StudentDetailsProps;
+  personalDetails: PersonalDetailsProps;
+  addressDetails: AddressDetailsProps;
+  guardianDetails: GuardianDetailsProps;
+  otherDetails: OtherDetailsProps;
 }

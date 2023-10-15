@@ -7,7 +7,6 @@ import {
   OtherDetails,
   PersonalDetails,
   StudentDetails,
-  applicantInputMapsInterface,
 } from "../interface/applicantModelInterface";
 
 const addressTemplate: Address = {

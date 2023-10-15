@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useFormikContext } from "formik";
 import { Typography, Input } from "../../components";
-import { applicantInputMaps } from "../../models/applicantModel";
+import { applicantInputMaps } from "../../models/applicantInitialValue";
 import RadioItems from "../Register/RadioItems";
 import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
 import Carousel from "../../components/Carousel";

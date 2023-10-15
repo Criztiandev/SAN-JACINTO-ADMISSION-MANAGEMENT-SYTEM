@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Button, Drawer, Typography } from "../../components";
+import { Button, Drawer } from "../../components";
 import { Form, Formik } from "formik";
 
-import applicantModel, {
-  applicantInputMaps,
-} from "../../models/applicantModel";
 import Carousel from "../../components/Carousel";
 import ItemSelect from "../Form/ItemSelect";
+import { PersonalDetailsSection } from "./DataObject";
+import applicantInitialValue from "../../data/initialValue/applicantInit";
 interface CreateDrawerProps {
   state: boolean;
   onClose: () => void;
@@ -39,7 +38,9 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
   const [selectGender, setSelectGender] = useState("");
 
-  console.log(selectedYearLevel);
+  console.log(
+    PersonalDetailsSection(["First Name", "Middle Name", "Last Name"])
+  );
 
   return (
     <AnimatePresence mode="wait">
@@ -49,7 +50,7 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
         state={state}
         onClick={onClose}>
         <Formik
-          initialValues={applicantModel}
+          initialValues={applicantInitialValue}
           onSubmit={(values, action) => {
             // clean up
             console.log(values);
@@ -79,8 +80,6 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
                   ))}
                 </Carousel>
               </section>
-
-              <section>{applicantInputMaps[1].title}</section>
 
               {/* <div className="grid grid-cols-2 gap-4 mb-4">
                 <Input label="First Name" name="personalDetails.firstName" />

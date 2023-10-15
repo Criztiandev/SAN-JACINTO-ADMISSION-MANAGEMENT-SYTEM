@@ -6,7 +6,7 @@ import useMultipleForm from "../hooks/useMultipleForm";
 
 import { NextIcon } from "../assets/icons";
 
-import applicantTemplate from "../models/applicantModel";
+import applicantTemplate from "../models/applicantInitialValue";
 import { ApplicantModelInterface } from "../interface/applicantModelInterface";
 
 import {
