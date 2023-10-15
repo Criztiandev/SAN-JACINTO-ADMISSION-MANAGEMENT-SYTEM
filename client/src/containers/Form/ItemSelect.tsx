@@ -5,21 +5,28 @@ import { ItemSelectProps } from "../../interface/FormInterface";
 import { CardSelectionAnim } from "../../animations/Form/CardSelectVariant";
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
+import { ApplicantModelInterface } from "../../interface/applicantModelInterface";
 
 const ItemSelect = ({
   title,
   subtitle,
   cover,
   select,
-  onSelect,
+  onSelect = () => {},
   name,
 }: ItemSelectProps) => {
-  const { studentDetails } = useFormikContext().values;
+  const { studentDetails } = useFormikContext<ApplicantModelInterface>().values;
   const yearLevel = studentDetails.yearLevel;
 
   useEffect(() => {
-    onSelect(yearLevel);
-  }, []);
+    if (yearLevel) {
+      onSelect(yearLevel);
+    }
+
+    return () => {
+      onSelect("");
+    };
+  }, [onSelect, yearLevel]);
 
   return (
     <motion.label

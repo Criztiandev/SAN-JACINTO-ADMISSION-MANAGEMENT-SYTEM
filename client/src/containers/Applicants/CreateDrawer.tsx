@@ -3,7 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import { Button, Drawer, Typography } from "../../components";
 import { Form, Formik } from "formik";
 
-import applicantModel from "../../models/applicantModel";
+import applicantModel, {
+  applicantInputMaps,
+} from "../../models/applicantModel";
 import Carousel from "../../components/Carousel";
 import ItemSelect from "../Form/ItemSelect";
 interface CreateDrawerProps {
@@ -62,8 +64,10 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
               </div>
             </header>
             <main>
-              <div className="flex flex-col gap-4 justify-center items-center border">
-                <Carousel width={"500px"}>
+              <section className="flex flex-col gap-2 justify-start items-start">
+                <h4 className="cursor-pointer mb-2">Grade Level</h4>
+
+                <Carousel width={"550px"}>
                   {yearLevels.map(props => (
                     <ItemSelect
                       key={props.title}
@@ -74,10 +78,9 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
                     />
                   ))}
                 </Carousel>
-                <Typography as="span" className="text-gray-400 pb-2 mt-4">
-                  Please Select Your Preffered Track
-                </Typography>
-              </div>
+              </section>
+
+              <section>{applicantInputMaps[1].title}</section>
 
               {/* <div className="grid grid-cols-2 gap-4 mb-4">
                 <Input label="First Name" name="personalDetails.firstName" />
