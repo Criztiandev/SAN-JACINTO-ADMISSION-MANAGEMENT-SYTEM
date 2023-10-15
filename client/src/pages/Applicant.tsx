@@ -18,6 +18,7 @@ import GradeFilter from "../containers/Applicants/GradeFilter";
 import StatusFilter from "../containers/Applicants/StatusFilter";
 import MoreOption from "../containers/Applicants/MoreOption";
 import ActionColumn from "../containers/Applicants/ActionColumn";
+import EditDrawer from "../containers/Applicants/EditDrawert";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -25,7 +26,6 @@ interface ColumnInterface {
 }
 
 const Applicant = () => {
-  const [onEdit, setOnEdit] = useState(false);
   const [selectedApplicant, setSelectedApplicant] = useState<any>({});
   const [search, setSearch] = useState("");
   const [columnSearch, setColumnSearch] = useState<ColumnInterface>({
@@ -35,6 +35,7 @@ const Applicant = () => {
 
   const createToggel = useDrawer();
   const viewToggle = useDrawer();
+  const editToggle = useDrawer();
 
   const handleViewApplicant = (data: any) => {
     setSelectedApplicant(data);
@@ -53,7 +54,7 @@ const Applicant = () => {
 
   const handleEdit = (data: Array<object>) => {
     setSelectedApplicant(data);
-    viewToggle.toggleDrawer();
+    editToggle.toggleDrawer();
   };
 
   // const handleAccept = () => {};
@@ -175,7 +176,12 @@ const Applicant = () => {
         data={selectedApplicant}
         state={viewToggle.active}
         onClick={viewToggle.toggleDrawer}
-        onEdit={onEdit}
+      />
+
+      <EditDrawer
+        data={selectedApplicant}
+        state={editToggle.active}
+        onClick={editToggle.toggleDrawer}
       />
     </>
   );

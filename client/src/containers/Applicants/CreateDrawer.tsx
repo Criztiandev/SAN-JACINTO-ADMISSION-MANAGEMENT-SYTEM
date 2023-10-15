@@ -29,7 +29,6 @@ const suffixes = [
 
 const FormSection = ({ title, details }: applicantInputMapsInterface) => {
   const [hide, setHide] = useState(true);
-  const [onEdit, setOnEdit] = useState();
 
   return (
     <div className="mb-4">
@@ -49,7 +48,7 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
       {hide && (
         <div className="grid grid-cols-2 gap-4">
           {details.map((props: InputInterface) => (
-            <Input key={props.label} {...props} disabled={onEdit} />
+            <Input key={props.label} {...props} />
           ))}
         </div>
       )}
@@ -99,7 +98,9 @@ const CreateDrawer = ({ state, onClick }: CreateDrawerProps) => {
                   className="bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-[100px]">
                   <option value={""}>N/A</option>
                   {suffixes.map(letters => (
-                    <option value={letters}>{letters}</option>
+                    <option key={letters} value={letters}>
+                      {letters}
+                    </option>
                   ))}
                 </Select>
               </div>

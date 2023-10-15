@@ -8,9 +8,16 @@ interface FieldProps extends InputInterface {
   value?: any;
   disabled?: any;
   unstyled?: boolean;
+  className?: string;
 }
 
-const Input = ({ label, name = "", unstyled, ...props }: FieldProps) => {
+const Input = ({
+  label,
+  name = "",
+  unstyled,
+  className,
+  ...props
+}: FieldProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -30,7 +37,7 @@ const Input = ({ label, name = "", unstyled, ...props }: FieldProps) => {
             ? ""
             : `border border-gray-400 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
                 props.disabled ? "text-gray-400" : ""
-              }`
+              } ${className}`
         }
         {...field}
         {...props}
