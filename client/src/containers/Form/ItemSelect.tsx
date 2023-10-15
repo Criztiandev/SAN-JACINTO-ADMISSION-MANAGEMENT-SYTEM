@@ -46,7 +46,9 @@ const ItemSelect = ({
           {subtitle}
         </Typography>
       </div>
-      {name && <Radio name={name} id={title} value={title} />}
+      {name && (
+        <Radio className="hidden" name={name} id={title} value={title} />
+      )}
     </motion.label>
   );
 };
