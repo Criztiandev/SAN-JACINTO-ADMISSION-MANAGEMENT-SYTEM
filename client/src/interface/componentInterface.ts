@@ -26,9 +26,9 @@ export interface StatsInterface {
 }
 
 export interface FetchingDrawerProps {
-  data: string;
-  state: boolean;
-  onClose: () => void;
+  data?: string;
+  state?: boolean;
+  onClose?: () => void;
   onEdit?: boolean;
 }
 

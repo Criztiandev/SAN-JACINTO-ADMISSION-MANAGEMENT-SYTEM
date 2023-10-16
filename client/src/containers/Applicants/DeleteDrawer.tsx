@@ -13,7 +13,7 @@ import {
 import ItemSelect from "../Form/ItemSelect";
 import InputSections from "../Form/InputSections";
 
-const ViewDrawer = ({
+const DeleteDrawer = ({
   data,
   state = false,
   onClose = () => {},
@@ -80,4 +80,4 @@ const ViewDrawer = ({
   );
 };
 
-export default ViewDrawer;
+export default DeleteDrawer;

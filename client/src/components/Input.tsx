@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
 import Typography from "./Typography";
-import { InputInterface } from "../interface/componentInterface";
+import { InputProps } from "../interface/FormInterface";
 
-interface FieldProps extends InputInterface {
+interface FieldProps extends InputProps {
   type?: string;
   value?: any;
   disabled?: any;

@@ -20,6 +20,9 @@ import MoreOption from "../containers/Applicants/MoreOption";
 import ActionColumn from "../containers/Applicants/ActionColumn";
 import EditDrawer from "../containers/Applicants/EditDrawer";
 import MessageDrawer from "../containers/Applicants/MessageDrawer";
+import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
+import { handleTitleUpdate } from "../helper/applicantPanelHelper";
+import usePanelDrawer from "../hooks/usePanelDrawer";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -34,34 +37,32 @@ const Applicant = () => {
     status: { id: "status", value: "" },
   });
 
-  const createToggel = useDrawer();
+  const CustomDrawer = usePanelDrawer([
+    { data: selectedApplicant, Component: ViewDrawer },
+    { data: null, Component: CreateDrawer },
+    { data: selectedApplicant, Component: EditDrawer },
+    { data: selectedApplicant, Component: DeleteDrawer },
+    { data: selectedApplicant, Component: MessageDrawer },
+  ]);
+
+  console.log(CustomDrawer);
+
+  const createToggle = useDrawer();
   const viewToggle = useDrawer();
   const editToggle = useDrawer();
   const messageToggle = useDrawer();
+  const deleteToggle = useDrawer();
 
-  const handleViewApplicant = (data: any) => {
-    setSelectedApplicant(data);
-    viewToggle.toggleDrawer();
-  };
-
-  const handleSelect = (name: keyof ColumnInterface, value: string) => {
+  const handleColumnSearch = (name: keyof ColumnInterface, value: string) => {
     setColumnSearch(prev => ({
       ...prev,
       [name]: { ...prev[name], value: value },
     }));
   };
 
-  const handleTitleUpdate = (_default: string, value: string) =>
-    value === "Default" || value === "" ? _default : value;
-
-  const handleEdit = (data: Array<object>) => {
+  const handleAction = (data: any, toggle: () => void) => {
     setSelectedApplicant(data);
-    editToggle.toggleDrawer();
-  };
-
-  const handleMessage = (data: Array<object>) => {
-    setSelectedApplicant(data);
-    messageToggle.toggleDrawer();
+    toggle();
   };
 
   // const handleAccept = () => {};
@@ -77,7 +78,9 @@ const Applicant = () => {
         <FirstColumn
           data={row}
           value={getValue()}
-          viewApplicant={() => handleViewApplicant(row.original._id)}
+          viewApplicant={() =>
+            handleAction(row.original._id, viewToggle.toggleDrawer)
+          }
         />
       ),
     },
@@ -114,8 +117,12 @@ const Applicant = () => {
       header: "Action",
       cell: ({ row }) => (
         <ActionColumn
-          onSelect={() => handleEdit(row.original)}
-          onMessage={() => handleMessage(row.original._id)}
+          onDelete={() => handleAction(row.original, deleteToggle.toggleDrawer)}
+          onHold={() => {}}
+          onEdit={() => handleAction(row.original, editToggle.toggleDrawer)}
+          onMessage={() =>
+            handleAction(row.original, messageToggle.toggleDrawer)
+          }
         />
       ),
     },
@@ -130,7 +137,7 @@ const Applicant = () => {
             dir="left"
             title="Create"
             icon={CreateApplicantIcon}
-            onClick={createToggel.toggleDrawer}
+            onClick={createToggle.toggleDrawer}
           />
         }
         action>
@@ -150,7 +157,9 @@ const Applicant = () => {
                     `Grade ${columnSearch.yearLevel.value}`
                   )
                 }
-                onSelect={e => handleSelect("yearLevel", e.currentTarget.value)}
+                onSelect={e =>
+                  handleColumnSearch("yearLevel", e.currentTarget.value)
+                }
               />
 
               {/* // Status Filter */}
@@ -159,7 +168,7 @@ const Applicant = () => {
                   handleTitleUpdate("Status", columnSearch.status.value)
                 }
                 onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleSelect("status", e.currentTarget.value)
+                  handleColumnSearch("status", e.currentTarget.value)
                 }
               />
 
@@ -176,29 +185,9 @@ const Applicant = () => {
         </>
       </BaseLayout>
 
-      {/* <Drawer /> */}
-      <CreateDrawer
-        state={createToggel.active}
-        onClose={createToggel.toggleDrawer}
-      />
-
-      <ViewDrawer
-        data={selectedApplicant}
-        state={viewToggle.active}
-        onClose={viewToggle.toggleDrawer}
-      />
-
-      <EditDrawer
-        data={selectedApplicant}
-        state={editToggle.active}
-        onClose={editToggle.toggleDrawer}
-      />
-
-      <MessageDrawer
-        data={selectedApplicant}
-        state={messageToggle.active}
-        onClose={messageToggle.toggleDrawer}
-      />
+      {CustomDrawer.map(({ id, Component, ...props }) => (
+        <Component key={id} {...props} />
+      ))}
     </>
   );
 };

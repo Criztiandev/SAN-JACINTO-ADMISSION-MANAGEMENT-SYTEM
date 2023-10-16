@@ -1,7 +1,9 @@
 import { AnimatePresence } from "framer-motion";
-import { Button, Drawer, Dropdown, IconButton } from "../../components";
+import { Button, Drawer, IconButton } from "../../components";
 import { Form, Formik } from "formik";
 import { EditIcon } from "../../assets/icons";
+
+import { motion } from "framer-motion";
 
 import { FetchingDrawerProps } from "../../interface/componentInterface";
 
@@ -17,6 +19,7 @@ const MessageDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
           initialValues={{}}
           onSubmit={(values, action) => {
             // clean up
+            alert(values);
             console.log(values);
             onClose();
             action.resetForm();
@@ -28,18 +31,22 @@ const MessageDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
             </header>
             <main className="h-full flex flex-col gap-4">
               <section className="flex justify-between items-center">
-                <Dropdown>
-                  <Button title="Facebook" />
-                </Dropdown>
+                <motion.div
+                  whileTap={{ scale: 0.9 }}
+                  className="cursor-pointer bg-red-900 border border-gray-400 rounded-full py-[12px] px-4 w-full max-w-[150px] text-white text-center">
+                  Facebook
+                </motion.div>
 
                 <div className="flex gap-4">
-                  <div>Criztian Jade M Tuplano</div>
-                  <IconButton />
+                  <div className="cursor-pointer border border-gray-400 rounded-full py-[12px] px-4">
+                    Criztian Jade M Tuplano
+                  </div>
+                  <IconButton type="outlined" />
                 </div>
               </section>
 
               {/* <Textarea  /> */}
-              <textarea className="w-full border">
+              <textarea className="w-full h-full border p-4">
                 Hey Criztian Jade M Tuplano. "I know you love her, but it's
                 over, mate It doesn't matter, put the phone away It's never easy
                 to walk away, let her goIt 'll be okayIt's gonna hurt for a bit
@@ -48,7 +55,7 @@ const MessageDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
               </textarea>
             </main>
             <footer className="flex justify-end items-center gap-4">
-              <IconButton />
+              <IconButton type="outlined" />
               <Button as="submit" title="Submit" dir="right" icon={EditIcon} />
             </footer>
           </Form>
