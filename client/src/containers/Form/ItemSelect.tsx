@@ -5,7 +5,7 @@ import { ItemSelectProps } from "../../interface/FormInterface";
 import { CardSelectionAnim } from "../../animations/Form/CardSelectVariant";
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
-import { ApplicantModelInterface } from "../../interface/applicantModelInterface";
+import { ApplicantModelProps } from "../../interface/applicantModelInterface";
 
 const ItemSelect = ({
   title,
@@ -13,25 +13,33 @@ const ItemSelect = ({
   cover,
   select,
   onSelect = () => {},
-  name,
+  name = "",
 }: ItemSelectProps) => {
-  const { studentDetails } = useFormikContext<ApplicantModelInterface>().values;
-  const yearLevel = studentDetails.yearLevel;
+  const [base, field] = name.split(".") || "";
+  const context: any = useFormikContext<ApplicantModelProps>().values;
+
+  const result =
+    context && context[base] && context[base][field]
+      ? context[base][field]
+      : "";
 
   useEffect(() => {
-    if (yearLevel) {
-      onSelect(yearLevel);
+    if (result) {
+      onSelect(result);
     }
 
     return () => {
       onSelect("");
     };
-  }, [onSelect, yearLevel]);
+  }, [onSelect, result]);
 
   return (
     <motion.label
       key={title}
-      animate={CardSelectionAnim.animate({ currVal: select, value: title })}
+      animate={CardSelectionAnim.animate({
+        currVal: select || result,
+        value: title,
+      })}
       variants={CardSelectionAnim.variant}
       whileTap={{ scale: 0.9 }}
       className={`cursor-pointer min-w-[200px] min-h-[250px] border border-gray rounded-[5px] p-4 flex justify-center items-center flex-col gap-4 text-center shadow-lg `}

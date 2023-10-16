@@ -317,7 +317,7 @@ export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
 ];
 
 // Application Form Model
-export const ApplicaionFormInputModel: ApplicationFormModelProps[] = [
+export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
   {
     title: "Student Details",
     model: OmitInputObject(["Year Level"], studenDetailsInputModel),

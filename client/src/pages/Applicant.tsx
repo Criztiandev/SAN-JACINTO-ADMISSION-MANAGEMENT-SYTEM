@@ -19,6 +19,7 @@ import StatusFilter from "../containers/Applicants/StatusFilter";
 import MoreOption from "../containers/Applicants/MoreOption";
 import ActionColumn from "../containers/Applicants/ActionColumn";
 import EditDrawer from "../containers/Applicants/EditDrawer";
+import MessageDrawer from "../containers/Applicants/MessageDrawer";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -36,6 +37,7 @@ const Applicant = () => {
   const createToggel = useDrawer();
   const viewToggle = useDrawer();
   const editToggle = useDrawer();
+  const messageToggle = useDrawer();
 
   const handleViewApplicant = (data: any) => {
     setSelectedApplicant(data);
@@ -55,6 +57,11 @@ const Applicant = () => {
   const handleEdit = (data: Array<object>) => {
     setSelectedApplicant(data);
     editToggle.toggleDrawer();
+  };
+
+  const handleMessage = (data: Array<object>) => {
+    setSelectedApplicant(data);
+    messageToggle.toggleDrawer();
   };
 
   // const handleAccept = () => {};
@@ -106,7 +113,10 @@ const Applicant = () => {
     {
       header: "Action",
       cell: ({ row }) => (
-        <ActionColumn onSelect={() => handleEdit(row.original)} />
+        <ActionColumn
+          onSelect={() => handleEdit(row.original)}
+          onMessage={() => handleMessage(row.original._id)}
+        />
       ),
     },
   ];
@@ -175,13 +185,19 @@ const Applicant = () => {
       <ViewDrawer
         data={selectedApplicant}
         state={viewToggle.active}
-        onClick={viewToggle.toggleDrawer}
+        onClose={viewToggle.toggleDrawer}
       />
 
       <EditDrawer
         data={selectedApplicant}
         state={editToggle.active}
-        onClick={editToggle.toggleDrawer}
+        onClose={editToggle.toggleDrawer}
+      />
+
+      <MessageDrawer
+        data={selectedApplicant}
+        state={messageToggle.active}
+        onClose={messageToggle.toggleDrawer}
       />
     </>
   );

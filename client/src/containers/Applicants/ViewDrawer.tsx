@@ -1,59 +1,21 @@
 import { AnimatePresence } from "framer-motion";
-import { Avatar, Button, Drawer, IconButton, Input } from "../../components";
+import { Button, Drawer, IconButton } from "../../components";
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import applicantData from "../../data/applicantData.json";
 import { Form, Formik } from "formik";
-import { applicantInputMaps } from "../../models/applicantInitialValue";
-import { useState } from "react";
-import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
 
-import Expand_Down from "../../assets/icons/Expand_down_light.svg";
-import { InputInterface } from "../../interface/componentInterface";
+import { FetchingDrawerProps } from "../../interface/componentInterface";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
+import Carousel from "../../components/Carousel";
+import {
+  ApplicationFormInputModel,
+  yearLevelsItemModel,
+} from "../../helper/applicantFormObject";
+import ItemSelect from "../Form/ItemSelect";
+import InputSections from "../Form/InputSections";
 
-interface ViewDrawerProps {
-  data: Array<object>;
-  state: boolean;
-  onClick: () => void;
-  onEdit?: boolean;
-}
-
-const FormSection = ({ title, details }: applicantInputMapsInterface) => {
-  const [hide, setHide] = useState(true);
-  const [onEdit, setOnEdit] = useState(true);
-
-  return (
-    <div className="mb-4">
-      <div className="flex justify-between items-center border-b border-gray-300 pb-2 mb-4">
-        <h4 className="cursor-pointer" onClick={() => setHide(prev => !prev)}>
-          {title}
-        </h4>
-
-        <div className="flex gap-4">
-          <IconButton
-            icon={EditIcon}
-            onClick={() => setOnEdit(prev => !prev)}
-          />
-          <IconButton
-            icon={Expand_Down}
-            onClick={() => setHide(prev => !prev)}
-          />
-        </div>
-      </div>
-
-      {hide && (
-        <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputInterface) => (
-            <Input key={props.label} {...props} disabled={onEdit} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ViewDrawer = ({ data, state, onClick }: ViewDrawerProps) => {
+const ViewDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
   const response = applicantData[0];
   const { firstName, middleName, lastName, suffix, email } =
     response.personalDetails;
@@ -64,13 +26,13 @@ const ViewDrawer = ({ data, state, onClick }: ViewDrawerProps) => {
         className="overflow-scroll"
         width="600px"
         state={state}
-        onClick={onClick}>
-        {/* <Formik
+        onClick={onClose}>
+        <Formik
           initialValues={response}
           onSubmit={(values, action) => {
             // clean up
-            alert(values);
-            onClick();
+            console.log(values);
+            onClose();
             action.resetForm();
           }}>
           <Form>
@@ -86,34 +48,31 @@ const ViewDrawer = ({ data, state, onClick }: ViewDrawerProps) => {
             </header>
 
             <main>
-              <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
-                <div className="flex items-center gap-4">
-                  <Avatar src={FemaleProfile} size="84px" />
-                  <span className=" text-white">
-                    <span className="flex gap-2">
-                      <div>Grade</div>
-                      <Input
-                        name="studentDetails.yearLevel"
-                        unstyled
-                        disabled={true}
-                      />
-                    </span>
+              <section className="flex flex-col gap-2 justify-start items-start mb-4">
+                <h4>Grade Level</h4>
+                <Carousel width={"550px"}>
+                  {yearLevelsItemModel.map(props => (
+                    <ItemSelect
+                      select=""
+                      key={props.title}
+                      {...props}
+                      name="studentDetails.yearLevel"
+                    />
+                  ))}
+                </Carousel>
+              </section>
 
-                    <Input name="studentDetails.track" unstyled />
-                  </span>
-                </div>
-              </div>
-
-              {applicantInputMaps.map(section => (
-                <FormSection {...section} />
+              {ApplicationFormInputModel.map(props => (
+                <InputSections key={props.title} {...props} isEdit={true} />
               ))}
             </main>
+
             <footer className="flex justify-end items-center gap-4">
-              <Button title="Hold" />
-              <Button as="submit" title="Accept" />
+              <Button as="reset" title="Reset" />
+              <Button as="submit" title="Save" />
             </footer>
           </Form>
-        </Formik> */}
+        </Formik>
       </Drawer>
     </AnimatePresence>
   );

@@ -21,7 +21,7 @@ export interface InputSectionProps {
 }
 
 export interface ItemSelectProps extends CardProps {
-  select: string;
+  select?: string | null;
   name?: string;
   className?: string;
   onSelect?: Dispatch<SetStateAction<string>> | undefined;

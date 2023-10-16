@@ -24,3 +24,15 @@ export interface StatsInterface {
   title: string;
   type: string;
 }
+
+export interface FetchingDrawerProps {
+  data: string;
+  state: boolean;
+  onClose: () => void;
+  onEdit?: boolean;
+}
+
+export interface CreateDrawerProps {
+  state: boolean;
+  onClose: () => void;
+}

@@ -9,13 +9,10 @@ import applicantInitialValue from "../../data/initialValue/applicantInit";
 
 import InputSections from "../Form/InputSections";
 import {
-  ApplicaionFormInputModel,
+  ApplicationFormInputModel,
   yearLevelsItemModel,
 } from "../../helper/applicantFormObject";
-interface CreateDrawerProps {
-  state: boolean;
-  onClose: () => void;
-}
+import { CreateDrawerProps } from "../../interface/componentInterface";
 
 const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
@@ -58,7 +55,7 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
                 </Carousel>
               </section>
 
-              {ApplicaionFormInputModel.map(props => (
+              {ApplicationFormInputModel.map(props => (
                 <InputSections {...props} />
               ))}
             </main>
