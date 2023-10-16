@@ -5,6 +5,12 @@ import Typography from "../../components/Typography";
 import { InputInterface } from "../../interface/componentInterface";
 import { ItemSelection } from "../../interface/registrationInterface";
 import RadioItems from "../Register/RadioItems";
+import ItemSelect from "../Form/ItemSelect";
+import {
+  fatherInputDetails,
+  legalGuardianInputDetails,
+  motherInputDetails,
+} from "../../helper/applicantFormObject";
 
 const getGuardianInput = (name: string): InputInterface[] => [
   {
@@ -36,20 +42,20 @@ const GuadianChoices: ItemSelection[] = [
 ];
 
 const GuardianDetails = () => {
-  const [selectedGuardian, setSelectedGuardian] = useState(-1);
+  const [selectedGuardian, setSelectedGuardian] = useState("");
   const parentChoice = ["Father", "Mother", "Legal"];
 
   return (
     <section>
       <div className="flex justfiy-center items-center flex-col mb-4">
         <Carousel>
-          {GuadianChoices.map((items, index) => (
-            <RadioItems
-              {...items}
-              index={index}
-              state={selectedGuardian}
-              name="guardianDetails.choosen"
-              handleSelect={() => setSelectedGuardian(index)}
+          {GuadianChoices.map(props => (
+            <ItemSelect
+              key={props.title}
+              {...props}
+              select={selectedGuardian}
+              onSelect={setSelectedGuardian}
+              name="studentDetails.choosen"
             />
           ))}
         </Carousel>
@@ -64,8 +70,8 @@ const GuardianDetails = () => {
           Father Details
         </Typography>
         <div className="grid grid-cols-2 gap-4">
-          {getGuardianInput("father").map(props => (
-            <Input key={props.label} {...props} />
+          {fatherInputDetails.map(props => (
+            <Input {...props} />
           ))}
         </div>
 
@@ -73,19 +79,19 @@ const GuardianDetails = () => {
           Mother Details
         </Typography>
         <div className="grid grid-cols-2 gap-4 mb-6">
-          {getGuardianInput("mother").map(props => (
-            <Input key={props.label} {...props} />
+          {motherInputDetails.map(props => (
+            <Input {...props} />
           ))}
         </div>
 
-        {parentChoice[selectedGuardian] === "Legal" && (
+        {selectedGuardian === "Other" && (
           <>
             <Typography as="h5" className="pb-2 border-b">
               Prefered Guardian Details
             </Typography>
             <div className="grid grid-cols-2 gap-4">
-              {getGuardianInput("legalGuardian").map(props => (
-                <Input key={props.label} {...props} />
+              {legalGuardianInputDetails.map(props => (
+                <Input {...props} />
               ))}
             </div>
           </>
