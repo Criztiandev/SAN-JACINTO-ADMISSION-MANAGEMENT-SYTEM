@@ -15,7 +15,7 @@ interface IconProps extends BaseProps {
 
 const Nav = () => {
   const icons: IconProps[] = [
-    { path: "/dashboard", icon: DashboardIcon },
+    { path: "/", icon: DashboardIcon },
     { path: "/applicants", icon: ApplicantIcon },
     { path: "/schedule", icon: ScheduleIcon },
     { path: "/message", icon: MessageIcon },

@@ -18,23 +18,33 @@ import DescIcon from "../assets/icons/Expand_down_light.svg";
 import { IconButton, Typography, Image } from ".";
 import { motion } from "framer-motion";
 
+interface ColumnFilterProps {
+  id: string;
+  value: string | number;
+}
+
 interface TableProps extends BaseProps {
   data: any[];
   config: any[];
   search: string;
-  columnSearch: any;
+  columnSearch: ColumnFilterProps[];
   layout: string;
 }
+
+const sortingIcons: any = {
+  asc: <Image className="w-5 h-5" src={AscIcon} alt="asc_icon" />,
+  desc: <Image className="w-5 h-5" src={DescIcon} alt="desc_icon" />,
+};
 
 type SortingState = ColumnSort[];
 
 const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
   const [globalFilter, setGlobalFilter] = useState("");
+  const memoizedData = useMemo(() => data, [data]);
 
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilter] = useState<ColumnFiltersState>([]);
-  const memoizedData = useMemo(() => data, [data]);
 
   useEffect(() => {
     if (search) setGlobalFilter(search);
@@ -69,11 +79,6 @@ const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
-
-  const sortingIcons: any = {
-    asc: <Image className="w-5 h-5" src={AscIcon} alt="asc_icon" />,
-    desc: <Image className="w-5 h-5" src={DescIcon} alt="desc_icon" />,
-  };
 
   return (
     <>

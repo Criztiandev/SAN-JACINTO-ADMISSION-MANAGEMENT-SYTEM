@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import IconButton from "./IconButton";
 import { ComponentType } from "../interface/componentInterface";
 import Button from "./Button";
-
+import { motion } from "framer-motion";
 interface DropdownProps extends ComponentType {
   as?: "icon" | "button";
   icon?: string;
@@ -12,6 +12,7 @@ interface DropdownProps extends ComponentType {
   disabled?: boolean;
   name?: string;
   style?: any;
+  zIndex?: number;
 }
 
 const Dropdown = ({
@@ -24,6 +25,7 @@ const Dropdown = ({
   disabled,
   name,
   style,
+  zIndex,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
@@ -33,6 +35,7 @@ const Dropdown = ({
   // forward ref to the comonent
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
+  // close the drawer when click outside
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       const current = buttonRef.current;
@@ -52,7 +55,7 @@ const Dropdown = ({
   const ComponentRender = as === "icon" ? IconButton : Button;
 
   return (
-    <div className="relative">
+    <motion.div className="relative">
       <ComponentRender
         disabled={disabled}
         ref={buttonRef}
@@ -64,15 +67,15 @@ const Dropdown = ({
         name={name}
       />
       {open && (
-        <ul
-          className={`${
-            className ? className : "z-50"
-          } bg-white min-w-[100px] min-h-[100px]  max-h-[350px] w-fit  absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md`}
+        <div
+          className={`bg-white min-w-[100px] min-h-[100px]  max-h-[350px] absolute right-0 top-[3.5rem] border rounded-[5px] shadow-md ${
+            zIndex ? zIndex : "z-50"
+          } ${className && className}`}
           style={style}>
           {children}
-        </ul>
+        </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

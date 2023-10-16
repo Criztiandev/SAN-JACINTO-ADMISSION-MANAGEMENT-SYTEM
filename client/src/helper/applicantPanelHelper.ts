@@ -28,3 +28,6 @@ export const TableCol: Array<string> = [
   "150px",
   "100px",
 ];
+
+export const handleTitleUpdate = (_default: string, value: string) =>
+  value === "Default" || value === "" ? _default : value;

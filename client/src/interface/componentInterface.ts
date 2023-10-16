@@ -17,18 +17,22 @@ export interface ProviderProps extends BaseProps {
   data: JSON;
 }
 
-export interface InputInterface {
-  type?: string;
-  label?: string;
-  name?: string;
-  value?: string;
-  placeholder?: string;
-}
-
 // dashboard
 export interface StatsInterface {
   added: number;
   total: string;
   title: string;
   type: string;
+}
+
+export interface FetchingDrawerProps {
+  data?: string;
+  state?: boolean;
+  onClose?: () => void;
+  onEdit?: boolean;
+}
+
+export interface CreateDrawerProps {
+  state: boolean;
+  onClose: () => void;
 }
