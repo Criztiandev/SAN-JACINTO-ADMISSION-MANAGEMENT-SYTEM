@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
 import Typography from "./Typography";
-import { InputInterface } from "../interface/componentInterface";
+import { InputProps } from "../interface/FormInterface";
 
-interface FieldProps extends InputInterface {
-  type?: string;
-}
-
-const Textarea = ({ label, name = "", ...props }: FieldProps) => {
+const Textarea = ({ label, name = "", ...props }: InputProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,

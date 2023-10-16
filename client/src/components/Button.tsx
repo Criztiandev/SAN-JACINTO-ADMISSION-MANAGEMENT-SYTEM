@@ -34,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <motion.button
-        whileTap={{ scale: 0.5 }}
+        whileTap={{ scale: 0.9 }}
         type={as}
         ref={ref}
         className={`

@@ -27,7 +27,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ) => {
     return (
       <motion.button
-        whileTap={{ scale: 0.5 }}
+        whileTap={{ scale: 0.8 }}
         type={as}
         ref={ref}
         disabled={disabled}

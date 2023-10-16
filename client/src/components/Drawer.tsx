@@ -4,35 +4,15 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface DrawerProps extends BaseProps {
+  width?: string;
   state: boolean;
   mode?: "light" | "dark";
   anchor?: "left" | "right";
   onClick?: () => void;
 }
 
-const sliderVariant = {
-  open: {
-    x: 0,
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
-  },
-  close: {
-    x: "100%",
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
-  },
-};
-
-const backdropVariant = {
-  open: {
-    display: "block",
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
-  },
-  close: {
-    display: "none",
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.8 },
-  },
-};
-
 const Drawer = ({
+  width,
   anchor = "right",
   mode = "light",
   children,
@@ -60,14 +40,17 @@ const Drawer = ({
         initial={{ opacity: "50%", display: "none" }}
         animate={state ? "open" : "close"}
         variants={backdropVariant}
-        className="fixed inset-0 back-drop w-full h-full bg-black z-20"
+        className={`fixed inset-0 back-drop w-full h-full bg-black z-20 ${
+          className && className
+        }`}
         onClick={onClick}></motion.div>
       <motion.aside
         ref={drawerRef}
         initial={{ x: "100%" }}
         animate={state ? "open" : "close"}
         variants={sliderVariant}
-        className={`fixed w-[400px] ${
+        style={{ width: width || "400px" }}
+        className={`fixed ${
           mode === "light" ? "bg-white" : "bg-[#1e1e1e] "
         } h-full top-0 p-4 z-30 ] ${anchorDir(anchor)} ${
           className && className
@@ -79,3 +62,25 @@ const Drawer = ({
 };
 
 export default Drawer;
+
+const sliderVariant = {
+  open: {
+    x: 0,
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+  close: {
+    x: "100%",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+};
+
+const backdropVariant = {
+  open: {
+    display: "block",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.05 },
+  },
+  close: {
+    display: "none",
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.8 },
+  },
+};

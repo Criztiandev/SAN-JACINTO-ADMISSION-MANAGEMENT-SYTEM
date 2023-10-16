@@ -1,10 +1,10 @@
 import { RouterProvider } from "react-router-dom";
 import { privateRoutes } from "./privateRoutes";
-import { useState } from "react";
 import { publicRoutes } from "./publicRoutes";
+import { useAuthContext } from "../context/AuthContext";
 
 const Routes = () => {
-  const [user, setUser] = useState("123123");
+  const { user } = useAuthContext();
 
   if (user) {
     return <RouterProvider router={privateRoutes} />;

@@ -1,15 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
 import Typography from "./Typography";
-import { InputInterface } from "../interface/componentInterface";
+import { InputProps } from "../interface/FormInterface";
 
-interface FieldProps extends InputInterface {
+interface FieldProps extends InputProps {
   type?: string;
   value?: any;
   disabled?: any;
+  unstyled?: boolean;
+  className?: string;
 }
 
-const Input = ({ label, name = "", ...props }: FieldProps) => {
+const Input = ({
+  label,
+  name = "",
+  unstyled,
+  className,
+  ...props
+}: FieldProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -24,9 +32,13 @@ const Input = ({ label, name = "", ...props }: FieldProps) => {
         </label>
       )}
       <input
-        className={`border border-gray-400 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
-          props.disabled ? "text-gray-400" : ""
-        }`}
+        className={
+          unstyled
+            ? ""
+            : `border border-gray-400 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
+                props.disabled ? "text-gray-400" : ""
+              } ${className}`
+        }
         {...field}
         {...props}
         id={name}

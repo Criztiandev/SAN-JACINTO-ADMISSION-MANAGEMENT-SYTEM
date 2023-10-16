@@ -4,26 +4,16 @@ import {
   ApplicantPage,
   DashboardPage,
   SchedulePage,
+  AnnoucementPage,
 } from "../pages";
 import Examiniees from "../pages/Examiniees";
 
 const routes = [
-  {
-    path: "/",
-    element: <DashboardPage />,
-  },
-
-  {
-    path: "/applicants",
-    element: <ApplicantPage />,
-  },
-
-  {
-    path: "/applicants/examinees",
-    element: <Examiniees />,
-  },
-
+  { path: "/", element: <DashboardPage /> },
+  { path: "/applicants", element: <ApplicantPage /> },
+  { path: "/applicants/examinees", element: <Examiniees /> },
   { path: "/schedule", element: <SchedulePage /> },
+  { path: "/annoucement", element: <AnnoucementPage /> },
 ];
 
 export const privateRoutes = createBrowserRouter(
