@@ -3,38 +3,42 @@ import { useState } from "react";
 import { useFormikContext } from "formik";
 import { Typography, Input } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
-import RadioItems from "../Register/RadioItems";
 import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
 import Carousel from "../../components/Carousel";
 import { InputProps } from "../../interface/FormInterface";
+import ItemSelect from "../Form/ItemSelect";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
-const trackMap = (yearLevel: YearLevelProps) => {
-  const track = { "Grade 7": JrTracks, "Grade 11": SHSTracks };
-  return track[yearLevel] || [];
+const GradeLevelTrack = (level: "Grade 7" | "Grade 11") => {
+  const trackMapping = {
+    "Grade 7": JrTracks,
+    "Grade 11": SHSTracks,
+  };
+
+  // Return the corresponding tracks or an empty array if not found
+  return trackMapping[level] || [];
 };
 
 const StudentDetails = () => {
-  const [selectedTrack, setSelectedTrack] = useState<number>(-1);
+  const [selectedTrack, setSelectedTrack] = useState("");
   const { details } = applicantInputMaps[0];
 
-  // Get the grade level selected
   const { values }: any = useFormikContext();
-  const currentYearLevel: YearLevelProps = values?.studentDetails?.yearLevel;
+  const currYearLevel: YearLevelProps = values?.studentDetails?.yearLevel;
 
   return (
     <section>
-      {trackMap(currentYearLevel).length > 0 ? (
+      {GradeLevelTrack(currYearLevel).length > 0 ? (
         <div className="flex justify-center items-center flex-col ">
           <Carousel>
-            {trackMap(currentYearLevel).map((items, index) => (
-              <RadioItems
-                {...items}
-                index={index}
-                state={selectedTrack}
-                name={"studentDetails.track"}
-                handleSelect={() => setSelectedTrack(index)}
+            {GradeLevelTrack(currYearLevel).map(props => (
+              <ItemSelect
+                key={props.title}
+                {...props}
+                select={selectedTrack}
+                onSelect={setSelectedTrack}
+                name="studentDetails.track"
               />
             ))}
           </Carousel>
@@ -45,14 +49,7 @@ const StudentDetails = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center flex-col">
-          <RadioItems
-            title="No Available Tracks"
-            subtitle="We will offer soon, stay tuned"
-            name={"studentDetails.track"}
-            className="w-[400px] opacity-50"
-            index={0}
-          />
-
+          <ItemSelect cover="" title="Invalid Track" subtitle="Unavailable" />
           <Typography as="span" className="text-gray-400 pb-2 mt-4">
             Please Select Your Preffered Track
           </Typography>

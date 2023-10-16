@@ -4,7 +4,7 @@ import { Button, Typography } from "../components/index";
 import RegistrationLayout from "../layouts/RegistrationLayout";
 import useMultipleForm from "../hooks/useMultipleForm";
 
-import { NextIcon } from "../assets/icons";
+import { NextIcon, PrevIcon } from "../assets/icons";
 import { ApplicantModelProps } from "../interface/applicantModelInterface";
 
 import {
@@ -16,12 +16,14 @@ import {
   OtherDetails,
   ApplicationForm,
 } from "../containers/Steps";
-import { panelTemplate } from "../interface/registrationInterface";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
+import { OutroDetails } from "../helper/registrationFormHelper";
+import { StepperProps } from "../interface/registrationInterface";
 
-const registrationPanels: panelTemplate[] = [
+const RegistrationStepper: StepperProps[] = [
   { title: "Grade Level", component: <GradeLevel /> },
   { title: "Student Details", component: <StudentDetails /> },
   { title: "Personal Details", component: <PersonalDetails /> },
@@ -31,29 +33,11 @@ const registrationPanels: panelTemplate[] = [
   { title: "Application Form", component: <ApplicationForm /> },
 ];
 
-const OutroDetails = [
-  {
-    title: "Congratulations",
-    desc: " Thank you on your admission to our school! Your examination schedule has been sent to your Facebook account.",
-  },
-
-  {
-    title: "Exciting Journey",
-    desc: "  As you embark on this exciting journey, please keep in mind that your registered Facebook account will serve as the primary channel for receiving all school updates.",
-  },
-
-  {
-    title: "Stay Tuned",
-    desc: " Stay connected to stay informed about events and important announcements. If you ever have any questions, don't hesitate to use your private account to get in touch. We're here to support you every step of the way!",
-  },
-];
-
 const Register = () => {
   const [active, setActive] = useState(false);
   const [index, setIndex] = useState(-1);
-  const { steps, currentIndex, isLastStep, next } = useMultipleForm(
-    registrationPanels.map(items => items.component)
-  );
+  const { steps, currentIndex, isLastStep, isFirstStep, next, back } =
+    useMultipleForm(RegistrationStepper.map(items => items.component));
 
   const Ended = index === OutroDetails.length - 1;
   const navigate = useNavigate();
@@ -95,13 +79,13 @@ const Register = () => {
 
   return (
     <>
-      <RegistrationLayout activePanel={registrationPanels[currentIndex].title}>
+      <RegistrationLayout activePanel={RegistrationStepper[currentIndex].title}>
         <section className="flex items-center justify-between border-b p-2">
           <Typography as="h3" className="font-semibold">
-            {registrationPanels[currentIndex].title}
+            {RegistrationStepper[currentIndex].title}
           </Typography>
           <span>
-            {currentIndex + 1} / {registrationPanels.length}
+            {currentIndex + 1} / {RegistrationStepper.length}
           </span>
         </section>
 
@@ -109,7 +93,20 @@ const Register = () => {
           <Form className="flex flex-col justify-between h-full">
             {steps}
 
-            <div className={`flex items-center justify-end`}>
+            <div
+              className={`flex items-center ${
+                isFirstStep ? "justify-end" : "justify-between"
+              }`}>
+              {!isFirstStep && (
+                <Button
+                  as="submit"
+                  type="outlined"
+                  dir="left"
+                  icon={PrevIcon}
+                  title="Prev"
+                  onClick={back}
+                />
+              )}
               <Button
                 as="submit"
                 type="outlined"
@@ -128,7 +125,6 @@ const Register = () => {
                     <h2>{OutroDetails[index].title}</h2>
                     <p>{OutroDetails[index].desc}</p>
                   </div>
-
                   <Button as="submit" title="Next" />
                 </div>
               </div>
