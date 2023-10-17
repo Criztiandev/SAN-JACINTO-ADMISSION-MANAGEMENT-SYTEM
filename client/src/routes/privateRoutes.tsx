@@ -7,6 +7,7 @@ import {
   AnnoucementPage,
 } from "../pages";
 import Examiniees from "../pages/Examiniees";
+import MasterList from "../pages/MasterList";
 
 const routes = [
   { path: "/", element: <DashboardPage /> },
@@ -14,6 +15,8 @@ const routes = [
   { path: "/applicants/examinees", element: <Examiniees /> },
   { path: "/schedule", element: <SchedulePage /> },
   { path: "/annoucement", element: <AnnoucementPage /> },
+  { path: "/masterlist", element: <MasterList /> },
+  { path: "/examiniees", element: <Examiniees /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

@@ -4,6 +4,7 @@ import { Typography, IconButton, Dropdown, Button } from "../components";
 import { BaseProps } from "../interface/componentInterface";
 import Nav from "./Nav";
 import { SettingsIcon, NotifIcon } from "../assets/icons";
+import ShortCut from "../containers/ShortCut";
 
 interface BaseLayoutProps extends BaseProps {
   title?: string;
@@ -29,9 +30,7 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
           <span className="flex gap-4">
             {action ? (
               <>
-                <Dropdown>
-                  <Button type="ghost" title="Master List" />
-                </Dropdown>
+                <ShortCut />
                 {header}
               </>
             ) : (

@@ -2,38 +2,13 @@ import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import { InputInterface } from "../../interface/componentInterface";
 import { ItemSelection } from "../../interface/registrationInterface";
-import RadioItems from "../Register/RadioItems";
 import ItemSelect from "../Form/ItemSelect";
 import {
   fatherInputDetails,
   legalGuardianInputDetails,
   motherInputDetails,
 } from "../../helper/applicantFormObject";
-
-const getGuardianInput = (name: string): InputInterface[] => [
-  {
-    label: `First Name`,
-    name: `guardianDetails.${name}.firstName`,
-    placeholder: `Enter your their first name`,
-  },
-  {
-    label: "Middle Name",
-    name: `guardianDetails.${name}.middleName`,
-    placeholder: `Enter your their middle name`,
-  },
-  {
-    label: "Last Name",
-    name: `guardianDetails.${name}.lastName`,
-    placeholder: `Enter your their last name`,
-  },
-  {
-    label: "Contact",
-    name: `guardianDetails.${name}.contact`,
-    placeholder: `Enter your their contact number`,
-  },
-];
 
 const GuadianChoices: ItemSelection[] = [
   { cover: "null", title: "Father", subtitle: "Strong" },
@@ -43,7 +18,6 @@ const GuadianChoices: ItemSelection[] = [
 
 const GuardianDetails = () => {
   const [selectedGuardian, setSelectedGuardian] = useState("");
-  const parentChoice = ["Father", "Mother", "Legal"];
 
   return (
     <section>
@@ -71,7 +45,7 @@ const GuardianDetails = () => {
         </Typography>
         <div className="grid grid-cols-2 gap-4">
           {fatherInputDetails.map(props => (
-            <Input {...props} />
+            <Input key={props.label} {...props} />
           ))}
         </div>
 

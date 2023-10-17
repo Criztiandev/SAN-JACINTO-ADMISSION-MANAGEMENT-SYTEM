@@ -22,7 +22,6 @@ import EditDrawer from "../containers/Applicants/EditDrawer";
 import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
 import { handleTitleUpdate } from "../helper/applicantPanelHelper";
-import usePanelDrawer from "../hooks/usePanelDrawer";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
@@ -37,21 +36,52 @@ const Applicant = () => {
     status: { id: "status", value: "" },
   });
 
-  const CustomDrawer = usePanelDrawer([
-    { data: selectedApplicant, Component: ViewDrawer },
-    { data: null, Component: CreateDrawer },
-    { data: selectedApplicant, Component: EditDrawer },
-    { data: selectedApplicant, Component: DeleteDrawer },
-    { data: selectedApplicant, Component: MessageDrawer },
-  ]);
-
-  console.log(CustomDrawer);
-
   const createToggle = useDrawer();
   const viewToggle = useDrawer();
   const editToggle = useDrawer();
   const messageToggle = useDrawer();
   const deleteToggle = useDrawer();
+
+  const DrawerData = [
+    {
+      id: "0",
+      Component: ViewDrawer,
+      data: selectedApplicant,
+      state: viewToggle.active,
+      onClose: viewToggle.toggleDrawer,
+    },
+
+    {
+      id: "1",
+      Component: CreateDrawer,
+      state: createToggle.active,
+      onClose: createToggle.toggleDrawer,
+    },
+
+    {
+      id: "2",
+      Component: EditDrawer,
+      data: selectedApplicant,
+      state: editToggle.active,
+      onClose: editToggle.toggleDrawer,
+    },
+
+    {
+      id: "3",
+      Component: MessageDrawer,
+      data: selectedApplicant,
+      state: messageToggle.active,
+      onClose: messageToggle.toggleDrawer,
+    },
+
+    {
+      id: "4",
+      Component: DeleteDrawer,
+      data: selectedApplicant,
+      state: deleteToggle.active,
+      onClose: deleteToggle.toggleDrawer,
+    },
+  ];
 
   const handleColumnSearch = (name: keyof ColumnInterface, value: string) => {
     setColumnSearch(prev => ({
@@ -66,6 +96,7 @@ const Applicant = () => {
   };
 
   // const handleAccept = () => {};
+  // const handleUpdateStatus = (status: string ) =>{}
 
   const HeaderConfig: ColumnDef<any, any>[] = [
     {
@@ -185,7 +216,7 @@ const Applicant = () => {
         </>
       </BaseLayout>
 
-      {CustomDrawer.map(({ id, Component, ...props }) => (
+      {DrawerData.map(({ id, Component, ...props }) => (
         <Component key={id} {...props} />
       ))}
     </>
