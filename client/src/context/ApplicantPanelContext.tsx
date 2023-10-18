@@ -48,6 +48,7 @@ const ApplicantProvider = ({ children }: ApplicantProviderProps) => {
   const deleteToggle = useDrawer();
 
   const handleAction = (data: any, toggle: () => void) => {
+    console.log("Delete Applicant");
     setSelectedApplicant(data);
     toggle();
   };

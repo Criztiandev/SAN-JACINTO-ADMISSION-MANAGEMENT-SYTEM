@@ -22,7 +22,7 @@ const ActionColumn = ({
   const DropdowmItems = [
     { icon: MessageIcon, title: "Message", onClick: onMessage },
     { icon: MessageIcon, title: "Hold", onClick: onHold },
-    { icon: DeleteIcon, title: "Delete", onclick: onDelete },
+    { icon: DeleteIcon, title: "Delete", onClick: onDelete },
   ];
 
   return (

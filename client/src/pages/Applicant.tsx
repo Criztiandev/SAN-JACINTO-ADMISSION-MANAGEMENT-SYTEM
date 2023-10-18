@@ -13,18 +13,11 @@ import StatusFilter from "../containers/Applicants/StatusFilter";
 import MoreOption from "../containers/Applicants/MoreOption";
 import { handleTitleUpdate } from "../helper/applicantPanelHelper";
 import { useApplicantPanelContext } from "../context/ApplicantPanelContext";
+import { DrawerListProps } from "../interface/componentInterface";
 
 interface ColumnInterface {
   yearLevel: { id: string; value: string };
   status: { id: string; value: string };
-}
-
-interface DrawerListProps {
-  id: string;
-  Component: any;
-  data?: Array<object> | string;
-  state: boolean;
-  onClose: () => void;
 }
 
 const Applicant = () => {
@@ -100,9 +93,10 @@ const Applicant = () => {
         </>
       </BaseLayout>
 
-      {DrawerLists.map(({ id, Component, ...props }: DrawerListProps) => (
-        <Component key={id} {...props} />
-      ))}
+      {DrawerLists.map(
+        ({ id, Component, state, ...props }: DrawerListProps) =>
+          state && <Component key={id} state={state} {...props} />
+      )}
     </>
   );
 };

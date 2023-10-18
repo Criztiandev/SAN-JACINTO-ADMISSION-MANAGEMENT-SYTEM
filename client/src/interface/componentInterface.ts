@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export interface BaseProps {
   className?: string;
@@ -33,6 +33,15 @@ export interface FetchingDrawerProps {
 }
 
 export interface CreateDrawerProps {
+  state: boolean;
+  onClose: () => void;
+}
+
+export interface DrawerListProps {
+  id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: ReactNode | ReactElement | any;
+  data?: Array<object> | string;
   state: boolean;
   onClose: () => void;
 }
