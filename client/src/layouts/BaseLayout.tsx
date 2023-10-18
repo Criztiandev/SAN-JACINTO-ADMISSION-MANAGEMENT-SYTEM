@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { Typography, IconButton, Dropdown, Button } from "../components";
+import { Typography, IconButton } from "../components";
 import { BaseProps } from "../interface/componentInterface";
 import Nav from "./Nav";
 import { SettingsIcon, NotifIcon } from "../assets/icons";

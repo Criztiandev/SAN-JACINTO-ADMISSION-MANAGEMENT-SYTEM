@@ -27,21 +27,23 @@ const FilterItems: ListItemProps[] = [
 const GradeFilter = ({ onTitleUpdate, onSelect }: GradeFilterProps) => {
   return (
     <Dropdown
-      className="border z-50"
+      className="border z-50 p-2"
       style={{ width: "150px" }}
       as="button"
       type="outlined"
       title={onTitleUpdate()}
       icon={FilterIcon}>
       {FilterItems.map(items => (
-        <Button
-          key={items.title}
-          type="ghost"
-          dir="left"
-          value={items.value}
-          {...items}
-          onClick={onSelect}
-        />
+        <div className="hover:bg-blue-300 rounded-[5px]">
+          <Button
+            key={items.title}
+            type="ghost"
+            dir="left"
+            value={items.value}
+            {...items}
+            onClick={onSelect}
+          />
+        </div>
       ))}
     </Dropdown>
   );
