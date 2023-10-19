@@ -22,6 +22,7 @@ import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
 import { OutroDetails } from "../helper/registrationFormHelper";
 import { StepperProps } from "../interface/registrationInterface";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const RegistrationStepper: StepperProps[] = [
   { title: "Grade Level", component: <GradeLevel /> },
@@ -53,13 +54,16 @@ const Register = () => {
   };
 
   const handleQuery = (values: ApplicantModelProps) => {
+    const { mutateAsync: addApplicantMutation } = useMutation({
+      mutationFn: addApplicant(),
+    });
+
     if (index !== OutroDetails.length - 1) {
       setActive(true);
       return;
     }
 
-    alert(values);
-    navigate("/");
+    addApplicantMutation(values);
   };
 
   // // Formik Submission Handler

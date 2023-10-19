@@ -11,8 +11,13 @@ import {
   yearLevelsItemModel,
 } from "../../helper/applicantFormObject";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const EditDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
+const EditDrawer = ({
+  data,
+  state,
+  onClose = () => {},
+}: FetchingDrawerProps) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
   const response = applicantData[0];
 
@@ -28,8 +33,7 @@ const EditDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
             <Formik
               initialValues={response}
               onSubmit={(values, action) => {
-                // clean up
-                console.log(values);
+                toast.success("Applicant is Edited Successfully");
                 onClose();
                 action.resetForm();
               }}>
@@ -63,7 +67,7 @@ const EditDrawer = ({ data, state, onClose }: FetchingDrawerProps) => {
                 </main>
 
                 <footer className="flex justify-end items-center gap-4">
-                  <Button as="reset" title="Reset" />
+                  <Button as="button" title="Cancel" />
                   <Button as="submit" title="Save" />
                 </footer>
               </Form>
