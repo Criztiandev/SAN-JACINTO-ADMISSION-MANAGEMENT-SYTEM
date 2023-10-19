@@ -10,7 +10,7 @@ interface ListItemProps {
 }
 
 interface StatusFilterProps {
-  onTitleUpdate: () => string;
+  onTitleUpdate?: () => string;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 

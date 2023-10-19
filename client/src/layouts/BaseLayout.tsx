@@ -16,7 +16,7 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
     <div className=" grid grid-cols-[70px_auto]">
-      <aside className=" bg-[#652020]">
+      <aside className="">
         <Nav />
       </aside>
 

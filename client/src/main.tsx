@@ -8,15 +8,22 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import AuthContextProvider from "./context/AuthContext";
 import Loading from "./components/Loading";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DrawerProvider from "./context/DrawerContext";
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
-        <Suspense fallback={<Loading />}>
-          <Routes />
-        </Suspense>
+        <DrawerProvider>
+          <Suspense fallback={<Loading />}>
+            <Routes />
+            <ToastContainer />
+          </Suspense>
+        </DrawerProvider>
       </AuthContextProvider>
     </QueryClientProvider>
   </React.StrictMode>

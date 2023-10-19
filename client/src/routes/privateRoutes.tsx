@@ -8,16 +8,17 @@ import {
 } from "../pages";
 import Examiniees from "../pages/Examiniees";
 import MasterList from "../pages/MasterList";
-import ApplicantProvider from "../context/ApplicantPanelContext";
+import UserAccount from "../pages/UserAccount";
+import TableProvider from "../context/TableContext";
 
 const routes = [
   { path: "/", element: <DashboardPage /> },
   {
     path: "/applicants",
     element: (
-      <ApplicantProvider>
+      <TableProvider>
         <ApplicantPage />
-      </ApplicantProvider>
+      </TableProvider>
     ),
   },
   { path: "/applicants/examinees", element: <Examiniees /> },
@@ -25,6 +26,7 @@ const routes = [
   { path: "/annoucement", element: <AnnoucementPage /> },
   { path: "/masterlist", element: <MasterList /> },
   { path: "/examiniees", element: <Examiniees /> },
+  { path: "/user", element: <UserAccount /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

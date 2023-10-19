@@ -3,19 +3,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
 
-import {
-  Badge,
-  Button,
-  Dropdown,
-  Table,
-  IconButton,
-  Drawer,
-} from "../components";
+import { Badge, Button, IconButton, Drawer } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 
 import ApplicantIcon from "../assets/icons/Applicants.svg";
-import SelectAllIcon from "../assets/icons/Select_All.svg";
-import ImportIcon from "../assets/icons/Import_light.svg";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import MessageIcon from "../assets/icons/Message_light.svg";
 

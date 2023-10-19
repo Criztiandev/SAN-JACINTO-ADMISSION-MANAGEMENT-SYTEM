@@ -20,6 +20,7 @@ const ShortCut = () => {
     <Dropdown className="flex flex-col p-2 w-[175px]">
       {shortcutItems.map(items => (
         <motion.div
+          key={items.title}
           whileTap={{ scale: 0.8 }}
           className="hover:bg-blue-300 rounded-[5px]">
           <Link to={items.path} className="flex gap-2 p-2">

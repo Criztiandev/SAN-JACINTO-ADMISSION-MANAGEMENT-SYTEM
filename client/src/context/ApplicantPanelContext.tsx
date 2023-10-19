@@ -11,6 +11,8 @@ import FirstColumn from "../containers/Table/FirstColumn";
 import ActionColumn from "../containers/Applicants/ActionColumn";
 import TitleHeader from "../containers/Table/TitleHeader";
 import { Badge } from "../components";
+import { toast } from "react-toastify";
+import { ToastConfig } from "../utils/notifUtils";
 
 interface ApplicantProviderProps {
   children: ReactNode;
@@ -48,81 +50,17 @@ const ApplicantProvider = ({ children }: ApplicantProviderProps) => {
   const deleteToggle = useDrawer();
 
   const handleAction = (data: any, toggle: () => void) => {
-    console.log("Delete Applicant");
     setSelectedApplicant(data);
     toggle();
   };
 
   const handleAccept = () => {
-    alert("Applicant Accepted");
+    toast.success("Applicant Accepted Successfully", ToastConfig);
   };
 
   const handleUpdateStatus = (target: string, status: string) => {
-    alert(`ApplicantID: ${target} is Updated To ${status} `);
+    toast.info("Applicat is Updated Successfully", ToastConfig);
   };
-
-  const TableConfig: ColumnDef<any, any>[] = [
-    {
-      id: "select",
-      header: ({ table }) => <TitleHeader data={table} />,
-      accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
-
-      cell: ({ row, getValue }) => (
-        <FirstColumn
-          data={row}
-          value={getValue()}
-          viewApplicant={() =>
-            handleAction(row.original._id, viewToggle.toggleDrawer)
-          }
-        />
-      ),
-    },
-
-    { header: "LRN", accessorKey: "studentDetails.LRN" },
-    {
-      header: "Grade Level",
-      accessorKey: "studentDetails.yearLevel",
-      accessorFn: ({ yearLevel }) => ` ${yearLevel}`,
-    },
-    { header: "Gender", accessorKey: "personalDetails.gender" },
-    { header: "BOD", accessorKey: "personalDetails.birthDate" },
-    { header: "Age", accessorKey: "personalDetails.age" },
-    {
-      header: "Guardian",
-      accessorKey: "guardianDetails.legalGuardian",
-      accessorFn: ({ guardianDetails }) => {
-        const { firstName, middleName, lastName } =
-          guardianDetails.legalGuardian;
-
-        return `${lastName}, ${firstName} ${middleName[0]}.`;
-      },
-    },
-
-    { header: "Contact", accessorKey: "personalDetails.contact" },
-    { header: "Average", accessorKey: "studentDetails.generalAverage" },
-    {
-      header: "Status",
-      accessorKey: "status",
-      cell: ({ getValue }: any) => (
-        <Badge as="neutral" type={getValue()} title={getValue()} />
-      ),
-    },
-    {
-      header: "Action",
-      cell: ({ row }) => (
-        <ActionColumn
-          onAccept={() => handleAccept()}
-          onDelete={() => handleAction(row.original, deleteToggle.toggleDrawer)}
-          onHold={() => handleUpdateStatus(row.original._id, "Hold")}
-          onEdit={() => handleAction(row.original, editToggle.toggleDrawer)}
-          onMessage={() =>
-            handleAction(row.original, messageToggle.toggleDrawer)
-          }
-        />
-      ),
-    },
-  ];
 
   const DrawerLists: DrawerListProps[] = [
     {
