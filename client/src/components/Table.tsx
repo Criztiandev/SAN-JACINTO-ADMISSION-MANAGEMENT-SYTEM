@@ -1,85 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseProps } from "../interface/componentInterface";
-import { useMemo, useState, useEffect } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  getPaginationRowModel,
-  getSortedRowModel,
-  ColumnSort,
-  getFilteredRowModel,
-  ColumnFiltersState,
-} from "@tanstack/react-table";
+
 import PrevIcon from "../assets/icons/Expand_left_light.svg";
 import NextIcon from "../assets/icons/Expand_right_light.svg";
 import AscIcon from "../assets/icons/Expand_up_light.svg";
 import DescIcon from "../assets/icons/Expand_down_light.svg";
 import { IconButton, Typography, Image } from ".";
 import { motion } from "framer-motion";
-
-interface ColumnFilterProps {
-  id: string;
-  value: string | number;
-}
-
-interface TableProps extends BaseProps {
-  data: any[];
-  config: any[];
-  search: string;
-  columnSearch: ColumnFilterProps[];
-  layout: string;
-}
+import { flexRender } from "@tanstack/react-table";
+import { useTableContext } from "../context/TableContext";
 
 const sortingIcons: any = {
   asc: <Image className="w-5 h-5" src={AscIcon} alt="asc_icon" />,
   desc: <Image className="w-5 h-5" src={DescIcon} alt="desc_icon" />,
 };
 
-type SortingState = ColumnSort[];
+interface TableProps {
+  layout: string;
+}
 
-const Table = ({ data, config, search, columnSearch, layout }: TableProps) => {
-  const [globalFilter, setGlobalFilter] = useState("");
-  const memoizedData = useMemo(() => data, [data]);
-
-  const [rowSelection, setRowSelection] = useState({});
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilter] = useState<ColumnFiltersState>([]);
-
-  useEffect(() => {
-    if (search) setGlobalFilter(search);
-    if (columnSearch) setColumnFilter(prev => [...prev, ...columnSearch]);
-
-    return () => {
-      setGlobalFilter("");
-      setColumnFilter([]);
-    };
-  }, [search, columnSearch]);
-
-  useEffect(() => {});
-
-  const table = useReactTable({
-    data: memoizedData,
-    columns: config,
-
-    state: {
-      rowSelection,
-      sorting,
-      globalFilter,
-      columnFilters: columnFilters,
-    },
-
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onGlobalFilterChange: setGlobalFilter,
-    onColumnFiltersChange: setColumnFilter,
-
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-  });
-
+const Table = ({ layout }: TableProps) => {
+  const { table } = useTableContext();
   return (
     <>
       <motion.div className="relative border overflow-scroll rounded-[5px] xl:h-[54vh] 2xl:h-[61vh] ">

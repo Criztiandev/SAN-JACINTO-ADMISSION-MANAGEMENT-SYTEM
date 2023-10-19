@@ -1,130 +1,94 @@
-/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {
+import {
   createContext,
   useContext,
-  useMemo,
-  useReducer,
   useState,
+  ChangeEvent,
+  useMemo,
 } from "react";
+import { BaseProps } from "../interface/componentInterface";
+import { useQuery } from "react-query";
+
 import {
   useReactTable,
   getCoreRowModel,
-  Table,
   getPaginationRowModel,
+  getSortedRowModel,
   getFilteredRowModel,
+  ColumnFiltersState,
+  SortingState,
+  OnChangeFn,
 } from "@tanstack/react-table";
-import { BaseProps } from "../interface/componentInterface";
+import ApplicantData from "../data/applicantData.json";
+import { TableValue } from "../interface/Table.types";
 
-interface TableProviderProps extends BaseProps {
-  data: any[]; // Change this to the appropriate type for your data
-  config: any[]; // Change this to the appropriate type for your config
-  layout: string;
-}
+const TableContext = createContext<TableValue | undefined>(undefined);
 
-interface TableContextValue {
-  table: Table<any>; // Change this to the appropriate type for your data
-  filter: string;
-  search: string;
-  filterSelect: string;
-  tableLayout: string;
-  rowSelected: any;
-  viewProfile: boolean;
-  handleAcceptApplicant: (value: number | Array<number>) => void;
-  dispatch: React.Dispatch<Action>;
-}
-
-const TableContext = createContext<TableContextValue | undefined>(undefined);
-
-const initialState = {
-  filter: "",
-  search: "",
-  filterSelect: "",
-  viewProfile: false,
-};
-
-type Action =
-  | { type: "SET_FILTER"; payload: string }
-  | { type: "SET_SEARCH"; payload: string }
-  | { type: "SET_FILTER_SELECT"; payload: string }
-  | { type: "SET_TABLE_LAYOUT"; payload: string }
-  | { type: "SET_VIEW_PROFILE"; payload?: boolean };
-
-const reducer = (state: typeof initialState, action: Action) => {
-  switch (action.type) {
-    case "SET_FILTER":
-      return { ...state, filter: action.payload };
-
-    case "SET_FILTER_SELECT":
-      return { ...state, filterSelect: action.payload };
-
-    case "SET_SEARCH":
-      return { ...state, search: action.payload };
-
-    case "SET_TABLE_LAYOUT":
-      return { ...state, tableLayout: action.payload };
-
-    case "SET_VIEW_PROFILE":
-      return { ...state, viewProfile: !state.viewProfile };
-
-    default:
-      return state;
-  }
-};
-
-export const useTableContext = (): TableContextValue => {
+// eslint-disable-next-line react-refresh/only-export-components
+export const useTableContext = () => {
   const context = useContext(TableContext);
   if (!context)
     throw new Error("useTableContext must be used within a TableProvider");
   return context;
 };
 
-const TableProvider = ({
-  data,
-  config,
-  children,
-  layout,
-}: TableProviderProps) => {
-  const [rowSelected, setRowSelected] = useState({});
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const memoizedData = useMemo(() => data, [data]);
+const TableProvider = ({ children }: BaseProps) => {
+  const query = useQuery({});
+  const data = ApplicantData;
+  const memoizedData: any = useMemo(() => data, [data]);
 
-  // Table Configuration
-  const table = useReactTable({
-    data: memoizedData,
-    columns: config,
-    state: {
-      globalFilter: state.filter,
-      rowSelection: rowSelected,
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
+  const [selected, setSelected] = useState<object | string>({});
+  const [tableConfig, setTableConfig] = useState([]);
 
-    onGlobalFilterChange: (value: string) =>
-      dispatch({ type: "SET_FILTER", payload: value }),
-    enableRowSelection: true,
+  const [search, setSearch] = useState<string | number>("");
+  const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([]);
+  const [sort, setSort] = useState<SortingState | undefined>();
+  const [rowSelect, setRowSelect] = useState({});
 
-    onRowSelectionChange: setRowSelected,
-    debugTable: true,
-  });
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearch(e.currentTarget.value);
 
-  const handleAcceptApplicant = (value: number | Array<number>) => {
-    if (Array.isArray(value)) {
-      const applicants = value.map((id: number) => memoizedData[id]);
-      console.log(applicants);
-      return;
-    }
-    alert(JSON.stringify(memoizedData[value]));
+  const handleSelected = (data: string | object) => {
+    setSelected(data);
   };
 
-  const value: TableContextValue = {
-    ...state,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleColumnSearch = (filter: any) => {
+    setColumnSearch(prev => [{ ...prev, ...filter }]);
+  };
+
+  const table = useReactTable({
+    data: memoizedData,
+    columns: tableConfig,
+
+    state: {
+      rowSelection: rowSelect,
+      sorting: sort,
+      globalFilter: search,
+      columnFilters: columnSearch,
+    },
+
+    onRowSelectionChange: setRowSelect,
+    onSortingChange: setSort as OnChangeFn<SortingState>,
+    onGlobalFilterChange: setSearch,
+    onColumnFiltersChange: setColumnSearch,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
+  const value = {
     table,
-    handleAcceptApplicant,
-    dispatch,
-    tableLayout: layout,
-    rowSelected,
+    ...query,
+    selected,
+    search,
+    columnSearch,
+
+    handleSearch,
+    handleSelected,
+    handleColumnSearch,
+    setTableConfig,
   };
 
   return (

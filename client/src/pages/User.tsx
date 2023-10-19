@@ -4,14 +4,8 @@ import BaseLayout from "../layouts/BaseLayout";
 
 const User = () => {
   const TabLists = [
-    {
-      title: "All",
-      active: true,
-    },
-    {
-      title: "Roles",
-      active: false,
-    },
+    { title: "All", active: true },
+    { title: "Roles", active: false },
   ];
 
   return (

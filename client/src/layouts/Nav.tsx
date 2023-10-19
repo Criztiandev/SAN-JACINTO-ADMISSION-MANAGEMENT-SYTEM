@@ -1,11 +1,12 @@
 import Avatar from "../components/Avatar";
 import Image from "../components/Image";
+import Logo from "../assets/image/Logo.png";
 import DashboardIcon from "../assets/icons/Overview.svg";
 import ApplicantIcon from "../assets/icons/Applicants.svg";
 import ScheduleIcon from "../assets/icons/Calendar.svg";
 import MessageIcon from "../assets/icons/Message_light.svg";
 import ToolsIcon from "../assets/icons/Structure_light.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BaseProps } from "../interface/componentInterface";
 
 interface IconProps extends BaseProps {
@@ -13,20 +14,21 @@ interface IconProps extends BaseProps {
   icon: string;
 }
 
-const Nav = () => {
-  const icons: IconProps[] = [
-    { path: "/", icon: DashboardIcon },
-    { path: "/applicants", icon: ApplicantIcon },
-    { path: "/schedule", icon: ScheduleIcon },
-    { path: "/message", icon: MessageIcon },
-    { path: "/tools", icon: ToolsIcon },
-  ];
+const icons: IconProps[] = [
+  { path: "/", icon: DashboardIcon },
+  { path: "/applicants", icon: ApplicantIcon },
+  { path: "/schedule", icon: ScheduleIcon },
+  { path: "/message", icon: MessageIcon },
+  { path: "/tools", icon: ToolsIcon },
+];
 
+const Nav = () => {
+  const navigate = useNavigate();
   return (
     <nav className=" sticky top-0 py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border border-gray-300 ">
       <figure className="logo">
         <Link to="/">
-          <Image src={DashboardIcon} alt="logo" />
+          <Image src={Logo} alt="logo" />
         </Link>
       </figure>
 
@@ -42,7 +44,9 @@ const Nav = () => {
         ))}
       </ul>
 
-      <Avatar />
+      <button onClick={() => navigate("/user")}>
+        <Avatar src="" />
+      </button>
     </nav>
   );
 };
