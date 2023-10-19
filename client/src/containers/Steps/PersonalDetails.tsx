@@ -2,112 +2,48 @@ import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
-import { InputInterface } from "../../interface/componentInterface";
-import { ItemSelection } from "../../interface/registrationInterface";
-import RadioItems from "../Register/RadioItems";
 import { Typography } from "../../components";
+import ItemSelect from "../Form/ItemSelect";
+import { InputProps } from "../../interface/FormInterface";
+import {
+  personalDetailsInputModel,
+  suffixes,
+} from "../../helper/applicantFormObject";
+import { OmitInputObject } from "../../utils/OmitUtils";
+import { GenderSelectionItems } from "../../helper/registrationFormHelper";
 
-const parentName = "personalDetails";
+const firstSection: InputProps[] = OmitInputObject(
+  [
+    "Suffix",
+    "Birth Date",
+    "Age",
+    "Email",
+    "Contact",
+    "Facebook Link",
+    "Mother Tounge",
+    "Gender",
+  ],
+  personalDetailsInputModel
+);
 
-const suffixes = [
-  "Jr.",
-  "Sr.",
-  "II",
-  "III",
-  "IV",
-  "V",
-  "VI",
-  "VII",
-  "VIII",
-  "IX",
-];
-
-const gendersArr: ItemSelection[] = [
-  {
-    cover: "",
-    title: "Male",
-    subtitle: "Masculine",
-  },
-  {
-    cover: "",
-    title: "Female",
-    subtitle: "Feminine",
-  },
-];
-
-const firstSection: InputInterface[] = [
-  {
-    label: "First Name",
-    name: `${parentName}.firstName`,
-    placeholder: "Enter your First Name",
-  },
-
-  {
-    label: "Middle Name",
-    name: `${parentName}.middleName`,
-    placeholder: "Enter your First Name",
-  },
-
-  {
-    label: "Last Name",
-    name: `${parentName}.lastName`,
-    placeholder: "Enter your First Name",
-  },
-];
-
-const secondSection: InputInterface[] = [
-  {
-    type: "date",
-    label: "Birth Date",
-    name: "personalDetails.birthDate",
-  },
-  {
-    type: "number",
-    label: "Age",
-    name: "personalDetails.age",
-    placeholder: "Enter your Age",
-  },
-  {
-    type: "email",
-    label: "Email",
-    name: "personalDetails.email",
-    placeholder: "Enter your @email",
-  },
-
-  {
-    type: "number",
-    label: "Contact",
-    name: "personalDetails.contact",
-    placeholder: "Enter your phone number",
-  },
-
-  {
-    type: "string",
-    label: "Facebook Link",
-    name: "personalDetails.facebookLink",
-    placeholder: "Enter your facebook link",
-  },
-
-  {
-    label: "Mother Tounge",
-    name: "personalDetails.motherTounge",
-    placeholder: "Enter",
-  },
-];
+const secondSection: InputProps[] = OmitInputObject(
+  ["First Name", "Middle Name", "Last Name", "Suffix", "Gender"],
+  personalDetailsInputModel
+);
 
 const PersonalDetails = () => {
-  const [genderSelect, setGenderSelect] = useState(-1);
+  const [genderSelect, setGenderSelect] = useState("");
   return (
     <section className="flex flex-col gap-4 mb-4">
       <div className="flex justify-center items-center flex-col">
         <Carousel direction="center">
-          {gendersArr.map((gender, index) => (
-            <RadioItems
-              {...gender}
-              index={index}
-              state={genderSelect}
+          {GenderSelectionItems.map(props => (
+            <ItemSelect
+              key={props.title}
+              {...props}
+              select={genderSelect}
+              onSelect={setGenderSelect}
               name="personalDetails.gender"
-              handleSelect={() => setGenderSelect(index)}
             />
           ))}
         </Carousel>

@@ -16,7 +16,7 @@ export interface panelTitleInterface {
 }
 
 // Panel Stepper Template
-export interface panelTemplate {
+export interface StepperProps {
   title: string;
   component: ReactElement;
 }

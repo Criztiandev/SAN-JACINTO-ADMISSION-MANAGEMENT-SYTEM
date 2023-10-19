@@ -1,14 +1,11 @@
-export { default as ApplicantPage } from "./Applicant";
-export { default as ArchivePage } from "./Archieve";
-export { default as AnnoucementPage } from "./Annoucement";
-export { default as BotManagerPage } from "./BotManager";
-export { default as CheckPointPage } from "./CheckPoint";
-export { default as DashboardPage } from "./Dashboard";
-export { default as ErrorPage } from "./ErrorPage";
-export { default as LandingPage } from "./LandingPage";
-export { default as LoginPage } from "./LoginPage";
-export { default as MasterListPage } from "./MasterList";
-export { default as RegisterPage } from "./Register";
-export { default as SchedulePage } from "./Schedule";
-export { default as ToolPage } from "./Tools";
-export { default as UserPage } from "./User";
+import { lazy } from "react";
+
+export const ApplicantPage = lazy(() => import("./Applicant.tsx"));
+export const AnnoucementPage = lazy(() => import("./Annoucement.tsx"));
+export const DashboardPage = lazy(() => import("./Dashboard.tsx"));
+export const ErrorPage = lazy(() => import("./ErrorPage.tsx"));
+export const LandingPage = lazy(() => import("./LandingPage.tsx"));
+export const RegisterPage = lazy(() => import("./Register.tsx"));
+export const SchedulePage = lazy(() => import("./Schedule.tsx"));
+export const MasterListPage = lazy(() => import("./MasterList.tsx"));
+export const LoginPage = lazy(() => import("./LoginPage.tsx"));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -6,6 +6,11 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Routes from "./routes";
 import { QueryClientProvider, QueryClient } from "react-query";
 import AuthContextProvider from "./context/AuthContext";
+import Loading from "./components/Loading";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DrawerProvider from "./context/DrawerContext";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +18,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
-        <Routes />
+        <DrawerProvider>
+          <Suspense fallback={<Loading />}>
+            <Routes />
+            <ToastContainer />
+          </Suspense>
+        </DrawerProvider>
       </AuthContextProvider>
     </QueryClientProvider>
   </React.StrictMode>

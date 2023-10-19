@@ -9,6 +9,7 @@ interface ActionColumnProps {
   onMessage: () => void;
   onHold: () => void;
   onDelete: () => void;
+  onAccept?: () => void;
 }
 
 const ActionColumn = ({
@@ -16,30 +17,17 @@ const ActionColumn = ({
   onMessage,
   onDelete,
   onHold,
+  onAccept,
 }: ActionColumnProps) => {
   const DropdowmItems = [
-    {
-      icon: MessageIcon,
-      title: "Message",
-      onClick: onMessage,
-    },
-
-    {
-      icon: MessageIcon,
-      title: "Hold",
-      onClick: onHold,
-    },
-
-    {
-      icon: DeleteIcon,
-      title: "Delete",
-      onclick: onDelete,
-    },
+    { icon: MessageIcon, title: "Message", onClick: onMessage },
+    { icon: MessageIcon, title: "Hold", onClick: onHold },
+    { icon: DeleteIcon, title: "Delete", onClick: onDelete },
   ];
 
   return (
     <span className="flex gap-4">
-      <IconButton type="outlined" icon={AcceptIcon} />
+      <IconButton type="outlined" icon={AcceptIcon} onClick={onAccept} />
       <IconButton type="outlined" icon={EditIcon} onClick={onEdit} />
       <Dropdown className=" w-[9.5rem] py-2 px-4 flex flex-col">
         {DropdowmItems.map(({ title, icon, onClick }) => (
