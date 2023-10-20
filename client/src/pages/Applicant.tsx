@@ -18,7 +18,7 @@ import CreateDrawer from "../containers/Applicants/CreateDrawer";
 import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
 import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import EditDrawer from "../containers/Applicants/EditDrawer";
-import { DrawerListProps } from "../interface/Drawer.types";
+import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApplicants } from "../api/applicant.api";
 import Loading from "../components/Loading";
@@ -167,6 +167,7 @@ const Applicant = () => {
     },
   ];
 
+  // Setting up the Table Config
   useEffect(() => {
     if (!TableConfig) throw new Error("No Config");
     setTableConfig(TableConfig);
@@ -176,6 +177,7 @@ const Applicant = () => {
     };
   }, []);
 
+  // Storing the Data to the Table data
   useEffect(() => {
     if (isSuccess) {
       toast.success(data.message);
@@ -187,6 +189,7 @@ const Applicant = () => {
     };
   }, [isSuccess]);
 
+  // Checking if there us an error
   if (isError) toast.error(error.message);
   if (isLoading) return <Loading />;
 

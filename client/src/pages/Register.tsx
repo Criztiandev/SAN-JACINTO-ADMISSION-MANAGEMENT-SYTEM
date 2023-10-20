@@ -5,7 +5,7 @@ import RegistrationLayout from "../layouts/RegistrationLayout";
 import useMultipleForm from "../hooks/useMultipleForm";
 
 import { NextIcon, PrevIcon } from "../assets/icons";
-import { ApplicantModelProps } from "../interface/applicantModelInterface";
+import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
 import {
   GradeLevel,
@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
 import { OutroDetails } from "../helper/registrationFormHelper";
-import { StepperProps } from "../interface/registrationInterface";
+import { StepperProps } from "../interface/Registration.Type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 const RegistrationStepper: StepperProps[] = [

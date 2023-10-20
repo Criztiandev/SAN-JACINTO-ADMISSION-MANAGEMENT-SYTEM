@@ -2,7 +2,7 @@ import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import { ItemSelection } from "../../interface/registrationInterface";
+import { ItemSelection } from "../../interface/Registration.Type";
 import ItemSelect from "../Form/ItemSelect";
 import {
   fatherInputDetails,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
 import Typography from "./Typography";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 
 interface FieldProps extends BaseProps {
   name?: string;

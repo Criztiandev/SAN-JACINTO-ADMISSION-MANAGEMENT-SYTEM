@@ -1,6 +1,6 @@
 import { Typography, Radio } from "../../components";
 import useRadioSelect from "../../hooks/userRadioSelect";
-import { ItemSelection } from "../../interface/registrationInterface";
+import { ItemSelection } from "../../interface/Registration.Type";
 
 const categoryList: ItemSelection[] = [
   { cover: "null", title: "Casual", subtitle: "Regular Schedule" },

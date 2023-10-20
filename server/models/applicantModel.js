@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
 const parentSchema = new mongoose.Schema({
   firstName: { type: String, required: true },

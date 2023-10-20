@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { Typography, IconButton } from "../components";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import Nav from "./Nav";
 import { SettingsIcon, NotifIcon } from "../assets/icons";
 import ShortCut from "../containers/ShortCut";

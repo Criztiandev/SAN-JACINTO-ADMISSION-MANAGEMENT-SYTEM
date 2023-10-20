@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext } from "react";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import useDrawer from "../hooks/useDrawer";
-import { DrawerValue } from "../interface/Drawer.types";
+import { DrawerValue } from "../interface/Drawer.Types";
 
 const DrawerContext = createContext<DrawerValue | undefined>(undefined);
 

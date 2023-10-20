@@ -7,7 +7,7 @@ import {
   OtherDetailsProps,
   PersonalDetailsProps,
   StudentDetailsProps,
-} from "../../interface/applicantModelInterface";
+} from "../../interface/ApplicantMode.Type";
 
 const addressTemplate: AddressBaseProps = {
   houseNo: "91",

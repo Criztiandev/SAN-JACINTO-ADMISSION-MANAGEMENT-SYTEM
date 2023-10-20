@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState, Fragment } from "react";
 import IconButton from "./IconButton";
-import { ComponentType } from "../interface/componentInterface";
+import { ComponentType } from "../interface/Component.Type";
 import Button from "./Button";
 import { motion } from "framer-motion";
 interface DropdownProps extends ComponentType {

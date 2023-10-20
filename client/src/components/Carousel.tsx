@@ -1,5 +1,5 @@
 import useCarousel from "../hooks/useCarousel";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import { motion } from "framer-motion";
 import { RefObject } from "react";
 

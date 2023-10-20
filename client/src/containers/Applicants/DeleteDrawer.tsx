@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { Button, Drawer } from "../../components";
 import applicantData from "../../data/applicantData.json";
 import { Form, Formik } from "formik";
-import { FetchingDrawerProps } from "../../interface/componentInterface";
+import { FetchingDrawerProps } from "../../interface/Component.Type";
 import { toast } from "react-toastify";
 import { ToastConfig } from "../../utils/notifUtils";
 

@@ -7,7 +7,7 @@ import ScheduleIcon from "../assets/icons/Calendar.svg";
 import MessageIcon from "../assets/icons/Message_light.svg";
 import ToolsIcon from "../assets/icons/Structure_light.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 
 interface IconProps extends BaseProps {
   path: string;

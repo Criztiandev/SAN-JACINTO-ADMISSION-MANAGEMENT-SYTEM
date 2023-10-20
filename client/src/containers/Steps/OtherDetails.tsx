@@ -1,5 +1,5 @@
 import Input from "../../components/Input";
-import { InputInterface } from "../../interface/componentInterface";
+import { InputInterface } from "../../interface/Component.Type";
 
 const OtherDetails = () => {
   const OtherInputTransformer: InputInterface[] = [

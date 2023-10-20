@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.type";
 
 interface BadgeProps extends BaseProps {
   as: "neutral" | "stats";

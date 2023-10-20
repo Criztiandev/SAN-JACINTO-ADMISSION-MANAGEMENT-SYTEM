@@ -1,4 +1,4 @@
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import { createElement } from "react";
 import { forwardRef } from "react";
 

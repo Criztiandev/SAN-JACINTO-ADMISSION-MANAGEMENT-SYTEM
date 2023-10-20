@@ -6,7 +6,7 @@ import {
   ChangeEvent,
   useMemo,
 } from "react";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 
 import {
   useReactTable,

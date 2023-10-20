@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Button, Drawer } from "../../components";
 import { Form, Formik } from "formik";
-import { FetchingDrawerProps } from "../../interface/componentInterface";
+import { FetchingDrawerProps } from "../../interface/Component.Type";
 import applicantData from "../../data/applicantData.json";
 import ItemSelect from "../Form/ItemSelect";
 import InputSections from "../Form/InputSections";

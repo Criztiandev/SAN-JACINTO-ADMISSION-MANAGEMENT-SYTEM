@@ -1,5 +1,5 @@
 import { CardProps, InputProps } from "../interface/FormInterface";
-import { ApplicationFormModelProps } from "../interface/applicantModelInterface";
+import { ApplicationFormModelProps } from "../interface/ApplicantMode.Type";
 import { OmitInputObject } from "../utils/OmitUtils";
 
 export const JrTracksItemModel: CardProps[] = [

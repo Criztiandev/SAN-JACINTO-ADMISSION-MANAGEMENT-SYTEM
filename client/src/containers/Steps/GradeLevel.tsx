@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
-import { ItemSelection } from "../../interface/registrationInterface";
+import { ItemSelection } from "../../interface/Registration.Type";
 import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
 

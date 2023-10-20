@@ -12,7 +12,7 @@ import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
 } from "../../helper/applicantFormObject";
-import { CreateDrawerProps } from "../../interface/componentInterface";
+import { CreateDrawerProps } from "../../interface/Component.Type";
 
 const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");

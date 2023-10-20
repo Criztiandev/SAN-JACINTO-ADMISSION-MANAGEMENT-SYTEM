@@ -1,6 +1,6 @@
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import { InputInterface } from "../../interface/componentInterface";
+import { InputInterface } from "../../interface/Component.Type";
 
 const InputTransformer = (name: string): InputInterface[] => [
   {

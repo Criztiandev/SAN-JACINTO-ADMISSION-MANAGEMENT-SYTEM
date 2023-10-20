@@ -1,11 +1,11 @@
 import { Avatar, IconButton, Input, Typography } from "../../components";
-import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
+import { applicantInputMapsInterface } from "../../interface/ApplicantMode.Type";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { useState } from "react";
-import { InputInterface } from "../../interface/componentInterface";
+import { InputInterface } from "../../interface/Component.Type";
 import { useFormikContext } from "formik";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";

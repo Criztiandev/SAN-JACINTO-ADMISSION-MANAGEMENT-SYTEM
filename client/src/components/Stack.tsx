@@ -1,4 +1,4 @@
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import { Fragment } from "./Fragments";
 
 interface StackProps extends BaseProps {
