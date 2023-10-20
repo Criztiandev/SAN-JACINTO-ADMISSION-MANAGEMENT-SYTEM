@@ -3,11 +3,8 @@
 
 import { Button, Table, SearchBar, Badge } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
-
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-
 import MoreOption from "../containers/Applicants/MoreOption";
-
 import { useTableContext } from "../context/TableContext";
 import { useEffect } from "react";
 import { ColumnDef } from "@tanstack/react-table";
@@ -22,8 +19,25 @@ import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
 import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import EditDrawer from "../containers/Applicants/EditDrawer";
 import { DrawerListProps } from "../interface/Drawer.types";
+import { useQuery } from "@tanstack/react-query";
+import { fetchApplicants } from "../api/applicant.api";
+import Loading from "../components/Loading";
+import { toast } from "react-toastify";
 
 const Applicant = () => {
+  const { isLoading, isError, error } = useQuery({
+    queryFn: fetchApplicants,
+    queryKey: ["applicants"],
+  });
+
+  const {
+    data,
+    search,
+    selected,
+    handleSearch,
+    handleSelected,
+    setTableConfig,
+  } = useTableContext();
   const {
     createToggle,
     deleteToggle,
@@ -32,10 +46,8 @@ const Applicant = () => {
     editToggle,
     holdToggle,
   } = useDrawerContext();
-  const { search, selected, handleSearch, handleSelected, setTableConfig } =
-    useTableContext();
 
-  const handleToggle = (data: object | string, toggle) => {
+  const handleToggle = (data: object | string, toggle = () => {}) => {
     handleSelected(data);
     toggle();
   };
@@ -163,26 +175,34 @@ const Applicant = () => {
     };
   }, []);
 
+  if (isError) {
+    toast.error(error.message);
+  }
+  if (isLoading) return <Loading />;
+
   return (
     <>
       <BaseLayout
         title="Applicants"
         header={
-          <Button
-            dir="left"
-            title="Create"
-            icon={CreateApplicantIcon}
-            onClick={createToggle.toggleDrawer}
-          />
+          data.length > 0 && (
+            <Button
+              dir="left"
+              title="Create"
+              icon={CreateApplicantIcon}
+              onClick={createToggle.toggleDrawer}
+            />
+          )
         }
         action>
         <>
-          <div className="flex justify-between items-center">
-            <SearchBar value={search} onChange={handleSearch} />
+          {data.length >= 0 && (
+            <div className="flex justify-between items-center">
+              <SearchBar value={search} onChange={handleSearch} />
 
-            <div className="flex gap-4">
-              {/* // Status Filter */}
-              {/* <StatusFilter
+              <div className="flex gap-4">
+                {/* // Status Filter */}
+                {/* <StatusFilter
                 onTitleUpdate={() => {}}
                 onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
@@ -191,9 +211,10 @@ const Applicant = () => {
                 }
               /> */}
 
-              <MoreOption />
+                <MoreOption />
+              </div>
             </div>
-          </div>
+          )}
           <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
         </>
       </BaseLayout>

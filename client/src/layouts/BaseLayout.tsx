@@ -42,7 +42,9 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
           </span>
         </header>
 
-        {children}
+        <div className="grid grid-rows-[64px_auto_32px] gap-4 h-full">
+          {children}
+        </div>
       </main>
     </div>
   );

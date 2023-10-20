@@ -54,16 +54,10 @@ const Register = () => {
   };
 
   const handleQuery = (values: ApplicantModelProps) => {
-    const { mutateAsync: addApplicantMutation } = useMutation({
-      mutationFn: addApplicant(),
-    });
-
     if (index !== OutroDetails.length - 1) {
       setActive(true);
       return;
     }
-
-    addApplicantMutation(values);
   };
 
   // // Formik Submission Handler

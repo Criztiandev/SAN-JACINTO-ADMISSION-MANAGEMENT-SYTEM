@@ -7,7 +7,6 @@ import {
   useMemo,
 } from "react";
 import { BaseProps } from "../interface/componentInterface";
-import { useQuery } from "@tanstack/react-query";
 
 import {
   useReactTable,
@@ -19,8 +18,8 @@ import {
   SortingState,
   OnChangeFn,
 } from "@tanstack/react-table";
-import ApplicantData from "../data/applicantData.json";
 import { TableValue } from "../interface/Table.types";
+import applicantData from "../data/applicantData.json";
 
 const TableContext = createContext<TableValue | undefined>(undefined);
 
@@ -33,10 +32,7 @@ export const useTableContext = () => {
 };
 
 const TableProvider = ({ children }: BaseProps) => {
-  const query = useQuery({});
-  const data = ApplicantData;
-  const memoizedData: any = useMemo(() => data, [data]);
-
+  const [tableData, setTableData] = useState<Array<object>>([]);
   const [selected, setSelected] = useState<object | string>({});
   const [tableConfig, setTableConfig] = useState([]);
 
@@ -44,6 +40,8 @@ const TableProvider = ({ children }: BaseProps) => {
   const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([]);
   const [sort, setSort] = useState<SortingState | undefined>();
   const [rowSelect, setRowSelect] = useState({});
+
+  const memoizedData: any = useMemo(() => tableData, [tableData]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
     setSearch(e.currentTarget.value);
@@ -57,8 +55,10 @@ const TableProvider = ({ children }: BaseProps) => {
     setColumnSearch(prev => [{ ...prev, ...filter }]);
   };
 
+  const handleMutateData = (data: any) => setTableData(data);
+
   const table = useReactTable({
-    data: memoizedData,
+    data: memoizedData || [],
     columns: tableConfig,
 
     state: {
@@ -79,8 +79,8 @@ const TableProvider = ({ children }: BaseProps) => {
   });
 
   const value = {
+    data: memoizedData,
     table,
-    ...query,
     selected,
     search,
     columnSearch,
@@ -89,6 +89,7 @@ const TableProvider = ({ children }: BaseProps) => {
     handleSelected,
     handleColumnSearch,
     setTableConfig,
+    handleMutateData,
   };
 
   return (
