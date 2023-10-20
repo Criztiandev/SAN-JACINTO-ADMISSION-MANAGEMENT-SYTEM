@@ -19,7 +19,6 @@ import {
   OnChangeFn,
 } from "@tanstack/react-table";
 import { TableValue } from "../interface/Table.types";
-import applicantData from "../data/applicantData.json";
 
 const TableContext = createContext<TableValue | undefined>(undefined);
 
@@ -55,7 +54,7 @@ const TableProvider = ({ children }: BaseProps) => {
     setColumnSearch(prev => [{ ...prev, ...filter }]);
   };
 
-  const handleMutateData = (data: any) => setTableData(data);
+  const handleMutateData = (data: Array<object>) => setTableData(data);
 
   const table = useReactTable({
     data: memoizedData || [],
@@ -79,7 +78,7 @@ const TableProvider = ({ children }: BaseProps) => {
   });
 
   const value = {
-    data: memoizedData,
+    tableData: memoizedData,
     table,
     selected,
     search,

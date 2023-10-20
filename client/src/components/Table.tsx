@@ -21,15 +21,15 @@ interface TableProps {
 
 const Table = ({ layout }: TableProps) => {
   const { createToggle } = useDrawerContext();
-  const { table, data } = useTableContext();
+  const { table, tableData } = useTableContext();
 
   return (
     <>
       <motion.div
         className={`relative border overflow-scroll rounded-[5px] ${
-          data.length <= 0 && "flex justify-center items-center"
+          tableData.length <= 0 && "flex justify-center items-center"
         }`}>
-        {data.length > 0 ? (
+        {tableData.length > 0 ? (
           table.getHeaderGroups().map(({ id, headers }) => (
             <div key={id}>
               {/* Header */}
@@ -97,7 +97,7 @@ const Table = ({ layout }: TableProps) => {
         )}
       </motion.div>
 
-      {data.length >= 0 && (
+      {tableData.length >= 0 && (
         <div className="flex justify-end gap-16 items-center">
           <div className="flex gap-2">
             <span>Row per Page:</span>

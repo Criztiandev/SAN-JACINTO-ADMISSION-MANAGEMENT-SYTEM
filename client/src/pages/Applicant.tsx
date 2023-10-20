@@ -25,18 +25,19 @@ import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 
 const Applicant = () => {
-  const { isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, isSuccess } = useQuery({
     queryFn: fetchApplicants,
     queryKey: ["applicants"],
   });
 
   const {
-    data,
+    tableData,
     search,
     selected,
     handleSearch,
     handleSelected,
     setTableConfig,
+    handleMutateData,
   } = useTableContext();
   const {
     createToggle,
@@ -175,9 +176,18 @@ const Applicant = () => {
     };
   }, []);
 
-  if (isError) {
-    toast.error(error.message);
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message);
+      handleMutateData(data.payload);
+    }
+
+    return () => {
+      handleMutateData([]);
+    };
+  }, [isSuccess]);
+
+  if (isError) toast.error(error.message);
   if (isLoading) return <Loading />;
 
   return (
@@ -185,7 +195,7 @@ const Applicant = () => {
       <BaseLayout
         title="Applicants"
         header={
-          data.length > 0 && (
+          tableData.length > 0 && (
             <Button
               dir="left"
               title="Create"
@@ -196,13 +206,12 @@ const Applicant = () => {
         }
         action>
         <>
-          {data.length >= 0 && (
-            <div className="flex justify-between items-center">
-              <SearchBar value={search} onChange={handleSearch} />
+          <div className="flex justify-between items-center">
+            <SearchBar value={search} onChange={handleSearch} />
 
-              <div className="flex gap-4">
-                {/* // Status Filter */}
-                {/* <StatusFilter
+            <div className="flex gap-4">
+              {/* // Status Filter */}
+              {/* <StatusFilter
                 onTitleUpdate={() => {}}
                 onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
@@ -211,11 +220,13 @@ const Applicant = () => {
                 }
               /> */}
 
-                <MoreOption />
-              </div>
+              <MoreOption />
             </div>
-          )}
-          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
+          </div>
+          <Table
+            data={data}
+            layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
+          />
         </>
       </BaseLayout>
 
