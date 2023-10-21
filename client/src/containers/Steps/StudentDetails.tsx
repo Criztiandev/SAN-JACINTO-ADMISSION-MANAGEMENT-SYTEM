@@ -1,14 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useFormikContext } from "formik";
-import { Typography, Input } from "../../components";
+import { Typography, Input, Select } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
 import Carousel from "../../components/Carousel";
 import { InputProps } from "../../interface/FormInterface";
 import ItemSelect from "../Form/ItemSelect";
+import { OmitInputObject } from "../../utils/OmitUtils";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
+
+const generateSchoolYearOption = (target = 2005) => {
+  const currentYear = new Date().getFullYear();
+  const options = [];
+  for (let year = target; year <= currentYear; year++) {
+    const schoolYear = `${year} - ${
+      year + 1 === currentYear + 1 ? "Current" : year + 1
+    }`;
+
+    options.push(
+      <option key={schoolYear} value={schoolYear}>
+        {schoolYear}
+      </option>
+    );
+  }
+
+  return options || [];
+};
 
 const GradeLevelTrack = (level: "Grade 7" | "Grade 11") => {
   const trackMapping = {
@@ -16,7 +35,6 @@ const GradeLevelTrack = (level: "Grade 7" | "Grade 11") => {
     "Grade 11": SHSTracks,
   };
 
-  // Return the corresponding tracks or an empty array if not found
   return trackMapping[level] || [];
 };
 
@@ -58,9 +76,22 @@ const StudentDetails = () => {
 
       <div className="my-8">
         <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputProps) => (
-            <Input key={props.name} {...props} />
+          {OmitInputObject(
+            ["Year Level", "Track", "School Year", "Last School Attended"],
+            details
+          ).map(props => (
+            <Input {...props} />
           ))}
+          <Select label="School Year" name="studentDetails.schoolYear">
+            <option value={""}>Select Year Level</option>
+            {generateSchoolYearOption(2005)}
+          </Select>
+
+          <Input
+            label="Last School Attended"
+            name="studentDetails.lastSchoolAttended"
+            placeholder="Enter your Last School Attended"
+          />
         </div>
       </div>
     </section>

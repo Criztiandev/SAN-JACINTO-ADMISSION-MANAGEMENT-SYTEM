@@ -17,7 +17,7 @@ export const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState("asdadasds");
+  const [user, setUser] = useState("");
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

@@ -10,44 +10,44 @@ import {
 } from "../../interface/ApplicantMode.Type";
 
 const addressTemplate: AddressBaseProps = {
-  houseNo: "91",
-  street: "Rawis",
-  barangay: "Poblacion",
-  municipality: "Batuan",
-  province: "Masbate",
-  country: "Phillipines",
-  zip: "5400",
+  houseNo: "",
+  street: "",
+  barangay: "",
+  municipality: "",
+  province: "",
+  country: "",
+  zip: "",
 };
 
 // Define reusable guardian object
 const guardianTemplate: NameBaseProps = {
-  firstName: "Mareflor",
-  middleName: "Mitra",
-  lastName: "Tuplano",
-  contact: "0948828485",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  contact: "",
 };
 
 const studentDetails: StudentDetailsProps = {
-  LRN: "192193123",
-  PSA: "123123123",
-  yearLevel: "Grade 12",
-  track: "Regular",
-  schoolYear: "2023-2024",
-  lastSchoolAttended: "Nazareth Institute of Alfonzo",
+  LRN: "",
+  PSA: "",
+  yearLevel: "",
+  track: "",
+  schoolYear: "",
+  lastSchoolAttended: "",
 };
 
 const personalDetails: PersonalDetailsProps = {
-  firstName: "Criztian Jade",
-  middleName: "Mitra",
-  lastName: "Tuplano",
+  firstName: "",
+  middleName: "",
+  lastName: "",
   suffix: "",
-  gender: "Male",
+  gender: "",
   birthDate: "",
   age: 22,
-  motherTounge: "Filipino",
-  email: "criztiandev@gmail.com",
-  contact: "09482004868",
-  facebookLink: "https://www.facebook.com/criztiandev07",
+  motherTounge: "",
+  email: "",
+  contact: "",
+  facebookLink: "",
 };
 
 const addressDetails: AddressDetailsProps = {

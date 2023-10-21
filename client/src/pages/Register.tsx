@@ -22,7 +22,9 @@ import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
 import { OutroDetails } from "../helper/registrationFormHelper";
 import { StepperProps } from "../interface/Registration.Type";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const RegistrationStepper: StepperProps[] = [
   { title: "Grade Level", component: <GradeLevel /> },
@@ -36,16 +38,23 @@ const RegistrationStepper: StepperProps[] = [
 
 const Register = () => {
   const [active, setActive] = useState(false);
-  const [index, setIndex] = useState(-1);
-  const { steps, currentIndex, isLastStep, isFirstStep, next, back } =
+  const [index, setIndex] = useState(0);
+  const { steps, currentIndex, isLastStep, isFirstStep, next, back, goto } =
     useMultipleForm(RegistrationStepper.map(items => items.component));
-
   const Ended = index === OutroDetails.length - 1;
   const navigate = useNavigate();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async data =>
+      axios.post("http://localhost:4000/api/applicant/create", data),
+  });
 
   const handleNext = () => {
     if (Ended) {
       setActive(false);
+      setIndex(-1);
+      goto(0);
+      navigate("/");
     }
 
     return setIndex(prev =>
@@ -53,10 +62,14 @@ const Register = () => {
     );
   };
 
-  const handleQuery = (values: ApplicantModelProps) => {
-    if (index !== OutroDetails.length - 1) {
+  const handleQuery = async (values: ApplicantModelProps) => {
+    try {
+      await mutateAsync(values);
+      toast.success("Applicant Sent Successfully");
       setActive(true);
-      return;
+    } catch (error) {
+      const { message } = error?.response.data;
+      toast.error(message);
     }
   };
 
@@ -66,10 +79,6 @@ const Register = () => {
     actions: FormikHelpers<ApplicantModelProps>
   ) => {
     if (!isLastStep) return next();
-    if (!Ended) {
-      setActive(true);
-      return handleNext();
-    }
 
     handleQuery(values);
     actions.resetForm();
@@ -120,10 +129,10 @@ const Register = () => {
                   <div className="w-[120px] h-[120px] border rounded-full bg-blue-400"></div>
 
                   <div className="text-center max-w-[400px]">
-                    <h2>{OutroDetails[index].title}</h2>
-                    <p>{OutroDetails[index].desc}</p>
+                    <h2>{OutroDetails[index]?.title}</h2>
+                    <p>{OutroDetails[index]?.desc}</p>
                   </div>
-                  <Button as="submit" title="Next" />
+                  <Button as="button" title="Next" onClick={handleNext} />
                 </div>
               </div>
             )}

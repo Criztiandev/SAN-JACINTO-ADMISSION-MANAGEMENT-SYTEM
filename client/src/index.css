@@ -94,3 +94,7 @@ textarea {
   border-radius: 20px;
   transition: all 5s ease-in; /* Smooth transition for background color */
 }
+
+blockquote {
+  background: rgba(34, 248, 98, 0.459);
+}

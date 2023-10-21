@@ -191,41 +191,41 @@ export const currentAddressInputModel: InputProps[] = [
 export const permanentAddressInputModel: InputProps[] = [
   {
     label: "House No.",
-    name: `addressDetails.current.houseNo`,
+    name: `addressDetails.permanent.houseNo`,
     placeholder: `Enter your House number`,
   },
   {
     label: "Street",
-    name: `addressDetails.current.street`,
+    name: `addressDetails.permanent.street`,
     placeholder: `Enter your House number`,
   },
   {
     label: "Barangay",
-    name: `addressDetails.current.barangay`,
+    name: `addressDetails.permanent.barangay`,
     placeholder: "Enter your Barangay",
   },
 
   {
     label: "Municipality",
-    name: `addressDetails.current.municipality`,
+    name: `addressDetails.permanent.municipality`,
     placeholder: "Enter your Municipality",
   },
 
   {
     label: "Province",
-    name: `addressDetails.current.province`,
+    name: `addressDetails.permanent.province`,
     placeholder: "Enter your Province",
   },
 
   {
     label: "Country",
-    name: `addressDetails.current.country`,
+    name: `addressDetails.permanent.country`,
     placeholder: "Enter your Country",
   },
 
   {
     label: "Zip Code",
-    name: `addressDetails.current.zip`,
+    name: `addressDetails.permanent.zip`,
     placeholder: "Enter your Zip Code",
   },
 ];

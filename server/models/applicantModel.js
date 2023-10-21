@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const parentSchema = new mongoose.Schema({
+const nameSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   middleName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -22,62 +22,35 @@ const applicantSchema = mongoose.Schema(
     studentDetails: {
       LRN: { type: String, required: true, unique: true },
       PSA: { type: String, required: true, unique: true },
-      yearLevel: {
-        type: String,
-        enum: [
-          "grade 7",
-          "grade 8",
-          "grade 9",
-          "grade 10",
-          "grade 11",
-          "grade 12",
-        ],
-        required: true,
-      },
+      yearLevel: { type: String, required: true },
       track: { type: String, require: true },
+      schoolYear: { type: String, require: true },
+      lastSchoolAttended: { type: String, require: true },
     },
 
     personalDetails: {
       firstName: { type: String, required: true },
       middleName: { type: String, required: true },
       lastName: { type: String, required: true },
-      suffix: { type: String, required: true },
-      gender: { type: String, enum: ["male", "female"], required: true },
-      birthDate: { type: Date, required: true },
+      suffix: { type: String, default: "N/A" },
+      gender: { type: String, required: true },
+      birthDate: { type: String },
       age: { type: Number, required: true },
-    },
-
-    socials: {
-      facebook: {
-        id: { type: String, require: true, unique: true },
-        link: { type: String, require: true },
-      },
-      gmail: { type: String, require: true, unique: true },
+      motherTounge: { type: String, require: true },
+      email: { type: String, require: true, unique: true },
       contact: { type: String, require: true, unique: true },
-
-      preferedContact: {
-        type: String,
-        enum: ["facebook", "gmail"],
-        required: true,
-      },
+      facebookLink: { type: String, require: true, unique: true },
     },
 
     addressDetails: {
-      permanentAddress: addressSchema,
-      currentAddress: addressSchema,
-    },
-
-    schoolDetails: {
-      schoolID: { type: Number, require: true },
-      schoolName: { type: String, require: true },
-      schoolYear: { type: String, require: true },
-      contact: { type: String, require: true },
+      permanent: addressSchema,
+      current: addressSchema,
     },
 
     guardianDetails: {
-      father: parentSchema,
-      mother: parentSchema,
-      legalGuardian: parentSchema,
+      father: nameSchema,
+      mother: nameSchema,
+      legalGuardian: nameSchema,
     },
 
     otherDetails: {

@@ -5,6 +5,7 @@ export const applicantInputMaps = [
       {
         label: "General Average",
         name: "studentDetails.generalAverage",
+        placeholder: "Enter your General Average",
       },
       {
         label: "LRN",

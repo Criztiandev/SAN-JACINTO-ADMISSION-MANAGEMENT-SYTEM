@@ -1,3 +1,6 @@
+import MaleProfile from "../assets/image/Male_profile.png";
+import FemaleProfile from "../assets/image/Female_Profile.png";
+
 export const OutroDetails = [
   {
     title: "Congratulations",
@@ -16,6 +19,6 @@ export const OutroDetails = [
 ];
 
 export const GenderSelectionItems = [
-  { cover: "", title: "Male", subtitle: "Masculine" },
-  { cover: "", title: "Female", subtitle: "Feminine" },
+  { cover: MaleProfile, title: "Male", subtitle: "Masculine" },
+  { cover: FemaleProfile, title: "Female", subtitle: "Feminine" },
 ];

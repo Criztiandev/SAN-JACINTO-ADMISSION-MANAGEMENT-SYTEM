@@ -23,11 +23,18 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchApplicants } from "../api/applicant.api";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Applicant = () => {
-  const { data, isLoading, isError, error, isSuccess } = useQuery({
-    queryFn: fetchApplicants,
+  const { isLoading, isError, error } = useQuery({
+    queryFn: async () => {
+      const { data } = await axios.get("http://localhost:4000/api/applicant");
+      handleMutateData(data);
+      return data;
+    },
     queryKey: ["applicants"],
+    staleTime: 5 * 60 * 1000,
+    refetchOnMount: false,
   });
 
   const {
@@ -178,16 +185,6 @@ const Applicant = () => {
   }, []);
 
   // Storing the Data to the Table data
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(data.message);
-      handleMutateData(data.payload);
-    }
-
-    return () => {
-      handleMutateData([]);
-    };
-  }, [isSuccess]);
 
   // Checking if there us an error
   if (isError) toast.error(error.message);
@@ -226,10 +223,7 @@ const Applicant = () => {
               <MoreOption />
             </div>
           </div>
-          <Table
-            data={data}
-            layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
-          />
+          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
         </>
       </BaseLayout>
 

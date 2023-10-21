@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const createApplicant = async () => {};
 export const fetchApplicants = async () => {

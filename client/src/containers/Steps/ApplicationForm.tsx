@@ -1,16 +1,19 @@
 import { Avatar, IconButton, Input, Typography } from "../../components";
-import { applicantInputMapsInterface } from "../../interface/ApplicantMode.Type";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { useState } from "react";
-import { InputInterface } from "../../interface/Component.Type";
 import { useFormikContext } from "formik";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
+import { InputProps } from "../../interface/FormInterface";
+import {
+  ApplicationFormModelProps,
+  ApplicantModelProps,
+} from "../../interface/ApplicantMode.Type";
 
-const FormSection = ({ title, details }: applicantInputMapsInterface) => {
+const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   const [hide, setHide] = useState(false);
   const [onEdit, setOnEdit] = useState(true);
 
@@ -35,7 +38,7 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 
       {hide && (
         <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputInterface) => (
+          {model.map((props: InputProps) => (
             <Input key={props.label} {...props} disabled={onEdit} />
           ))}
         </div>
@@ -45,9 +48,10 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 };
 
 const ApplicationForm = () => {
-  const { values } = useFormikContext();
-  const { firstName, middleName, lastName, gender } = values?.personalDetails;
-  const { yearLevel, track } = values?.studentDetails;
+  const { values } = useFormikContext<ApplicantModelProps>();
+  const { firstName, middleName, lastName, gender } =
+    values?.personalDetails || {};
+  const { yearLevel, track } = values?.studentDetails || {};
   return (
     <section>
       <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
