@@ -20,14 +20,16 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { OutroDetails } from "../helper/registrationFormHelper";
+import { OutroDetails } from "../helper/registrationForm.Helper";
 import { StepperProps } from "../interface/Registration.Type";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import GradeDetails from "../containers/Steps/GradeDetails";
 
 const RegistrationStepper: StepperProps[] = [
   { title: "Grade Level", component: <GradeLevel /> },
+  { title: "Grade Details", component: <GradeDetails /> },
   { title: "Student Details", component: <StudentDetails /> },
   { title: "Personal Details", component: <PersonalDetails /> },
   { title: "Current Address", component: <PermanentAddress /> },
@@ -68,7 +70,7 @@ const Register = () => {
       toast.success("Applicant Sent Successfully");
       setActive(true);
     } catch (error) {
-      const { message } = error?.response.data;
+      const { message } = error?.response.data || {};
       toast.error(message);
     }
   };
@@ -106,7 +108,7 @@ const Register = () => {
               }`}>
               {!isFirstStep && (
                 <Button
-                  as="submit"
+                  as="button"
                   type="outlined"
                   dir="left"
                   icon={PrevIcon}

@@ -10,7 +10,7 @@ import {
   suffixes,
 } from "../../helper/applicantFormObject";
 import { OmitInputObject } from "../../utils/OmitUtils";
-import { GenderSelectionItems } from "../../helper/registrationFormHelper";
+import { GenderSelectionItems } from "../../helper/registrationForm.Helper";
 
 const firstSection: InputProps[] = OmitInputObject(
   [
