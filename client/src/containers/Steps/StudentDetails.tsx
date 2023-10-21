@@ -5,9 +5,9 @@ import { Typography, Input, Select } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
 import Carousel from "../../components/Carousel";
-import { InputProps } from "../../interface/FormInterface";
 import ItemSelect from "../Form/ItemSelect";
 import { OmitInputObject } from "../../utils/OmitUtils";
+import { motion } from "framer-motion";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
@@ -40,7 +40,7 @@ const GradeLevelTrack = (level: "Grade 7" | "Grade 11") => {
 
 const StudentDetails = () => {
   const [selectedTrack, setSelectedTrack] = useState("");
-  const { details } = applicantInputMaps[0];
+  const { model } = applicantInputMaps[0];
 
   const { values }: any = useFormikContext();
   const currYearLevel: YearLevelProps = values?.studentDetails?.yearLevel;
@@ -78,20 +78,27 @@ const StudentDetails = () => {
         <div className="grid grid-cols-2 gap-4">
           {OmitInputObject(
             ["Year Level", "Track", "School Year", "Last School Attended"],
-            details
+            model
           ).map(props => (
-            <Input {...props} />
+            <motion.div whileHover={{ scale: 1.03 }}>
+              <Input {...props} />
+            </motion.div>
           ))}
-          <Select label="School Year" name="studentDetails.schoolYear">
-            <option value={""}>Select Year Level</option>
-            {generateSchoolYearOption(2005)}
-          </Select>
 
-          <Input
-            label="Last School Attended"
-            name="studentDetails.lastSchoolAttended"
-            placeholder="Enter your Last School Attended"
-          />
+          <motion.div whileHover={{ scale: 1.03 }}>
+            <Select label="School Year" name="studentDetails.schoolYear">
+              <option value={""}>Select Year Level</option>
+              {generateSchoolYearOption(2005)}
+            </Select>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.03 }}>
+            <Input
+              label="Last School Attended"
+              name="studentDetails.lastSchoolAttended"
+              placeholder="Enter your Last School Attended"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

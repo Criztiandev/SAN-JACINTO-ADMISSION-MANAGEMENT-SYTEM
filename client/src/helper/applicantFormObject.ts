@@ -278,24 +278,24 @@ export const motherInputDetails: InputProps[] = [
 
 export const legalGuardianInputDetails: InputProps[] = [
   {
-    label: "Legal Guardian's First Name",
+    label: "Guardian's First Name",
     name: "guardianDetails.legalGuardian.firstName",
-    placeholder: "Enter tour Legal Guardian's First name",
+    placeholder: "Enter tour Guardian's First name",
   },
   {
-    label: "Legal Guardian's Middle Name",
+    label: "Guardian's Middle Name",
     name: "guardianDetails.legalGuardian.middleName",
-    placeholder: "Enter tour Legal Guardian's Middle name",
+    placeholder: "Enter tour Guardian's Middle name",
   },
   {
-    label: "Legal Guardian's Last Name",
+    label: "Guardian's Last Name",
     name: "guardianDetails.legalGuardian.lastName",
-    placeholder: "Enter your Legal Guardian's Last name",
+    placeholder: "Enter your Guardian's Last name",
   },
   {
-    label: "Legal Guardian's Contact ",
+    label: "Guardian's Contact ",
     name: "guardianDetails.legalGuardian.contact",
-    placeholder: "Enter your Legal Guardian's Contact",
+    placeholder: "Enter your Guardian's Contact",
   },
 ];
 
@@ -312,7 +312,7 @@ export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
   { title: "Permanent Address Details", model: personalDetailsInputModel },
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
-  { title: "Legal Guardians", model: legalGuardianInputDetails },
+  { title: "Guardians", model: legalGuardianInputDetails },
   { title: "Other Details", model: otherInputDetails },
 ];
 
@@ -339,7 +339,7 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
 
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
-  { title: "Legal Guardian", model: legalGuardianInputDetails },
+  { title: "Guardian", model: legalGuardianInputDetails },
 
   { title: "Other Details", model: otherInputDetails },
 ];
