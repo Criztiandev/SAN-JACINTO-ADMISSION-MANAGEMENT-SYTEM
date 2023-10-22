@@ -6,31 +6,12 @@ import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
 import { InputProps } from "../../interface/FormInterface";
 import {
-  personalDetailsInputModel,
+  FetchLocalStorageFormData,
+  GenderSelectionItems,
+  PersonalDetailsFirstSection,
+  PersonalDetailsSectionSection,
   suffixes,
-} from "../../helper/applicantFormObject";
-import { OmitInputObject } from "../../utils/OmitUtils";
-import { GenderSelectionItems } from "../../helper/registrationForm.Helper";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
-
-const firstSection: InputProps[] = OmitInputObject(
-  [
-    "Suffix",
-    "Birth Date",
-    "Age",
-    "Email",
-    "Contact",
-    "Facebook Link",
-    "Mother Tounge",
-    "Gender",
-  ],
-  personalDetailsInputModel
-);
-
-const secondSection: InputProps[] = OmitInputObject(
-  ["First Name", "Middle Name", "Last Name", "Suffix", "Gender"],
-  personalDetailsInputModel
-);
+} from "../../helper/ApplicantionForm.Helper";
 
 const PersonalDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -56,8 +37,8 @@ const PersonalDetails = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-6 items-center justify-center">
-        {firstSection.map(props => (
-          <Input {...props} />
+        {PersonalDetailsFirstSection.map((props: InputProps) => (
+          <Input key={props.label} {...props} />
         ))}
 
         <Select
@@ -72,8 +53,8 @@ const PersonalDetails = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-6 items-center justify-center mb-4">
-        {secondSection.map(props => (
-          <Input {...props} />
+        {PersonalDetailsSectionSection.map(props => (
+          <Input key={props.label} {...props} />
         ))}
       </div>
     </section>
