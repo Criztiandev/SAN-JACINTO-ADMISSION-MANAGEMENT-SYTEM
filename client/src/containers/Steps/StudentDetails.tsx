@@ -11,10 +11,12 @@ import { motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { GradeLevelTrack } from "../../helper/GradeLevel.Helper";
 import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
 const StudentDetails = () => {
+  FetchLocalStorageFormData("applicant_form");
   const [selectedTrack, setSelectedTrack] = useState("");
   const { model } = applicantInputMaps[0];
 

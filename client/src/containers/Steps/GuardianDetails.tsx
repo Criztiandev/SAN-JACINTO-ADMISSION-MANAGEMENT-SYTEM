@@ -16,6 +16,7 @@ import EraseIcon from "../../assets/icons/Erase.svg";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { Button, IconButton } from "../../components";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 const GuardianInputs: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
@@ -23,6 +24,7 @@ const GuardianInputs: ApplicationFormModelProps[] = [
 ];
 
 const GuardianDetails = () => {
+  FetchLocalStorageFormData("applicant_form");
   const { values, setValues } = useFormikContext<ApplicantModelProps>();
   const { father, mother } = values.guardianDetails;
   const [selectedGuardian, setSelectedGuardian] = useState("");

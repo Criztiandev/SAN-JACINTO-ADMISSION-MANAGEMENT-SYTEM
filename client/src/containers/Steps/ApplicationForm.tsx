@@ -12,8 +12,10 @@ import {
   ApplicationFormModelProps,
   ApplicantModelProps,
 } from "../../interface/ApplicantMode.Type";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 const FormSection = ({ title, model }: ApplicationFormModelProps) => {
+  FetchLocalStorageFormData("applicant_form");
   const [hide, setHide] = useState(false);
   const [onEdit, setOnEdit] = useState(true);
 

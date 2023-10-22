@@ -12,6 +12,8 @@ import DoneIcon from "../../assets/icons/Done_light.svg";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const AcceptVariant = {
   selected: {
@@ -32,8 +34,15 @@ const DeclineVariant = {
 };
 
 const PermanentAddress = () => {
-  const [isPermanent, setIsPermanent] = useState(false);
-  const [isCurrent, setIsCurrent] = useState(false);
+  FetchLocalStorageFormData("applicant_form");
+  const { setItems, getItem } = useLocalStorage("address_btn");
+
+  const [isPermanent, setIsPermanent] = useState(
+    getItem()?.isPermanent || false
+  );
+  const [isCurrent, setIsCurrent] = useState<boolean>(
+    getItem()?.isCurrent || false
+  );
 
   const { values, setValues } = useFormikContext<ApplicantModelProps>();
   const { current } = values?.addressDetails || {
@@ -75,6 +84,7 @@ const PermanentAddress = () => {
               onClick={() => {
                 updatePermanentToCurrent();
                 setIsPermanent(true);
+                setItems({ isPermanent: true, isCurrent: false });
               }}>
               <img src={DoneIcon} alt="Done" className="p-2" />
             </motion.button>
@@ -90,6 +100,7 @@ const PermanentAddress = () => {
               className="border rounded-full hover:border-red-500 hover:bg-[#f8222275]"
               onClick={() => {
                 setIsCurrent(prev => !prev);
+                setItems({ isPermanent: false, isCurrent: true });
               }}>
               <img src={CloseIcon} alt="close" className="p-2" />
             </motion.button>

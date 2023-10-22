@@ -4,7 +4,7 @@ import { Button, IconButton, Typography } from "../components/index";
 import RegistrationLayout from "../layouts/RegistrationLayout";
 import useMultipleForm from "../hooks/useMultipleForm";
 
-import { NextIcon, PrevIcon } from "../assets/icons";
+import { NextIcon, PrevIcon, ResetIcon } from "../assets/icons";
 import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,12 @@ import { useEffect } from "react";
 RegistrationStepper;
 
 const Register = () => {
-  const { removeItem, setItems, getItem } = useLocalStorage("applicant_form");
+  const {
+    removeItem: FormRemove,
+    setItems,
+    getItem,
+  } = useLocalStorage("applicant_form");
+  const { removeItem: AddressRemove } = useLocalStorage("address_btn");
 
   // Modal
   const {
@@ -141,7 +146,13 @@ const Register = () => {
               )}
 
               <div className="flex gap-4">
-                <IconButton onClick={removeItem} />
+                <IconButton
+                  icon={ResetIcon}
+                  onClick={() => {
+                    FormRemove();
+                    AddressRemove();
+                  }}
+                />
 
                 <Button
                   as="submit"
