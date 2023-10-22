@@ -1,6 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
 import { CardProps, InputProps } from "../interface/FormInterface";
-import { ApplicationFormModelProps } from "../interface/ApplicantMode.Type";
+import {
+  ApplicantModelProps,
+  ApplicationFormModelProps,
+} from "../interface/ApplicantMode.Type";
 import { OmitInputObject } from "../utils/OmitUtils";
+import {
+  GradeLevel,
+  GradeDetails,
+  StudentDetails,
+  PersonalDetails,
+  PermanentAddress,
+  GuardianDetails,
+  OtherDetails,
+  ApplicationForm,
+} from "../containers/Steps";
+import { StepperProps } from "../interface/Registration.Type";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useFormikContext } from "formik";
+import { useEffect } from "react";
+
+import MaleProfile from "../assets/image/Male_profile.png";
+import FemaleProfile from "../assets/image/Female_Profile.png";
+import { ItemSelectProps } from "../interface/FormInterface";
 
 export const JrTracksItemModel: CardProps[] = [
   { cover: "null", title: "Regular", subtitle: "Regular Student" },
@@ -343,3 +366,116 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
 
   { title: "Other Details", model: otherInputDetails },
 ];
+
+export const OtherInputData: InputProps[] = [
+  {
+    label: "Are you a 4ps Beneficiary ?",
+    name: `otherDetails.is4psBeneficiary`,
+    placeholder: "Enter your Reference #",
+  },
+
+  {
+    label: "Are you a Indigenous Person ?",
+    name: `otherDetails.isIndigenousPerson`,
+    placeholder: "Please Specify",
+  },
+
+  {
+    label: "Are you a LWD Person ?",
+    name: `otherDetails.isLWD`,
+    placeholder: "Please Specify",
+  },
+];
+
+export const RegistrationStepper: StepperProps[] = [
+  { title: "Grade Level", component: <GradeLevel /> },
+  { title: "Grade Details", component: <GradeDetails /> },
+  { title: "Student Details", component: <StudentDetails /> },
+  { title: "Personal Details", component: <PersonalDetails /> },
+  { title: "Current Address", component: <PermanentAddress /> },
+  { title: "Guardian Details", component: <GuardianDetails /> },
+  { title: "Other Details", component: <OtherDetails /> },
+  { title: "Application Form", component: <ApplicationForm /> },
+];
+
+export const OutroDetails = [
+  {
+    title: "Congratulations",
+    desc: " Thank you on your admission to our school! Your examination schedule has been sent to your Facebook account.",
+  },
+
+  {
+    title: "Exciting Journey",
+    desc: "  As you embark on this exciting journey, please keep in mind that your registered Facebook account will serve as the primary channel for receiving all school updates.",
+  },
+
+  {
+    title: "Stay Tuned",
+    desc: " Stay connected to stay informed about events and important announcements. If you ever have any questions, don't hesitate to use your private account to get in touch. We're here to support you every step of the way!",
+  },
+];
+
+export const GenderSelectionItems = [
+  { cover: MaleProfile, title: "Male", subtitle: "Masculine" },
+  { cover: FemaleProfile, title: "Female", subtitle: "Feminine" },
+];
+
+export const GuadianChoices: ItemSelectProps[] = [
+  { cover: "null", title: "Father", subtitle: "Strong" },
+  { cover: "null", title: "Mother", subtitle: "Caring" },
+  { cover: "null", title: "Other", subtitle: "Prefered" },
+];
+
+export const GuardianInputs: ApplicationFormModelProps[] = [
+  { title: "Father Details", model: fatherInputDetails },
+  { title: "Mother Details", model: motherInputDetails },
+];
+
+export const gradeDetails: InputProps[] = [
+  { label: "English", name: "gradeDetails.english" },
+  { label: "Science", name: "gradeDetails.science" },
+  { label: "Filipino", name: "gradeDetails.filipino" },
+  { label: "Math", name: "gradeDetails.math" },
+  { label: "General Average", name: "gradeDetails.generalAve" },
+];
+
+// Functions
+
+export const FetchLocalStorageFormData = (name: string) => {
+  const { getItem, setItems } = useLocalStorage(name);
+  const { values, setValues } = useFormikContext<ApplicantModelProps>();
+
+  useEffect(() => {
+    // if there is no instance then create one
+    if (!getItem()) {
+      setItems(values || []);
+    }
+
+    // there is instance store it
+    setValues(getItem() || values);
+
+    return () => {
+      setValues(values);
+    };
+  }, []);
+};
+
+// Modified Data
+export const PersonalDetailsFirstSection: InputProps[] = OmitInputObject(
+  [
+    "Suffix",
+    "Birth Date",
+    "Age",
+    "Email",
+    "Contact",
+    "Facebook Link",
+    "Mother Tounge",
+    "Gender",
+  ],
+  personalDetailsInputModel
+);
+
+export const PersonalDetailsSectionSection: InputProps[] = OmitInputObject(
+  ["First Name", "Middle Name", "Last Name", "Suffix", "Gender"],
+  personalDetailsInputModel
+);

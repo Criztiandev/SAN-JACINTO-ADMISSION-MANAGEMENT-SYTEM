@@ -9,17 +9,17 @@ import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
 import { useNavigate } from "react-router-dom";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { OutroDetails } from "../helper/registrationForm.Helper";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { createApplicant } from "../api/applicant.api";
-import { RegistrationStepper } from "../helper/Registration.Helper";
 import useModal from "../hooks/useModal";
 import OutroModal from "../containers/Steps/OutroModal";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
-
-RegistrationStepper;
+import {
+  OutroDetails,
+  RegistrationStepper,
+} from "../helper/ApplicantionForm.Helper";
 
 const Register = () => {
   const {

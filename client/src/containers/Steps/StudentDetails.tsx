@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { GradeLevelTrack } from "../../helper/GradeLevel.Helper";
 import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
@@ -61,7 +61,7 @@ const StudentDetails = () => {
             model
           ).map(props => (
             <motion.div whileHover={{ scale: 1.03 }}>
-              <Input {...props} />
+              <Input key={props.label} {...props} />
             </motion.div>
           ))}
 

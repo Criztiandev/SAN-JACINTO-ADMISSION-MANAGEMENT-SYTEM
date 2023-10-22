@@ -9,7 +9,7 @@ import Carousel from "../../components/Carousel";
 import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
-} from "../../helper/applicantFormObject";
+} from "../../helper/ApplicantionForm.Helper";
 import { useState } from "react";
 import { toast } from "react-toastify";
 

@@ -1,14 +1,11 @@
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import {
-  fatherInputDetails,
+  FetchLocalStorageFormData,
+  GuardianInputs,
   legalGuardianInputDetails,
-  motherInputDetails,
-} from "../../helper/applicantFormObject";
-import {
-  ApplicantModelProps,
-  ApplicationFormModelProps,
-} from "../../interface/ApplicantMode.Type";
+} from "../../helper/ApplicantionForm.Helper";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
 import CopyIcon from "../../assets/icons/Copy_alt_light.svg";
@@ -16,12 +13,6 @@ import EraseIcon from "../../assets/icons/Erase.svg";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { Button, IconButton } from "../../components";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
-
-const GuardianInputs: ApplicationFormModelProps[] = [
-  { title: "Father Details", model: fatherInputDetails },
-  { title: "Mother Details", model: motherInputDetails },
-];
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
