@@ -16,10 +16,14 @@ import { createApplicant } from "../api/applicant.api";
 import { RegistrationStepper } from "../helper/Registration.Helper";
 import useModal from "../hooks/useModal";
 import OutroModal from "../containers/Steps/OutroModal";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useEffect } from "react";
 
 RegistrationStepper;
 
 const Register = () => {
+  const { removeItem, setItems, getItem } = useLocalStorage("applicant_form");
+
   // Modal
   const {
     data: modalData,
@@ -44,6 +48,7 @@ const Register = () => {
     currentIndex,
   } = useMultipleForm(RegistrationStepper.map(({ component }) => component));
 
+  // Mutation Query
   const { mutateAsync } = useMutation({
     mutationKey: ["createApplicant"], // Optional, give your mutation a key
     mutationFn: async (data: ApplicantModelProps) => {
@@ -52,7 +57,10 @@ const Register = () => {
     },
   });
 
+  // navigation
   const navigate = useNavigate();
+
+  // fomik
 
   // Reset Everything
   const Reset = () => {
@@ -60,11 +68,10 @@ const Register = () => {
     resetFormIndex();
     handleResetModalIndex();
     navigate("/");
-    // navigate to landing page but not able to go back here
   };
 
   // Handle Next Button for Modal
-  const handleNext = () => {
+  const handleNextModal = () => {
     if (lastIndex) Reset();
     return handleNextIndex();
   };
@@ -89,9 +96,18 @@ const Register = () => {
     values: ApplicantModelProps,
     actions: FormikHelpers<ApplicantModelProps>
   ) => {
-    if (!isLastStep) return next();
+    if (!isLastStep) {
+      setItems(values);
+      return next();
+    }
     handleQuery(values, actions);
   };
+
+  useEffect(() => {
+    if (!getItem()) {
+      setItems(applicantInitialValue);
+    }
+  }, []);
 
   return (
     <>
@@ -125,7 +141,7 @@ const Register = () => {
               )}
 
               <div className="flex gap-4">
-                <IconButton />
+                <IconButton onClick={removeItem} />
 
                 <Button
                   as="submit"
@@ -138,7 +154,10 @@ const Register = () => {
             </div>
 
             {isActiveModal && (
-              <OutroModal data={modalData[modalIndex]} onNext={handleNext} />
+              <OutroModal
+                data={modalData[modalIndex]}
+                onNext={handleNextModal}
+              />
             )}
           </Form>
         </Formik>

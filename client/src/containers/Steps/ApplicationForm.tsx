@@ -73,7 +73,7 @@ const ApplicationForm = () => {
 
       <div className="flex flex-col gap-4">
         {applicantInputMaps.map(section => (
-          <FormSection {...section} />
+          <FormSection key={section.title} {...section} />
         ))}
       </div>
     </section>

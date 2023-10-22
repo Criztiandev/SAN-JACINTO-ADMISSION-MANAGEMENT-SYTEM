@@ -2,6 +2,7 @@ import {
   AddressBaseProps,
   AddressDetailsProps,
   ApplicantModelProps,
+  GradeDetails,
   GuardianDetailsProps,
   NameBaseProps,
   OtherDetailsProps,
@@ -36,6 +37,14 @@ const studentDetails: StudentDetailsProps = {
   lastSchoolAttended: "",
 };
 
+const gradeDetails: GradeDetails = {
+  english: "",
+  filipino: "",
+  math: "",
+  science: "",
+  generalAve: "",
+};
+
 const personalDetails: PersonalDetailsProps = {
   firstName: "",
   middleName: "",
@@ -62,13 +71,14 @@ const guardianDetails: GuardianDetailsProps = {
 };
 
 const otherDetails: OtherDetailsProps = {
-  is4psBeneficiary: "No",
-  isIndigenousPerson: "No",
-  isLWD: "No",
+  is4psBeneficiary: "",
+  isIndigenousPerson: "",
+  isLWD: "",
 };
 
 const applicantInitialValue: ApplicantModelProps = {
   studentDetails,
+  gradeDetails,
   personalDetails,
   addressDetails,
   guardianDetails,

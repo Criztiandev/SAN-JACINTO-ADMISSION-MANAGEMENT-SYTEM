@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
 
 const useMultipleForm = (steps: ReactElement[]) => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(7);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   // Next Step
   const next = () =>
     setCurrentStepIndex(prev => (prev >= steps.length - 1 ? prev : prev + 1));

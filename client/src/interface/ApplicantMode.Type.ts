@@ -29,6 +29,14 @@ export interface StudentDetailsProps {
   lastSchoolAttended: string;
 }
 
+export interface GradeDetails {
+  english: string;
+  filipino: string;
+  math: string;
+  science: string;
+  generalAve: string;
+}
+
 export interface PersonalDetailsProps extends NameBaseProps {
   gender: string;
   birthDate: Date | string;
@@ -64,6 +72,7 @@ export interface OtherDetailsProps {
 
 export interface ApplicantModelProps {
   studentDetails: StudentDetailsProps;
+  gradeDetails: GradeDetails;
   personalDetails: PersonalDetailsProps;
   addressDetails: AddressDetailsProps;
   guardianDetails: GuardianDetailsProps;

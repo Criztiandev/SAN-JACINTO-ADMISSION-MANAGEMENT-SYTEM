@@ -1,4 +1,5 @@
 import { Input } from "../../components";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
 
@@ -11,6 +12,8 @@ const gradeDetails: InputProps[] = [
 ];
 
 const GradeDetails = () => {
+  FetchLocalStorageFormData("applicant_form");
+
   return (
     <section className="grid grid-cols-2 gap-4">
       {gradeDetails.map(props => (

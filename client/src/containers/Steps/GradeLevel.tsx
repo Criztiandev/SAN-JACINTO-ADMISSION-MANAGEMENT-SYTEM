@@ -4,9 +4,11 @@ import Carousel from "../../components/Carousel";
 import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
 import { yearLevels } from "../../helper/GradeLevel.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
+  FetchLocalStorageFormData("applicant_form");
 
   return (
     <section className="flex justify-center items-center flex-col  h-full mb-4 overflow-hidden ">

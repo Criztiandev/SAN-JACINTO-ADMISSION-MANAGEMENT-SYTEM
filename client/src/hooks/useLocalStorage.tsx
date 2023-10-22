@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const useLocalStorage = (key: string) => {
   // store data to the local storage to
+
+  const init = (value: any) => {
+    if (!getItem()) {
+      setItems(value);
+    }
+  };
+
   const setItems = (value: any) => {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
@@ -19,5 +26,13 @@ export const useLocalStorage = (key: string) => {
     }
   };
 
-  return { setItems, getItem };
+  const removeItem = () => {
+    try {
+      window.localStorage.removeItem(key);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return { setItems, getItem, removeItem, init };
 };
