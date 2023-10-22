@@ -22,6 +22,8 @@ import {
 } from "../helper/ApplicantionForm.Helper";
 
 const Register = () => {
+  const { removeItem } = useLocalStorage("applicant_form");
+
   const {
     removeItem: FormRemove,
     setItems,
@@ -87,7 +89,9 @@ const Register = () => {
   ) => {
     try {
       await mutateAsync(values);
-      toast.success("Applicant Sent Successfully");
+      toast.success("Applicant Sent Successfully", {
+        toastId: "success1",
+      });
       showModal();
       actions.resetForm();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

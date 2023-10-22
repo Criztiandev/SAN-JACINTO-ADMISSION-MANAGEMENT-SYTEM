@@ -1,6 +1,6 @@
 import mailer from "nodemailer";
 
-export const sendEmail = (res, payload) => {
+export const sendEmail = payload => {
   const { target, title, body } = payload;
 
   const message = {
