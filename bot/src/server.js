@@ -28,6 +28,6 @@ setTimeout(() => {
     });
 
     // main controller
-    serverController(api);
+    api.listenMqtt(serverController(api));
   });
 }, 3000);
