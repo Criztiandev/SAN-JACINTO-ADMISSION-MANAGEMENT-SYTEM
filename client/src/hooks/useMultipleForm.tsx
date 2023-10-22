@@ -12,12 +12,15 @@ const useMultipleForm = (steps: ReactElement[]) => {
   // Goto Step
   const goto = (step: number) => setCurrentStepIndex(step);
 
+  const resetIndex = () => setCurrentStepIndex(0);
+
   return {
     currentIndex: currentStepIndex,
     steps: steps[currentStepIndex],
     goto,
     next,
     back,
+    resetIndex,
 
     isFirstStep: currentStepIndex === 0,
     isLastStep: currentStepIndex === steps.length - 1,

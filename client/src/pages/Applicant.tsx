@@ -3,11 +3,8 @@
 
 import { Button, Table, SearchBar, Badge } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
-
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-
 import MoreOption from "../containers/Applicants/MoreOption";
-
 import { useTableContext } from "../context/TableContext";
 import { useEffect } from "react";
 import { ColumnDef } from "@tanstack/react-table";
@@ -21,9 +18,34 @@ import CreateDrawer from "../containers/Applicants/CreateDrawer";
 import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
 import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import EditDrawer from "../containers/Applicants/EditDrawer";
-import { DrawerListProps } from "../interface/Drawer.types";
+import { DrawerListProps } from "../interface/Drawer.Types";
+import { useQuery } from "@tanstack/react-query";
+import { fetchApplicants } from "../api/applicant.api";
+import Loading from "../components/Loading";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Applicant = () => {
+  const { isLoading, isError, error } = useQuery({
+    queryFn: async () => {
+      const { data } = await axios.get("http://localhost:4000/api/applicant");
+      handleMutateData(data);
+      return data;
+    },
+    queryKey: ["applicants"],
+    staleTime: 5 * 60 * 1000,
+    refetchOnMount: false,
+  });
+
+  const {
+    tableData,
+    search,
+    selected,
+    handleSearch,
+    handleSelected,
+    setTableConfig,
+    handleMutateData,
+  } = useTableContext();
   const {
     createToggle,
     deleteToggle,
@@ -32,10 +54,8 @@ const Applicant = () => {
     editToggle,
     holdToggle,
   } = useDrawerContext();
-  const { search, selected, handleSearch, handleSelected, setTableConfig } =
-    useTableContext();
 
-  const handleToggle = (data: object | string, toggle) => {
+  const handleToggle = (data: object | string, toggle = () => {}) => {
     handleSelected(data);
     toggle();
   };
@@ -154,6 +174,7 @@ const Applicant = () => {
     },
   ];
 
+  // Setting up the Table Config
   useEffect(() => {
     if (!TableConfig) throw new Error("No Config");
     setTableConfig(TableConfig);
@@ -163,17 +184,25 @@ const Applicant = () => {
     };
   }, []);
 
+  // Storing the Data to the Table data
+
+  // Checking if there us an error
+  if (isError) toast.error(error.message);
+  if (isLoading) return <Loading />;
+
   return (
     <>
       <BaseLayout
         title="Applicants"
         header={
-          <Button
-            dir="left"
-            title="Create"
-            icon={CreateApplicantIcon}
-            onClick={createToggle.toggleDrawer}
-          />
+          tableData.length > 0 && (
+            <Button
+              dir="left"
+              title="Create"
+              icon={CreateApplicantIcon}
+              onClick={createToggle.toggleDrawer}
+            />
+          )
         }
         action>
         <>

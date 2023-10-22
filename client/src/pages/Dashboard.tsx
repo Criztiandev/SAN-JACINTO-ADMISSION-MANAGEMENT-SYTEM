@@ -5,7 +5,7 @@ import statsData from "../data/statsData.json";
 
 import Stack from "../components/Stack";
 import useStats from "../hooks/useStats";
-import { StatsInterface } from "../interface/componentInterface";
+import { StatsInterface } from "../interface/Component.Type";
 
 const Dashboard = () => {
   const currentData: StatsInterface[] = statsData;

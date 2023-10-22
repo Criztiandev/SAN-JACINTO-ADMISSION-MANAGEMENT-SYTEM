@@ -1,3 +1,7 @@
+import MaleProfile from "../assets/image/Male_profile.png";
+import FemaleProfile from "../assets/image/Female_Profile.png";
+import { ItemSelectProps } from "../interface/FormInterface";
+
 export const OutroDetails = [
   {
     title: "Congratulations",
@@ -16,6 +20,12 @@ export const OutroDetails = [
 ];
 
 export const GenderSelectionItems = [
-  { cover: "", title: "Male", subtitle: "Masculine" },
-  { cover: "", title: "Female", subtitle: "Feminine" },
+  { cover: MaleProfile, title: "Male", subtitle: "Masculine" },
+  { cover: FemaleProfile, title: "Female", subtitle: "Feminine" },
+];
+
+export const GuadianChoices: ItemSelectProps[] = [
+  { cover: "null", title: "Father", subtitle: "Strong" },
+  { cover: "null", title: "Mother", subtitle: "Caring" },
+  { cover: "null", title: "Other", subtitle: "Prefered" },
 ];

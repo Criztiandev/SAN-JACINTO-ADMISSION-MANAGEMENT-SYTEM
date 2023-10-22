@@ -5,7 +5,7 @@ import { EditIcon } from "../../assets/icons";
 
 import { motion } from "framer-motion";
 
-import { FetchingDrawerProps } from "../../interface/componentInterface";
+import { FetchingDrawerProps } from "../../interface/Component.Type";
 import { toast } from "react-toastify";
 import { useState } from "react";
 

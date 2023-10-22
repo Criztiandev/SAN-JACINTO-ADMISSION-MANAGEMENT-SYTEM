@@ -1,5 +1,5 @@
 import { CardProps, InputProps } from "../interface/FormInterface";
-import { ApplicationFormModelProps } from "../interface/applicantModelInterface";
+import { ApplicationFormModelProps } from "../interface/ApplicantMode.Type";
 import { OmitInputObject } from "../utils/OmitUtils";
 
 export const JrTracksItemModel: CardProps[] = [
@@ -191,111 +191,111 @@ export const currentAddressInputModel: InputProps[] = [
 export const permanentAddressInputModel: InputProps[] = [
   {
     label: "House No.",
-    name: `addressDetails.current.houseNo`,
+    name: `addressDetails.permanent.houseNo`,
     placeholder: `Enter your House number`,
   },
   {
     label: "Street",
-    name: `addressDetails.current.street`,
+    name: `addressDetails.permanent.street`,
     placeholder: `Enter your House number`,
   },
   {
     label: "Barangay",
-    name: `addressDetails.current.barangay`,
+    name: `addressDetails.permanent.barangay`,
     placeholder: "Enter your Barangay",
   },
 
   {
     label: "Municipality",
-    name: `addressDetails.current.municipality`,
+    name: `addressDetails.permanent.municipality`,
     placeholder: "Enter your Municipality",
   },
 
   {
     label: "Province",
-    name: `addressDetails.current.province`,
+    name: `addressDetails.permanent.province`,
     placeholder: "Enter your Province",
   },
 
   {
     label: "Country",
-    name: `addressDetails.current.country`,
+    name: `addressDetails.permanent.country`,
     placeholder: "Enter your Country",
   },
 
   {
     label: "Zip Code",
-    name: `addressDetails.current.zip`,
+    name: `addressDetails.permanent.zip`,
     placeholder: "Enter your Zip Code",
   },
 ];
 
 export const fatherInputDetails: InputProps[] = [
   {
-    label: "Father's First Name",
+    label: "First Name",
     name: "guardianDetails.father.firstName",
-    placeholder: "Enter your father Details",
+    placeholder: "Enter your father's Details",
   },
   {
-    label: "Father's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.father.middleName",
-    placeholder: "Enter your father Details",
+    placeholder: "Enter your father's Details",
   },
   {
-    label: "Father's Last Name",
+    label: "Last Name",
     name: "guardianDetails.father.lastName",
-    placeholder: "Enter your fahter details",
+    placeholder: "Enter your fahter's details",
   },
   {
-    label: "Father's Contact ",
+    label: "Contact ",
     name: "guardianDetails.father.contact",
-    placeholder: "Enter your fahter details",
+    placeholder: "Enter your fahter's details",
   },
 ];
 
 export const motherInputDetails: InputProps[] = [
   {
-    label: "Mother's First Name",
+    label: "First Name",
     name: "guardianDetails.mother.firstName",
-    placeholder: "Enter tour Mother's First name",
+    placeholder: "Enter tour mother's First name",
   },
   {
-    label: "Mother's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.mother.middleName",
-    placeholder: "Enter tour Mother's Middle name",
+    placeholder: "Enter tour mother's Middle name",
   },
   {
-    label: "Mother's Last Name",
+    label: "Last Name",
     name: "guardianDetails.mother.lastName",
-    placeholder: "Enter your Mother's Last name",
+    placeholder: "Enter your mother's Last name",
   },
   {
-    label: "Mother's Contact ",
+    label: "Contact ",
     name: "guardianDetails.mother.contact",
-    placeholder: "Enter your Mother's Contact",
+    placeholder: "Enter your mother's Contact",
   },
 ];
 
 export const legalGuardianInputDetails: InputProps[] = [
   {
-    label: "Legal Guardian's First Name",
+    label: "First Name",
     name: "guardianDetails.legalGuardian.firstName",
-    placeholder: "Enter tour Legal Guardian's First name",
+    placeholder: "Enter tour Guardian's First name",
   },
   {
-    label: "Legal Guardian's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.legalGuardian.middleName",
-    placeholder: "Enter tour Legal Guardian's Middle name",
+    placeholder: "Enter tour Guardian's Middle name",
   },
   {
-    label: "Legal Guardian's Last Name",
+    label: "Last Name",
     name: "guardianDetails.legalGuardian.lastName",
-    placeholder: "Enter your Legal Guardian's Last name",
+    placeholder: "Enter your Guardian's Last name",
   },
   {
-    label: "Legal Guardian's Contact ",
+    label: "Contact ",
     name: "guardianDetails.legalGuardian.contact",
-    placeholder: "Enter your Legal Guardian's Contact",
+    placeholder: "Enter your Guardian's Contact",
   },
 ];
 
@@ -312,7 +312,7 @@ export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
   { title: "Permanent Address Details", model: personalDetailsInputModel },
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
-  { title: "Legal Guardians", model: legalGuardianInputDetails },
+  { title: "Guardians", model: legalGuardianInputDetails },
   { title: "Other Details", model: otherInputDetails },
 ];
 
@@ -339,7 +339,7 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
 
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
-  { title: "Legal Guardian", model: legalGuardianInputDetails },
+  { title: "Guardian", model: legalGuardianInputDetails },
 
   { title: "Other Details", model: otherInputDetails },
 ];

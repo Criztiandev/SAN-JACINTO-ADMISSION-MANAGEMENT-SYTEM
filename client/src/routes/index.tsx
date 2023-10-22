@@ -6,10 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 const Routes = () => {
   const { user } = useAuthContext();
 
-  if (user) {
-    return <RouterProvider router={privateRoutes} />;
-  }
-
+  if (user) return <RouterProvider router={privateRoutes} />;
   return <RouterProvider router={publicRoutes} />;
 };
 

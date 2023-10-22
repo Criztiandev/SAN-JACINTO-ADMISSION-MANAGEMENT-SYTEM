@@ -3,7 +3,7 @@ import Logo from "../assets/image/Logo.png";
 import {
   panelTitleInterface,
   registrationLayoutProps,
-} from "../interface/registrationInterface";
+} from "../interface/Registration.Type";
 import useDrawer from "../hooks/useDrawer";
 import { Link } from "react-router-dom";
 

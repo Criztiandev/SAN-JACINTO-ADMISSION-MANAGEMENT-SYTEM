@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 

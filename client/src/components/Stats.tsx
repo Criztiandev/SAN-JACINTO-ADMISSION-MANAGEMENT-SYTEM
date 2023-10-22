@@ -1,6 +1,6 @@
 import { Typography, Image, Badge } from ".";
 import { DecreaseIcon, IncreaseIcon } from "../assets/icons";
-import { BaseProps, TextProps } from "../interface/componentInterface";
+import { BaseProps, TextProps } from "../interface/Component.Type";
 import { Fragment } from "./Fragments";
 
 interface NumberProps extends TextProps {

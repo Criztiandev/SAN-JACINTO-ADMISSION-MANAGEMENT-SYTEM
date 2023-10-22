@@ -1,5 +1,5 @@
 import { Calendar as BigCalendar, CalendarProps } from "react-big-calendar";
-import { Event as CustomEvent } from "../interface/dateInterface";
+import { Event as CustomEvent } from "../interface/Date.Type";
 
 interface CalendarCustomProps
   extends Omit<CalendarProps<CustomEvent>, "events"> {

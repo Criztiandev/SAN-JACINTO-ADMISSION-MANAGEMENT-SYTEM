@@ -1,4 +1,4 @@
-import { CardSelectionProps } from "../../interface/animationInterface";
+import { CardSelectionProps } from "../../interface/Animation.Type";
 
 export const CardSelectionAnim = {
   animate: ({ currVal, value }: CardSelectionProps) => {

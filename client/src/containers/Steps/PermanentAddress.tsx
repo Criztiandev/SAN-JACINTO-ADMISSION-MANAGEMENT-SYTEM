@@ -1,67 +1,145 @@
+import { useState } from "react";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import { InputInterface } from "../../interface/componentInterface";
+import {
+  currentAddressInputModel,
+  permanentAddressInputModel,
+} from "../../helper/applicantFormObject";
+import { useFormikContext } from "formik";
+import { IconButton } from "../../components";
+import CloseIcon from "../../assets/icons/Close_round_light.svg";
+import DoneIcon from "../../assets/icons/Done_light.svg";
 
-const InputTransformer = (name: string): InputInterface[] => [
-  {
-    label: "House No.",
-    name: `addressDetails.${name}.houseNo`,
-    placeholder: `Enter your House number`,
-  },
-  {
-    label: "Street",
-    name: `addressDetails.${name}.street`,
-    placeholder: `Enter your House number`,
-  },
-  {
-    label: "Barangay",
-    name: `addressDetails.${name}.barangay`,
-    placeholder: "Enter your Barangay",
-  },
+import { AnimatePresence, motion } from "framer-motion";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
-  {
-    label: "Municipality",
-    name: `addressDetails.${name}.municipality`,
-    placeholder: "Enter your Municipality",
+const AcceptVariant = {
+  selected: {
+    border: "1px solid green",
+    background: "#22f86275",
   },
+};
 
-  {
-    label: "Province",
-    name: `addressDetails.${name}.province`,
-    placeholder: "Enter your Province",
+const DeclineVariant = {
+  selected: {
+    border: "1px solid red",
+    background: "#f8222275",
   },
-
-  {
-    label: "Country",
-    name: `addressDetails.${name}.country`,
-    placeholder: "Enter your Country",
+  unselected: {
+    border: "",
+    background: "none",
   },
-
-  {
-    label: "Zip Code",
-    name: `addressDetails.${name}.zip`,
-    placeholder: "Enter your Zip Code",
-  },
-];
+};
 
 const PermanentAddress = () => {
+  FetchLocalStorageFormData("applicant_form");
+  const { setItems, getItem } = useLocalStorage("address_btn");
+
+  const [isPermanent, setIsPermanent] = useState(
+    getItem()?.isPermanent || false
+  );
+  const [isCurrent, setIsCurrent] = useState<boolean>(
+    getItem()?.isCurrent || false
+  );
+
+  const { values, setValues } = useFormikContext<ApplicantModelProps>();
+  const { current } = values?.addressDetails || {
+    permanent: "",
+    current: "",
+  };
+
+  const updatePermanentToCurrent = () => {
+    setValues({
+      ...values,
+      addressDetails: {
+        ...values.addressDetails,
+        permanent: current,
+      },
+    });
+  };
+
   return (
     <section>
       <div className="grid grid-cols-2 gap-4">
-        {InputTransformer("current").map(inputs => (
-          <Input key={inputs.label} {...inputs} />
+        {currentAddressInputModel.map(props => (
+          <motion.span key={props.label} whileHover={{ scale: 1.03 }}>
+            <Input {...props} />
+          </motion.span>
         ))}
       </div>
 
-      <Typography className="my-4 border-b pb-2" as="h5">
-        Permanent Address
-      </Typography>
+      <div className="my-4  flex flex-col gap-2 mb-4">
+        <span>Is this your Permanent Address ?</span>
+        <div className="flex gap-2">
+          {!isCurrent && (
+            <motion.button
+              type="button"
+              animate={isPermanent && "selected"}
+              variants={AcceptVariant}
+              disabled={isPermanent}
+              whileTap={{ scale: 0.7 }}
+              className="border rounded-full  hover:border-green-600 hover:bg-[#22f86275]"
+              onClick={() => {
+                updatePermanentToCurrent();
+                setIsPermanent(true);
+                setItems({ isPermanent: true, isCurrent: false });
+              }}>
+              <img src={DoneIcon} alt="Done" className="p-2" />
+            </motion.button>
+          )}
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        {InputTransformer("permanent").map(props => (
-          <Input key={props.label} {...props} />
-        ))}
+          {!isPermanent && (
+            <motion.button
+              type="button"
+              animate={isCurrent ? "selected" : "unselected"}
+              disabled={isCurrent}
+              variants={DeclineVariant}
+              whileTap={{ scale: 0.7 }}
+              className="border rounded-full hover:border-red-500 hover:bg-[#f8222275]"
+              onClick={() => {
+                setIsCurrent(prev => !prev);
+                setItems({ isPermanent: false, isCurrent: true });
+              }}>
+              <img src={CloseIcon} alt="close" className="p-2" />
+            </motion.button>
+          )}
+        </div>
       </div>
+
+      <AnimatePresence>
+        {isCurrent && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-4">
+            <div className="flex justify-between items-center mb-4 border-b py-2 border-gray-400">
+              <Typography as="h4">Permanent Address</Typography>
+
+              <div className="flex gap-4">
+                <IconButton
+                  type="outlined"
+                  icon={CloseIcon}
+                  onClick={() => {
+                    setIsCurrent(false);
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {permanentAddressInputModel.map(props => (
+                <motion.span key={props.label} whileHover={{ scale: 1.05 }}>
+                  <Input {...props} />
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

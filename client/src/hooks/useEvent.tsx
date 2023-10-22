@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Event } from "../interface/dateInterface";
+import { Event } from "../interface/Date.Type";
 
 const useEvent = () => {
   const [selected, setSelected] = useState<Event | null>(null);

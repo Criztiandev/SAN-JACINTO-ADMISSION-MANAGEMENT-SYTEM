@@ -18,7 +18,7 @@ import useEvent from "../hooks/useEvent";
 import BaseLayout from "../layouts/BaseLayout";
 import scheduleModel from "../models/scheduleModel";
 
-import { Event } from "../interface/dateInterface";
+import { Event } from "../interface/Date.Type";
 import {
   ColorSelect,
   CoverSelect,

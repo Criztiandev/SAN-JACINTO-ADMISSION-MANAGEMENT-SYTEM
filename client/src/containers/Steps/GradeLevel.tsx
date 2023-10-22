@@ -1,21 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
-import { ItemSelection } from "../../interface/registrationInterface";
 import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
-
-const yearLevels: ItemSelection[] = [
-  { cover: "null", title: "Grade 7", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 8", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 9", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 10", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 11", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 12", subtitle: "Freshies" },
-];
+import { yearLevels } from "../../helper/GradeLevel.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
+  FetchLocalStorageFormData("applicant_form");
 
   return (
     <section className="flex justify-center items-center flex-col  h-full mb-4 overflow-hidden ">

@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
 import Typography from "./Typography";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 
 interface FieldProps extends BaseProps {
   name?: string;
   type?: string;
   placeholder?: string;
   label?: string;
-
-  onChange?: (value: string) => void;
 }
 
-const Select = ({ label, name = "", onChange, ...props }: FieldProps) => {
+const Select = ({ label, name = "", ...props }: FieldProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -32,7 +30,6 @@ const Select = ({ label, name = "", onChange, ...props }: FieldProps) => {
         className={`bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
         {...field}
         {...props}
-        onChange={onChange}
         id={name}
       />
       <Typography as="p" className="text-sm text-red-400">

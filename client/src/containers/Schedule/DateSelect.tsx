@@ -2,8 +2,8 @@ import { useFormikContext } from "formik";
 import { options } from "../../helper/dateHelper";
 import { useEffect } from "react";
 import { Input } from "../../components";
-import { InputInterface } from "../../interface/componentInterface";
-import { Event } from "../../interface/dateInterface";
+import { InputInterface } from "../../interface/Component.Type";
+import { Event } from "../../interface/Date.Type";
 
 interface DateSelectProps {
   selected: Event;
