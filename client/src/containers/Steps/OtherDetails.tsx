@@ -1,8 +1,10 @@
 import Input from "../../components/Input";
-import { InputInterface } from "../../interface/componentInterface";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { InputProps } from "../../interface/FormInterface";
 
 const OtherDetails = () => {
-  const OtherInputTransformer: InputInterface[] = [
+  FetchLocalStorageFormData("applicant_form");
+  const OtherInputTransformer: InputProps[] = [
     {
       label: "Are you a 4ps Beneficiary ?",
       name: `otherDetails.is4psBeneficiary`,

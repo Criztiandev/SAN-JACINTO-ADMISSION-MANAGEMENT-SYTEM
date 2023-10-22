@@ -1,11 +1,7 @@
 export const applicantInputMaps = [
   {
     title: "Student Details",
-    details: [
-      {
-        label: "General Average",
-        name: "studentDetails.generalAverage",
-      },
+    model: [
       {
         label: "LRN",
         name: "studentDetails.LRN",
@@ -44,7 +40,7 @@ export const applicantInputMaps = [
 
   {
     title: "Personal Details",
-    details: [
+    model: [
       {
         type: "date",
         label: "Birth Date",
@@ -88,7 +84,7 @@ export const applicantInputMaps = [
   // current address
   {
     title: "Current Address",
-    details: [
+    model: [
       {
         label: "House No.",
         name: `addressDetails.current.houseNo`,
@@ -134,7 +130,7 @@ export const applicantInputMaps = [
   // Permanent address
   {
     title: "Permanent Address",
-    details: [
+    model: [
       {
         label: "House No.",
         name: `addressDetails.permanent.houseNo`,
@@ -179,7 +175,7 @@ export const applicantInputMaps = [
 
   {
     title: "Fathers Details",
-    details: [
+    model: [
       {
         label: "Father's First Name",
         name: "guardianDetails.father.firstName",
@@ -195,7 +191,7 @@ export const applicantInputMaps = [
 
   {
     title: "Mother's Details",
-    details: [
+    model: [
       {
         label: "Mother's First Name",
         name: "guardianDetails.mother.firstName",
@@ -221,7 +217,7 @@ export const applicantInputMaps = [
 
   {
     title: "Legal Guardian's Details",
-    details: [
+    model: [
       {
         label: "Legal Guardian's First Name",
         name: "guardianDetails.legalGuardian.firstName",
@@ -247,7 +243,7 @@ export const applicantInputMaps = [
 
   {
     title: "Other Details",
-    details: [
+    model: [
       { label: "4ps Beneficiary", name: "otherDetails.is4psBeneficiary" },
       { label: "Indigenous People", name: "otherDetails.isIndigenousPerson" },
       { label: "Learners With Disability", name: "otherDetails.isLWD" },

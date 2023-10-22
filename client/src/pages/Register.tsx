@@ -1,81 +1,118 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import { Button, Typography } from "../components/index";
+import { Button, IconButton, Typography } from "../components/index";
 
 import RegistrationLayout from "../layouts/RegistrationLayout";
 import useMultipleForm from "../hooks/useMultipleForm";
 
-import { NextIcon, PrevIcon } from "../assets/icons";
-import { ApplicantModelProps } from "../interface/applicantModelInterface";
-
-import {
-  GradeLevel,
-  StudentDetails,
-  PermanentAddress,
-  PersonalDetails,
-  GuardianDetails,
-  OtherDetails,
-  ApplicationForm,
-} from "../containers/Steps";
+import { NextIcon, PrevIcon, ResetIcon } from "../assets/icons";
+import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { OutroDetails } from "../helper/registrationFormHelper";
-import { StepperProps } from "../interface/registrationInterface";
+import { OutroDetails } from "../helper/registrationForm.Helper";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { createApplicant } from "../api/applicant.api";
+import { RegistrationStepper } from "../helper/Registration.Helper";
+import useModal from "../hooks/useModal";
+import OutroModal from "../containers/Steps/OutroModal";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useEffect } from "react";
 
-const RegistrationStepper: StepperProps[] = [
-  { title: "Grade Level", component: <GradeLevel /> },
-  { title: "Student Details", component: <StudentDetails /> },
-  { title: "Personal Details", component: <PersonalDetails /> },
-  { title: "Current Address", component: <PermanentAddress /> },
-  { title: "Guardian Details", component: <GuardianDetails /> },
-  { title: "Other Details", component: <OtherDetails /> },
-  { title: "Application Form", component: <ApplicationForm /> },
-];
+RegistrationStepper;
 
 const Register = () => {
-  const [active, setActive] = useState(false);
-  const [index, setIndex] = useState(-1);
-  const { steps, currentIndex, isLastStep, isFirstStep, next, back } =
-    useMultipleForm(RegistrationStepper.map(items => items.component));
+  const {
+    removeItem: FormRemove,
+    setItems,
+    getItem,
+  } = useLocalStorage("applicant_form");
+  const { removeItem: AddressRemove } = useLocalStorage("address_btn");
 
-  const Ended = index === OutroDetails.length - 1;
+  // Modal
+  const {
+    data: modalData,
+    currentIndex: modalIndex,
+
+    active: isActiveModal,
+    showModal,
+    hideModal,
+    lastIndex,
+    handleNext: handleNextIndex,
+    handleResetIndex: handleResetModalIndex,
+  } = useModal({ data: OutroDetails });
+
+  // Form Stepper
+  const {
+    steps,
+    next,
+    back,
+    isFirstStep,
+    isLastStep,
+    resetIndex: resetFormIndex,
+    currentIndex,
+  } = useMultipleForm(RegistrationStepper.map(({ component }) => component));
+
+  // Mutation Query
+  const { mutateAsync } = useMutation({
+    mutationKey: ["createApplicant"], // Optional, give your mutation a key
+    mutationFn: async (data: ApplicantModelProps) => {
+      const result = await createApplicant(data);
+      return result; // Return the variables for later use
+    },
+  });
+
+  // navigation
   const navigate = useNavigate();
 
-  const handleNext = () => {
-    if (Ended) {
-      setActive(false);
-    }
+  // fomik
 
-    return setIndex(prev =>
-      prev >= OutroDetails.length - 1 ? prev : prev + 1
-    );
-  };
-
-  const handleQuery = (values: ApplicantModelProps) => {
-    if (index !== OutroDetails.length - 1) {
-      setActive(true);
-      return;
-    }
-
-    alert(values);
+  // Reset Everything
+  const Reset = () => {
+    hideModal();
+    resetFormIndex();
+    handleResetModalIndex();
     navigate("/");
   };
 
-  // // Formik Submission Handler
+  // Handle Next Button for Modal
+  const handleNextModal = () => {
+    if (lastIndex) Reset();
+    return handleNextIndex();
+  };
+
+  const handleQuery = async (
+    values: ApplicantModelProps,
+    actions: FormikHelpers<ApplicantModelProps>
+  ) => {
+    try {
+      await mutateAsync(values);
+      toast.success("Applicant Sent Successfully");
+      showModal();
+      actions.resetForm();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const responseError = error.response.data;
+      toast.error(responseError.message);
+    }
+  };
+
   const handleSubmit = async (
     values: ApplicantModelProps,
     actions: FormikHelpers<ApplicantModelProps>
   ) => {
-    if (!isLastStep) return next();
-    if (!Ended) {
-      setActive(true);
-      return handleNext();
+    if (!isLastStep) {
+      setItems(values);
+      return next();
     }
-
-    handleQuery(values);
-    actions.resetForm();
+    handleQuery(values, actions);
   };
+
+  useEffect(() => {
+    if (!getItem()) {
+      setItems(applicantInitialValue);
+    }
+  }, []);
 
   return (
     <>
@@ -99,7 +136,7 @@ const Register = () => {
               }`}>
               {!isFirstStep && (
                 <Button
-                  as="submit"
+                  as="button"
                   type="outlined"
                   dir="left"
                   icon={PrevIcon}
@@ -107,27 +144,31 @@ const Register = () => {
                   onClick={back}
                 />
               )}
-              <Button
-                as="submit"
-                type="outlined"
-                dir="right"
-                icon={NextIcon}
-                title={`${isLastStep ? "Finish" : "Next"}`}
-              />
+
+              <div className="flex gap-4">
+                <IconButton
+                  icon={ResetIcon}
+                  onClick={() => {
+                    FormRemove();
+                    AddressRemove();
+                  }}
+                />
+
+                <Button
+                  as="submit"
+                  type="outlined"
+                  dir="right"
+                  icon={NextIcon}
+                  title={`${isLastStep ? "Finish" : "Next"}`}
+                />
+              </div>
             </div>
 
-            {active && (
-              <div className="fixed top-0 left-0 w-full h-full bg-[#00000080] flex justify-center items-center ">
-                <div className="w-[600px] h-[400px] bg-white rounded-[5px] p-4 flex justify-center items-center flex-col gap-4">
-                  <div className="w-[120px] h-[120px] border rounded-full bg-blue-400"></div>
-
-                  <div className="text-center max-w-[400px]">
-                    <h2>{OutroDetails[index].title}</h2>
-                    <p>{OutroDetails[index].desc}</p>
-                  </div>
-                  <Button as="submit" title="Next" />
-                </div>
-              </div>
+            {isActiveModal && (
+              <OutroModal
+                data={modalData[modalIndex]}
+                onNext={handleNextModal}
+              />
             )}
           </Form>
         </Formik>

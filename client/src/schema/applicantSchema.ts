@@ -5,7 +5,7 @@ import {
   NameBaseProps,
   PersonalDetailsProps,
   StudentDetailsProps,
-} from "../interface/applicantModelInterface";
+} from "../interface/ApplicantMode.Type";
 
 export const YearLevelEnum: Array<string> = ["7", "8", "9", "10", "11", "12"];
 

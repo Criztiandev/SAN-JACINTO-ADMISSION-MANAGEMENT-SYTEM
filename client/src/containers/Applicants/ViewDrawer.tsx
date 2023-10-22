@@ -4,7 +4,7 @@ import EditIcon from "../../assets/icons/Edit_light.svg";
 import applicantData from "../../data/applicantData.json";
 import { Form, Formik } from "formik";
 
-import { FetchingDrawerProps } from "../../interface/componentInterface";
+import { FetchingDrawerProps } from "../../interface/Component.Type";
 import Carousel from "../../components/Carousel";
 import {
   ApplicationFormInputModel,

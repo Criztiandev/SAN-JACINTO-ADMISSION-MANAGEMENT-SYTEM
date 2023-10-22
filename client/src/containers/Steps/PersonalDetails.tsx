@@ -10,7 +10,8 @@ import {
   suffixes,
 } from "../../helper/applicantFormObject";
 import { OmitInputObject } from "../../utils/OmitUtils";
-import { GenderSelectionItems } from "../../helper/registrationFormHelper";
+import { GenderSelectionItems } from "../../helper/registrationForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
 const firstSection: InputProps[] = OmitInputObject(
   [
@@ -32,6 +33,7 @@ const secondSection: InputProps[] = OmitInputObject(
 );
 
 const PersonalDetails = () => {
+  FetchLocalStorageFormData("applicant_form");
   const [genderSelect, setGenderSelect] = useState("");
   return (
     <section className="flex flex-col gap-4 mb-4">

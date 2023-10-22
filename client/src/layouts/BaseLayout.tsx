@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { Typography, IconButton } from "../components";
-import { BaseProps } from "../interface/componentInterface";
+import { BaseProps } from "../interface/Component.Type";
 import Nav from "./Nav";
 import { SettingsIcon, NotifIcon } from "../assets/icons";
 import ShortCut from "../containers/ShortCut";
@@ -42,7 +42,9 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
           </span>
         </header>
 
-        {children}
+        <div className="grid grid-rows-[64px_auto_32px] gap-4 h-full">
+          {children}
+        </div>
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef, useEffect, ChangeEvent, forwardRef } from "react";
 import SearchIcon from "../assets/icons/Search.svg";
-import { ComponentType } from "../interface/componentInterface";
+import { ComponentType } from "../interface/Component.Type";
 
 interface SearchBarProps extends ComponentType {
   as?: "icon" | "normal";

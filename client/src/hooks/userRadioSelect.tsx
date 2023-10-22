@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from "react";
-import { ItemSelection } from "../interface/registrationInterface";
+import { ItemSelection } from "../interface/Registration.Type";
 
 // Define the interface for the hook's return value
 interface RadioSelectHook {

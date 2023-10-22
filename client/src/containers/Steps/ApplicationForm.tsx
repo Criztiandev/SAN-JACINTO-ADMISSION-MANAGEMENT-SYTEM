@@ -1,16 +1,21 @@
 import { Avatar, IconButton, Input, Typography } from "../../components";
-import { applicantInputMapsInterface } from "../../interface/applicantModelInterface";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { useState } from "react";
-import { InputInterface } from "../../interface/componentInterface";
 import { useFormikContext } from "formik";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
+import { InputProps } from "../../interface/FormInterface";
+import {
+  ApplicationFormModelProps,
+  ApplicantModelProps,
+} from "../../interface/ApplicantMode.Type";
+import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 
-const FormSection = ({ title, details }: applicantInputMapsInterface) => {
+const FormSection = ({ title, model }: ApplicationFormModelProps) => {
+  FetchLocalStorageFormData("applicant_form");
   const [hide, setHide] = useState(false);
   const [onEdit, setOnEdit] = useState(true);
 
@@ -35,7 +40,7 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 
       {hide && (
         <div className="grid grid-cols-2 gap-4">
-          {details.map((props: InputInterface) => (
+          {model.map((props: InputProps) => (
             <Input key={props.label} {...props} disabled={onEdit} />
           ))}
         </div>
@@ -45,9 +50,10 @@ const FormSection = ({ title, details }: applicantInputMapsInterface) => {
 };
 
 const ApplicationForm = () => {
-  const { values } = useFormikContext();
-  const { firstName, middleName, lastName, gender } = values?.personalDetails;
-  const { yearLevel, track } = values?.studentDetails;
+  const { values } = useFormikContext<ApplicantModelProps>();
+  const { firstName, middleName, lastName, gender } =
+    values?.personalDetails || {};
+  const { yearLevel, track } = values?.studentDetails || {};
   return (
     <section>
       <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
@@ -69,7 +75,7 @@ const ApplicationForm = () => {
 
       <div className="flex flex-col gap-4">
         {applicantInputMaps.map(section => (
-          <FormSection {...section} />
+          <FormSection key={section.title} {...section} />
         ))}
       </div>
     </section>

@@ -5,7 +5,7 @@ import { ItemSelectProps } from "../../interface/FormInterface";
 import { CardSelectionAnim } from "../../animations/Form/CardSelectVariant";
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
-import { ApplicantModelProps } from "../../interface/applicantModelInterface";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 
 const ItemSelect = ({
   title,

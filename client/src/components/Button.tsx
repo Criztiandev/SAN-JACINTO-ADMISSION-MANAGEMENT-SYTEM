@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef } from "react";
-import { ComponentType } from "../interface/componentInterface";
+import { ComponentType } from "../interface/Component.Type";
 import { ComponentStyle } from "../helper/componentHelper";
 import Typography from "./Typography";
 import Image from "./Image";
