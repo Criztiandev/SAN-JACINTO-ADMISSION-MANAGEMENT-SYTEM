@@ -5,3 +5,4 @@ export { default as SettingsIcon } from "./Setting_alt_line_light.svg";
 export { default as IncreaseIcon } from "./Expand_up_light.svg";
 export { default as DecreaseIcon } from "./Expand_down_light.svg";
 export { default as EditIcon } from "./Edit_light.svg";
+export { default as ResetIcon } from "./Reset.svg";
