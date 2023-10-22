@@ -2,7 +2,7 @@
 import { useField } from "formik";
 import Typography from "./Typography";
 import { InputProps } from "../interface/FormInterface";
-import { MouseEvent, useState, useRef } from "react";
+import { MouseEvent, useState } from "react";
 
 interface FieldProps extends InputProps {
   type?: string;
@@ -23,7 +23,6 @@ const ComboBox = ({
 }: FieldProps) => {
   const [currentValue, setCurrentValue] = useState("");
   const [showOption, setShowOption] = useState(false);
-  const optionRef = useRef<HTMLDivElement | undefined>(undefined);
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,

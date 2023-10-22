@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik, FormikHelpers } from "formik";
 import { Button, IconButton, Typography } from "../components/index";
 
@@ -22,7 +23,7 @@ import {
 } from "../helper/ApplicantionForm.Helper";
 
 const Register = () => {
-  const { removeItem } = useLocalStorage("applicant_form");
+  // const { removeItem } = useLocalStorage("applicant_form");
 
   const {
     removeItem: FormRemove,
