@@ -43,7 +43,6 @@ const Register = () => {
     resetIndex: resetFormIndex,
     currentIndex,
   } = useMultipleForm(RegistrationStepper.map(({ component }) => component));
-  const navigate = useNavigate();
 
   const { mutateAsync } = useMutation({
     mutationKey: ["createApplicant"], // Optional, give your mutation a key
@@ -53,12 +52,15 @@ const Register = () => {
     },
   });
 
+  const navigate = useNavigate();
+
   // Reset Everything
   const Reset = () => {
     hideModal();
     resetFormIndex();
     handleResetModalIndex();
     navigate("/");
+    // navigate to landing page but not able to go back here
   };
 
   // Handle Next Button for Modal

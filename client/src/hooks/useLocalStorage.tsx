@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const useLocalStorage = (key: string) => {
-  const setItems = (value: unknown) => {
+  // store data to the local storage to
+  const setItems = (value: any) => {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
@@ -7,12 +9,13 @@ export const useLocalStorage = (key: string) => {
     }
   };
 
+  // fetch data to the local storage
   const getItem = () => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : undefined;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
