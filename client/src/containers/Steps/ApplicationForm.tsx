@@ -12,7 +12,7 @@ import {
   ApplicationFormModelProps,
   ApplicantModelProps,
 } from "../../interface/ApplicantMode.Type";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
 
 const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   FetchLocalStorageFormData("applicant_form");

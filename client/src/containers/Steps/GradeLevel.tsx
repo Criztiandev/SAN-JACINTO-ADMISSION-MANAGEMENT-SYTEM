@@ -4,7 +4,7 @@ import Carousel from "../../components/Carousel";
 import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
 import { yearLevels } from "../../helper/GradeLevel.Helper";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
+import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
 
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik, FormikHelpers } from "formik";
 import { Button, IconButton, Typography } from "../components/index";
 
@@ -9,19 +10,21 @@ import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
 import { useNavigate } from "react-router-dom";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { OutroDetails } from "../helper/registrationForm.Helper";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { createApplicant } from "../api/applicant.api";
-import { RegistrationStepper } from "../helper/Registration.Helper";
 import useModal from "../hooks/useModal";
 import OutroModal from "../containers/Steps/OutroModal";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useEffect } from "react";
-
-RegistrationStepper;
+import {
+  OutroDetails,
+  RegistrationStepper,
+} from "../helper/ApplicantionForm.Helper";
 
 const Register = () => {
+  // const { removeItem } = useLocalStorage("applicant_form");
+
   const {
     removeItem: FormRemove,
     setItems,
@@ -87,7 +90,9 @@ const Register = () => {
   ) => {
     try {
       await mutateAsync(values);
-      toast.success("Applicant Sent Successfully");
+      toast.success("Applicant Sent Successfully", {
+        toastId: "success1",
+      });
       showModal();
       actions.resetForm();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

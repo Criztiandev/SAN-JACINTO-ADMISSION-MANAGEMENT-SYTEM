@@ -2,9 +2,10 @@ import { useState } from "react";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import {
+  FetchLocalStorageFormData,
   currentAddressInputModel,
   permanentAddressInputModel,
-} from "../../helper/applicantFormObject";
+} from "../../helper/ApplicantionForm.Helper";
 import { useFormikContext } from "formik";
 import { IconButton } from "../../components";
 import CloseIcon from "../../assets/icons/Close_round_light.svg";
@@ -12,37 +13,15 @@ import DoneIcon from "../../assets/icons/Done_light.svg";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
-import { FetchLocalStorageFormData } from "../../helper/Registration.Helper";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-
-const AcceptVariant = {
-  selected: {
-    border: "1px solid green",
-    background: "#22f86275",
-  },
-};
-
-const DeclineVariant = {
-  selected: {
-    border: "1px solid red",
-    background: "#f8222275",
-  },
-  unselected: {
-    border: "",
-    background: "none",
-  },
-};
+import { AcceptVariant, DeclineVariant } from "../../helper/Animation.Helper";
 
 const PermanentAddress = () => {
-  FetchLocalStorageFormData("applicant_form");
   const { setItems, getItem } = useLocalStorage("address_btn");
+  const { isPermanent: isPerm, isCurrent: isCurr } = getItem();
 
-  const [isPermanent, setIsPermanent] = useState(
-    getItem()?.isPermanent || false
-  );
-  const [isCurrent, setIsCurrent] = useState<boolean>(
-    getItem()?.isCurrent || false
-  );
+  const [isPermanent, setIsPermanent] = useState(isPerm || false);
+  const [isCurrent, setIsCurrent] = useState<boolean>(isCurr || false);
 
   const { values, setValues } = useFormikContext<ApplicantModelProps>();
   const { current } = values?.addressDetails || {
@@ -50,6 +29,7 @@ const PermanentAddress = () => {
     current: "",
   };
 
+  // Update the Prefered Choice
   const updatePermanentToCurrent = () => {
     setValues({
       ...values,
@@ -59,6 +39,8 @@ const PermanentAddress = () => {
       },
     });
   };
+
+  FetchLocalStorageFormData("applicant_form");
 
   return (
     <section>

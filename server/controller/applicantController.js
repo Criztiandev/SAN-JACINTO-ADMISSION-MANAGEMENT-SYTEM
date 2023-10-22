@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import applicantModel from "../models/applicantModel.js";
+import { sendEmail } from "../utils/email.uitls.js";
 
 const findApplicantByField = async (key, target) => {
   const query = { [key]: target };
@@ -32,6 +33,11 @@ export const createApplicant = asyncHandler(async (req, res) => {
     const newApplicant = await applicantModel.create(req.body);
 
     if (newApplicant) {
+      sendEmail({
+        target: email,
+        title: "Application Form Confirmation",
+        body: "Hi Im Criztan This is the Test Email my Friend",
+      });
       res.status(201).json({ message: "Applicant created successfully" });
     } else {
       throw new Error("Server error. Please try again.");

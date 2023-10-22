@@ -42,6 +42,14 @@ const applicantSchema = mongoose.Schema(
       facebookLink: { type: String, require: true, unique: true },
     },
 
+    gradeDetails: {
+      english: { type: String, require: true },
+      filipino: { type: String, require: true },
+      math: { type: String, require: true },
+      science: { type: String, require: true },
+      generalAve: { type: String, require: true },
+    },
+
     addressDetails: {
       permanent: addressSchema,
       current: addressSchema,
