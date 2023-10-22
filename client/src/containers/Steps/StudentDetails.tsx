@@ -3,64 +3,42 @@ import { useState } from "react";
 import { useFormikContext } from "formik";
 import { Typography, Input, Select } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
-import { JrTracks, SHSTracks } from "../../helper/Steps/studentDetailsHelper";
+
 import Carousel from "../../components/Carousel";
 import ItemSelect from "../Form/ItemSelect";
 import { OmitInputObject } from "../../utils/OmitUtils";
 import { motion } from "framer-motion";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+import { GradeLevelTrack } from "../../helper/GradeLevel.Helper";
+import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
-
-const generateSchoolYearOption = (target = 2005) => {
-  const currentYear = new Date().getFullYear();
-  const options = [];
-  for (let year = target; year <= currentYear; year++) {
-    const schoolYear = `${year} - ${
-      year + 1 === currentYear + 1 ? "Current" : year + 1
-    }`;
-
-    options.push(
-      <option key={schoolYear} value={schoolYear}>
-        {schoolYear}
-      </option>
-    );
-  }
-
-  return options || [];
-};
-
-const GradeLevelTrack = (level: "Grade 7" | "Grade 11") => {
-  const trackMapping = {
-    "Grade 7": JrTracks,
-    "Grade 11": SHSTracks,
-  };
-
-  return trackMapping[level] || [];
-};
 
 const StudentDetails = () => {
   const [selectedTrack, setSelectedTrack] = useState("");
   const { model } = applicantInputMaps[0];
 
-  const { values }: any = useFormikContext();
-  const currYearLevel: YearLevelProps = values?.studentDetails?.yearLevel;
+  const { values }: any = useFormikContext<ApplicantModelProps>();
+  const { studentDetails, gradeDetails } = values;
+
+  const currYearLevel: YearLevelProps = studentDetails?.yearLevel;
+  const currentTrack = GradeLevelTrack(gradeDetails, currYearLevel);
+  const levelLength = currentTrack.length;
+  const renderTracks = currentTrack.map(props => (
+    <ItemSelect
+      key={props.title}
+      {...props}
+      select={selectedTrack}
+      onSelect={setSelectedTrack}
+      name="studentDetails.track"
+    />
+  ));
 
   return (
     <section>
-      {GradeLevelTrack(currYearLevel).length > 0 ? (
+      {levelLength > 0 ? (
         <div className="flex justify-center items-center flex-col ">
-          <Carousel>
-            {GradeLevelTrack(currYearLevel).map(props => (
-              <ItemSelect
-                key={props.title}
-                {...props}
-                select={selectedTrack}
-                onSelect={setSelectedTrack}
-                name="studentDetails.track"
-              />
-            ))}
-          </Carousel>
-
+          <Carousel direction="center">{renderTracks}</Carousel>
           <Typography as="span" className="text-gray-400 pb-2 mt-4">
             Please Select Your Preffered Track
           </Typography>
@@ -88,7 +66,7 @@ const StudentDetails = () => {
           <motion.div whileHover={{ scale: 1.03 }}>
             <Select label="School Year" name="studentDetails.schoolYear">
               <option value={""}>Select Year Level</option>
-              {generateSchoolYearOption(2005)}
+              {GenerateSchoolYearOpt(2005)}
             </Select>
           </motion.div>
 

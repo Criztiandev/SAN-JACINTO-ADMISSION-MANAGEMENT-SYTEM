@@ -1,18 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
-import { ItemSelection } from "../../interface/Registration.Type";
 import { Typography } from "../../components";
 import ItemSelect from "../Form/ItemSelect";
-
-const yearLevels: ItemSelection[] = [
-  { cover: "null", title: "Grade 7", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 8", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 9", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 10", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 11", subtitle: "Freshies" },
-  { cover: "null", title: "Grade 12", subtitle: "Freshies" },
-];
+import { yearLevels } from "../../helper/GradeLevel.Helper";
 
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");

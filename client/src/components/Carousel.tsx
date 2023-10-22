@@ -1,11 +1,11 @@
 import useCarousel from "../hooks/useCarousel";
-import { BaseProps } from "../interface/Component.Type";
+import { BaseProps } from "../interface/Component.type";
 import { motion } from "framer-motion";
 import { RefObject } from "react";
 
 interface CarouselProps extends BaseProps {
   width?: number | string;
-  direction?: string;
+  direction?: "center";
 }
 
 const Carousel = ({ width = "700px", children, direction }: CarouselProps) => {

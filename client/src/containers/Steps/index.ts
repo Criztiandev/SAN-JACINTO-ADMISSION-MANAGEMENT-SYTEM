@@ -1,4 +1,5 @@
 export { default as GradeLevel } from "./GradeLevel";
+export { default as GradeDetails } from "./GradeDetails";
 export { default as StudentDetails } from "./StudentDetails";
 export { default as PersonalDetails } from "./PersonalDetails";
 export { default as PermanentAddress } from "./PermanentAddress";

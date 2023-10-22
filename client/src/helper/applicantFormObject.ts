@@ -232,68 +232,68 @@ export const permanentAddressInputModel: InputProps[] = [
 
 export const fatherInputDetails: InputProps[] = [
   {
-    label: "Father's First Name",
+    label: "First Name",
     name: "guardianDetails.father.firstName",
-    placeholder: "Enter your father Details",
+    placeholder: "Enter your father's Details",
   },
   {
-    label: "Father's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.father.middleName",
-    placeholder: "Enter your father Details",
+    placeholder: "Enter your father's Details",
   },
   {
-    label: "Father's Last Name",
+    label: "Last Name",
     name: "guardianDetails.father.lastName",
-    placeholder: "Enter your fahter details",
+    placeholder: "Enter your fahter's details",
   },
   {
-    label: "Father's Contact ",
+    label: "Contact ",
     name: "guardianDetails.father.contact",
-    placeholder: "Enter your fahter details",
+    placeholder: "Enter your fahter's details",
   },
 ];
 
 export const motherInputDetails: InputProps[] = [
   {
-    label: "Mother's First Name",
+    label: "First Name",
     name: "guardianDetails.mother.firstName",
-    placeholder: "Enter tour Mother's First name",
+    placeholder: "Enter tour mother's First name",
   },
   {
-    label: "Mother's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.mother.middleName",
-    placeholder: "Enter tour Mother's Middle name",
+    placeholder: "Enter tour mother's Middle name",
   },
   {
-    label: "Mother's Last Name",
+    label: "Last Name",
     name: "guardianDetails.mother.lastName",
-    placeholder: "Enter your Mother's Last name",
+    placeholder: "Enter your mother's Last name",
   },
   {
-    label: "Mother's Contact ",
+    label: "Contact ",
     name: "guardianDetails.mother.contact",
-    placeholder: "Enter your Mother's Contact",
+    placeholder: "Enter your mother's Contact",
   },
 ];
 
 export const legalGuardianInputDetails: InputProps[] = [
   {
-    label: "Guardian's First Name",
+    label: "First Name",
     name: "guardianDetails.legalGuardian.firstName",
     placeholder: "Enter tour Guardian's First name",
   },
   {
-    label: "Guardian's Middle Name",
+    label: "Middle Name",
     name: "guardianDetails.legalGuardian.middleName",
     placeholder: "Enter tour Guardian's Middle name",
   },
   {
-    label: "Guardian's Last Name",
+    label: "Last Name",
     name: "guardianDetails.legalGuardian.lastName",
     placeholder: "Enter your Guardian's Last name",
   },
   {
-    label: "Guardian's Contact ",
+    label: "Contact ",
     name: "guardianDetails.legalGuardian.contact",
     placeholder: "Enter your Guardian's Contact",
   },
