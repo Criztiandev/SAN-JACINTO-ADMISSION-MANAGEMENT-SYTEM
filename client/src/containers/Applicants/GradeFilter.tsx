@@ -9,7 +9,7 @@ interface ListItemProps {
 }
 
 interface GradeFilterProps {
-  onTitleUpdate: () => string;
+  title: string;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -24,14 +24,14 @@ const FilterItems: ListItemProps[] = [
 ];
 // columnSearch.yearLevel.value
 
-const GradeFilter = ({ onTitleUpdate, onSelect }: GradeFilterProps) => {
+const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
   return (
     <Dropdown
       className="border z-50 p-2"
       style={{ width: "150px" }}
       as="button"
       type="outlined"
-      title={onTitleUpdate()}
+      title={title}
       icon={FilterIcon}>
       {FilterItems.map(items => (
         <div className="hover:bg-blue-300 rounded-[5px]">

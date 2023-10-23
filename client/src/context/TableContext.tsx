@@ -57,7 +57,7 @@ const TableProvider = ({ children }: BaseProps) => {
   const handleMutateData = (data: Array<object>) => setTableData(data);
 
   const table = useReactTable({
-    data: memoizedData || [],
+    data: memoizedData,
     columns: tableConfig,
 
     state: {
@@ -77,7 +77,7 @@ const TableProvider = ({ children }: BaseProps) => {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const value = {
+  const value: any = {
     tableData: memoizedData,
     table,
     selected,

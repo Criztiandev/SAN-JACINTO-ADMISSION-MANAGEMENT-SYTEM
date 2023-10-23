@@ -6,3 +6,8 @@ export { default as IncreaseIcon } from "./Expand_up_light.svg";
 export { default as DecreaseIcon } from "./Expand_down_light.svg";
 export { default as EditIcon } from "./Edit_light.svg";
 export { default as ResetIcon } from "./Reset.svg";
+export { default as DashboardIcon } from "./Overview.svg";
+export { default as ApplicantIcon } from "./Applicants.svg";
+export { default as CalendarIcon } from "./Calendar.svg";
+export { default as MessageIcon } from "./Message_light.svg";
+export { default as ToolsIcon } from "./Structure_light.svg";

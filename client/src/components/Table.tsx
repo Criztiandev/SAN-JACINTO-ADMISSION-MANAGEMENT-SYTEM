@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button } from ".";
 import { motion } from "framer-motion";
 import { useTableContext } from "../context/TableContext";
-import { useDrawerContext } from "../context/DrawerContext";
 import TableHeader from "../containers/Table/TableHeader";
 import TableRow from "../containers/Table/TableRow";
 import TableAction from "../containers/Table/TableAction";
@@ -14,7 +12,6 @@ interface TableProps {
 }
 
 const Table = ({ layout }: TableProps) => {
-  const { createToggle } = useDrawerContext();
   const { table, tableData } = useTableContext();
   const { getHeaderGroups, getRowModel }: any = table;
 

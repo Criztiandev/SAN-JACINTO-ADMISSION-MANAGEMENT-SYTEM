@@ -23,17 +23,17 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import axios from "axios";
+import StatusFilter from "../containers/Applicants/StatusFilter";
+import GradeFilter from "../containers/Applicants/GradeFilter";
 
 const Applicant = () => {
   const { isLoading, isError, error } = useQuery({
     queryFn: async () => {
       const { data } = await axios.get("http://localhost:4000/api/applicant");
-      handleMutateData(data);
+      handleMutateData(data.payload);
       return data;
     },
     queryKey: ["applicants"],
-    staleTime: 5 * 60 * 1000,
-    refetchOnMount: false,
   });
 
   const {
@@ -45,6 +45,8 @@ const Applicant = () => {
     setTableConfig,
     handleMutateData,
   } = useTableContext();
+
+  // Drawer Context
   const {
     createToggle,
     deleteToggle,
@@ -194,36 +196,29 @@ const Applicant = () => {
       <BaseLayout
         title="Applicants"
         header={
-          tableData.length > 0 && (
-            <Button
-              dir="left"
-              title="Create"
-              icon={CreateApplicantIcon}
-              onClick={createToggle.toggleDrawer}
-            />
-          )
+          <Button
+            dir="left"
+            title="Create"
+            icon={CreateApplicantIcon}
+            onClick={createToggle.toggleDrawer}
+          />
         }
         action>
-        <>
+        {tableData.length > 0 ? (
           <div className="flex justify-between items-center">
             <SearchBar value={search} onChange={handleSearch} />
 
             <div className="flex gap-4">
-              {/* // Status Filter */}
-              {/* <StatusFilter
-                onTitleUpdate={() => {}}
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch({
-                    status: { id: "status", value: e.currentTarget.value },
-                  })
-                }
-              /> */}
+              <GradeFilter title="Grade" onSelect={() => {}} />
+              <StatusFilter title="Filter" onSelect={() => {}} />
 
               <MoreOption />
             </div>
           </div>
-          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
-        </>
+        ) : (
+          <span></span>
+        )}
+        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
 
       {DrawerLists.map(
