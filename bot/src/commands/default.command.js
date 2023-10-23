@@ -5,6 +5,7 @@ export const introduction = () => (api, event) => {
   const UID = api.getCurrentUserID();
 
   api.getUserInfo(UID, (err, ret) => {
+    if (err) return console.error(err);
     const { thumbSrc, name, profileUrl } = ret[UID];
 
     const info = {
@@ -15,8 +16,11 @@ export const introduction = () => (api, event) => {
       platform: "Facebok",
     };
 
-    const greetMessage = `Hello! @Sender I am ${info.name}, a bot running version ${info.version}. I'm here to assist you on ${info.platform}. How can I help you today?`;
+    const greetMessage = `@Hello! I am ${info.name}, a bot running version ${info.version}. I'm here to assist you on ${info.platform}. How can I help you today?`;
 
-    api.sendMessage(mentionConfig(greetMessage, { UID: senderID }), threadID);
+    api.sendMessage(
+      mentionConfig(greetMessage, { UID: senderID, flag: "@Hello!" }),
+      threadID
+    );
   });
 };

@@ -20,7 +20,6 @@ import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import EditDrawer from "../containers/Applicants/EditDrawer";
 import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchApplicants } from "../api/applicant.api";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import axios from "axios";
