@@ -19,16 +19,26 @@ const Nav = () => {
 
       <ul className="flex flex-col gap-4">
         {navIcons.map(el => (
-          <li
-            key={el.path}
-            className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400"
-            onClick={() => {
-              startTransition(() => {
-                navigate(el.path);
-              });
-            }}>
-            <Image className="p-2" src={el.icon} alt={"Link Icon"} />
-          </li>
+          <>
+            {isPending ? (
+              <span
+                key={el.path}
+                className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400">
+                <Image className="p-2" src={el.icon} alt={"Link Icon"} />
+              </span>
+            ) : (
+              <li
+                key={el.path}
+                className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400"
+                onClick={() => {
+                  startTransition(() => {
+                    navigate(el.path);
+                  });
+                }}>
+                <Image className="p-2" src={el.icon} alt={"Link Icon"} />
+              </li>
+            )}
+          </>
         ))}
       </ul>
 
