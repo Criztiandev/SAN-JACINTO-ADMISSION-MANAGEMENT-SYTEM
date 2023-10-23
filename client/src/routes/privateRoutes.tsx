@@ -10,6 +10,7 @@ import Examiniees from "../pages/Examiniees";
 import MasterList from "../pages/MasterList";
 import UserAccount from "../pages/UserAccount";
 import TableProvider from "../context/TableContext";
+import ScheduleContextProvider from "../context/ScheduleContext";
 
 const routes = [
   { path: "/", element: <DashboardPage /> },
@@ -21,8 +22,15 @@ const routes = [
       </TableProvider>
     ),
   },
+  {
+    path: "/schedule",
+    element: (
+      <ScheduleContextProvider>
+        <SchedulePage />
+      </ScheduleContextProvider>
+    ),
+  },
   { path: "/applicants/examinees", element: <Examiniees /> },
-  { path: "/schedule", element: <SchedulePage /> },
   { path: "/annoucement", element: <AnnoucementPage /> },
   { path: "/masterlist", element: <MasterList /> },
   { path: "/examiniees", element: <Examiniees /> },

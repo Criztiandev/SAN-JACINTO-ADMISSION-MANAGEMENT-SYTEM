@@ -1,78 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Drawer,
-  SearchBar,
-  Typography,
-  Textarea,
-  Calendar,
-  Button,
-  Image,
-} from "../components";
+import { SearchBar, Typography, Calendar, Image } from "../components";
 
 import { momentLocalizer } from "react-big-calendar";
-import { Formik, Form } from "formik";
 import moment from "moment";
-import { useState } from "react";
 
 import useEvent from "../hooks/useEvent";
 import BaseLayout from "../layouts/BaseLayout";
-import scheduleModel from "../models/scheduleModel";
 
 import { Event } from "../interface/Date.Type";
-import {
-  ColorSelect,
-  CoverSelect,
-  CategorySelect,
-  DateSelect,
-  DetailsInput,
-} from "../containers/Schedule";
-import { DateFormat } from "../helper/dateHelper";
+
+import CreateScheduleDrawer from "../containers/Schedule/CreateScheduleDrawer";
+import useDrawer from "../hooks/useDrawer";
+import { useScheduleContext } from "../context/ScheduleContext";
+import { DateFormat } from "../utils/Date.utils";
 
 const Schedule = () => {
-  const [createEvent, setCreateEvent] = useState(false);
-  const [viewEvent, setViewEvent] = useState(false);
-  const [selectedSlots, setSelectedSlots] = useState<any>(undefined);
-  const { selected, events, setSelected, setEvents } = useEvent();
+  const { handleSelectedSlot } = useScheduleContext();
+  const createDrawer = useDrawer();
+  const { events } = useEvent();
 
   const toggleCreateDrawer = ({ start, end }: Event) => {
-    setCreateEvent(prev => !prev);
+    createDrawer.toggleDrawer();
     const endDate = new Date(end);
     endDate.setDate(endDate.getDate() - 1);
-
-    setSelectedSlots({ start, end: endDate });
+    handleSelectedSlot(start, end);
   };
 
-  const toggleViewDrawer = (event: Event) => {
-    setViewEvent(prev => !prev);
-    setSelected(event);
-  };
+  // const handleSubmit = (value, action) => {
+  //   // customize the tail of the selection snake
+  //   const endDate = new Date(selectedSlots.end);
+  //   endDate.setDate(endDate.getDate() + 1);
 
-  const toggleCloseDrawer = () => {
-    if (viewEvent) {
-      setViewEvent(prev => !prev);
-    }
+  //   setEvents(prev => [
+  //     ...prev,
+  //     { title: value.title, start: selectedSlots.start, end: endDate },
+  //   ]);
 
-    if (createEvent) {
-      setCreateEvent(prev => !prev);
-    }
-  };
-
-  const handleSubmit = (value, action) => {
-    // customize the tail of the selection snake
-    const endDate = new Date(selectedSlots.end);
-    endDate.setDate(endDate.getDate() + 1);
-
-    setEvents(prev => [
-      ...prev,
-      { title: value.title, start: selectedSlots.start, end: endDate },
-    ]);
-
-    // Query the value
-    alert("Schedule Data is Successfully send to the database");
-
-    toggleCloseDrawer();
-    action.resetForm();
-  };
+  //   // Query the value
+  //   alert("Schedule Data is Successfully send to the database");
+  //   action.resetForm();
+  // };
 
   return (
     <>
@@ -107,15 +74,15 @@ const Schedule = () => {
             </div>
           </div>
           <Calendar
-            events={events}
+            events={[]}
             onSelectSlot={toggleCreateDrawer}
-            onDoubleClickEvent={toggleViewDrawer}
+            onDoubleClickEvent={() => {}}
             localizer={momentLocalizer(moment)}
           />
         </section>
       </BaseLayout>
 
-      {(createEvent || viewEvent) && (
+      {/* {(createEvent || viewEvent) && (
         <Drawer
           title={
             (createEvent && "Create Event") ||
@@ -145,7 +112,12 @@ const Schedule = () => {
             </Form>
           </Formik>
         </Drawer>
-      )}
+      )} */}
+
+      <CreateScheduleDrawer
+        state={createDrawer.active}
+        onClick={createDrawer.toggleDrawer}
+      />
     </>
   );
 };

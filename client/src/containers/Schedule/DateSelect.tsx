@@ -1,22 +1,24 @@
 import { useFormikContext } from "formik";
-import { options } from "../../helper/dateHelper";
+import { options } from "../../utils/Date.utils";
 import { useEffect } from "react";
 import { Input } from "../../components";
-import { InputInterface } from "../../interface/Component.Type";
 import { Event } from "../../interface/Date.Type";
+import { InputProps } from "../../interface/FormInterface";
 
 interface DateSelectProps {
   selected: Event;
 }
 
-interface DateInputProps extends InputInterface {
+interface DateInputProps extends InputProps {
   disabled?: boolean | string;
 }
 
 const DateSelect = ({ selected }: DateSelectProps) => {
+  const { start, end } = selected;
+
   const { setFieldValue } = useFormikContext();
-  const startDateValue = selected.start.toLocaleDateString(undefined, options);
-  const endDateValue = selected.end.toLocaleDateString(undefined, options);
+  const startDateValue = start.toLocaleDateString(undefined, options);
+  const endDateValue = end.toLocaleDateString(undefined, options);
 
   const dateInputList: DateInputProps[] = [
     {
@@ -43,7 +45,7 @@ const DateSelect = ({ selected }: DateSelectProps) => {
     if (selected && selected.end) {
       setFieldValue("date.end", selected.end);
     }
-  }, [selected, setFieldValue]);
+  }, [selected]);
 
   return (
     <section className="grid grid-cols-2 gap-4">
