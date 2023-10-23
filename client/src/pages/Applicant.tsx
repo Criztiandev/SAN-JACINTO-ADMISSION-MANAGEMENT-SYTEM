@@ -42,6 +42,7 @@ const Applicant = () => {
     selected,
     handleSearch,
     handleSelected,
+    handleColumnSearch,
     setTableConfig,
     handleMutateData,
   } = useTableContext();
@@ -83,7 +84,8 @@ const Applicant = () => {
     {
       header: "Grade Level",
       accessorKey: "studentDetails.yearLevel",
-      accessorFn: ({ yearLevel }) => ` ${yearLevel}`,
+      accessorFn: ({ studentDetails }) =>
+        `${studentDetails.yearLevel.split(" ")[1]}`,
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
     { header: "BOD", accessorKey: "personalDetails.birthDate" },
@@ -100,7 +102,7 @@ const Applicant = () => {
     },
 
     { header: "Contact", accessorKey: "personalDetails.contact" },
-    { header: "Average", accessorKey: "studentDetails.generalAverage" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
     {
       header: "Status",
       accessorKey: "status",
@@ -185,8 +187,6 @@ const Applicant = () => {
     };
   }, []);
 
-  // Storing the Data to the Table data
-
   // Checking if there us an error
   if (isError) toast.error(error.message);
   if (isLoading) return <Loading />;
@@ -209,9 +209,24 @@ const Applicant = () => {
             <SearchBar value={search} onChange={handleSearch} />
 
             <div className="flex gap-4">
-              <GradeFilter title="Grade" onSelect={() => {}} />
-              <StatusFilter title="Filter" onSelect={() => {}} />
-
+              <GradeFilter
+                title="Grade"
+                onSelect={e =>
+                  handleColumnSearch({
+                    id: "studentDetails.yearLevel",
+                    value: e.currentTarget.value,
+                  })
+                }
+              />
+              <StatusFilter
+                title="Filter"
+                onSelect={e =>
+                  handleColumnSearch({
+                    id: "status",
+                    value: e.currentTarget.value,
+                  })
+                }
+              />
               <MoreOption />
             </div>
           </div>

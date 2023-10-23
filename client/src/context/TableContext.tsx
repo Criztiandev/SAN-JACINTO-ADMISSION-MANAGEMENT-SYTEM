@@ -36,7 +36,10 @@ const TableProvider = ({ children }: BaseProps) => {
   const [tableConfig, setTableConfig] = useState([]);
 
   const [search, setSearch] = useState<string | number>("");
-  const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([]);
+  console.log(tableData);
+  const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([
+    { id: "studentDetails.yearLevel", value: "Grade 11" },
+  ]);
   const [sort, setSort] = useState<SortingState | undefined>();
   const [rowSelect, setRowSelect] = useState({});
 
