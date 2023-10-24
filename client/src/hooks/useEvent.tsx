@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
-import { Event } from "../interface/Date.Type";
+import { ScheduleEventProps } from "../interface/Date.Type";
 
 const useEvent = () => {
-  const [selected, setSelected] = useState<Event | null>(null);
-  const [events, setEvents] = useState<Event[]>([
+  const [selected, setSelected] = useState<ScheduleEventProps | null>(null);
+  const [events, setEvents] = useState<ScheduleEventProps[]>([
     {
+      _id: "12312313123",
       title: "Nice",
       start: new Date(),
       end: new Date(),

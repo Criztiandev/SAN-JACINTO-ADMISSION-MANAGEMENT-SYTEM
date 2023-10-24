@@ -20,21 +20,20 @@ import MessageDrawer from "../containers/Applicants/MessageDrawer";
 import EditDrawer from "../containers/Applicants/EditDrawer";
 import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchApplicants } from "../api/applicant.api";
 import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import axios from "axios";
+import StatusFilter from "../containers/Applicants/StatusFilter";
+import GradeFilter from "../containers/Applicants/GradeFilter";
 
 const Applicant = () => {
   const { isLoading, isError, error } = useQuery({
     queryFn: async () => {
       const { data } = await axios.get("http://localhost:4000/api/applicant");
-      handleMutateData(data);
+      handleMutateData(data.payload);
       return data;
     },
     queryKey: ["applicants"],
-    staleTime: 5 * 60 * 1000,
-    refetchOnMount: false,
   });
 
   const {
@@ -43,9 +42,12 @@ const Applicant = () => {
     selected,
     handleSearch,
     handleSelected,
+    handleColumnSearch,
     setTableConfig,
     handleMutateData,
   } = useTableContext();
+
+  // Drawer Context
   const {
     createToggle,
     deleteToggle,
@@ -82,7 +84,8 @@ const Applicant = () => {
     {
       header: "Grade Level",
       accessorKey: "studentDetails.yearLevel",
-      accessorFn: ({ yearLevel }) => ` ${yearLevel}`,
+      accessorFn: ({ studentDetails }) =>
+        `${studentDetails.yearLevel.split(" ")[1]}`,
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
     { header: "BOD", accessorKey: "personalDetails.birthDate" },
@@ -99,7 +102,7 @@ const Applicant = () => {
     },
 
     { header: "Contact", accessorKey: "personalDetails.contact" },
-    { header: "Average", accessorKey: "studentDetails.generalAverage" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
     {
       header: "Status",
       accessorKey: "status",
@@ -184,8 +187,6 @@ const Applicant = () => {
     };
   }, []);
 
-  // Storing the Data to the Table data
-
   // Checking if there us an error
   if (isError) toast.error(error.message);
   if (isLoading) return <Loading />;
@@ -195,36 +196,44 @@ const Applicant = () => {
       <BaseLayout
         title="Applicants"
         header={
-          tableData.length > 0 && (
-            <Button
-              dir="left"
-              title="Create"
-              icon={CreateApplicantIcon}
-              onClick={createToggle.toggleDrawer}
-            />
-          )
+          <Button
+            dir="left"
+            title="Create"
+            icon={CreateApplicantIcon}
+            onClick={createToggle.toggleDrawer}
+          />
         }
         action>
-        <>
+        {tableData.length > 0 ? (
           <div className="flex justify-between items-center">
             <SearchBar value={search} onChange={handleSearch} />
 
             <div className="flex gap-4">
-              {/* // Status Filter */}
-              {/* <StatusFilter
-                onTitleUpdate={() => {}}
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
+              <GradeFilter
+                title="Grade"
+                onSelect={e =>
                   handleColumnSearch({
-                    status: { id: "status", value: e.currentTarget.value },
+                    id: "studentDetails.yearLevel",
+                    value: e.currentTarget.value,
                   })
                 }
-              /> */}
-
+              />
+              <StatusFilter
+                title="Filter"
+                onSelect={e =>
+                  handleColumnSearch({
+                    id: "status",
+                    value: e.currentTarget.value,
+                  })
+                }
+              />
               <MoreOption />
             </div>
           </div>
-          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
-        </>
+        ) : (
+          <span></span>
+        )}
+        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
 
       {DrawerLists.map(

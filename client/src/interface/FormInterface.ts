@@ -12,6 +12,7 @@ export interface InputProps {
   name?: string;
   value?: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export interface InputSectionProps {

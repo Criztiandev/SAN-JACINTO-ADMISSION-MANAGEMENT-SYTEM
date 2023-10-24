@@ -18,7 +18,7 @@ const CoverSelect = () => {
 
   return (
     <section>
-      <Typography as="h5" className="mb-4 border-b border-gray-300 pb-2">
+      <Typography as="h5" className="my-4 border-b border-gray-300 pb-2">
         Cover
       </Typography>
 

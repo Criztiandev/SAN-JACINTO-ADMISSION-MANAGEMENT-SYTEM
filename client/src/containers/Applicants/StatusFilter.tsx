@@ -10,7 +10,7 @@ interface ListItemProps {
 }
 
 interface StatusFilterProps {
-  onTitleUpdate?: () => string;
+  title: string;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -20,13 +20,13 @@ const StatusItems: ListItemProps[] = [
   { title: "Hold", icon: ApplicantIcon, value: "Hold" },
 ];
 
-const StatusFilter = ({ onTitleUpdate, onSelect }: StatusFilterProps) => {
+const StatusFilter = ({ title, onSelect }: StatusFilterProps) => {
   return (
     <Dropdown
       className="border z-50 w-[150px] p-2"
       as="button"
       type="outlined"
-      title={onTitleUpdate()}
+      title={title}
       icon={FilterIcon}>
       {StatusItems.map(items => (
         <div className="hover:bg-blue-300 rounded-[5px]">

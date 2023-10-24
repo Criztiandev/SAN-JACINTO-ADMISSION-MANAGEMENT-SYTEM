@@ -9,29 +9,29 @@ interface ListItemProps {
 }
 
 interface GradeFilterProps {
-  onTitleUpdate: () => string;
+  title: string;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const FilterItems: ListItemProps[] = [
-  { title: "Default", icon: ApplicantIcon, value: "" },
-  { title: "Grade 7", icon: ApplicantIcon, value: "7" },
-  { title: "Grade 8", icon: ApplicantIcon, value: "8" },
-  { title: "Grade 9", icon: ApplicantIcon, value: "9" },
-  { title: "Grade 10", icon: ApplicantIcon, value: "10" },
-  { title: "Grade 11", icon: ApplicantIcon, value: "11" },
-  { title: "Grade 12", icon: ApplicantIcon, value: "12" },
+  { title: "Default", icon: ApplicantIcon },
+  { title: "Grade 7", icon: ApplicantIcon },
+  { title: "Grade 8", icon: ApplicantIcon },
+  { title: "Grade 9", icon: ApplicantIcon },
+  { title: "Grade 10", icon: ApplicantIcon },
+  { title: "Grade 11", icon: ApplicantIcon },
+  { title: "Grade 12", icon: ApplicantIcon },
 ];
 // columnSearch.yearLevel.value
 
-const GradeFilter = ({ onTitleUpdate, onSelect }: GradeFilterProps) => {
+const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
   return (
     <Dropdown
       className="border z-50 p-2"
       style={{ width: "150px" }}
       as="button"
       type="outlined"
-      title={onTitleUpdate()}
+      title={title}
       icon={FilterIcon}>
       {FilterItems.map(items => (
         <div className="hover:bg-blue-300 rounded-[5px]">
@@ -39,7 +39,7 @@ const GradeFilter = ({ onTitleUpdate, onSelect }: GradeFilterProps) => {
             key={items.title}
             type="ghost"
             dir="left"
-            value={items.value}
+            value={items.title}
             {...items}
             onClick={onSelect}
           />
