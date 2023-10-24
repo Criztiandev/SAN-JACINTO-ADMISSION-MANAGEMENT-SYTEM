@@ -6,7 +6,7 @@ interface ExaminesItemsProps {
   name: string;
   yearLevel: string;
   genAve: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const ExaminesItems = ({

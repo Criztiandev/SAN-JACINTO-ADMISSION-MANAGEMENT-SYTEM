@@ -1,4 +1,11 @@
-import { Drawer, IconButton, Image, Input, Textarea } from "../../components";
+import {
+  Button,
+  Drawer,
+  IconButton,
+  Image,
+  Input,
+  Textarea,
+} from "../../components";
 import { DrawerProps } from "../../interface/Drawer.Types";
 import { AnimatePresence } from "framer-motion";
 import { Formik, Form, Field } from "formik";
@@ -48,7 +55,7 @@ const Examinees = [
   },
 ];
 
-const ViewScheduleDrawer = (props: DrawerProps) => {
+const ViewScheduleDrawer = ({ onClick = () => {}, ...props }: DrawerProps) => {
   const [isEdit, setIsEdit] = useState(true);
   const { selectedEvent } = useScheduleContext();
   const { title, _id, start, end } = selectedEvent;
@@ -58,6 +65,7 @@ const ViewScheduleDrawer = (props: DrawerProps) => {
 
   const handleDelete = () => {
     toast.success("Schedule Deleted Successfully");
+    onClick();
   };
 
   return (
@@ -65,7 +73,7 @@ const ViewScheduleDrawer = (props: DrawerProps) => {
       {props.state && (
         <AnimatePresence>
           <Drawer
-            onClick={props.onClick}
+            onClick={onClick}
             {...props}
             className="overflow-scroll"
             width="600px">
@@ -178,11 +186,17 @@ const ViewScheduleDrawer = (props: DrawerProps) => {
                     </div>
                   </section>
 
-                  <section className="h-[300px]">
+                  <section className="h-[350px] flex flex-col">
                     <h5 className="pb-2 my-4 border-b border-gray-400">
                       Content
                     </h5>
+
                     <Textarea name="content" disabled={isEdit} />
+                  </section>
+
+                  <section className="flex justify-end gap-4">
+                    <Button title="Reset" />
+                    <Button title="Submit" />
                   </section>
                 </main>
               </Form>

@@ -119,7 +119,7 @@ const CreateScheduleDrawer = ({
                     <DateSelect {...selectedSlot} />
                   </section>
 
-                  <section className="h-[300px]">
+                  <section className="h-[350px] flex flex-col mb-4">
                     <h5 className="pb-2 my-4 border-b border-gray-400">
                       Content
                     </h5>
