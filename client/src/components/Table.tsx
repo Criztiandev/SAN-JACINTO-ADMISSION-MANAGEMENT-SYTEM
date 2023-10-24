@@ -30,7 +30,7 @@ const Table = ({ layout }: TableProps) => {
               <div className="relative">
                 <motion.div className="w-full">
                   {getRowModel().rows.map((row: any) => (
-                    <TableRow row={row} layout={layout} />
+                    <TableRow key={row.id} row={row} layout={layout} />
                   ))}
                 </motion.div>
               </div>
