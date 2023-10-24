@@ -8,12 +8,12 @@ export const options: Intl.DateTimeFormatOptions = {
 
 interface DateFormatProps {
   format: string | Date;
-  reverse: boolean;
+  reverse?: boolean;
 }
 
 export const DateFormat = ({
   format,
-  reverse = false,
+  reverse = true,
 }: DateFormatProps): string => {
   const date = !reverse ? new Date(format) : (format as Date); // Explicit type assertion
   if (isNaN(date.getTime())) return "Invalid Date";

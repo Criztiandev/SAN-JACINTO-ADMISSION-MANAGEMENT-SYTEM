@@ -1,8 +1,13 @@
+import { ScheduleEventProps } from "./Date.Type";
+
 export interface SelectedSlotProps {
   start: Date;
   end: Date;
 }
 export interface ScheduleContextValues {
+  selectedEvent: ScheduleEventProps;
+  handleSelectedEvent: (details: ScheduleEventProps) => void;
+
   selectedSlot: SelectedSlotProps;
   handleSelectedSlot: (start: Date, end: Date) => void;
 }

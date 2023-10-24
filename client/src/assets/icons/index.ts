@@ -11,3 +11,4 @@ export { default as ApplicantIcon } from "./Applicants.svg";
 export { default as CalendarIcon } from "./Calendar.svg";
 export { default as MessageIcon } from "./Message_light.svg";
 export { default as ToolsIcon } from "./Structure_light.svg";
+export { default as DeleteIcon } from "./Delete.svg";

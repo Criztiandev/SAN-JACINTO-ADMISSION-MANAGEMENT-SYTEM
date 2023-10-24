@@ -1,5 +1,6 @@
-export interface Event {
+export interface ScheduleEventProps {
+  _id?: string | undefined;
   start: Date;
   end: Date;
-  title?: string;
+  title?: string | undefined;
 }
