@@ -35,7 +35,7 @@ export const createApplicant = asyncHandler(async (req, res) => {
     if (newApplicant) {
       sendEmail({
         target: email,
-        title: "Application Form Confirmation",
+        title: "Application Form Confirmation ",
         body: "Hi Im Criztan This is the Test Email my Friend",
       });
       res.status(201).json({ message: "Applicant created successfully" });

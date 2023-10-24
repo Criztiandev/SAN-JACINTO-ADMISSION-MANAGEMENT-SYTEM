@@ -1,4 +1,13 @@
 import { ReactNode, ReactElement } from "react";
+import { BaseProps } from "./Component.Type";
+
+export interface DrawerProps extends BaseProps {
+  width?: string;
+  state: boolean;
+  mode?: "light" | "dark";
+  anchor?: "left" | "right";
+  onClick?: () => void;
+}
 
 export interface useDrawerProps {
   active: boolean;

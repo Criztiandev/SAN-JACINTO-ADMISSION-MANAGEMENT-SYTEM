@@ -36,7 +36,10 @@ const TableProvider = ({ children }: BaseProps) => {
   const [tableConfig, setTableConfig] = useState([]);
 
   const [search, setSearch] = useState<string | number>("");
-  const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([]);
+  console.log(tableData);
+  const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([
+    { id: "studentDetails.yearLevel", value: "Grade 11" },
+  ]);
   const [sort, setSort] = useState<SortingState | undefined>();
   const [rowSelect, setRowSelect] = useState({});
 
@@ -57,7 +60,7 @@ const TableProvider = ({ children }: BaseProps) => {
   const handleMutateData = (data: Array<object>) => setTableData(data);
 
   const table = useReactTable({
-    data: memoizedData || [],
+    data: memoizedData,
     columns: tableConfig,
 
     state: {
@@ -77,7 +80,7 @@ const TableProvider = ({ children }: BaseProps) => {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const value = {
+  const value: any = {
     tableData: memoizedData,
     table,
     selected,

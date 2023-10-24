@@ -1,15 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseProps } from "../interface/Component.Type";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-
-interface DrawerProps extends BaseProps {
-  width?: string;
-  state: boolean;
-  mode?: "light" | "dark";
-  anchor?: "left" | "right";
-  onClick?: () => void;
-}
+import { DrawerProps } from "../interface/Drawer.Types";
 
 const Drawer = ({
   width,
@@ -38,7 +30,11 @@ const Drawer = ({
     <>
       <motion.div
         initial={{ opacity: "50%", display: "none" }}
-        animate={state ? "open" : "close"}
+        animate={state && "open"}
+        exit={{
+          display: "none",
+          transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.8 },
+        }}
         variants={backdropVariant}
         className={`fixed inset-0 back-drop w-full h-full bg-black z-20 ${
           className && className
