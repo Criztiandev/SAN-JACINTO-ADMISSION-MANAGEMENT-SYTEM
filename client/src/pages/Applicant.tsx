@@ -1,20 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, SearchBar } from "../components";
+import { Button, Table, SearchBar, Loading } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-import MoreOption from "../containers/Applicants/MoreOption";
 import { useTableContext } from "../context/TableContext";
 import { useEffect } from "react";
 
 import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../components/Loading";
 import { toast } from "react-toastify";
 import axios from "axios";
-import StatusFilter from "../containers/Applicants/StatusFilter";
-import GradeFilter from "../containers/Applicants/GradeFilter";
+
+import {
+  GradeFilterButton,
+  StatusFilterButton,
+  MoreOptionButton,
+} from "../containers/Applicants";
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
@@ -97,7 +99,7 @@ const Applicant = () => {
             <SearchBar value={search} onChange={handleSearch} />
 
             <div className="flex gap-4">
-              <GradeFilter
+              <GradeFilterButton
                 title="Grade"
                 onSelect={e =>
                   handleColumnSearch({
@@ -106,7 +108,7 @@ const Applicant = () => {
                   })
                 }
               />
-              <StatusFilter
+              <StatusFilterButton
                 title="Filter"
                 onSelect={e =>
                   handleColumnSearch({
@@ -115,7 +117,7 @@ const Applicant = () => {
                   })
                 }
               />
-              <MoreOption />
+              <MoreOptionButton />
             </div>
           </div>
         ) : (

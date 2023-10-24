@@ -18,3 +18,5 @@ export { default as Typography } from "./Typography";
 export { default as Radio } from "./Radio";
 export { default as Calendar } from "./Calendar";
 export { default as Textarea } from "./Textarea";
+export { default as Loading } from "./Loading";
+export { default as BarLoader } from "./BarLoader";
