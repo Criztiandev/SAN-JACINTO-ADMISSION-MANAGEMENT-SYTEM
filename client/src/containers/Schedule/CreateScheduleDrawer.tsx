@@ -1,16 +1,35 @@
-import { CoverSelect } from ".";
-import { Formik, Form } from "formik";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Formik, Form, FormikHelpers } from "formik";
 import { Button, Drawer, Input, Textarea } from "../../components";
 import { DrawerProps } from "../../interface/Drawer.Types";
 import { AnimatePresence } from "framer-motion";
 import { scheduleModelInit } from "../../data/initialValue/annoucementInit";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
-
-import { DateSelect } from "./";
+import { CoverSelect, DateSelect } from ".";
 import { useScheduleContext } from "../../context/ScheduleContext";
 import { toast } from "react-toastify";
-import { Field } from "formik";
+import { InputProps } from "../../interface/FormInterface";
+
+import ExaminesItems from "./ExaminesItems";
+import { ScheduleModelProps } from "../../interface/Schedule.Types";
+
+const DetailsInput: InputProps[] = [
+  {
+    label: "Title",
+    name: "title",
+    placeholder: "Enter title",
+  },
+
+  {
+    label: "Facilitator",
+    name: "facilitator",
+    placeholder: "Enter the Facilitator of this event",
+  },
+  {
+    label: "Venue",
+    name: "venue",
+    placeholder: "Enter the Venue",
+  },
+];
 
 const Examinees = [
   {
@@ -33,24 +52,32 @@ const CreateScheduleDrawer = ({
   ...props
 }: DrawerProps) => {
   const { selectedSlot } = useScheduleContext();
-  useEffect(() => {}, []);
+
+  const handleSubmit = (
+    values: ScheduleModelProps,
+    action: FormikHelpers<ScheduleModelProps>
+  ) => {
+    try {
+      console.log(values);
+      toast.success("Schedule is Created Successfully");
+      onClick();
+      action.resetForm();
+    } catch (error: any) {
+      toast.error(error);
+      throw error;
+    }
+  };
 
   return (
     <>
       {props.state && (
         <AnimatePresence>
-          <Drawer {...props} className="overflow-scroll" width="600px">
-            <Formik
-              initialValues={scheduleModelInit}
-              onSubmit={(values, action) => {
-                try {
-                  toast.success("Schedule is Created Successfully");
-                  console.log(values);
-                  onClick();
-                } catch (e: TypeError) {
-                  toast.error(e || e.message);
-                }
-              }}>
+          <Drawer
+            onClick={onClick}
+            {...props}
+            className="overflow-scroll"
+            width="600px">
+            <Formik initialValues={scheduleModelInit} onSubmit={handleSubmit}>
               <Form className="">
                 <header className="flex flex-col border-b border-gray-400 p-2">
                   <h2>Create New Event</h2>
@@ -66,30 +93,10 @@ const CreateScheduleDrawer = ({
                       Students
                     </h5>
 
-                    <div>
-                      <div className="grid grid-cols-2 gap-4 justify-items-between items-center max-h-[300px] overflow-y-scroll p-4 my-4">
-                        {Examinees.map(cards => (
-                          <motion.label
-                            key={cards._id}
-                            whileHover={{ border: "1px solid black" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="border rounded-[5px] p-4 w-[250px] flex flex-col gap-2 hover:cursor-pointer">
-                            <div className="flex gap-2">
-                              <Field
-                                type="checkbox"
-                                name="batch"
-                                value={cards._id}
-                              />
-                              <h6>{cards.name}</h6>
-                            </div>
-
-                            <div className="">
-                              <div>{cards.yearLevel}</div>
-                              <div>Gen: {cards.genAve}</div>
-                            </div>
-                          </motion.label>
-                        ))}
-                      </div>
+                    <div className="grid grid-cols-2 gap-4 justify-items-between items-center max-h-[300px] overflow-y-scroll my-4">
+                      {Examinees.map(cards => (
+                        <ExaminesItems key={cards.name} {...cards} />
+                      ))}
                     </div>
                   </section>
 
@@ -98,9 +105,9 @@ const CreateScheduleDrawer = ({
                       Details
                     </h5>
                     <div className="grid grid-cols-2 gap-4">
-                      <Input label="Title" name="title" />
-                      <Input label="Facilitator" name="facilitator" />
-                      <Input label="Venue" name="venue" />
+                      {DetailsInput.map(props => (
+                        <Input key={props.label} {...props} />
+                      ))}
                     </div>
                   </section>
 
@@ -108,32 +115,15 @@ const CreateScheduleDrawer = ({
                     <h5 className="pb-2 my-4 border-b border-gray-400">
                       Date && Time
                     </h5>
-                    {/* <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        label="Start"
-                        name="date.start"
-                        value={DateFormat({
-                          format: selectedSlot.start,
-                          reverse: false,
-                        })}
-                      />
-                      <Input
-                        label="End"
-                        name="date.end"
-                        value={DateFormat({
-                          format: selectedSlot.end,
-                          reverse: false,
-                        })}
-                      />
-                    </div> */}
-                    <DateSelect selected={selectedSlot} />
+
+                    <DateSelect {...selectedSlot} />
                   </section>
 
                   <section className="h-[300px]">
                     <h5 className="pb-2 my-4 border-b border-gray-400">
                       Content
                     </h5>
-                    <Textarea label="Annoucement" name="title" />
+                    <Textarea label="Annoucement" name="content" />
                   </section>
                 </main>
 

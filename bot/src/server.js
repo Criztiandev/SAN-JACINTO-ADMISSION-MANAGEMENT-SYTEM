@@ -1,7 +1,7 @@
 import login from "facebook-chat-api";
 import dotenv from "dotenv";
 import { serverController } from "./controller/main.controller.js";
-
+import { serverConfig } from "./config/bot.cofig.js";
 dotenv.config();
 
 if (process.env.APP_STATE === undefined) {
@@ -14,20 +14,14 @@ const credentials = {
 };
 
 setTimeout(() => {
-  login(credentials, (error, api) => {
-    if (error) {
-      return console.error(error);
-    }
+  try {
+    login(credentials, (error, api) => {
+      if (error) return console.error("Failed to Login, Please Try Again");
 
-    api.setOptions({
-      listenEvents: true,
-      selfListen: true,
-      autoMarkRead: false,
-      autoMarkDelivery: false,
-      logLevel: "info",
+      api.setOptions(serverConfig);
+      api.listenMqtt(serverController(api));
     });
-
-    // main controller
-    api.listenMqtt(serverController(api));
-  });
+  } catch (e) {
+    console.log(e);
+  }
 }, 3000);

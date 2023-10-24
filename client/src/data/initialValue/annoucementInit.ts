@@ -1,4 +1,6 @@
-export const scheduleModelInit = {
+import { ScheduleModelProps } from "../../interface/Schedule.Types";
+
+export const scheduleModelInit: ScheduleModelProps = {
   cover: "",
   title: "",
   venue: "",
@@ -14,5 +16,5 @@ export const scheduleModelInit = {
     end: "",
   },
 
-  content: {},
+  content: "",
 };

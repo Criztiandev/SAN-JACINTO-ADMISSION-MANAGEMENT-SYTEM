@@ -1,22 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useFormikContext } from "formik";
 import { options } from "../../utils/Date.utils";
 import { useEffect } from "react";
 import { Input } from "../../components";
-import { Event } from "../../interface/Date.Type";
 import { InputProps } from "../../interface/FormInterface";
-
-interface DateSelectProps {
-  selected: Event;
-}
+import { SelectedSlotProps } from "../../interface/Schedule.Types";
 
 interface DateInputProps extends InputProps {
   disabled?: boolean | string;
 }
 
-const DateSelect = ({ selected }: DateSelectProps) => {
-  const { start, end } = selected;
-
+const DateSelect = ({ start, end }: SelectedSlotProps) => {
   const { setFieldValue } = useFormikContext();
+
   const startDateValue = start.toLocaleDateString(undefined, options);
   const endDateValue = end.toLocaleDateString(undefined, options);
 
@@ -38,14 +34,14 @@ const DateSelect = ({ selected }: DateSelectProps) => {
   ];
 
   useEffect(() => {
-    if (selected && selected.start) {
-      setFieldValue("date.start", selected.start);
-    }
+    if (start) setFieldValue("date.start", start);
+    if (end) setFieldValue("date.end", end);
 
-    if (selected && selected.end) {
-      setFieldValue("date.end", selected.end);
-    }
-  }, [selected]);
+    return () => {
+      setFieldValue("date.start", "");
+      setFieldValue("date.end", "");
+    };
+  }, [start, end]);
 
   return (
     <section className="grid grid-cols-2 gap-4">

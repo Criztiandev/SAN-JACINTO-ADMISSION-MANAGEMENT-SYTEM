@@ -3,7 +3,6 @@ import { getCommand } from "../utils/command.utils.js";
 
 export const serverController = api => (err, event) => {
   if (err) return console.err(err);
-
   const { type, body } = event;
 
   switch (type) {
@@ -13,7 +12,6 @@ export const serverController = api => (err, event) => {
 
       const commandHandler = adminsCommand[input];
       if (commandHandler) commandHandler(api, event);
-
       break;
   }
 };

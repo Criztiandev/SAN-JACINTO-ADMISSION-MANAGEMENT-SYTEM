@@ -21,9 +21,11 @@ const Schedule = () => {
 
   const toggleCreateDrawer = ({ start, end }: Event) => {
     createDrawer.toggleDrawer();
+
+    // Update the Date Selection by One
     const endDate = new Date(end);
     endDate.setDate(endDate.getDate() - 1);
-    handleSelectedSlot(start, end);
+    handleSelectedSlot(start, endDate);
   };
 
   // const handleSubmit = (value, action) => {
