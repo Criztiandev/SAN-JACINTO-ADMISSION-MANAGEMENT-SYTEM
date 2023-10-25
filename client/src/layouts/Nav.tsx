@@ -2,7 +2,7 @@ import Avatar from "../components/Avatar";
 import Image from "../components/Image";
 import Logo from "../assets/image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { navIcons } from "../helper/Navigation.Helper";
+import { navigationPaths } from "../helper/Navigation.Helper";
 import { useTransition } from "react";
 
 const Nav = () => {
@@ -18,7 +18,7 @@ const Nav = () => {
       </figure>
 
       <ul className="flex flex-col gap-4">
-        {navIcons.map(el => (
+        {navigationPaths.map(el => (
           <>
             {isPending ? (
               <span

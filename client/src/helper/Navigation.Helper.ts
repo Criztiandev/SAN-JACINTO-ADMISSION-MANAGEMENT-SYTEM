@@ -7,10 +7,10 @@ import {
   ToolsIcon,
 } from "../assets/icons";
 
-export const navIcons: IconProps[] = [
+export const navigationPaths: IconProps[] = [
   { path: "/", icon: DashboardIcon },
   { path: "/applicants", icon: ApplicantIcon },
   { path: "/schedule", icon: CalendarIcon },
-  { path: "/message", icon: MessageIcon },
+  { path: "/annoucement", icon: MessageIcon },
   { path: "/tools", icon: ToolsIcon },
 ];

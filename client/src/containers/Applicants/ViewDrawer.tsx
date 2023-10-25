@@ -1,5 +1,4 @@
-import { AnimatePresence } from "framer-motion";
-import { Button, Drawer, IconButton } from "../../components";
+import { Drawer, IconButton } from "../../components";
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import applicantData from "../../data/applicantData.json";
 import { Form, Formik } from "formik";
@@ -23,7 +22,7 @@ const ViewDrawer = ({
     response.personalDetails;
 
   return (
-    <AnimatePresence mode="wait">
+    <>
       {state && (
         <Drawer
           className="overflow-scroll"
@@ -73,7 +72,7 @@ const ViewDrawer = ({
           </Formik>
         </Drawer>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
