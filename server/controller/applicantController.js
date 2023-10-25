@@ -49,7 +49,11 @@ export const createApplicant = asyncHandler(async (req, res) => {
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
   try {
-    const applicants = await applicantModel.find({}).lean();
+    const applicants = await applicantModel
+      .find({ status: { $in: ["pending", "hold"] } })
+      .select(
+        "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status"
+      );
 
     if (applicants.length === 0) {
       res.status(200).json({ payload: null, message: "No applicants found" });

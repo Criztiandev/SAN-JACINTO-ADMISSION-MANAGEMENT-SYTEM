@@ -5,12 +5,11 @@ import { Button, Table, SearchBar, Loading } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import { useTableContext } from "../context/TableContext";
-import { useEffect } from "react";
+import { useEffect, MouseEvent } from "react";
 
 import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 import {
   GradeFilterButton,
@@ -20,11 +19,12 @@ import {
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
+import { fetchApplicants } from "../api/Applicant.api";
 
 const Applicant = () => {
   const { isLoading, isError, error } = useQuery({
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:4000/api/applicant");
+      const { data } = await fetchApplicants();
       handleMutateData(data.payload);
       return data;
     },
@@ -101,7 +101,7 @@ const Applicant = () => {
             <div className="flex gap-4">
               <GradeFilterButton
                 title="Grade"
-                onSelect={e =>
+                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
                     id: "studentDetails.yearLevel",
                     value: e.currentTarget.value,
@@ -110,7 +110,7 @@ const Applicant = () => {
               />
               <StatusFilterButton
                 title="Filter"
-                onSelect={e =>
+                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
                     id: "status",
                     value: e.currentTarget.value,
@@ -125,11 +125,10 @@ const Applicant = () => {
         )}
         <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
-
+      // Make this unload and load onl when the state is true
       {DrawerLists(selected, toggleOptions).map(
-        ({ id, Component, state, ...props }: DrawerListProps) => (
-          <Component key={id} state={state} {...props} />
-        )
+        ({ id, Component, state, ...props }: DrawerListProps) =>
+          state ? <Component key={id} state={state} {...props} /> : null
       )}
     </>
   );

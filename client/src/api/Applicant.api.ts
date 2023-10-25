@@ -1,15 +1,17 @@
 import axios from "axios";
+import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 
-export const createApplicant = async data => {
-  const res = await axios.post(
-    "http://localhost:4000/api/applicant/create",
-    data
-  );
+const BASE_URL = "http://localhost:4000/api";
+
+export const createApplicant = async (data: ApplicantModelProps) => {
+  const res = await axios.post(`${BASE_URL}/applicant/create`, data);
   return res.data;
 };
 export const fetchApplicants = async () => {
-  const result = await axios.get("http://localhost:4000/api/applicant");
-  return result.data;
+  return await axios.get(`${BASE_URL}/applicant`);
 };
-export const updateApplicants = () => {};
-export const deleteApplicants = () => {};
+
+export const fetchApplicantByID = async (id: string) => {
+  const res = await axios.get(`${BASE_URL}/applicant/${id}`);
+  return res.data;
+};

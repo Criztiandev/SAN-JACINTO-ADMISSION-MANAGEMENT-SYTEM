@@ -1,22 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  CreateApplicantDrawer,
-  ViewApplicantDrawer,
-  UpdateApplicantDrawer,
-  DeleteApplicantDrawer,
-  MessageApplicantDrawer,
+  CreateLazyDrawer,
+  ViewLazyDrawer,
+  UpdateLazyDrawer,
+  DeleteLazyDrawer,
+  MessageLazyDrawer,
 } from "../containers/Applicants";
 
-import FirstColumn from "../containers/Table/FirstColumn";
-import TitleHeader from "../containers/Table/TitleHeader";
 import { ColumnDef } from "@tanstack/react-table";
-
-import useDrawer from "../hooks/useDrawer";
-import { useTableContext } from "../context/TableContext";
-import ActionColumn from "../containers/Applicants/ActionColumn";
 import { Badge } from "../components";
+import ActionColumn from "../containers/Applicants/ActionColumn";
+import TitleHeader from "../containers/Table/TitleHeader";
+import FirstColumn from "../containers/Table/FirstColumn";
+import { useDrawerProps } from "../interface/Drawer.Types";
 
-export const DrawerLists = (selected: any, toggles) => {
+interface ToggleProps {
+  viewToggle: useDrawerProps;
+  createToggle: useDrawerProps;
+  updateToggle: useDrawerProps;
+  deleteToggle: useDrawerProps;
+  messageToggle: useDrawerProps;
+}
+
+export const DrawerLists = (selected: any, toggles: ToggleProps) => {
   const {
     viewToggle,
     createToggle,
@@ -28,7 +34,7 @@ export const DrawerLists = (selected: any, toggles) => {
   return [
     {
       id: "0",
-      Component: ViewApplicantDrawer,
+      Component: ViewLazyDrawer,
       data: selected,
       state: viewToggle.active,
       onClose: viewToggle.toggleDrawer,
@@ -36,14 +42,14 @@ export const DrawerLists = (selected: any, toggles) => {
 
     {
       id: "1",
-      Component: CreateApplicantDrawer,
+      Component: CreateLazyDrawer,
       state: createToggle.active,
       onClose: createToggle.toggleDrawer,
     },
 
     {
       id: "2",
-      Component: UpdateApplicantDrawer,
+      Component: UpdateLazyDrawer,
       data: selected,
       state: updateToggle.active,
       onClose: updateToggle.toggleDrawer,
@@ -51,7 +57,7 @@ export const DrawerLists = (selected: any, toggles) => {
 
     {
       id: "3",
-      Component: MessageApplicantDrawer,
+      Component: MessageLazyDrawer,
       data: selected,
       state: messageToggle.active,
       onClose: messageToggle.toggleDrawer,
@@ -59,7 +65,7 @@ export const DrawerLists = (selected: any, toggles) => {
 
     {
       id: "4",
-      Component: DeleteApplicantDrawer,
+      Component: DeleteLazyDrawer,
       data: selected,
       state: deleteToggle.active,
       onClose: deleteToggle.toggleDrawer,
@@ -68,7 +74,7 @@ export const DrawerLists = (selected: any, toggles) => {
 };
 
 export const TableConfig = (
-  toggles,
+  toggles: ToggleProps,
   onToggle: (id: string, toggle: () => void) => void,
   onAccept: (id: string, status: string) => void
 ): ColumnDef<any, any>[] => {

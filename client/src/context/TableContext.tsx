@@ -32,11 +32,12 @@ export const useTableContext = () => {
 
 const TableProvider = ({ children }: BaseProps) => {
   const [tableData, setTableData] = useState<Array<object>>([]);
-  const [selected, setSelected] = useState<object | string>({});
+  const [selected, setSelected] = useState<object | string>(
+    "653566cfe3c333a845bcaabc"
+  );
   const [tableConfig, setTableConfig] = useState([]);
 
   const [search, setSearch] = useState<string | number>("");
-  console.log(tableData);
   const [columnSearch, setColumnSearch] = useState<ColumnFiltersState>([
     { id: "studentDetails.yearLevel", value: "Grade 11" },
   ]);
