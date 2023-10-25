@@ -1,7 +1,7 @@
 import { Dropdown, Button } from "../../components";
 import FilterIcon from "../../assets/icons/Filter.svg";
 import ApplicantIcon from "../../assets/icons/Applicants.svg";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 
 interface ListItemProps {
   title: string;
@@ -21,12 +21,20 @@ const StatusItems: ListItemProps[] = [
 ];
 
 const StatusFilter = ({ title, onSelect }: StatusFilterProps) => {
+  const [currentTitle, setCurrentTitle] = useState<string | null>(null);
+
+  const handleTitleUpdate = (_title: string) => {
+    console.log(_title);
+    if (_title === "") return setCurrentTitle(title);
+    setCurrentTitle(_title);
+  };
+
   return (
     <Dropdown
       className="border z-50 w-[150px] p-2"
       as="button"
       type="outlined"
-      title={title}
+      title={currentTitle || "Filter"}
       icon={FilterIcon}>
       {StatusItems.map(items => (
         <div className="hover:bg-blue-300 rounded-[5px]">
@@ -36,7 +44,10 @@ const StatusFilter = ({ title, onSelect }: StatusFilterProps) => {
             dir="left"
             value={items.title}
             {...items}
-            onClick={onSelect}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+              onSelect(e);
+              handleTitleUpdate(e.currentTarget.value);
+            }}
           />
         </div>
       ))}

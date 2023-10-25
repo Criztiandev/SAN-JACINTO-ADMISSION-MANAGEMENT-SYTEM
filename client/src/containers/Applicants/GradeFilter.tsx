@@ -1,7 +1,7 @@
 import { Dropdown, Button } from "../../components";
 import FilterIcon from "../../assets/icons/Filter.svg";
 import ApplicantIcon from "../../assets/icons/Applicants.svg";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 interface ListItemProps {
   title: string;
   icon: string;
@@ -25,13 +25,20 @@ const FilterItems: ListItemProps[] = [
 // columnSearch.yearLevel.value
 
 const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
+  const [currentTitle, setCurrentTitle] = useState<string | null>(null);
+
+  const handleTitleUpdate = (_title: string) => {
+    console.log(_title);
+    if (_title === "") return setCurrentTitle(title);
+    setCurrentTitle(_title);
+  };
   return (
     <Dropdown
       className="border z-50 p-2"
       style={{ width: "150px" }}
       as="button"
       type="outlined"
-      title={title}
+      title={currentTitle || title}
       icon={FilterIcon}>
       {FilterItems.map(items => (
         <div className="hover:bg-blue-300 rounded-[5px]">
@@ -41,7 +48,10 @@ const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
             dir="left"
             value={items.title}
             {...items}
-            onClick={onSelect}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+              onSelect(e);
+              handleTitleUpdate(e.currentTarget.value);
+            }}
           />
         </div>
       ))}

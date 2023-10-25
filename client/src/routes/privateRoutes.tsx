@@ -30,8 +30,22 @@ const routes = [
       </ScheduleContextProvider>
     ),
   },
-  { path: "/applicants/examinees", element: <Examiniees /> },
-  { path: "/annoucement", element: <AnnoucementPage /> },
+  {
+    path: "/applicants/examinees",
+    element: (
+      <TableProvider>
+        <Examiniees />
+      </TableProvider>
+    ),
+  },
+  {
+    path: "/annoucement",
+    element: (
+      <TableProvider>
+        <AnnoucementPage />
+      </TableProvider>
+    ),
+  },
   { path: "/masterlist", element: <MasterList /> },
   { path: "/examiniees", element: <Examiniees /> },
   { path: "/user", element: <UserAccount /> },
