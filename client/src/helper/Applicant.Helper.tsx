@@ -133,12 +133,15 @@ export const TableConfig = (
       cell: ({ row }) => {
         const credentials = row.original;
         const UID = credentials?._id;
+        const currentStatus =
+          credentials?.status === "hold" ? "Pending" : "Hold";
         return (
           <ActionColumn
-            onAccept={() => onAccept(UID, "hold")}
+            status={currentStatus}
+            onAccept={() => onAccept(UID, "accept")}
             onDelete={() => onToggle(UID, deleteToggle.toggleDrawer)}
             onEdit={() => onToggle(UID, updateToggle.toggleDrawer)}
-            onHold={() => onAccept(UID, "hold")}
+            onHold={() => onAccept(UID, currentStatus)}
             onMessage={() => onToggle(UID, messageToggle.toggleDrawer)}
           />
         );
@@ -146,3 +149,10 @@ export const TableConfig = (
     },
   ];
 };
+
+export const PersoanlDetailsNameInput = [
+  { name: "personalDetails.lastName" },
+  { name: "personalDetails.firstName" },
+  { name: "personalDetails.middleName" },
+  { name: "personalDetails.suffix" },
+];

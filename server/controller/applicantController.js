@@ -56,7 +56,7 @@ export const fetchAllApplicant = asyncHandler(async (req, res) => {
       );
 
     if (applicants.length === 0) {
-      res.status(200).json({ payload: null, message: "No applicants found" });
+      res.status(200).json({ payload: [], message: "No applicants found" });
     } else {
       res
         .status(200)
@@ -83,7 +83,7 @@ export const updateApplicant = asyncHandler(async (req, res) => {
   const payload = req.body;
   if (!payload) throw new Error("No Request Body");
 
-  const { _id } = await applicantModel
+  const _applicant = await applicantModel
     .findOneAndUpdate({ _id: id }, payload, { new: true })
     .lean()
     .select("_id");
@@ -91,7 +91,7 @@ export const updateApplicant = asyncHandler(async (req, res) => {
   if (!_applicant) throw new Error("Applicant Doest Found, Please Try Again");
 
   res.status(200).json({
-    payload: _id,
+    payload: _applicant,
     message: "Updated Credentials Successfully",
   });
 });

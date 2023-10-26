@@ -8,7 +8,7 @@ import { useTableContext } from "../context/TableContext";
 import { useEffect, MouseEvent } from "react";
 
 import { DrawerListProps } from "../interface/Drawer.Types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import {
@@ -19,16 +19,36 @@ import {
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
-import { fetchApplicants } from "../api/Applicant.api";
+import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.api";
 
 const Applicant = () => {
-  const { isLoading, isError, isFetched, error } = useQuery({
+  // Drawers
+  const viewToggle = useDrawer();
+  const createToggle = useDrawer();
+  const updateToggle = useDrawer();
+  const deleteToggle = useDrawer();
+  const messageToggle = useDrawer();
+
+  const { isLoading, isError, error, refetch } = useQuery({
     queryFn: async () => {
       const { data } = await fetchApplicants();
       handleMutateData(data.payload);
       return data;
     },
     queryKey: ["applicants"],
+  });
+
+  const acceptApplicant = useMutation({
+    mutationFn: async ({ APID, value }: any) => {
+      return updateStatusApplicant(APID, value);
+    },
+    onSuccess: () => {
+      toast.success("Applicant is Accepted Successfully");
+    },
+
+    onError: () => {
+      toast.error("Failed, Please Try Again");
+    },
   });
 
   const {
@@ -41,13 +61,6 @@ const Applicant = () => {
     setTableConfig,
     handleMutateData,
   } = useTableContext();
-
-  // Drawers
-  const viewToggle = useDrawer();
-  const createToggle = useDrawer();
-  const updateToggle = useDrawer();
-  const deleteToggle = useDrawer();
-  const messageToggle = useDrawer();
 
   const toggleOptions = {
     viewToggle,
@@ -62,8 +75,9 @@ const Applicant = () => {
     toggle();
   };
 
-  const handleAccept = (id: string, status: string) => {
-    toast.success(`Applicant: ${id} is Updated to ${status} Successfully`);
+  const handleAccept = async (id: string, status: string) => {
+    await acceptApplicant.mutateAsync({ APID: id, value: status });
+    refetch();
   };
 
   // Setting up the Table Config
