@@ -61,10 +61,6 @@ export const suffixes: Array<string> = [
 
 export const studenDetailsInputModel: InputProps[] = [
   {
-    label: "General Average",
-    name: "gradeDetails.generalAve",
-  },
-  {
     label: "LRN",
     name: "studentDetails.LRN",
     placeholder: "Enter your LRN",
@@ -361,11 +357,9 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
   },
   { title: "Current Address", model: currentAddressInputModel },
   { title: "Permanent Address", model: permanentAddressInputModel },
-
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
   { title: "Guardian", model: legalGuardianInputDetails },
-
   { title: "Other Details", model: otherInputDetails },
 ];
 
