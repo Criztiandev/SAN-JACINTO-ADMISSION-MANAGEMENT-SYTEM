@@ -3,17 +3,9 @@ import Image from "../components/Image";
 import Logo from "../assets/image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { navigationPaths } from "../helper/Navigation.Helper";
-import { useTransition } from "react";
 
 const Nav = () => {
-  const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
-
-  const handleTransition = (path: string) => {
-    startTransition(() => {
-      navigate(path);
-    });
-  };
 
   return (
     <nav className=" sticky top-0 py-4 px-[10px] w-[70px] flex justify-between items-center flex-col h-[100vh] border border-gray-300 ">
@@ -27,9 +19,10 @@ const Nav = () => {
         {navigationPaths.map(el => (
           <li
             key={el.path}
-            className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400"
-            onClick={() => handleTransition(el.path)}>
-            <Image className="p-2" src={el.icon} alt={"Link Icon"} />
+            className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400">
+            <Link to={el.path}>
+              <Image className="p-2" src={el.icon} alt={"Link Icon"} />
+            </Link>
           </li>
         ))}
       </ul>

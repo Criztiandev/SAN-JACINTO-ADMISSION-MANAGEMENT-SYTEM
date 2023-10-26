@@ -80,20 +80,18 @@ export const fetchApplicantByID = asyncHandler(async (req, res) => {
 
 export const updateApplicant = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { credentails } = req.body;
+  const payload = req.body;
+  if (!payload) throw new Error("No Request Body");
 
-  console.log(id);
-  console.log(req.body);
-
-  const _applicant = await applicantModel
-    .findOneAndUpdate({ _id: id }, credentails, { new: true })
+  const { _id } = await applicantModel
+    .findOneAndUpdate({ _id: id }, payload, { new: true })
     .lean()
     .select("_id");
 
   if (!_applicant) throw new Error("Applicant Doest Found, Please Try Again");
 
   res.status(200).json({
-    payload: _applicant._id,
+    payload: _id,
     message: "Updated Credentials Successfully",
   });
 });

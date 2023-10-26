@@ -37,7 +37,7 @@ const Table = ({ layout }: TableProps) => {
             </div>
           ))
         ) : (
-          <TableEmpty title="No Applicant Available" />
+          <TableEmpty title="Loading" />
         )}
       </motion.div>
 

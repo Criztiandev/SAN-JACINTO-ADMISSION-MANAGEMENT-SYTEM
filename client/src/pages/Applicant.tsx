@@ -22,7 +22,7 @@ import useDrawer from "../hooks/useDrawer";
 import { fetchApplicants } from "../api/Applicant.api";
 
 const Applicant = () => {
-  const { isLoading, isError, error } = useQuery({
+  const { isLoading, isError, isFetched, error } = useQuery({
     queryFn: async () => {
       const { data } = await fetchApplicants();
       handleMutateData(data.payload);
@@ -125,7 +125,7 @@ const Applicant = () => {
         )}
         <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
-      // Make this unload and load onl when the state is true
+
       {DrawerLists(selected, toggleOptions).map(
         ({ id, Component, state, ...props }: DrawerListProps) =>
           state ? <Component key={id} state={state} {...props} /> : null

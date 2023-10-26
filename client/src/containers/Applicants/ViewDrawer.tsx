@@ -1,45 +1,75 @@
-import { Drawer, IconButton, Loading } from "../../components";
-import EditIcon from "../../assets/icons/Edit_light.svg";
-import applicantData from "../../data/applicantData.json";
+import { Suspense, useState } from "react";
+import { toast } from "react-toastify";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
+import {
+  Button,
+  Drawer,
+  IconButton,
+  Loading,
+  Carousel,
+} from "../../components";
 import { Form, Formik, FormikHelpers } from "formik";
+import { EditIcon } from "../../assets/icons";
+import ItemSelect from "../Form/ItemSelect";
+import InputSections from "../Form/InputSections";
+
+import {
+  fetchApplicantByID,
+  updateApplicantByID,
+} from "../../api/Applicant.api";
 
 import { FetchingDrawerProps } from "../../interface/Component.Type";
-import Carousel from "../../components/Carousel";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+
 import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
 } from "../../helper/ApplicantionForm.Helper";
-import ItemSelect from "../Form/ItemSelect";
-import InputSections from "../Form/InputSections";
-import { useQuery } from "@tanstack/react-query";
-import { fetchApplicantByID } from "../../api/Applicant.api";
-import { Suspense } from "react";
-import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 
 const ViewDrawer = ({
-  data: APID,
+  data: APID = "",
   state = false,
   onClose = () => {},
 }: FetchingDrawerProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+
   const { data, isLoading } = useQuery({
     queryFn: async () => fetchApplicantByID(APID),
     queryKey: ["applicantByID"],
   });
 
-  const handleSubmit = (
+  const { mutate, isPending, isSuccess } = useMutation({
+    mutationFn: async (value: ApplicantModelProps) =>
+      updateApplicantByID(APID, value),
+    mutationKey: [`applicantUpdate${APID}`],
+  });
+
+  const handleSubmit = async (
     values: ApplicantModelProps,
     action: FormikHelpers<ApplicantModelProps>
   ) => {
-    // clean up
-    console.log(values);
-    onClose();
-    action.resetForm();
+    try {
+      mutate(values);
+      setIsEdit(false);
+      action.resetForm();
+    } catch (e) {
+      toast.error(e);
+    }
   };
 
-  const { lastName, firstName, middleName, suffix } =
-    data.payload.personalDetails;
+  const handleReset = () => {
+    setIsEdit(false);
+    toast.success("Application Form has been reset Successfully");
+  };
 
   if (isLoading) return <Loading />;
+  if (isPending) return <Loading />;
+  if (isSuccess && !isPending) {
+    toast.success("Applicant Updated Successfully");
+    onClose();
+  }
+
   return (
     <Suspense fallback={<Loading />}>
       <Drawer
@@ -52,15 +82,24 @@ const ViewDrawer = ({
             <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
               <div>
                 <h2 className="font-bold">
-                  {lastName || "Last"} {firstName || "First Name"}{" "}
-                  {middleName || "Middle Name"} {suffix || "Suffix"}
+                  {data.payload.personalDetails.lastName || "Last"}{" "}
+                  {data.payload.personalDetails.firstName || "First Name"}{" "}
+                  {data.payload.personalDetails.middleName || "Middle Name"}{" "}
+                  {data.payload.personalDetails.suffix || "Suffix"}
                 </h2>
                 <span className="text-gray-400 font-medium">
-                  @{data.payload.email || "Email"}
+                  @{data.payload.personalDetails.email || "Email"}
                 </span>
               </div>
 
-              <IconButton type="outlined" icon={EditIcon} />
+              <IconButton
+                type="outlined"
+                icon={EditIcon}
+                onClick={() => setIsEdit(prev => !prev)}
+                className={`p-2 border border-gray-400 rounded-full  ${
+                  isEdit ? "border-green-500 bg-[#22f86275]" : ""
+                }`}
+              />
             </header>
 
             <main>
@@ -79,9 +118,21 @@ const ViewDrawer = ({
               </section>
 
               {ApplicationFormInputModel.map(props => (
-                <InputSections key={props.title} {...props} isEdit={true} />
+                <InputSections key={props.title} {...props} isEdit={!isEdit} />
               ))}
             </main>
+
+            {isEdit && (
+              <footer className="flex gap-4 justify-end">
+                <Button
+                  as="button"
+                  title="Reset"
+                  onClick={handleReset}
+                  disabled={isPending}
+                />
+                <Button as="submit" title="Submit" disabled={isPending} />
+              </footer>
+            )}
           </Form>
         </Formik>
       </Drawer>
