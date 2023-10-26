@@ -18,6 +18,7 @@ import {
 } from "../../api/Applicant.api";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { useState } from "react";
+import DrawerLoading from "../DrawerLoading";
 
 interface UpdatedApplicantByIDProps {
   id: string;
@@ -73,8 +74,8 @@ const EditDrawer = ({
 
     action.resetForm();
   };
-
-  if (isLoading || isPending || isFetching) return <Loading />;
+  if (isPending || isFetching) return <DrawerLoading />;
+  if (isLoading) return <Loading />;
 
   return (
     <>

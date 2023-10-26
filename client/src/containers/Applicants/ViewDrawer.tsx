@@ -28,12 +28,14 @@ import {
   yearLevelsItemModel,
 } from "../../helper/ApplicantionForm.Helper";
 import { PersoanlDetailsNameInput } from "../../helper/Applicant.Helper";
+import DrawerLoading from "../DrawerLoading";
 
 const ViewDrawer = ({
   data: APID = "",
   state = false,
   onClose = () => {},
 }: FetchingDrawerProps) => {
+  const [selectedYearLevel, setSelectedYearLevel] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
   // Query
@@ -45,6 +47,7 @@ const ViewDrawer = ({
   const { payload } = data || "";
   const { firstName, middleName, lastName, suffix, email } =
     payload?.personalDetails || "";
+  const { yearLevel, track } = payload?.studentDetails || "";
 
   // Memoized Data
   const memoizedData = useMemo(() => data?.payload, [data?.payload]);
@@ -94,7 +97,8 @@ const ViewDrawer = ({
     }
   };
 
-  if (isLoading || isPending || isFetching) return <Loading />;
+  if (isPending || isFetching) return <DrawerLoading />;
+  if (isLoading) return <Loading />;
 
   return (
     <Suspense fallback={<Loading />}>
@@ -148,12 +152,13 @@ const ViewDrawer = ({
             <main>
               <section className="flex flex-col gap-2 justify-start items-start mb-4">
                 <h4>Grade Level</h4>
-                <div className="opacity-50">
+                <div className={`${!isEdit && "opacity-50"}`}>
                   <Carousel width={"550px"}>
                     {yearLevelsItemModel.map(props => (
                       <ItemSelect
-                        select="Grade 7"
                         key={props.title}
+                        select={!isEdit ? yearLevel : selectedYearLevel}
+                        onSelect={isEdit ? setSelectedYearLevel : () => {}}
                         {...props}
                         name="studentDetails.yearLevel"
                       />
