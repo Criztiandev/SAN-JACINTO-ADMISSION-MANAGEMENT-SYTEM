@@ -10,7 +10,6 @@ import AuthContextProvider from "./context/AuthContext";
 import DrawerProvider from "./context/DrawerContext";
 
 import { ToastContainer } from "react-toastify";
-import Loading from "./components/Loading";
 import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
@@ -20,11 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <DrawerProvider>
-          <Suspense fallback={<Loading />}>
-            <Routes />
-            <ToastContainer />
-            <ReactQueryDevtools />
-          </Suspense>
+          <Routes />
+          <ToastContainer />
+          <ReactQueryDevtools />
         </DrawerProvider>
       </AuthContextProvider>
     </QueryClientProvider>

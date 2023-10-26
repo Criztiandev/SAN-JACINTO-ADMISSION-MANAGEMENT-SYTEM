@@ -5,12 +5,11 @@ import { Button, Table, SearchBar, Loading } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import { useTableContext } from "../context/TableContext";
-import { useEffect } from "react";
+import { useEffect, MouseEvent } from "react";
 
 import { DrawerListProps } from "../interface/Drawer.Types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 import {
   GradeFilterButton,
@@ -20,15 +19,36 @@ import {
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
+import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.api";
 
 const Applicant = () => {
-  const { isLoading, isError, error } = useQuery({
+  // Drawers
+  const viewToggle = useDrawer();
+  const createToggle = useDrawer();
+  const updateToggle = useDrawer();
+  const deleteToggle = useDrawer();
+  const messageToggle = useDrawer();
+
+  const { isLoading, isError, error, refetch } = useQuery({
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:4000/api/applicant");
+      const { data } = await fetchApplicants();
       handleMutateData(data.payload);
       return data;
     },
     queryKey: ["applicants"],
+  });
+
+  const acceptApplicant = useMutation({
+    mutationFn: async ({ APID, value }: any) => {
+      return updateStatusApplicant(APID, value);
+    },
+    onSuccess: () => {
+      toast.success("Applicant is Accepted Successfully");
+    },
+
+    onError: () => {
+      toast.error("Failed, Please Try Again");
+    },
   });
 
   const {
@@ -41,13 +61,6 @@ const Applicant = () => {
     setTableConfig,
     handleMutateData,
   } = useTableContext();
-
-  // Drawers
-  const viewToggle = useDrawer();
-  const createToggle = useDrawer();
-  const updateToggle = useDrawer();
-  const deleteToggle = useDrawer();
-  const messageToggle = useDrawer();
 
   const toggleOptions = {
     viewToggle,
@@ -62,8 +75,9 @@ const Applicant = () => {
     toggle();
   };
 
-  const handleAccept = (id: string, status: string) => {
-    toast.success(`Applicant: ${id} is Updated to ${status} Successfully`);
+  const handleAccept = async (id: string, status: string) => {
+    await acceptApplicant.mutateAsync({ APID: id, value: status });
+    refetch();
   };
 
   // Setting up the Table Config
@@ -101,7 +115,7 @@ const Applicant = () => {
             <div className="flex gap-4">
               <GradeFilterButton
                 title="Grade"
-                onSelect={e =>
+                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
                     id: "studentDetails.yearLevel",
                     value: e.currentTarget.value,
@@ -110,7 +124,7 @@ const Applicant = () => {
               />
               <StatusFilterButton
                 title="Filter"
-                onSelect={e =>
+                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
                   handleColumnSearch({
                     id: "status",
                     value: e.currentTarget.value,
@@ -127,9 +141,8 @@ const Applicant = () => {
       </BaseLayout>
 
       {DrawerLists(selected, toggleOptions).map(
-        ({ id, Component, state, ...props }: DrawerListProps) => (
-          <Component key={id} state={state} {...props} />
-        )
+        ({ id, Component, state, ...props }: DrawerListProps) =>
+          state ? <Component key={id} state={state} {...props} /> : null
       )}
     </>
   );
