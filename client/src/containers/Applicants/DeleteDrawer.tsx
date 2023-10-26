@@ -1,18 +1,46 @@
 import { AnimatePresence } from "framer-motion";
-import { Button, Drawer } from "../../components";
-import applicantData from "../../data/applicantData.json";
+import { Button, Drawer, Loading } from "../../components";
 import { Form, Formik } from "formik";
 import { FetchingDrawerProps } from "../../interface/Component.Type";
 import { toast } from "react-toastify";
-import { ToastConfig } from "../../utils/notifUtils";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  deleteApplicantByID,
+  fetchApplicantByID,
+} from "../../api/Applicant.api";
 
 const DeleteDrawer = ({
-  data,
+  data: APID = "",
   state = false,
   onClose = () => {},
 }: FetchingDrawerProps) => {
-  const response = applicantData[0];
-  const { firstName, middleName, lastName, suffix } = response.personalDetails;
+  const { data, isLoading } = useQuery({
+    queryFn: async () => fetchApplicantByID(APID),
+    queryKey: ["applicantByID", APID],
+  });
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id: string) => deleteApplicantByID(id),
+
+    onSuccess: () => {
+      toast.success("Delete Applicant Successfully");
+      onClose();
+    },
+
+    onError: () => {
+      toast.error("Something went wrong please Try again");
+    },
+  });
+
+  const { payload } = data || "";
+  const { firstName, middleName, lastName, suffix } =
+    payload?.personalDetails || "";
+
+  const handleSubmit = async () => {
+    await mutateAsync(APID);
+  };
+
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -23,17 +51,7 @@ const DeleteDrawer = ({
             width="600px"
             state={state}
             onClick={onClose}>
-            <Formik
-              initialValues={response}
-              onSubmit={(values, action) => {
-                // clean up
-                toast.success(
-                  "Applicant is Delete of Successfully",
-                  ToastConfig
-                );
-                onClose();
-                action.resetForm();
-              }}>
+            <Formik initialValues={data || []} onSubmit={handleSubmit}>
               <Form className="grid grid-rows-[72px_auto_64px] gap-4 h-full">
                 <header className="border-b border-gray-300 pb-4">
                   <h3>Deleting Applicant</h3>
@@ -45,7 +63,7 @@ const DeleteDrawer = ({
                 <main style={{ lineHeight: "1.8" }}>
                   Are you absolutely certain you want to proceed with deleting{" "}
                   <span className="border-b-2 border-black font-bold">
-                    {lastName}, {firstName} {middleName} {suffix && suffix}
+                    {lastName}, {firstName} {middleName} {suffix || ""}
                   </span>
                   's data? Deleting data is an irreversible action and can lead
                   to permanent loss of information. Please take a moment to

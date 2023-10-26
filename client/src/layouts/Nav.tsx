@@ -3,10 +3,8 @@ import Image from "../components/Image";
 import Logo from "../assets/image/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { navigationPaths } from "../helper/Navigation.Helper";
-import { useTransition } from "react";
 
 const Nav = () => {
-  const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
 
   return (
@@ -19,26 +17,13 @@ const Nav = () => {
 
       <ul className="flex flex-col gap-4">
         {navigationPaths.map(el => (
-          <>
-            {isPending ? (
-              <span
-                key={el.path}
-                className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400">
-                <Image className="p-2" src={el.icon} alt={"Link Icon"} />
-              </span>
-            ) : (
-              <li
-                key={el.path}
-                className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400"
-                onClick={() => {
-                  startTransition(() => {
-                    navigate(el.path);
-                  });
-                }}>
-                <Image className="p-2" src={el.icon} alt={"Link Icon"} />
-              </li>
-            )}
-          </>
+          <li
+            key={el.path}
+            className="cursor-pointer rounded-[5px] hover:bg-blue-400 active:bg-blue-400">
+            <Link to={el.path}>
+              <Image className="p-2" src={el.icon} alt={"Link Icon"} />
+            </Link>
+          </li>
         ))}
       </ul>
 

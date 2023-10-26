@@ -5,6 +5,7 @@ import MessageIcon from "../../assets/icons/Message_light.svg";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import { motion } from "framer-motion";
 interface ActionColumnProps {
+  status: string;
   onEdit: () => void;
   onMessage: () => void;
   onHold: () => void;
@@ -13,6 +14,7 @@ interface ActionColumnProps {
 }
 
 const ActionColumn = ({
+  status,
   onEdit,
   onMessage,
   onDelete,
@@ -21,7 +23,7 @@ const ActionColumn = ({
 }: ActionColumnProps) => {
   const DropdowmItems = [
     { icon: MessageIcon, title: "Message", onClick: onMessage },
-    { icon: MessageIcon, title: "Hold", onClick: onHold },
+    { icon: MessageIcon, title: status, onClick: onHold },
     { icon: DeleteIcon, title: "Delete", onClick: onDelete },
   ];
 

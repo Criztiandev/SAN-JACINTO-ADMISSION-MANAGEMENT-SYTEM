@@ -3,7 +3,12 @@ import { InputProps, InputSectionProps } from "../../interface/FormInterface";
 import { IconButton, Input } from "../../components";
 import { DecreaseIcon, EditIcon } from "../../assets/icons/index";
 
-const InputSections = ({ title, model, isEdit }: InputSectionProps) => {
+const InputSections = ({
+  title,
+  model,
+  isEdit,
+  hidden = true,
+}: InputSectionProps) => {
   const [hide, setHide] = useState(true);
   const [edit, setEdit] = useState(false);
 
@@ -28,7 +33,7 @@ const InputSections = ({ title, model, isEdit }: InputSectionProps) => {
             onClick={() => setHide(prev => !prev)}
           />
 
-          {edit && (
+          {!hidden && (
             <IconButton
               icon={EditIcon}
               onClick={() => setEdit(prev => !prev)}

@@ -49,10 +49,14 @@ export const createApplicant = asyncHandler(async (req, res) => {
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
   try {
-    const applicants = await applicantModel.find({}).lean();
+    const applicants = await applicantModel
+      .find({ status: { $in: ["pending", "hold"] } })
+      .select(
+        "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status"
+      );
 
     if (applicants.length === 0) {
-      res.status(200).json({ payload: null, message: "No applicants found" });
+      res.status(200).json({ payload: [], message: "No applicants found" });
     } else {
       res
         .status(200)
@@ -76,20 +80,18 @@ export const fetchApplicantByID = asyncHandler(async (req, res) => {
 
 export const updateApplicant = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { credentails } = req.body;
-
-  console.log(id);
-  console.log(req.body);
+  const payload = req.body;
+  if (!payload) throw new Error("No Request Body");
 
   const _applicant = await applicantModel
-    .findOneAndUpdate({ _id: id }, credentails, { new: true })
+    .findOneAndUpdate({ _id: id }, payload, { new: true })
     .lean()
     .select("_id");
 
   if (!_applicant) throw new Error("Applicant Doest Found, Please Try Again");
 
   res.status(200).json({
-    payload: _applicant._id,
+    payload: _applicant,
     message: "Updated Credentials Successfully",
   });
 });

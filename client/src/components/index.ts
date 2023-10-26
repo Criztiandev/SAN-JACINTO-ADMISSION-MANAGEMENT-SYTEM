@@ -20,3 +20,4 @@ export { default as Calendar } from "./Calendar";
 export { default as Textarea } from "./Textarea";
 export { default as Loading } from "./Loading";
 export { default as BarLoader } from "./BarLoader";
+export { default as Carousel } from "./Carousel";

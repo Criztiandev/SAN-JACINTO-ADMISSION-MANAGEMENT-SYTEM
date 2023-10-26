@@ -62,7 +62,7 @@ export const suffixes: Array<string> = [
 export const studenDetailsInputModel: InputProps[] = [
   {
     label: "General Average",
-    name: "studentDetails.generalAverage",
+    name: "gradeDetails.generalAve",
   },
   {
     label: "LRN",
@@ -97,6 +97,14 @@ export const studenDetailsInputModel: InputProps[] = [
     name: "studentDetails.lastSchoolAttended",
     placeholder: "Enter your School Last Attended",
   },
+];
+
+export const gradeDetailsInputModel: InputProps[] = [
+  { label: "English", name: "gradeDetails.english" },
+  { label: "Filipino", name: "gradeDetails.filipino" },
+  { label: "Science", name: "gradeDetails.science" },
+  { label: "Math", name: "gradeDetails.math" },
+  { label: "General Average", name: "gradeDetails.generalAve" },
 ];
 
 export const personalDetailsInputModel: InputProps[] = [
@@ -345,20 +353,14 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
     title: "Student Details",
     model: OmitInputObject(["Year Level"], studenDetailsInputModel),
   },
+
+  { title: "Grade Details", model: gradeDetailsInputModel },
   {
     title: "Personal Details",
     model: OmitInputObject(["Suffix"], personalDetailsInputModel),
   },
-
-  {
-    title: "Current Address",
-    model: currentAddressInputModel,
-  },
-
-  {
-    title: "Permanent Address",
-    model: permanentAddressInputModel,
-  },
+  { title: "Current Address", model: currentAddressInputModel },
+  { title: "Permanent Address", model: permanentAddressInputModel },
 
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },

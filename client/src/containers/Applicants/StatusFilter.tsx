@@ -37,7 +37,7 @@ const StatusFilter = ({ title, onSelect }: StatusFilterProps) => {
       title={currentTitle || "Filter"}
       icon={FilterIcon}>
       {StatusItems.map(items => (
-        <div className="hover:bg-blue-300 rounded-[5px]">
+        <div key={items.title} className="hover:bg-blue-300 rounded-[5px]">
           <Button
             key={items.title}
             type="ghost"
