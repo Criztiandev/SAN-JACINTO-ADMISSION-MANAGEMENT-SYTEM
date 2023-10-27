@@ -13,7 +13,11 @@ const Routes = () => {
         <RouterProvider router={privateRoutes} />
       </Suspense>
     );
-  return <RouterProvider router={publicRoutes} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={publicRoutes} />
+    </Suspense>
+  );
 };
 
 export default Routes;

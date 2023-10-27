@@ -1,209 +1,132 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import applicantData from "../data/applicantData.json";
-import { ColumnDef } from "@tanstack/react-table";
-import { useState, MouseEvent } from "react";
-
-import { Badge, Table, SearchBar } from "../components";
+import { Button, Table, SearchBar, Loading, IconButton } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
+import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
+import { useTableContext } from "../context/TableContext";
+import { useEffect } from "react";
 
+import { DrawerListProps } from "../interface/Drawer.Types";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { Download } from "../assets/icons";
+
+import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
-import TitleHeader from "../containers/Table/TitleHeader";
-import FirstColumn from "../containers/Table/FirstColumn";
-import CreateDrawer from "../containers/Applicants/CreateDrawer";
-import ViewDrawer from "../containers/Applicants/ViewDrawer";
-import GradeFilter from "../containers/Applicants/GradeFilter";
-import StatusFilter from "../containers/Applicants/StatusFilter";
-import MoreOption from "../containers/Applicants/MoreOption";
-import ActionColumn from "../containers/Applicants/ActionColumn";
-import EditDrawer from "../containers/Applicants/EditDrawer";
-import MessageDrawer from "../containers/Applicants/MessageDrawer";
-import DeleteDrawer from "../containers/Applicants/DeleteDrawer";
-import { handleTitleUpdate } from "../helper/applicantPanelHelper";
-
-interface ColumnInterface {
-  yearLevel: { id: string; value: string };
-  status: { id: string; value: string };
-}
+import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.api";
 
 const MasterList = () => {
-  const [selectedApplicant, setSelectedApplicant] = useState<any>({});
-  const [search, setSearch] = useState("");
-  const [columnSearch, setColumnSearch] = useState<ColumnInterface>({
-    yearLevel: { id: "studentDetails.yearLevel", value: "" },
-    status: { id: "status", value: "" },
+  // Drawers
+  const viewToggle = useDrawer();
+  const createToggle = useDrawer();
+  const updateToggle = useDrawer();
+  const deleteToggle = useDrawer();
+  const messageToggle = useDrawer();
+
+  const { isLoading, isError, error, refetch } = useQuery({
+    queryFn: async () => {
+      const { data } = await fetchApplicants();
+      handleMutateData(data.payload);
+      return data;
+    },
+    queryKey: ["applicants"],
   });
 
-  const createToggle = useDrawer();
-  const viewToggle = useDrawer();
-  const editToggle = useDrawer();
-  const messageToggle = useDrawer();
-  const deleteToggle = useDrawer();
-
-  const DrawerData = [
-    {
-      id: "0",
-      Component: ViewDrawer,
-      data: selectedApplicant,
-      state: viewToggle.active,
-      onClose: viewToggle.toggleDrawer,
+  const acceptApplicant = useMutation({
+    mutationFn: async ({ APID, value }: any) => {
+      return updateStatusApplicant(APID, value);
+    },
+    onSuccess: () => {
+      toast.success("Applicant is Accepted Successfully");
     },
 
-    {
-      id: "1",
-      Component: CreateDrawer,
-      state: createToggle.active,
-      onClose: createToggle.toggleDrawer,
+    onError: () => {
+      toast.error("Failed, Please Try Again");
     },
+  });
 
-    {
-      id: "2",
-      Component: EditDrawer,
-      data: selectedApplicant,
-      state: editToggle.active,
-      onClose: editToggle.toggleDrawer,
-    },
+  const {
+    tableData,
+    search,
+    selected,
+    handleSearch,
+    handleSelected,
+    setTableConfig,
+    handleMutateData,
+  } = useTableContext();
 
-    {
-      id: "3",
-      Component: MessageDrawer,
-      data: selectedApplicant,
-      state: messageToggle.active,
-      onClose: messageToggle.toggleDrawer,
-    },
-
-    {
-      id: "4",
-      Component: DeleteDrawer,
-      data: selectedApplicant,
-      state: deleteToggle.active,
-      onClose: deleteToggle.toggleDrawer,
-    },
-  ];
-
-  const handleColumnSearch = (name: keyof ColumnInterface, value: string) => {
-    setColumnSearch(prev => ({
-      ...prev,
-      [name]: { ...prev[name], value: value },
-    }));
+  const toggleOptions = {
+    viewToggle,
+    createToggle,
+    updateToggle,
+    deleteToggle,
+    messageToggle,
   };
 
-  const handleAction = (data: any, toggle: () => void) => {
-    setSelectedApplicant(data);
+  const handleToggle = (data: object | string, toggle = () => {}) => {
+    handleSelected(data);
     toggle();
   };
 
-  const HeaderConfig: ColumnDef<any, any>[] = [
-    {
-      id: "select",
-      header: ({ table }) => <TitleHeader data={table} />,
-      accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+  const handleAccept = async (id: string, status: string) => {
+    await acceptApplicant.mutateAsync({ APID: id, value: status });
+    refetch();
+  };
 
-      cell: ({ row, getValue }) => (
-        <FirstColumn
-          data={row}
-          value={getValue()}
-          viewApplicant={() =>
-            handleAction(row.original._id, viewToggle.toggleDrawer)
-          }
-        />
-      ),
-    },
+  // Setting up the Table Config
+  useEffect(() => {
+    const config = TableConfig(toggleOptions, handleToggle, handleAccept);
+    if (!config) throw new Error("No Config");
+    setTableConfig(config);
 
-    { header: "LRN", accessorKey: "studentDetails.LRN" },
-    {
-      header: "Grade Level",
-      accessorKey: "studentDetails.yearLevel",
-    },
-    { header: "Gender", accessorKey: "personalDetails.gender" },
-    { header: "BOD", accessorKey: "personalDetails.birthDate" },
-    { header: "Age", accessorKey: "personalDetails.age" },
-    {
-      header: "Guardian",
-      accessorKey: "guardianDetails.legalGuardian",
-      accessorFn: ({ guardianDetails }) => {
-        const { firstName, middleName, lastName } =
-          guardianDetails.legalGuardian;
+    return () => {
+      setTableConfig([]);
+    };
+  }, []);
 
-        return `${lastName}, ${firstName} ${middleName[0]}.`;
-      },
-    },
-
-    { header: "Contact", accessorKey: "personalDetails.contact" },
-    { header: "Average", accessorKey: "studentDetails.generalAverage" },
-    {
-      header: "Status",
-      accessorKey: "status",
-      cell: ({ getValue }: any) => (
-        <Badge as="neutral" type={getValue()} title={getValue()} />
-      ),
-    },
-    {
-      header: "Action",
-      cell: ({ row }) => (
-        <ActionColumn
-          onDelete={() => handleAction(row.original, deleteToggle.toggleDrawer)}
-          onHold={() => {}}
-          onEdit={() => handleAction(row.original, editToggle.toggleDrawer)}
-          onMessage={() =>
-            handleAction(row.original, messageToggle.toggleDrawer)
-          }
-        />
-      ),
-    },
-  ];
+  // Checking if there us an error
+  if (isError) toast.error(error.message);
+  if (isLoading) return <Loading />;
 
   return (
     <>
-      <BaseLayout title="Master List" action>
-        <>
-          <div className="flex justify-between items-center">
-            <SearchBar
-              value={search}
-              onChange={e => setSearch(e.target.value)}
+      <BaseLayout
+        title="Master Lists"
+        header={
+          <div className="flex gap-4">
+            <IconButton icon={Download} type="outlined" />
+            <Button
+              dir="left"
+              title="Create"
+              icon={CreateApplicantIcon}
+              onClick={createToggle.toggleDrawer}
             />
+          </div>
+        }
+        shortcut={false}
+        action>
+        {tableData.length > 0 ? (
+          <div className="flex justify-between items-center">
+            <SearchBar value={search} onChange={handleSearch} />
 
             <div className="flex gap-4">
-              {/* Grade Filter */}
-              <GradeFilter
-                onTitleUpdate={() =>
-                  handleTitleUpdate(
-                    "Grade",
-                    `Grade ${columnSearch.yearLevel.value}`
-                  )
-                }
-                onSelect={e =>
-                  handleColumnSearch("yearLevel", e.currentTarget.value)
-                }
-              />
-
-              {/* // Status Filter */}
-              <StatusFilter
-                onTitleUpdate={() =>
-                  handleTitleUpdate("Status", columnSearch.status.value)
-                }
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch("status", e.currentTarget.value)
-                }
-              />
-
-              <MoreOption />
+              <Button type="contained" as="button" title="Applicants" />
+              <Button type="outlined" as="button" title="Examinees" />
+              <Button type="outlined" as="button" title="Jr Highschools" />
+              <Button type="outlined" as="button" title="SHS High" />
             </div>
           </div>
-          <Table
-            data={applicantData}
-            config={HeaderConfig}
-            search={search}
-            columnSearch={[{ ...columnSearch.status }]}
-            layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px"
-          />
-        </>
+        ) : (
+          <span></span>
+        )}
+        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
 
-      {DrawerData.map(({ id, Component, ...props }) => (
-        <Component key={id} {...props} />
-      ))}
+      {DrawerLists(selected, toggleOptions).map(
+        ({ id, Component, state, ...props }: DrawerListProps) =>
+          state ? <Component key={id} state={state} {...props} /> : null
+      )}
     </>
   );
 };
