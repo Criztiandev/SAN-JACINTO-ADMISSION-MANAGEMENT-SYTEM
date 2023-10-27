@@ -46,8 +46,22 @@ const routes = [
       </TableProvider>
     ),
   },
-  { path: "/masterlist", element: <MasterList /> },
-  { path: "/examiniees", element: <Examiniees /> },
+  {
+    path: "/masterlist",
+    element: (
+      <TableProvider>
+        <MasterList />
+      </TableProvider>
+    ),
+  },
+  {
+    path: "/examiniees",
+    element: (
+      <TableProvider>
+        <Examiniees />
+      </TableProvider>
+    ),
+  },
   { path: "/user", element: <UserAccount /> },
 ];
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Dropdown } from "../components";
-import ApplicantIcon from "../assets/icons/Applicants.svg";
+import { ApplicantIcon } from "../assets/icons";
 import { motion } from "framer-motion";
 const ShortCut = () => {
   const shortcutItems = [

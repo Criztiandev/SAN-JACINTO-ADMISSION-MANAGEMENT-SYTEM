@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnimatePresence } from "framer-motion";
-import { Button, Drawer } from "../../components";
-import { Form, Formik } from "formik";
+import { Button, Drawer, Loading } from "../../components";
+import { Form, Formik, FormikHelpers } from "formik";
 import { FetchingDrawerProps } from "../../interface/Component.Type";
-import applicantData from "../../data/applicantData.json";
 import ItemSelect from "../Form/ItemSelect";
 import InputSections from "../Form/InputSections";
 import Carousel from "../../components/Carousel";
@@ -10,16 +10,72 @@ import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
 } from "../../helper/ApplicantionForm.Helper";
-import { useState } from "react";
 import { toast } from "react-toastify";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  fetchApplicantByID,
+  updateApplicantByID,
+} from "../../api/Applicant.api";
+import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+import { useState } from "react";
+import DrawerLoading from "../DrawerLoading";
+
+interface UpdatedApplicantByIDProps {
+  id: string;
+  values: object;
+}
 
 const EditDrawer = ({
-  data,
+  data: APID = "",
   state,
   onClose = () => {},
 }: FetchingDrawerProps) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
-  const response = applicantData[0];
+
+  const { data, isLoading, isFetching, refetch, isRefetchError } = useQuery({
+    queryFn: async () => fetchApplicantByID(APID),
+    queryKey: ["applicantByID", APID],
+  });
+
+  const { payload } = data || "";
+  const { firstName, middleName, lastName, suffix } =
+    payload?.personalDetails || "";
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async ({ id, values }: UpdatedApplicantByIDProps) =>
+      updateApplicantByID(id, values),
+
+    onSuccess: () => handleSuccess(),
+
+    onError: () => {
+      toast.error("Something went wrong, Please Try again");
+    },
+  });
+
+  const handleSuccess = () => {
+    if (!isRefetchError) {
+      refetch();
+      toast.success(
+        `${lastName} ${firstName} ${middleName[0]} ${
+          suffix || ""
+        }'s credentials been Updated Successfully`
+      );
+    } else {
+      toast.error("Fetching Error");
+    }
+  };
+
+  const handleSubmit = (
+    values: ApplicantModelProps,
+    action: FormikHelpers<ApplicantModelProps>
+  ) => {
+    mutate({ id: APID, values: values });
+    refetch();
+
+    action.resetForm();
+  };
+  if (isPending || isFetching) return <DrawerLoading />;
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -30,13 +86,7 @@ const EditDrawer = ({
             width="600px"
             state={state}
             onClick={onClose}>
-            <Formik
-              initialValues={response}
-              onSubmit={(values, action) => {
-                toast.success("Applicant is Edited Successfully");
-                onClose();
-                action.resetForm();
-              }}>
+            <Formik initialValues={payload} onSubmit={handleSubmit}>
               <Form>
                 <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
                   <div>

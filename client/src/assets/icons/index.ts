@@ -6,9 +6,11 @@ export { default as IncreaseIcon } from "./Expand_up_light.svg";
 export { default as DecreaseIcon } from "./Expand_down_light.svg";
 export { default as EditIcon } from "./Edit_light.svg";
 export { default as ResetIcon } from "./Reset.svg";
-export { default as DashboardIcon } from "./Overview.svg";
-export { default as ApplicantIcon } from "./Applicants.svg";
-export { default as CalendarIcon } from "./Calendar.svg";
-export { default as MessageIcon } from "./Message_light.svg";
-export { default as ToolsIcon } from "./Structure_light.svg";
 export { default as DeleteIcon } from "./Delete.svg";
+export { default as Download } from "./Arrow_down.svg";
+
+export { default as Dashboard } from "./Overview_Dark.svg";
+export { default as ApplicantIcon } from "./User_Dark.svg";
+export { default as CalendarIcon } from "./Calendar_Dark.svg";
+export { default as MessageIcon } from "./Message_Dark.svg";
+export { default as ToolsIcon } from "./Structure_Dark.svg";

@@ -1,6 +1,6 @@
 import { Dropdown, Button } from "../../components";
 import FilterIcon from "../../assets/icons/Filter.svg";
-import ApplicantIcon from "../../assets/icons/Applicants.svg";
+import { ApplicantIcon } from "../../assets/icons";
 import { MouseEvent, useState } from "react";
 
 interface ListItemProps {
