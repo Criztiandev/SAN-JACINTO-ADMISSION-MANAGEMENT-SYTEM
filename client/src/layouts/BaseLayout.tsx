@@ -10,9 +10,16 @@ interface BaseLayoutProps extends BaseProps {
   title?: string;
   action?: boolean;
   header?: ReactNode;
+  shortcut: boolean;
 }
 
-const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
+const BaseLayout = ({
+  title,
+  action,
+  children,
+  header,
+  shortcut,
+}: BaseLayoutProps) => {
   const name = "Criztian Jade M Tuplano";
   return (
     <Suspense fallback={<span>Loading</span>}>
@@ -33,7 +40,7 @@ const BaseLayout = ({ title, action, children, header }: BaseLayoutProps) => {
             <span className="flex gap-4">
               {action ? (
                 <>
-                  <ShortCut />
+                  {shortcut && <ShortCut />}
                   {header}
                 </>
               ) : (

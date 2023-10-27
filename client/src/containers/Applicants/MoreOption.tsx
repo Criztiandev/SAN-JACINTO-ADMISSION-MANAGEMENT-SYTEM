@@ -1,5 +1,5 @@
 import { Dropdown, Button } from "../../components";
-import ApplicantIcon from "../../assets/icons/Applicants.svg";
+import { ApplicantIcon } from "../../assets/icons";
 
 interface ListItemProps {
   title: string;
