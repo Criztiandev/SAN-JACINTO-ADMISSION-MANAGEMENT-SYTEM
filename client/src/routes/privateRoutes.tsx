@@ -5,12 +5,11 @@ import {
   DashboardPage,
   SchedulePage,
   AnnoucementPage,
+  ExaminiesPage,
+  MasterListPage,
+  UserAccountPage,
 } from "../pages";
-import Examiniees from "../pages/Examiniees";
-import MasterList from "../pages/MasterList";
-import UserAccount from "../pages/UserAccount";
-import TableProvider from "../context/TableContext";
-import ScheduleContextProvider from "../context/ScheduleContext";
+import { TableProvider, ScheduleProvider } from "../context";
 
 const routes = [
   {
@@ -32,19 +31,12 @@ const routes = [
   {
     path: "/schedule",
     element: (
-      <ScheduleContextProvider>
+      <ScheduleProvider>
         <SchedulePage />
-      </ScheduleContextProvider>
+      </ScheduleProvider>
     ),
   },
-  {
-    path: "/applicants/examinees",
-    element: (
-      <TableProvider>
-        <Examiniees />
-      </TableProvider>
-    ),
-  },
+
   {
     path: "/annoucement",
     element: (
@@ -57,7 +49,7 @@ const routes = [
     path: "/masterlist",
     element: (
       <TableProvider>
-        <MasterList />
+        <MasterListPage />
       </TableProvider>
     ),
   },
@@ -65,11 +57,11 @@ const routes = [
     path: "/examiniees",
     element: (
       <TableProvider>
-        <Examiniees />
+        <ExaminiesPage />
       </TableProvider>
     ),
   },
-  { path: "/user", element: <UserAccount /> },
+  { path: "/user", element: <UserAccountPage /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

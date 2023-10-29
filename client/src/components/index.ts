@@ -1,23 +1,24 @@
-export { default as Avatar } from "./Avatar";
-export { default as Badge } from "./Badge";
-export { default as Button } from "./Button";
-export { default as Card } from "./Card";
-export { default as ColorLabel } from "./ColorLabel";
-export { default as Drawer } from "./Drawer";
-export { default as Dropdown } from "./Dropdown";
-export { default as IconButton } from "./IconButton";
-export { default as Image } from "./Image";
-export { default as Input } from "./Input";
-export { default as SearchBar } from "./SearchBar";
-export { default as Select } from "./Select";
-export { default as Stack } from "./Stack";
-export { default as Switch } from "./Switch";
-export { default as Table } from "./Table";
-export { default as Tabs } from "./Tabs";
-export { default as Typography } from "./Typography";
-export { default as Radio } from "./Radio";
-export { default as Calendar } from "./Calendar";
-export { default as Textarea } from "./Textarea";
-export { default as Loading } from "./Loading";
-export { default as BarLoader } from "./BarLoader";
-export { default as Carousel } from "./Carousel";
+import { lazy } from "react";
+
+export const Avatar = lazy(() => import("./Avatar.tsx"));
+
+export const Badge = lazy(() => import("./Badge.tsx"));
+export const Button = lazy(() => import("./Button.tsx"));
+
+export const Calendar = lazy(() => import("./Calendar.tsx"));
+export const Carousel = lazy(() => import("./Carousel.tsx"));
+
+export const Drawer = lazy(() => import("./Drawer.tsx"));
+export const Dropdown = lazy(() => import("./Dropdown.tsx"));
+export const IconButton = lazy(() => import("./IconButton.tsx"));
+export const Image = lazy(() => import("./Image.tsx"));
+export const Input = lazy(() => import("./Input.tsx"));
+export const SearchBar = lazy(() => import("./SearchBar.tsx"));
+export const Select = lazy(() => import("./Select.tsx"));
+export const Table = lazy(() => import("./Table.tsx"));
+export const Typography = lazy(() => import("./Typography.tsx"));
+export const Radio = lazy(() => import("./Radio.tsx"));
+export const TextAre = lazy(() => import("./Textarea.tsx"));
+
+export { default as Loading } from "./Loading.tsx";
+export { default as BarLoader } from "./BarLoader.tsx";
