@@ -1,66 +1,86 @@
 [
   {
-    "_id": "651a85b8b49fb87f8b3160a2",
     "studentDetails": {
-      "generalAverage": 95,
-      "LRN": "192193123",
-      "PSA": "123123123",
+      "LRN": "12313121231233",
+      "PSA": "132232323",
       "yearLevel": "Grade 7",
-      "track": "Regular",
-      "schoolYear": "2023-2024",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
       "lastSchoolAttended": "Nazareth Institute of Alfonzo"
     },
     "personalDetails": {
-      "firstName": "Criztian Jade",
-      "middleName": "Mitra",
-      "lastName": "Tuplano",
-      "suffix": "",
-      "gender": "Male",
-      "birthDate": "05/07/01",
-      "age": 22,
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
       "motherTounge": "Filipino",
-      "email": "criztiandev@gmail.com",
-      "contact": "09482004868",
-      "facebookLink": "https://www.facebook.com/criztiandev07"
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
     },
     "addressDetails": {
       "permanent": {
-        "houseNo": "91",
+        "houseNo": "51",
         "street": "Rawis",
         "barangay": "Poblacion",
         "municipality": "Batuan",
         "province": "Masbate",
-        "country": "Phillipines",
-        "zip": "5400"
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
       },
       "current": {
-        "houseNo": "91",
+        "houseNo": "51",
         "street": "Rawis",
         "barangay": "Poblacion",
         "municipality": "Batuan",
         "province": "Masbate",
-        "country": "Phillipines",
-        "zip": "5400"
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
       }
     },
     "guardianDetails": {
       "father": {
-        "firstName": "Mareflor",
-        "middleName": "Mitra",
+        "firstName": "John",
+        "middleName": "Turado",
         "lastName": "Tuplano",
-        "contact": "0948828485"
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
       },
       "mother": {
         "firstName": "Mareflor",
-        "middleName": "Mitra",
-        "lastName": "Tuplano",
-        "contact": "0948828485"
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
       },
       "legalGuardian": {
         "firstName": "Mareflor",
-        "middleName": "Mitra",
-        "lastName": "Tuplano",
-        "contact": "0948828485"
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
       }
     },
     "otherDetails": {
@@ -68,74 +88,97 @@
       "isIndigenousPerson": "No",
       "isLWD": "No"
     },
-    "signiture": "path2",
     "status": "pending",
-    "yearLevel": "8",
-    "createdAt": "2023-09-09T17:10:12.075+00:00",
-    "updatedAt": "2023-09-09T17:10:12.075+00:00"
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
   },
   {
-    "_id": "651a85b8b49fb87f8b3160a3",
     "studentDetails": {
-      "generalAverage": 88,
-      "LRN": "192193124",
-      "PSA": "123123124",
-      "yearLevel": 9,
-      "track": "Science",
-      "schoolYear": "2023-2024",
-      "lastSchoolAttended": "St. Mary's High School"
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
     },
     "personalDetails": {
-      "firstName": "Alicia",
-      "middleName": "Marie",
-      "lastName": "Johnson",
-      "suffix": "",
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
       "gender": "Female",
-      "birthDate": "03/15/04",
-      "age": 19,
-      "motherTongue": "English",
-      "email": "alicia.j@example.com",
-      "contact": "09571234567",
-      "facebookLink": "https://www.facebook.com/alicia.j"
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
     },
     "addressDetails": {
       "permanent": {
-        "houseNo": "45",
-        "street": "Elm Street",
-        "barangay": "Maple",
-        "municipality": "Springfield",
-        "province": "Ohio",
-        "country": "United States",
-        "zip": "45501"
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
       },
       "current": {
-        "houseNo": "45",
-        "street": "Elm Street",
-        "barangay": "Maple",
-        "municipality": "Springfield",
-        "province": "Ohio",
-        "country": "United States",
-        "zip": "45501"
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
       }
     },
     "guardianDetails": {
       "father": {
         "firstName": "John",
-        "middleName": "Michael",
-        "lastName": "Johnson",
-        "contact": "09571234568"
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
       },
       "mother": {
-        "firstName": "Emily",
-        "middleName": "Ann",
-        "lastName": "Johnson",
-        "contact": "09571234569"
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
       },
       "legalGuardian": {
-        "firstName": "John",
-        "middleName": "Michael",
-        "lastName": "Johnson",
-        "contact": "09571234568"
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
       }
     },
     "otherDetails": {
@@ -143,10 +186,895 @@
       "isIndigenousPerson": "No",
       "isLWD": "No"
     },
-    "signiture": "path",
-    "yearLevel": "7",
     "status": "pending",
-    "createdAt": "2023-09-10T09:30:45.075+00:00",
-    "updatedAt": "2023-09-10T09:30:45.075+00:00"
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
+  },
+  {
+    "studentDetails": {
+      "LRN": "12313121231233",
+      "PSA": "132232323",
+      "yearLevel": "Grade 7",
+      "track": "SPE",
+      "schoolYear": "2019 - 2020",
+      "lastSchoolAttended": "Nazareth Institute of Alfonzo"
+    },
+    "personalDetails": {
+      "firstName": "Mark Jayson",
+      "middleName": "Principe",
+      "lastName": "Alves",
+      "suffix": "IV",
+      "gender": "Female",
+      "birthDate": "2023-10-19",
+      "age": 18,
+      "motherTounge": "Filipino",
+      "email": "criztiande7v@gmail.com",
+      "contact": "9482004268",
+      "facebookLink": "www.facebook.com/criztiandev7"
+    },
+    "gradeDetails": {
+      "english": "95",
+      "filipino": "95",
+      "math": "95",
+      "science": "95",
+      "generalAve": "95"
+    },
+    "addressDetails": {
+      "permanent": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090c"
+        }
+      },
+      "current": {
+        "houseNo": "51",
+        "street": "Rawis",
+        "barangay": "Poblacion",
+        "municipality": "Batuan",
+        "province": "Masbate",
+        "country": "Philippines",
+        "zip": "5400",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090d"
+        }
+      }
+    },
+    "guardianDetails": {
+      "father": {
+        "firstName": "John",
+        "middleName": "Turado",
+        "lastName": "Tuplano",
+        "contact": "09488184858",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090e"
+        }
+      },
+      "mother": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0949929295",
+        "_id": {
+          "$oid": "653ab2674cbfeb113796090f"
+        }
+      },
+      "legalGuardian": {
+        "firstName": "Mareflor",
+        "middleName": "Abano",
+        "lastName": "Mitra",
+        "contact": "0942929495",
+        "_id": {
+          "$oid": "653ab2674cbfeb1137960910"
+        }
+      }
+    },
+    "otherDetails": {
+      "is4psBeneficiary": "No",
+      "isIndigenousPerson": "No",
+      "isLWD": "No"
+    },
+    "status": "pending",
+    "createdAt": {
+      "$date": "2023-10-26T18:39:35.984Z"
+    },
+    "updatedAt": {
+      "$date": "2023-10-26T19:38:12.635Z"
+    },
+    "__v": 0
   }
 ]

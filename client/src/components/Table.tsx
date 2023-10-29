@@ -18,7 +18,7 @@ const Table = ({ layout }: TableProps) => {
   return (
     <>
       <motion.div
-        className={`relative border overflow-scroll rounded-[5px] ${
+        className={`relative border overflow-scroll rounded-[5px]  h-full ${
           tableData.length <= 0 && "flex justify-center items-center"
         }`}>
         {tableData.length > 0 ? (
@@ -27,7 +27,7 @@ const Table = ({ layout }: TableProps) => {
               <TableHeader key={id} headers={headers} layout={layout} />
 
               {/* Content */}
-              <div className="relative">
+              <div className="relative h-full">
                 <motion.div className="w-full">
                   {getRowModel().rows.map((row: any) => (
                     <TableRow key={row.id} row={row} layout={layout} />

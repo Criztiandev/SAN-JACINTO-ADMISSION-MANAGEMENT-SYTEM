@@ -13,7 +13,14 @@ import TableProvider from "../context/TableContext";
 import ScheduleContextProvider from "../context/ScheduleContext";
 
 const routes = [
-  { path: "/", element: <DashboardPage /> },
+  {
+    path: "/",
+    element: (
+      <TableProvider>
+        <DashboardPage />
+      </TableProvider>
+    ),
+  },
   {
     path: "/applicants",
     element: (

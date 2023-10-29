@@ -1,70 +1,104 @@
-import Stats from "../components/Stats";
-import Typography from "../components/Typography";
-import BaseLayout from "../layouts/BaseLayout";
-import statsData from "../data/statsData.json";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { IconButton } from "../components";
+import {
+  CalendarIcon,
+  SettingIcon,
+  SignOutIcon,
+  ApplicantIcon,
+  GraphIcon,
+} from "../assets/icons";
+import { BaseLayout } from "../layouts";
+import DashboardStats from "../containers/Dashboard/DashboardStats";
+import GrapButton from "../containers/Dashboard/GrapButton";
+import useDrawer from "../hooks/useDrawer";
+import SettingsDrawer from "../containers/Dashboard/SettingsDrawer";
+import { useState, MouseEvent, useTransition } from "react";
+import AdmissionCalendar from "../containers/Dashboard/AdmissionCalendar";
 
-import Stack from "../components/Stack";
-import useStats from "../hooks/useStats";
-import { StatsInterface } from "../interface/Component.Type";
+const ApplicantStats = [
+  { value: "18,000", subtitle: "Junior" },
+  { value: "12,000", subtitle: "Senior" },
+  { value: "13,000", subtitle: "SPE & SPJ" },
+];
+
+const DashboardPanel = [
+  { title: "Graph", icons: GraphIcon },
+  { title: "Admission", icons: CalendarIcon },
+  { title: "Applicant", icons: ApplicantIcon },
+];
+
+const PanelTitle = [
+  { key: "Graph", title: "Applicant Graph" },
+  { key: "Admission", title: "Admission Calendar" },
+  { key: "Applicant", title: "Recent Applicant Table" },
+];
 
 const Dashboard = () => {
-  const currentData: StatsInterface[] = statsData;
-  const { stats } = useStats(currentData);
+  const [selectedTab, setSelectedTab] = useState([]);
+  const [activePanel, setActivePanel] = useState("Applicant");
+  const { active: drawerActive, toggleDrawer } = useDrawer();
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleSelectPanel = (event: MouseEvent<HTMLButtonElement>) => {
+    startTransition(() => {
+      setActivePanel(event.currentTarget.name);
+    });
+  };
 
   return (
-    <BaseLayout>
-      {/* // Stats Section */}
-      <section className="grid grid-cols-3 gap-4">
-        {stats.map(items => (
-          <Stats
-            key={items.title}
-            className="flex flex-col gap-4 px-6 py-4 rounded-[5px] bg-white border border-gray-200 shadow-[0px_0px_3px_##919eab29]">
-            {/* Stats Header */}
+    <>
+      <BaseLayout
+        title="Welcome to Hell"
+        subtitle="Hi! Criztian, Its beeen a while,"
+        actions={
+          <>
+            <IconButton icon={SettingIcon} onClick={toggleDrawer} />
+            <IconButton icon={SignOutIcon} />
+          </>
+        }
+        style="free"
+        className="border h-full">
+        <section className="grid grid-cols-3 gap-4">
+          {ApplicantStats.map(props => (
+            <DashboardStats {...props} />
+          ))}
+        </section>
 
-            <Stats.Header type="header" className="flex justify-between">
-              <Stats.Label as="h5">Total</Stats.Label>
-              <Stats.Type as="h6" type={items.type} value={300} />
-            </Stats.Header>
+        <section className="grid grid-cols-[1fr_300px] gap-4 my-4">
+          <div className="relative border w-full h-[400px] rounded-[5px] flex flex-col gap-2 overflow-hidden">
+            <div className="w-full bg-gray-300 px-2">
+              <h3 className="p-2">
+                {PanelTitle.find(title => title.key === activePanel)?.title ||
+                  "Title"}
+              </h3>
+            </div>
+            {/* <SummaryTable layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px" /> */}
+            <AdmissionCalendar />
+          </div>
 
-            <Stats.Content type="main">
-              <Stats.Number as="h2" value={items.total} />
-              <Stats.Helper type="div">
-                <Typography as="p">{items.title}</Typography>
-              </Stats.Helper>
-            </Stats.Content>
-          </Stats>
-        ))}
-      </section>
-      {/* // Graph Section */}
-      <section className="grid grid-cols-[auto_370px] gap-4">
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
+          {/* // Content */}
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-3 gap-4 justify-items-center w-full">
+              {DashboardPanel.map(props => (
+                <GrapButton
+                  {...props}
+                  selected={activePanel}
+                  pending={isPending}
+                  onClick={handleSelectPanel}
+                />
+              ))}
+            </div>
 
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
-      </section>
-      <section className="grid grid-cols-[auto_370px] gap-4">
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
-      </section>
+            <div className="w-full border h-full"></div>
+          </div>
+        </section>
+      </BaseLayout>
 
-      <section className="bg-[#cccccc] w-full h-[300px] rounded-[5px]"></section>
-
-      <section className="grid grid-cols-[auto_370px] gap-4">
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
-        <Stack>
-          <Stack.Content dir="vertical" spacing={16}></Stack.Content>
-        </Stack>
-      </section>
-    </BaseLayout>
+      {drawerActive && (
+        <SettingsDrawer state={drawerActive} onClose={toggleDrawer} />
+      )}
+    </>
   );
 };
 

@@ -28,6 +28,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     return (
       <motion.button
         whileTap={{ scale: 0.8 }}
+        whileHover={{ scale: 1.1 }}
         type={as}
         ref={ref}
         disabled={disabled}
@@ -35,7 +36,9 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         name={name}
         className={`
         ${ComponentIconStyle({ type })} 
-        p-2 rounded-full flex justify-center items-center ${className}`}>
+        p-2 rounded-full flex justify-center items-center ${
+          className || ""
+        } hover:bg-gray-200`}>
         <img className="w-6 h-6" src={icon} alt="Kebbab" />
       </motion.button>
     );

@@ -8,6 +8,7 @@ interface ConfigContextProps {
 
 const ConfigContext = createContext<ConfigContextProps | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useConfigContext = () => {
   const context = useContext(ConfigContext);
   if (!context) throw new Error("There is no Config Context");

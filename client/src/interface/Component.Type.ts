@@ -25,14 +25,12 @@ export interface StatsInterface {
   type: string;
 }
 
-export interface FetchingDrawerProps {
-  data?: string;
-  state?: boolean;
-  onClose?: () => void;
-  onEdit?: boolean;
-}
-
-export interface CreateDrawerProps {
+export interface ToggleDrawerProps {
   state: boolean;
   onClose: () => void;
+}
+
+export interface FetchingDrawerProps extends ToggleDrawerProps {
+  data?: string;
+  onEdit?: boolean;
 }

@@ -32,3 +32,11 @@ export interface DrawerListProps {
   state: boolean;
   onClose: () => void;
 }
+
+export interface ToggleProps {
+  viewToggle: useDrawerProps;
+  createToggle: useDrawerProps;
+  updateToggle: useDrawerProps;
+  deleteToggle: useDrawerProps;
+  messageToggle: useDrawerProps;
+}
