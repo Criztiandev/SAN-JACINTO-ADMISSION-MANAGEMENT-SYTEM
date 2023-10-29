@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { BarLoader, Image } from "../../components";
 import { MouseEvent } from "react";
 
-interface GraphButtonProps {
+interface TabButtonProps {
   title: string;
   icons: string;
   selected: string;
@@ -10,13 +10,13 @@ interface GraphButtonProps {
   pending?: boolean;
 }
 
-const GrapButton = ({
+const TabButton = ({
   title,
   icons,
   selected,
   onClick,
   pending = false,
-}: GraphButtonProps) => {
+}: TabButtonProps) => {
   return (
     <motion.button
       whileTap={{ scale: 0.8 }}
@@ -38,4 +38,4 @@ const GrapButton = ({
   );
 };
 
-export default GrapButton;
+export default TabButton;
