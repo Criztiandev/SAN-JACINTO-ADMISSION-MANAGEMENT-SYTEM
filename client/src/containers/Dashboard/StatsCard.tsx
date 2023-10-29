@@ -1,11 +1,11 @@
 import { Badge, Typography } from "../../components";
 
-interface DashboardStatsProps {
+interface StatsCardProps {
   value: string | number;
   subtitle: string;
 }
 
-const DashboardStats = ({ value, subtitle }: DashboardStatsProps) => {
+const StatsCard = ({ value, subtitle }: StatsCardProps) => {
   return (
     <div className="border border-gray-400 p-4 rounded-[5px]">
       <div className="flex justify-between items-center mb-4 ">
@@ -21,4 +21,4 @@ const DashboardStats = ({ value, subtitle }: DashboardStatsProps) => {
   );
 };
 
-export default DashboardStats;
+export default StatsCard;

@@ -1,20 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useState, MouseEvent } from "react";
 import { BaseLayout } from "../layouts";
 import useDrawer from "../hooks/useDrawer";
 import SettingsDrawer from "../containers/Dashboard/SettingsDrawer";
-import { useState, MouseEvent, useTransition, lazy } from "react";
 import StatsSection from "../containers/Dashboard/StatsSection";
 import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
-
-const GraphComponent = lazy(
-  () => import("../containers/Dashboard/GraphComponent")
-);
-const AdmissionCalendar = lazy(
-  () => import("../containers/Dashboard/AdmissionCalendar")
-);
-const SummaryTable = lazy(() => import("../containers/Dashboard/SummaryTable"));
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Graph");

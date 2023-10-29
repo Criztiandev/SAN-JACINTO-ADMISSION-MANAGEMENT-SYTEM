@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useTableContext } from "../../context/TableContext";
 import { useEffect } from "react";
 import { TableConfig } from "../../helper/Applicant.Helper";
@@ -7,7 +8,6 @@ import { fetchApplicants } from "../../api/Applicant.Api";
 import { toast } from "react-toastify";
 
 const SummaryTable = () => {
-  const layout = "350px 150px 150px 100px 150px 100px 250px 200px 100px 150px";
   const { setTableConfig, handleMutateData } = useTableContext();
   const { isError } = useQuery({
     queryFn: async () => {
@@ -29,7 +29,6 @@ const SummaryTable = () => {
     setTableConfig(config);
 
     return () => {
-      handleMutateData([]);
       setTableConfig([]);
     };
   }, []);
@@ -38,7 +37,9 @@ const SummaryTable = () => {
     toast.error("Something Went Wrong");
   }
 
-  return <Table layout={layout} />;
+  return (
+    <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px" />
+  );
 };
 
 export default SummaryTable;

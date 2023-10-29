@@ -14,6 +14,8 @@ interface TabActionProps {
 }
 
 const TabAction = ({ selected, isPending, onSelect }: TabActionProps) => {
+  console.log("Select Panel");
+
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-3 gap-4 justify-items-center w-full">
