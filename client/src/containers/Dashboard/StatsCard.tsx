@@ -1,12 +1,13 @@
 import { Badge, Typography } from "../../components";
 import FetchLoader from "../General/FetchLoader";
 interface StatsCardProps {
-  value: string | number;
-  subtitle: string;
+  title?: string;
+  count?: string | number;
+  increase?: number | string;
   isLoading?: boolean;
 }
 
-const StatsCard = ({ value, subtitle, isLoading }: StatsCardProps) => {
+const StatsCard = ({ count, title, increase, isLoading }: StatsCardProps) => {
   return (
     <div
       className={`rounded-[5px] min-h-[150px] ${
@@ -20,14 +21,14 @@ const StatsCard = ({ value, subtitle, isLoading }: StatsCardProps) => {
             <Typography as="h5" className="cursor-default">
               Total
             </Typography>
-            <Badge as="stats" title="+23" />
+            <Badge as="stats" title={`+${increase}`} />
           </div>
 
           <div className="flex flex-col">
             <Typography as="h1" className="cursor-default">
-              {value}
+              {count}
             </Typography>
-            <small className="opacity-50 font-semibold">{subtitle}</small>
+            <small className="opacity-50 font-semibold">{title}</small>
           </div>
         </>
       )}

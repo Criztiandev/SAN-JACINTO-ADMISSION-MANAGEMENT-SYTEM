@@ -1,16 +1,26 @@
-import StatsCard from "./StatsCard";
+import { StatsCard } from ".";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAllData } from "../../utils/Api.utils";
 
-const ApplicantStats = [
-  { value: "18,000", subtitle: "Junior" },
-  { value: "12,000", subtitle: "Senior" },
-  { value: "13,000", subtitle: "SPE & SPJ" },
-];
+interface StatsDataProps {
+  title: string;
+  count: number;
+  increase: number;
+}
 
 const StatsSection = () => {
+  const { data, isLoading } = useQuery({
+    queryFn: async () => await fetchAllData("dashboard"),
+    queryKey: ["statsData"],
+  });
+
+  if (isLoading) return;
+
+  const { payload } = data;
   return (
     <section className="grid grid-cols-3 gap-4">
-      {ApplicantStats.map(props => (
-        <StatsCard key={props.subtitle} {...props} />
+      {payload.map((props: StatsDataProps) => (
+        <StatsCard key={props.title} {...props} isLoading={isLoading} />
       ))}
     </section>
   );
