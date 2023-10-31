@@ -10,7 +10,7 @@ const StatsSection = () => {
   return (
     <section className="grid grid-cols-3 gap-4">
       {ApplicantStats.map(props => (
-        <StatsCard key={props.subtitle} {...props} isLoading />
+        <StatsCard key={props.subtitle} {...props} />
       ))}
     </section>
   );
