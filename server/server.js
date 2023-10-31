@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/connectDB.js";
 import applicantRoute from "./routes/applicantRoutes.js";
+import dasboardRoute from "./routes/dashboardRoutes.js";
 import { errorHandler, notFound } from "./middleware/_index.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -24,6 +25,7 @@ app.use(helmet());
 // Routes
 
 app.use("/api/applicant", applicantRoute);
+app.use("/api/dashboard", dasboardRoute);
 
 // Error Handlers
 app.use(notFound);

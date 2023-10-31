@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, MouseEvent } from "react";
 import { BaseLayout } from "../layouts";
+import { useQuery } from "@tanstack/react-query";
 import useDrawer from "../hooks/useDrawer";
 import SettingsDrawer from "../containers/Drawers/SettingsDrawer";
 import StatsSection from "../containers/Dashboard/StatsSection";
 import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
+import { fetchAllData } from "../utils/Api.utils";
+import { Loading } from "../components";
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Graph");
