@@ -6,6 +6,7 @@ import { Table } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApplicants } from "../../api/Applicant.Api";
 import { toast } from "react-toastify";
+import FetchLoader from "../General/FetchLoader";
 
 const SummaryTable = () => {
   const { setTableConfig, handleMutateData } = useTableContext();
@@ -35,6 +36,7 @@ const SummaryTable = () => {
 
   if (isError) {
     toast.error("Something Went Wrong");
+    return <FetchLoader />;
   }
 
   return (

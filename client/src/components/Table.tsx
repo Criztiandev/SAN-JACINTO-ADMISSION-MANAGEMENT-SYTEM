@@ -5,7 +5,7 @@ import { useTableContext } from "../context/TableContext";
 import TableHeader from "../containers/Table/TableHeader";
 import TableRow from "../containers/Table/TableRow";
 import TableAction from "../containers/Table/TableAction";
-import TableEmpty from "../containers/Table/TableEmpty";
+import FetchLoader from "../containers/General/FetchLoader";
 
 interface TableProps {
   layout: string;
@@ -37,7 +37,7 @@ const Table = ({ layout }: TableProps) => {
             </div>
           ))
         ) : (
-          <TableEmpty title="There is No Applicant" />
+          <FetchLoader />
         )}
       </motion.div>
 

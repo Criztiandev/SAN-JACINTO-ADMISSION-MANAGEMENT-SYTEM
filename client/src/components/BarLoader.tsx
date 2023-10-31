@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { BarVariant } from "../animations/Loader.Variant";
 
 interface BarLoaderProps {
-  size: number;
+  size?: number;
   color?: string;
 }
 

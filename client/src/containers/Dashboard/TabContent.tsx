@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Suspense, lazy } from "react";
-
+import FetchLoader from "../General/FetchLoader";
 interface TabContentProps {
   selected: string;
 }
@@ -14,7 +14,7 @@ const PanelList: PanelItem[] = [
   {
     key: "Graph",
     title: "Applicant Graph",
-    Component: lazy(() => import("./GraphComponent")),
+    Component: lazy(() => import("./LineGraph")),
   },
   {
     key: "Admission",
@@ -40,7 +40,7 @@ const TabContent = ({ selected }: TabContentProps) => {
       <div className="w-full bg-gray-300 px-2">
         <h3 className="p-2">{title || "Title"}</h3>
       </div>
-      <Suspense fallback={<div>Loading</div>}>{<Component />}</Suspense>
+      <Suspense fallback={<FetchLoader />}>{<Component />}</Suspense>
     </div>
   );
 };
