@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import applicantInitialValue from "../data/initialValue/applicantInit";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { createApplicant } from "../api/applicant.api";
+import { createApplicant } from "../api/Applicant.Api";
 import useModal from "../hooks/useModal";
 import OutroModal from "../containers/Steps/OutroModal";
 import { useLocalStorage } from "../hooks/useLocalStorage";

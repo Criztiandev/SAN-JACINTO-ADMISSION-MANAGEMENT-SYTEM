@@ -19,7 +19,7 @@ import {
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
-import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.api";
+import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
 
 const Examiniees = () => {
   // Drawers

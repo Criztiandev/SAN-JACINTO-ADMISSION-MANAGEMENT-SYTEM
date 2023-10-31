@@ -7,7 +7,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   deleteApplicantByID,
   fetchApplicantByID,
-} from "../../api/Applicant.api";
+} from "../../api/Applicant.Api";
 
 const DeleteDrawer = ({
   data: APID = "",
@@ -43,51 +43,47 @@ const DeleteDrawer = ({
   if (isLoading) return <Loading />;
 
   return (
-    <>
-      {state && (
-        <AnimatePresence mode="wait">
-          <Drawer
-            className="overflow-scroll"
-            width="600px"
-            state={state}
-            onClick={onClose}>
-            <Formik initialValues={data || []} onSubmit={handleSubmit}>
-              <Form className="grid grid-rows-[72px_auto_64px] gap-4 h-full">
-                <header className="border-b border-gray-300 pb-4">
-                  <h3>Deleting Applicant</h3>
-                  <span>
-                    Deleting this Applicant could lose all its credentials
-                  </span>
-                </header>
+    <AnimatePresence mode="wait">
+      <Drawer
+        className="overflow-scroll"
+        width="600px"
+        state={state}
+        onClick={onClose}>
+        <Formik initialValues={data || []} onSubmit={handleSubmit}>
+          <Form className="grid grid-rows-[72px_auto_64px] gap-4 h-full">
+            <header className="border-b border-gray-300 pb-4">
+              <h3>Deleting Applicant</h3>
+              <span>
+                Deleting this Applicant could lose all its credentials
+              </span>
+            </header>
 
-                <main style={{ lineHeight: "1.8" }}>
-                  Are you absolutely certain you want to proceed with deleting{" "}
-                  <span className="border-b-2 border-black font-bold">
-                    {lastName}, {firstName} {middleName} {suffix || ""}
-                  </span>
-                  's data? Deleting data is an irreversible action and can lead
-                  to permanent loss of information. Please take a moment to
-                  consider the potential consequences before confirming this
-                  action. If you proceed, the data will be removed from the
-                  system, and any associated records or references may be lost.
-                </main>
+            <main style={{ lineHeight: "1.8" }}>
+              Are you absolutely certain you want to proceed with deleting{" "}
+              <span className="border-b-2 border-black font-bold">
+                {lastName}, {firstName} {middleName} {suffix || ""}
+              </span>
+              's data? Deleting data is an irreversible action and can lead to
+              permanent loss of information. Please take a moment to consider
+              the potential consequences before confirming this action. If you
+              proceed, the data will be removed from the system, and any
+              associated records or references may be lost.
+            </main>
 
-                <footer className="flex justify-end items-center gap-4">
-                  <Button
-                    type="outlined"
-                    as="button"
-                    title="Cancel"
-                    icon=""
-                    onClick={onClose}
-                  />
-                  <Button type="outlined" as="submit" title="Submit" icon="" />
-                </footer>
-              </Form>
-            </Formik>
-          </Drawer>
-        </AnimatePresence>
-      )}
-    </>
+            <footer className="flex justify-end items-center gap-4">
+              <Button
+                type="outlined"
+                as="button"
+                title="Cancel"
+                icon=""
+                onClick={onClose}
+              />
+              <Button type="outlined" as="submit" title="Submit" icon="" />
+            </footer>
+          </Form>
+        </Formik>
+      </Drawer>
+    </AnimatePresence>
   );
 };
 

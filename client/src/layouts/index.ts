@@ -1,5 +1,8 @@
+import { lazy } from "react";
 export { default as NavigationBar } from "./Nav";
+
 export { default as Footer } from "./Footer";
 export { default as Header } from "./Header";
-export { default as RegistrationLayout } from "./RegistrationLayout";
-export { default as BaseLayout } from "./BaseLayout";
+
+export const RegistrationLayout = lazy(() => import("./RegistrationLayout"));
+export const BaseLayout = lazy(() => import("./BaseLayout"));

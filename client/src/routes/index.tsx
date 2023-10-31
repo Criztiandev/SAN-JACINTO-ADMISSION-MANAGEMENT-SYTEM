@@ -4,6 +4,7 @@ import { publicRoutes } from "./publicRoutes";
 import { useAuthContext } from "../context/AuthContext";
 import { Suspense } from "react";
 import { Loading } from "../components";
+
 const Routes = () => {
   const { user } = useAuthContext();
 

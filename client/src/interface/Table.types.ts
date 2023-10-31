@@ -2,6 +2,7 @@
 
 import { ColumnFiltersState, TableOptions } from "@tanstack/react-table";
 import { ChangeEvent } from "react";
+import { ToggleProps } from "./Drawer.Types";
 
 export interface TableValue {
   tableData: Array<object> | Array<any>;
@@ -19,4 +20,11 @@ export interface TableValue {
 export interface ColumnFilterProps {
   id: string;
   value: string | number;
+}
+
+export interface TableConfigProps {
+  toggles: ToggleProps | object | any;
+  onToggle: (id: string, toggle: () => void) => void;
+  onAccept: (id: string, status: string) => void;
+  action?: boolean;
 }

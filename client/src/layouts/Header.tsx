@@ -1,7 +1,33 @@
+import { Typography } from "../components";
 import { BaseProps } from "../interface/Component.Type";
+
+interface HeaderLayoutProps extends BaseProps {
+  title?: string;
+  subtitle?: string;
+}
 
 const Header = ({ children, ...props }: BaseProps) => {
   return <header {...props}>{children}</header>;
 };
+
+const HeaderLayout = ({
+  title,
+  subtitle,
+  children,
+  className,
+}: HeaderLayoutProps) => {
+  return (
+    <header className="flex justify-between items-center">
+      <span>
+        <Typography as="h1">{title}</Typography>
+        <Typography as="small">{subtitle}</Typography>
+      </span>
+
+      <span className={`flex gap-4 ${className || ""}`}>{children}</span>
+    </header>
+  );
+};
+
+Header.Layout = HeaderLayout;
 
 export default Header;

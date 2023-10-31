@@ -15,7 +15,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   fetchApplicantByID,
   updateApplicantByID,
-} from "../../api/Applicant.api";
+} from "../../api/Applicant.Api";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { useState } from "react";
 import DrawerLoading from "../DrawerLoading";

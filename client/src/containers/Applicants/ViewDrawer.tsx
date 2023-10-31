@@ -18,7 +18,7 @@ import InputSections from "../Form/InputSections";
 import {
   fetchApplicantByID,
   updateApplicantByID,
-} from "../../api/Applicant.api";
+} from "../../api/Applicant.Api";
 
 import { FetchingDrawerProps } from "../../interface/Component.Type";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";

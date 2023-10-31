@@ -7,9 +7,11 @@ import Routes from "./routes";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthContextProvider from "./context/AuthContext";
-
+import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import ConfigProvider from "./context/ConfigContext";
 
 const queryClient = new QueryClient();
@@ -19,9 +21,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ConfigProvider>
         <AuthContextProvider>
-          <Routes />
-          <ToastContainer />
-          <ReactQueryDevtools />
+          <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
+            <Routes />
+            <ToastContainer />
+            <ReactQueryDevtools />
+          </SkeletonTheme>
         </AuthContextProvider>
       </ConfigProvider>
     </QueryClientProvider>

@@ -12,17 +12,10 @@ import { Badge } from "../components";
 import ActionColumn from "../containers/Applicants/ActionColumn";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
-import { useDrawerProps } from "../interface/Drawer.Types";
+import { TableConfigProps } from "../interface/Table.types";
+import { ToggleProps } from "../interface/Drawer.Types";
 
-interface ToggleProps {
-  viewToggle: useDrawerProps;
-  createToggle: useDrawerProps;
-  updateToggle: useDrawerProps;
-  deleteToggle: useDrawerProps;
-  messageToggle: useDrawerProps;
-}
-
-export const DrawerLists = (selected: any, toggles: ToggleProps) => {
+export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
   const {
     viewToggle,
     createToggle,
@@ -73,14 +66,16 @@ export const DrawerLists = (selected: any, toggles: ToggleProps) => {
   ];
 };
 
-export const TableConfig = (
-  toggles: ToggleProps,
-  onToggle: (id: string, toggle: () => void) => void,
-  onAccept: (id: string, status: string) => void
-): ColumnDef<any, any>[] => {
-  const { viewToggle, updateToggle, deleteToggle, messageToggle } = toggles;
+export const TableConfig = ({
+  toggles,
+  onAccept,
+  onToggle,
+  action = false,
+}: TableConfigProps): ColumnDef<any, any>[] => {
+  const { viewToggle, updateToggle, deleteToggle, messageToggle } =
+    toggles || "";
 
-  return [
+  const config: ColumnDef<any, any>[] = [
     {
       id: "select",
       header: ({ table }) => <TitleHeader data={table} />,
@@ -148,6 +143,9 @@ export const TableConfig = (
       },
     },
   ];
+
+  if (action) return config.filter(filter => filter.header !== "Action");
+  return config;
 };
 
 export const PersoanlDetailsNameInput = [
