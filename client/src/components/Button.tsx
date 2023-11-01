@@ -1,47 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef } from "react";
-import { ComponentType } from "../interface/Component.Type";
-import { ComponentStyle } from "../helper/component.Helper";
-import Typography from "./Typography";
-import Image from "./Image";
+import { BaseButtonStyle } from "../helper/component.Helper";
+import { ButtonProps } from "../interface/Component.Type";
+import { Image, Typography } from ".";
 import { motion } from "framer-motion";
 
-interface ButtonProps extends ComponentType {
-  as?: "button" | "submit" | "reset";
-  dir?: "left" | "right";
-  icon?: string;
-  title?: string;
-  onClick?: any;
-  name?: string;
-  disabled?: boolean;
-  value?: string;
-}
-
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      as = "button",
-      dir,
-      title,
-      icon,
-      type = "contained",
-      onClick,
-      className = "",
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
+  ({ as = "contained", dir, title, icon, className, ...props }, ref) => {
+    const finalizeStyle = `${
+      className && className
+    } flex rounded-full gap-2 items-center justify-center ${BaseButtonStyle(
+      as
+    )}`;
+
     return (
-      <motion.button
-        type={as}
-        ref={ref}
-        className={`
-        flex rounded-full gap-2 items-center justify-center
-        ${ComponentStyle({ type })} ${className && className}`}
-        onClick={onClick}
-        disabled={disabled}
-        {...props}>
+      <motion.button ref={ref} className={finalizeStyle} {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
         <Typography
           as="span"

@@ -7,6 +7,10 @@ export interface TypographyProps extends BaseProps {
 
 export interface IconButtonProps extends BaseButtonProps {}
 
+export interface ButtonProps extends BaseButtonProps {
+  title: string;
+}
+
 export interface SearchBarProps extends BaseActionProps {
   value?: string | number;
   disabled: boolean;

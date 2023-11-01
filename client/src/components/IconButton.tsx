@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { IconButtonProps } from "../interface/Component.Type";
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, as = "contained", icon, ...props }, ref) => {
+  ({ as = "contained", icon, className, ...props }, ref) => {
     const preferedStyle = BaseIconButtonStyle(as);
     const finalizedStyle = `${
       className && className
