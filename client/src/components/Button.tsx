@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef } from "react";
 import { ComponentType } from "../interface/Component.Type";
-import { ComponentStyle } from "../helper/componentHelper";
+import { ComponentStyle } from "../helper/component.Helper";
 import Typography from "./Typography";
 import Image from "./Image";
 import { motion } from "framer-motion";
