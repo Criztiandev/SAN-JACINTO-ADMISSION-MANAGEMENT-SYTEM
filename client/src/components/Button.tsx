@@ -6,12 +6,23 @@ import { Image, Typography } from ".";
 import { motion } from "framer-motion";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ as = "contained", dir, title, icon, className, ...props }, ref) => {
+  (
+    {
+      as = "contained",
+      dir = "left",
+      title,
+      icon,
+      className,
+      unstyled,
+      ...props
+    },
+    ref
+  ) => {
     const finalizeStyle = `${
       className && className
-    } flex rounded-full gap-2 items-center justify-center ${BaseButtonStyle(
-      as
-    )}`;
+    } flex rounded-full gap-2 items-center justify-center ${
+      !unstyled && BaseButtonStyle(as)
+    }`;
 
     return (
       <motion.button

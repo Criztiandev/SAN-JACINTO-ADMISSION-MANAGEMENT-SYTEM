@@ -4,10 +4,10 @@ import { DropdownProps, OptionItem } from "../interface/Component.Type";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { ApplicantIcon } from "../assets/icons";
 
-const Dropdown = ({ isIcon, className, option, ...props }: DropdownProps) => {
+const Dropdown = ({ className, option, ...props }: DropdownProps) => {
   const { ref, active, handleActive } = useClickOutSide();
 
-  const ComponentRender = isIcon && !props.title ? IconButton : Button;
+  const ComponentRender = props.icon && !props.title ? IconButton : Button;
 
   return (
     <motion.div className="relative">
@@ -19,10 +19,14 @@ const Dropdown = ({ isIcon, className, option, ...props }: DropdownProps) => {
             className && className
           }`}>
           {option.map(({ icon, title }: OptionItem) => (
-            <div className="flex gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="flex gap-2 py-1"
+              value={title}
+              onClick={props.onClick}>
               <img src={icon || ApplicantIcon} alt="icon" />
-              <button>{title}</button>
-            </div>
+              <span>{title}</span>
+            </motion.button>
           ))}
         </motion.div>
       )}

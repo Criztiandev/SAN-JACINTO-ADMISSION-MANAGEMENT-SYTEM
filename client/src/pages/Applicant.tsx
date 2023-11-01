@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, SearchBar, Loading, IconButton } from "../components";
+import { Button, Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import { useTableContext } from "../context/TableContext";
@@ -11,17 +11,24 @@ import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import {
-  GradeFilterButton,
-  StatusFilterButton,
-  MoreOptionButton,
-} from "../containers/Applicants";
+import { StatusFilterButton } from "../containers/Applicants";
 
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
-import useDrawer from "../hooks/useDrawer";
 import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
 import FetchLoader from "../containers/General/FetchLoader";
 import FilterButton from "../containers/Applicants/FilterButton";
+import { FilterIcon, ApplicantIcon } from "../assets/icons";
+import useDrawer from "../hooks/useDrawer";
+import { OptionItem } from "../interface/Component.Type";
+
+const GradeOptions: OptionItem[] = [
+  { icon: ApplicantIcon, title: "Grade 7" },
+  { icon: ApplicantIcon, title: "Grade 8" },
+  { icon: ApplicantIcon, title: "Grade 9" },
+  { icon: ApplicantIcon, title: "Grade 10" },
+  { icon: ApplicantIcon, title: "Grade 11" },
+  { icon: ApplicantIcon, title: "Grade 12" },
+];
 
 const Applicant = () => {
   // Drawers
@@ -109,9 +116,16 @@ const Applicant = () => {
           <SearchBar value={search} onChange={handleSearch} disabled={true} />
 
           <div className="flex gap-4">
-            <FilterButton title="Grade" />
-            <FilterButton title="Status" />
-            <IconButton />
+            <FilterButton
+              icon={FilterIcon}
+              title="Grade"
+              option={GradeOptions}
+            />
+            <FilterButton
+              icon={FilterIcon}
+              title="Status"
+              option={GradeOptions}
+            />
             {/* <GradeFilterButton
               title="Grade"
               onSelect={(e: MouseEvent<HTMLButtonElement>) =>
@@ -130,7 +144,6 @@ const Applicant = () => {
                 })
               }
             />
-            <MoreOptionButton />
           </div>
         </div>
 

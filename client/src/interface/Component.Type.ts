@@ -8,7 +8,8 @@ export interface TypographyProps extends BaseProps {
 export interface IconButtonProps extends BaseButtonProps {}
 
 export interface ButtonProps extends BaseButtonProps {
-  title: string;
+  title?: string;
+  unstyled?: boolean;
 }
 
 export interface SearchBarProps extends BaseActionProps {
@@ -20,7 +21,6 @@ export interface SearchBarProps extends BaseActionProps {
 
 export interface DropdownProps extends BaseButtonProps {
   title?: string;
-  isIcon?: boolean;
   option: Array<OptionItem>;
 }
 

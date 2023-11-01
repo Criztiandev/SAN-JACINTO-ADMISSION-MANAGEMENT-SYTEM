@@ -14,14 +14,14 @@ export type ComponentStyle = "contained" | "outlined" | "ghost";
 
 export interface BaseActionProps {
   as: ComponentStyle;
-  className: string;
-  name: string;
+  className?: string;
+  name?: string;
 }
 
 export interface BaseButtonProps extends BaseActionProps {
   type: "button" | "submit" | "reset";
   icon?: string;
   dir?: "left" | "right";
-  disabled: boolean;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void | (() => void);
 }
