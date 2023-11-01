@@ -45,3 +45,12 @@ export interface ToggleProps {
   deleteToggle: useDrawerProps;
   messageToggle: useDrawerProps;
 }
+export interface ToggleDrawerProps {
+  state: boolean;
+  onClose: () => void;
+}
+
+export interface FetchingDrawerProps extends ToggleDrawerProps {
+  data?: string;
+  onEdit?: boolean;
+}

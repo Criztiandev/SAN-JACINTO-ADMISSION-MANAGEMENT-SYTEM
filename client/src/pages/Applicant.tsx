@@ -20,6 +20,8 @@ import {
 import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
 import useDrawer from "../hooks/useDrawer";
 import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
+import FetchLoader from "../containers/General/FetchLoader";
+import FilterButton from "../containers/Applicants/FilterButton";
 
 const Applicant = () => {
   // Drawers
@@ -91,53 +93,51 @@ const Applicant = () => {
     };
   }, []);
 
-  // Checking if there us an error
-  if (isError) toast.error(error.message);
-  if (isLoading) return <Loading />;
-
   return (
     <>
       <BaseLayout
         title="Applicants"
-        header={
+        actions={
           <Button
             dir="left"
             title="Create"
             icon={CreateApplicantIcon}
             onClick={createToggle.toggleDrawer}
           />
-        }
-        action>
-        {tableData.length > 0 ? (
-          <div className="flex justify-between items-center">
-            <SearchBar value={search} onChange={handleSearch} />
+        }>
+        <div className="flex justify-between items-center">
+          <SearchBar value={search} onChange={handleSearch} disabled={true} />
 
-            <div className="flex gap-4">
-              <GradeFilterButton
-                title="Grade"
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch({
-                    id: "studentDetails.yearLevel",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-              <StatusFilterButton
-                title="Filter"
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch({
-                    id: "status",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-              <MoreOptionButton />
-            </div>
+          <div className="flex gap-4">
+            <FilterButton title="Grade" />
+            <FilterButton title="Status" />
+            {/* <GradeFilterButton
+              title="Grade"
+              onSelect={(e: MouseEvent<HTMLButtonElement>) =>
+                handleColumnSearch({
+                  id: "studentDetails.yearLevel",
+                  value: e.currentTarget.value,
+                })
+              }
+            /> */}
+            <StatusFilterButton
+              title="Filter"
+              onSelect={(e: MouseEvent<HTMLButtonElement>) =>
+                handleColumnSearch({
+                  id: "status",
+                  value: e.currentTarget.value,
+                })
+              }
+            />
+            <MoreOptionButton />
           </div>
+        </div>
+
+        {isError || isLoading ? (
+          <FetchLoader />
         ) : (
-          <span></span>
+          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
         )}
-        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
       </BaseLayout>
 
       {DrawerLists(selected, toggleOptions).map(
