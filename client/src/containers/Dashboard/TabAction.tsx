@@ -1,8 +1,7 @@
-import { GraphIcon, CalendarIcon, ApplicantIcon } from "../../assets/icons";
+import { CalendarIcon, ApplicantIcon } from "../../assets/icons";
 import GraphButton from "./TabButton";
 import { MouseEvent } from "react";
 const DashboardPanel = [
-  { title: "Graph", icons: GraphIcon },
   { title: "Admission", icons: CalendarIcon },
   { title: "Applicant", icons: ApplicantIcon },
 ];
@@ -26,6 +25,10 @@ const TabAction = ({ selected, isPending, onSelect }: TabActionProps) => {
             onClick={onSelect}
           />
         ))}
+      </div>
+
+      <div className="w-full h-full p-4 border border-gray-400 rounded-[5px]">
+        hi
       </div>
     </div>
   );

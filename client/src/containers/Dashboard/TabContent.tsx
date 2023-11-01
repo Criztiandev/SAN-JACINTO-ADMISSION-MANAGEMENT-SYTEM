@@ -1,21 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, ComponentType } from "react";
 import FetchLoader from "../General/FetchLoader";
+import { toast } from "react-toastify";
 interface TabContentProps {
   selected: string;
 }
 interface PanelItem {
   key?: string;
   title: string;
-  Component: any;
+  Component: ComponentType<any>;
 }
 
 const PanelList: PanelItem[] = [
-  {
-    key: "Graph",
-    title: "Applicant Graph",
-    Component: lazy(() => import("./LineGraph")),
-  },
   {
     key: "Admission",
     title: "Admission Calendar",
@@ -29,12 +25,15 @@ const PanelList: PanelItem[] = [
 ];
 
 const TabContent = ({ selected }: TabContentProps) => {
-  const { title, Component } = PanelList.find(
-    (e: PanelItem) => e.key === selected
-  ) || {
-    title: "",
-    Component: null,
-  };
+  const found: any = PanelList.find((e: PanelItem) => e.key === selected);
+
+  if (!found) {
+    toast.error("Content Doesnt Exist");
+    <FetchLoader />;
+  }
+
+  const { title, Component } = found;
+
   return (
     <div className="relative border w-full h-[400px] rounded-[5px] flex flex-col gap-2 overflow-hidden">
       <div className="w-full bg-gray-300 px-2">
