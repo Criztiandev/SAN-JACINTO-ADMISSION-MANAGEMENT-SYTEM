@@ -14,7 +14,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     )}`;
 
     return (
-      <motion.button ref={ref} className={finalizeStyle} {...props}>
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        ref={ref}
+        className={finalizeStyle}
+        {...props}>
         {dir === "left" && <Image src={icon} alt="icon" />}
         <Typography
           as="span"
