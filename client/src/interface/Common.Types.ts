@@ -10,7 +10,7 @@ export interface ItemProps {
   title: string;
 }
 
-type ComponentStyle = "contained" | "outlined" | "ghost" | "unstyled";
+export type ComponentStyle = "contained" | "outlined" | "ghost";
 
 export interface BaseActionProps {
   as: ComponentStyle;
