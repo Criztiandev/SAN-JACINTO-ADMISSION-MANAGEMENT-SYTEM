@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, MouseEvent } from "react";
 
 export interface BaseProps {
   className?: string;
@@ -15,8 +15,14 @@ export interface ComponentStyle {
 }
 
 export interface BaseActionProps extends ComponentStyle {
-  dir?: "left" | "right";
   className: string;
   name: string;
+}
+
+export interface BaseButtonProps extends BaseActionProps {
+  type: "button" | "submit" | "reset";
+  icon?: string;
+  dir?: "left" | "right";
   disabled: boolean;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }

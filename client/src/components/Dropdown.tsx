@@ -4,10 +4,10 @@ import { DropdownProps, OptionItem } from "../interface/Component.Type";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { ApplicantIcon } from "../assets/icons";
 
-const Dropdown = ({ as, className, option, ...props }: DropdownProps) => {
+const Dropdown = ({ isIcon, className, option, ...props }: DropdownProps) => {
   const { ref, active, handleActive } = useClickOutSide();
 
-  const ComponentRender = as === "icon" && !props.title ? IconButton : Button;
+  const ComponentRender = isIcon && !props.title ? IconButton : Button;
 
   return (
     <motion.div className="relative">

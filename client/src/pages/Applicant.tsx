@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, SearchBar, Loading } from "../components";
+import { Button, Table, SearchBar, Loading, IconButton } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import { useTableContext } from "../context/TableContext";
@@ -111,6 +111,7 @@ const Applicant = () => {
           <div className="flex gap-4">
             <FilterButton title="Grade" />
             <FilterButton title="Status" />
+            <IconButton />
             {/* <GradeFilterButton
               title="Grade"
               onSelect={(e: MouseEvent<HTMLButtonElement>) =>
