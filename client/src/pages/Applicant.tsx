@@ -5,30 +5,24 @@ import { Button, Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
 import { useTableContext } from "../context/TableContext";
-import { useEffect, MouseEvent } from "react";
+import { useEffect } from "react";
 
 import { DrawerListProps } from "../interface/Drawer.Types";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { StatusFilterButton } from "../containers/Applicants";
-
-import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
-import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
+import {
+  DrawerLists,
+  GradeOptions,
+  StatusItems,
+  TableConfig,
+} from "../helper/Applicant.Helper";
+import { updateStatusApplicant } from "../api/Applicant.Api";
 import FetchLoader from "../containers/General/FetchLoader";
 import FilterButton from "../containers/Applicants/FilterButton";
-import { FilterIcon, ApplicantIcon } from "../assets/icons";
+import { FilterIcon } from "../assets/icons";
 import useDrawer from "../hooks/useDrawer";
-import { OptionItem } from "../interface/Component.Type";
-
-const GradeOptions: OptionItem[] = [
-  { icon: ApplicantIcon, title: "Grade 7" },
-  { icon: ApplicantIcon, title: "Grade 8" },
-  { icon: ApplicantIcon, title: "Grade 9" },
-  { icon: ApplicantIcon, title: "Grade 10" },
-  { icon: ApplicantIcon, title: "Grade 11" },
-  { icon: ApplicantIcon, title: "Grade 12" },
-];
+import { fetchAllData } from "../utils/Api.utils";
 
 const Applicant = () => {
   // Drawers
@@ -38,9 +32,9 @@ const Applicant = () => {
   const deleteToggle = useDrawer();
   const messageToggle = useDrawer();
 
-  const { isLoading, isError, error, refetch } = useQuery({
+  const { isLoading, isError, refetch } = useQuery({
     queryFn: async () => {
-      const { data } = await fetchApplicants();
+      const { data } = await fetchAllData("applicant");
       handleMutateData(data.payload);
       return data;
     },
@@ -61,7 +55,6 @@ const Applicant = () => {
   });
 
   const {
-    tableData,
     search,
     selected,
     handleSearch,
@@ -106,10 +99,12 @@ const Applicant = () => {
         title="Applicants"
         actions={
           <Button
+            type="button"
             dir="left"
             title="Create"
             icon={CreateApplicantIcon}
             onClick={createToggle.toggleDrawer}
+            disabled={true}
           />
         }>
         <div className="flex justify-between items-center">
@@ -120,29 +115,13 @@ const Applicant = () => {
               icon={FilterIcon}
               title="Grade"
               option={GradeOptions}
+              disabled={true}
             />
             <FilterButton
               icon={FilterIcon}
               title="Status"
-              option={GradeOptions}
-            />
-            {/* <GradeFilterButton
-              title="Grade"
-              onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                handleColumnSearch({
-                  id: "studentDetails.yearLevel",
-                  value: e.currentTarget.value,
-                })
-              }
-            /> */}
-            <StatusFilterButton
-              title="Filter"
-              onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                handleColumnSearch({
-                  id: "status",
-                  value: e.currentTarget.value,
-                })
-              }
+              option={StatusItems}
+              disabled={true}
             />
           </div>
         </div>

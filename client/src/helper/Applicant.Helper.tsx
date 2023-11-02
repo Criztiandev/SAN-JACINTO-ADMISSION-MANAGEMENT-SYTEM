@@ -14,6 +14,8 @@ import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
 import { TableConfigProps } from "../interface/Table.types";
 import { ToggleProps } from "../interface/Drawer.Types";
+import { OptionItem } from "../interface/Component.Type";
+import { ApplicantIcon } from "../assets/icons";
 
 export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
   const {
@@ -22,7 +24,7 @@ export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
     updateToggle,
     deleteToggle,
     messageToggle,
-  } = toggles;
+  } = toggles || {};
 
   return [
     {
@@ -144,7 +146,7 @@ export const TableConfig = ({
     },
   ];
 
-  if (action) return config.filter(filter => filter.header !== "Action");
+  if (action) return config.filter((filter) => filter.header !== "Action");
   return config;
 };
 
@@ -153,4 +155,19 @@ export const PersoanlDetailsNameInput = [
   { name: "personalDetails.firstName" },
   { name: "personalDetails.middleName" },
   { name: "personalDetails.suffix" },
+];
+
+export const GradeOptions: OptionItem[] = [
+  { icon: ApplicantIcon, title: "Grade 7" },
+  { icon: ApplicantIcon, title: "Grade 8" },
+  { icon: ApplicantIcon, title: "Grade 9" },
+  { icon: ApplicantIcon, title: "Grade 10" },
+  { icon: ApplicantIcon, title: "Grade 11" },
+  { icon: ApplicantIcon, title: "Grade 12" },
+];
+
+export const StatusItems: OptionItem[] = [
+  { title: "Default", icon: ApplicantIcon },
+  { title: "Pending", icon: ApplicantIcon },
+  { title: "Hold", icon: ApplicantIcon },
 ];

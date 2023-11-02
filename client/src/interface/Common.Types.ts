@@ -13,13 +13,13 @@ export interface ItemProps {
 export type ComponentStyle = "contained" | "outlined" | "ghost";
 
 export interface BaseActionProps {
-  as: ComponentStyle;
+  as?: ComponentStyle;
   className?: string;
   name?: string;
 }
 
 export interface BaseButtonProps extends BaseActionProps {
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   icon?: string;
   dir?: "left" | "right";
   disabled?: boolean;

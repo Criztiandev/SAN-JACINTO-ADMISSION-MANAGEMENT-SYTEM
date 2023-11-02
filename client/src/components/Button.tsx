@@ -6,23 +6,12 @@ import { Image, Typography } from ".";
 import { motion } from "framer-motion";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      as = "contained",
-      dir = "left",
-      title,
-      icon,
-      className,
-      unstyled,
-      ...props
-    },
-    ref
-  ) => {
+  ({ as = "contained", dir = "left", className, unstyled, ...props }, ref) => {
     const finalizeStyle = `${
       className && className
     } flex rounded-full gap-2 items-center justify-center ${
       !unstyled && BaseButtonStyle(as)
-    }`;
+    } ${props.disabled && "opacity-50"}`;
 
     return (
       <motion.button
@@ -31,13 +20,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={finalizeStyle}
         {...props}>
-        {dir === "left" && <Image src={icon} alt="icon" />}
+        {dir === "left" && <Image src={props.icon} alt="icon" />}
+
         <Typography
           as="span"
           className="text-[14px] w-full flex justify-between">
-          {title}
+          {props.title}
         </Typography>
-        {dir === "right" && <Image src={icon} alt="icon" />}
+
+        {dir === "right" && <Image src={props.icon} alt="icon" />}
       </motion.button>
     );
   }

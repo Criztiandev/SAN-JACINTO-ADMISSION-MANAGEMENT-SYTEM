@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from "react";
-import { BaseProps } from "./Component.Type";
+import { BaseProps } from "./Common.Types";
 
 export interface DrawerProps extends BaseProps {
   width?: string;

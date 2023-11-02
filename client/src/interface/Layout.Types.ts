@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BaseProps } from "../interface/Component.Type";
+import { BaseProps } from "../interface/Common.Types";
 
 export interface IconProps extends BaseProps {
   path: string;
@@ -12,4 +12,9 @@ export interface BaseLayoutProps extends BaseProps {
   subtitle?: string;
   actions?: ReactNode;
   style?: "free" | "default";
+}
+
+export interface HeaderLayoutProps extends BaseProps {
+  title?: string;
+  subtitle?: string;
 }
