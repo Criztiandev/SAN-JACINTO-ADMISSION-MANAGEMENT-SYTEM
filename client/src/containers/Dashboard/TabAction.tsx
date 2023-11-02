@@ -8,20 +8,20 @@ const DashboardPanel = [
 
 interface TabActionProps {
   selected: string;
-  isPending: boolean;
+  pending: boolean;
   onSelect: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const TabAction = ({ selected, isPending, onSelect }: TabActionProps) => {
+const TabAction = ({ selected, pending, onSelect }: TabActionProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-3 gap-4 justify-items-center w-full">
-        {DashboardPanel.map(props => (
+        {DashboardPanel.map((props) => (
           <GraphButton
             key={props.title}
             {...props}
             selected={selected}
-            pending={isPending}
+            pending={pending}
             onClick={onSelect}
           />
         ))}

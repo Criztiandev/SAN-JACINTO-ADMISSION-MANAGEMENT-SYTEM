@@ -10,9 +10,7 @@ const ScheduleCalendar = () => {
     queryKey: ["admissionSched"],
   });
 
-  if (isLoading || isError) {
-    return <FetchLoader />;
-  }
+  if (isLoading || isError) return <FetchLoader />;
 
   return (
     <>

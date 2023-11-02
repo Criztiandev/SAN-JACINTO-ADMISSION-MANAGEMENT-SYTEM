@@ -5,12 +5,11 @@ import { TableConfig } from "../../helper/Applicant.Helper";
 import { Table } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApplicants } from "../../api/Applicant.Api";
-import { toast } from "react-toastify";
 import FetchLoader from "../General/FetchLoader";
 
 const SummaryTable = () => {
   const { setTableConfig, handleMutateData } = useTableContext();
-  const { isError } = useQuery({
+  const { isError, isLoading } = useQuery({
     queryFn: async () => {
       const { data } = await fetchApplicants();
       handleMutateData(data.payload);
@@ -34,10 +33,7 @@ const SummaryTable = () => {
     };
   }, []);
 
-  if (isError) {
-    toast.error("Something Went Wrong");
-    return <FetchLoader />;
-  }
+  if (isError || isLoading) return <FetchLoader />;
 
   return (
     <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px" />

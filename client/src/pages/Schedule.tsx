@@ -11,49 +11,37 @@ const Schedule = () => {
   const [selectedTab, setSelectedTab] = useState("calendar");
 
   return (
-    <>
-      <BaseLayout title="Schedule">
-        <div className="flex justify-between items-center">
-          {selectedTab === "batch" ? (
-            <SearchBar dir="left" />
-          ) : (
-            <div>{currentDate.getDate()}</div>
-          )}
+    <BaseLayout title="Schedule">
+      <div className="flex justify-between items-center">
+        {selectedTab === "batch" ? (
+          <SearchBar dir="left" />
+        ) : (
+          <div>{currentDate.getDate()}</div>
+        )}
 
-          <div className="flex gap-4 items-center">
-            <Button
-              icon={CalendarIcon}
-              as={"outlined"}
-              title="Calendar"
-              onClick={() => setSelectedTab("calendar")}
-            />
-            <Button
-              icon={ApplicantIcon}
-              title="Batch"
-              as={"outlined"}
-              onClick={() => setSelectedTab("batch")}
-            />
-            {/* <Dropdown /> */}
-          </div>
+        <div className="flex gap-4 items-center">
+          <Button
+            icon={CalendarIcon}
+            as={"outlined"}
+            title="Calendar"
+            onClick={() => setSelectedTab("calendar")}
+          />
+          <Button
+            icon={ApplicantIcon}
+            title="Batch"
+            as={"outlined"}
+            onClick={() => setSelectedTab("batch")}
+          />
+          {/* <Dropdown /> */}
         </div>
-        <section className="grid grid-cols-[auto_300px] gap-4">
-          {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
+      </div>
+      <section className="grid grid-cols-[auto_300px] gap-4">
+        {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
 
-          <aside className="border border-gray-400 rounded-[5px]"></aside>
-        </section>
-        <div></div>
-      </BaseLayout>
-
-      {/* <CreateScheduleDrawer
-        state={createDrawer.active}
-        onClick={createDrawer.toggleDrawer}
-      />
-
-      <ViewScheduleDrawer
-        state={viewDrawer.active}
-        onClick={viewDrawer.toggleDrawer}
-      /> */}
-    </>
+        <aside className="border border-gray-400 rounded-[5px]"></aside>
+      </section>
+      <div></div>
+    </BaseLayout>
   );
 };
 
