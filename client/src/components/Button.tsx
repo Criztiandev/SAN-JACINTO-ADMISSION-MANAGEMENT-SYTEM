@@ -1,54 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { forwardRef } from "react";
-import { ComponentType } from "../interface/Component.Type";
-import { ComponentStyle } from "../helper/componentHelper";
-import Typography from "./Typography";
-import Image from "./Image";
+import { BaseButtonStyle } from "../helper/component.Helper";
+import { ButtonProps } from "../interface/Component.Type";
+import { Image, Typography } from ".";
 import { motion } from "framer-motion";
 
-interface ButtonProps extends ComponentType {
-  as?: "button" | "submit" | "reset";
-  dir?: "left" | "right";
-  icon?: string;
-  title?: string;
-  onClick?: any;
-  name?: string;
-  disabled?: boolean;
-  value?: string;
-}
-
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      as = "button",
-      dir,
-      title,
-      icon,
-      type = "contained",
-      onClick,
-      className = "",
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
+  ({ as = "contained", dir = "left", className, unstyled, ...props }, ref) => {
+    const finalizeStyle = `${
+      className && className
+    } flex rounded-full gap-2 items-center justify-center ${
+      !unstyled && BaseButtonStyle(as)
+    } ${props.disabled && "opacity-50"}`;
+
     return (
       <motion.button
-        type={as}
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
         ref={ref}
-        className={`
-        flex rounded-full gap-2 items-center justify-center
-        ${ComponentStyle({ type })} ${className && className}`}
-        onClick={onClick}
-        disabled={disabled}
+        className={finalizeStyle}
         {...props}>
-        {dir === "left" && <Image src={icon} alt="icon" />}
+        {dir === "left" && <Image src={props.icon} alt="icon" />}
+
         <Typography
           as="span"
           className="text-[14px] w-full flex justify-between">
-          {title}
+          {props.title}
         </Typography>
-        {dir === "right" && <Image src={icon} alt="icon" />}
+
+        {dir === "right" && <Image src={props.icon} alt="icon" />}
       </motion.button>
     );
   }

@@ -28,10 +28,10 @@ const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
   const [currentTitle, setCurrentTitle] = useState<string | null>(null);
 
   const handleTitleUpdate = (_title: string) => {
-    console.log(_title);
     if (_title === "") return setCurrentTitle(title);
     setCurrentTitle(_title);
   };
+
   return (
     <Dropdown
       className="border z-50 p-2"
@@ -40,7 +40,7 @@ const GradeFilter = ({ title, onSelect }: GradeFilterProps) => {
       type="outlined"
       title={currentTitle || title}
       icon={FilterIcon}>
-      {FilterItems.map(items => (
+      {FilterItems.map((items) => (
         <div key={items.title} className="hover:bg-blue-300 rounded-[5px]">
           <Button
             key={items.title}

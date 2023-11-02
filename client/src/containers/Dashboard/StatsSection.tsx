@@ -9,18 +9,33 @@ interface StatsDataProps {
 }
 
 const StatsSection = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryFn: async () => await fetchAllData("dashboard"),
     queryKey: ["statsData"],
   });
 
-  if (isLoading) return;
+  if (isLoading || isError) {
+    return (
+      <section className="grid grid-cols-3 gap-4">
+        {[{}, {}, {}].map(() => (
+          <StatsCard
+            key={Math.random()}
+            title="NA"
+            count={0}
+            increase={0}
+            isLoading={true}
+          />
+        ))}
+      </section>
+    );
+  }
 
   const { payload } = data;
+
   return (
     <section className="grid grid-cols-3 gap-4">
       {payload.map((props: StatsDataProps) => (
-        <StatsCard key={props.title} {...props} isLoading={isLoading} />
+        <StatsCard key={props.title} {...props} />
       ))}
     </section>
   );

@@ -21,7 +21,7 @@ const StatsCard = ({ count, title, increase, isLoading }: StatsCardProps) => {
             <Typography as="h5" className="cursor-default">
               Total
             </Typography>
-            <Badge as="stats" title={`+${increase}`} />
+            <Badge as="stats" title={`+${increase}`} className="bg-red" />
           </div>
 
           <div className="flex flex-col">

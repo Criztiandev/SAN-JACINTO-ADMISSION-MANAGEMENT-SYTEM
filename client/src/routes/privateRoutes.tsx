@@ -15,9 +15,11 @@ const routes = [
   {
     path: "/",
     element: (
-      <TableProvider>
-        <DashboardPage />
-      </TableProvider>
+      <ScheduleProvider>
+        <TableProvider>
+          <DashboardPage />
+        </TableProvider>
+      </ScheduleProvider>
     ),
   },
   {
@@ -32,7 +34,9 @@ const routes = [
     path: "/schedule",
     element: (
       <ScheduleProvider>
-        <SchedulePage />
+        <TableProvider>
+          <SchedulePage />
+        </TableProvider>
       </ScheduleProvider>
     ),
   },
@@ -65,7 +69,7 @@ const routes = [
 ];
 
 export const privateRoutes = createBrowserRouter(
-  routes.map(route => ({
+  routes.map((route) => ({
     path: route.path,
     element: route.element,
     errorElement: <ErrorPage />,

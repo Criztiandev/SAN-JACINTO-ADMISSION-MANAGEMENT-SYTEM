@@ -4,15 +4,13 @@ import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import FetchLoader from "../General/FetchLoader";
 
-const AdmissionCalendar = () => {
+const ScheduleCalendar = () => {
   const { data, isError, isLoading, isFetched } = useQuery({
     queryFn: async () => {},
     queryKey: ["admissionSched"],
   });
 
-  if (isLoading || isError) {
-    return <FetchLoader />;
-  }
+  if (isLoading || isError) return <FetchLoader />;
 
   return (
     <>
@@ -29,4 +27,4 @@ const AdmissionCalendar = () => {
   );
 };
 
-export default AdmissionCalendar;
+export default ScheduleCalendar;

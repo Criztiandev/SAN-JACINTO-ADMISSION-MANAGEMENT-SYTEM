@@ -1,3 +1,5 @@
+import { lazy } from "react";
+
 export { default as NextIcon } from "./Expand_right_light.svg";
 export { default as PrevIcon } from "./Expand_left_light.svg";
 export { default as NotifIcon } from "./Bell_light.svg";
@@ -19,3 +21,4 @@ export { default as ToolsIcon } from "./Structure_Dark.svg";
 export { default as SignOutIcon } from "./Sign_out_Dark.svg";
 export { default as SettingIcon } from "./Settings_Dark.svg";
 export { default as GraphIcon } from "./Graph_Dark.svg";
+export { default as FilterIcon } from "./Filter.svg";

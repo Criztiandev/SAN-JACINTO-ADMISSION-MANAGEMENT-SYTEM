@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement } from "react";
-import { BaseProps } from "./Component.Type";
+import { BaseProps } from "./Common.Types";
 
 export interface DrawerProps extends BaseProps {
   width?: string;
@@ -12,6 +12,11 @@ export interface DrawerProps extends BaseProps {
 export interface useDrawerProps {
   active: boolean;
   toggleDrawer: () => void;
+}
+
+export interface ToggleDrawer {
+  state: boolean;
+  onClose: () => void;
 }
 
 export interface DrawerValue {
@@ -39,4 +44,13 @@ export interface ToggleProps {
   updateToggle: useDrawerProps;
   deleteToggle: useDrawerProps;
   messageToggle: useDrawerProps;
+}
+export interface ToggleDrawerProps {
+  state: boolean;
+  onClose: () => void;
+}
+
+export interface FetchingDrawerProps extends ToggleDrawerProps {
+  data?: string;
+  onEdit?: boolean;
 }
