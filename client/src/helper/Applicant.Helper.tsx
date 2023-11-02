@@ -14,6 +14,8 @@ import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
 import { TableConfigProps } from "../interface/Table.types";
 import { ToggleProps } from "../interface/Drawer.Types";
+import { OptionItem } from "../interface/Component.Type";
+import { ApplicantIcon } from "../assets/icons";
 
 export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
   const {
@@ -22,46 +24,46 @@ export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
     updateToggle,
     deleteToggle,
     messageToggle,
-  } = toggles;
+  } = toggles || {};
 
   return [
     {
       id: "0",
       Component: ViewLazyDrawer,
       data: selected,
-      state: viewToggle.active,
-      onClose: viewToggle.toggleDrawer,
+      state: viewToggle?.active,
+      onClose: viewToggle?.toggleDrawer,
     },
 
     {
       id: "1",
       Component: CreateLazyDrawer,
-      state: createToggle.active,
-      onClose: createToggle.toggleDrawer,
+      state: createToggle?.active,
+      onClose: createToggle?.toggleDrawer,
     },
 
     {
       id: "2",
       Component: UpdateLazyDrawer,
       data: selected,
-      state: updateToggle.active,
-      onClose: updateToggle.toggleDrawer,
+      state: updateToggle?.active,
+      onClose: updateToggle?.toggleDrawer,
     },
 
     {
       id: "3",
       Component: MessageLazyDrawer,
       data: selected,
-      state: messageToggle.active,
-      onClose: messageToggle.toggleDrawer,
+      state: messageToggle?.active,
+      onClose: messageToggle?.toggleDrawer,
     },
 
     {
       id: "4",
       Component: DeleteLazyDrawer,
       data: selected,
-      state: deleteToggle.active,
-      onClose: deleteToggle.toggleDrawer,
+      state: deleteToggle?.active,
+      onClose: deleteToggle?.toggleDrawer,
     },
   ];
 };
@@ -144,7 +146,7 @@ export const TableConfig = ({
     },
   ];
 
-  if (action) return config.filter(filter => filter.header !== "Action");
+  if (action) return config.filter((filter) => filter.header !== "Action");
   return config;
 };
 
@@ -153,4 +155,19 @@ export const PersoanlDetailsNameInput = [
   { name: "personalDetails.firstName" },
   { name: "personalDetails.middleName" },
   { name: "personalDetails.suffix" },
+];
+
+export const GradeOptions: OptionItem[] = [
+  { icon: ApplicantIcon, title: "Grade 7" },
+  { icon: ApplicantIcon, title: "Grade 8" },
+  { icon: ApplicantIcon, title: "Grade 9" },
+  { icon: ApplicantIcon, title: "Grade 10" },
+  { icon: ApplicantIcon, title: "Grade 11" },
+  { icon: ApplicantIcon, title: "Grade 12" },
+];
+
+export const StatusItems: OptionItem[] = [
+  { title: "Default", icon: ApplicantIcon },
+  { title: "Pending", icon: ApplicantIcon },
+  { title: "Hold", icon: ApplicantIcon },
 ];

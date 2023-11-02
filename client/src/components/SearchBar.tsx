@@ -1,70 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useRef, useEffect, ChangeEvent, forwardRef } from "react";
+import { forwardRef } from "react";
 import SearchIcon from "../assets/icons/Search.svg";
-import { ComponentType } from "../interface/Component.Type";
-
-interface SearchBarProps extends ComponentType {
-  as?: "icon" | "normal";
-  dir?: "left" | "right";
-  value?: string | number;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (event: any) => void;
-}
+import { SearchBarProps } from "../interface/Component.Type";
+import Skeleton from "react-loading-skeleton";
 
 const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
   (
-    { as = "normal", dir = "left", value, onChange, onClick }: SearchBarProps,
+    { dir = "left", value, onChange, onClick, disabled }: SearchBarProps,
     ref
   ) => {
-    const [active, setActive] = useState<boolean>(as === "normal");
-    const searchBarRef = useRef<HTMLLabelElement | null>(null);
-
-    const handleActive = () => {
-      if (as === "icon") setActive(prev => !prev);
-    };
-
-    // Handle Click outside to turn off the searchbar
-    useEffect(() => {
-      if (as === "icon") {
-        const handleClickOutSide = (event: MouseEvent) => {
-          if (
-            searchBarRef.current &&
-            !searchBarRef.current.contains(event.target as Node)
-          ) {
-            setActive(false);
-          }
-        };
-
-        document.addEventListener("click", handleClickOutSide);
-
-        return () => {
-          document.removeEventListener("click", handleClickOutSide);
-        };
-      }
-    }, [as]);
+    // if Disabled return the loading
+    if (disabled)
+      return (
+        <div className="w-[300px] rounded-ful h-[49px]">
+          <Skeleton width={"100%"} height={"100%"} />
+        </div>
+      );
 
     return (
       <label
-        ref={searchBarRef}
-        className={`cursor-pointer flex gap-2 border rounded-full w-fit ${
-          active ? "px-[20px] py-3" : "p-3"
-        }`}
+        className={`cursor-pointer flex gap-2 border rounded-full w-fit p-3`}
         onClick={onClick}>
-        {dir === "left" && (
-          <img src={SearchIcon} alt="Magnifying Glass" onClick={handleActive} />
-        )}
-        {active && (
-          <input
-            ref={ref}
-            className="h-fit w-fit outline-none"
-            placeholder="Search here"
-            value={value}
-            onChange={onChange}
-          />
-        )}
-        {dir === "right" && (
-          <img src={SearchIcon} alt="Magnifying Glass" onClick={handleActive} />
-        )}
+        {dir === "left" && <img src={SearchIcon} alt="Magnifying Glass" />}
+        <input
+          ref={ref}
+          className="h-fit w-fit outline-none"
+          placeholder="Search here"
+          value={value}
+          onChange={onChange}
+        />
+        {dir === "right" && <img src={SearchIcon} alt="Magnifying Glass" />}
       </label>
     );
   }

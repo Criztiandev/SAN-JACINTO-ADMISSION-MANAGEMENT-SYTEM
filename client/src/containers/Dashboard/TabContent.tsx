@@ -1,21 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, ComponentType } from "react";
 import FetchLoader from "../General/FetchLoader";
+import { toast } from "react-toastify";
 interface TabContentProps {
   selected: string;
+  pending: boolean;
 }
 interface PanelItem {
   key?: string;
   title: string;
-  Component: any;
+  Component: ComponentType<any>;
 }
 
 const PanelList: PanelItem[] = [
-  {
-    key: "Graph",
-    title: "Applicant Graph",
-    Component: lazy(() => import("./LineGraph")),
-  },
   {
     key: "Admission",
     title: "Admission Calendar",
@@ -28,13 +25,27 @@ const PanelList: PanelItem[] = [
   },
 ];
 
-const TabContent = ({ selected }: TabContentProps) => {
-  const { title, Component } = PanelList.find(
-    (e: PanelItem) => e.key === selected
-  ) || {
-    title: "",
-    Component: null,
-  };
+const TabContent = ({ selected, pending }: TabContentProps) => {
+  const found: any = PanelList.find((e: PanelItem) => e.key === selected);
+
+  if (!found) {
+    toast.error("Content Doesnt Exist");
+    <FetchLoader />;
+  }
+
+  if (pending) {
+    return (
+      <div className="relative border w-full h-[400px] rounded-[5px] flex flex-col gap-2 overflow-hidden">
+        <div className="w-full bg-gray-300 px-2">
+          <h3 className="p-2">{"Pending"}</h3>
+        </div>
+        <FetchLoader />
+      </div>
+    );
+  }
+
+  const { title, Component } = found;
+
   return (
     <div className="relative border w-full h-[400px] rounded-[5px] flex flex-col gap-2 overflow-hidden">
       <div className="w-full bg-gray-300 px-2">

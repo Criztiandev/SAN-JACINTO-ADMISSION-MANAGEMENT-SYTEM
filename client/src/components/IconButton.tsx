@@ -1,45 +1,24 @@
-import { MouseEvent, forwardRef } from "react";
 import Kebbab from "../assets/icons/Kebbab.svg";
-import { ComponentIconStyle } from "../helper/componentHelper";
-import { ComponentType } from "../interface/Component.Type";
+import { forwardRef } from "react";
+import { BaseIconButtonStyle } from "../helper/component.Helper";
 import { motion } from "framer-motion";
-
-interface IconButtonProps extends ComponentType {
-  as?: "button" | "submit";
-  icon?: string;
-  disabled?: boolean;
-  name?: string;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void | (() => void);
-}
+import { IconButtonProps } from "../interface/Component.Type";
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  (
-    {
-      icon = Kebbab,
-      onClick,
-      disabled,
-      type = "ghost",
-      className = "",
-      name,
-      as = "button",
-    },
-    ref
-  ) => {
+  ({ as = "contained", icon, className, ...props }, ref) => {
+    const preferedStyle = BaseIconButtonStyle(as);
+    const finalizedStyle = `${
+      className && className
+    } p-2 rounded-full flex justify-center items-center border border-gray-400 ${preferedStyle}`;
+
     return (
       <motion.button
         whileTap={{ scale: 0.8 }}
         whileHover={{ scale: 1.1 }}
-        type={as}
         ref={ref}
-        disabled={disabled}
-        onClick={onClick}
-        name={name}
-        className={`
-        ${ComponentIconStyle({ type })} 
-        p-2 rounded-full flex justify-center items-center ${
-          className || ""
-        } hover:bg-gray-200`}>
-        <img className="w-6 h-6" src={icon} alt="Kebbab" />
+        className={finalizedStyle}
+        {...props}>
+        <img className="w-6 h-6" src={icon || Kebbab} alt="Kebbab" />
       </motion.button>
     );
   }
