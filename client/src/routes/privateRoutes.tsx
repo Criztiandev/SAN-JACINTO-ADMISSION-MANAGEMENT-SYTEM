@@ -34,7 +34,9 @@ const routes = [
     path: "/schedule",
     element: (
       <ScheduleProvider>
-        <SchedulePage />
+        <TableProvider>
+          <SchedulePage />
+        </TableProvider>
       </ScheduleProvider>
     ),
   },

@@ -13,8 +13,9 @@ export interface ButtonProps extends BaseButtonProps {
 }
 
 export interface SearchBarProps extends BaseActionProps {
+  dir: "left" | "right";
   value?: string | number;
-  disabled: boolean;
+  disabled?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onClick?: (event: unknown) => void;
 }

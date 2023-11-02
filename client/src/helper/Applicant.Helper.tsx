@@ -31,39 +31,39 @@ export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
       id: "0",
       Component: ViewLazyDrawer,
       data: selected,
-      state: viewToggle.active,
-      onClose: viewToggle.toggleDrawer,
+      state: viewToggle?.active,
+      onClose: viewToggle?.toggleDrawer,
     },
 
     {
       id: "1",
       Component: CreateLazyDrawer,
-      state: createToggle.active,
-      onClose: createToggle.toggleDrawer,
+      state: createToggle?.active,
+      onClose: createToggle?.toggleDrawer,
     },
 
     {
       id: "2",
       Component: UpdateLazyDrawer,
       data: selected,
-      state: updateToggle.active,
-      onClose: updateToggle.toggleDrawer,
+      state: updateToggle?.active,
+      onClose: updateToggle?.toggleDrawer,
     },
 
     {
       id: "3",
       Component: MessageLazyDrawer,
       data: selected,
-      state: messageToggle.active,
-      onClose: messageToggle.toggleDrawer,
+      state: messageToggle?.active,
+      onClose: messageToggle?.toggleDrawer,
     },
 
     {
       id: "4",
       Component: DeleteLazyDrawer,
       data: selected,
-      state: deleteToggle.active,
-      onClose: deleteToggle.toggleDrawer,
+      state: deleteToggle?.active,
+      onClose: deleteToggle?.toggleDrawer,
     },
   ];
 };

@@ -1,5 +1,6 @@
 import { Typography } from "../components";
 import { BaseProps } from "../interface/Common.Types";
+import { HeaderLayoutProps } from "../interface/Layout.Types";
 
 const Header = ({ children, ...props }: BaseProps) => {
   return <header {...props}>{children}</header>;
