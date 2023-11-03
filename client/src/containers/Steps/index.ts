@@ -1,9 +1,11 @@
-export { default as GradeLevel } from "./GradeLevel";
-export { default as GradeDetails } from "./GradeDetails";
-export { default as StudentDetails } from "./StudentDetails";
-export { default as PersonalDetails } from "./PersonalDetails";
-export { default as PermanentAddress } from "./PermanentAddress";
-export { default as GuardianDetails } from "./GuardianDetails";
-export { default as OtherDetails } from "./OtherDetails";
-export { default as ApplicationForm } from "./ApplicationForm";
-export { default as Outro } from "./Outro";
+import { lazy } from "react";
+
+export const GradeLevel = lazy(() => import("./GradeLevel"));
+export const GradeDetails = lazy(() => import("./GradeDetails"));
+export const StudentDetails = lazy(() => import("./StudentDetails"));
+export const PersonalDetails = lazy(() => import("./PersonalDetails"));
+export const PermanentAddress = lazy(() => import("./PermanentAddress"));
+export const GuardianDetails = lazy(() => import("./GuardianDetails"));
+export const OtherDetails = lazy(() => import("./OtherDetails"));
+export const ApplicationForm = lazy(() => import("./ApplicationForm"));
+export const Outro = lazy(() => import("./Outro"));

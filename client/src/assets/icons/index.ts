@@ -1,5 +1,3 @@
-import { lazy } from "react";
-
 export { default as NextIcon } from "./Expand_right_light.svg";
 export { default as PrevIcon } from "./Expand_left_light.svg";
 export { default as NotifIcon } from "./Bell_light.svg";
@@ -10,7 +8,6 @@ export { default as ResetIcon } from "./Reset.svg";
 export { default as DeleteIcon } from "./Delete.svg";
 export { default as Download } from "./Arrow_down.svg";
 
-// navigation
 export { default as Dashboard } from "./Overview_Dark.svg";
 export { default as ApplicantIcon } from "./User_Dark.svg";
 export { default as CalendarIcon } from "./Calendar_Dark.svg";
