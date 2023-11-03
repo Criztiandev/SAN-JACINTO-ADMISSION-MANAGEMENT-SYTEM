@@ -1,33 +1,48 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-refresh/only-export-components */
 import { CardProps, InputProps } from "../interface/FormInterface";
-import {
-  ApplicantModelProps,
-  ApplicationFormModelProps,
-} from "../interface/ApplicantMode.Type";
 import { OmitInputObject } from "../utils/OmitUtils";
-
-import useLocalStorage from "../hooks/useLocalStorage";
-import { useFormikContext } from "formik";
-import { useEffect } from "react";
-
-import MaleProfile from "../assets/image/Male_profile.png";
-import FemaleProfile from "../assets/image/Female_Profile.png";
+import { ApplicationFormModelProps } from "../interface/ApplicantMode.Type";
+import { MaleProfile, FemaleProfile } from "../assets/image";
 import { ItemSelectProps } from "../interface/FormInterface";
 
 export const JrTracksItemModel: CardProps[] = [
-  { cover: "null", title: "Regular", subtitle: "Regular Student" },
-  { cover: "null", title: "SPE", subtitle: "Regular" },
-  { cover: "null", title: "SPJ", subtitle: "Special Journalism" },
+  { cover: "null", title: "Regular", subtitle: "General Academic Strand" },
+  { cover: "null", title: "SPE", subtitle: "General Academic Strand" },
+  { cover: "null", title: "SPJ", subtitle: "General Academic Strand" },
 ];
 
 export const SHSTracksItemModel: CardProps[] = [
-  { cover: "null", title: "GAS", subtitle: "Regular Student" },
-  { cover: "null", title: "STEM", subtitle: "Regular" },
-  { cover: "null", title: "ABM", subtitle: "Special Journalism" },
+  { cover: "null", title: "GAS", subtitle: "General Academic Strand" },
+  {
+    cover: "null",
+    title: "STEM",
+    subtitle: "Science, Technology, Engineering, and Mathematics",
+  },
+  {
+    cover: "null",
+    title: "ABM",
+    subtitle: "Accountancy Business Management",
+  },
+
+  {
+    cover: "null",
+    title: "EIM",
+    subtitle: "EIM",
+  },
+
+  {
+    cover: "null",
+    title: "ICT",
+    subtitle: "Information Communication and Technology",
+  },
+
+  {
+    cover: "null",
+    title: "BPP",
+    subtitle: "BPP",
+  },
 ];
 
-export const yearLevelsItemModel: CardProps[] = [
+export const yearLevelItem: CardProps[] = [
   { cover: "null", title: "Grade 7", subtitle: "Freshies" },
   { cover: "null", title: "Grade 8", subtitle: "Freshies" },
   { cover: "null", title: "Grade 9", subtitle: "Freshies" },
@@ -315,11 +330,24 @@ export const legalGuardianInputDetails: InputProps[] = [
     placeholder: "Enter your Guardian's Contact",
   },
 ];
+export const OtherInputData: InputProps[] = [
+  {
+    label: "Are you a 4ps Beneficiary ?",
+    name: `otherDetails.is4psBeneficiary`,
+    placeholder: "Enter your Reference #",
+  },
 
-export const otherInputDetails: InputProps[] = [
-  { label: "4ps Beneficiary", name: "otherDetails.is4psBeneficiary" },
-  { label: "Indigenous People", name: "otherDetails.isIndigenousPerson" },
-  { label: "Learners With Disability", name: "otherDetails.isLWD" },
+  {
+    label: "Are you a Indigenous Person ?",
+    name: `otherDetails.isIndigenousPerson`,
+    placeholder: "Please Specify",
+  },
+
+  {
+    label: "Are you a LWD Person ?",
+    name: `otherDetails.isLWD`,
+    placeholder: "Please Specify",
+  },
 ];
 
 export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
@@ -330,7 +358,7 @@ export const ApplicationFormInputProps: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
   { title: "Guardians", model: legalGuardianInputDetails },
-  { title: "Other Details", model: otherInputDetails },
+  { title: "Other Details", model: OtherInputData },
 ];
 
 // Application Form Model
@@ -350,27 +378,7 @@ export const ApplicationFormInputModel: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
   { title: "Guardian", model: legalGuardianInputDetails },
-  { title: "Other Details", model: otherInputDetails },
-];
-
-export const OtherInputData: InputProps[] = [
-  {
-    label: "Are you a 4ps Beneficiary ?",
-    name: `otherDetails.is4psBeneficiary`,
-    placeholder: "Enter your Reference #",
-  },
-
-  {
-    label: "Are you a Indigenous Person ?",
-    name: `otherDetails.isIndigenousPerson`,
-    placeholder: "Please Specify",
-  },
-
-  {
-    label: "Are you a LWD Person ?",
-    name: `otherDetails.isLWD`,
-    placeholder: "Please Specify",
-  },
+  { title: "Other Details", model: OtherInputData },
 ];
 
 export const OutroDetails = [
@@ -405,35 +413,6 @@ export const GuardianInputs: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
   { title: "Mother Details", model: motherInputDetails },
 ];
-
-export const gradeDetails: InputProps[] = [
-  { label: "English", name: "gradeDetails.english" },
-  { label: "Science", name: "gradeDetails.science" },
-  { label: "Filipino", name: "gradeDetails.filipino" },
-  { label: "Math", name: "gradeDetails.math" },
-  { label: "General Average", name: "gradeDetails.generalAve" },
-];
-
-// Functions
-
-export const FetchLocalStorageFormData = (name: string) => {
-  const { getItem, setItems } = useLocalStorage(name);
-  const { values, setValues } = useFormikContext<ApplicantModelProps>();
-
-  useEffect(() => {
-    // if there is no instance then create one
-    if (!getItem()) {
-      setItems(values || []);
-    }
-
-    // there is instance store it
-    setValues(getItem() || values);
-
-    return () => {
-      setValues(values);
-    };
-  }, []);
-};
 
 // Modified Data
 export const PersonalDetailsFirstSection: InputProps[] = OmitInputObject(

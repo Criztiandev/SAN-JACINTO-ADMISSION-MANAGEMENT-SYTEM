@@ -26,7 +26,7 @@ import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
-} from "../../helper/ApplicantionForm.Helper";
+} from "../../helper/Stepper.Helper";
 import { PersoanlDetailsNameInput } from "../../helper/Applicant.Helper";
 import DrawerLoading from "../DrawerLoading";
 
@@ -113,7 +113,7 @@ const ViewDrawer = ({
               <div className="flex flex-col">
                 {isEdit ? (
                   <div className="grid grid-cols-4 gap-2 w-[480px]">
-                    {PersoanlDetailsNameInput.map(props => (
+                    {PersoanlDetailsNameInput.map((props) => (
                       <Field
                         key={props.name}
                         {...props}
@@ -142,7 +142,7 @@ const ViewDrawer = ({
               <IconButton
                 type="outlined"
                 icon={EditIcon}
-                onClick={() => setIsEdit(prev => !prev)}
+                onClick={() => setIsEdit((prev) => !prev)}
                 className={`p-2 border border-gray-400 rounded-full  ${
                   isEdit ? "border-green-500 bg-[#22f86275]" : ""
                 }`}
@@ -154,7 +154,7 @@ const ViewDrawer = ({
                 <h4>Grade Level</h4>
                 <div className={`${!isEdit && "opacity-50"}`}>
                   <Carousel width={"550px"}>
-                    {yearLevelsItemModel.map(props => (
+                    {yearLevelsItemModel.map((props) => (
                       <ItemSelect
                         key={props.title}
                         select={!isEdit ? yearLevel : selectedYearLevel}
@@ -167,7 +167,7 @@ const ViewDrawer = ({
                 </div>
               </section>
 
-              {ApplicationFormInputModel.map(props => (
+              {ApplicationFormInputModel.map((props) => (
                 <InputSections key={props.title} {...props} isEdit={!isEdit} />
               ))}
             </main>

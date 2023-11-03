@@ -1,11 +1,7 @@
 import { useState } from "react";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import {
-  FetchLocalStorageFormData,
-  currentAddressInputModel,
-  permanentAddressInputModel,
-} from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { useFormikContext } from "formik";
 import { IconButton } from "../../components";
 import CloseIcon from "../../assets/icons/Close_round_light.svg";
@@ -15,6 +11,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { AcceptVariant, DeclineVariant } from "../../helper/Animation.Helper";
+import {
+  currentAddressInputModel,
+  personalDetailsInputModel,
+} from "../../data/Stepper.Data";
 
 const PermanentAddress = () => {
   const { setItems, getItem } = useLocalStorage("address_btn");
@@ -103,7 +103,7 @@ const PermanentAddress = () => {
 
               <div className="flex gap-4">
                 <IconButton
-                  type="outlined"
+                  as="outlined"
                   icon={CloseIcon}
                   onClick={() => {
                     setIsCurrent(false);
@@ -113,7 +113,7 @@ const PermanentAddress = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {permanentAddressInputModel.map((props) => (
+              {personalDetailsInputModel.map((props) => (
                 <motion.span key={props.label} whileHover={{ scale: 1.05 }}>
                   <Input {...props} />
                 </motion.span>

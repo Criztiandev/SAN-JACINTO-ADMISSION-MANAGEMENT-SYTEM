@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { GradeLevelTrack } from "../../helper/GradeLevel.Helper";
 import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
-import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 
 type YearLevelProps = "Grade 7" | "Grade 11";
 
@@ -26,7 +26,7 @@ const StudentDetails = () => {
   const currYearLevel: YearLevelProps = studentDetails?.yearLevel;
   const currentTrack = GradeLevelTrack(gradeDetails, currYearLevel);
   const levelLength = currentTrack.length;
-  const renderTracks = currentTrack.map(props => (
+  const renderTracks = currentTrack.map((props) => (
     <ItemSelect
       key={props.title}
       {...props}
@@ -59,7 +59,7 @@ const StudentDetails = () => {
           {OmitInputObject(
             ["Year Level", "Track", "School Year", "Last School Attended"],
             model
-          ).map(props => (
+          ).map((props) => (
             <motion.div whileHover={{ scale: 1.03 }}>
               <Input key={props.label} {...props} />
             </motion.div>

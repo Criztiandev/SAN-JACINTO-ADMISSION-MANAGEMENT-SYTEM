@@ -9,3 +9,11 @@ export interface PanelStepList {
   "Application Form"?: string;
   "Thank you"?: string;
 }
+
+export interface GradesProps {
+  english: number;
+  filipino: number;
+  science: number;
+  math: number;
+  generalAve: number;
+}

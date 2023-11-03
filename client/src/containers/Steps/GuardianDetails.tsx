@@ -1,11 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import {
-  FetchLocalStorageFormData,
-  GuardianInputs,
-  legalGuardianInputDetails,
-} from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
@@ -14,6 +10,10 @@ import EraseIcon from "../../assets/icons/Erase.svg";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { Button, IconButton } from "../../components";
+import {
+  GuardianInputs,
+  legalGuardianInputDetails,
+} from "../../data/Stepper.Data";
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -72,7 +72,7 @@ const GuardianDetails = () => {
             <Button
               icon={CopyIcon}
               dir="left"
-              type="outlined"
+              as="outlined"
               className="bg-transparent text-black border-gray-400"
               title="Father"
               onClick={() => setSelectedGuardian("Father")}
@@ -80,7 +80,7 @@ const GuardianDetails = () => {
             <Button
               icon={CopyIcon}
               dir="left"
-              type="outlined"
+              as="outlined"
               className="bg-transparent text-black border-gray-400"
               title="Mother"
               onClick={() => setSelectedGuardian("Mother")}

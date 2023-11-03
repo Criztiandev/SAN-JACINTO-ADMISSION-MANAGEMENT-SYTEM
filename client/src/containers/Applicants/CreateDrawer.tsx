@@ -11,7 +11,7 @@ import InputSections from "../Form/InputSections";
 import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
-} from "../../helper/ApplicantionForm.Helper";
+} from "../../helper/Stepper.Helper";
 import { CreateDrawerProps } from "../../interface/Component.Type";
 
 const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
@@ -45,7 +45,7 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
                   <section className="flex flex-col gap-2 justify-start items-start mb-4">
                     <h4>Grade Level</h4>
                     <Carousel width={"550px"}>
-                      {yearLevelsItemModel.map(props => (
+                      {yearLevelsItemModel.map((props) => (
                         <ItemSelect
                           key={props.title}
                           {...props}
@@ -57,7 +57,7 @@ const CreateDrawer = ({ state, onClose }: CreateDrawerProps) => {
                     </Carousel>
                   </section>
 
-                  {ApplicationFormInputModel.map(props => (
+                  {ApplicationFormInputModel.map((props) => (
                     <InputSections {...props} />
                   ))}
                 </main>

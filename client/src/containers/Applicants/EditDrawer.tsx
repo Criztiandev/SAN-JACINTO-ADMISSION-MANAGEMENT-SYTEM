@@ -9,7 +9,7 @@ import Carousel from "../../components/Carousel";
 import {
   ApplicationFormInputModel,
   yearLevelsItemModel,
-} from "../../helper/ApplicantionForm.Helper";
+} from "../../helper/Stepper.Helper";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
@@ -99,7 +99,7 @@ const EditDrawer = ({
                   <section className="flex flex-col gap-2 justify-start items-start mb-4">
                     <h4>Grade Level</h4>
                     <Carousel width={"550px"}>
-                      {yearLevelsItemModel.map(props => (
+                      {yearLevelsItemModel.map((props) => (
                         <ItemSelect
                           key={props.title}
                           select={selectedYearLevel}
@@ -111,7 +111,7 @@ const EditDrawer = ({
                     </Carousel>
                   </section>
 
-                  {ApplicationFormInputModel.map(props => (
+                  {ApplicationFormInputModel.map((props) => (
                     <InputSections key={props.title} {...props} />
                   ))}
                 </main>

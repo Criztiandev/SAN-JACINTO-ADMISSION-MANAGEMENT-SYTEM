@@ -37,7 +37,6 @@ const RegistrationAction = ({ stepper }: currentProps) => {
 
         <Button
           as="outlined"
-          type="button"
           dir="right"
           icon={NextIcon}
           title={`${stepper.isLastStep ? "Finish" : "Next"}`}
