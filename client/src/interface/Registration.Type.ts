@@ -1,5 +1,5 @@
 import { BaseProps } from "./Common.Types";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 // Layout Props
 export interface panelTitleInterface {
@@ -18,7 +18,7 @@ export interface panelTitleInterface {
 // Panel Stepper Template
 export interface StepperProps {
   title: string;
-  component: ReactElement;
+  component: ReactNode;
 }
 
 export interface ItemSelection {

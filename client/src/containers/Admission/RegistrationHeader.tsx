@@ -1,5 +1,5 @@
 import { Typography } from "../../components";
-import { RegistrationStepper } from "../../helper/ApplicantionForm.Helper";
+import { RegistrationStepper } from "../../helper/Admission.Helper";
 
 interface RegistrationHeaderProps {
   steps: number;

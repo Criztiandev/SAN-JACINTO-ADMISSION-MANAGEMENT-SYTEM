@@ -1,57 +1,72 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import RegistrationLayout from "../layouts/RegistrationLayout";
-import useMultipleForm from "../hooks/useMultipleForm";
 
-import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
+import { useMultipleForm, useModal, useLocalStorage } from "../hooks";
 
-import { useNavigate } from "react-router-dom";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { useMutation } from "@tanstack/react-query";
-import { createApplicant } from "../api/Applicant.Api";
-import useModal from "../hooks/useModal";
+import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 import OutroModal from "../containers/Steps/OutroModal";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useEffect } from "react";
 import {
   OutroDetails,
   RegistrationStepper,
 } from "../helper/ApplicantionForm.Helper";
-import RegistrationHeader from "../containers/Admission/RegistrationHeader";
-import RegistrationAction from "../containers/Admission/RegistrationAction";
 import {
+  RegistrationHeader,
+  RegistrationAction,
+} from "../containers/Admission";
+import {
+  handleApplicantMutation,
+  handleNextModal,
   handleQuery,
-  handleRegistrationReset,
-} from "../helper/Admission.Helpter";
-import { toast } from "react-toastify";
+} from "../helper/Admission.Helper";
 
 const Register = () => {
-  const { setItems, getItem } = useLocalStorage("applicant_form");
+  const navigate = useNavigate();
+
+  // Local Storage
+  const applicantStorage = useLocalStorage("applicant_form");
+  const addressStorage = useLocalStorage("address_btn");
+  const { getItem, setItems } = applicantStorage;
 
   // Outro Modal
   const outroModal = useModal({ data: OutroDetails });
-  const {
-    data: modalData,
-    currentIndex: modalIndex,
-    active: isActiveModal,
-    isLastIndex,
-    handleNext: handleNextIndex,
-  } = outroModal;
+  const { data: modalData } = outroModal;
+
   // Form Stepper
-  const multiStep = useMultipleForm(
-    RegistrationStepper.map(({ component }) => component)
-  );
+  const Steps = RegistrationStepper.map(({ component }) => component); // Unpackage
+  const multiStep = useMultipleForm(Steps);
   const { steps, currentIndex } = multiStep;
+
+  // Handling Submit
+  const handleSubmit = async (values: ApplicantModelProps) => {
+    if (!multiStep.isLastStep) {
+      setItems(values);
+      return multiStep.nextStep();
+    }
+    handleQuery(values, mutateAsync);
+  };
+
+  useEffect(() => {
+    if (!getItem()) {
+      setItems(applicantInitialValue);
+    }
+
+    return () => {
+      applicantStorage.removeItem();
+      addressStorage.removeItem();
+    };
+  }, []);
 
   // Mutation Query
   const { mutateAsync } = useMutation({
+    mutationFn: handleApplicantMutation,
     mutationKey: ["createApplicant"], // Optional, give your mutation a key
-    mutationFn: async (data: ApplicantModelProps) => {
-      const result = await createApplicant(data);
-      return result; // Return the variables for later use
-    },
-
     onSuccess: () => {
       outroModal.showModal();
       toast.success("Applicant Send Succssfully");
@@ -60,34 +75,6 @@ const Register = () => {
       toast.error("Something went wrong, Please Try Again");
     },
   });
-
-  // navigation
-  const navigate = useNavigate();
-
-  // Handle Next Button for Modal
-  const handleNextModal = () => {
-    if (isLastIndex)
-      handleRegistrationReset(outroModal, multiStep.resetIndex, navigate);
-    return handleNextIndex();
-  };
-
-  const handleSubmit = async (
-    values: ApplicantModelProps,
-    actions: FormikHelpers<ApplicantModelProps>
-  ) => {
-    if (!multiStep.isLastStep) {
-      setItems(values);
-      return multiStep.nextStep();
-    }
-    handleQuery(values, mutateAsync);
-    actions.resetForm();
-  };
-
-  useEffect(() => {
-    if (!getItem()) {
-      setItems(applicantInitialValue);
-    }
-  }, []);
 
   return (
     <>
@@ -103,8 +90,13 @@ const Register = () => {
         </Formik>
       </RegistrationLayout>
 
-      {isActiveModal && (
-        <OutroModal data={modalData[modalIndex]} onNext={handleNextModal} />
+      {outroModal.active && (
+        <OutroModal
+          data={modalData[outroModal.currentIndex]}
+          onNext={() =>
+            handleNextModal(outroModal, multiStep.resetIndex, navigate)
+          }
+        />
       )}
     </>
   );
