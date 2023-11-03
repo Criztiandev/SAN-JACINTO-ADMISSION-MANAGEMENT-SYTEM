@@ -13,7 +13,7 @@ import DoneIcon from "../../assets/icons/Done_light.svg";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { AcceptVariant, DeclineVariant } from "../../helper/Animation.Helper";
 
 const PermanentAddress = () => {
@@ -45,7 +45,7 @@ const PermanentAddress = () => {
   return (
     <section>
       <div className="grid grid-cols-2 gap-4">
-        {currentAddressInputModel.map(props => (
+        {currentAddressInputModel.map((props) => (
           <motion.span key={props.label} whileHover={{ scale: 1.03 }}>
             <Input {...props} />
           </motion.span>
@@ -81,7 +81,7 @@ const PermanentAddress = () => {
               whileTap={{ scale: 0.7 }}
               className="border rounded-full hover:border-red-500 hover:bg-[#f8222275]"
               onClick={() => {
-                setIsCurrent(prev => !prev);
+                setIsCurrent((prev) => !prev);
                 setItems({ isPermanent: false, isCurrent: true });
               }}>
               <img src={CloseIcon} alt="close" className="p-2" />
@@ -113,7 +113,7 @@ const PermanentAddress = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {permanentAddressInputModel.map(props => (
+              {permanentAddressInputModel.map((props) => (
                 <motion.span key={props.label} whileHover={{ scale: 1.05 }}>
                   <Input {...props} />
                 </motion.span>

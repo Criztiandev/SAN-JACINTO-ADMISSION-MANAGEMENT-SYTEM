@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 export interface useMultipleFormOption {
   currentIndex: number;
-  steps: ReactElement;
+  Steps: ReactElement;
   goto: (value: number) => void;
   nextStep: () => void;
   prevStep: () => void;

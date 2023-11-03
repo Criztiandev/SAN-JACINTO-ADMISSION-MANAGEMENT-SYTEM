@@ -67,9 +67,11 @@ const RegistrationLayout = ({
         <main className="p-6 flex flex-col gap-8">{children}</main>
       </div>
 
-      <Drawer state={active} onClick={toggleDrawer}>
-        Hi
-      </Drawer>
+      {active && (
+        <Drawer state={active} onClick={toggleDrawer}>
+          Hi
+        </Drawer>
+      )}
     </>
   );
 };

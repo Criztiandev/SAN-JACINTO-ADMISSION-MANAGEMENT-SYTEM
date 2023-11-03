@@ -5,7 +5,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import Routes from "./routes";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthContextProvider from "./context/AuthContext";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { ToastContainer } from "react-toastify";
@@ -24,7 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
             <Routes />
             <ToastContainer />
-            <ReactQueryDevtools />
           </SkeletonTheme>
         </AuthContextProvider>
       </ConfigProvider>

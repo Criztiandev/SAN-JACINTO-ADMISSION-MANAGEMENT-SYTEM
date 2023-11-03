@@ -17,7 +17,7 @@ const useMultipleForm = (steps: ReactElement[]): useMultipleFormOption => {
 
   return {
     currentIndex: currentStepIndex,
-    steps: steps[currentStepIndex],
+    Steps: steps[currentStepIndex],
     goto,
     nextStep,
     prevStep,

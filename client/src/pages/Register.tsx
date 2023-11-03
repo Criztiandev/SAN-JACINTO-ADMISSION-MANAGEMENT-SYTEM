@@ -6,16 +6,12 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 import RegistrationLayout from "../layouts/RegistrationLayout";
-
 import { useMultipleForm, useModal, useLocalStorage } from "../hooks";
 
 import applicantInitialValue from "../data/initialValue/applicantInit";
 import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 import OutroModal from "../containers/Steps/OutroModal";
-import {
-  OutroDetails,
-  RegistrationStepper,
-} from "../helper/ApplicantionForm.Helper";
+
 import {
   RegistrationHeader,
   RegistrationAction,
@@ -24,6 +20,8 @@ import {
   handleApplicantMutation,
   handleNextModal,
   handleQuery,
+  OutroModalDetails,
+  RegistrationStepper,
 } from "../helper/Admission.Helper";
 
 const Register = () => {
@@ -35,13 +33,15 @@ const Register = () => {
   const { getItem, setItems } = applicantStorage;
 
   // Outro Modal
-  const outroModal = useModal({ data: OutroDetails });
+  const outroModal = useModal({ data: OutroModalDetails });
   const { data: modalData } = outroModal;
 
   // Form Stepper
-  const Steps = RegistrationStepper.map(({ component }) => component); // Unpackage
-  const multiStep = useMultipleForm(Steps);
-  const { steps, currentIndex } = multiStep;
+  const componentPackage = RegistrationStepper.map(
+    ({ component: Component }) => <Component />
+  ); // Unpackage
+  const multiStep = useMultipleForm(componentPackage);
+  const { Steps, currentIndex } = multiStep;
 
   // Handling Submit
   const handleSubmit = async (values: ApplicantModelProps) => {
@@ -83,8 +83,7 @@ const Register = () => {
 
         <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
           <Form className="flex flex-col justify-between h-full">
-            {steps}
-
+            {Steps}
             <RegistrationAction stepper={multiStep} />
           </Form>
         </Formik>

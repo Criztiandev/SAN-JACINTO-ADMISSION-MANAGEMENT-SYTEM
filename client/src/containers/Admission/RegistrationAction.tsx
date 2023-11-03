@@ -1,6 +1,6 @@
 import { Button, IconButton } from "../../components";
 import { ResetIcon, PrevIcon, NextIcon } from "../../assets/icons";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { useMultipleFormOption } from "../../interface/MultiStep.Type";
 
 interface currentProps {
