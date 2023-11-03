@@ -1,5 +1,4 @@
-import { BaseProps } from "./Common.Types";
-import { ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 
 // Layout Props
 export interface panelTitleInterface {
@@ -10,7 +9,6 @@ export interface panelTitleInterface {
   "Guardian Details"?: string;
   "Other Details"?: string;
   "Account Details"?: string;
-  Checkpoint?: string;
   "Application Form"?: string;
   "Thank you"?: string;
 }
@@ -28,6 +26,3 @@ export interface ItemSelection {
 }
 
 // Registration layout props
-export interface registrationLayoutProps extends BaseProps {
-  activePanel: string;
-}
