@@ -1,4 +1,4 @@
-import { BaseProps } from "./Component.Type";
+import { BaseProps } from "./Common.Types";
 import { ReactElement } from "react";
 
 // Layout Props

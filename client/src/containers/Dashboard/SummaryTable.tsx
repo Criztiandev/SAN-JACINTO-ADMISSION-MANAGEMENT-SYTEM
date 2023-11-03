@@ -9,6 +9,7 @@ import FetchLoader from "../General/FetchLoader";
 
 const SummaryTable = () => {
   const { setTableConfig, handleMutateData } = useTableContext();
+
   const { isError, isLoading } = useQuery({
     queryFn: async () => {
       const { data } = await fetchApplicants();

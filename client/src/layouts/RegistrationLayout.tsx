@@ -17,7 +17,7 @@ const RegistrationLayout = ({
   activePanel,
   children,
 }: registrationLayoutProps) => {
-  const { active, setActive } = useDrawer();
+  const { active, toggleDrawer } = useDrawer();
 
   const panelContent: string =
     defaultPanelContent[activePanel as keyof panelTitleInterface] ||
@@ -59,9 +59,7 @@ const RegistrationLayout = ({
             <section>
               <Typography as="span" className="text-white">
                 Have a question ?{" "}
-                <button onClick={() => setActive(prev => !prev)}>
-                  Click me
-                </button>
+                <button onClick={toggleDrawer}>Click me</button>
               </Typography>
             </section>
           </aside>
@@ -69,7 +67,7 @@ const RegistrationLayout = ({
         <main className="p-6 flex flex-col gap-8">{children}</main>
       </div>
 
-      <Drawer state={active} onClick={() => setActive(prev => !prev)}>
+      <Drawer state={active} onClick={toggleDrawer}>
         Hi
       </Drawer>
     </>
