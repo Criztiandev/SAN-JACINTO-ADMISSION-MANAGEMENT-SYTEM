@@ -36,6 +36,8 @@ const LoginPage = () => {
     },
   });
 
+  console.log(import.meta.env.VITE_SERVER_URL);
+
   const handleSubmit = async (
     value: loginCredentialsParams,
     action: FormikHelpers<loginCredentialsParams>
@@ -64,7 +66,7 @@ const LoginPage = () => {
 
             <div className="flex flex-col gap-4">
               {LoginInput.map((props) => (
-                <Input {...props} />
+                <Input key={props.label} {...props} />
               ))}
 
               <div className="flex justify-end">
