@@ -60,7 +60,7 @@ input {
 }
 
 input::placeholder {
-  color: white;
+  color: #cccccc;
 }
 
 input::-webkit-outer-spin-button,

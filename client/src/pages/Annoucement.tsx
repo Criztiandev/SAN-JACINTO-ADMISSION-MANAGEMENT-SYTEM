@@ -19,10 +19,10 @@ import {
 } from "../helper/Applicant.Helper";
 import { updateStatusApplicant } from "../api/Applicant.Api";
 import FetchLoader from "../containers/General/FetchLoader";
-import { FilterIcon } from "../assets/icons";
-import useDrawer from "../hooks/useDrawer";
 import { fetchAllData } from "../utils/Api.utils";
 import { FilterButton } from "../containers/Applicants";
+import { FilterIcon } from "../assets/icons";
+import { useDrawer } from "../hooks";
 
 const Applicant = () => {
   // Drawers

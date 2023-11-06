@@ -1,13 +1,10 @@
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form } from "formik";
 import { Input, Typography } from "../components";
 import { motion } from "framer-motion";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { loginAdmin } from "../api/Auth.Api";
-import { loginCredentialsParams } from "../interface/Auth.Types";
 import { InputProps } from "../interface/FormInterface";
 import { authSchema } from "../schema/authSchema";
+import useLoginMutation from "../hooks/useLoginMutation";
 
 const LoginInput: InputProps[] = [
   {
@@ -25,27 +22,7 @@ const LoginInput: InputProps[] = [
 ];
 
 const LoginPage = () => {
-  const { mutateAsync } = useMutation({
-    mutationFn: async (data: loginCredentialsParams) => loginAdmin(data),
-    onError: (e) => {
-      toast.error(e.message);
-    },
-
-    onSuccess: () => {
-      toast.success("Login Successfully");
-    },
-  });
-
-  console.log(import.meta.env.VITE_SERVER_URL);
-
-  const handleSubmit = async (
-    value: loginCredentialsParams,
-    action: FormikHelpers<loginCredentialsParams>
-  ) => {
-    await mutateAsync(value);
-    action.resetForm();
-  };
-
+  const { handleSubmit } = useLoginMutation();
   return (
     <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">
       <div className="w-[40%] h-full bg-[#7a0021] text-white p-4 flex justify-center items-center px-12">
