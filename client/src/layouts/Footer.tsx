@@ -1,4 +1,4 @@
-import { BaseProps } from "../interface/Component.Type";
+import { BaseProps } from "../interface/Common.Types";
 
 const Footer = ({ children, ...props }: BaseProps) => {
   return <footer {...props}>{children}</footer>;

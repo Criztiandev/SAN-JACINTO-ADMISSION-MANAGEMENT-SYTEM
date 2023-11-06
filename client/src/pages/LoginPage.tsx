@@ -1,20 +1,32 @@
 import { Formik, Form, FormikHelpers } from "formik";
-import { Input } from "../components";
+import { Input, Typography } from "../components";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
+import { loginAdmin } from "../api/Auth.Api";
+import { loginCredentialsParams } from "../interface/Auth.Types";
+import { InputProps } from "../interface/FormInterface";
+import { authSchema } from "../schema/authSchema";
+
+const LoginInput: InputProps[] = [
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Enter your password",
+  },
+];
 
 const LoginPage = () => {
   const { mutateAsync } = useMutation({
-    mutationFn: async (data) => {
-      const res = data;
-      return res;
-    },
+    mutationFn: async (data: loginCredentialsParams) => loginAdmin(data),
     onError: (e) => {
       toast.error(e.message);
     },
@@ -25,48 +37,41 @@ const LoginPage = () => {
   });
 
   const handleSubmit = async (
-    value: LoginCredentials,
-    action: FormikHelpers<LoginCredentials>
+    value: loginCredentialsParams,
+    action: FormikHelpers<loginCredentialsParams>
   ) => {
-    await mutateAsync({ value });
+    await mutateAsync(value);
     action.resetForm();
   };
 
   return (
     <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">
-      <div className="w-[40%] h-full bg-[#7A0021] text-white p-4 flex justify-center items-center">
+      <div className="w-[40%] h-full bg-[#7a0021] text-white p-4 flex justify-center items-center px-12">
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={handleSubmit}>
-          <Form className="flex flex-col justify-center gap-4 h-full w-[400px] ali">
-            <div className="mb-4">
-              <span>Welcome to</span>
-              <h1 className="uppercase font-bold">
-                San Jancito National Highschool
-              </h1>
-              <small className="italic">
-                "Basta Magaling sa San Jacinto Galing"
-              </small>
+          onSubmit={handleSubmit}
+          validationSchema={authSchema}>
+          <Form className="flex flex-col justify-center gap-4 h-full">
+            <div className="mb-4 flex gap-2 flex-col">
+              <Typography as="h5">Welcome to</Typography>
+              <Typography as="h1" className="font-extrabold text-4xl">
+                San Jacinto National HighSchool
+              </Typography>
+              <Typography as="small" className="italic">
+                Basta Magaling sa San Jacinto Galing
+              </Typography>
             </div>
-            <div className="flex flex-col gap-4">
-              <div>
-                <Input
-                  type="email"
-                  label="Email"
-                  name="email"
-                  placeholder="Enter your email"
-                />
-                <Input
-                  type="password"
-                  label="Password"
-                  name="password"
-                  placeholder="Enter your password"
-                />
-              </div>
 
-              <Link className="items-end" to={"/forgot"}>
-                Forgot Password
-              </Link>
+            <div className="flex flex-col gap-4">
+              {LoginInput.map((props) => (
+                <Input {...props} />
+              ))}
+
+              <div className="flex justify-end">
+                <Link className="items-end" to={"/forgot"}>
+                  Forgot Password
+                </Link>
+              </div>
             </div>
 
             <div className="flex justify-center">
