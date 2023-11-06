@@ -23,6 +23,7 @@ import {
   OutroModalDetails,
   RegistrationStepper,
 } from "../helper/Admission.Helper";
+import applicantSchema from "../schema/applicant.Schema";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -30,7 +31,6 @@ const Register = () => {
   // Local Storage
   const applicantStorage = useLocalStorage("applicant_form");
   const addressStorage = useLocalStorage("address_btn");
-  const { getItem, setItems } = applicantStorage;
 
   // Outro Modal
   const outroModal = useModal({ data: OutroModalDetails });
@@ -45,16 +45,25 @@ const Register = () => {
 
   // Handling Submit
   const handleSubmit = async (values: ApplicantModelProps) => {
-    if (!multiStep.isLastStep) {
-      setItems(values);
-      return multiStep.nextStep();
+    try {
+      console.log("handleSubmit called with values:", values);
+      if (!multiStep.isLastStep) {
+        applicantStorage.setItems(values);
+        return multiStep.nextStep();
+      }
+      handleQuery(values, mutateAsync);
+    } catch (error) {
+      console.error("Form submission error:", error);
     }
-    handleQuery(values, mutateAsync);
   };
 
   useEffect(() => {
-    if (!getItem()) {
-      setItems(applicantInitialValue);
+    if (!applicantStorage.getItem()) {
+      applicantStorage.setItems(applicantInitialValue);
+    }
+
+    if (!addressStorage.getItem()) {
+      addressStorage.setItems({ isPermanent: false, isCurr: false });
     }
 
     return () => {
@@ -81,7 +90,10 @@ const Register = () => {
       <RegistrationLayout activePanel={"Title"}>
         <RegistrationHeader steps={currentIndex} />
 
-        <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
+        <Formik
+          initialValues={applicantInitialValue}
+          onSubmit={handleSubmit}
+          validationSchema={applicantSchema}>
           <Form className="flex flex-col justify-between h-full">
             {Steps}
             <RegistrationAction stepper={multiStep} />

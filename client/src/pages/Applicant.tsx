@@ -19,10 +19,10 @@ import {
 } from "../helper/Applicant.Helper";
 import { updateStatusApplicant } from "../api/Applicant.Api";
 import FetchLoader from "../containers/General/FetchLoader";
-import FilterButton from "../containers/Applicants/FilterButton";
 import { FilterIcon } from "../assets/icons";
-import useDrawer from "../hooks/useDrawer";
 import { fetchAllData } from "../utils/Api.utils";
+import { FilterButton } from "../containers/Applicants";
+import { useDrawer } from "../hooks";
 
 const Applicant = () => {
   // Drawers
@@ -108,7 +108,12 @@ const Applicant = () => {
           />
         }>
         <div className="flex justify-between items-center">
-          <SearchBar value={search} onChange={handleSearch} disabled={true} />
+          <SearchBar
+            dir="left"
+            value={search}
+            onChange={handleSearch}
+            disabled={true}
+          />
 
           <div className="flex gap-4">
             <FilterButton

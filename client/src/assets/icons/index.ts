@@ -19,3 +19,6 @@ export { default as SignOutIcon } from "./Sign_out_Dark.svg";
 export { default as SettingIcon } from "./Settings_Dark.svg";
 export { default as GraphIcon } from "./Graph_Dark.svg";
 export { default as FilterIcon } from "./Filter.svg";
+
+export { default as FatherIcon } from "./Father.svg";
+export { default as Mother } from "./Mother.svg";

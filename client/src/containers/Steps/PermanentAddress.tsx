@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
@@ -15,6 +16,7 @@ import {
   currentAddressInputModel,
   personalDetailsInputModel,
 } from "../../data/Stepper.Data";
+import SwitchButton from "./SwitchButton";
 
 const PermanentAddress = () => {
   const { setItems, getItem } = useLocalStorage("address_btn");
@@ -40,6 +42,17 @@ const PermanentAddress = () => {
     });
   };
 
+  const handlePermanentAddress = () => {
+    updatePermanentToCurrent();
+    setIsPermanent(true);
+    setItems({ isPermanent: true, isCurrent: false });
+  };
+
+  const handleCurrentAddress = () => {
+    setIsCurrent((prev) => !prev);
+    setItems({ isPermanent: false, isCurrent: true });
+  };
+
   FetchLocalStorageFormData("applicant_form");
 
   return (
@@ -56,36 +69,23 @@ const PermanentAddress = () => {
         <span>Is this your Permanent Address ?</span>
         <div className="flex gap-2">
           {!isCurrent && (
-            <motion.button
-              type="button"
-              animate={isPermanent && "selected"}
-              variants={AcceptVariant}
-              disabled={isPermanent}
-              whileTap={{ scale: 0.7 }}
-              className="border rounded-full  hover:border-green-600 hover:bg-[#22f86275]"
-              onClick={() => {
-                updatePermanentToCurrent();
-                setIsPermanent(true);
-                setItems({ isPermanent: true, isCurrent: false });
-              }}>
-              <img src={DoneIcon} alt="Done" className="p-2" />
-            </motion.button>
+            <SwitchButton
+              icon={DoneIcon}
+              toggle={isPermanent}
+              variant={AcceptVariant}
+              color="#22f86275"
+              onClick={handlePermanentAddress}
+            />
           )}
 
           {!isPermanent && (
-            <motion.button
-              type="button"
-              animate={isCurrent ? "selected" : "unselected"}
-              disabled={isCurrent}
-              variants={DeclineVariant}
-              whileTap={{ scale: 0.7 }}
-              className="border rounded-full hover:border-red-500 hover:bg-[#f8222275]"
-              onClick={() => {
-                setIsCurrent((prev) => !prev);
-                setItems({ isPermanent: false, isCurrent: true });
-              }}>
-              <img src={CloseIcon} alt="close" className="p-2" />
-            </motion.button>
+            <SwitchButton
+              icon={CloseIcon}
+              toggle={isCurrent}
+              variant={DeclineVariant}
+              color="#f8222275"
+              onClick={handleCurrentAddress}
+            />
           )}
         </div>
       </div>

@@ -1,5 +1,3 @@
-import { lazy, Suspense } from "react";
-
 interface ImageProps {
   src: string;
   alt: string;
@@ -7,13 +5,7 @@ interface ImageProps {
 }
 
 const Image = ({ src, alt, className }: ImageProps) => {
-  const LazySVG = lazy(() => import(`./${src}`));
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazySVG alt={alt} className={className} />
-    </Suspense>
-  );
+  return <img src={src} alt={alt} className={`${className} `} />;
 };
 
 export default Image;

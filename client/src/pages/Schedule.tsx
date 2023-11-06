@@ -1,36 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchBar, Button } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import BatchTable from "../containers/Schedule/BatchTable";
 import { ApplicantIcon, CalendarIcon } from "../assets/icons";
 import ScheduleCalendar from "../containers/Schedule/ScheduleCalendar";
 
 const Schedule = () => {
-  const currentDate = new Date();
   const [selectedTab, setSelectedTab] = useState("calendar");
 
+  const [isPending, startTransition] = useTransition();
+
+  const handleSelectTab = (target: string) => {
+    startTransition(() => {
+      setSelectedTab(target);
+    });
+  };
   return (
     <BaseLayout title="Schedule">
       <div className="flex justify-between items-center">
-        {selectedTab === "batch" ? (
-          <SearchBar dir="left" />
-        ) : (
-          <div>{currentDate.getDate()}</div>
-        )}
+        {selectedTab === "batch" ? <SearchBar dir="left" /> : <div></div>}
 
         <div className="flex gap-4 items-center">
           <Button
             icon={CalendarIcon}
             as={"outlined"}
             title="Calendar"
-            onClick={() => setSelectedTab("calendar")}
+            disabled={isPending}
+            onClick={() => handleSelectTab("calendar")}
           />
           <Button
             icon={ApplicantIcon}
             title="Batch"
             as={"outlined"}
-            onClick={() => setSelectedTab("batch")}
+            disabled={isPending}
+            onClick={() => handleSelectTab("batch")}
           />
           {/* <Dropdown /> */}
         </div>

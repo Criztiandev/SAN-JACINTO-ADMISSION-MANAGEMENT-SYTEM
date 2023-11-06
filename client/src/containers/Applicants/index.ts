@@ -8,4 +8,4 @@ export const MessageLazyDrawer = lazy(() => import("./MessageDrawer"));
 
 export { default as GradeFilterButton } from "./GradeFilter";
 export { default as MoreOptionButton } from "./MoreOption";
-export { default as Filter } from "./FilterButton";
+export { default as FilterButton } from "./FilterButton";

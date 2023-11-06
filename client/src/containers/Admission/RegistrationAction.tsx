@@ -36,6 +36,7 @@ const RegistrationAction = ({ stepper }: currentProps) => {
         <IconButton icon={ResetIcon} onClick={handleReset} />
 
         <Button
+          type="submit"
           as="outlined"
           dir="right"
           icon={NextIcon}

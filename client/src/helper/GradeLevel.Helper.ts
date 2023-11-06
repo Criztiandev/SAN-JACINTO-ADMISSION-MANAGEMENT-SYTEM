@@ -10,7 +10,8 @@ export const GradeLevelTrack = (
 
   const isRegularStudent = generalAve >= 75;
   if (!isRegularStudent) return [];
-  if (level !== "Grade 7" && isRegularStudent) return SHSTracksItemModel;
+  if (level === "Grade 11" || (level === "Grade 12" && isRegularStudent))
+    return SHSTracksItemModel;
 
   // Grade 7
   const isSPE = english >= 85 && math >= 85 && science >= 85 && filipino >= 83;

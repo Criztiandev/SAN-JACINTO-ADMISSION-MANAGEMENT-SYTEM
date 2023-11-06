@@ -1,1 +1,3 @@
-export const lazyComponentExpoter = (paths: Array<string> | string) => {};
+export const lazyComponentExpoter = (paths: Array<string> | string) => {
+  if (Array.isArray(paths)) return;
+};

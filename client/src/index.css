@@ -14,7 +14,6 @@
 
 body {
   background: #f9fafb;
-  /* color: #80808021; */
 }
 
 /* Headings */
@@ -55,17 +54,19 @@ p {
 }
 
 input {
+  color: white;
+  outline: none;
   background: inherit;
+}
+
+input::placeholder {
+  color: white;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
 }
 
 textarea {
@@ -93,7 +94,4 @@ textarea {
   background-color: darkgrey;
   border-radius: 20px;
   transition: all 5s ease-in; /* Smooth transition for background color */
-}
-
-blockquote {
 }

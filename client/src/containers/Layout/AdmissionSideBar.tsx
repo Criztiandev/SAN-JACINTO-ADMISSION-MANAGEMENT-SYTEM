@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Image, Typography } from "../../components";
+import { Typography } from "../../components";
 import { Suspense } from "react";
 import Logo from "../../assets/image/Logo.png";
 import Skeleton from "react-loading-skeleton";
@@ -17,7 +17,7 @@ const AdmissionSideBar = ({ content, toggle }: AdmissionSidebarProps) => {
           <div className="flex items-center gap-4">
             <figure className="w-16 h-16">
               <Suspense fallback={<Skeleton width={64} height={64} />}>
-                <Image src={Logo} alt="Logo Icon" />
+                <img src={Logo} alt="Logo Icon" />
               </Suspense>
             </figure>
             <Typography className="text-white " as="h3">

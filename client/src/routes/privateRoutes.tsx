@@ -10,6 +10,7 @@ import {
   UserAccountPage,
 } from "../pages";
 import { TableProvider, ScheduleProvider } from "../context";
+import Tools from "../pages/Tools";
 
 const routes = [
   {
@@ -66,6 +67,7 @@ const routes = [
     ),
   },
   { path: "/user", element: <UserAccountPage /> },
+  { path: "/tools", element: <Tools /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

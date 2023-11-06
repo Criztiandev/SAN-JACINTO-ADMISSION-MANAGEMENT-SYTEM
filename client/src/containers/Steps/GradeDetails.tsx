@@ -8,8 +8,8 @@ const GradeDetails = () => {
   return (
     <section className="grid grid-cols-2 gap-4">
       {gradeDetailsInputModel.map((props) => (
-        <motion.div whileHover={{ scale: 1.03 }}>
-          <Input key={props.label} {...props} />
+        <motion.div key={props.name} whileHover={{ scale: 1.03 }}>
+          <Input {...props} />
         </motion.div>
       ))}
     </section>
