@@ -1,11 +1,10 @@
 import { Formik, Form } from "formik";
 import { Input, Typography } from "../components";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { InputProps } from "../interface/FormInterface";
 import { authSchema } from "../schema/authSchema";
-import useLoginMutation from "../hooks/useLoginMutation";
-
+import useFormSubmit from "../hooks/useFormSubmit";
 const LoginInput: InputProps[] = [
   {
     label: "Email",
@@ -22,7 +21,8 @@ const LoginInput: InputProps[] = [
 ];
 
 const LoginPage = () => {
-  const { handleSubmit } = useLoginMutation();
+  const { payload, handleSubmit } = useFormSubmit("auth/login");
+
   return (
     <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">
       <div className="w-[40%] h-full bg-[#7a0021] text-white p-4 flex justify-center items-center px-12">

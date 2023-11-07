@@ -3,6 +3,7 @@ import adminModel from "../models/adminModel.js";
 import sessionModel from "../models/session.Model.js";
 import { generateToken } from "../utils/token.utils.js";
 import { storeTokenToCookies } from "../utils/cookie.utils.js";
+import jwt from "jsonwebtoken";
 
 export const loginController = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -14,30 +15,11 @@ export const loginController = asyncHandler(async (req, res) => {
     throw new Error("Incorrect Password, Please Try again");
   }
 
-  // check session
-  const currentSession = await sessionModel
-    .findOne({ UID: user._id })
-    .lean()
-    .select("_id");
-
-  if (currentSession) {
-    throw new Error("Account Already Login, Please Try again");
-  }
-
-  // create session
-  const createSession = await sessionModel.create({
-    UID: user._id,
-    agent: req.get("User-Agent"),
-    expiration: Date.now() + 24 * 60 * 60 * 1000,
-    status: true,
+  const secret = process.env.JWT_SECRET + user.password;
+  const token = jwt.sign({ _id: user._id, email: user.email }, secret, {
+    expiresIn: "15m",
   });
-
-  if (!createSession) {
-    throw new Error("Something went wrong");
-  }
-
-  const token = generateToken(createSession._id, process.env.JWT_SECRET);
-  storeTokenToCookies(res, process.env.AUTH_NAME, token);
+  const checkPointURL = `${process.env.BASE_URL}/checkpoint/${user._id}/${token}`;
 
   res.status(200).json({
     _id: user._id,
