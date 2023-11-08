@@ -1,51 +1,52 @@
 import mongoose from "mongoose";
 
-const schema = {
-  title: { type: String, require: true },
-  label: { type: String, require: true },
-  type: { type: String, enum: ["schedule", "examination", "event"] },
-  date: { type: Date, require: true },
-  time: {
-    start: { type: String, require: true },
-    end: { type: String, require: true },
+const scheduleSchema = new mongoose.Schema({
+  // Unique identifier for the schedule
+  scheduleId: {
+    type: String,
+    unique: true,
+    required: true,
   },
-  venue: { type: String, require: true },
-  coordinator: { type: String, require: true },
-};
 
-const examinationScheduleSchema = new mongoose.Schema(
-  {
-    ...schema,
-    applicants: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        default: [],
-        maxLength: 255,
-        unique: true,
+  // The name or title of the schedule (e.g., "Fall 2023 Semester Schedule")
+  name: {
+    type: String,
+    required: true,
+  },
+
+  // Start and end dates for the schedule
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+
+  // List of admission events or activities associated with the schedule
+  events: [
+    {
+      name: {
+        type: String,
+        required: true,
       },
-    ],
-    status: {
-      type: String,
-      enum: ["pending", "ongoing", "cancel"],
-      default: "ongoing",
+      date: {
+        type: Date,
+        required: true,
+      },
+      description: String,
+      // You can add more fields as needed
     },
-    createdBy: {
-      type: String,
-      default: "N/A",
-      require: true,
-    },
+  ],
+
+  // Other schedule-related information
+  description: String,
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Reference to the user who created the schedule
   },
-  { timestamps: true }
-);
+  // You can add more fields as needed
+});
 
-export const examinationSchedModel = mongoose.model(
-  "Schedule",
-  examinationScheduleSchema
-);
-
-// const scheduleSchema = new mongoose.Schema({}, { timestamps: true });
-
-// const eventScheduleSchema = new mongoose.Schema({}, { timestamps: true });
-
-// // export default mongoose.model("Schedule", scheduleSchema);
+export default mongoose.model("Schedule", scheduleSchema);

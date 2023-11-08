@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { FormikHelpers } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface FormSubmitResult {
@@ -10,19 +12,31 @@ interface FormSubmitResult {
   handleSubmit: (value: any, action: FormikHelpers<any>) => Promise<any>;
 }
 
-const useFormSubmit = (path: string): FormSubmitResult => {
+interface UseFormSubmitProps {
+  route: string;
+  redirect?: string;
+}
+
+const useFormSubmit = ({
+  route,
+  redirect,
+}: UseFormSubmitProps): FormSubmitResult => {
   const [currentPayload, setCurrentPayload] = useState<Array<object> | object>(
     {}
   );
+  const navigate = useNavigate();
 
-  const handleMutationError = (error: AxiosError) => {
-    if (!error.response) {
+  const handleMutationError = (e: AxiosError) => {
+    if (!e.response) {
       toast.error("Error: Something went wrong");
-      return;
+    } else {
+      const { error } = e.response.data as { error: string };
+      toast.error(error);
     }
 
-    const { message } = error.response.data as { message: string };
-    toast.error(message);
+    if (redirect) {
+      navigate(redirect);
+    }
   };
 
   const handleSuccessMutation = (payload: AxiosResponse) => {
@@ -42,7 +56,7 @@ const useFormSubmit = (path: string): FormSubmitResult => {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (value) =>
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}/${path}`, value),
+      axios.post(`${import.meta.env.VITE_SERVER_URL}${route}`, value),
     onError: handleMutationError,
     onSuccess: handleSuccessMutation,
   });

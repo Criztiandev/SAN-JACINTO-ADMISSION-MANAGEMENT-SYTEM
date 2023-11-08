@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import { Input, Typography } from "../components";
 import { motion } from "framer-motion";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { InputProps } from "../interface/FormInterface";
 import { authSchema } from "../schema/authSchema";
 import useFormSubmit from "../hooks/useFormSubmit";
@@ -21,7 +21,9 @@ const LoginInput: InputProps[] = [
 ];
 
 const LoginPage = () => {
-  const { payload, handleSubmit } = useFormSubmit("auth/login");
+  const { handleSubmit } = useFormSubmit({
+    route: "/auth/login",
+  });
 
   return (
     <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">

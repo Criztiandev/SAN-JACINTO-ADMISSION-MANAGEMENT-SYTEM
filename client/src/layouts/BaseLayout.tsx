@@ -4,16 +4,15 @@ import { Header } from ".";
 
 const BaseLayout = ({
   title = "Title",
-  subtitle = "Subtitle",
+  subtitle,
   actions,
   children,
-  style,
   className,
+  free,
 }: BaseLayoutProps) => {
-  const defaultStyle =
-    style === "free"
-      ? className
-      : "grid grid-rows-[64px_auto_32px] gap-4 h-full";
+  const defaultStyle = !free
+    ? "grid grid-rows-[64px_auto_32px] gap-4 h-full"
+    : className;
 
   return (
     <div className=" grid grid-cols-[70px_auto]">

@@ -6,11 +6,11 @@ export const generateSecret = ({ token, secret }) => {
   return token === null || !token ? secret + 10000 : secret + token + 10000;
 };
 
-export const generateToken = (UID, secret, expires) => {
-  if (!UID || !secret)
+export const generateToken = (payload, secret, expires) => {
+  if (!payload || !secret)
     throw new Error("Please provide the required parameters");
 
-  return jwt.sign({ _id: UID }, secret, { expiresIn: expires || "1d" });
+  return jwt.sign(payload, secret, { expiresIn: expires || "1d" });
 };
 
 export const verifyToken = (token, secret) => {

@@ -1,3 +1,5 @@
+// If you hack this , your gay
+
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -5,6 +7,8 @@ import connectDb from "./config/connectDB.js";
 import applicantRoute from "./routes/applicantRoutes.js";
 import authRoute from "./routes/authRoutes.js";
 import dasboardRoute from "./routes/dashboardRoutes.js";
+import scheduleRoute from "./routes/scheduleRoutes.js";
+
 import { errorHandler, notFound } from "./middleware/_index.js";
 import cors from "cors";
 import helmet from "helmet";
@@ -28,6 +32,7 @@ app.use(helmet());
 app.use("/api/auth", authRoute);
 app.use("/api/applicant", applicantRoute);
 app.use("/api/dashboard", dasboardRoute);
+app.use("/api/schedules", scheduleRoute);
 
 // Error Handlers
 app.use(notFound);

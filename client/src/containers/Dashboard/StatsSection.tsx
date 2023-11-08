@@ -1,6 +1,6 @@
 import { StatsCard } from ".";
 import { useQuery } from "@tanstack/react-query";
-import { fetchAllData } from "../../utils/Api.utils";
+import axios from "axios";
 
 interface StatsDataProps {
   title: string;
@@ -8,15 +8,24 @@ interface StatsDataProps {
   increase: number;
 }
 
-const StatsSection = () => {
-  const { data, isLoading, isError, isFetched } = useQuery({
-    queryFn: async () => await fetchAllData("dashboard"),
+interface StatsSectionProps {
+  serverUrl: string;
+}
+
+const StatsSection = ({ serverUrl }: StatsSectionProps) => {
+  const { data, isLoading, isError } = useQuery({
+    queryFn: async () => {
+      const response = await axios.get(`${serverUrl}/dashboard/stats`);
+      return response.data;
+    },
     queryKey: ["statsData"],
   });
 
-  if (isLoading || isError || !isFetched) return <StatsLoader />;
+  if (isLoading || isError) {
+    return <StatsLoader />;
+  }
 
-  const { payload } = data;
+  const { payload } = data as { payload: StatsDataProps[] };
 
   return (
     <section className="grid grid-cols-3 gap-4">
@@ -30,15 +39,17 @@ const StatsSection = () => {
 const StatsLoader = () => {
   return (
     <section className="grid grid-cols-3 gap-4">
-      {[{}, {}, {}].map(() => (
-        <StatsCard
-          key={Math.random()}
-          title="NA"
-          count={0}
-          increase={0}
-          isLoading={true}
-        />
-      ))}
+      {Array(3)
+        .fill(null)
+        .map((_, index) => (
+          <StatsCard
+            key={index}
+            title="NA"
+            count={0}
+            increase={0}
+            isLoading={true}
+          />
+        ))}
     </section>
   );
 };

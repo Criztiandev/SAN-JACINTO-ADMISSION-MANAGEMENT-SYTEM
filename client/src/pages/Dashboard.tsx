@@ -24,16 +24,16 @@ const Dashboard = () => {
   return (
     <>
       <BaseLayout
-        title="Welcome to Hell"
-        subtitle="Hi! Criztian, Its beeen a while,"
+        title="Hello, Criztian Jade 👋"
         actions={
           <ActionHeader onSettings={toggleSettings} onLogout={toggleLogout} />
         }
-        style="free"
-        className="h-full">
-        <StatsSection />
+        className="h-full"
+        free>
+        {/* // Stats */}
+        <StatsSection serverUrl={import.meta.env.VITE_SERVER_URL} />
 
-        <section className="grid grid-cols-[1fr_300px] gap-4 my-4">
+        <section className="h-[80vh] grid grid-cols-[1fr_300px] gap-4 my-4">
           <TabContent selected={activePanel} pending={isPending} />
           <TabAction
             selected={activePanel}

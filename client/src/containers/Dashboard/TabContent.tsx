@@ -47,7 +47,7 @@ const TabContent = ({ selected, pending }: TabContentProps) => {
   const { title, Component } = found;
 
   return (
-    <div className="relative border w-full h-[400px] rounded-[5px] flex flex-col gap-2 overflow-hidden">
+    <div className="relative border w-full rounded-[5px] flex flex-col gap-2 overflow-hidden">
       <div className="w-full bg-gray-300 px-2">
         <h3 className="p-2">{title || "Title"}</h3>
       </div>

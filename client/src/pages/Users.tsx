@@ -96,7 +96,8 @@ const Applicant = () => {
   return (
     <>
       <BaseLayout
-        title="Examinees"
+        title="Users"
+        subtitle="Hey there, Welcome this the user's table"
         actions={
           <Button
             type="button"

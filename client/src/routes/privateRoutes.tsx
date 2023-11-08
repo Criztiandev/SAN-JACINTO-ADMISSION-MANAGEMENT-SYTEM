@@ -7,10 +7,11 @@ import {
   AnnoucementPage,
   ExaminiesPage,
   MasterListPage,
-  UserAccountPage,
 } from "../pages";
 import { TableProvider, ScheduleProvider } from "../context";
 import Tools from "../pages/Tools";
+import Users from "../pages/Users";
+import Profile from "../pages/Profile";
 
 const routes = [
   {
@@ -66,8 +67,16 @@ const routes = [
       </TableProvider>
     ),
   },
-  { path: "/user", element: <UserAccountPage /> },
+  {
+    path: "/users",
+    element: (
+      <TableProvider>
+        <Users />
+      </TableProvider>
+    ),
+  },
   { path: "/tools", element: <Tools /> },
+  { path: "/profile", element: <Profile /> },
 ];
 
 export const privateRoutes = createBrowserRouter(

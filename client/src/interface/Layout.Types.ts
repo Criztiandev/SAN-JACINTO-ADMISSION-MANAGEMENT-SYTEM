@@ -14,7 +14,7 @@ export interface IconProps extends BaseProps {
 
 export interface BaseLayoutProps extends CommonLayoutProps {
   actions?: ReactNode;
-  style?: "free" | "default";
+  free?: boolean;
 }
 
 export interface RegistrationLayoutProps extends BaseProps {

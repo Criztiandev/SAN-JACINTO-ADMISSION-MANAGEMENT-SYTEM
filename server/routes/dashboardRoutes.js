@@ -3,6 +3,6 @@ import { fetchSchoolStats } from "../controller/dashboardController.js";
 
 const router = express.Router();
 
-router.get("/", fetchSchoolStats);
+router.get("/stats", fetchSchoolStats);
 
 export default router;
