@@ -3,10 +3,11 @@ import { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import FetchLoader from "../General/FetchLoader";
+import { fetchAllData } from "../../utils/Api.utils";
 
 const ScheduleCalendar = () => {
   const { data, isError, isLoading, isFetched } = useQuery({
-    queryFn: async () => {},
+    queryFn: async () => fetchAllData("schedules"),
     queryKey: ["admissionSched"],
   });
 
@@ -16,7 +17,7 @@ const ScheduleCalendar = () => {
     <>
       {isFetched && (
         <Calendar
-          events={[]}
+          events={[] || data}
           onSelectSlot={() => {}}
           onDoubleClickEvent={() => {}}
           localizer={momentLocalizer(moment)}

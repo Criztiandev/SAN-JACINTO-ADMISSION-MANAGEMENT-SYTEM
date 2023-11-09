@@ -5,26 +5,31 @@ import {
   UpdateLazyDrawer,
   DeleteLazyDrawer,
   MessageLazyDrawer,
+  FilterButton,
 } from "../containers/Applicants";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "../components";
+import { Badge, Button } from "../components";
 import ActionColumn from "../containers/Applicants/ActionColumn";
 import TitleHeader from "../containers/Table/TitleHeader";
 import FirstColumn from "../containers/Table/FirstColumn";
 import { TableConfigProps } from "../interface/Table.types";
-import { ToggleProps } from "../interface/Drawer.Types";
 import { OptionItem } from "../interface/Component.Type";
-import { ApplicantIcon } from "../assets/icons";
+import { useDrawer } from "../hooks";
+import {
+  ApplicantIcon,
+  FilterIcon,
+  CreateApplicantIcon,
+} from "../assets/icons";
 
-export const DrawerLists = (selected: any, toggles?: ToggleProps) => {
+export const DrawerLists = (selected: any, toggles: any) => {
   const {
     viewToggle,
     createToggle,
     updateToggle,
-    deleteToggle,
     messageToggle,
-  } = toggles || {};
+    deleteToggle,
+  } = toggles;
 
   return [
     {
@@ -171,3 +176,57 @@ export const StatusItems: OptionItem[] = [
   { title: "Pending", icon: ApplicantIcon },
   { title: "Hold", icon: ApplicantIcon },
 ];
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useDrawerOptions = () => {
+  return {
+    viewToggle: useDrawer(),
+    createToggle: useDrawer(),
+    updateToggle: useDrawer(),
+    deleteToggle: useDrawer(),
+    messageToggle: useDrawer(),
+  };
+};
+
+export const RenderFilterButton = ({ loading }: { loading: boolean }) => {
+  const FilterButtonsOption = [
+    { title: "Grade", option: GradeOptions },
+    { title: "Status", option: StatusItems },
+  ];
+
+  return (
+    <div className="flex gap-4">
+      {FilterButtonsOption.map((props) => (
+        <FilterButton icon={FilterIcon} disabled={loading} {...props} />
+      ))}
+    </div>
+  );
+};
+
+export const RenderCreateButton = ({
+  toggle,
+  loading,
+}: {
+  toggle: () => void;
+  loading: boolean;
+}) => {
+  return (
+    <Button
+      type="button"
+      dir="left"
+      title="Create"
+      icon={CreateApplicantIcon}
+      onClick={toggle}
+      disabled={loading}
+    />
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const renderDrawerList = (selected: any, option: any) => {
+  return DrawerLists(selected, option).map(
+    ({ id, Component, state, ...props }) => {
+      state && <Component key={id} state={state} {...props} />;
+    }
+  );
+};

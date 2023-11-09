@@ -22,3 +22,4 @@ export { default as FilterIcon } from "./Filter.svg";
 
 export { default as FatherIcon } from "./Father.svg";
 export { default as Mother } from "./Mother.svg";
+export { default as CreateApplicantIcon } from "./Create_Applicant.svg";

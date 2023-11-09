@@ -34,14 +34,14 @@ import axios from "axios";
 //   },
 // ];
 
-interface EventProps {
+interface Schedule {
   title: string;
   start: Date;
   end: Date;
 }
 
 const AdmissionCalendar = () => {
-  const { data, isError, isLoading, isFetched } = useQuery({
+  const { data, isError, isLoading, isFetched } = useQuery<Schedule[]>({
     queryFn: async () =>
       await axios.get(`${import.meta.env.VITE_SERVER_URL}/schedules`),
     queryKey: ["admissionSched"],

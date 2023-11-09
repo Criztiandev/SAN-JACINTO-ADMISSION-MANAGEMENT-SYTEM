@@ -5,6 +5,7 @@ import { navigationPaths } from "../helper/Navigation.Helper";
 import { motion } from "framer-motion";
 import { IconProps } from "../interface/Layout.Types";
 import { useConfigContext } from "../context/ConfigContext";
+
 const Nav = () => {
   const { activePage, handleActivePage } = useConfigContext();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Nav = () => {
         ))}
       </ul>
 
-      <button onClick={() => navigate("/user")}>
+      <button onClick={() => navigate("/profile")}>
         <Avatar src="" />
       </button>
     </nav>

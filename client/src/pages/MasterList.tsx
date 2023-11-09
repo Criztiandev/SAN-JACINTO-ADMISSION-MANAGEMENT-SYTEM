@@ -3,7 +3,7 @@
 
 import { Button, Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
-import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
+import CreateApplicantIcon from "../assets/icons/Create_Applicant.svg";
 import { useTableContext } from "../context/TableContext";
 import { useEffect } from "react";
 
