@@ -1,3 +1,4 @@
+import { FC, ReactElement, Suspense, ReactNode } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import {
   ErrorPage,
@@ -11,34 +12,50 @@ import {
 import { TableProvider, ScheduleProvider } from "../context";
 import Tools from "../pages/Tools";
 import Profile from "../pages/Profile";
+import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
+import { Loading } from "../components";
+import ApplicantSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+interface ProviderWrapperProps {
+  children: React.ReactNode;
+  loader: ReactElement;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+const ProviderWrapper: FC<ProviderWrapperProps> = ({ children, loader }) => {
+  return (
+    <Suspense fallback={loader}>
+      <TableProvider>
+        <ScheduleProvider>{children}</ScheduleProvider>
+      </TableProvider>
+    </Suspense>
+  );
+};
 
 const routes = [
   {
     path: "/",
     element: (
-      <ScheduleProvider>
-        <TableProvider>
-          <DashboardPage />
-        </TableProvider>
-      </ScheduleProvider>
+      <ProviderWrapper loader={<DashboardSkeleton />}>
+        <DashboardSkeleton />
+      </ProviderWrapper>
     ),
   },
   {
     path: "/applicants",
     element: (
-      <TableProvider>
-        <ApplicantPage />
-      </TableProvider>
+      <Suspense fallback={<Loading />}>
+        <TableProvider>
+          <ApplicantSkeleton />
+        </TableProvider>
+      </Suspense>
     ),
   },
   {
     path: "/schedule",
     element: (
-      <ScheduleProvider>
-        <TableProvider>
-          <SchedulePage />
-        </TableProvider>
-      </ScheduleProvider>
+      <ProviderWrapper loader={<Loading />}>
+        <SchedulePage />
+      </ProviderWrapper>
     ),
   },
 

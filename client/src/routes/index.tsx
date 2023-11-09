@@ -8,12 +8,7 @@ import { Loading } from "../components";
 const Routes = () => {
   const { user } = useAuthContext();
 
-  if (user)
-    return (
-      <Suspense fallback={<Loading />}>
-        <RouterProvider router={privateRoutes} />
-      </Suspense>
-    );
+  if (user) return <RouterProvider router={privateRoutes} />;
   return (
     <Suspense fallback={<Loading />}>
       <RouterProvider router={publicRoutes} />

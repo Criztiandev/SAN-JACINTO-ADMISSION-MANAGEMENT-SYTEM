@@ -1,6 +1,7 @@
 import { StatsCard } from ".";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import StatsLoader from "../Loaders/StatsLoader";
 
 interface StatsDataProps {
   title: string;
@@ -32,24 +33,6 @@ const StatsSection = ({ serverUrl }: StatsSectionProps) => {
       {payload.map((props: StatsDataProps) => (
         <StatsCard key={props.title} {...props} />
       ))}
-    </section>
-  );
-};
-
-const StatsLoader = () => {
-  return (
-    <section className="grid grid-cols-3 gap-4">
-      {Array(3)
-        .fill(null)
-        .map((_, index) => (
-          <StatsCard
-            key={index}
-            title="NA"
-            count={0}
-            increase={0}
-            isLoading={true}
-          />
-        ))}
     </section>
   );
 };

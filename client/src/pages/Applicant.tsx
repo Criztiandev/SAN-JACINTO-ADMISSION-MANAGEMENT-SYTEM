@@ -4,7 +4,7 @@
 import { Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import { useTableContext } from "../context/TableContext";
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -26,7 +26,13 @@ const Applicant = () => {
   const toggleOption = useDrawerOptions();
   const { createToggle } = toggleOption;
 
-  const { isLoading, isPending, refetch } = useQuery({
+  const [isPending, startTransition] = useTransition();
+
+  const {
+    isLoading,
+    isPending: QueryPending,
+    refetch,
+  } = useQuery({
     queryFn: async () => {
       const { payload } = await fetchAllData("applicant");
       handleMutateData(payload);
@@ -74,19 +80,25 @@ const Applicant = () => {
 
   // Setting up the Table Config
   useEffect(() => {
-    const config = TableConfig({
-      toggles: toggleOption,
-      onToggle: handleToggle,
-      onAccept: handleAccept,
+    let config: any = "";
+
+    startTransition(() => {
+      config = TableConfig({
+        toggles: toggleOption,
+        onToggle: handleToggle,
+        onAccept: handleAccept,
+      });
+
+      if (!config) throw new Error("No Config");
+      setTableConfig(config);
     });
 
-    if (!config) throw new Error("No Config");
-    setTableConfig(config);
-
     return () => {
-      setTableConfig([]);
+      startTransition(() => {
+        setTableConfig([]);
+      });
     };
-  }, []);
+  }, [startTransition]);
 
   return (
     <>
@@ -95,7 +107,7 @@ const Applicant = () => {
         actions={
           <RenderCreateButton
             toggle={createToggle.toggleDrawer}
-            loading={isLoading}
+            loading={QueryPending}
           />
         }>
         <div className="flex justify-between items-center">
@@ -103,15 +115,15 @@ const Applicant = () => {
             dir="left"
             value={search}
             onChange={handleSearch}
-            disabled={isLoading}
+            disabled={QueryPending}
           />
 
           <div className="flex gap-4">
-            <RenderFilterButton loading={isLoading} />
+            <RenderFilterButton loading={QueryPending} />
           </div>
         </div>
 
-        {isLoading || isPending ? (
+        {isLoading || QueryPending ? (
           <FetchLoader />
         ) : (
           <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px" />

@@ -5,7 +5,7 @@ interface ImageProps {
 }
 
 const Image = ({ src, alt, className }: ImageProps) => {
-  return <img src={src} alt={alt} className={`${className} `} />;
+  return <img loading="lazy" src={src} alt={alt} className={`${className} `} />;
 };
 
 export default Image;

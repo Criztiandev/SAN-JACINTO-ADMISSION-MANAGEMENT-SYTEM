@@ -10,6 +10,7 @@ import TabContent from "../containers/Dashboard/TabContent";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAdminById } from "../api/Auth.Api";
 import { useAuthContext } from "../context/AuthContext";
+import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Admission");
@@ -19,7 +20,7 @@ const Dashboard = () => {
   const { active: logoutIsActive, toggleDrawer: toggleLogout } = useDrawer();
 
   const { user } = useAuthContext();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: async () => {
       const res = await fetchAdminById(user);
       return res;
