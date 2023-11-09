@@ -9,7 +9,9 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     const preferedStyle = BaseIconButtonStyle(as);
     const finalizedStyle = `${
       className && className
-    } p-2 rounded-full flex justify-center items-center border border-gray-400 ${preferedStyle}`;
+    } p-2 rounded-full flex justify-center items-center border border-gray-400 select-none ${
+      props.disabled && "opacity-50"
+    } ${preferedStyle}`;
 
     return (
       <motion.button

@@ -12,4 +12,4 @@ export const AnnoucementPage = lazy(() => import("./Annoucement.tsx"));
 export const SchedulePage = lazy(() => import("./Schedule.tsx"));
 export const ExaminiesPage = lazy(() => import("./Examiniees.tsx"));
 export const MasterListPage = lazy(() => import("./MasterList.tsx"));
-export const UserAccountPage = lazy(() => import("./UserAccount.tsx"));
+export const ProfilePage = lazy(() => import("./Profile.tsx"));

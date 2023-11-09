@@ -103,7 +103,7 @@ const Applicant = () => {
             dir="left"
             value={search}
             onChange={handleSearch}
-            disabled={isLoading || isPending}
+            disabled={isLoading}
           />
 
           <div className="flex gap-4">

@@ -26,7 +26,11 @@ const Dashboard = () => {
       <BaseLayout
         title="Hello, Criztian Jade 👋"
         actions={
-          <ActionHeader onSettings={toggleSettings} onLogout={toggleLogout} />
+          <ActionHeader
+            onSettings={toggleSettings}
+            onLogout={toggleLogout}
+            loading={true}
+          />
         }
         className="h-full"
         free>
@@ -39,6 +43,7 @@ const Dashboard = () => {
             selected={activePanel}
             onSelect={handleSelectPanel}
             pending={isPending}
+            loading={true}
           />
         </section>
       </BaseLayout>

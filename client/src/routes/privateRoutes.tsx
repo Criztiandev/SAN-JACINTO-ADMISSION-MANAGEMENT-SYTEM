@@ -10,7 +10,6 @@ import {
 } from "../pages";
 import { TableProvider, ScheduleProvider } from "../context";
 import Tools from "../pages/Tools";
-import Users from "../pages/Users";
 import Profile from "../pages/Profile";
 
 const routes = [
@@ -67,14 +66,7 @@ const routes = [
       </TableProvider>
     ),
   },
-  {
-    path: "/users",
-    element: (
-      <TableProvider>
-        <Users />
-      </TableProvider>
-    ),
-  },
+
   { path: "/tools", element: <Tools /> },
   { path: "/profile", element: <Profile /> },
 ];
