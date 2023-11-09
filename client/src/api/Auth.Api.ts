@@ -11,9 +11,9 @@ export const loginAdmin = async (credentials: loginCredentialsParams) => {
 
 export const fetchAdminById = async (UID: string) => {
   try {
-    const { data } = await axios.get(`${baseURL}/admin/${UID}`);
-    return data;
-  } catch (error: AxiosError | any) {
+    const res = await axios.get(`${baseURL}/account/${UID}`);
+    return res.data.payload;
+  } catch (error: any | AxiosError) {
     if (!error.response) {
       toast.error("Something went wrong, Please try again later");
     }

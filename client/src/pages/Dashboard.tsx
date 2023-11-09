@@ -7,6 +7,9 @@ import StatsSection from "../containers/Dashboard/StatsSection";
 import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAdminById } from "../api/Auth.Api";
+import { useAuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Admission");
@@ -14,6 +17,15 @@ const Dashboard = () => {
   const { active: settingsIsActive, toggleDrawer: toggleSettings } =
     useDrawer();
   const { active: logoutIsActive, toggleDrawer: toggleLogout } = useDrawer();
+
+  const { user } = useAuthContext();
+  const { data, isLoading, isError } = useQuery({
+    queryFn: async () => {
+      const res = await fetchAdminById(user);
+      return res;
+    },
+    queryKey: ["admin"],
+  });
 
   const handleSelectPanel = (event: MouseEvent<HTMLButtonElement>) => {
     startTransition(() => {
@@ -24,12 +36,12 @@ const Dashboard = () => {
   return (
     <>
       <BaseLayout
-        title="Hello, Criztian Jade 👋"
+        title={`Hello, ${data?.fullName} 👋`}
         actions={
           <ActionHeader
             onSettings={toggleSettings}
             onLogout={toggleLogout}
-            loading={true}
+            loading={isLoading}
           />
         }
         className="h-full"
@@ -43,7 +55,7 @@ const Dashboard = () => {
             selected={activePanel}
             onSelect={handleSelectPanel}
             pending={isPending}
-            loading={true}
+            loading={isLoading}
           />
         </section>
       </BaseLayout>

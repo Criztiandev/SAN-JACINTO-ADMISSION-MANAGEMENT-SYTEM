@@ -7,11 +7,11 @@ interface ActionHeaderProps {
   loading: boolean;
 }
 
-const ActionHeader = ({ onSettings, onLogout }: ActionHeaderProps) => {
+const ActionHeader = ({ onSettings, onLogout, loading }: ActionHeaderProps) => {
   return (
     <>
-      <IconButton icon={SettingIcon} onClick={onSettings} disabled />
-      <IconButton icon={SignOutIcon} onClick={onLogout} disabled />
+      <IconButton icon={SettingIcon} onClick={onSettings} disabled={loading} />
+      <IconButton icon={SignOutIcon} onClick={onLogout} disabled={loading} />
     </>
   );
 };
