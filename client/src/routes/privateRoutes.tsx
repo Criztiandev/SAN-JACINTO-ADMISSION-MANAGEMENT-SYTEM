@@ -14,7 +14,8 @@ import Tools from "../pages/Tools";
 import Profile from "../pages/Profile";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import { Loading } from "../components";
-import ApplicantSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -45,7 +46,7 @@ const routes = [
     element: (
       <Suspense fallback={<Loading />}>
         <TableProvider>
-          <ApplicantSkeleton />
+          <TablePanelSkeleton />
         </TableProvider>
       </Suspense>
     ),
@@ -53,8 +54,8 @@ const routes = [
   {
     path: "/schedule",
     element: (
-      <ProviderWrapper loader={<Loading />}>
-        <SchedulePage />
+      <ProviderWrapper loader={<ScheduleSkeleton />}>
+        <ScheduleSkeleton />
       </ProviderWrapper>
     ),
   },
@@ -62,25 +63,42 @@ const routes = [
   {
     path: "/annoucement",
     element: (
-      <TableProvider>
-        <AnnoucementPage />
-      </TableProvider>
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <TablePanelSkeleton />
+        </TableProvider>
+      </Suspense>
     ),
   },
   {
     path: "/masterlist",
     element: (
-      <TableProvider>
-        <MasterListPage />
-      </TableProvider>
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <TablePanelSkeleton />
+        </TableProvider>
+      </Suspense>
     ),
   },
   {
     path: "/examiniees",
     element: (
-      <TableProvider>
-        <ExaminiesPage />
-      </TableProvider>
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <TablePanelSkeleton />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
+
+  {
+    path: "/users",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <TablePanelSkeleton />
+        </TableProvider>
+      </Suspense>
     ),
   },
 

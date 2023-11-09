@@ -35,7 +35,7 @@ const ToolOptions: ToolOptionProps[] = [
     title: "Users",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exnatus maxime distinctio. Nisi exercitationem",
-    path: "users",
+    path: "/users",
   },
 ];
 
