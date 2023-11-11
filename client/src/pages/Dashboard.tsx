@@ -7,26 +7,23 @@ import StatsSection from "../containers/Dashboard/StatsSection";
 import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAdminById } from "../api/Auth.Api";
 import { useAuthContext } from "../context/AuthContext";
+import useFetch from "../hooks/useFetch";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
+import { Button, Typography } from "../components";
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Admission");
   const [isPending, startTransition] = useTransition();
-  const { active: settingsIsActive, toggleDrawer: toggleSettings } =
-    useDrawer();
-  const { active: logoutIsActive, toggleDrawer: toggleLogout } = useDrawer();
 
   const { user } = useAuthContext();
-  const { data, isLoading } = useQuery({
-    queryFn: async () => {
-      const res = await fetchAdminById(user);
-      return res;
-    },
-    queryKey: ["admin"],
-  });
+  const {
+    data,
+    isLoading,
+    isPending: isFetchPending,
+  } = useFetch({ route: `/account/${user}`, key: ["stats"] });
+
+  if (isLoading || isFetchPending) return <DashboardSkeleton />;
 
   const handleSelectPanel = (event: MouseEvent<HTMLButtonElement>) => {
     startTransition(() => {
@@ -40,34 +37,58 @@ const Dashboard = () => {
         title={`Hello, ${data?.fullName} 👋`}
         actions={
           <ActionHeader
-            onSettings={toggleSettings}
-            onLogout={toggleLogout}
+            onSettings={() => {}}
+            onLogout={() => {}}
             loading={isLoading}
           />
         }
-        className="h-full"
+        className="h-full flex flex-col gap-8"
         free>
         {/* // Stats */}
         <StatsSection serverUrl={import.meta.env.VITE_SERVER_URL} />
 
-        <section className="h-[80vh] grid grid-cols-[1fr_300px] gap-4 my-4">
-          <TabContent selected={activePanel} pending={isPending} />
+        <section className="flex flex-col gap-4 h-[80vh]">
           <TabAction
             selected={activePanel}
             onSelect={handleSelectPanel}
             pending={isPending}
-            loading={isLoading}
           />
+
+          <TabContent selected={activePanel} pending={isPending} />
+        </section>
+
+        <section className="h-80vh bg-gray-500 p-4 rounded-[5px] grid grid-cols-[200px_auto]">
+          <div className="h-full flex flex-col items-center gap-4">
+            {/* //Profile */}
+            <div className="w-[128px] h-[128px] rounded-full border border-gray-400"></div>
+            {/* // Details */}
+            <div className="text-center text-gray-100">
+              <Typography as="h6">Criztian Jade M Tuplano</Typography>
+              <Typography as="span" className="text-sm">
+                @criztindev
+              </Typography>
+            </div>
+            {/* // Action */}
+            <Button title="Turn Off" className="hover:bg-red-500" />
+          </div>
+          <div className="text-white">
+            <div className="flex gap-4 items-center">
+              <span>🟢 Status:</span>
+              <span className="bg-green-300 text-black px-3  py-1 rounded-full font-semibold cursor-default">
+                Active
+              </span>
+            </div>
+          </div>
         </section>
       </BaseLayout>
 
-      {settingsIsActive && (
+      {/* {settingsIsActive && (
         <SettingsDrawer state={settingsIsActive} onClose={toggleSettings} />
       )}
 
       {logoutIsActive && (
         <SettingsDrawer state={logoutIsActive} onClose={toggleLogout} />
-      )}
+      )} */}
     </>
   );
 };

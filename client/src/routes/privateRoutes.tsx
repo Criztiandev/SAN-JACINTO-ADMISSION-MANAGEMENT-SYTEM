@@ -38,7 +38,7 @@ const routes = [
     path: "/",
     element: (
       <ProviderWrapper loader={<DashboardSkeleton />}>
-        <DashboardSkeleton />
+        <DashboardPage />
       </ProviderWrapper>
     ),
   },
@@ -108,7 +108,7 @@ const routes = [
     path: "/profile",
     element: (
       <Suspense fallback={<ProfileSkeleton />}>
-        <ProfileSkeleton />
+        <ProfilePage />
       </Suspense>
     ),
   },
