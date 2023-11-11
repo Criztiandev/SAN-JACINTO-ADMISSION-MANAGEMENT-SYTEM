@@ -54,7 +54,7 @@ p {
 }
 
 input {
-  color: white;
+  color: inherit;
   outline: none;
   background: inherit;
 }

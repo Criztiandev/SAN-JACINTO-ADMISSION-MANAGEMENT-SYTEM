@@ -1,104 +1,117 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Table, SearchBar } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
+import { Table, SearchBar, Badge, IconButton } from "../components";
+
 import { useTableContext } from "../context/TableContext";
-import { useEffect, useTransition } from "react";
-
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-
 import {
   RenderCreateButton,
   RenderFilterButton,
-  TableConfig,
-  renderDrawerList,
-  useDrawerOptions,
 } from "../helper/Applicant.Helper";
-import { updateStatusApplicant } from "../api/Applicant.Api";
-import FetchLoader from "../containers/General/FetchLoader";
-import { fetchAllData } from "../utils/Api.utils";
-import { AxiosError } from "axios";
+import useFetch from "../hooks/useFetch";
+import { ColumnDef } from "@tanstack/react-table";
+import TitleHeader from "../containers/Table/TitleHeader";
+import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
+import FirstColumn from "../containers/Table/FirstColumn";
+import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import axios, { AxiosError } from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { handleAxiosError } from "../utils/Api.utils";
+import ApplicantDrawer from "../containers/Applicants/ApplicantDrawer";
+import ViewApplicant from "../containers/Applicants/ViewApplicant";
+import EditApplicant from "../containers/Applicants/EditApplicant";
+import MessageApplicant from "../containers/Applicants/MessageApplicant";
+import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
+import CreateApplicant from "../containers/Applicants/CreateApplicant";
+import ArchieveIcon from "../assets/icons/Arhive_light.svg";
+import { useNavigate } from "react-router-dom";
 
 const Applicant = () => {
-  // Drawers
-  const toggleOption = useDrawerOptions();
-  const { createToggle } = toggleOption;
+  const { handleSearch, handleMutateData } = useTableContext();
+  const navigate = useNavigate();
 
-  const [isPending, startTransition] = useTransition();
-
-  const {
-    isLoading,
-    isPending: QueryPending,
-    refetch,
-  } = useQuery({
-    queryFn: async () => {
-      const { payload } = await fetchAllData("applicant");
-      handleMutateData(payload);
-      return payload;
-    },
-    queryKey: ["applicants"],
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
+    route: "/applicant",
+    overrideFn: handleMutateData,
+    key: ["applicants"],
   });
 
-  const acceptApplicant = useMutation({
-    mutationFn: async ({ APID, value }: any) => {
-      return updateStatusApplicant(APID, value);
+  // mutation
+  const { mutateAsync } = useMutation({
+    mutationFn: ({ UID, status }: { UID: string; status: string }) => {
+      return axios.put(`${import.meta.env.VITE_SERVER_URL}/applicant/${UID}`, {
+        status,
+      });
     },
+
     onSuccess: () => {
-      toast.success("Applicant is Accepted Successfully");
+      toast.success("Applicant Accepted Successfully");
+      refetch();
     },
 
-    onError: (e: AxiosError | any) => {
-      if (!e.response) {
-        toast.error("Error: Something went wrong");
-      }
-
-      const { error } = e.response?.data as { error: string };
-      toast.error(error);
+    onError: (e: AxiosError) => {
+      handleAxiosError(e);
     },
   });
 
-  const {
-    search,
-    selected,
-    handleSearch,
-    setTableConfig,
-    handleSelected,
-    handleMutateData,
-  } = useTableContext();
-
-  const handleToggle = (data: object | string, toggle = () => {}) => {
-    handleSelected(data);
-    toggle();
+  const handleAction = async (id: string, currentStatus: string) => {
+    void mutateAsync({ UID: id, status: currentStatus });
   };
 
-  const handleAccept = async (id: string, status: string) => {
-    await acceptApplicant.mutateAsync({ APID: id, value: status });
-    refetch();
-  };
+  if (isLoading || isPending || isFetched) return <TablePanelSkeleton />;
 
-  // Setting up the Table Config
-  useEffect(() => {
-    let config: any = "";
+  const ApplicantTableConfig: ColumnDef<any, any>[] = [
+    {
+      id: "select",
+      header: ({ table }) => <TitleHeader data={table} />,
+      accessorFn: ({ personalDetails }) =>
+        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+      cell: ({ row, getValue }) => (
+        <FirstColumn data={row} value={getValue()} />
+      ),
+    },
 
-    startTransition(() => {
-      config = TableConfig({
-        toggles: toggleOption,
-        onToggle: handleToggle,
-        onAccept: handleAccept,
-      });
+    { header: "LRN", accessorKey: "studentDetails.LRN" },
+    {
+      header: "Grade Level",
+      accessorKey: "studentDetails.yearLevel",
+      accessorFn: ({ studentDetails }) =>
+        `${studentDetails.yearLevel.split(" ")[1]}`,
+    },
+    { header: "Gender", accessorKey: "personalDetails.gender" },
+    { header: "BOD", accessorKey: "personalDetails.birthDate" },
+    { header: "Age", accessorKey: "personalDetails.age" },
+    {
+      header: "Guardian",
+      accessorKey: "guardianDetails.legalGuardian",
+      accessorFn: ({ guardianDetails }) => {
+        const { firstName, middleName, lastName } =
+          guardianDetails.legalGuardian;
 
-      if (!config) throw new Error("No Config");
-      setTableConfig(config);
-    });
+        return `${lastName}, ${firstName} ${middleName[0]}.`;
+      },
+    },
 
-    return () => {
-      startTransition(() => {
-        setTableConfig([]);
-      });
-    };
-  }, [startTransition]);
+    { header: "Contact", accessorKey: "personalDetails.contact" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ getValue }: any) => (
+        <Badge as="neutral" type={getValue()} title={getValue()} />
+      ),
+    },
+    {
+      header: "Action",
+      cell: ({ row }) => {
+        return (
+          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -106,31 +119,39 @@ const Applicant = () => {
         title="Applicants"
         actions={
           <RenderCreateButton
-            toggle={createToggle.toggleDrawer}
-            loading={QueryPending}
+            toggle={() => {}}
+            loading={isLoading || isPending}
           />
         }>
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
-            value={search}
+            value={""}
             onChange={handleSearch}
-            disabled={QueryPending}
+            disabled={isPending}
           />
 
-          <div className="flex gap-4">
-            <RenderFilterButton loading={QueryPending} />
+          <div className="flex justify-between gap-4">
+            <RenderFilterButton loading={isPending} />
+            <IconButton
+              as="outlined"
+              icon={ArchieveIcon}
+              onClick={() => navigate("/applicant/archieve")}
+            />
           </div>
         </div>
 
-        {isLoading || QueryPending ? (
-          <FetchLoader />
-        ) : (
-          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px" />
-        )}
+        <Table
+          config={ApplicantTableConfig}
+          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+        />
       </BaseLayout>
 
-      {renderDrawerList(selected, toggleOption)}
+      <ApplicantDrawer pref="create" Component={CreateApplicant} />
+      <ApplicantDrawer pref="view" Component={ViewApplicant} />
+      <ApplicantDrawer pref="edit" Component={EditApplicant} />
+      <ApplicantDrawer pref="archieve" Component={ArchieveApplicant} />
+      <ApplicantDrawer pref="message" Component={MessageApplicant} />
     </>
   );
 };

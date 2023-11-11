@@ -19,15 +19,15 @@ export interface ToggleDrawer {
   onClose: () => void;
 }
 
-export interface DrawerValue {
-  createToggle: useDrawerProps;
-  viewToggle: useDrawerProps;
-  deleteToggle: useDrawerProps;
-  updateToggle: useDrawerProps;
-  messageToggle: useDrawerProps;
-  editToggle: useDrawerProps;
-  holdToggle: useDrawerProps;
-}
+// export interface DrawerValue {
+//   createToggle: useDrawerProps;
+//   viewToggle: useDrawerProps;
+//   deleteToggle: useDrawerProps;
+//   updateToggle: useDrawerProps;
+//   messageToggle: useDrawerProps;
+//   editToggle: useDrawerProps;
+//   holdToggle: useDrawerProps;
+// }
 
 export interface DrawerListProps {
   id: string;

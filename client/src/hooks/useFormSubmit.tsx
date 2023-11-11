@@ -11,6 +11,7 @@ import { handleAxiosError } from "../utils/Api.utils";
 interface FormSubmitResult {
   payload: Array<object> | object;
   handleSubmit: (value: any, action: FormikHelpers<any>) => Promise<any>;
+  isPending: boolean;
 }
 
 interface UseFormSubmitProps {
@@ -42,6 +43,7 @@ const useFormSubmit = ({
     toast.success(message);
   };
 
+  // a breather to avoid spamming
   const handleSubmit = async (value: any, action: FormikHelpers<any>) => {
     try {
       await mutateAsync(value);
@@ -51,14 +53,14 @@ const useFormSubmit = ({
     }
   };
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: async (value) =>
       axios[`${type}`](`${import.meta.env.VITE_SERVER_URL}${route}`, value),
-    onError: handleMutationError,
     onSuccess: handleSuccessMutation,
+    onError: handleMutationError,
   });
 
-  return { payload: currentPayload, handleSubmit };
+  return { payload: currentPayload, handleSubmit, isPending };
 };
 
 export default useFormSubmit;

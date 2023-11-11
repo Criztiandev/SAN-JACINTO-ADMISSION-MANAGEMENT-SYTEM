@@ -1,4 +1,4 @@
-import { FC, ReactElement, Suspense, ReactNode } from "react";
+import { FC, ReactElement, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import {
   ErrorPage,

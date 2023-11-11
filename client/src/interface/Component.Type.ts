@@ -28,4 +28,5 @@ export interface DropdownProps extends BaseButtonProps {
 export interface OptionItem {
   icon: string;
   title: string;
+  onClick?: () => void;
 }

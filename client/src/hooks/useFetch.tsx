@@ -6,9 +6,10 @@ import { handleAxiosError } from "../utils/Api.utils";
 interface useFetchProps {
   route: string;
   key: Array<string>;
+  overrideFn?: (data: any) => void;
 }
 
-const useFetch = ({ route, key }: useFetchProps) => {
+const useFetch = ({ route, key, overrideFn }: useFetchProps) => {
   const query = useQuery({
     queryFn: async () => {
       try {
@@ -16,6 +17,10 @@ const useFetch = ({ route, key }: useFetchProps) => {
           `${import.meta.env.VITE_SERVER_URL}${route}`
         );
         const { payload } = res.data;
+
+        if (overrideFn) {
+          overrideFn(payload);
+        }
         return payload;
       } catch (e: any) {
         handleAxiosError(e);

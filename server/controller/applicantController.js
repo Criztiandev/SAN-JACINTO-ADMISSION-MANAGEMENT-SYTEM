@@ -79,12 +79,12 @@ export const fetchApplicantByID = asyncHandler(async (req, res) => {
 });
 
 export const updateApplicant = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id: APID } = req.params;
   const payload = req.body;
   if (!payload) throw new Error("No Request Body");
 
   const _applicant = await applicantModel
-    .findOneAndUpdate({ _id: id }, payload, { new: true })
+    .findOneAndUpdate({ _id: APID }, payload, { new: true })
     .lean()
     .select("_id");
 
@@ -97,9 +97,10 @@ export const updateApplicant = asyncHandler(async (req, res) => {
 });
 
 export const deleteApplicant = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { id: APID } = req.params;
+
   const _applicant = await applicantModel
-    .findOneAndDelete({ _id: id })
+    .findByIdandDelete(APID)
     .lean()
     .select("_id");
 

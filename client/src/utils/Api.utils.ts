@@ -19,7 +19,7 @@ export const handleAxiosError = (error: AxiosError) => {
   if (data && responseError) {
     toast.error(responseError);
   } else {
-    toast.error(`HTTP error${status}`);
+    toast.error(`HTTP error ${status}`);
   }
   return;
 };

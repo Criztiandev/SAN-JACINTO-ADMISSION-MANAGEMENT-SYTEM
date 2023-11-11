@@ -39,8 +39,12 @@ const Input = ({
       <input
         {...field}
         {...props}
-        className={`w-full px-4 py-3 border rounded-[5px] ${
+        className={`w-full px-4 py-3 border rounded-[5px] text-gray-600${
           className && className
+        } ${
+          props.disabled
+            ? " bg-gray-300 text-gray-600 opacity-70"
+            : "bg-gray-100 text-gray-600 select-none"
         }`}
       />
       {meta.error && (
