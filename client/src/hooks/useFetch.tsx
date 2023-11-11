@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { handleAxiosError } from "../utils/Api.utils";
 
 interface useFetchProps {
@@ -14,10 +13,9 @@ const useFetch = ({ route, key }: useFetchProps) => {
     queryFn: async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/${route}`
+          `${import.meta.env.VITE_SERVER_URL}${route}`
         );
-        const { payload, message } = res.data;
-        toast.success(message || "Fetch Successfully");
+        const { payload } = res.data;
         return payload;
       } catch (e: any) {
         handleAxiosError(e);

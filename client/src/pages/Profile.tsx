@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { BaseLayout } from "../layouts";
 import ActionHeader from "../containers/Dashboard/ActionHeader";
-import { useQuery } from "@tanstack/react-query";
 import { useAuthContext } from "../context/AuthContext";
-import { fetchAdminById } from "../api/Auth.Api";
 import { Formik, Form } from "formik";
 import { Button, IconButton, Input, Typography } from "../components";
 import { useState } from "react";
@@ -11,25 +9,19 @@ import { ProfileInputSection } from "../data/profile.Data";
 import { EditIcon } from "../assets/icons";
 import FetchLoader from "../containers/General/FetchLoader";
 import useFormSubmit from "../hooks/useFormSubmit";
+import useFetch from "../hooks/useFetch";
 
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const { user } = useAuthContext();
   const { handleSubmit } = useFormSubmit({ route: "test" });
 
-  const { data, isLoading, isPending } = useQuery({
-    queryFn: async () => {
-      const payload = await fetchAdminById(user);
-      return payload;
-    },
-    queryKey: [""],
+  const { data, isLoading, isPending } = useFetch({
+    route: `/account/${user}`,
+    key: ["profile"],
   });
 
   if (isLoading || isPending) return <FetchLoader />;
-
-  // const { active: settingsIsActive, toggleDrawer: toggleSettings } =
-  //   useDrawer();
-  // const { active: logoutIsActive, toggleDrawer: toggleLogout } = useDrawer();
 
   return (
     <>

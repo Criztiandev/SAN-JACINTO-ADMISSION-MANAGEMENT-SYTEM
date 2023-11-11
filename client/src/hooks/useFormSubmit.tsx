@@ -6,6 +6,7 @@ import { FormikHelpers } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { handleAxiosError } from "../utils/Api.utils";
 
 interface FormSubmitResult {
   payload: Array<object> | object;
@@ -15,11 +16,13 @@ interface FormSubmitResult {
 interface UseFormSubmitProps {
   route: string;
   redirect?: string;
+  type: "post" | "put";
 }
 
 const useFormSubmit = ({
   route,
   redirect,
+  type = "post",
 }: UseFormSubmitProps): FormSubmitResult => {
   const [currentPayload, setCurrentPayload] = useState<Array<object> | object>(
     {}
@@ -27,13 +30,7 @@ const useFormSubmit = ({
   const navigate = useNavigate();
 
   const handleMutationError = (e: AxiosError) => {
-    if (!e.response) {
-      toast.error("Error: Something went wrong");
-    } else {
-      const { error } = e.response.data as { error: string };
-      toast.error(error);
-    }
-
+    handleAxiosError(e);
     if (redirect) {
       navigate(redirect);
     }
@@ -46,17 +43,13 @@ const useFormSubmit = ({
   };
 
   const handleSubmit = async (value: any, action: FormikHelpers<any>) => {
-    try {
-      await mutateAsync(value);
-      action.resetForm();
-    } catch (e) {
-      return e;
-    }
+    await mutateAsync(value);
+    action.resetForm();
   };
 
   const { mutateAsync } = useMutation({
     mutationFn: async (value) =>
-      axios.post(`${import.meta.env.VITE_SERVER_URL}${route}`, value),
+      axios[`${type}`](`${import.meta.env.VITE_SERVER_URL}${route}`, value),
     onError: handleMutationError,
     onSuccess: handleSuccessMutation,
   });
