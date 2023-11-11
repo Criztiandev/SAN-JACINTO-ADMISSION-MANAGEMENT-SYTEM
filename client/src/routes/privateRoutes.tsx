@@ -45,9 +45,9 @@ const routes = [
   {
     path: "/applicants",
     element: (
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<TablePanelSkeleton />}>
         <TableProvider>
-          <TablePanelSkeleton />
+          <ApplicantPage />
         </TableProvider>
       </Suspense>
     ),

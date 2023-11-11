@@ -1,7 +1,6 @@
 import { StatsCard } from ".";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import StatsLoader from "../Loaders/StatsLoader";
+import useFetch from "../../hooks/useFetch";
 
 interface StatsDataProps {
   title: string;
@@ -9,28 +8,18 @@ interface StatsDataProps {
   increase: number;
 }
 
-interface StatsSectionProps {
-  serverUrl: string;
-}
-
-const StatsSection = ({ serverUrl }: StatsSectionProps) => {
-  const { data, isLoading, isError } = useQuery({
-    queryFn: async () => {
-      const response = await axios.get(`${serverUrl}/dashboard/stats`);
-      return response.data;
-    },
-    queryKey: ["statsData"],
+const StatsSection = () => {
+  const { data, isLoading, isError, isPending } = useFetch({
+    route: "/dashboard/stats",
+    key: ["stats"],
   });
 
-  if (isLoading || isError) {
-    return <StatsLoader />;
-  }
+  console.log(data);
 
-  const { payload } = data as { payload: StatsDataProps[] };
-
+  if (isLoading || isError || isPending) return <StatsLoader />;
   return (
     <section className="grid grid-cols-3 gap-4">
-      {payload.map((props: StatsDataProps) => (
+      {data.map((props: StatsDataProps) => (
         <StatsCard key={props.title} {...props} />
       ))}
     </section>

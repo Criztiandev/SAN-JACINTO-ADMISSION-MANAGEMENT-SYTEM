@@ -21,7 +21,7 @@ const Dashboard = () => {
     data,
     isLoading,
     isPending: isFetchPending,
-  } = useFetch({ route: `/account/${user}`, key: ["stats"] });
+  } = useFetch({ route: `/account/${user}`, key: ["user"] });
 
   if (isLoading || isFetchPending) return <DashboardSkeleton />;
 
@@ -45,7 +45,7 @@ const Dashboard = () => {
         className="h-full flex flex-col gap-8"
         free>
         {/* // Stats */}
-        <StatsSection serverUrl={import.meta.env.VITE_SERVER_URL} />
+        <StatsSection />
 
         <section className="flex flex-col gap-4 h-[80vh]">
           <TabAction
