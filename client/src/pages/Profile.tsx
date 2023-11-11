@@ -44,7 +44,7 @@ const Profile = () => {
             contact: data?.contact,
           }}
           onSubmit={handleSubmit}>
-          <Form className="flex flex-col gap-4 my-4">
+          <Form>
             <div className="flex justify-end">
               <IconButton
                 icon={EditIcon}
@@ -54,7 +54,7 @@ const Profile = () => {
             </div>
             {ProfileInputSection.map((props) => (
               <div
-                className="grid grid-cols-2 items-center justify-center gap-8 border-b border-b-gray-200 pt-2 pb-6"
+                className="grid grid-cols-2 items-center justify-center gap-8 border-b border-b-gray-200 pb-6 mb-4"
                 key={props.label}>
                 {/* // left column */}
                 <div className="w-[450px]">
@@ -65,10 +65,10 @@ const Profile = () => {
                 </div>
                 <Input
                   {...props}
-                  className={`bg-gray-300 placeholder-gray-400 text-black ${
+                  className={`bg-gray-300  ${
                     isEdit
-                      ? "bg-gray-100 placeholder-gray-500 cursor-default"
-                      : "cursor-not-allowed"
+                      ? "bg-gray-100 cursor-default text-gray-600 placeholder-gray-600"
+                      : "cursor-not-allowed text-gray-400 placeholder-gray-400"
                   } `}
                   disabled={!isEdit}
                 />

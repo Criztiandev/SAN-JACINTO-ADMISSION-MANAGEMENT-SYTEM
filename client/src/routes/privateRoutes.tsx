@@ -8,14 +8,15 @@ import {
   AnnoucementPage,
   ExaminiesPage,
   MasterListPage,
+  ProfilePage,
 } from "../pages";
 import { TableProvider, ScheduleProvider } from "../context";
 import Tools from "../pages/Tools";
-import Profile from "../pages/Profile";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import { Loading } from "../components";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
+import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton";
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -106,8 +107,8 @@ const routes = [
   {
     path: "/profile",
     element: (
-      <Suspense fallback={<Loading />}>
-        <Profile />
+      <Suspense fallback={<ProfileSkeleton />}>
+        <ProfileSkeleton />
       </Suspense>
     ),
   },
