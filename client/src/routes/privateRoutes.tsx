@@ -103,7 +103,14 @@ const routes = [
   },
 
   { path: "/tools", element: <Tools /> },
-  { path: "/profile", element: <Profile /> },
+  {
+    path: "/profile",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Profile />
+      </Suspense>
+    ),
+  },
 ];
 
 export const privateRoutes = createBrowserRouter(

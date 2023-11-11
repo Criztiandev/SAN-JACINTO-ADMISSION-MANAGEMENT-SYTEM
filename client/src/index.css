@@ -59,9 +59,9 @@ input {
   background: inherit;
 }
 
-input::placeholder {
+/* input::placeholder {
   color: #cccccc;
-}
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

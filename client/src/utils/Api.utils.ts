@@ -1,21 +1,25 @@
-import axios from "axios";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
-export const fetchAllData = async (path: string) => {
-  const { data } = await axios.get(`http://localhost:4000/api/${path}`);
-  return data;
+export const handleAxiosError = (error: AxiosError) => {
+  if (!error.response) {
+    toast.error("Error: Something went wrong");
+    return;
+  }
+
+  const { data, status } = error.response;
+
+  if (status === 400) {
+    toast.error("Resource Not Found");
+    return;
+  }
+
+  const { error: responseError } = data as { error: string };
+
+  if (data && responseError) {
+    toast.error(responseError);
+  } else {
+    toast.error(`HTTP error${status}`);
+  }
+  return;
 };
-
-export const fetchDataByID = async (UID: string | number, path: string) =>
-  await axios.get(`http://localhost:4000/api/${path}/${UID}`);
-
-export const updateDataByID = async (
-  UID: string | number,
-  path: string,
-  payload: object
-) => await axios.put(`http://localhost:4000/api/${path}/${UID}`, payload);
-
-export const deleteDataByID = async (UID: string | number, path: string) =>
-  await axios.delete(`http://localhost:4000/api/${path}/${UID}`);
-
-export const createData = async (path: string, payload: object) =>
-  await axios.post(`http://localhost:4000/api/${path}`, payload);
