@@ -16,7 +16,7 @@ interface FormSubmitResult {
 interface UseFormSubmitProps {
   route: string;
   redirect?: string;
-  type: "post" | "put";
+  type?: "post" | "put";
 }
 
 const useFormSubmit = ({
@@ -43,8 +43,12 @@ const useFormSubmit = ({
   };
 
   const handleSubmit = async (value: any, action: FormikHelpers<any>) => {
-    await mutateAsync(value);
-    action.resetForm();
+    try {
+      await mutateAsync(value);
+      action.resetForm();
+    } catch (e: any) {
+      return e;
+    }
   };
 
   const { mutateAsync } = useMutation({

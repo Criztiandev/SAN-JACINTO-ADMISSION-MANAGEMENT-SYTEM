@@ -14,7 +14,7 @@ import useFetch from "../hooks/useFetch";
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const { user } = useAuthContext();
-  const { handleSubmit } = useFormSubmit({ route: "test" });
+  const { handleSubmit } = useFormSubmit({ route: "/test" });
 
   const { data, isLoading, isPending } = useFetch({
     route: `/account/${user}`,
