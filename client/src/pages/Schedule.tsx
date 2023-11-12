@@ -39,7 +39,7 @@ const Schedule = () => {
       }
       free>
       <div className="relative  w-full rounded-[5px] flex flex-col gap-2 overflow-hidden  h-[78vh]">
-        {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
+        {selectedTab === "calendar" ? <ScheduleCalendar /> : <div>hi</div>}
       </div>
     </BaseLayout>
   );

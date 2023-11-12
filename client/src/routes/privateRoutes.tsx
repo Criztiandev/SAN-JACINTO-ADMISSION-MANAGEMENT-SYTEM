@@ -1,22 +1,11 @@
-import { FC, ReactElement, Suspense } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { FC, ReactElement, Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import {
-  ErrorPage,
-  ApplicantPage,
-  DashboardPage,
-  SchedulePage,
-  AnnoucementPage,
-  ExaminiesPage,
-  MasterListPage,
-  ProfilePage,
-} from "../pages";
 import { TableProvider, ScheduleProvider } from "../context";
-import Tools from "../pages/Tools";
-import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
-import { Loading } from "../components";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
-import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
-import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton";
+import ErrorPage from "../pages/ErrorPage";
+
+const ApplicantPage = lazy(() => import("../pages/Applicant"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -34,14 +23,14 @@ const ProviderWrapper: FC<ProviderWrapperProps> = ({ children, loader }) => {
 };
 
 const routes = [
-  {
-    path: "/",
-    element: (
-      <ProviderWrapper loader={<DashboardSkeleton />}>
-        <DashboardPage />
-      </ProviderWrapper>
-    ),
-  },
+  // {
+  //   path: "/",
+  //   element: (
+  //     <ProviderWrapper loader={<DashboardSkeleton />}>
+  //       <DashboardPage />
+  //     </ProviderWrapper>
+  //   ),
+  // },
   {
     path: "/applicants",
     element: (
@@ -52,66 +41,66 @@ const routes = [
       </Suspense>
     ),
   },
-  {
-    path: "/schedule",
-    element: (
-      <ProviderWrapper loader={<ScheduleSkeleton />}>
-        <ScheduleSkeleton />
-      </ProviderWrapper>
-    ),
-  },
+  // {
+  //   path: "/schedule",
+  //   element: (
+  //     <ProviderWrapper loader={<ScheduleSkeleton />}>
+  //       <SchedulePage />
+  //     </ProviderWrapper>
+  //   ),
+  // },
 
-  {
-    path: "/annoucement",
-    element: (
-      <Suspense fallback={<TablePanelSkeleton />}>
-        <TableProvider>
-          <TablePanelSkeleton />
-        </TableProvider>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/masterlist",
-    element: (
-      <Suspense fallback={<TablePanelSkeleton />}>
-        <TableProvider>
-          <TablePanelSkeleton />
-        </TableProvider>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/examiniees",
-    element: (
-      <Suspense fallback={<TablePanelSkeleton />}>
-        <TableProvider>
-          <TablePanelSkeleton />
-        </TableProvider>
-      </Suspense>
-    ),
-  },
+  // {
+  //   path: "/annoucement",
+  //   element: (
+  //     <Suspense fallback={<TablePanelSkeleton />}>
+  //       <TableProvider>
+  //         <AnnoucementPage />
+  //       </TableProvider>
+  //     </Suspense>
+  //   ),
+  // },
+  // {
+  //   path: "/masterlist",
+  //   element: (
+  //     <Suspense fallback={<TablePanelSkeleton />}>
+  //       <TableProvider>
+  //         <MasterListPage />
+  //       </TableProvider>
+  //     </Suspense>
+  //   ),
+  // },
+  // {
+  //   path: "/examiniees",
+  //   element: (
+  //     <Suspense fallback={<TablePanelSkeleton />}>
+  //       <TableProvider>
+  //         <ExaminiesPage />
+  //       </TableProvider>
+  //     </Suspense>
+  //   ),
+  // },
 
-  {
-    path: "/users",
-    element: (
-      <Suspense fallback={<TablePanelSkeleton />}>
-        <TableProvider>
-          <TablePanelSkeleton />
-        </TableProvider>
-      </Suspense>
-    ),
-  },
+  // {
+  //   path: "/users",
+  //   element: (
+  //     <Suspense fallback={<TablePanelSkeleton />}>
+  //       <TableProvider>
+  //         <UsersPage />
+  //       </TableProvider>
+  //     </Suspense>
+  //   ),
+  // },
 
-  { path: "/tools", element: <Tools /> },
-  {
-    path: "/profile",
-    element: (
-      <Suspense fallback={<ProfileSkeleton />}>
-        <ProfilePage />
-      </Suspense>
-    ),
-  },
+  // { path: "/tools", element: <Tools /> },
+  // {
+  //   path: "/profile",
+  //   element: (
+  //     <Suspense fallback={<ProfileSkeleton />}>
+  //       <ProfilePage />
+  //     </Suspense>
+  //   ),
+  // },
 ];
 
 export const privateRoutes = createBrowserRouter(
