@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { Drawer } from "../../components";
+import Drawer from "../../components/Drawer";
 
 interface ApplicantDrawerProps {
-  pref: string;
+  state: string;
   Component: any;
 }
 
-const ApplicantDrawer = ({ pref, Component }: ApplicantDrawerProps) => {
+const DrawerWrapper = ({ state, Component }: ApplicantDrawerProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -21,12 +21,12 @@ const ApplicantDrawer = ({ pref, Component }: ApplicantDrawerProps) => {
 
   return (
     <>
-      {currentState === pref && (
+      {currentState === state && (
         <AnimatePresence mode="wait">
           <Drawer
             className="overflow-scroll"
             width="600px"
-            state={true}
+            state={currentState === state}
             onClick={handleClose}>
             <Component APID={currentID} />
           </Drawer>
@@ -36,4 +36,4 @@ const ApplicantDrawer = ({ pref, Component }: ApplicantDrawerProps) => {
   );
 };
 
-export default ApplicantDrawer;
+export default DrawerWrapper;

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
-import { Button } from "../../components";
-import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 
 const ArchieveApplicant = ({ APID }: { APID: string }) => {
   const navigate = useNavigate();

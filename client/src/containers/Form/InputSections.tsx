@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { InputProps, InputSectionProps } from "../../interface/FormInterface";
-import { IconButton, Input } from "../../components";
-import { DecreaseIcon, EditIcon } from "../../assets/icons/index";
+import IconButton from "../../components/IconButton";
+import Input from "../../components/Input";
+
+import DecreaseIcon from "../../assets/icons/Expand_down_light.svg";
+import EditIcon from "../../assets/icons/Edit_light.svg";
 
 const InputSections = ({
   title,

@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dropdown, IconButton } from "../../components";
+import Dropdown from "../../components/Dropdown";
+import IconButton from "../../components/IconButton";
+
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import AcceptIcon from "../../assets/icons/Done_light.svg";
 import MessageIcon from "../../assets/icons/Message_light.svg";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import ArchieveIcon from "../../assets/icons/Arhive_light.svg";
 import KebbabIcon from "../../assets/icons/Kebbab.svg";
+
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface ActionColumnProps {
   data: any;

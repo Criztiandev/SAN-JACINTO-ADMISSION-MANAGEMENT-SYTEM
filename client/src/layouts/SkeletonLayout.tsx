@@ -1,5 +1,5 @@
 import { BaseLayoutProps } from "../interface/Layout.Types";
-import { Header } from "../layouts";
+import Header from "./Header";
 import Nav from "../layouts/Nav";
 
 const SkeletonLayout = ({

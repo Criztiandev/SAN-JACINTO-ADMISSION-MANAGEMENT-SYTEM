@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Typography, IconButton } from "../../components";
 import { useTableContext } from "../../context/TableContext";
-import { PrevIcon, NextIcon } from "../../assets/icons";
-
+import PrevIcon from "../../assets/icons/Expand_left_light.svg";
+import NextIcon from "../../assets/icons/Expand_right_light.svg";
+import Typography from "../../components/Typography";
+import IconButton from "../../components/IconButton";
 const TableAction = () => {
   const { table } = useTableContext();
   const {
@@ -22,10 +23,10 @@ const TableAction = () => {
         <select
           className="bg-inherit"
           value={getState().pagination.pageSize}
-          onChange={e => {
+          onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}>
-          {[10, 20, 30, 40, 50].map(pageSize => (
+          {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               {pageSize}
             </option>
@@ -39,13 +40,13 @@ const TableAction = () => {
 
       <span className="flex gap-4">
         <IconButton
-          type="outlined"
+          as="outlined"
           disabled={!getCanPreviousPage()}
           onClick={() => previousPage()}
           icon={PrevIcon}
         />
         <IconButton
-          type="outlined"
+          as="outlined"
           disabled={!getCanNextPage()}
           onClick={() => nextPage()}
           icon={NextIcon}

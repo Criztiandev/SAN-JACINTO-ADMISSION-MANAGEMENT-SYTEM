@@ -2,9 +2,11 @@
 import { forwardRef } from "react";
 import { BaseButtonStyle } from "../helper/component.Helper";
 import { ButtonProps } from "../interface/Component.Type";
-import { Image, Typography } from ".";
 import { motion } from "framer-motion";
 import Kebbab from "../assets/icons/Kebbab.svg";
+import Image from "./Image";
+import Typography from "./Typography";
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { as = "contained", dir = "left", className, unstyled, icon, ...props },

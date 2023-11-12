@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Image, Radio, Typography } from "../../components";
+import Image from "../../components/Image";
+import Radio from "../../components/Radio";
+import Typography from "../../components/Typography";
 import { ItemSelectProps } from "../../interface/FormInterface";
 import { CardSelectionAnim } from "../../animations/Form/CardSelectVariant";
 import { useFormikContext } from "formik";
-import { useEffect } from "react";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 
 const ItemSelect = ({
@@ -47,6 +49,7 @@ const ItemSelect = ({
       <Image
         src={cover}
         className="w-24 h-24 rounded-full border bg-blue-500"
+        alt="cover"
       />
       <div>
         <Typography as="h4">{title}</Typography>

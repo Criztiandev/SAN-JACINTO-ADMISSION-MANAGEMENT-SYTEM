@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import { Typography } from "../components";
+import Typography from "../components/Typography";
 
 const ErrorPage = () => {
   const error = useRouteError();

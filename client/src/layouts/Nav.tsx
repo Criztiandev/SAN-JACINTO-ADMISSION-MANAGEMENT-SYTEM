@@ -1,5 +1,6 @@
 import Logo from "../assets/image/Logo.png";
-import { Avatar, Image } from "../components";
+import Avatar from "../components/Avatar";
+import Image from "../components/Image";
 import { Link, useNavigate } from "react-router-dom";
 import { navigationPaths } from "../helper/Navigation.Helper";
 import { motion } from "framer-motion";

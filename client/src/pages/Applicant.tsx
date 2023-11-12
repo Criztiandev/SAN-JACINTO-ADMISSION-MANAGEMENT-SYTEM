@@ -1,32 +1,64 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import BaseLayout from "../layouts/BaseLayout";
-import { Table, SearchBar, Badge, IconButton } from "../components";
+// External Dependencies
+import { Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
+// Project Components
+import BaseLayout from "../layouts/BaseLayout";
+import Table from "../components/Table";
+import SearchBar from "../components/SearchBar";
+import Badge from "../components/Badge";
+import IconButton from "../components/IconButton";
+
+// Context and Helpers
 import { useTableContext } from "../context/TableContext";
 import {
   RenderCreateButton,
   RenderFilterButton,
 } from "../helper/Applicant.Helper";
 import useFetch from "../hooks/useFetch";
+
+// React Table
 import { ColumnDef } from "@tanstack/react-table";
+
+// Containers
 import TitleHeader from "../containers/Table/TitleHeader";
 import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
-import axios, { AxiosError } from "axios";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+
+// Axios and API Utils
+import axios from "axios";
 import { handleAxiosError } from "../utils/Api.utils";
-import ApplicantDrawer from "../containers/Applicants/ApplicantDrawer";
-import ViewApplicant from "../containers/Applicants/ViewApplicant";
-import EditApplicant from "../containers/Applicants/EditApplicant";
-import MessageApplicant from "../containers/Applicants/MessageApplicant";
-import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
-import CreateApplicant from "../containers/Applicants/CreateApplicant";
+
+// Applicant Components
+
+import DrawerWrapper from "../containers/Applicants/DrawerWrapper";
+
+const ViewApplicant = lazy(
+  () => import("../containers/Applicants/ViewApplicant")
+);
+const EditApplicant = lazy(
+  () => import("../containers/Applicants/EditApplicant")
+);
+const MessageApplicant = lazy(
+  () => import("../containers/Applicants/MessageApplicant")
+);
+const ArchieveApplicant = lazy(
+  () => import("../containers/Applicants/ArchieveApplicant")
+);
+const CreateApplicant = lazy(
+  () => import("../containers/Applicants/CreateApplicant")
+);
+
+// Assets
 import ArchieveIcon from "../assets/icons/Arhive_light.svg";
-import { useNavigate } from "react-router-dom";
+import DrawerLoader from "../containers/Loaders/DrawerLoader";
 
 const Applicant = () => {
   const { handleSearch, handleMutateData } = useTableContext();
@@ -59,8 +91,6 @@ const Applicant = () => {
   const handleAction = async (id: string, currentStatus: string) => {
     void mutateAsync({ UID: id, status: currentStatus });
   };
-
-  if (isLoading || isPending || isFetched) return <TablePanelSkeleton />;
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -113,6 +143,8 @@ const Applicant = () => {
     },
   ];
 
+  if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
+
   return (
     <>
       <BaseLayout
@@ -147,11 +179,13 @@ const Applicant = () => {
         />
       </BaseLayout>
 
-      <ApplicantDrawer pref="create" Component={CreateApplicant} />
-      <ApplicantDrawer pref="view" Component={ViewApplicant} />
-      <ApplicantDrawer pref="edit" Component={EditApplicant} />
-      <ApplicantDrawer pref="archieve" Component={ArchieveApplicant} />
-      <ApplicantDrawer pref="message" Component={MessageApplicant} />
+      <Suspense fallback={<DrawerLoader />}>
+        <DrawerWrapper state="create" Component={CreateApplicant} />
+        <DrawerWrapper state="edit" Component={EditApplicant} />
+        <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+        <DrawerWrapper state="message" Component={MessageApplicant} />
+        <DrawerWrapper state="view" Component={ViewApplicant} />
+      </Suspense>
     </>
   );
 };

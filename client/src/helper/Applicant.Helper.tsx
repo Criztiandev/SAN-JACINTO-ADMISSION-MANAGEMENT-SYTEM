@@ -1,37 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FilterButton } from "../containers/Applicants";
 
-import { Button } from "../components";
+//Hooks
+import useDrawer from "../hooks/useDrawer";
 
-import { OptionItem } from "../interface/Component.Type";
-import { useDrawer } from "../hooks";
-import {
-  ApplicantIcon,
-  FilterIcon,
-  CreateApplicantIcon,
-} from "../assets/icons";
+// Types
 
-export const PersoanlDetailsNameInput = [
-  { name: "personalDetails.lastName" },
-  { name: "personalDetails.firstName" },
-  { name: "personalDetails.middleName" },
-  { name: "personalDetails.suffix" },
-];
+// Icons
+import FilterIcon from "../assets/icons/Filter.svg";
+import CreateApplicantIcon from "../assets/icons/Create_Applicant.svg";
 
-export const GradeOptions: OptionItem[] = [
-  { icon: ApplicantIcon, title: "Grade 7" },
-  { icon: ApplicantIcon, title: "Grade 8" },
-  { icon: ApplicantIcon, title: "Grade 9" },
-  { icon: ApplicantIcon, title: "Grade 10" },
-  { icon: ApplicantIcon, title: "Grade 11" },
-  { icon: ApplicantIcon, title: "Grade 12" },
-];
-
-export const StatusItems: OptionItem[] = [
-  { title: "Default", icon: ApplicantIcon },
-  { title: "Pending", icon: ApplicantIcon },
-  { title: "Hold", icon: ApplicantIcon },
-];
+// Buttons
+import Button from "../components/Button";
+import FilterButton from "../containers/Applicants/FilterButton";
+import { GradeOptions, StatusItems } from "../data/Applicant.Data";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useDrawerOptions = () => {

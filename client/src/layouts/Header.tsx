@@ -1,4 +1,4 @@
-import { Typography } from "../components";
+import Typography from "../components/Typography";
 import { BaseProps } from "../interface/Common.Types";
 import { CommonLayoutProps } from "../interface/Layout.Types";
 

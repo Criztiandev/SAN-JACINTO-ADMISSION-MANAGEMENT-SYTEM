@@ -3,7 +3,7 @@ import { BaseProps } from "./Common.Types";
 
 export interface DrawerProps extends BaseProps {
   width?: string;
-  state: boolean;
+  state?: boolean;
   mode?: "light" | "dark";
   anchor?: "left" | "right";
   onClick?: () => void;

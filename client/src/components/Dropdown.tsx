@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { IconButton, Button } from ".";
+import IconButton from "./IconButton";
+import Button from "./Button";
 import { DropdownProps, OptionItem } from "../interface/Component.Type";
 import useClickOutSide from "../hooks/useClickOutSide";
-import { ApplicantIcon } from "../assets/icons";
+import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
 
 const Dropdown = ({ className, option, ...props }: DropdownProps) => {
   const { ref, active, handleActive } = useClickOutSide();

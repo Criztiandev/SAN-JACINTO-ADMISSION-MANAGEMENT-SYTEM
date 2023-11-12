@@ -1,6 +1,6 @@
 import Nav from "./Nav";
 import { BaseLayoutProps } from "../interface/Layout.Types";
-import { Header } from ".";
+import Header from "./Header";
 
 const BaseLayout = ({
   title = "Title",

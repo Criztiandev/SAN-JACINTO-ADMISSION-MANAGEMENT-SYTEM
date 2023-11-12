@@ -1,14 +1,20 @@
-import { Formik, Form, Field } from "formik";
-import useFetch from "../../hooks/useFetch";
-import FetchLoader from "../General/FetchLoader";
 import { useState } from "react";
-import { IconButton, Carousel, Button } from "../../components";
-import { EditIcon } from "../../assets/icons";
+import { Formik, Form, Field } from "formik";
+import FetchLoader from "../General/FetchLoader";
+import IconButton from "../../components/IconButton";
+import Carousel from "../../components/Carousel";
+import Button from "../../components/Button";
+
+import EditIcon from "../../assets/icons/Edit_light.svg";
+
 import { ApplicationFormInputModel } from "../../data/Stepper.Data";
+import { yearLevelItem } from "../../data/Stepper.Data";
+
 import InputSections from "../Form/InputSections";
 import ItemSelect from "../Form/ItemSelect";
-import { yearLevelItem } from "../../data/Stepper.Data";
+
 import useFormSubmit from "../../hooks/useFormSubmit";
+import useFetch from "../../hooks/useFetch";
 
 const EditApplicant = ({ APID }: { APID: string }) => {
   const [selectedYearLevel, setSelectedYearLevel] = useState<string>("");
@@ -26,7 +32,12 @@ const EditApplicant = ({ APID }: { APID: string }) => {
     type: "post",
   });
 
-  if (isLoading || isPending) return <FetchLoader />;
+  if (isLoading || isPending)
+    return (
+      <div className="h-[100vh]">
+        <FetchLoader />
+      </div>
+    );
   const { personalDetails, studentDetails } = data;
 
   const handleReset = () => {

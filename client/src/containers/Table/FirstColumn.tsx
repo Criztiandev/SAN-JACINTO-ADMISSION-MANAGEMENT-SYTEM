@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Avatar } from "../../components";
 import Checkbox from "../../components/Checkbox";
 import { motion } from "framer-motion";
+
+import { Suspense, lazy, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
-import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+
+const LazyAvatar = lazy(() => import("../../components/Avatar"));
 interface FirstColumnProps {
   data: any;
   value: string;
@@ -34,10 +37,12 @@ const FirstColumn = ({ data, value }: FirstColumnProps) => {
           onChange: memoizedData.getToggleSelectedHandler(),
         }}
       />
-      <Avatar
-        src={gender === "Male" ? MaleProfile : FemaleProfile}
-        size="42px"
-      />
+      <Suspense fallback={<Skeleton width={48} height={48} circle />}>
+        <LazyAvatar
+          src={gender === "Male" ? MaleProfile : FemaleProfile}
+          size="42px"
+        />
+      </Suspense>
       <span>{value}</span>
     </motion.div>
   );
