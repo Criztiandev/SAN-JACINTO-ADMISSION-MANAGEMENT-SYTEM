@@ -34,7 +34,12 @@ export const RenderFilterButton = ({ loading }: { loading: boolean }) => {
   return (
     <div className="flex gap-4">
       {FilterButtonsOption.map((props) => (
-        <FilterButton icon={FilterIcon} disabled={loading} {...props} />
+        <FilterButton
+          key={props.title}
+          icon={FilterIcon}
+          disabled={loading}
+          {...props}
+        />
       ))}
     </div>
   );

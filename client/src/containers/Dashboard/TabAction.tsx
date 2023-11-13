@@ -1,6 +1,8 @@
-import { CalendarIcon, ApplicantIcon } from "../../assets/icons";
 import GraphButton from "./TabButton";
+import CalendarIcon from "../../assets/icons/Calendar_Dark.svg";
+import ApplicantIcon from "../../assets/icons/Applicant_Dark.svg";
 import { MouseEvent } from "react";
+
 const DashboardPanel = [
   { title: "Admission", icons: CalendarIcon },
   { title: "Applicant", icons: ApplicantIcon },

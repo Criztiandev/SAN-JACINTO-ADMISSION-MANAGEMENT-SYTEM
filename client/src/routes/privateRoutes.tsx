@@ -4,8 +4,10 @@ import { createBrowserRouter } from "react-router-dom";
 import { TableProvider, ScheduleProvider } from "../context";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import ErrorPage from "../pages/ErrorPage";
+import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 
 const ApplicantPage = lazy(() => import("../pages/Applicant"));
+const DashboardPage = lazy(() => import("../pages/Dashboard"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -23,14 +25,14 @@ const ProviderWrapper: FC<ProviderWrapperProps> = ({ children, loader }) => {
 };
 
 const routes = [
-  // {
-  //   path: "/",
-  //   element: (
-  //     <ProviderWrapper loader={<DashboardSkeleton />}>
-  //       <DashboardPage />
-  //     </ProviderWrapper>
-  //   ),
-  // },
+  {
+    path: "/",
+    element: (
+      <ProviderWrapper loader={<DashboardSkeleton />}>
+        <DashboardPage />
+      </ProviderWrapper>
+    ),
+  },
   {
     path: "/applicants",
     element: (

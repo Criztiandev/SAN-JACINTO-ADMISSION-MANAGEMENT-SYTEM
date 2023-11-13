@@ -1,43 +1,73 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useTableContext } from "../../context/TableContext";
-import { useEffect } from "react";
-import { TableConfig } from "../../helper/Applicant.Helper";
-import { Table } from "../../components";
-import { useQuery } from "@tanstack/react-query";
-import { fetchApplicants } from "../../api/Applicant.Api";
+import Table from "../../components/Table";
 import FetchLoader from "../General/FetchLoader";
+import Badge from "../../components/Badge";
+import { ColumnDef } from "@tanstack/react-table";
+import TitleHeader from "../Table/TitleHeader";
+import FirstColumn from "../Table/FirstColumn";
+import useFetch from "../../hooks/useFetch";
 
 const SummaryTable = () => {
-  const { setTableConfig, handleMutateData } = useTableContext();
+  const { handleMutateData } = useTableContext();
 
-  const { isError, isLoading } = useQuery({
-    queryFn: async () => {
-      const { data } = await fetchApplicants();
-      handleMutateData(data.payload);
-      return data;
-    },
-    queryKey: ["applicants"],
+  const { isLoading, isPending, isFetched } = useFetch({
+    route: "/applicant",
+    overrideFn: handleMutateData,
+    key: ["applicants"],
   });
 
-  useEffect(() => {
-    const config = TableConfig({
-      toggles: {},
-      onAccept: () => {},
-      onToggle: () => {},
-      action: true,
-    });
-    if (!config) throw new Error("No Config");
-    setTableConfig(config);
+  const ApplicantTableConfig: ColumnDef<any, any>[] = [
+    {
+      id: "select",
+      header: ({ table }) => <TitleHeader data={table} />,
+      accessorFn: ({ personalDetails }) =>
+        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+      cell: ({ row, getValue }) => (
+        <FirstColumn data={row} value={getValue()} />
+      ),
+    },
 
-    return () => {
-      setTableConfig([]);
-    };
-  }, []);
+    { header: "LRN", accessorKey: "studentDetails.LRN" },
+    {
+      header: "Grade Level",
+      accessorKey: "studentDetails.yearLevel",
+      accessorFn: ({ studentDetails }) =>
+        `${studentDetails.yearLevel.split(" ")[1]}`,
+    },
+    { header: "Gender", accessorKey: "personalDetails.gender" },
+    { header: "BOD", accessorKey: "personalDetails.birthDate" },
+    { header: "Age", accessorKey: "personalDetails.age" },
+    {
+      header: "Guardian",
+      accessorKey: "guardianDetails.legalGuardian",
+      accessorFn: ({ guardianDetails }) => {
+        const { firstName, middleName, lastName } =
+          guardianDetails.legalGuardian;
 
-  if (isError || isLoading) return <FetchLoader />;
+        return `${lastName}, ${firstName} ${middleName[0]}.`;
+      },
+    },
+
+    { header: "Contact", accessorKey: "personalDetails.contact" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ getValue }: any) => (
+        <Badge as="neutral" type={getValue()} title={getValue()} />
+      ),
+    },
+  ];
+
+  if (isPending || isLoading || !isFetched) return <FetchLoader />;
 
   return (
-    <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px" />
+    <Table
+      config={ApplicantTableConfig}
+      layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+    />
   );
 };
 

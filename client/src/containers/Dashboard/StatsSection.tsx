@@ -1,4 +1,4 @@
-import { StatsCard } from ".";
+import StatsCard from "./StatsCard";
 import StatsLoader from "../Loaders/StatsLoader";
 import useFetch from "../../hooks/useFetch";
 

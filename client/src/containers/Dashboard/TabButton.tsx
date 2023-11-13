@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Image } from "../../components";
 import { MouseEvent } from "react";
+import Image from "../../components/Image";
 
 interface TabButtonProps {
   title: string;

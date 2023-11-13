@@ -24,7 +24,6 @@ const PanelList: PanelItem[] = [
     Component: lazy(() => import("./SummaryTable")),
   },
 ];
-
 const TabContent = ({ selected, pending }: TabContentProps) => {
   const found: any = PanelList.find((e: PanelItem) => e.key === selected);
 

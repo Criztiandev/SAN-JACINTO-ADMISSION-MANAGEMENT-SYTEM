@@ -3,7 +3,7 @@ import Checkbox from "../../components/Checkbox";
 import { motion } from "framer-motion";
 
 import { Suspense, lazy, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
 import Skeleton from "react-loading-skeleton";
@@ -18,10 +18,11 @@ const FirstColumn = ({ data, value }: FirstColumnProps) => {
   const memoizedData = useMemo(() => data, [data]);
   const { gender } = memoizedData.original.personalDetails;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleViewToggle = () => {
     const { _id } = memoizedData.original;
-    navigate(`/applicants/?APID=${_id}&state=view`);
+    navigate(`${location.pathname}?APID=${_id}&state=view`);
   };
 
   return (

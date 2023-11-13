@@ -1,123 +1,90 @@
-import { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import IconButton from "../../components/IconButton";
-import Carousel from "../../components/Carousel";
-import Button from "../../components/Button";
-
-import EditIcon from "../../assets/icons/Edit_light.svg";
-
-import { ApplicationFormInputModel } from "../../data/Stepper.Data";
-import { yearLevelItem } from "../../data/Stepper.Data";
+import { Formik, Form } from "formik";
 
 import useFormSubmit from "../../hooks/useFormSubmit";
-import useFetch from "../../hooks/useFetch";
 
-import InputSections from "../Form/InputSections";
-import ItemSelect from "../Form/ItemSelect";
-import FetchLoader from "../General/FetchLoader";
+import applicantInitialValue from "../../data/initialValue/applicantInit";
+import { applicantInputMaps } from "../../models/applicantInitialValue";
+import Input from "../../components/Input";
+import { useState } from "react";
+import { ApplicationFormModelProps } from "../../interface/ApplicantMode.Type";
+import IconButton from "../../components/IconButton";
+import ExpandDown from "../../assets/icons/Expand_down_light.svg";
+import { InputProps } from "../../interface/FormInterface";
+import Button from "../../components/Button";
 
-const CreateApplicant = ({ APID }: { APID: string }) => {
-  const [selectedYearLevel, setSelectedYearLevel] = useState<string>("");
-  const [isEdit, setIsEdit] = useState(false);
+const FormSection = ({ title, model }: ApplicationFormModelProps) => {
+  const [hide, setHide] = useState(true);
+  const [onEdit, setOnEdit] = useState(false);
 
-  // Fetching
-  const { data, isLoading, isPending } = useFetch({
-    route: `/applicant/${APID}`,
-    key: ["applicant"],
-  });
+  return (
+    <div>
+      <div className="flex justify-between items-center border-b border-gray-300 pb-2 mb-4">
+        <h4 className="cursor-pointer" onClick={() => setHide((prev) => !prev)}>
+          {title}
+        </h4>
 
+        <div className="flex gap-4">
+          {/* <IconButton
+            icon={EditIcon}
+            onClick={() => setOnEdit((prev) => !prev)}
+          /> */}
+          <IconButton
+            icon={ExpandDown}
+            onClick={() => setHide((prev) => !prev)}
+          />
+        </div>
+      </div>
+
+      {hide && (
+        <div className="grid grid-cols-2 gap-4">
+          {model.map((props: InputProps) => (
+            <Input key={props.label} {...props} disabled={onEdit} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const CreateApplicant = () => {
   // mutation
-  const { handleSubmit, isPending: mutationPending } = useFormSubmit({
+  const { handleSubmit } = useFormSubmit({
     route: "test",
     type: "post",
   });
 
-  if (isLoading || isPending)
-    return (
-      <div className="h-[100vh]">
-        <FetchLoader />
-      </div>
-    );
-  const { personalDetails, studentDetails } = data;
-
-  const handleReset = () => {
-    setIsEdit(false);
-  };
-
   return (
-    <Formik initialValues={data} onSubmit={handleSubmit}>
-      <Form>
-        <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
-          <div className="flex flex-col">
-            {isEdit ? (
-              <Field
-                name="fullName"
-                className="border-b border-gray-400 text-black px-2 text-[30px] font-bold"
+    <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
+      <Form className="">
+        <section className="">
+          <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
+            {/* <div className="flex items-center gap-4">
+              <Avatar
+                src={gender === "Male" ? MaleProfile : FemaleProfile}
+                size="84px"
               />
-            ) : (
-              <h2 className="font-bold">
-                {personalDetails.lastName}, {personalDetails.firstName}{" "}
-                {personalDetails.middleName[0]}. {personalDetails.suffix}
-              </h2>
-            )}
-            {isEdit ? (
-              <Field
-                name="personalDetails.email"
-                className=" my-2 px-2 border-b border-gray-500 text-black"
-              />
-            ) : (
-              <span className="text-gray-400 my-2">
-                @{personalDetails?.email.split("@")[0]}
-              </span>
-            )}
+              <div className="text-white">
+                <Typography as="h4">
+                  {lastName}, {firstName} {middleName}
+                </Typography>
+                <Typography as="span">
+                  {yearLevel} {track && `| ${track}`}
+                </Typography>
+              </div>
+            </div> */}
           </div>
 
-          <IconButton
-            as="outlined"
-            icon={EditIcon}
-            onClick={() => setIsEdit((prev) => !prev)}
-            className={`p-2 border border-gray-400 rounded-full  ${
-              isEdit ? "border-green-500 bg-[#22f86275]" : ""
-            }`}
-          />
-        </header>
+          <div className="flex flex-col gap-4">
+            {applicantInputMaps.map((section) => (
+              <FormSection key={section.title} {...section} />
+            ))}
+          </div>
+        </section>
 
-        <main>
-          <section className="flex flex-col gap-2 justify-start items-start mb-4">
-            <h4>Grade Level</h4>
-            <div className={`${!isEdit && "opacity-50"}`}>
-              {/* // Remember this shit */}
-              <Carousel width={"550px"}>
-                {yearLevelItem.map((props) => (
-                  <ItemSelect
-                    key={props.title}
-                    select={
-                      isEdit ? selectedYearLevel : studentDetails.yearLevel
-                    }
-                    onSelect={isEdit ? setSelectedYearLevel : () => {}}
-                    {...props}
-                    name="studentDetails.yearLevel"
-                  />
-                ))}
-              </Carousel>
-            </div>
-          </section>
-          {ApplicationFormInputModel.map((props) => (
-            <InputSections key={props.title} {...props} isEdit={!isEdit} />
-          ))}
-        </main>
-
-        {isEdit && (
-          <footer className="flex gap-4 justify-end">
-            <IconButton as="outlined" type="button" onClick={handleReset} />
-            <Button
-              type="submit"
-              as="contained"
-              title="Submit"
-              disabled={mutationPending}
-            />
-          </footer>
-        )}
+        <section className="flex justify-end gap-4 w-full ">
+          <IconButton as="outlined" type="button" />
+          <Button as="contained" title="Create" />
+        </section>
       </Form>
     </Formik>
   );

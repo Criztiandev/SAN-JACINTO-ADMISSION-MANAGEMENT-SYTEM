@@ -1,22 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, MouseEvent, useTransition } from "react";
-import { BaseLayout } from "../layouts";
-import useDrawer from "../hooks/useDrawer";
-import SettingsDrawer from "../containers/Drawers/SettingsDrawer";
+import { useState, MouseEvent, useTransition, lazy } from "react";
+import { useAuthContext } from "../context/AuthContext";
+
+import LogoutIcon from "../assets/icons/Sign_out_Dark.svg";
+
 import StatsSection from "../containers/Dashboard/StatsSection";
-import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
-import { useAuthContext } from "../context/AuthContext";
 import useFetch from "../hooks/useFetch";
+import Button from "../components/Button";
+import Typography from "../components/Typography";
+import BaseLayout from "../layouts/BaseLayout";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
-import { Button, Typography } from "../components";
+import IconButton from "../components/IconButton";
+import { useNavigate } from "react-router-dom";
+
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+const NoticeContent = lazy(() => import("../containers/Drawers/NoticeContent"));
+const ViewApplicant = lazy(
+  () => import("../containers/Applicants/ViewApplicant")
+);
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Admission");
   const [isPending, startTransition] = useTransition();
+  const navigate = useNavigate();
 
   const { user } = useAuthContext();
+
   const {
     data,
     isLoading,
@@ -36,10 +47,9 @@ const Dashboard = () => {
       <BaseLayout
         title={`Hello, ${data?.fullName} 👋`}
         actions={
-          <ActionHeader
-            onSettings={() => {}}
-            onLogout={() => {}}
-            loading={isLoading}
+          <IconButton
+            icon={LogoutIcon}
+            onClick={() => navigate("?state=logout")}
           />
         }
         className="h-full flex flex-col gap-8"
@@ -82,13 +92,9 @@ const Dashboard = () => {
         </section>
       </BaseLayout>
 
-      {/* {settingsIsActive && (
-        <SettingsDrawer state={settingsIsActive} onClose={toggleSettings} />
-      )}
-
-      {logoutIsActive && (
-        <SettingsDrawer state={logoutIsActive} onClose={toggleLogout} />
-      )} */}
+      <DrawerWrapper state="logout" Component={NoticeContent} />
+      <DrawerWrapper state="view" Component={ViewApplicant} />
+      <DrawerWrapper state="turnOff" Component={NoticeContent} />
     </>
   );
 };

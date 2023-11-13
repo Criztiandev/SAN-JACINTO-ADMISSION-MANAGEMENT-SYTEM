@@ -1,4 +1,4 @@
-import { StatsCard } from "../Dashboard";
+import StatsCard from "../Dashboard/StatsCard";
 
 const StatsLoader = () => {
   return (

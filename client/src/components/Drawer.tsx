@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { DrawerProps } from "../interface/Drawer.Types";
 
@@ -12,6 +11,8 @@ const Drawer = ({
   onClick,
 }: DrawerProps) => {
   const anchorDir = (dir: string) => (dir === "left" ? "left-0" : "right-0");
+
+  console.log(children);
 
   return (
     <motion.div

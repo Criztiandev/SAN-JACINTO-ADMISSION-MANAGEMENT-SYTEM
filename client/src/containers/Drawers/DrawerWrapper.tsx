@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Drawer from "../../components/Drawer";
 
@@ -11,12 +11,13 @@ interface ApplicantDrawerProps {
 const DrawerWrapper = ({ state, Component }: ApplicantDrawerProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const currentID = searchParams.get("APID");
+  const currentID = searchParams.get("APID") || "";
   const currentState = searchParams.get("state");
 
   const handleClose = () => {
-    navigate("/applicants");
+    navigate(`${pathname}`);
   };
 
   return (
@@ -24,9 +25,9 @@ const DrawerWrapper = ({ state, Component }: ApplicantDrawerProps) => {
       {currentState === state && (
         <AnimatePresence mode="wait">
           <Drawer
-            className="overflow-scroll"
+            className="overflow-scroll h-[100vh]"
             width="600px"
-            state={currentState === state}
+            state={true}
             onClick={handleClose}>
             <Component APID={currentID} />
           </Drawer>

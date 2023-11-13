@@ -1,10 +1,9 @@
-import { Calendar } from "../../components";
 import { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import FetchLoader from "../General/FetchLoader";
 import axios from "axios";
-
+import Calendar from "../../components/Calendar";
 // const temporarySchedules = [
 //   {
 //     title: "Admission Schedule",

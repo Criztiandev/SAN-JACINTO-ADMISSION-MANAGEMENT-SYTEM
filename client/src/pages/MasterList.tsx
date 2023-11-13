@@ -1,126 +1,199 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Table, SearchBar } from "../components";
-import BaseLayout from "../layouts/BaseLayout";
-import { useTableContext } from "../context/TableContext";
-import { useEffect } from "react";
-
-import { useQuery, useMutation } from "@tanstack/react-query";
+// External Dependencies
+import { Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
+// Project Components
+import BaseLayout from "../layouts/BaseLayout";
+import Table from "../components/Table";
+import SearchBar from "../components/SearchBar";
+import Badge from "../components/Badge";
+import IconButton from "../components/IconButton";
+
+// Context and Helpers
+import { useTableContext } from "../context/TableContext";
 import {
   RenderCreateButton,
   RenderFilterButton,
-  TableConfig,
-  renderDrawerList,
-  useDrawerOptions,
 } from "../helper/Applicant.Helper";
-import { updateStatusApplicant } from "../api/Applicant.Api";
-import FetchLoader from "../containers/General/FetchLoader";
-import { fetchAllData } from "../utils/Api.utils";
-import { AxiosError } from "axios";
+import useFetch from "../hooks/useFetch";
 
-const Applicant = () => {
-  // Drawers
-  const toggleOption = useDrawerOptions();
-  const { createToggle } = toggleOption;
+// React Table
+import { ColumnDef } from "@tanstack/react-table";
 
-  const { isLoading, isPending, refetch } = useQuery({
-    queryFn: async () => {
-      const { payload } = await fetchAllData("applicant");
-      handleMutateData(payload);
-      return payload;
-    },
-    queryKey: ["applicants"],
+// Containers
+import TitleHeader from "../containers/Table/TitleHeader";
+import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
+import FirstColumn from "../containers/Table/FirstColumn";
+import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+
+// Axios and API Utils
+import axios from "axios";
+import { handleAxiosError } from "../utils/Api.utils";
+
+// Applicant Components
+
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+
+const ViewApplicant = lazy(
+  () => import("../containers/Applicants/ViewApplicant")
+);
+const EditApplicant = lazy(
+  () => import("../containers/Applicants/EditApplicant")
+);
+const MessageApplicant = lazy(
+  () => import("../containers/Applicants/MessageApplicant")
+);
+const ArchieveApplicant = lazy(
+  () => import("../containers/Applicants/ArchieveApplicant")
+);
+const CreateApplicant = lazy(
+  () => import("../containers/Applicants/CreateApplicant")
+);
+
+// Assets
+import ArchieveIcon from "../assets/icons/Arhive_light.svg";
+import DrawerLoader from "../containers/Loaders/DrawerLoader";
+
+const MasterList = () => {
+  const { search, handleSearch, handleMutateData } = useTableContext();
+  const navigate = useNavigate();
+
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
+    route: "/applicant",
+    overrideFn: handleMutateData,
+    key: ["applicants"],
   });
 
-  const acceptApplicant = useMutation({
-    mutationFn: async ({ APID, value }: any) => {
-      return updateStatusApplicant(APID, value);
+  // mutation
+  const { mutateAsync } = useMutation({
+    mutationFn: ({ UID, status }: { UID: string; status: string }) => {
+      return axios.put(`${import.meta.env.VITE_SERVER_URL}/applicant/${UID}`, {
+        status,
+      });
     },
+
     onSuccess: () => {
-      toast.success("Applicant is Accepted Successfully");
+      toast.success("Applicant Accepted Successfully");
+      refetch();
     },
 
-    onError: (e: AxiosError | any) => {
-      if (!e.response) {
-        toast.error("Error: Something went wrong");
-      }
-
-      const { error } = e.response?.data as { error: string };
-      toast.error(error);
+    onError: (e: AxiosError) => {
+      handleAxiosError(e);
     },
   });
 
-  const {
-    search,
-    selected,
-    handleSearch,
-    setTableConfig,
-    handleSelected,
-    handleMutateData,
-  } = useTableContext();
-
-  const handleToggle = (data: object | string, toggle = () => {}) => {
-    handleSelected(data);
-    toggle();
+  const handleCreateApplicant = () => {
+    navigate("/applicants?state=create");
   };
 
-  const handleAccept = async (id: string, status: string) => {
-    await acceptApplicant.mutateAsync({ APID: id, value: status });
-    refetch();
+  const handleAction = async (id: string, currentStatus: string) => {
+    void mutateAsync({ UID: id, status: currentStatus });
   };
 
-  // Setting up the Table Config
-  useEffect(() => {
-    const config = TableConfig({
-      toggles: toggleOption,
-      onToggle: handleToggle,
-      onAccept: handleAccept,
-    });
+  const ApplicantTableConfig: ColumnDef<any, any>[] = [
+    {
+      id: "select",
+      header: ({ table }) => <TitleHeader data={table} />,
+      accessorFn: ({ personalDetails }) =>
+        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+      cell: ({ row, getValue }) => (
+        <FirstColumn data={row} value={getValue()} />
+      ),
+    },
 
-    if (!config) throw new Error("No Config");
-    setTableConfig(config);
+    { header: "LRN", accessorKey: "studentDetails.LRN" },
+    {
+      header: "Grade Level",
+      accessorKey: "studentDetails.yearLevel",
+      accessorFn: ({ studentDetails }) =>
+        `${studentDetails.yearLevel.split(" ")[1]}`,
+    },
+    { header: "Gender", accessorKey: "personalDetails.gender" },
+    { header: "BOD", accessorKey: "personalDetails.birthDate" },
+    { header: "Age", accessorKey: "personalDetails.age" },
+    {
+      header: "Guardian",
+      accessorKey: "guardianDetails.legalGuardian",
+      accessorFn: ({ guardianDetails }) => {
+        const { firstName, middleName, lastName } =
+          guardianDetails.legalGuardian;
 
-    return () => {
-      setTableConfig([]);
-    };
-  }, []);
+        return `${lastName}, ${firstName} ${middleName[0]}.`;
+      },
+    },
+
+    { header: "Contact", accessorKey: "personalDetails.contact" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ getValue }: any) => (
+        <Badge as="neutral" type={getValue()} title={getValue()} />
+      ),
+    },
+    {
+      header: "Action",
+      cell: ({ row }) => {
+        return (
+          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+        );
+      },
+    },
+  ];
+
+  if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
   return (
     <>
       <BaseLayout
         title="Applicants"
         actions={
-          <RenderCreateButton
-            toggle={createToggle.toggleDrawer}
-            loading={isLoading}
-          />
+          <div className="flex gap-4">
+            <IconButton
+              as="outlined"
+              icon={ArchieveIcon}
+              onClick={() => navigate("/applicant/archieve")}
+            />
+            <RenderCreateButton
+              toggle={handleCreateApplicant}
+              loading={isLoading || isPending}
+            />
+          </div>
         }>
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
             value={search}
             onChange={handleSearch}
-            disabled={isLoading || isPending}
+            disabled={isPending}
           />
 
-          <div className="flex gap-4">
-            <RenderFilterButton loading={isLoading} />
+          <div className="flex justify-between gap-4">
+            <RenderFilterButton loading={isPending} />
           </div>
         </div>
 
-        {isLoading || isPending ? (
-          <FetchLoader />
-        ) : (
-          <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px" />
-        )}
+        <Table
+          config={ApplicantTableConfig}
+          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+        />
       </BaseLayout>
 
-      {renderDrawerList(selected, toggleOption)}
+      <Suspense fallback={<DrawerLoader />}>
+        <DrawerWrapper state="create" Component={CreateApplicant} />
+        <DrawerWrapper state="edit" Component={EditApplicant} />
+        <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+        <DrawerWrapper state="message" Component={MessageApplicant} />
+        <DrawerWrapper state="view" Component={ViewApplicant} />
+      </Suspense>
     </>
   );
 };
 
-export default Applicant;
+export default MasterList;

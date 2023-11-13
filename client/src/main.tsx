@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -16,16 +15,14 @@ import ConfigProvider from "./context/ConfigContext";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ConfigProvider>
-        <AuthContextProvider>
-          <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
-            <Routes />
-            <ToastContainer />
-          </SkeletonTheme>
-        </AuthContextProvider>
-      </ConfigProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ConfigProvider>
+      <AuthContextProvider>
+        <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
+          <Routes />
+          <ToastContainer />
+        </SkeletonTheme>
+      </AuthContextProvider>
+    </ConfigProvider>
+  </QueryClientProvider>
 );
