@@ -31,10 +31,10 @@ const Table = ({ config, layout }: TableProps) => {
 
   if (tableData.length <= 0)
     return (
-      <div className="relative">
+      <div className="relative h-full">
         <FetchLoader />
         <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[48px] z-10 font-bold">
-          No Applicant Available
+          No Data Available
         </span>
       </div>
     );

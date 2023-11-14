@@ -8,17 +8,27 @@ import BatchCard from "./BatchCard";
 import Textarea from "../../components/Textarea";
 import { scheduleSchema } from "../../schema/schedule.Schema";
 import useFormSubmit from "../../hooks/useFormSubmit";
+import useFetch from "../../hooks/useFetch";
+import FetchLoader from "../General/FetchLoader";
 
 const CreateCalendar = () => {
-  const { queryParams, baseRoute } = useURL();
+  const { queryParams, baseRoute, reload } = useURL();
   const start = queryParams.get("start");
   const end = queryParams.get("end");
+
+  const { data, isFetched, isError } = useFetch({
+    route: "/batch",
+    key: ["batches"],
+  });
 
   const { handleSubmit } = useFormSubmit({
     route: `${baseRoute}/create`,
     redirect: `${baseRoute}`,
+    overideFn: reload,
     type: "post",
   });
+
+  if (!isFetched || isError) return <FetchLoader />;
 
   return (
     <div>
@@ -61,11 +71,24 @@ const CreateCalendar = () => {
               </Typography>
 
               <div className="max-h-[350px] overflow-y-auto pr-4">
-                <div className="grid grid-cols-2 gap-4 ">
-                  <BatchCard UID="123123123" />
-
-                  <BatchCard UID="123123122222323233" />
-                </div>
+                {data?.length <= 0 ? (
+                  <div className="w-full border h-[200px] bg-gray-400 rounded-[5px] flex justify-center items-center font-bold text-[32px]">
+                    No Batch Available
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-4 ">
+                    <BatchCard
+                      UID="123123123"
+                      title="Batch 1"
+                      description="sdfsdfsdfsdfsdfsdf"
+                    />
+                    <BatchCard
+                      UID="123123122222323233"
+                      title="Batch 2"
+                      description="asdasdadasd"
+                    />
+                  </div>
+                )}
               </div>
             </section>
 
@@ -112,7 +135,11 @@ const CreateCalendar = () => {
               />
             </section>
             <section className="flex justify-end gap-4">
-              <Button type="submit" title="Submit" />
+              <Button
+                type="submit"
+                title="Submit"
+                disabled={data?.length <= 0 && true}
+              />
             </section>
           </Form>
         </Formik>

@@ -15,7 +15,8 @@ const AnnoucementPage = lazy(() => import("../pages/Annoucement"));
 const ExaminiesPage = lazy(() => import("../pages/Examiniees"));
 const ToolPage = lazy(() => import("../pages/Tools.tsx"));
 const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
-
+const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
+const UserPage = lazy(() => import("../pages/Users.tsx"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -70,16 +71,16 @@ const routes = [
       </Suspense>
     ),
   },
-  // {
-  //   path: "/masterlist",
-  //   element: (
-  //     <Suspense fallback={<TablePanelSkeleton />}>
-  //       <TableProvider>
-  //         <MasterListPage />
-  //       </TableProvider>
-  //     </Suspense>
-  //   ),
-  // },
+  {
+    path: "/masterlist",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <MasterListPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
   {
     path: "/examiniees",
     element: (
@@ -91,16 +92,16 @@ const routes = [
     ),
   },
 
-  // {
-  //   path: "/users",
-  //   element: (
-  //     <Suspense fallback={<TablePanelSkeleton />}>
-  //       <TableProvider>
-  //         <UsersPage />
-  //       </TableProvider>
-  //     </Suspense>
-  //   ),
-  // },
+  {
+    path: "/users",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <UserPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
 
   {
     path: "/tools",

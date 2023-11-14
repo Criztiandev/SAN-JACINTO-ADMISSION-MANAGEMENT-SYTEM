@@ -22,14 +22,12 @@ interface ScheduleDetails {
 const ScheduleCalendar = () => {
   const [scheduleData, setScheduleData] = useState([]);
 
-  const { updateURL, queryParams } = useURL();
+  const { updateURL } = useURL();
 
-  const { data, isError, isLoading, isFetched, refetch } = useFetch({
+  const { data, isError, isLoading, isFetched } = useFetch({
     route: "/schedule",
     key: ["schedules"],
   });
-
-  const isReFetch = queryParams.get("action");
 
   const handleCreateSchedule = (data: any) => {
     const { start, end } = data;
@@ -40,12 +38,6 @@ const ScheduleCalendar = () => {
     const { _id } = data;
     updateURL(`state=view&APID=${_id}`);
   };
-
-  useEffect(() => {
-    if (isReFetch === "success") {
-      refetch();
-    }
-  }, [isReFetch]);
 
   useEffect(() => {
     if (isFetched) {
@@ -68,6 +60,7 @@ const ScheduleCalendar = () => {
 
   return (
     <>
+      <div className="flex justify-end mb-4"></div>
       {isFetched && (
         <Calendar
           events={scheduleData}
@@ -76,13 +69,10 @@ const ScheduleCalendar = () => {
           localizer={momentLocalizer(moment)}
         />
       )}
+
       <DrawerWrapper state="create" Component={CreateCalendar} />
       <DrawerWrapper state="view" Component={ViewCalendar} />
-      <DrawerWrapper
-        state="delete"
-        refetch={refetch}
-        Component={DeleteNotice}
-      />
+      <DrawerWrapper state="delete" Component={DeleteNotice} />
     </>
   );
 };

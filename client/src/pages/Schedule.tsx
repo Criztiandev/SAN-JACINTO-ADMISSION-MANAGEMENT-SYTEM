@@ -49,33 +49,3 @@ const Schedule = () => {
 };
 
 export default Schedule;
-
-{
-  /* <div className="flex justify-between items-center">
-{selectedTab === "batch" ? <SearchBar dir="left" /> : <div></div>}
-
-<div className="flex gap-4 items-center">
-  <Button
-    icon={CalendarIcon}
-    as={selectedTab === "calendar" ? "contained" : "outlined"}
-    title="Calendar"
-    disabled={isPending}
-    onClick={() => handleSelectTab("calendar")}
-  />
-  <Button
-    icon={ApplicantIcon}
-    title="Batch"
-    as={selectedTab !== "calendar" ? "contained" : "outlined"}
-    disabled={isPending}
-    onClick={() => handleSelectTab("batch")}
-  />
-</div>
-</div>
-<section className="grid grid-cols-[1fr_300px] gap-4 h-full ">
-<div className="relative  w-full rounded-[5px] flex flex-col gap-2 overflow-hidden">
-  {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
-</div>
-
-<aside className="border border-gray-400 rounded-[5px]"></aside>
-</section> */
-}

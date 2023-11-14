@@ -10,12 +10,16 @@ import Badge from "../../components/Badge";
 import TitleHeader from "../Table/TitleHeader";
 import FirstColumn from "../Table/FirstColumn";
 import useFetch from "../../hooks/useFetch";
+import Button from "../../components/Button";
+import DrawerWrapper from "../Drawers/DrawerWrapper";
+import useURL from "../../hooks/useURL";
+import CreateBatch from "./CreateBatch";
 
 const BatchTable = () => {
   const { handleMutateData } = useTableContext();
-
+  const { updateURL } = useURL();
   const { isLoading, isPending, isFetched } = useFetch({
-    route: "/applicant",
+    route: "/batch",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
@@ -63,13 +67,30 @@ const BatchTable = () => {
     },
   ];
 
-  if (isPending || isLoading || !isFetched) return <FetchLoader />;
+  const handleCreateBatch = () => {
+    updateURL(`state=create`);
+  };
+
+  if (isPending || isLoading || !isFetched)
+    return (
+      <div className="h-full border">
+        <FetchLoader />
+      </div>
+    );
 
   return (
-    <Table
-      config={ApplicantTableConfig}
-      layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
-    />
+    <>
+      <div className="h-full">
+        <div className="flex justify-end mb-4">
+          <Button title="Create" onClick={handleCreateBatch} />
+        </div>
+        <Table
+          config={ApplicantTableConfig}
+          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+        />
+      </div>
+      <DrawerWrapper state="create" Component={CreateBatch} />
+    </>
   );
 };
 

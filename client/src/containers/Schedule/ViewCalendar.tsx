@@ -101,8 +101,8 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
             <div className="max-h-[350px] overflow-y-auto pr-4">
               {data?.batches?.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 ">
-                  {data?.batches?.map((id: string) => (
-                    <BatchCard UID={id} disabled={!isEdit} />
+                  {data?.batches?.map((props: any) => (
+                    <BatchCard {...props} disabled={!isEdit} />
                   ))}
                 </div>
               ) : (

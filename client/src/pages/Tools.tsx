@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Header } from "../layouts";
 import Nav from "../layouts/Nav";
 import { motion } from "framer-motion";
+import Header from "../layouts/Header";
 
 interface ToolOptionProps {
   title: string;

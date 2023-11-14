@@ -14,8 +14,6 @@ const StatsSection = () => {
     key: ["stats"],
   });
 
-  console.log(data);
-
   if (isLoading || isError || isPending) return <StatsLoader />;
   return (
     <section className="grid grid-cols-3 gap-4">

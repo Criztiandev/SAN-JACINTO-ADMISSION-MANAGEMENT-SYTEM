@@ -29,6 +29,8 @@ const useFetch = ({ route, key, overrideFn }: useFetchProps) => {
       }
     },
     queryKey: key,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   return query;

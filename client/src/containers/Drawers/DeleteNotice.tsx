@@ -4,10 +4,9 @@ import Button from "../../components/Button";
 import useURL from "../../hooks/useURL";
 import { handleAxiosError } from "../../utils/Api.utils";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const DeleteNotice = () => {
-  const { navigateBack, queryParams, baseRoute } = useURL();
+  const { navigateBack, queryParams, baseRoute, reload } = useURL();
   const action = queryParams.get("state") || "title";
   const APID = queryParams.get("APID");
 
@@ -18,12 +17,10 @@ const DeleteNotice = () => {
   const handleConfirm = () => {
     const performDelete = async () => {
       try {
-        console.log(`${baseRoute}/${APID}`);
         await axios.delete(
           `${import.meta.env.VITE_SERVER_URL}${baseRoute}/${APID}`
         );
-        toast.success("Deleted Successfully");
-        navigateBack();
+        reload();
       } catch (e: any) {
         console.log(e);
         handleAxiosError(e);

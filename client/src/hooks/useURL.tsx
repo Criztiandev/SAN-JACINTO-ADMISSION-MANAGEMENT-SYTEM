@@ -19,12 +19,18 @@ const useURL = () => {
     navigate(`${pathname}?${payload}`);
   };
 
+  const reload = () => {
+    navigate(`${pathname}`);
+    navigate(0);
+  };
+
   return {
     queryParams: searchParams,
     baseRoute: pathname,
     navigateBack,
     navigateTo,
     updateURL,
+    reload,
   };
 };
 
