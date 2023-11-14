@@ -16,6 +16,7 @@ const useFetch = ({ route, key, overrideFn }: useFetchProps) => {
         const res = await axios.get(
           `${import.meta.env.VITE_SERVER_URL}${route}`
         );
+
         const { payload } = res.data;
 
         if (overrideFn) {

@@ -5,10 +5,11 @@ import Drawer from "../../components/Drawer";
 
 interface ApplicantDrawerProps {
   state: string;
+  refetch?: any;
   Component: any;
 }
 
-const DrawerWrapper = ({ state, Component }: ApplicantDrawerProps) => {
+const DrawerWrapper = ({ state, refetch, Component }: ApplicantDrawerProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -29,7 +30,7 @@ const DrawerWrapper = ({ state, Component }: ApplicantDrawerProps) => {
             width="600px"
             state={true}
             onClick={handleClose}>
-            <Component APID={currentID} />
+            <Component APID={currentID} refetch={refetch} />
           </Drawer>
         </AnimatePresence>
       )}

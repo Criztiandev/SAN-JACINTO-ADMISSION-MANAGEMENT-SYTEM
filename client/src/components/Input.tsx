@@ -44,7 +44,7 @@ const Input = ({
         } ${
           props.disabled
             ? " bg-gray-300 text-gray-600 opacity-70"
-            : "bg-gray-100 text-gray-600 select-none"
+            : "bg-gray-100 text-black select-none"
         }`}
       />
       {meta.error && (

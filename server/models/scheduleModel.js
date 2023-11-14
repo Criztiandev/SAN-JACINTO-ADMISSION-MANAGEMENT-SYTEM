@@ -1,52 +1,61 @@
 import mongoose from "mongoose";
 
 const scheduleSchema = new mongoose.Schema({
-  // Unique identifier for the schedule
-  scheduleId: {
+  title: {
     type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
     unique: true,
-    required: true,
   },
-
-  // The name or title of the schedule (e.g., "Fall 2023 Semester Schedule")
-  name: {
+  facilitator: {
     type: String,
     required: true,
+    minlength: 3,
+    maxlength: 64,
+    unique: true,
   },
-
-  // Start and end dates for the schedule
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  endDate: {
-    type: Date,
-    required: true,
-  },
-
-  // List of admission events or activities associated with the schedule
-  events: [
+  batches: [
     {
-      name: {
-        type: String,
-        required: true,
-      },
-      date: {
-        type: Date,
-        required: true,
-      },
-      description: String,
-      // You can add more fields as needed
+      type: String,
+      unique: true,
     },
   ],
-
-  // Other schedule-related information
-  description: String,
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the user who created the schedule
+  schedule: {
+    start: {
+      type: Date,
+      required: true,
+    },
+    end: {
+      type: Date,
+      required: true,
+    },
   },
-  // You can add more fields as needed
+  time: {
+    start: {
+      type: String,
+      required: true,
+    },
+    end: {
+      type: String,
+      required: true,
+    },
+  },
+  venue: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
+    unique: true,
+  },
+  details: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 255,
+  },
+
+  status: { type: String, enum: ["ongoing", "finished"], default: "ongoing" },
 });
 
 export default mongoose.model("Schedule", scheduleSchema);

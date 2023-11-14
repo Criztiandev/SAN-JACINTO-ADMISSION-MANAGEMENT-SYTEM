@@ -34,7 +34,7 @@ app.use(helmet());
 app.use("/api/auth", authRoute);
 app.use("/api/applicant", applicantRoute);
 app.use("/api/dashboard", dasboardRoute);
-app.use("/api/schedules", scheduleRoute);
+app.use("/api/schedule", scheduleRoute);
 app.use("/api/account", accountRoute);
 
 // Error Handlers

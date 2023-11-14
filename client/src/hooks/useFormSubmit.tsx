@@ -12,17 +12,22 @@ interface FormSubmitResult {
   payload: Array<object> | object;
   handleSubmit: (value: any, action: FormikHelpers<any>) => Promise<any>;
   isPending: boolean;
+  isSuccess: boolean;
 }
 
 interface UseFormSubmitProps {
   route: string;
   redirect?: string;
+  errRedirect?: string;
+  overideFn?: () => void;
   type?: "post" | "put";
 }
 
 const useFormSubmit = ({
   route,
   redirect,
+  errRedirect,
+  overideFn,
   type = "post",
 }: UseFormSubmitProps): FormSubmitResult => {
   const [currentPayload, setCurrentPayload] = useState<Array<object> | object>(
@@ -32,15 +37,23 @@ const useFormSubmit = ({
 
   const handleMutationError = (e: AxiosError) => {
     handleAxiosError(e);
-    if (redirect) {
-      navigate(redirect);
+
+    if (errRedirect) {
+      navigate(errRedirect);
     }
   };
 
   const handleSuccessMutation = (payload: AxiosResponse) => {
     const { message } = payload.data;
+
+    if (overideFn) {
+      overideFn();
+    }
     setCurrentPayload(payload.data);
     toast.success(message);
+    if (redirect) {
+      navigate(redirect);
+    }
   };
 
   // a breather to avoid spamming
@@ -53,14 +66,14 @@ const useFormSubmit = ({
     }
   };
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: async (value) =>
       axios[`${type}`](`${import.meta.env.VITE_SERVER_URL}${route}`, value),
     onSuccess: handleSuccessMutation,
     onError: handleMutationError,
   });
 
-  return { payload: currentPayload, handleSubmit, isPending };
+  return { payload: currentPayload, handleSubmit, isPending, isSuccess };
 };
 
 export default useFormSubmit;

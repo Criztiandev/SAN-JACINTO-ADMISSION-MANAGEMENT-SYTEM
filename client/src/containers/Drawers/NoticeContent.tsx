@@ -1,15 +1,14 @@
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Typography from "../../components/Typography";
 import Button from "../../components/Button";
+import useURL from "../../hooks/useURL";
 
 const NoticeContent = () => {
-  const [searchParams] = useSearchParams();
-  const title = searchParams.get("state") || "title";
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { navigateBack, queryParams } = useURL();
+
+  const title = queryParams.get("state") || "title";
 
   const handleCancel = () => {
-    navigate(location.pathname);
+    navigateBack;
   };
 
   const handleConfirm = () => {

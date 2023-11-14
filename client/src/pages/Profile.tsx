@@ -1,25 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { BaseLayout } from "../layouts";
-import ActionHeader from "../containers/Dashboard/ActionHeader";
 import { useAuthContext } from "../context/AuthContext";
 import { Formik, Form } from "formik";
-import { Button, IconButton, Input, Typography } from "../components";
 import { useState } from "react";
 import { ProfileInputSection } from "../data/profile.Data";
-import { EditIcon } from "../assets/icons";
 import FetchLoader from "../containers/General/FetchLoader";
 import useFormSubmit from "../hooks/useFormSubmit";
 import useFetch from "../hooks/useFetch";
+import EditIcon from "../assets/icons/Edit_light.svg";
+import BaseLayout from "../layouts/BaseLayout";
+import Button from "../components/Button";
+import IconButton from "../components/IconButton";
+import Input from "../components/Input";
+import Typography from "../components/Typography";
+import useURL from "../hooks/useURL";
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+import ChangePassword from "../containers/Profile/ChangePassword";
 
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
+  const { updateURL } = useURL();
   const { user } = useAuthContext();
   const { handleSubmit } = useFormSubmit({ route: "/test" });
 
   const { data, isLoading, isPending } = useFetch({
     route: `/account/${user}`,
-    key: ["profile"],
+    key: [`${user}`],
   });
+
+  const handleTogglePassword = () => {
+    updateURL(`state=password&APID=${user}`);
+  };
 
   if (isLoading || isPending) return <FetchLoader />;
 
@@ -27,13 +37,7 @@ const Profile = () => {
     <>
       <BaseLayout
         title={`Hello, ${data?.fullName} 👋`}
-        actions={
-          <ActionHeader
-            onSettings={() => {}}
-            onLogout={() => {}}
-            loading={isLoading || isPending}
-          />
-        }
+        actions={<IconButton />}
         className="h-full"
         free>
         <Formik
@@ -52,6 +56,7 @@ const Profile = () => {
                 onClick={() => setIsEdit((prev) => !prev)}
               />
             </div>
+
             {ProfileInputSection.map((props) => (
               <div
                 className="grid grid-cols-2 items-center justify-center gap-8 border-b border-b-gray-200 pb-6 mb-4"
@@ -75,6 +80,27 @@ const Profile = () => {
               </div>
             ))}
 
+            <div className="grid grid-cols-2 items-center justify-center gap-8 border-b border-b-gray-200 pb-6 mb-4">
+              <div className="w-[450px]">
+                <Typography as="h6" className="mb-2 font-semibold">
+                  Password
+                </Typography>
+                <Typography as="p">
+                  Changing your username will also affect your name and
+                  appearance on all other Ionic websites like the Forum and
+                  Market.
+                </Typography>
+              </div>
+              <div className="flex">
+                <Button
+                  type="button"
+                  title="Change Password"
+                  disabled={!isEdit}
+                  onClick={handleTogglePassword}
+                />
+              </div>
+            </div>
+
             {isEdit && (
               <div className="flex gap-4 justify-end">
                 <Button type="button" title="Cancel" as="outlined" />
@@ -84,6 +110,8 @@ const Profile = () => {
           </Form>
         </Formik>
       </BaseLayout>
+
+      <DrawerWrapper state="password" Component={ChangePassword} />
     </>
   );
 };
