@@ -12,8 +12,6 @@ const Drawer = ({
 }: DrawerProps) => {
   const anchorDir = (dir: string) => (dir === "left" ? "left-0" : "right-0");
 
-  console.log(children);
-
   return (
     <motion.div
       animate={state && "open"}

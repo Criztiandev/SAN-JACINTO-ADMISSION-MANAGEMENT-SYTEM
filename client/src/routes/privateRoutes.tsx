@@ -5,9 +5,17 @@ import { TableProvider, ScheduleProvider } from "../context";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import ErrorPage from "../pages/ErrorPage";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
+import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
+import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton.tsx";
 
 const ApplicantPage = lazy(() => import("../pages/Applicant"));
 const DashboardPage = lazy(() => import("../pages/Dashboard"));
+const SchedulePage = lazy(() => import("../pages/Schedule"));
+const AnnoucementPage = lazy(() => import("../pages/Annoucement"));
+const ExaminiesPage = lazy(() => import("../pages/Examiniees"));
+const ToolPage = lazy(() => import("../pages/Tools.tsx"));
+const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
+
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -43,25 +51,25 @@ const routes = [
       </Suspense>
     ),
   },
-  // {
-  //   path: "/schedule",
-  //   element: (
-  //     <ProviderWrapper loader={<ScheduleSkeleton />}>
-  //       <SchedulePage />
-  //     </ProviderWrapper>
-  //   ),
-  // },
+  {
+    path: "/schedule",
+    element: (
+      <ProviderWrapper loader={<ScheduleSkeleton />}>
+        <SchedulePage />
+      </ProviderWrapper>
+    ),
+  },
 
-  // {
-  //   path: "/annoucement",
-  //   element: (
-  //     <Suspense fallback={<TablePanelSkeleton />}>
-  //       <TableProvider>
-  //         <AnnoucementPage />
-  //       </TableProvider>
-  //     </Suspense>
-  //   ),
-  // },
+  {
+    path: "/annoucement",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <AnnoucementPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
   // {
   //   path: "/masterlist",
   //   element: (
@@ -72,16 +80,16 @@ const routes = [
   //     </Suspense>
   //   ),
   // },
-  // {
-  //   path: "/examiniees",
-  //   element: (
-  //     <Suspense fallback={<TablePanelSkeleton />}>
-  //       <TableProvider>
-  //         <ExaminiesPage />
-  //       </TableProvider>
-  //     </Suspense>
-  //   ),
-  // },
+  {
+    path: "/examiniees",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <ExaminiesPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
 
   // {
   //   path: "/users",
@@ -94,15 +102,22 @@ const routes = [
   //   ),
   // },
 
-  // { path: "/tools", element: <Tools /> },
-  // {
-  //   path: "/profile",
-  //   element: (
-  //     <Suspense fallback={<ProfileSkeleton />}>
-  //       <ProfilePage />
-  //     </Suspense>
-  //   ),
-  // },
+  {
+    path: "/tools",
+    element: (
+      <Suspense fallback={<div>Loading</div>}>
+        <ToolPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <Suspense fallback={<ProfileSkeleton />}>
+        <ProfilePage />
+      </Suspense>
+    ),
+  },
 ];
 
 export const privateRoutes = createBrowserRouter(

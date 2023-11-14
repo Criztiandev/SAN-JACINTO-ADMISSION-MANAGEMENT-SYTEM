@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, IconButton } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
 import { useState, useTransition } from "react";
-import BatchTable from "../containers/Schedule/BatchTable";
-import { ApplicantIcon, CalendarIcon } from "../assets/icons";
 import ScheduleCalendar from "../containers/Schedule/ScheduleCalendar";
+import Button from "../components/Button";
+import IconButton from "../components/IconButton";
+import BatchTable from "../containers/Schedule/BatchTable";
+import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
+import CalendarIcon from "../assets/icons/Calendar_Dark.svg";
 
 const Schedule = () => {
   const [selectedTab, setSelectedTab] = useState("calendar");
@@ -15,6 +17,7 @@ const Schedule = () => {
       setSelectedTab(target);
     });
   };
+
   return (
     <BaseLayout
       title="Schedule"
@@ -39,7 +42,7 @@ const Schedule = () => {
       }
       free>
       <div className="relative  w-full rounded-[5px] flex flex-col gap-2 overflow-hidden  h-[78vh]">
-        {selectedTab === "calendar" ? <ScheduleCalendar /> : <div>hi</div>}
+        {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
       </div>
     </BaseLayout>
   );

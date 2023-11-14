@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useTableContext } from "../../context/TableContext";
-import Table from "../../components/Table";
-import FetchLoader from "../General/FetchLoader";
-import Badge from "../../components/Badge";
 import { ColumnDef } from "@tanstack/react-table";
+import { useTableContext } from "../../context/TableContext";
+
+import FetchLoader from "../General/FetchLoader";
+import Table from "../../components/Table";
+import Badge from "../../components/Badge";
+
 import TitleHeader from "../Table/TitleHeader";
 import FirstColumn from "../Table/FirstColumn";
 import useFetch from "../../hooks/useFetch";
