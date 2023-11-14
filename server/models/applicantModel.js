@@ -69,7 +69,7 @@ const applicantSchema = mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["applicant", "examiniees", "accepted"],
+      enum: ["applicant", "examiniees", "regular"],
       default: "applicant",
     },
     status: {

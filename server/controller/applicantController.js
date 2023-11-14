@@ -48,7 +48,7 @@ export const fetchAllApplicant = asyncHandler(async (req, res) => {
     "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
 
   const applicants = await applicantModel
-    .find({ status: "pending", role: "applicant" })
+    .find({ status: "pending" })
     .select(fields);
 
   res.status(200).json({
@@ -103,10 +103,51 @@ export const deleteApplicant = asyncHandler(async (req, res) => {
 });
 
 export const acceptApplicant = asyncHandler(async (req, res) => {
-  const { id: APID } = req.params;
+  const { UID } = req.body;
+
+  const filterField =
+    " _id studentDetails.yearLevel studentDetails.track role status";
+
+  // find the applicant
+  const _applicant = await applicantModel
+    .findOne({ _id: UID })
+    .lean()
+    .select(filterField);
+  if (!_applicant) throw new Error("Applicant Doesnt Exist");
+
+  const { studentDetails } = _applicant;
+  const { yearLevel: level, track } = studentDetails;
+
+  // Filter Examiniees
+  if (level === "Grade 7" || level === "Grade 11" || level === "Grade 12") {
+    if (track === "SPE" || track === "SPJ" || track === "STEM") {
+      const _examiniees = await applicantModel.findOneAndUpdate(
+        { _id: UID },
+        { status: "accepted", role: "examiniees" },
+        { new: true }
+      );
+      if (!_examiniees)
+        throw new Error("Something went wrong, Please Try again");
+
+      res.status(200).json({
+        payload: null,
+        message: "Accepted Applicant",
+      });
+
+      return;
+    }
+  }
+
+  // Regular student
+  const regular = await applicantModel.findOneAndUpdate(
+    { _id: UID },
+    { status: "accepted", role: "regular" },
+    { new: true }
+  );
+  if (!regular) throw new Error("Something went wrong");
 
   res.status(200).json({
-    payload: [],
+    payload: null,
     message: "Applicant Accepted Successfully",
   });
 });

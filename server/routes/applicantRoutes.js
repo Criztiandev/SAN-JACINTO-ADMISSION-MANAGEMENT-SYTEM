@@ -12,7 +12,7 @@ import { fetchAllExaminiees } from "../controller/examinieesController.js";
 const router = express.Router();
 
 router.post("/create", createApplicant);
-router.post("/accept", acceptApplicant);
+router.post("/accept/", acceptApplicant);
 
 router.get("/", fetchAllApplicant);
 router.get("/:id", fetchApplicantByID);

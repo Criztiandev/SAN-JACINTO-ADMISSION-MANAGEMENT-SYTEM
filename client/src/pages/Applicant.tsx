@@ -2,11 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // External Dependencies
-import { Suspense, lazy } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { Suspense } from "react";
 
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
@@ -32,37 +28,23 @@ import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColum
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
-// Axios and API Utils
-import axios from "axios";
-import { handleAxiosError } from "../utils/Api.utils";
-
 // Applicant Components
 
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
-
-const ViewApplicant = lazy(
-  () => import("../containers/Applicants/ViewApplicant")
-);
-const EditApplicant = lazy(
-  () => import("../containers/Applicants/EditApplicant")
-);
-const MessageApplicant = lazy(
-  () => import("../containers/Applicants/MessageApplicant")
-);
-const ArchieveApplicant = lazy(
-  () => import("../containers/Applicants/ArchieveApplicant")
-);
-const CreateApplicant = lazy(
-  () => import("../containers/Applicants/CreateApplicant")
-);
-
+import ViewApplicant from "../containers/Applicants/ViewApplicant";
+import EditApplicant from "../containers/Applicants/EditApplicant";
+import CreateApplicant from "../containers/Applicants/CreateApplicant";
+import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
+import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
 import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 import DrawerLoader from "../containers/Loaders/DrawerLoader";
+import useCustomMutation from "../hooks/useCustomMutation";
+import useURL from "../hooks/useURL";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const navigate = useNavigate();
+  const { updateURL, navigateTo } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant",
@@ -71,25 +53,13 @@ const Applicant = () => {
   });
 
   // mutation
-  const { mutateAsync } = useMutation({
-    mutationFn: ({ UID, status }: { UID: string; status: string }) => {
-      return axios.put(`${import.meta.env.VITE_SERVER_URL}/applicant/${UID}`, {
-        status,
-      });
-    },
-
-    onSuccess: () => {
-      toast.success("Applicant Accepted Successfully");
-      refetch();
-    },
-
-    onError: (e: AxiosError) => {
-      handleAxiosError(e);
-    },
+  const { mutateAsync } = useCustomMutation({
+    route: `/applicant/accept/`,
+    overrideFn: () => refetch(),
   });
 
   const handleCreateApplicant = () => {
-    navigate("/applicants?state=create");
+    updateURL("state=create");
   };
 
   const handleAction = async (id: string, currentStatus: string) => {
@@ -158,7 +128,7 @@ const Applicant = () => {
             <IconButton
               as="outlined"
               icon={ArchieveIcon}
-              onClick={() => navigate("/applicant/archieve")}
+              onClick={() => navigateTo("/applicant/archieve")}
             />
             <RenderCreateButton
               toggle={handleCreateApplicant}
