@@ -6,7 +6,8 @@ interface ExamineesCardProps {
   name: string;
   yearLevel: string;
   track: string;
-  ave: string | number;
+  ave: string;
+  disabled?: boolean;
 }
 
 const ExamineesCard = ({
@@ -15,6 +16,7 @@ const ExamineesCard = ({
   yearLevel,
   track,
   ave,
+  disabled,
 }: ExamineesCardProps) => {
   return (
     <motion.label
@@ -26,7 +28,7 @@ const ExamineesCard = ({
 
       <div className="flex justify-between">
         <div className="flex gap-2 items-start">
-          <Field type="checkbox" name="examinees" value={_id} />
+          {!disabled && <Field type="checkbox" name="examiniees" value={_id} />}
           <span className="font-semibold">{name}</span>
         </div>
       </div>

@@ -2,14 +2,25 @@
 import { Formik, Form } from "formik";
 import Button from "../../components/Button";
 import Typography from "../../components/Typography";
-import ExamineesCard from "./ExamineesCard";
 import Input from "../../components/Input";
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
+import useFormSubmit from "../../hooks/useFormSubmit";
+import ExamineesCard from "../Schedule/ExamineesCard";
+import useURL from "../../hooks/useURL";
+
 const CreateBatch = () => {
+  const { reload } = useURL();
+
   const { data, isLoading, isError, isFetched } = useFetch({
-    route: "/examiniees",
-    key: ["examiniees"],
+    route: "/batch/examiniees",
+    key: ["batchExaminies"],
+  });
+
+  const { handleSubmit } = useFormSubmit({
+    route: "/batch/create",
+    redirect: "/batch",
+    overideFn: reload,
   });
 
   if (isLoading || isError || !isFetched) return <FetchLoader />;
@@ -17,7 +28,7 @@ const CreateBatch = () => {
   return (
     <div>
       <header className="pb-4 mb-4 border-b border-gray-400">
-        <h1>Create Scheule</h1>
+        <h1>Create Batch</h1>
         <span>You can create event to this form</span>
       </header>
 
@@ -25,9 +36,9 @@ const CreateBatch = () => {
         <Formik
           initialValues={{
             title: "",
-            examinees: [],
+            examiniees: [],
           }}
-          onSubmit={() => {}}>
+          onSubmit={handleSubmit}>
           <Form className="flex flex-col gap-4">
             <section>
               <Typography
@@ -41,6 +52,14 @@ const CreateBatch = () => {
                   label="Title"
                   name="title"
                   placeholder="Enter Batch Title"
+                />
+
+                <Input
+                  type="date"
+                  label="Schedule"
+                  name="title"
+                  placeholder="Enter"
+                  disabled={true}
                 />
               </div>
             </section>
@@ -57,9 +76,27 @@ const CreateBatch = () => {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-4">
-                  {data?.map((props: any) => (
-                    <ExamineesCard {...props} />
-                  ))}
+                  {data?.map(
+                    ({
+                      _id,
+                      personalDetails,
+                      studentDetails,
+                      gradeDetails,
+                    }: any) => {
+                      const { firstName, middleName, lastName } =
+                        personalDetails;
+                      const { yearLevel, track } = studentDetails;
+                      return (
+                        <ExamineesCard
+                          _id={_id}
+                          name={`${lastName}, ${firstName} ${middleName[0]}.`}
+                          yearLevel={yearLevel}
+                          track={track}
+                          ave={gradeDetails?.generalAve}
+                        />
+                      );
+                    }
+                  )}
                 </div>
               )}
             </section>

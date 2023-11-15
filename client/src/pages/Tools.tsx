@@ -37,6 +37,11 @@ const ToolOptions: ToolOptionProps[] = [
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exnatus maxime distinctio. Nisi exercitationem",
     path: "/users",
   },
+  {
+    title: "Batch",
+    description: "fsfsdfsdf",
+    path: "/batch",
+  },
 ];
 
 const Tools = () => {

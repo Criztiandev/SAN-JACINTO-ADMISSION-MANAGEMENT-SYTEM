@@ -48,7 +48,7 @@ export const fetchAllApplicant = asyncHandler(async (req, res) => {
     "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
 
   const applicants = await applicantModel
-    .find({ status: "pending" })
+    .find({ status: "pending", role: "applicant" })
     .select(fields);
 
   res.status(200).json({
@@ -67,6 +67,24 @@ export const fetchApplicantByID = asyncHandler(async (req, res) => {
   res
     .status(200)
     .json({ payload: applicant, message: "Applicant Fetch Successfully" });
+});
+
+export const fetchAllRegularStudents = asyncHandler(async (req, res) => {
+  const _regular = await applicantModel.find({ role: "regular" }).lean();
+
+  res.status(200).json({
+    payload: _regular,
+    message: "Fetched All regulars",
+  });
+});
+
+export const fetchAllExaminiesStudents = asyncHandler(async (req, res) => {
+  const _examiniees = await applicantModel.find({ role: "examiniees" }).lean();
+
+  res.status(200).json({
+    payload: _examiniees,
+    message: "Fetched All regulars",
+  });
 });
 
 export const updateApplicant = asyncHandler(async (req, res) => {

@@ -17,6 +17,7 @@ const ToolPage = lazy(() => import("../pages/Tools.tsx"));
 const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
 const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
 const UserPage = lazy(() => import("../pages/Users.tsx"));
+const BatchPage = lazy(() => import("../pages/Batch.tsx"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -87,6 +88,17 @@ const routes = [
       <Suspense fallback={<TablePanelSkeleton />}>
         <TableProvider>
           <ExaminiesPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
+
+  {
+    path: "/batch",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <BatchPage />
         </TableProvider>
       </Suspense>
     ),

@@ -32,7 +32,7 @@ const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
 
   const { isLoading, isPending, isFetched } = useFetch({
-    route: "/examiniees",
+    route: "/applicant/examiniees",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
