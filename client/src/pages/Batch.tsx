@@ -5,7 +5,6 @@
 import { Suspense } from "react";
 
 import BaseLayout from "../layouts/BaseLayout";
-import SearchBar from "../components/SearchBar";
 
 import { useTableContext } from "../context/TableContext";
 import useFetch from "../hooks/useFetch";
@@ -17,7 +16,6 @@ import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import DrawerLoader from "../containers/Loaders/DrawerLoader";
 import useURL from "../hooks/useURL";
 import EditBatch from "../containers/Batch/EditBatch";
-import DeleteBatch from "../containers/Batch/DeleteBatch";
 import ViewBatch from "../containers/Batch/ViewBatch";
 import CreateBatch from "../containers/Batch/CreateBatch";
 import BatchCard from "../containers/Batch/BatchCard";
@@ -25,7 +23,7 @@ import CreateBatchButton from "../containers/Batch/CreateBatchButton";
 import DeleteNotice from "../containers/Drawers/DeleteNotice";
 
 const Batch = () => {
-  const { search, handleSearch, handleMutateData } = useTableContext();
+  const { handleMutateData } = useTableContext();
   const { updateURL } = useURL();
 
   const { data, isLoading, isPending, isFetched } = useFetch({

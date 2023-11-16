@@ -1,17 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// External Imports
 import { Formik, Form } from "formik";
+import { MouseEvent, useEffect, useState } from "react";
+
+// Component Imports
 import Button from "../../components/Button";
 import Typography from "../../components/Typography";
 import Input from "../../components/Input";
+import IconButton from "../../components/IconButton";
+
+// Hook Imports
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
 import useFormSubmit from "../../hooks/useFormSubmit";
-import ExamineesCard from "../Schedule/ExamineesCard";
 import useURL from "../../hooks/useURL";
 
-const CreateBatch = () => {
-  const { reload } = useURL();
+// Custom Component Import
+import ExamineesCard from "./ExamineesCard";
+import EmptyCard from "../Common/EmptyCard";
+import Dropdown from "../../components/Dropdown";
 
+const CreateBatch = () => {
+  const [payload, setPayload] = useState([{}]);
+  const [panel, setPanel] = useState("Juniors");
+  const [selectAll, setSelectAll] = useState(false);
+
+  const { reload } = useURL();
   const { data, isLoading, isError, isFetched } = useFetch({
     route: "/batch/examiniees",
     key: ["batchExaminies"],
@@ -22,6 +36,29 @@ const CreateBatch = () => {
     redirect: "/batch",
     overideFn: reload,
   });
+
+  const handleFilterExaminees = (e: MouseEvent<HTMLButtonElement>) => {
+    const selectedPanel = e.currentTarget.value;
+    setPanel(selectedPanel);
+  };
+
+  useEffect(() => {
+    if (isFetched && data) {
+      const filteredData = isFetched
+        ? data.filter(({ studentDetails }: any) => {
+            const { yearLevel } = studentDetails;
+            return panel === "Seniors"
+              ? yearLevel === "Grade 11" || yearLevel === "Grade 12"
+              : true;
+          })
+        : [];
+      setPayload(filteredData);
+    }
+  }, [data, isFetched, panel]);
+
+  const handleSelectAll = () => {
+    setSelectAll((prev) => !prev);
+  };
 
   if (isLoading || isError || !isFetched) return <FetchLoader />;
 
@@ -53,14 +90,6 @@ const CreateBatch = () => {
                   name="title"
                   placeholder="Enter Batch Title"
                 />
-
-                <Input
-                  type="date"
-                  label="Schedule"
-                  name="title"
-                  placeholder="Enter"
-                  disabled={true}
-                />
               </div>
             </section>
 
@@ -69,36 +98,57 @@ const CreateBatch = () => {
                 <Typography as="h4" className="">
                   Examiniees
                 </Typography>
-              </div>
-              {data?.length <= 0 ? (
-                <div className="w-full border h-[200px] bg-gray-400 rounded-[5px] flex justify-center items-center font-bold text-[32px]">
-                  No Examiniees Available
+
+                <div className="flex gap-2">
+                  <Dropdown
+                    type="button"
+                    title={panel || "Grade level"}
+                    className="p-4 flex gap-2 flex-col w-[120px]"
+                    onClick={handleFilterExaminees}
+                    option={[
+                      { title: "Juniors", icon: "" },
+                      { title: "Seniors", icon: "" },
+                    ]}
+                  />
+                  <IconButton
+                    as={selectAll ? "contained" : "outlined"}
+                    onClick={handleSelectAll}
+                  />
                 </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-4">
-                  {data?.map(
+              </div>
+
+              <div className="border flex">
+                {payload?.length <= 0 ? (
+                  <EmptyCard title="No Examiniees Available" />
+                ) : (
+                  data?.map(
                     ({
-                      _id,
                       personalDetails,
                       studentDetails,
                       gradeDetails,
+                      ...props
                     }: any) => {
-                      const { firstName, middleName, lastName } =
+                      const { lastName, middleName, firstName } =
                         personalDetails;
-                      const { yearLevel, track } = studentDetails;
+                      const { track, yearLevel } = studentDetails;
+                      const { generalAve } = gradeDetails;
+                      const name = `${lastName}, ${firstName} ${middleName[0]}`;
+
                       return (
                         <ExamineesCard
-                          _id={_id}
-                          name={`${lastName}, ${firstName} ${middleName[0]}.`}
+                          key={props._id}
+                          name={name}
                           yearLevel={yearLevel}
                           track={track}
-                          ave={gradeDetails?.generalAve}
+                          ave={generalAve}
+                          selected={selectAll}
+                          {...props}
                         />
                       );
                     }
-                  )}
-                </div>
-              )}
+                  )
+                )}
+              </div>
             </section>
 
             <section className="flex justify-end gap-4">

@@ -18,6 +18,7 @@ const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
 const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
 const UserPage = lazy(() => import("../pages/Users.tsx"));
 const BatchPage = lazy(() => import("../pages/Batch.tsx"));
+const ArchievePage = lazy(() => import("../pages/Archieve.tsx"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -128,6 +129,16 @@ const routes = [
     element: (
       <Suspense fallback={<ProfileSkeleton />}>
         <ProfilePage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/applicant/archieve",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <ArchievePage />
+        </TableProvider>
       </Suspense>
     ),
   },

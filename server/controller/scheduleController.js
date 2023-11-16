@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import scheduleModel from "../models/scheduleModel.js";
+import batchModel from "../models/batchModel.js";
 
 export const fetchAllSchedule = expressAsyncHandler(async (req, res) => {
   const schedules = await scheduleModel
@@ -19,8 +20,17 @@ export const fetchScheduleByID = expressAsyncHandler(async (req, res) => {
   const _schedule = await scheduleModel.findById(id).lean();
   if (!_schedule) throw new Error("Schedule Doesnt Exist");
 
+  const _batches = await Promise.all(
+    _schedule.batches.map(async (id) => {
+      return await batchModel.findOne({ _id: id });
+    })
+  );
+
   res.status(200).json({
-    payload: _schedule,
+    payload: {
+      ..._schedule,
+      batches: _batches,
+    },
     message: `${_schedule?.title} Fetched Successfully`,
   });
 });
@@ -39,7 +49,11 @@ export const updateScheduleById = expressAsyncHandler(async (req, res) => {
 });
 
 export const createSchedule = expressAsyncHandler(async (req, res) => {
-  const { title, facilitator, venue } = req.body;
+  const { title, facilitator, venue, batches } = req.body;
+
+  if (batches.length <= 0) {
+    throw new Error("Invalid, No Selected Batch, Please Try again");
+  }
 
   // check title
   const _title = await scheduleModel
@@ -65,6 +79,17 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
   const create = await scheduleModel.create(req.body);
   if (!create) throw new Error("Something wen wrong");
 
+  // update all batch
+  await Promise.all(
+    batches.map(async (id) => {
+      await batchModel.findOneAndUpdate(
+        { _id: id },
+        { schedule: create._id, status: "ongoing" },
+        { new: true }
+      );
+    })
+  );
+
   res.status(200).json({
     payload: null,
     message: "Created Schedule Succesfully",
@@ -74,7 +99,18 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
 export const deleteSchedule = expressAsyncHandler(async (req, res) => {
   const { id: APID } = req.params;
 
-  console.log(APID);
+  const _schedle = await scheduleModel.findOne({ _id: APID }).lean();
+
+  // update all the batches to pending
+  await Promise.all(
+    _schedle.batches.map(async (id) => {
+      await batchModel.findOneAndUpdate(
+        { _id: id },
+        { schedule: null, status: "pending" },
+        { new: true }
+      );
+    })
+  );
 
   const schedule = await scheduleModel
     .findByIdAndDelete(APID)

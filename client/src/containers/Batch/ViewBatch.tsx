@@ -3,11 +3,18 @@ import IconButton from "../../components/IconButton";
 import Typography from "../../components/Typography";
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
-import ExamineesCard from "../Schedule/ExamineesCard";
+import ExamineesCard from "./ExamineesCard";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import useURL from "../../hooks/useURL";
+import EmptyCard from "../Common/EmptyCard";
+import EditIcon from "../../assets/icons/Edit_light.svg";
+import { useState } from "react";
+import { Form, Formik } from "formik";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const ViewBatch = ({ APID }: { APID: string }) => {
+  const [schedPayload, setSchedPayload] = useState<any>({});
   const { updateURL } = useURL();
 
   const { data, isLoading, isError } = useFetch({
@@ -15,52 +22,107 @@ const ViewBatch = ({ APID }: { APID: string }) => {
     key: ["batch"],
   });
 
+  const schedQuery = useQuery({
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/schedule/${data?.schedule}`
+      );
+      setSchedPayload(res.data.payload);
+      return res.data;
+    },
+    queryKey: [`batchSched${data?.schedule}`],
+  });
+
+  if (isError || isLoading || schedQuery.isLoading || schedQuery.isError)
+    return <FetchLoader />;
+
   const handleDelete = () => {
     updateURL(`state=delete&APID=${APID}`);
   };
 
-  if (isError || isLoading) return <FetchLoader />;
+  console.log(schedPayload?.schedule);
+  const formatedStartDate = new Date(
+    schedPayload?.schedule?.start
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  const formatedEndDate = new Date(
+    schedPayload?.schedule?.end
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   return (
-    <div>
-      <header className="pb-4 mb-4 border-b border-gray-400 flex justify-between items-start">
-        <div>
-          <h1>{data?.title || "Title"}</h1>
-          <span>
-            {data?.schedule === null ? "Not yet specified" : data?.schedule}
-          </span>
-        </div>
-
-        <IconButton icon={DeleteIcon} as="outlined" onClick={handleDelete} />
-      </header>
-
-      <main>
-        <Typography as="h4" className="mb-4 pb-2 border-b border-gray-300">
-          Examiniees
-        </Typography>
-        {data?.length <= 0 ? (
-          <div className="w-full border h-[200px] bg-gray-400 rounded-[5px] flex justify-center items-center font-bold text-[32px]">
-            No Examiniees Available
+    <Formik
+      initialValues={{
+        title: "",
+        examiniees: [],
+      }}
+      onSubmit={() => {}}>
+      <Form>
+        <header className="pb-4 mb-4 border-b border-gray-400 flex justify-between items-start">
+          <div>
+            <h1>{data?.title || "Title"}</h1>
+            <span>
+              {data?.schedule === null
+                ? "Not yet specified"
+                : `${formatedStartDate} - ${formatedEndDate}`}
+            </span>
           </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-4">
-            {data?.examiniees?.map(
-              ({ _id, personalDetails, studentDetails, gradeDetails }: any) => (
-                <ExamineesCard
-                  key={_id}
-                  _id={_id}
-                  name={`${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName[0]}`}
-                  yearLevel={studentDetails?.yearLevel}
-                  track={studentDetails?.track}
-                  ave={gradeDetails.generalAve}
-                  disabled
-                />
+
+          <div className="flex gap-4">
+            <IconButton icon={EditIcon} as="outlined" />
+            <IconButton
+              icon={DeleteIcon}
+              as="outlined"
+              onClick={handleDelete}
+            />
+          </div>
+        </header>
+
+        <main>
+          <Typography as="h4" className="mb-4 pb-2 border-b border-gray-300">
+            Examiniees
+          </Typography>
+
+          <div className=" flex">
+            {data?.length <= 0 ? (
+              <EmptyCard title="No Examiniees Available" />
+            ) : (
+              data?.examiniees?.map(
+                ({
+                  personalDetails,
+                  studentDetails,
+                  gradeDetails,
+                  ...props
+                }: any) => {
+                  const { lastName, middleName, firstName } = personalDetails;
+                  const { track, yearLevel } = studentDetails;
+                  const { generalAve } = gradeDetails;
+                  const name = `${lastName}, ${firstName} ${middleName[0]}`;
+
+                  return (
+                    <ExamineesCard
+                      key={props._id}
+                      name={name}
+                      yearLevel={yearLevel}
+                      track={track}
+                      ave={generalAve}
+                      {...props}
+                      disabled
+                    />
+                  );
+                }
               )
             )}
           </div>
-        )}
-      </main>
-    </div>
+        </main>
+      </Form>
+    </Formik>
   );
 };
 

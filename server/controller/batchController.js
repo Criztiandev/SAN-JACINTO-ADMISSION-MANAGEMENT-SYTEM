@@ -1,9 +1,12 @@
 import expressAsyncHandler from "express-async-handler";
 import batchModel from "../models/batchModel.js";
 import applicantModel from "../models/applicantModel.js";
+import scheduleModel from "../models/scheduleModel.js";
 
 export const fetchAllBatch = expressAsyncHandler(async (req, res) => {
-  const batch = await batchModel.find({}).lean();
+  const query = req.query || {};
+
+  const batch = await batchModel.find(query).lean();
 
   res.status(200).json({
     payload: batch,
@@ -50,6 +53,10 @@ export const fetchBatchById = expressAsyncHandler(async (req, res) => {
 export const createBatch = expressAsyncHandler(async (req, res) => {
   try {
     const { title, examiniees } = req.body;
+
+    if (examiniees.length <= 0) {
+      throw new Error("Please Select Batch");
+    }
 
     // Check if title already used
     const existingTitleBatch = await batchModel
@@ -104,7 +111,7 @@ export const createBatch = expressAsyncHandler(async (req, res) => {
 export const deleteBatch = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const _batch = await batchModel.findById(id).lean().select("examiniees");
+  const _batch = await batchModel.findById(id).lean().select("");
   if (!_batch) throw new Error("Batch doesnt exist");
 
   // update to examiniees

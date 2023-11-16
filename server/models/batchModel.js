@@ -6,8 +6,8 @@ const batchSchema = mongoose.Schema({
   examiniees: [{ type: mongoose.Types.ObjectId, required: true }],
   status: {
     type: String,
-    enum: ["ongoing", "cancel", "finished"],
-    default: "ongoing",
+    enum: ["pending", "ongoing", "cancel", "finished"],
+    default: "pending",
   },
 });
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useURL from "../../hooks/useURL";
 import Input from "../../components/Input";
 import { Formik, Form } from "formik";
@@ -17,9 +18,11 @@ const CreateCalendar = () => {
   const end = queryParams.get("end");
 
   const { data, isFetched, isError } = useFetch({
-    route: "/batch",
+    route: "/batch?status=pending",
     key: ["batches"],
   });
+
+  console.log(data);
 
   const { handleSubmit } = useFormSubmit({
     route: `${baseRoute}/create`,
@@ -77,16 +80,9 @@ const CreateCalendar = () => {
                   </div>
                 ) : (
                   <div className="grid grid-cols-2 gap-4 ">
-                    <BatchCard
-                      UID="123123123"
-                      title="Batch 1"
-                      description="sdfsdfsdfsdfsdfsdf"
-                    />
-                    <BatchCard
-                      UID="123123122222323233"
-                      title="Batch 2"
-                      description="asdasdadasd"
-                    />
+                    {data?.map((batch: any) => (
+                      <BatchCard {...batch} />
+                    ))}
                   </div>
                 )}
               </div>
@@ -100,7 +96,7 @@ const CreateCalendar = () => {
               </Typography>
               <div className="grid grid-cols-2 gap-4">
                 <Input label="Start" name="schedule.start" disabled={true} />
-                <Input label="End" name="schedule.start" disabled={true} />
+                <Input label="End" name="schedule.end" disabled={true} />
               </div>
             </section>
 

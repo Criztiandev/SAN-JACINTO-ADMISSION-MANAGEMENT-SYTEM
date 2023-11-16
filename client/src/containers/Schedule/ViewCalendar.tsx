@@ -102,7 +102,12 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
               {data?.batches?.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 ">
                   {data?.batches?.map((props: any) => (
-                    <BatchCard {...props} disabled={!isEdit} />
+                    <BatchCard
+                      key={props.title}
+                      {...props}
+                      schedule={"Settled"}
+                      disabled={true}
+                    />
                   ))}
                 </div>
               ) : (
@@ -156,11 +161,13 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
           </section>
         </main>
 
-        {isEdit && (
-          <footer className="flex gap-4 justify-end mt-4">
+        <footer className="flex gap-4 justify-end mt-4">
+          {isEdit ? (
             <Button type="submit" as="contained" title="Submit" />
-          </footer>
-        )}
+          ) : (
+            <Button type="button" as="contained" title="Announce" />
+          )}
+        </footer>
       </Form>
     </Formik>
   );

@@ -25,17 +25,23 @@ import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 
 // Assets
 
-import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import Button from "../components/Button";
+import PromoteExaminiees from "../containers/Examiniees/PromoteExaminiees";
+import useURL from "../hooks/useURL";
+import PromoteBatchExaminiees from "../containers/Examiniees/PromoteBatchExaminiees";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-
+  const { updateURL } = useURL();
   const { isLoading, isPending, isFetched } = useFetch({
     route: "/applicant/examiniees",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
+
+  const handleToggleUpdate = () => {
+    updateURL("state=promote");
+  };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -80,7 +86,9 @@ const Examiniees = () => {
 
   return (
     <>
-      <BaseLayout title="Examiniees" actions={<Button title="Export" />}>
+      <BaseLayout
+        title="Examiniees"
+        actions={<Button title="Promite" onClick={handleToggleUpdate} />}>
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
@@ -100,7 +108,8 @@ const Examiniees = () => {
         />
       </BaseLayout>
 
-      <DrawerWrapper state="view" Component={ViewApplicant} />
+      <DrawerWrapper state="view" Component={PromoteBatchExaminiees} />
+      <DrawerWrapper state="promote" Component={PromoteExaminiees} />
     </>
   );
 };

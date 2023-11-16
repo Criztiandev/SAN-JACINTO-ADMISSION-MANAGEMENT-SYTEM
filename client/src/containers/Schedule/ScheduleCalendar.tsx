@@ -42,9 +42,14 @@ const ScheduleCalendar = () => {
   useEffect(() => {
     if (isFetched) {
       const transformedPayload = data?.map(({ schedule, ...items }: any) => {
+        const origDate = new Date(schedule?.end);
+        origDate.setDate(origDate.getDate() - 1);
+
+        const formatDate = origDate?.toISOString();
+
         return {
           start: new Date(schedule.start),
-          end: new Date(schedule.end),
+          end: formatDate,
           ...items,
         };
       });

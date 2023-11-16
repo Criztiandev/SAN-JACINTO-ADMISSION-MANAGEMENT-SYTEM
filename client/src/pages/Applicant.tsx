@@ -38,7 +38,6 @@ import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
 import ArchieveIcon from "../assets/icons/Arhive_light.svg";
-import DrawerLoader from "../containers/Loaders/DrawerLoader";
 import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 
@@ -128,7 +127,7 @@ const Applicant = () => {
             <IconButton
               as="outlined"
               icon={ArchieveIcon}
-              onClick={() => navigateTo("/applicant/archieve")}
+              onClick={() => navigateTo("/navigate")}
             />
             <RenderCreateButton
               toggle={handleCreateApplicant}
@@ -155,13 +154,11 @@ const Applicant = () => {
         />
       </BaseLayout>
 
-      <Suspense fallback={<DrawerLoader />}>
-        <DrawerWrapper state="create" Component={CreateApplicant} />
-        <DrawerWrapper state="edit" Component={EditApplicant} />
-        <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
-        <DrawerWrapper state="message" Component={MessageApplicant} />
-        <DrawerWrapper state="view" Component={ViewApplicant} />
-      </Suspense>
+      <DrawerWrapper state="create" Component={CreateApplicant} />
+      <DrawerWrapper state="edit" Component={EditApplicant} />
+      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );
 };

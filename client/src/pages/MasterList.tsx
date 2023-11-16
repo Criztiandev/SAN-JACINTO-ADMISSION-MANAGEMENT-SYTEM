@@ -2,16 +2,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // External Dependencies
-import { Suspense } from "react";
 
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
+import Badge from "../components/Badge";
+import IconButton from "../components/IconButton";
 
 // Context and Helpers
 import { useTableContext } from "../context/TableContext";
-
+import { RenderFilterButton } from "../helper/Applicant.Helper";
 import useFetch from "../hooks/useFetch";
 
 // React Table
@@ -19,6 +20,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 // Containers
 import TitleHeader from "../containers/Table/TitleHeader";
+import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
@@ -26,19 +28,41 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
+import EditApplicant from "../containers/Applicants/EditApplicant";
+import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
+import MessageApplicant from "../containers/Applicants/MessageApplicant";
 
 // Assets
-import DrawerLoader from "../containers/Loaders/DrawerLoader";
+import ExportIcon from "../assets/icons/Print_light.svg";
+
+import useCustomMutation from "../hooks/useCustomMutation";
+import useURL from "../hooks/useURL";
+import ExportApplicant from "../containers/Masterlist/ExportApplicant";
 import Button from "../components/Button";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
+  const { updateURL } = useURL();
 
-  const { isLoading, isPending, isFetched } = useFetch({
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant/regular",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
+
+  // mutation
+  const { mutateAsync } = useCustomMutation({
+    route: `/applicant/accept/`,
+    overrideFn: () => refetch(),
+  });
+
+  const toggleExportDrawer = () => {
+    updateURL("state=export");
+  };
+
+  const handleAction = async (id: string, currentStatus: string) => {
+    void mutateAsync({ UID: id, status: currentStatus });
+  };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -74,6 +98,21 @@ const Applicant = () => {
 
     { header: "Contact", accessorKey: "personalDetails.contact" },
     { header: "Average", accessorKey: "gradeDetails.generalAve" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ getValue }: any) => (
+        <Badge as="neutral" type={getValue()} title={getValue()} />
+      ),
+    },
+    {
+      header: "Action",
+      cell: ({ row }) => {
+        return (
+          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+        );
+      },
+    },
   ];
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
@@ -84,7 +123,11 @@ const Applicant = () => {
         title="Master List"
         actions={
           <div className="flex gap-4">
-            <Button as="contained" title="Export" />
+            <Button
+              icon={ExportIcon}
+              title="Export"
+              onClick={toggleExportDrawer}
+            />
           </div>
         }>
         <div className="flex justify-between items-center">
@@ -96,8 +139,7 @@ const Applicant = () => {
           />
 
           <div className="flex justify-between gap-4">
-            <Button as="outlined" title="Applicants" />
-            <Button as="outlined" title="Regular" />
+            <RenderFilterButton loading={isPending} />
           </div>
         </div>
 
@@ -107,9 +149,11 @@ const Applicant = () => {
         />
       </BaseLayout>
 
-      <Suspense fallback={<DrawerLoader />}>
-        <DrawerWrapper state="view" Component={ViewApplicant} />
-      </Suspense>
+      <DrawerWrapper state="edit" Component={EditApplicant} />
+      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="view" Component={ViewApplicant} />
+      <DrawerWrapper state="export" Component={ExportApplicant} />
     </>
   );
 };

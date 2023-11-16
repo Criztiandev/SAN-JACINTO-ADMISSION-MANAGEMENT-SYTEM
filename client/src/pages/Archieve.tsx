@@ -3,7 +3,6 @@
 
 // External Dependencies
 import { Suspense, lazy } from "react";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -13,31 +12,20 @@ import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import Badge from "../components/Badge";
-import IconButton from "../components/IconButton";
 
-// Context and Helpers
 import { useTableContext } from "../context/TableContext";
-import {
-  RenderCreateButton,
-  RenderFilterButton,
-} from "../helper/Applicant.Helper";
 import useFetch from "../hooks/useFetch";
-
-// React Table
 import { ColumnDef } from "@tanstack/react-table";
 
-// Containers
 import TitleHeader from "../containers/Table/TitleHeader";
 import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
-// Axios and API Utils
 import axios from "axios";
 import { handleAxiosError } from "../utils/Api.utils";
 
 // Applicant Components
-
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 
 const ViewApplicant = lazy(
@@ -57,15 +45,13 @@ const CreateApplicant = lazy(
 );
 
 // Assets
-import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 import DrawerLoader from "../containers/Loaders/DrawerLoader";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const navigate = useNavigate();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant",
+    route: "/applicant?status=archieve",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
@@ -87,10 +73,6 @@ const Applicant = () => {
       handleAxiosError(e);
     },
   });
-
-  const handleCreateApplicant = () => {
-    navigate("/applicants?state=create");
-  };
 
   const handleAction = async (id: string, currentStatus: string) => {
     void mutateAsync({ UID: id, status: currentStatus });
@@ -151,32 +133,14 @@ const Applicant = () => {
 
   return (
     <>
-      <BaseLayout
-        title="Applicants"
-        actions={
-          <div className="flex gap-4">
-            <IconButton
-              as="outlined"
-              icon={ArchieveIcon}
-              onClick={() => navigate("/applicant/archieve")}
-            />
-            <RenderCreateButton
-              toggle={handleCreateApplicant}
-              loading={isLoading || isPending}
-            />
-          </div>
-        }>
-        <div className="flex justify-between items-center">
+      <BaseLayout title="Archieve">
+        <div className="flex justify-end items-center">
           <SearchBar
             dir="left"
             value={search}
             onChange={handleSearch}
             disabled={isPending}
           />
-
-          <div className="flex justify-between gap-4">
-            <RenderFilterButton loading={isPending} />
-          </div>
         </div>
 
         <Table
