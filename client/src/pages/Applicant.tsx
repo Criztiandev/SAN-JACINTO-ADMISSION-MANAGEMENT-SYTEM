@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // External Dependencies
-import { Suspense } from "react";
 
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
@@ -53,7 +52,7 @@ const Applicant = () => {
 
   // mutation
   const { mutateAsync } = useCustomMutation({
-    route: `/applicant/accept/`,
+    route: `/examiniees/create`,
     overrideFn: () => refetch(),
   });
 
@@ -71,9 +70,16 @@ const Applicant = () => {
       header: ({ table }) => <TitleHeader data={table} />,
       accessorFn: ({ personalDetails }) =>
         `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
-      cell: ({ row, getValue }) => (
-        <FirstColumn data={row} value={getValue()} />
-      ),
+      cell: ({ row, getValue }) => {
+        const { original } = row;
+        return (
+          <FirstColumn
+            UID={original?.APID}
+            gender={original?.gender}
+            value={getValue()}
+          />
+        );
+      },
     },
 
     { header: "LRN", accessorKey: "studentDetails.LRN" },

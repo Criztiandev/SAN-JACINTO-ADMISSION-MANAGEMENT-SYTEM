@@ -15,7 +15,6 @@ import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 // Assets
 import DrawerLoader from "../containers/Loaders/DrawerLoader";
 import useURL from "../hooks/useURL";
-import EditBatch from "../containers/Batch/EditBatch";
 import ViewBatch from "../containers/Batch/ViewBatch";
 import CreateBatch from "../containers/Batch/CreateBatch";
 import BatchCard from "../containers/Batch/BatchCard";
@@ -38,8 +37,6 @@ const Batch = () => {
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
-  console.log(data);
-
   return (
     <>
       <BaseLayout title="Batch">
@@ -53,7 +50,6 @@ const Batch = () => {
 
       <Suspense fallback={<DrawerLoader />}>
         <DrawerWrapper state="create" Component={CreateBatch} />
-        <DrawerWrapper state="edit" Component={EditBatch} />
         <DrawerWrapper state="delete" Component={DeleteNotice} />
         <DrawerWrapper state="view" Component={ViewBatch} />
       </Suspense>

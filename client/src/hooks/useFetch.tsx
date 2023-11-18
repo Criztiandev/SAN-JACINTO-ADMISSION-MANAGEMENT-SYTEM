@@ -2,14 +2,18 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { handleAxiosError } from "../utils/Api.utils";
+import { UseQueryOptions, QueryKey } from "@tanstack/react-query";
 
-interface useFetchProps {
+type NullableQueryKey = QueryKey | undefined;
+
+interface UseFetchProps {
   route: string;
-  key: Array<string>;
+  key?: NullableQueryKey;
   overrideFn?: (data: any) => void;
+  option?: Partial<UseQueryOptions<any, unknown>>;
 }
 
-const useFetch = ({ route, key, overrideFn }: useFetchProps) => {
+const useFetch = ({ route, key, overrideFn, option }: UseFetchProps) => {
   const query = useQuery({
     queryFn: async () => {
       try {
@@ -17,20 +21,18 @@ const useFetch = ({ route, key, overrideFn }: useFetchProps) => {
           `${import.meta.env.VITE_SERVER_URL}${route}`
         );
 
-        const { payload } = res.data;
-
         if (overrideFn) {
-          overrideFn(payload);
+          overrideFn(res.data.payload);
         }
-        return payload;
+        return res.data.payload;
       } catch (e: any) {
         handleAxiosError(e);
         throw e;
       }
     },
-    queryKey: key,
-    refetchOnReconnect: true,
+    ...option,
     refetchOnMount: true,
+    queryKey: key ?? [],
   });
 
   return query;

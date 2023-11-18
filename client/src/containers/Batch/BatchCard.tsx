@@ -1,10 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
 import useURL from "../../hooks/useURL";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import axios from "axios";
-import FetchLoader from "../General/FetchLoader";
+import useFetch from "../../hooks/useFetch";
 interface BatchCardProps {
   _id: string;
   title: string;
@@ -20,46 +18,42 @@ const BatchCard = ({
   schedule,
   status,
 }: BatchCardProps) => {
-  const [schedPayload, setSchedPayload] = useState<any>({});
   const { updateURL } = useURL();
 
   const handleClick = () => {
     updateURL(`state=view&APID=${_id}`);
   };
 
-  const { isLoading, isError } = useQuery({
-    queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/schedule/${schedule}`
-      );
-      setSchedPayload(res.data.payload);
-      return res.data;
+  const { data } = useFetch({
+    route: `/schedule/${schedule}`,
+    key: [`batchSched${schedule}`],
+    option: {
+      enabled: !!schedule,
     },
-    queryKey: [`batchSched${schedule}`],
   });
-
-  if (isLoading || isError) return <FetchLoader />;
 
   const currentYear = new Date().getFullYear();
-  const formatedStartDate = new Date(
-    schedPayload?.schedule?.start
-  ).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-  const formatedEndDate = new Date(
-    schedPayload?.schedule?.end
-  ).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
+  const formatedStartDate = new Date(data?.schedule?.start).toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric",
+    }
+  );
+  const formatedEndDate = new Date(data?.schedule?.end).toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric",
+    }
+  );
 
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.9 }}
       onClick={handleClick}
-      className="relative w-[250px] h-[300px] border border-gray-400 rounded-[10px] overflow-hidden select-none">
+      className="relative  border border-gray-400 rounded-[10px] overflow-hidden select-none min-h-[320px]">
       <div className="relative bg-coverImage bg-center h-[120px]">
         <span className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 font-medium rounded-full border w-[64px] h-[64px] flex justify-center items-center bg-green-300">
           <span className="text-[32px] select-none">{length}</span>
@@ -77,7 +71,7 @@ const BatchCard = ({
               : `${formatedStartDate} - ${formatedEndDate}, ${currentYear}`}
           </span>
         </div>
-        <span className="px-4 py-2 border rounded-full capitalize">
+        <span className="bg-[#FFEE7D] text-black  px-4 py-2 border rounded-full capitalize">
           {status}
         </span>
       </div>

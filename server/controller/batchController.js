@@ -108,11 +108,38 @@ export const createBatch = expressAsyncHandler(async (req, res) => {
   }
 });
 
+export const updateBatch = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const _batch = await batchModel
+    .findOne({ _id: id })
+    .lean()
+    .select("_id schedule");
+
+  if (!_batch) throw new Error("Batch Doesnt exist, Please Try again");
+
+  if (_batch.schedule)
+    throw new Error("Batch is already schedule, Please Try again");
+
+  await batchModel
+    .findOneAndUpdate({ _id: id }, req.body, { new: true })
+    .lean()
+    .select("_id");
+
+  res.status(200).json({
+    payload: null,
+    message: "Updated Batch successfully",
+  });
+});
+
 export const deleteBatch = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const _batch = await batchModel.findById(id).lean().select("");
   if (!_batch) throw new Error("Batch doesnt exist");
+
+  if (_batch.schedule !== null)
+    throw new Error("Batch is Already Scheduled, Please Try again");
 
   // update to examiniees
   await Promise.all(

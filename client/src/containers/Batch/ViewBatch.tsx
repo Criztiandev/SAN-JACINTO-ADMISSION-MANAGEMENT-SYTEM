@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import IconButton from "../../components/IconButton";
 import Typography from "../../components/Typography";
@@ -8,13 +9,9 @@ import DeleteIcon from "../../assets/icons/Delete.svg";
 import useURL from "../../hooks/useURL";
 import EmptyCard from "../Common/EmptyCard";
 import EditIcon from "../../assets/icons/Edit_light.svg";
-import { useState } from "react";
 import { Form, Formik } from "formik";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 const ViewBatch = ({ APID }: { APID: string }) => {
-  const [schedPayload, setSchedPayload] = useState<any>({});
   const { updateURL } = useURL();
 
   const { data, isLoading, isError } = useFetch({
@@ -22,36 +19,32 @@ const ViewBatch = ({ APID }: { APID: string }) => {
     key: ["batch"],
   });
 
-  const schedQuery = useQuery({
-    queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/schedule/${data?.schedule}`
-      );
-      setSchedPayload(res.data.payload);
-      return res.data;
+  const { data: querySchedPayload } = useFetch({
+    route: `/schedule/${data?.schedule}`,
+    key: ["test"],
+    option: {
+      queryKey: ["test"],
+      enabled: !!data?.schedule,
     },
-    queryKey: [`batchSched${data?.schedule}`],
   });
 
-  if (isError || isLoading || schedQuery.isLoading || schedQuery.isError)
-    return <FetchLoader />;
+  if (isError || isLoading) return <FetchLoader />;
 
   const handleDelete = () => {
     updateURL(`state=delete&APID=${APID}`);
   };
 
-  console.log(schedPayload?.schedule);
+  // console.log(schedPayload?.schedule);
+  const currentYear = new Date().getFullYear();
   const formatedStartDate = new Date(
-    schedPayload?.schedule?.start
+    querySchedPayload?.schedule?.start
   ).toLocaleDateString("en-US", {
-    year: "numeric",
     month: "short",
     day: "numeric",
   });
   const formatedEndDate = new Date(
-    schedPayload?.schedule?.end
+    querySchedPayload?.schedule?.end
   ).toLocaleDateString("en-US", {
-    year: "numeric",
     month: "short",
     day: "numeric",
   });
@@ -70,12 +63,12 @@ const ViewBatch = ({ APID }: { APID: string }) => {
             <span>
               {data?.schedule === null
                 ? "Not yet specified"
-                : `${formatedStartDate} - ${formatedEndDate}`}
+                : `${formatedStartDate} - ${formatedEndDate}, ${currentYear}`}
             </span>
           </div>
 
           <div className="flex gap-4">
-            <IconButton icon={EditIcon} as="outlined" />
+            {!data?.schedule && <IconButton icon={EditIcon} as="outlined" />}
             <IconButton
               icon={DeleteIcon}
               as="outlined"

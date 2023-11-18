@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import applicantModel from "../models/applicantModel.js";
 import { sendEmail } from "../utils/email.uitls.js";
-import examinieesModel from "../models/examinieesModel.js";
 
 const validateFields = async (flagArray) => {
   for (const flag of flagArray) {
@@ -119,77 +118,4 @@ export const deleteApplicant = asyncHandler(async (req, res) => {
     payload: _applicant._id,
     message: "Applicant is Deleted Successfully",
   });
-});
-
-export const acceptApplicant = asyncHandler(async (req, res) => {
-  const { UID } = req.body;
-
-  const filterField =
-    " _id studentDetails.yearLevel studentDetails.track role status";
-
-  // find the applicant
-  const _applicant = await applicantModel
-    .findOne({ _id: UID })
-    .lean()
-    .select(filterField);
-  if (!_applicant) throw new Error("Applicant Doesnt Exist");
-
-  const { studentDetails } = _applicant;
-  const { yearLevel: level, track } = studentDetails;
-
-  // Filter Examiniees
-  if (level === "Grade 7" || level === "Grade 11" || level === "Grade 12") {
-    if (track === "SPE" || track === "SPJ" || track === "STEM") {
-      // Update the Applicant
-      const _accepted = await applicantModel
-        .findOneAndUpdate(
-          { _id: UID },
-          { status: "accepted", role: "examiniees" },
-          { new: true }
-        )
-        .lean()
-        .select("_id personalDetails");
-      if (!_accepted) throw new Error("Something went wrong, Please Try again");
-
-      console.log(_accepted);
-      const _examiniees = await examinieesModel.create({
-        ..._accepted.personalDetails,
-        APID: UID,
-      });
-
-      if (!_examiniees)
-        throw new Error("Something went wrong,Please Try again");
-
-      res.status(200).json({
-        payload: null,
-        message: "Accepted Applicant",
-      });
-
-      return;
-    }
-  }
-
-  // Regular student
-  const regular = await applicantModel.findOneAndUpdate(
-    { _id: UID },
-    { status: "accepted", role: "regular" },
-    { new: true }
-  );
-  if (!regular) throw new Error("Something went wrong");
-
-  res.status(200).json({
-    payload: null,
-    message: "Applicant Accepted Successfully",
-  });
-});
-
-export const promiteApplicant = asyncHandler(async (req, res) => {
-  const { id } = req.body;
-
-  const _applicant = await applicantModel
-    .findOne({ _id: id })
-    .lean()
-    .select("_id status role");
-
-  if (!_applicant) throw new Error("Applicant doesnt exist");
 });

@@ -8,7 +8,6 @@ import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import Badge from "../components/Badge";
-import IconButton from "../components/IconButton";
 
 // Context and Helpers
 import { useTableContext } from "../context/TableContext";

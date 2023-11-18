@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Checkbox from "../../components/Checkbox";
 import { motion } from "framer-motion";
 
-import { Suspense, lazy, useMemo } from "react";
+import { Suspense, lazy } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import MaleProfile from "../../assets/image/Male_profile.png";
 import FemaleProfile from "../../assets/image/Female_Profile.png";
@@ -10,34 +9,24 @@ import Skeleton from "react-loading-skeleton";
 
 const LazyAvatar = lazy(() => import("../../components/Avatar"));
 interface FirstColumnProps {
-  data: any;
+  UID: string;
+  gender: string;
   value: string;
 }
 
-const FirstColumn = ({ data, value }: FirstColumnProps) => {
-  const memoizedData = useMemo(() => data, [data]);
-  const { gender } = memoizedData.original.personalDetails;
+const FirstColumn = ({ UID, gender, value }: FirstColumnProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleViewToggle = () => {
-    const { _id } = memoizedData.original;
-    navigate(`${location.pathname}?APID=${_id}&state=view`);
+    navigate(`${location.pathname}?APID=${UID}&state=view`);
   };
 
   return (
     <motion.div
       whileTap={{ scale: 0.9 }}
-      className="cursor-pointer grid grid-cols-[16px_48px_auto] gap-4 items-center"
+      className="cursor-pointer grid grid-cols-[48px_auto] gap-4 items-center"
       onClick={handleViewToggle}>
-      <Checkbox
-        {...{
-          checked: memoizedData.getIsSelected(),
-          disabled: !memoizedData.getCanSelect(),
-          indeterminate: memoizedData.getIsSomeSelected(),
-          onChange: memoizedData.getToggleSelectedHandler(),
-        }}
-      />
       <Suspense fallback={<Skeleton width={48} height={48} circle />}>
         <LazyAvatar
           src={gender === "Male" ? MaleProfile : FemaleProfile}

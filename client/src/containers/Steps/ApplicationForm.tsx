@@ -54,6 +54,7 @@ const ApplicationForm = () => {
   const { firstName, middleName, lastName, gender } =
     values?.personalDetails || {};
   const { yearLevel, track } = values?.studentDetails || {};
+
   return (
     <section>
       <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
