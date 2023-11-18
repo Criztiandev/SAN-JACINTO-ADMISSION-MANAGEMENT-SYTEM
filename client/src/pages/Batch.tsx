@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // External Dependencies
-import { Suspense } from "react";
+import { useEffect } from "react";
 
 import BaseLayout from "../layouts/BaseLayout";
 
@@ -13,7 +13,6 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 
 // Assets
-import DrawerLoader from "../containers/Loaders/DrawerLoader";
 import useURL from "../hooks/useURL";
 import ViewBatch from "../containers/Batch/ViewBatch";
 import CreateBatch from "../containers/Batch/CreateBatch";
@@ -23,17 +22,28 @@ import DeleteNotice from "../containers/Drawers/DeleteNotice";
 
 const Batch = () => {
   const { handleMutateData } = useTableContext();
-  const { updateURL } = useURL();
+  const { updateURL, queryParams } = useURL();
+  const isRefetch = queryParams.get("refetch");
 
-  const { data, isLoading, isPending, isFetched } = useFetch({
+  const { data, isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/batch",
     overrideFn: handleMutateData,
-    key: ["batchExaminiees"],
+    key: ["batchess"],
+    option: {
+      retry: true,
+    },
   });
 
   const handleCreate = () => {
     updateURL("state=create");
   };
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      updateURL("/");
+    }
+  }, [isRefetch]);
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
@@ -42,17 +52,19 @@ const Batch = () => {
       <BaseLayout title="Batch">
         <div className="grid grid-cols-4 gap-8">
           {data?.map(({ examiniees, ...props }: any) => (
-            <BatchCard length={examiniees?.length} {...props} />
+            <BatchCard
+              key={props.title}
+              length={examiniees?.length}
+              {...props}
+            />
           ))}
           <CreateBatchButton onClick={handleCreate} />
         </div>
       </BaseLayout>
 
-      <Suspense fallback={<DrawerLoader />}>
-        <DrawerWrapper state="create" Component={CreateBatch} />
-        <DrawerWrapper state="delete" Component={DeleteNotice} />
-        <DrawerWrapper state="view" Component={ViewBatch} />
-      </Suspense>
+      <DrawerWrapper state="create" Component={CreateBatch} />
+      <DrawerWrapper state="delete" Component={DeleteNotice} />
+      <DrawerWrapper state="view" Component={ViewBatch} />
     </>
   );
 };

@@ -6,7 +6,7 @@ import { handleAxiosError } from "../../utils/Api.utils";
 import axios from "axios";
 
 const DeleteNotice = () => {
-  const { navigateBack, queryParams, baseRoute, reload } = useURL();
+  const { navigateBack, queryParams, baseRoute } = useURL();
   const action = queryParams.get("state") || "title";
   const APID = queryParams.get("APID");
 
@@ -20,7 +20,7 @@ const DeleteNotice = () => {
         await axios.delete(
           `${import.meta.env.VITE_SERVER_URL}${baseRoute}/${APID}`
         );
-        reload();
+        navigateBack("refetch=true");
       } catch (e: any) {
         console.log(e);
         handleAxiosError(e);

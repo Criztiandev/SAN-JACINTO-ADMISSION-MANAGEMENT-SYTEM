@@ -17,6 +17,9 @@ const ViewBatch = ({ APID }: { APID: string }) => {
   const { data, isLoading, isError } = useFetch({
     route: `/batch/${APID}`,
     key: ["batch"],
+    option: {
+      enabled: !!APID,
+    },
   });
 
   const { data: querySchedPayload } = useFetch({

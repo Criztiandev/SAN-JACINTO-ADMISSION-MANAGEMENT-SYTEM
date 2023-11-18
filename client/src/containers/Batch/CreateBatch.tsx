@@ -13,7 +13,6 @@ import IconButton from "../../components/IconButton";
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
 import useFormSubmit from "../../hooks/useFormSubmit";
-import useURL from "../../hooks/useURL";
 
 // Custom Component Import
 import ExamineesCard from "./ExamineesCard";
@@ -25,7 +24,6 @@ const CreateBatch = () => {
   const [panel, setPanel] = useState("Juniors");
   const [selectAll, setSelectAll] = useState(false);
 
-  const { reload } = useURL();
   const { data, isLoading, isError, isFetched } = useFetch({
     route: "/batch/examiniees",
     key: ["batchExaminies"],
@@ -33,8 +31,7 @@ const CreateBatch = () => {
 
   const { handleSubmit } = useFormSubmit({
     route: "/batch/create",
-    redirect: "/batch",
-    overideFn: reload,
+    redirect: "/batch?refetch=true",
   });
 
   const handleFilterExaminees = (e: MouseEvent<HTMLButtonElement>) => {
@@ -56,11 +53,11 @@ const CreateBatch = () => {
     }
   }, [data, isFetched, panel]);
 
+  if (isLoading || isError || !isFetched) return <FetchLoader />;
+
   const handleSelectAll = () => {
     setSelectAll((prev) => !prev);
   };
-
-  if (isLoading || isError || !isFetched) return <FetchLoader />;
 
   return (
     <div>

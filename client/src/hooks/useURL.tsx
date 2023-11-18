@@ -7,16 +7,20 @@ const useURL = () => {
 
   const { pathname } = location;
 
-  const navigateBack = () => {
-    navigate(`${pathname}`);
+  const navigateBack = (route?: string) => {
+    navigate(`${pathname}?${route}`);
   };
 
   const navigateTo = (route: string) => {
     navigate(`${pathname}/${route}`);
   };
 
-  const updateURL = (payload: string) => {
-    navigate(`${pathname}?${payload}`);
+  const updateURL = (path: string) => {
+    if (path === "/") {
+      navigate(`${pathname}`);
+      return;
+    }
+    navigate(`${pathname}?${path}`);
   };
 
   const reload = () => {
