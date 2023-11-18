@@ -8,8 +8,8 @@ import ExamineesCard from "./ExamineesCard";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import useURL from "../../hooks/useURL";
 import EmptyCard from "../Common/EmptyCard";
-import EditIcon from "../../assets/icons/Edit_light.svg";
 import { Form, Formik } from "formik";
+import MessageIcon from "../../assets/icons/Message_Dark.svg";
 
 const ViewBatch = ({ APID }: { APID: string }) => {
   const { updateURL } = useURL();
@@ -31,13 +31,16 @@ const ViewBatch = ({ APID }: { APID: string }) => {
     },
   });
 
-  if (isError || isLoading) return <FetchLoader />;
-
   const handleDelete = () => {
-    updateURL(`state=delete&APID=${APID}`);
+    updateURL(`APID=${APID}&state=delete`);
   };
 
-  // console.log(schedPayload?.schedule);
+  const handleAnnouce = () => {
+    updateURL(`APID=${APID}&state=annoucement`);
+  };
+
+  if (isError || isLoading) return <FetchLoader />;
+
   const currentYear = new Date().getFullYear();
   const formatedStartDate = new Date(
     querySchedPayload?.schedule?.start
@@ -59,19 +62,23 @@ const ViewBatch = ({ APID }: { APID: string }) => {
         examiniees: [],
       }}
       onSubmit={() => {}}>
-      <Form>
+      <Form className="">
         <header className="pb-4 mb-4 border-b border-gray-400 flex justify-between items-start">
           <div>
             <h1>{data?.title || "Title"}</h1>
             <span>
               {data?.schedule === null
-                ? "Not yet specified"
+                ? "📅 Not yet specified"
                 : `${formatedStartDate} - ${formatedEndDate}, ${currentYear}`}
             </span>
           </div>
 
           <div className="flex gap-4">
-            {!data?.schedule && <IconButton icon={EditIcon} as="outlined" />}
+            <IconButton
+              icon={MessageIcon}
+              as="outlined"
+              onClick={handleAnnouce}
+            />
             <IconButton
               icon={DeleteIcon}
               as="outlined"
@@ -85,35 +92,29 @@ const ViewBatch = ({ APID }: { APID: string }) => {
             Examiniees
           </Typography>
 
-          <div className=" flex">
+          <div className="flex max-h-[400px] overflow-y-auto">
             {data?.length <= 0 ? (
               <EmptyCard title="No Examiniees Available" />
             ) : (
-              data?.examiniees?.map(
-                ({
-                  personalDetails,
-                  studentDetails,
-                  gradeDetails,
-                  ...props
-                }: any) => {
-                  const { lastName, middleName, firstName } = personalDetails;
-                  const { track, yearLevel } = studentDetails;
-                  const { generalAve } = gradeDetails;
-                  const name = `${lastName}, ${firstName} ${middleName[0]}`;
+              data?.examiniees?.map((props: any) => {
+                const { lastName, middleName, firstName } =
+                  props.personalDetails;
+                const { track, yearLevel } = props.studentDetails;
+                const { generalAve } = props.gradeDetails;
+                const name = `${lastName}, ${firstName} ${middleName[0]}`;
 
-                  return (
-                    <ExamineesCard
-                      key={props._id}
-                      name={name}
-                      yearLevel={yearLevel}
-                      track={track}
-                      ave={generalAve}
-                      {...props}
-                      disabled
-                    />
-                  );
-                }
-              )
+                return (
+                  <ExamineesCard
+                    key={props._id}
+                    name={name}
+                    yearLevel={yearLevel}
+                    track={track}
+                    ave={generalAve}
+                    {...props}
+                    disabled
+                  />
+                );
+              })
             )}
           </div>
         </main>

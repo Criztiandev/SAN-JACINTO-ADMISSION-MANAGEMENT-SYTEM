@@ -19,6 +19,7 @@ import CreateBatch from "../containers/Batch/CreateBatch";
 import BatchCard from "../containers/Batch/BatchCard";
 import CreateBatchButton from "../containers/Batch/CreateBatchButton";
 import DeleteNotice from "../containers/Drawers/DeleteNotice";
+import BatchAnnoucement from "../containers/Batch/BatchAnnoucement";
 
 const Batch = () => {
   const { handleMutateData } = useTableContext();
@@ -62,6 +63,7 @@ const Batch = () => {
       <DrawerWrapper state="create" Component={CreateBatch} />
       <DrawerWrapper state="delete" Component={DeleteNotice} />
       <DrawerWrapper state="view" Component={ViewBatch} />
+      <DrawerWrapper state="annoucement" Component={BatchAnnoucement} />
     </>
   );
 };

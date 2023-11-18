@@ -12,7 +12,6 @@ import { useTableContext } from "../context/TableContext";
 import { ColumnDef } from "@tanstack/react-table";
 
 import FirstColumn from "../containers/Table/FirstColumn";
-import TitleHeader from "../containers/Table/TitleHeader";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
