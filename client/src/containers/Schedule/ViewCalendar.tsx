@@ -124,7 +124,7 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
             </Typography>
             <div className="grid grid-cols-2 gap-4">
               <Input label="Start" name="schedule.start" disabled={true} />
-              <Input label="End" name="schedule.start" disabled={true} />
+              <Input label="End" name="schedule.end" disabled={true} />
             </div>
           </section>
 

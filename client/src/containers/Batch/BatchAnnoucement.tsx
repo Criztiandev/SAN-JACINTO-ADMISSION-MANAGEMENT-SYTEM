@@ -4,13 +4,15 @@ import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
 import useURL from "../../hooks/useURL";
 import MessageIcon from "../../assets/icons/Message_Dark.svg";
-import Textarea from "../../components/Textarea";
 import Button from "../../components/Button";
 import Typography from "../../components/Typography";
 
 import FilterButton from "../Applicants/FilterButton";
+import { useState } from "react";
 
 const BatchAnnoucement = ({ APID }: { APID: string }) => {
+  const [platform, setPlatform] = useState("Facebook");
+  const [message, setMessage] = useState("");
   const { updateURL } = useURL();
 
   const { data, isLoading, isError } = useFetch({
@@ -32,6 +34,11 @@ const BatchAnnoucement = ({ APID }: { APID: string }) => {
 
   const handleCancell = () => {
     updateURL(`/`);
+  };
+
+  const handleSent = () => {
+    console.log(`Platform: ${platform}`);
+    console.log(`${message}`);
   };
 
   if (isError || isLoading) return <FetchLoader />;
@@ -68,13 +75,24 @@ const BatchAnnoucement = ({ APID }: { APID: string }) => {
             title="Platform"
             icon=""
             option={[
-              { title: "Facebook", icon: "" },
-              { title: "Gmail", icon: "" },
+              {
+                title: "Facebook",
+                icon: "",
+                onClick: () => setPlatform("Facebook"),
+              },
+              {
+                title: "Gmail",
+                icon: "",
+                onClick: () => setPlatform("Gmail"),
+              },
             ]}
           />
         </div>
         <div className="my-4">
-          <Textarea name="annoucement" className="font-semibold h-[250px]" />
+          <textarea
+            className="w-full h-[300px] p-4 rounded-[5px] border border-gray-400"
+            value={message}
+            onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
         </div>
 
         <div className="flex justify-end gap-4">
@@ -83,6 +101,7 @@ const BatchAnnoucement = ({ APID }: { APID: string }) => {
             title="Annouce"
             icon={MessageIcon}
             disabled={!data?.schedule}
+            onClick={handleSent}
           />
         </div>
       </main>

@@ -9,7 +9,7 @@ import DeleteIcon from "../../assets/icons/Delete.svg";
 import useURL from "../../hooks/useURL";
 import EmptyCard from "../Common/EmptyCard";
 import { Form, Formik } from "formik";
-import MessageIcon from "../../assets/icons/Message_Dark.svg";
+import Button from "../../components/Button";
 
 const ViewBatch = ({ APID }: { APID: string }) => {
   const { updateURL } = useURL();
@@ -75,11 +75,6 @@ const ViewBatch = ({ APID }: { APID: string }) => {
 
           <div className="flex gap-4">
             <IconButton
-              icon={MessageIcon}
-              as="outlined"
-              onClick={handleAnnouce}
-            />
-            <IconButton
               icon={DeleteIcon}
               as="outlined"
               onClick={handleDelete}
@@ -116,6 +111,10 @@ const ViewBatch = ({ APID }: { APID: string }) => {
                 );
               })
             )}
+          </div>
+
+          <div className="absolute bottom-3 right-5">
+            <Button title="Annouce" onClick={handleAnnouce} />
           </div>
         </main>
       </Form>
