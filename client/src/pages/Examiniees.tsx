@@ -7,25 +7,19 @@ import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 
 // Context and Helpers
-import { useTableContext } from "../context/TableContext";
 import useFetch from "../hooks/useFetch";
-
-// React Table
+import { useTableContext } from "../context/TableContext";
 import { ColumnDef } from "@tanstack/react-table";
 
-import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
-
-// Applicant Components
-
-import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
-
-// Assets
-
-import Button from "../components/Button";
-import PromoteExaminiees from "../containers/Examiniees/PromoteExaminiees";
-import useURL from "../hooks/useURL";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TitleHeader from "../containers/Table/TitleHeader";
+import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
+
+// Assets
+import Button from "../components/Button";
+import useURL from "../hooks/useURL";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
@@ -39,6 +33,8 @@ const Examiniees = () => {
   const handleToggleUpdate = () => {
     updateURL("state=promote");
   };
+
+  if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -62,25 +58,28 @@ const Examiniees = () => {
     { header: "Contact", accessorKey: "contact" },
     {
       header: "Schedule",
-      accessorFn: ({ examDate }) => {
-        console.log(examDate);
-        return examDate === null ? "📅 Not Yet Specified" : examDate;
+      accessorKey: "schedule",
+      accessorFn: ({ schedule }) => {
+        console.log(schedule);
+        return schedule === null ? "📅 Not Yet Specified" : schedule;
       },
     },
     {
+      id: "action",
       header: "Status",
-      accessorKey: "status",
+      accessorKey: "schedule",
       cell: ({ getValue }) => {
         return (
-          <div className="px-4 py-2 border rounded-full capitalize bg-[#FFEE7D]">
-            {getValue()}
+          <div
+            className={`px-4 py-2 border rounded-full capitalize text-black font-semibold ${
+              getValue() === null ? "bg-green-400 " : "bg-[#FFEE7D]"
+            }`}>
+            {getValue() === null ? "Available" : "Scheduled"}
           </div>
         );
       },
     },
   ];
-
-  if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
   return (
     <>
@@ -102,8 +101,8 @@ const Examiniees = () => {
         />
       </BaseLayout>
 
-      <DrawerWrapper state="view" Component={PromoteExaminiees} />
-      <DrawerWrapper state="promote" Component={PromoteExaminiees} />
+      <DrawerWrapper state="view" Component={ViewExaminiee} />
+      <DrawerWrapper state="promote" Component={ViewExaminiee} />
     </>
   );
 };

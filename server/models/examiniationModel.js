@@ -21,11 +21,6 @@ const examResultsSchema = new mongoose.Schema({
   },
   regitrationDate: { type: Date, default: Date.now() },
   permitID: { type: String, require: true },
-  status: {
-    type: String,
-    enum: ["scheduled", "finished"],
-    default: "scheduled",
-  },
 });
 
 export default mongoose.model("examiniees", examResultsSchema);

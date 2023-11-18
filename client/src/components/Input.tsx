@@ -9,10 +9,12 @@ interface FieldProps extends InputProps {
   type?: string;
   value?: any;
   disabled?: any;
-  unstyled?: boolean;
 
-  className?: string;
   icon?: string;
+  className?: string;
+
+  static?: boolean;
+  unstyled?: boolean;
 }
 
 const Input = ({
@@ -43,7 +45,7 @@ const Input = ({
           className && className
         } ${
           props.disabled
-            ? " bg-gray-300 text-gray-600 opacity-70"
+            ? ` ${props.static ? "bg-gray-100" : "bg-gray-300"} text-gray-600  `
             : "bg-gray-100 text-black select-none"
         }`}
       />

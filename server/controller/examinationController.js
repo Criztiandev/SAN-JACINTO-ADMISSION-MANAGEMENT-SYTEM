@@ -17,6 +17,8 @@ export const fetchAllExaminiees = asyncHandler(async (req, res) => {
 export const fetchExaminieesById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
+  // check if applicant exist
+
   const _result = await examinieesModel.findOne({ _id: id }).lean();
   if (!_result) throw new Error("Examiniees doest exist");
 
@@ -72,7 +74,7 @@ export const createExaminiees = asyncHandler(async (req, res) => {
     // generate permit
     const currentDate = dayjs();
     const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
-    const permit = `${LRN.substring(0, 6)} - ${formatedDate} - ${track}`;
+    const permit = `${LRN.substring(0, 6)}-${formatedDate}-${track}`;
 
     const _examiniees = await examinieesModel.create({
       APID: UID,
@@ -80,6 +82,7 @@ export const createExaminiees = asyncHandler(async (req, res) => {
       fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
       email,
       contact,
+      track,
     });
 
     if (!_examiniees) throw new Error("Something went wrong,Please Try again");
