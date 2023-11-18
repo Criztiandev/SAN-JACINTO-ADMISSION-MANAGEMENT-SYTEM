@@ -53,6 +53,10 @@ const routes = [
         </TableProvider>
       </Suspense>
     ),
+    children: {
+      path: "/examiniees",
+      element: <div>Chil</div>,
+    },
   },
   {
     path: "/schedule",

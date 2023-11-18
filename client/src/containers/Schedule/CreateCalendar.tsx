@@ -13,7 +13,7 @@ import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
 
 const CreateCalendar = () => {
-  const { queryParams, baseRoute, reload } = useURL();
+  const { queryParams, baseRoute } = useURL();
   const start = queryParams.get("start");
   const end = queryParams.get("end");
 
@@ -22,12 +22,9 @@ const CreateCalendar = () => {
     key: ["batches"],
   });
 
-  console.log(data);
-
   const { handleSubmit } = useFormSubmit({
     route: `${baseRoute}/create`,
-    redirect: `${baseRoute}`,
-    overideFn: reload,
+    redirect: `${baseRoute}?refetch=true`,
     type: "post",
   });
 

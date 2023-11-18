@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InputProps, InputSectionProps } from "../../interface/FormInterface";
 import IconButton from "../../components/IconButton";
 import Input from "../../components/Input";
@@ -10,23 +10,11 @@ const InputSections = ({
   title,
   model,
   hidden = true,
-  isEdit,
+  disable,
 }: InputSectionProps) => {
   const [hideSection, setHideSection] = useState(true);
-  const [edit, setEdit] = useState(true);
-
+  const [isEdit, setIsEdit] = useState(false);
   const handleHideSection = () => setHideSection((prev) => !prev);
-
-  // update isEdit as global edit
-  useEffect(() => {
-    if (isEdit) {
-      setEdit((prev) => !prev);
-    }
-
-    return () => {
-      setEdit(false);
-    };
-  }, [isEdit]);
 
   return (
     <div className="mb-4">
@@ -45,7 +33,7 @@ const InputSections = ({
           {!hidden && (
             <IconButton
               icon={EditIcon}
-              onClick={() => setEdit((prev) => !prev)}
+              onClick={() => setIsEdit((prev) => !prev)}
             />
           )}
         </div>
@@ -57,7 +45,7 @@ const InputSections = ({
             <Input
               key={props.label}
               {...props}
-              disabled={edit}
+              disabled={disable ? disable : isEdit}
               className={`bg-black`}
             />
           ))}

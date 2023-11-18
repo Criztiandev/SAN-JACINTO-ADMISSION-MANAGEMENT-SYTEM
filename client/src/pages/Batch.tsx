@@ -29,9 +29,6 @@ const Batch = () => {
     route: "/batch",
     overrideFn: handleMutateData,
     key: ["batchess"],
-    option: {
-      retry: true,
-    },
   });
 
   const handleCreate = () => {

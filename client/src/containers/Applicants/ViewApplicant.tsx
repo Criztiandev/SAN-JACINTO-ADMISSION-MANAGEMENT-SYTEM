@@ -88,27 +88,41 @@ const ViewApplicant = ({ APID }: { APID: string }) => {
         </header>
 
         <main>
-          <section className="flex flex-col gap-2 justify-start items-start mb-4">
+          <section className="flex flex-col gap-2 justify-start  items-start mb-4">
             <h4>Grade Level</h4>
-            <div className={`${!isEdit && "opacity-50"}`}>
-              {/* // Remember this shit */}
-              <Carousel width={"550px"}>
-                {yearLevelItem.map((props) => (
+            <div
+              className={`${
+                !isEdit && "opacity-50 w-full flex justify-center items-center"
+              } `}>
+              {isEdit ? (
+                <Carousel width={"550px"}>
+                  {yearLevelItem.map((props) => (
+                    <ItemSelect
+                      key={props.title}
+                      select={
+                        isEdit ? selectedYearLevel : studentDetails.yearLevel
+                      }
+                      onSelect={isEdit ? setSelectedYearLevel : () => {}}
+                      {...props}
+                      name="studentDetails.yearLevel"
+                    />
+                  ))}
+                </Carousel>
+              ) : (
+                <div className="">
                   <ItemSelect
-                    key={props.title}
-                    select={
-                      isEdit ? selectedYearLevel : studentDetails.yearLevel
-                    }
-                    onSelect={isEdit ? setSelectedYearLevel : () => {}}
-                    {...props}
+                    cover=""
+                    title={studentDetails.yearLevel}
+                    subtitle="selected"
+                    onSelect={() => {}}
                     name="studentDetails.yearLevel"
                   />
-                ))}
-              </Carousel>
+                </div>
+              )}
             </div>
           </section>
           {ApplicationFormInputModel.map((props) => (
-            <InputSections key={props.title} {...props} isEdit={!isEdit} />
+            <InputSections key={props.title} {...props} disable={!isEdit} />
           ))}
         </main>
 

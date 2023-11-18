@@ -11,8 +11,8 @@ const useURL = () => {
     navigate(`${pathname}?${route}`);
   };
 
-  const navigateTo = (route: string) => {
-    navigate(`${pathname}/${route}`);
+  const navigateTo = (route: string, parent?: boolean) => {
+    return parent ? navigate(`${pathname}/${route}`) : navigate(`${route}`);
   };
 
   const updateURL = (path: string) => {

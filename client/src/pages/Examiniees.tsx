@@ -39,7 +39,7 @@ const Examiniees = () => {
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
       id: "select",
-      header: ({ table }) => <TitleHeader data={table} />,
+      header: "Name",
       accessorKey: "fullName",
       cell: ({ row, getValue }) => {
         const { original } = row;
