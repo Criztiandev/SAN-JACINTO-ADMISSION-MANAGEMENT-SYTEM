@@ -3,13 +3,19 @@ import { FilterButtonProps } from "../../interface/ApplicantPanel.Type";
 import Skeleton from "react-loading-skeleton";
 import Dropdown from "../../components/Dropdown";
 
-const FilterButton = ({ title, option, ...props }: FilterButtonProps) => {
+const FilterButton = ({
+  as = "outlined",
+  title,
+  option,
+  onToggle,
+  ...props
+}: FilterButtonProps) => {
   const [currentTitle, setCurrentTitle] = useState(title);
 
   const handleTitleUpdate = (e: MouseEvent<HTMLButtonElement>) => {
-    const value = e.currentTarget.value;
-    if (value === "" || null) setCurrentTitle(title);
-    return setCurrentTitle(value);
+    const value: string = (e.currentTarget as HTMLButtonElement).value;
+    if (value === "" || value === null) setCurrentTitle(title);
+    else setCurrentTitle(value);
   };
 
   return (
@@ -18,12 +24,15 @@ const FilterButton = ({ title, option, ...props }: FilterButtonProps) => {
         <Skeleton height={45} width={145} />
       ) : (
         <Dropdown
-          as="outlined"
+          as={as}
           type="button"
           dir="left"
           title={currentTitle || title}
           className="p-4 min-w-[150px] flex flex-col gap-2"
-          onClick={handleTitleUpdate}
+          onClick={(e) => {
+            onToggle && onToggle(e);
+            handleTitleUpdate(e);
+          }}
           option={option}
           {...props}
         />
