@@ -5,8 +5,8 @@ export const notFound = (req, res, next) => {
 };
 
 export const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  const message = err.message;
+  let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  let message = err.message;
 
   if (err.name === "CastError" || err.kind === "ObjectId") {
     statusCode = 404;
@@ -14,7 +14,7 @@ export const errorHandler = (err, req, res, next) => {
   }
 
   res.status(statusCode).json({
-    message,
+    error: message,
     stack: process.env.NODE_ENVI === "production" ? null : err.stack,
   });
 };

@@ -1,51 +1,61 @@
 import mongoose from "mongoose";
 
-const schema = {
-  title: { type: String, require: true },
-  label: { type: String, require: true },
-  type: { type: String, enum: ["schedule", "examination", "event"] },
-  date: { type: Date, require: true },
+const scheduleSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
+    unique: true,
+  },
+  facilitator: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 64,
+    unique: true,
+  },
+  batches: [
+    {
+      type: String,
+      unique: true,
+    },
+  ],
+  schedule: {
+    start: {
+      type: Date,
+      required: true,
+    },
+    end: {
+      type: Date,
+      required: true,
+    },
+  },
   time: {
-    start: { type: String, require: true },
-    end: { type: String, require: true },
-  },
-  venue: { type: String, require: true },
-  coordinator: { type: String, require: true },
-};
-
-const examinationScheduleSchema = new mongoose.Schema(
-  {
-    ...schema,
-    applicants: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        default: [],
-        maxLength: 255,
-        unique: true,
-      },
-    ],
-    status: {
+    start: {
       type: String,
-      enum: ["pending", "ongoing", "cancel"],
-      default: "ongoing",
+      required: true,
     },
-    createdBy: {
+    end: {
       type: String,
-      default: "N/A",
-      require: true,
+      required: true,
     },
   },
-  { timestamps: true }
-);
+  venue: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 50,
+    unique: true,
+  },
+  details: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 255,
+  },
 
-export const examinationSchedModel = mongoose.model(
-  "Schedule",
-  examinationScheduleSchema
-);
+  status: { type: String, enum: ["ongoing", "finished"], default: "ongoing" },
+});
 
-// const scheduleSchema = new mongoose.Schema({}, { timestamps: true });
-
-// const eventScheduleSchema = new mongoose.Schema({}, { timestamps: true });
-
-// // export default mongoose.model("Schedule", scheduleSchema);
+export default mongoose.model("Schedule", scheduleSchema);

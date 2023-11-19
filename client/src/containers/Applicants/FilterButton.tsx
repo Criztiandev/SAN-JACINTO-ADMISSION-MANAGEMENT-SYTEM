@@ -1,7 +1,7 @@
 import { useState, MouseEvent } from "react";
-import { Dropdown } from "../../components";
 import { FilterButtonProps } from "../../interface/ApplicantPanel.Type";
 import Skeleton from "react-loading-skeleton";
+import Dropdown from "../../components/Dropdown";
 
 const FilterButton = ({ title, option, ...props }: FilterButtonProps) => {
   const [currentTitle, setCurrentTitle] = useState(title);

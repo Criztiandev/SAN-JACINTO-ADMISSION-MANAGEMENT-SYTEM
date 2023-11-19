@@ -1,19 +1,40 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, MouseEvent, useTransition } from "react";
-import { BaseLayout } from "../layouts";
-import useDrawer from "../hooks/useDrawer";
-import SettingsDrawer from "../containers/Drawers/SettingsDrawer";
+import { useState, MouseEvent, useTransition, lazy } from "react";
+import { useAuthContext } from "../context/AuthContext";
+
+import LogoutIcon from "../assets/icons/Sign_out_Dark.svg";
+
 import StatsSection from "../containers/Dashboard/StatsSection";
-import ActionHeader from "../containers/Dashboard/ActionHeader";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
+import useFetch from "../hooks/useFetch";
+import Button from "../components/Button";
+import Typography from "../components/Typography";
+import BaseLayout from "../layouts/BaseLayout";
+import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
+import IconButton from "../components/IconButton";
+import { useNavigate } from "react-router-dom";
+
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+const NoticeContent = lazy(() => import("../containers/Drawers/NoticeContent"));
+const ViewApplicant = lazy(
+  () => import("../containers/Applicants/ViewApplicant")
+);
 
 const Dashboard = () => {
   const [activePanel, setActivePanel] = useState("Admission");
   const [isPending, startTransition] = useTransition();
-  const { active: settingsIsActive, toggleDrawer: toggleSettings } =
-    useDrawer();
-  const { active: logoutIsActive, toggleDrawer: toggleLogout } = useDrawer();
+  const navigate = useNavigate();
+
+  const { user } = useAuthContext();
+
+  const {
+    data,
+    isLoading,
+    isPending: isFetchPending,
+  } = useFetch({ route: `/account/${user}`, key: ["user"] });
+
+  if (isLoading || isFetchPending) return <DashboardSkeleton />;
 
   const handleSelectPanel = (event: MouseEvent<HTMLButtonElement>) => {
     startTransition(() => {
@@ -24,32 +45,56 @@ const Dashboard = () => {
   return (
     <>
       <BaseLayout
-        title="Welcome to Hell"
-        subtitle="Hi! Criztian, Its beeen a while,"
+        title={`Hello, ${data?.fullName} 👋`}
         actions={
-          <ActionHeader onSettings={toggleSettings} onLogout={toggleLogout} />
+          <IconButton
+            icon={LogoutIcon}
+            onClick={() => navigate("?state=logout")}
+          />
         }
-        style="free"
-        className="h-full">
+        className="h-full flex flex-col gap-8"
+        free>
+        {/* // Stats */}
         <StatsSection />
 
-        <section className="grid grid-cols-[1fr_300px] gap-4 my-4">
-          <TabContent selected={activePanel} pending={isPending} />
+        <section className="flex flex-col gap-4 h-[80vh]">
           <TabAction
             selected={activePanel}
             onSelect={handleSelectPanel}
             pending={isPending}
           />
+
+          <TabContent selected={activePanel} pending={isPending} />
+        </section>
+
+        <section className="h-80vh bg-gray-500 p-4 rounded-[5px] grid grid-cols-[200px_auto]">
+          <div className="h-full flex flex-col items-center gap-4">
+            {/* //Profile */}
+            <div className="w-[128px] h-[128px] rounded-full border border-gray-400"></div>
+            {/* // Details */}
+            <div className="text-center text-gray-100">
+              <Typography as="h6">Criztian Jade M Tuplano</Typography>
+              <Typography as="span" className="text-sm">
+                @criztindev
+              </Typography>
+            </div>
+            {/* // Action */}
+            <Button title="Turn Off" className="hover:bg-red-500" />
+          </div>
+          <div className="text-white">
+            <div className="flex gap-4 items-center">
+              <span>🟢 Status:</span>
+              <span className="bg-green-300 text-black px-3  py-1 rounded-full font-semibold cursor-default">
+                Active
+              </span>
+            </div>
+          </div>
         </section>
       </BaseLayout>
 
-      {settingsIsActive && (
-        <SettingsDrawer state={settingsIsActive} onClose={toggleSettings} />
-      )}
-
-      {logoutIsActive && (
-        <SettingsDrawer state={logoutIsActive} onClose={toggleLogout} />
-      )}
+      <DrawerWrapper state="logout" Component={NoticeContent} />
+      <DrawerWrapper state="view" Component={ViewApplicant} />
+      <DrawerWrapper state="turnOff" Component={NoticeContent} />
     </>
   );
 };

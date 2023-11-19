@@ -1,5 +1,7 @@
-import axios from "axios";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import axios, { AxiosError } from "axios";
 import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
+import { toast } from "react-toastify";
 
 const BASE_URL = "http://localhost:4000/api";
 
@@ -12,8 +14,17 @@ export const fetchApplicants = async () => {
 };
 
 export const fetchApplicantByID = async (id: string) => {
-  const { data } = await axios.get(`${BASE_URL}/applicant/${id}`);
-  return data;
+  try {
+    const { data } = await axios.get(`${BASE_URL}/applicant/${id}`);
+    return data;
+  } catch (e: AxiosError | any) {
+    if (!e.response) {
+      toast.error("Something went wrong");
+      return;
+    }
+    const { message } = e.response.data;
+    toast.error(message);
+  }
 };
 
 export const updateApplicantByID = async (

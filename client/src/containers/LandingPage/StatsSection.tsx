@@ -12,7 +12,7 @@ interface StatsSectionProps {
 const StatsSection = ({ stats }: StatsSectionProps) => {
   return (
     <section className="bg-[#4A1420] flex justify-center items-center gap-32 p-4 py-8">
-      {stats.map(stats => (
+      {stats.map((stats) => (
         <div
           key={stats.title}
           className="cursor-default flex justify-center items-center flex-col text-white">

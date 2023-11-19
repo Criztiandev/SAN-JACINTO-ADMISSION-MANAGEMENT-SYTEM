@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { BarLoader, Image } from "../../components";
 import { MouseEvent } from "react";
+import Image from "../../components/Image";
 
 interface TabButtonProps {
   title: string;
@@ -12,28 +12,21 @@ interface TabButtonProps {
 
 const TabButton = ({
   title,
-  icons,
+  icons = "",
   selected,
   onClick,
   pending = false,
 }: TabButtonProps) => {
+  const selectedButton = selected === title && "bg-gray-300";
   return (
     <motion.button
       whileTap={{ scale: 0.8 }}
       whileHover={{ scale: 1.05 }}
       name={title}
-      className={`w-16 h-16 rounded-[5px] border border-gray-300 flex justify-center items-center hover:bg-gray-200 ${
-        selected === title && "bg-gray-300"
-      }`}
+      className={`p-3 rounded-[5px] border border-gray-300 flex justify-center items-center hover:bg-gray-200 ${selectedButton}`}
       disabled={pending}
       onClick={onClick}>
-      {pending ? (
-        <div className=" bg-gray-400 w-full h-full flex justify-center items-center rounded-[5px]">
-          <BarLoader size={32} />
-        </div>
-      ) : (
-        <Image src={icons} />
-      )}
+      <Image src={icons} alt="icon" />
     </motion.button>
   );
 };

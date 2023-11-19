@@ -1,6 +1,8 @@
-import { CalendarIcon, ApplicantIcon } from "../../assets/icons";
 import GraphButton from "./TabButton";
+import CalendarIcon from "../../assets/icons/Calendar_Dark.svg";
+import ApplicantIcon from "../../assets/icons/Applicant_Dark.svg";
 import { MouseEvent } from "react";
+
 const DashboardPanel = [
   { title: "Admission", icons: CalendarIcon },
   { title: "Applicant", icons: ApplicantIcon },
@@ -14,22 +16,16 @@ interface TabActionProps {
 
 const TabAction = ({ selected, pending, onSelect }: TabActionProps) => {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-3 gap-4 justify-items-center w-full">
-        {DashboardPanel.map((props) => (
-          <GraphButton
-            key={props.title}
-            {...props}
-            selected={selected}
-            pending={pending}
-            onClick={onSelect}
-          />
-        ))}
-      </div>
-
-      <div className="w-full h-full p-4 border border-gray-400 rounded-[5px]">
-        hi
-      </div>
+    <div className="flex gap-4  justify-end">
+      {DashboardPanel.map((props) => (
+        <GraphButton
+          key={props.title}
+          {...props}
+          selected={selected}
+          pending={pending}
+          onClick={onSelect}
+        />
+      ))}
     </div>
   );
 };

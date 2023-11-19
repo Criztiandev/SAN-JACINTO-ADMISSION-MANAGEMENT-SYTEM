@@ -32,7 +32,7 @@ const SideNav = ({ state, onClick }: SidebarProps) => {
           <div className="px-16 flex flex-col gap-4">
             <span className="w-full text-md  text-gray-400 ">Navigation</span>
             <ul className="text-white text-[48px] flex flex-col gap-4 ">
-              {navList.map(link => (
+              {navList.map((link) => (
                 <motion.li
                   key={link.title}
                   animate={state ? "open" : "close"}

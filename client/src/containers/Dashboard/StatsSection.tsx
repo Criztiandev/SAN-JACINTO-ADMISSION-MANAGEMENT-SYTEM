@@ -1,6 +1,6 @@
-import { StatsCard } from ".";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllData } from "../../utils/Api.utils";
+import StatsCard from "./StatsCard";
+import StatsLoader from "../Loaders/StatsLoader";
+import useFetch from "../../hooks/useFetch";
 
 interface StatsDataProps {
   title: string;
@@ -9,32 +9,15 @@ interface StatsDataProps {
 }
 
 const StatsSection = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryFn: async () => await fetchAllData("dashboard"),
-    queryKey: ["statsData"],
+  const { data, isLoading, isError, isPending } = useFetch({
+    route: "/dashboard/stats",
+    key: ["stats"],
   });
 
-  if (isLoading || isError) {
-    return (
-      <section className="grid grid-cols-3 gap-4">
-        {[{}, {}, {}].map(() => (
-          <StatsCard
-            key={Math.random()}
-            title="NA"
-            count={0}
-            increase={0}
-            isLoading={true}
-          />
-        ))}
-      </section>
-    );
-  }
-
-  const { payload } = data;
-
+  if (isLoading || isError || isPending) return <StatsLoader />;
   return (
     <section className="grid grid-cols-3 gap-4">
-      {payload.map((props: StatsDataProps) => (
+      {data.map((props: StatsDataProps) => (
         <StatsCard key={props.title} {...props} />
       ))}
     </section>

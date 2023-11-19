@@ -1,22 +1,26 @@
 import mailer from "nodemailer";
 
-export const sendEmail = payload => {
-  const { target, title, body } = payload;
+export const sendEmail = (target, content) => {
+  const { subject, text } = content;
 
-  const message = {
-    from: process.env.HOST_EMAIL,
-    to: target,
-    subject: title,
-    text: body,
-  };
+  try {
+    const message = {
+      from: process.env.HOST_EMAIL,
+      to: target,
+      subject,
+      text,
+    };
 
-  const transporter = mailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.HOST_EMAIL,
-      pass: process.env.HOST_PASSWORD,
-    },
-  });
+    const transporter = mailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.HOST_EMAIL,
+        pass: process.env.HOST_PASSWORD,
+      },
+    });
 
-  return transporter.sendMail(message);
+    return transporter.sendMail(message);
+  } catch (e) {
+    throw new Error(e);
+  }
 };

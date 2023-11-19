@@ -2,11 +2,16 @@
 import { forwardRef } from "react";
 import { BaseButtonStyle } from "../helper/component.Helper";
 import { ButtonProps } from "../interface/Component.Type";
-import { Image, Typography } from ".";
 import { motion } from "framer-motion";
+import Kebbab from "../assets/icons/Kebbab.svg";
+import Image from "./Image";
+import Typography from "./Typography";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ as = "contained", dir = "left", className, unstyled, ...props }, ref) => {
+  (
+    { as = "contained", dir = "left", className, unstyled, icon, ...props },
+    ref
+  ) => {
     const finalizeStyle = `${
       className && className
     } flex rounded-full gap-2 items-center justify-center ${
@@ -20,7 +25,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={finalizeStyle}
         {...props}>
-        {dir === "left" && <Image src={props.icon} alt="icon" />}
+        {dir === "left" && <Image src={icon || Kebbab} alt="icon" />}
 
         <Typography
           as="span"
@@ -28,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {props.title}
         </Typography>
 
-        {dir === "right" && <Image src={props.icon} alt="icon" />}
+        {dir === "right" && <Image src={icon || Kebbab} alt="icon" />}
       </motion.button>
     );
   }

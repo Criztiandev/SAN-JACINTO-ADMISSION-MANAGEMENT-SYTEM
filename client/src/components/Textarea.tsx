@@ -3,7 +3,11 @@ import { useField } from "formik";
 import Typography from "./Typography";
 import { InputProps } from "../interface/FormInterface";
 
-const Textarea = ({ label, name = "", ...props }: InputProps) => {
+interface TextAreaProps extends InputProps {
+  className: string;
+}
+
+const Textarea = ({ label, name = "", className, ...props }: TextAreaProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -18,9 +22,11 @@ const Textarea = ({ label, name = "", ...props }: InputProps) => {
         </label>
       )}
       <textarea
-        className={`border px-4 py-3 rounded-[5px] mb-2 w-full h-full ${errorClass} `}
         {...field}
         {...props}
+        className={`border px-4 py-3 rounded-[5px] mb-2 w-full  ${errorClass} ${
+          className && className
+        } `}
         id={name}
       />
       {meta.error && (

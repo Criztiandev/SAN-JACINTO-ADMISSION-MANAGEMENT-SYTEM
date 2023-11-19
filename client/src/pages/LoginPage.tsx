@@ -1,40 +1,65 @@
 import { Formik, Form } from "formik";
-import { Input } from "../components";
+import { Input, Typography } from "../components";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { InputProps } from "../interface/FormInterface";
+import { authSchema } from "../schema/authSchema";
+import useFormSubmit from "../hooks/useFormSubmit";
+const LoginInput: InputProps[] = [
+  {
+    label: "Email",
+    type: "email",
+    name: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    label: "Password",
+    type: "password",
+    name: "password",
+    placeholder: "Enter your password",
+  },
+];
 
 const LoginPage = () => {
+  const { handleSubmit } = useFormSubmit({
+    route: "/auth/login",
+  });
+
   return (
-    <div className="border w-full h-[100vh] grid grid-cols-[1fr_450px]">
-      <div className="bg-backgroundImage bg-cover bg-no-repeat "></div>
-      <div className="p-4 py-12">
+    <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">
+      <div className="w-[40%] h-full bg-[#7a0021] text-white p-4 flex justify-center items-center px-12">
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(value, action) => {
-            alert(value);
-            console.log(value);
-            action.resetForm();
-          }}>
-          <Form className="flex flex-col justify-between h-full">
-            <h1 className="text-center uppercase font-bold">
-              San Jancito National Highschool
-            </h1>
-            <div className="flex flex-col gap-4">
-              <div>
-                <Input type="email" label="Email" name="email" />
-                <Input type="password" label="Password" name="password" />
-              </div>
+          onSubmit={handleSubmit}
+          validationSchema={authSchema}>
+          <Form className="flex flex-col justify-center gap-4 h-full">
+            <div className="mb-4 flex gap-2 flex-col">
+              <Typography as="h5">Welcome to</Typography>
+              <Typography as="h1" className="font-extrabold text-4xl">
+                San Jacinto National HighSchool
+              </Typography>
+              <Typography as="small" className="italic">
+                Basta Magaling sa San Jacinto Galing
+              </Typography>
+            </div>
 
-              <p className=" text-center w-full px-8">
-                By signing up, you confirm that you have read and accepted our
-                User notice and Privacy Policy
-              </p>
+            <div className="flex flex-col gap-4">
+              {LoginInput.map((props) => (
+                <Input key={props.label} {...props} />
+              ))}
+
+              <div className="flex justify-end">
+                <Link className="items-end" to={"/forgot"}>
+                  Forgot Password
+                </Link>
+              </div>
             </div>
 
             <div className="flex justify-center">
               <motion.button
                 type="submit"
                 whileTap={{ scale: 0.8 }}
-                className="p-[12px] px-8 border border-gray-400 rounded-full">
+                className="bg-white text-black font-bold p-[12px] px-8 rounded-lg w-full hover:bg-zinc-900 hover:text-white">
                 Login
               </motion.button>
             </div>

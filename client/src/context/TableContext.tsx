@@ -6,7 +6,7 @@ import {
   ChangeEvent,
   useMemo,
 } from "react";
-import { BaseProps } from "../interface/Component.Type";
+import { BaseProps } from "../interface/Common.Types";
 
 import {
   useReactTable,
@@ -32,9 +32,7 @@ export const useTableContext = () => {
 
 const TableProvider = ({ children }: BaseProps) => {
   const [tableData, setTableData] = useState<Array<object>>([]);
-  const [selected, setSelected] = useState<object | string>(
-    "653566cfe3c333a845bcaabc"
-  );
+
   const [tableConfig, setTableConfig] = useState([]);
 
   const [search, setSearch] = useState<string | number>("");
@@ -49,13 +47,9 @@ const TableProvider = ({ children }: BaseProps) => {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) =>
     setSearch(e.currentTarget.value);
 
-  const handleSelected = (data: string | object) => {
-    setSelected(data);
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleColumnSearch = (filter: any) => {
-    setColumnSearch(prev => [{ ...prev, ...filter }]);
+    setColumnSearch((prev) => [{ ...prev, ...filter }]);
   };
 
   const handleMutateData = (data: Array<object>) => setTableData(data);
@@ -84,12 +78,10 @@ const TableProvider = ({ children }: BaseProps) => {
   const value: any = {
     tableData: memoizedData,
     table,
-    selected,
     search,
     columnSearch,
 
     handleSearch,
-    handleSelected,
     handleColumnSearch,
     setTableConfig,
     handleMutateData,

@@ -1,5 +1,5 @@
-import { Dropdown, Button } from "../../components";
-import { ApplicantIcon } from "../../assets/icons";
+import Dropdown from "../../components/Dropdown";
+import ApplicantIcon from "../../assets/icons/Applicant_Dark.svg";
 
 interface ListItemProps {
   title: string;
@@ -13,13 +13,7 @@ const MoreItems: ListItemProps[] = [
 ];
 
 const MoreOption = () => {
-  return (
-    <Dropdown type="outlined">
-      {MoreItems.map(items => (
-        <Button key={items.title} type="ghost" dir="left" {...items} />
-      ))}
-    </Dropdown>
-  );
+  return <Dropdown as="outlined" option={MoreItems} />;
 };
 
 export default MoreOption;

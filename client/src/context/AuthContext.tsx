@@ -2,7 +2,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface AuthContextType {
   user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
+  handleMutateUser: (value: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,13 +17,16 @@ export const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState("123123123");
+  const [user, setUser] = useState("64cb92131f09b7706b48b3f5");
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const handleMutateUser = (UID: string) => setUser(UID);
+
+  const value = {
+    user,
+    handleMutateUser,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContextProvider;

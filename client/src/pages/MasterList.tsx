@@ -1,132 +1,57 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Button, Table, SearchBar, Loading, IconButton } from "../components";
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+import FetchLoader from "../containers/General/FetchLoader";
+import ViewLevelList from "../containers/Masterlist/ViewLevelList";
+import useFetch from "../hooks/useFetch";
+import useURL from "../hooks/useURL";
 import BaseLayout from "../layouts/BaseLayout";
-import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
-import { useTableContext } from "../context/TableContext";
-import { useEffect } from "react";
 
-import { DrawerListProps } from "../interface/Drawer.Types";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { Download } from "../assets/icons";
-
-import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
-import useDrawer from "../hooks/useDrawer";
-import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
-
+import { motion } from "framer-motion";
 const MasterList = () => {
-  // Drawers
-  const viewToggle = useDrawer();
-  const createToggle = useDrawer();
-  const updateToggle = useDrawer();
-  const deleteToggle = useDrawer();
-  const messageToggle = useDrawer();
+  const { updateURL } = useURL();
 
-  const { isLoading, isError, error, refetch } = useQuery({
-    queryFn: async () => {
-      const { data } = await fetchApplicants();
-      handleMutateData(data.payload);
-      return data;
-    },
-    queryKey: ["applicants"],
+  const { data, isLoading, isError } = useFetch({
+    route: "/masterlist/stats",
+    key: ["masterlist"],
   });
 
-  const acceptApplicant = useMutation({
-    mutationFn: async ({ APID, value }: any) => {
-      return updateStatusApplicant(APID, value);
-    },
-    onSuccess: () => {
-      toast.success("Applicant is Accepted Successfully");
-    },
-
-    onError: () => {
-      toast.error("Failed, Please Try Again");
-    },
-  });
-
-  const {
-    tableData,
-    search,
-    selected,
-    handleSearch,
-    handleSelected,
-    setTableConfig,
-    handleMutateData,
-  } = useTableContext();
-
-  const toggleOptions = {
-    viewToggle,
-    createToggle,
-    updateToggle,
-    deleteToggle,
-    messageToggle,
+  const handleToggleList = (level: string) => {
+    updateURL(`state=view&filter=${level}`);
   };
 
-  const handleToggle = (data: object | string, toggle = () => {}) => {
-    handleSelected(data);
-    toggle();
-  };
-
-  const handleAccept = async (id: string, status: string) => {
-    await acceptApplicant.mutateAsync({ APID: id, value: status });
-    refetch();
-  };
-
-  // Setting up the Table Config
-  useEffect(() => {
-    const config = TableConfig(toggleOptions, handleToggle, handleAccept);
-    if (!config) throw new Error("No Config");
-    setTableConfig(config);
-
-    return () => {
-      setTableConfig([]);
-    };
-  }, []);
-
-  // Checking if there us an error
-  if (isError) toast.error(error.message);
-  if (isLoading) return <Loading />;
+  if (isLoading || isError) return <FetchLoader />;
 
   return (
     <>
       <BaseLayout
-        title="Master Lists"
-        header={
-          <div className="flex gap-4">
-            <IconButton icon={Download} type="outlined" />
-            <Button
-              dir="left"
-              title="Create"
-              icon={CreateApplicantIcon}
-              onClick={createToggle.toggleDrawer}
-            />
-          </div>
-        }
-        shortcut={false}
-        action>
-        {tableData.length > 0 ? (
-          <div className="flex justify-between items-center">
-            <SearchBar value={search} onChange={handleSearch} />
+        title="Master List"
+        actions={<div className="flex gap-4"></div>}
+        free>
+        <div className="grid grid-cols-4 gap-4">
+          {data?.map(({ title, count }: { title: string; count: number }) => (
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.9 }}
+              className="relative  border border-gray-400 rounded-[10px] overflow-hidden select-none min-h-[320px]"
+              onClick={() => handleToggleList(title?.split(" ")[1])}>
+              <div className="relative bg-coverImage bg-center h-[120px]">
+                <span className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 font-medium rounded-full border w-[64px] h-[64px] flex justify-center items-center bg-green-300">
+                  <span className="text-[32px] select-none">{count}</span>
+                </span>
+              </div>
 
-            <div className="flex gap-4">
-              <Button type="contained" as="button" title="Applicants" />
-              <Button type="outlined" as="button" title="Examinees" />
-              <Button type="outlined" as="button" title="Jr Highschools" />
-              <Button type="outlined" as="button" title="SHS High" />
-            </div>
-          </div>
-        ) : (
-          <span></span>
-        )}
-        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
+              {/* Details */}
+              <div className="p-4 text-center my-4">
+                <div className="mb-4">
+                  <h4 className="font-bold mt-4 mb-2">{title}</h4>
+                  <span className="text-gray-500"></span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </BaseLayout>
 
-      {DrawerLists(selected, toggleOptions).map(
-        ({ id, Component, state, ...props }: DrawerListProps) =>
-          state ? <Component key={id} state={state} {...props} /> : null
-      )}
+      <DrawerWrapper state="view" Component={ViewLevelList} />
     </>
   );
 };

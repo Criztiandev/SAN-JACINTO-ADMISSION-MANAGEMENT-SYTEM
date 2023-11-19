@@ -1,21 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useField } from "formik";
-import Typography from "./Typography";
 import { InputProps } from "../interface/FormInterface";
+import { motion } from "framer-motion";
+import Image from "./Image";
 
 interface FieldProps extends InputProps {
+  color?: string;
   type?: string;
   value?: any;
   disabled?: any;
-  unstyled?: boolean;
+
+  icon?: string;
   className?: string;
+
+  static?: boolean;
+  unstyled?: boolean;
 }
 
 const Input = ({
+  color,
   label,
   name = "",
-  unstyled,
   className,
+  icon,
   ...props
 }: FieldProps) => {
   const [field, meta] = useField<any>({
@@ -23,32 +30,31 @@ const Input = ({
     type: props.type,
     placeholder: props.placeholder,
   });
-  const errorClass = meta.touched && meta.error ? "border-red-500" : "";
   return (
-    <div className="flex flex-col">
+    <motion.label className="relative flex flex-col gap-2 mb-4 text-white outline-none">
+      {icon && <Image src={icon} alt="icon" />}
       {label && (
-        <label htmlFor={name} className="mb-2">
+        <span className={`font-medium text-black ${color && color}`}>
           {label}
-        </label>
+        </span>
       )}
       <input
-        className={
-          unstyled
-            ? ""
-            : `border border-gray-400 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} ${
-                props.disabled ? "text-gray-400" : ""
-              } ${className}`
-        }
         {...field}
         {...props}
-        id={name}
+        className={`w-full px-4 py-3 border rounded-[5px] text-gray-600${
+          className && className
+        } ${
+          props.disabled
+            ? ` ${props.static ? "bg-gray-100" : "bg-gray-300"} text-gray-600  `
+            : "bg-gray-100 text-black select-none"
+        }`}
       />
       {meta.error && (
-        <Typography as="p" className="text-sm text-red-400">
+        <span className="absolute  bottom-[-28px] text-red-500">
           {meta.error}
-        </Typography>
+        </span>
       )}
-    </div>
+    </motion.label>
   );
 };
 

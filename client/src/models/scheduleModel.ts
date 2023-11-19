@@ -1,15 +1,9 @@
-const scheduleModel = {
-  cover: "",
-  category: "",
-  color: "",
+export const scheduleInitialValue = {
   title: "",
-  speaker: "",
-  venue: "",
-  audience: "",
-  date: { start: "", end: "" },
+  facilitator: "",
+  batches: [],
   time: { start: "", end: "" },
-  content: "",
-  isAllday: false,
-};
 
-export default scheduleModel;
+  venue: "",
+  details: "",
+};

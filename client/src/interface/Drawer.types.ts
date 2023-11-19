@@ -3,7 +3,7 @@ import { BaseProps } from "./Common.Types";
 
 export interface DrawerProps extends BaseProps {
   width?: string;
-  state: boolean;
+  state?: boolean;
   mode?: "light" | "dark";
   anchor?: "left" | "right";
   onClick?: () => void;
@@ -19,15 +19,15 @@ export interface ToggleDrawer {
   onClose: () => void;
 }
 
-export interface DrawerValue {
-  createToggle: useDrawerProps;
-  viewToggle: useDrawerProps;
-  deleteToggle: useDrawerProps;
-  updateToggle: useDrawerProps;
-  messageToggle: useDrawerProps;
-  editToggle: useDrawerProps;
-  holdToggle: useDrawerProps;
-}
+// export interface DrawerValue {
+//   createToggle: useDrawerProps;
+//   viewToggle: useDrawerProps;
+//   deleteToggle: useDrawerProps;
+//   updateToggle: useDrawerProps;
+//   messageToggle: useDrawerProps;
+//   editToggle: useDrawerProps;
+//   holdToggle: useDrawerProps;
+// }
 
 export interface DrawerListProps {
   id: string;
