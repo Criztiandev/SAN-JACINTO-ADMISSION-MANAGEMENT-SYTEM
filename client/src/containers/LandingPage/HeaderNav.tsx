@@ -10,14 +10,14 @@ interface HeaderNavProps {
 }
 
 const HeaderNav = ({ state, onClick }: HeaderNavProps) => {
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
   const { scrollY } = useScroll(); // this is not a reactive
   const navigate = useNavigate();
 
-  useMotionValueEvent(scrollY, "change", latest => {
+  useMotionValueEvent(scrollY, "change", (latest) => {
     const prevVal = scrollY.getPrevious();
 
-    if (latest > prevVal && latest >= 150) {
+    if (latest > prevVal && latest >= 300) {
       setHidden(false);
     } else {
       setHidden(true);

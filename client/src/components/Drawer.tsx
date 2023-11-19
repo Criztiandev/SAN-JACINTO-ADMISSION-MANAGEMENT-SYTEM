@@ -9,6 +9,7 @@ const Drawer = ({
   className,
   state,
   onClick,
+  mode = "light",
 }: DrawerProps) => {
   const anchorDir = (dir: string) => (dir === "left" ? "left-0" : "right-0");
 
@@ -25,9 +26,13 @@ const Drawer = ({
         animate={state ? "open" : "close"}
         variants={sliderVariant}
         style={{ width: width || "400px" }}
-        className={`bg-white absolute p-4 ${anchorDir(
-          anchor
-        )} overflow-y-auto ${className && className}`}>
+        className={`absolute p-4 ${anchorDir(anchor)} overflow-y-auto h-full ${
+          className && className
+        } ${
+          mode === "dark"
+            ? "bg-[#1e1e1e] text-white"
+            : "bg-white text-[#1e1e1e]"
+        }`}>
         {children}
       </motion.aside>
     </motion.div>

@@ -89,12 +89,10 @@ const LandingPage = () => {
 
   useEffect(() => {
     if (isThrottled) {
-      // Reset the throttled state after a delay (e.g., 5 seconds)
       const timeoutId = setTimeout(() => {
         setIsThrottled(false);
       }, 5000);
 
-      // Cleanup the timeout to prevent memory leaks
       return () => clearTimeout(timeoutId);
     }
   }, [isThrottled]);
