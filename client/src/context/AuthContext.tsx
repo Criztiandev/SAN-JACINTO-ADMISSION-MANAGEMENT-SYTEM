@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface AuthContextType {
   user: string;
@@ -20,11 +26,16 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState("");
 
   const handleMutateUser = (UID: string) => setUser(UID);
-
   const value = {
     user,
     handleMutateUser,
   };
+  useEffect(() => {
+    const _id = sessionStorage.getItem("UID");
+    if (_id) {
+      setUser(_id);
+    }
+  }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

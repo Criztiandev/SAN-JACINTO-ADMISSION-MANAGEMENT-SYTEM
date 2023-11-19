@@ -176,7 +176,7 @@ const Applicant = () => {
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
       <DrawerWrapper state="edit" Component={EditApplicant} />
-      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="archive " Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>

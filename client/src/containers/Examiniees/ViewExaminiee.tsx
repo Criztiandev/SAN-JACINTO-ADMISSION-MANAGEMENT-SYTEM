@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from "../../components/Typography";
 import Avatar from "../../components/Avatar";
-import { FemaleProfile, MaleProfile } from "../../assets/image";
 import Input from "../../components/Input";
-
+import MaleProfile from "../../assets/image/Male_profile.png";
+import FemaleProfile from "../../assets/image/Female_Profile.png";
 import { Form, Formik } from "formik";
 import FetchLoader from "../General/FetchLoader";
 import useFetch from "../../hooks/useFetch";

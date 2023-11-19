@@ -74,9 +74,10 @@ const navList = [
     path: "/admission",
     delay: 3,
   },
+
   {
-    title: "About",
-    path: "/",
+    title: "Login",
+    path: "/login",
     delay: 4,
   },
 ];

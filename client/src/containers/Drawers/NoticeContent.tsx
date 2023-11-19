@@ -4,22 +4,38 @@ import useURL from "../../hooks/useURL";
 import { useAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 
+import useCustomMutation from "../../hooks/useCustomMutation";
+
 const NoticeContent = () => {
   const { user, handleMutateUser } = useAuthContext();
   const { navigateBack, queryParams, updateURL } = useURL();
-
   const title = queryParams.get("state") || "title";
 
+  const mutation = useCustomMutation({
+    route: `/auth/session/${user}`,
+    type: "delete",
+  });
+
+  const handleConfirm = async () => {
+    try {
+      if (user) {
+        await mutation?.mutateAsync({});
+        sessionStorage.removeItem("UID");
+        handleMutateUser("");
+        toast.success("Log out Successfully");
+
+        // Wait for seconds (adjust timeout duration if needed)
+        const timeoutDuration = 1000;
+        await new Promise((resolve) => setTimeout(resolve, timeoutDuration));
+
+        updateURL("/");
+      }
+    } catch (error) {
+      console.error("Error during confirmation:", error);
+    }
+  };
   const handleCancel = () => {
     navigateBack;
-  };
-
-  const handleConfirm = () => {
-    if (user) {
-      handleMutateUser("");
-      updateURL("/");
-      toast.success("Log out Successfully");
-    }
   };
 
   return (

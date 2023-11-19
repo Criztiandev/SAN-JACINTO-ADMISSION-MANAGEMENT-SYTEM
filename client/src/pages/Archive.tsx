@@ -125,7 +125,7 @@ const Applicant = () => {
   return (
     <>
       <BaseLayout
-        title="Applicants"
+        title="Archieve"
         actions={
           <div className="flex gap-4">
             <Dropdown

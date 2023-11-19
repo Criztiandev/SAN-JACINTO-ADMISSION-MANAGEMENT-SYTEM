@@ -44,7 +44,7 @@ const useFormSubmit = ({
     }
   };
 
-  const handleSuccessMutation = (payload: AxiosResponse) => {
+  const handleSuccessMutation = async (payload: AxiosResponse) => {
     const { message } = payload.data;
 
     if (overideFn) {
@@ -52,7 +52,12 @@ const useFormSubmit = ({
     }
     setCurrentPayload(payload.data);
     toast.success(message);
+
     if (redirect) {
+      // Wait for seconds (adjust timeout duration if needed)
+      const timeoutDuration = 1000;
+      await new Promise((resolve) => setTimeout(resolve, timeoutDuration));
+
       navigate(redirect);
     }
   };

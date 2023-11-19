@@ -19,7 +19,7 @@ const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
 const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
 const UserPage = lazy(() => import("../pages/Users.tsx"));
 const BatchPage = lazy(() => import("../pages/Batch.tsx"));
-const ArchievePage = lazy(() => import("../pages/Archieve.tsx"));
+const ArchivePage = lazy(() => import("../pages/Archive.tsx"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -138,11 +138,11 @@ const routes = [
     ),
   },
   {
-    path: "/applicant/archieve",
+    path: "/archive",
     element: (
       <Suspense fallback={<TablePanelSkeleton />}>
         <TableProvider>
-          <ArchievePage />
+          <ArchivePage />
         </TableProvider>
       </Suspense>
     ),
