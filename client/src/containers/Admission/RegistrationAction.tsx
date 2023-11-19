@@ -8,9 +8,10 @@ import { useMultipleFormOption } from "../../interface/MultiStep.Type";
 
 interface currentProps {
   stepper: useMultipleFormOption;
+  isThrottled: boolean;
 }
 
-const RegistrationAction = ({ stepper }: currentProps) => {
+const RegistrationAction = ({ stepper, isThrottled }: currentProps) => {
   const { removeItem: FormRemove } = useLocalStorage("applicant_form");
   const { removeItem: AddressRemove } = useLocalStorage("address_btn");
 
@@ -44,6 +45,7 @@ const RegistrationAction = ({ stepper }: currentProps) => {
           dir="right"
           icon={NextIcon}
           title={`${stepper.isLastStep ? "Finish" : "Next"}`}
+          disabled={isThrottled}
         />
       </div>
     </div>

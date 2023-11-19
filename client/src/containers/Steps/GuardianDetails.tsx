@@ -7,15 +7,11 @@ import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
-import ResetIcon from "../../assets/icons/Reset.svg";
-import FatherIcon from "../../assets/icons/Father.svg";
-import MotherIcon from "../../assets/icons/Mother.svg";
 
 import {
   GuardianInputs,
   legalGuardianInputDetails,
 } from "../../data/Stepper.Data";
-import IconButton from "../../components/IconButton";
 import Dropdown from "../../components/Dropdown";
 
 const GuardianDetails = () => {

@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
-import { toast } from "react-toastify";
 import { useModalOptions } from "../interface/Modal.Type";
-import { handleAxiosError } from "../utils/Api.utils";
 import GradeLevel from "../containers/Steps/GradeLevel";
 import GradeDetails from "../containers/Steps/GradeDetails";
 import StudentDetails from "../containers/Steps/StudentDetails";
@@ -39,18 +36,6 @@ export const RegistrationStepper = [
   { title: "Other Details", component: OtherDetails },
   { title: "Application Form", component: ApplicationForm },
 ];
-
-export const handleQuery = async (
-  values: ApplicantModelProps,
-  mutation: any
-) => {
-  try {
-    await mutation(values);
-    toast.success("Applicant Sent Successfully");
-  } catch (error: any) {
-    handleAxiosError(error);
-  }
-};
 
 export const handleRegistrationReset = (
   modal: useModalOptions,

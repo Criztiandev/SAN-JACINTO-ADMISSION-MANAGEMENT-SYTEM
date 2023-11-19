@@ -54,6 +54,7 @@ export const yearLevelItem: CardProps[] = [
 ];
 
 export const suffixes: Array<string> = [
+  "N/A",
   "Jr.",
   "Sr.",
   "II",

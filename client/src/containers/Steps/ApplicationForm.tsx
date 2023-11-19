@@ -40,7 +40,7 @@ const FormSection = ({ title, model }: ApplicationFormModelProps) => {
         </div>
       </div>
 
-      {hide && (
+      {!hide && (
         <div className="grid grid-cols-2 gap-4">
           {model.map((props: InputProps) => (
             <Input key={props.label} {...props} disabled={onEdit} />

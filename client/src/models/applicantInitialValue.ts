@@ -3,11 +3,13 @@ export const applicantInputMaps = [
     title: "Student Details",
     model: [
       {
+        type: "number",
         label: "LRN",
         name: "studentDetails.LRN",
         placeholder: "Enter your LRN",
       },
       {
+        type: "number",
         label: "PSA Ref#",
         name: "studentDetails.PSA",
         placeholder: "Enter your PSA Reference",
@@ -42,7 +44,7 @@ export const applicantInputMaps = [
     title: "Personal Details",
     model: [
       {
-        type: "date",
+        type: "text",
         label: "Birth Date",
         name: "personalDetails.birthDate",
       },
@@ -74,8 +76,14 @@ export const applicantInputMaps = [
       },
 
       {
-        label: "Mother Tounge",
-        name: "personalDetails.motherTounge",
+        label: "Religion",
+        name: "personalDetails.religion",
+        placeholder: "Enter",
+      },
+
+      {
+        label: "Mother Tongue",
+        name: "personalDetails.motherTongue",
         placeholder: "Enter",
       },
     ],

@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 import RegistrationLayout from "../layouts/RegistrationLayout";
 // import { useMultipleForm, useModal, useLocalStorage } from "../hooks";
@@ -17,7 +15,6 @@ import {
 } from "../containers/Admission";
 import {
   handleNextModal,
-  handleQuery,
   OutroModalDetails,
   RegistrationStepper,
 } from "../helper/Admission.Helper";
@@ -25,6 +22,7 @@ import useMultipleForm from "../hooks/useMultipleForm";
 import useModal from "../hooks/useModal";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { preferedValidationSchema } from "../schema/applicant.Schema";
+import useFormSubmit from "../hooks/useFormSubmit";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -44,24 +42,6 @@ const Register = () => {
   const multiStep = useMultipleForm(componentUnpackage);
   const { Steps, currentIndex } = multiStep;
 
-  // Handling Submit
-  const handleSubmit = async (values: ApplicantModelProps) => {
-    try {
-      const { isLastStep, nextStep } = multiStep;
-
-      if (!isLastStep) {
-        console.log("Test");
-        applicantStorage.setItems(values);
-        return nextStep();
-      }
-
-      // if its the last page
-      handleQuery(values, mutateAsync);
-    } catch (error) {
-      console.error("Form submission error:", error);
-    }
-  };
-
   useEffect(() => {
     if (!applicantStorage.getItem()) {
       applicantStorage.setItems(applicantInitialValue);
@@ -70,26 +50,35 @@ const Register = () => {
     if (!addressStorage.getItem()) {
       addressStorage.setItems({ isPermanent: false, isCurr: false });
     }
-
-    // return () => {
-    //   applicantStorage.removeItem();
-    //   addressStorage.removeItem();
-    // };
   }, []);
 
-  // Mutation Query
-  const { mutateAsync } = useMutation({
-    mutationFn: async () => {
-      return "";
-    },
-    mutationKey: ["createApplicant"], // Optional, give your mutation a key
-    onSuccess: () => {
+  // Handling Submit
+  const handleSubmit = async (
+    values: ApplicantModelProps,
+    action: FormikHelpers<ApplicantModelProps>
+  ) => {
+    const { isLastStep, nextStep } = multiStep;
+
+    if (!isLastStep) {
+      applicantStorage.setItems(values);
+      return nextStep();
+    }
+
+    mutationSubmit(values, action);
+  };
+
+  const {
+    handleSubmit: mutationSubmit,
+    isThrottled,
+    isPending,
+  } = useFormSubmit({
+    route: "/applicant/create",
+    overideFn: () => {
       outroModal.showModal();
-      toast.success("Applicant Send Succssfully");
+      applicantStorage.removeItem();
+      addressStorage.removeItem();
     },
-    onError: () => {
-      toast.error("Something went wrong, Please Try Again");
-    },
+    type: "post",
   });
 
   return (
@@ -103,7 +92,10 @@ const Register = () => {
           validationSchema={() => preferedValidationSchema(`${currentIndex}`)}>
           <Form className="flex flex-col justify-between h-full">
             {Steps}
-            <RegistrationAction stepper={multiStep} />
+            <RegistrationAction
+              stepper={multiStep}
+              isThrottled={isThrottled || isPending || false}
+            />
           </Form>
         </Formik>
       </RegistrationLayout>
