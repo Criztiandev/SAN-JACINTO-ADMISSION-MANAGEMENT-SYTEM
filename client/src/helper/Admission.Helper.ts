@@ -2,16 +2,15 @@
 import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 import { toast } from "react-toastify";
 import { useModalOptions } from "../interface/Modal.Type";
-import {
-  GradeDetails,
-  GradeLevel,
-  PermanentAddress,
-  PersonalDetails,
-  StudentDetails,
-  GuardianDetails,
-  OtherDetails,
-  ApplicationForm,
-} from "../containers/Steps";
+import { handleAxiosError } from "../utils/Api.utils";
+import GradeLevel from "../containers/Steps/GradeLevel";
+import GradeDetails from "../containers/Steps/GradeDetails";
+import StudentDetails from "../containers/Steps/StudentDetails";
+import PersonalDetails from "../containers/Steps/PersonalDetails";
+import PermanentAddress from "../containers/Steps/PermanentAddress";
+import GuardianDetails from "../containers/Steps/GuardianDetails";
+import OtherDetails from "../containers/Steps/OtherDetails";
+import ApplicationForm from "../containers/Steps/ApplicationForm";
 
 export const OutroModalDetails = [
   {
@@ -49,8 +48,7 @@ export const handleQuery = async (
     await mutation(values);
     toast.success("Applicant Sent Successfully");
   } catch (error: any) {
-    const responseError = error.response.data;
-    toast.error(responseError.message);
+    handleAxiosError(error);
   }
 };
 

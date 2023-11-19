@@ -9,12 +9,18 @@ import {
   suffixes,
 } from "../../data/Stepper.Data";
 import CustomCarousel from "./CustomCarousel";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const PersonalDetails = () => {
   FetchLocalStorageFormData("applicant_form");
+  const { getItem } = useLocalStorage("applicant_form");
   return (
     <section className="flex flex-col gap-4 mb-4">
-      <CustomCarousel data={GenderSelectionItems} />
+      <CustomCarousel
+        state={getItem()?.personalDetails?.gender}
+        name="personalDetails.gender"
+        data={GenderSelectionItems}
+      />
 
       <div className="grid grid-cols-2 gap-6 items-center justify-center">
         {PersonalDetailsFirstSection.map((props: InputProps) => (

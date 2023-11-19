@@ -16,6 +16,7 @@ import {
   legalGuardianInputDetails,
 } from "../../data/Stepper.Data";
 import IconButton from "../../components/IconButton";
+import Dropdown from "../../components/Dropdown";
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -72,7 +73,18 @@ const GuardianDetails = () => {
           </Typography>
 
           <div className="flex gap-4">
-            <IconButton
+            <Dropdown
+              type="button"
+              title="Guadian"
+              onClick={(e) => setSelectedGuardian(e.currentTarget.value)}
+              className="p-4"
+              option={[
+                { title: "Father", icon: "" },
+                { title: "Mother", icon: "" },
+                { title: "Reset", icon: "" },
+              ]}
+            />
+            {/* <IconButton
               icon={FatherIcon}
               as="outlined"
               onClick={() => setSelectedGuardian("Father")}
@@ -80,13 +92,13 @@ const GuardianDetails = () => {
             <IconButton
               icon={MotherIcon}
               as="outlined"
-              onClick={() => setSelectedGuardian("Father")}
+              onClick={() => setSelectedGuardian("Mother")}
             />
             <IconButton
               icon={ResetIcon}
               as="outlined"
-              onClick={() => setSelectedGuardian("Father")}
-            />
+              onClick={() => setSelectedGuardian("Reset")}
+            /> */}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">

@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Drawer from "../../components/Drawer";
 import HamburgerMenu from "../../assets/icons/Menu.svg";
-import { toast } from "react-toastify";
 interface SidebarProps {
   state: boolean;
   onClick: () => void;

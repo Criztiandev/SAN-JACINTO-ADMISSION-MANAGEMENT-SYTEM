@@ -13,10 +13,11 @@ import Input from "../../components/Input";
 import Select from "../../components/Select";
 import ItemSelect from "../Form/ItemSelect";
 import { OmitInputObject } from "../../utils/OmitUtils";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const StudentDetails = () => {
   FetchLocalStorageFormData("applicant_form");
-
+  const { getItem } = useLocalStorage("applicant_form");
   const { model } = applicantInputMaps[0];
 
   const { values }: any = useFormikContext<ApplicantModelProps>();
@@ -27,7 +28,11 @@ const StudentDetails = () => {
   return (
     <section>
       {preferedTrack.length > 0 ? (
-        <CustomCarousel data={preferedTrack} />
+        <CustomCarousel
+          state={getItem()?.studentDetails?.track}
+          name="studentDetails.track"
+          data={preferedTrack}
+        />
       ) : (
         <InvalidTrack />
       )}
@@ -39,7 +44,7 @@ const StudentDetails = () => {
             model
           ).map((props) => (
             <motion.div key={props.label} whileHover={{ scale: 1.03 }}>
-              <Input {...props} />
+              <Input type="number" {...props} />
             </motion.div>
           ))}
 
@@ -52,6 +57,7 @@ const StudentDetails = () => {
 
           <motion.div whileHover={{ scale: 1.03 }}>
             <Input
+              type="text"
               label="Last School Attended"
               name="studentDetails.lastSchoolAttended"
               placeholder="Enter your Last School Attended"

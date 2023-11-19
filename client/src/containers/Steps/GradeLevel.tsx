@@ -4,22 +4,28 @@ import Carousel from "../../components/Carousel";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { yearLevelItem } from "../../data/Stepper.Data";
 import Typography from "../../components/Typography";
+import useLocalStorage from "../../hooks/useLocalStorage";
 const GradeLevel = () => {
-  const [selectedYearLevel, setSelectedYearLevel] = useState("");
   FetchLocalStorageFormData("applicant_form");
+  const { getItem } = useLocalStorage("applicant_form");
+  const [selected, setSelected] = useState(
+    getItem()?.studentDetails?.yearLevel || ""
+  );
 
   return (
     <section className="flex justify-center items-center flex-col  h-full mb-4 overflow-hidden ">
       <div className="flex flex-col gap-4 justify-center items-center">
         <Carousel>
           {yearLevelItem.map((props) => (
-            <Carousel.Item
-              key={props.title}
-              {...props}
-              select={selectedYearLevel}
-              onSelect={setSelectedYearLevel}
-              name="studentDetails.yearLevel"
-            />
+            <div onClick={() => setSelected(props.title)}>
+              <Carousel.Item
+                active={selected === props.title}
+                key={props.title}
+                {...props}
+                name="studentDetails.yearLevel"
+                value={props.title}
+              />
+            </div>
           ))}
         </Carousel>
         <Typography as="span" className="text-gray-400 pb-2 mt-4">
