@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { IconButton } from "../components";
 import ArrowLeft from "../assets/icons/Expand_left_light.svg";
 import ArrowRight from "../assets/icons/Expand_right_light.svg";
 import HeroSection from "../containers/LandingPage/HeroSection";
@@ -9,6 +8,7 @@ import { motion } from "framer-motion";
 import Image from "../assets/image/370590732_259434943578824_5246411036796987967_n.jpg";
 import SideNav from "../containers/LandingPage/SideNav";
 import HeaderNav from "../containers/LandingPage/HeaderNav";
+import IconButton from "../components/IconButton";
 interface CardContentProps {
   cover: string;
   title: string;
@@ -151,14 +151,14 @@ const LandingPage = () => {
   const [selectedCard, setSelectedCard] = useState(0);
   const [selectedTestimonial, setSelectedTestimonial] = useState(0);
 
-  const handleToggle = () => setToggle(prev => !prev);
+  const handleToggle = () => setToggle((prev) => !prev);
 
   const handlePrev = () => {
-    setSelectedTestimonial(prev => (prev <= 0 ? prev : prev - 1));
+    setSelectedTestimonial((prev) => (prev <= 0 ? prev : prev - 1));
   };
 
   const handleNext = () => {
-    setSelectedTestimonial(prev =>
+    setSelectedTestimonial((prev) =>
       prev >= Testimonial.length - 1 ? prev : prev + 1
     );
   };
@@ -235,7 +235,7 @@ const LandingPage = () => {
             <div className="flex justify-between items-center w-full px-[64px]">
               <IconButton
                 icon={ArrowLeft}
-                type="contained"
+                as="contained"
                 onClick={handlePrev}
               />
               <div className="w-[600px] text-center flex flex-col gap-4">
@@ -252,7 +252,7 @@ const LandingPage = () => {
               </div>
               <IconButton
                 icon={ArrowRight}
-                type="contained"
+                as="contained"
                 onClick={handleNext}
               />
             </div>
@@ -312,7 +312,7 @@ const LandingPage = () => {
             </div>
 
             <div className="grid grid-cols-5 gap-12 my-16">
-              {alumniDetails.map(alumni => (
+              {alumniDetails.map((alumni) => (
                 <div className="flex justify-center items-center flex-col gap-2 text-center">
                   <div className="w-16 h-16 rounded-full bg-gray-400"></div>
                   <h6>{alumni.name}</h6>

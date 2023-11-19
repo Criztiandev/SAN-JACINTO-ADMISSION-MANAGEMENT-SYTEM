@@ -1,9 +1,12 @@
 import Typography from "../../components/Typography";
 import Button from "../../components/Button";
 import useURL from "../../hooks/useURL";
+import { useAuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const NoticeContent = () => {
-  const { navigateBack, queryParams } = useURL();
+  const { user, handleMutateUser } = useAuthContext();
+  const { navigateBack, queryParams, updateURL } = useURL();
 
   const title = queryParams.get("state") || "title";
 
@@ -12,7 +15,11 @@ const NoticeContent = () => {
   };
 
   const handleConfirm = () => {
-    console.log("Confirm");
+    if (user) {
+      handleMutateUser("");
+      updateURL("/");
+      toast.success("Log out Successfully");
+    }
   };
 
   return (

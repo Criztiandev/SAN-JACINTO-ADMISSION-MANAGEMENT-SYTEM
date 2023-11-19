@@ -36,10 +36,11 @@ const applicantSchema = mongoose.Schema(
       gender: { type: String, required: true },
       birthDate: { type: String },
       age: { type: Number, required: true },
-      motherTounge: { type: String, require: true },
+      motherTongue: { type: String, required: true }, // Corrected typo
       email: { type: String, require: true, unique: true },
       contact: { type: String, require: true, unique: true },
       facebookLink: { type: String, require: true, unique: true },
+      religion: { type: String, require: true },
     },
 
     gradeDetails: {
@@ -58,7 +59,13 @@ const applicantSchema = mongoose.Schema(
     guardianDetails: {
       father: nameSchema,
       mother: nameSchema,
-      legalGuardian: nameSchema,
+      legalGuardian: {
+        firstName: { type: String, required: true },
+        middleName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        contact: { type: String, require: true, unique: true },
+        relationship: { type: String, require: true },
+      },
     },
 
     otherDetails: {
