@@ -12,6 +12,7 @@ import scheduleRoute from "./routes/scheduleRoutes.js";
 import accountRoute from "./routes/accountRoutes.js";
 import batchRoute from "./routes/batchRoutes.js";
 import examinieesRoute from "./routes/examinieesRoute.js";
+import masterlistRoute from "./routes/masterlistRoutes.js";
 
 import { errorHandler, notFound } from "./middleware/_index.js";
 import cors from "cors";
@@ -40,6 +41,7 @@ app.use("/api/dashboard", dasboardRoute);
 app.use("/api/schedule", scheduleRoute);
 app.use("/api/account", accountRoute);
 app.use("/api/examiniees", examinieesRoute);
+app.use("/api/masterlist", masterlistRoute);
 
 // Error Handlers
 app.use(notFound);
