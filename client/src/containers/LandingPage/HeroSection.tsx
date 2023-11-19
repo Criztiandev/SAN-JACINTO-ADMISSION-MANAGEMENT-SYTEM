@@ -1,6 +1,6 @@
 const HeroSection = () => {
   return (
-    <section className="bg-backgroundImage bg-cover h-[100vh] flex justify-center items-center gap-4 flex-col  text-white">
+    <section className="bg-backgroundImage bg-cover bg-bottom h-[100vh] flex justify-center items-center gap-4 flex-col  text-white">
       <h1 className="font-secondary font-semibold text-[84px] text-center w-[900px]">
         San Jacinto National Highschool
       </h1>
