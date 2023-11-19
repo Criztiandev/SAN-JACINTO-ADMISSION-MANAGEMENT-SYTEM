@@ -1,183 +1,114 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Form, Formik, FormikHelpers } from "formik";
-import { Button, IconButton, Typography } from "../components/index";
+import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import RegistrationLayout from "../layouts/RegistrationLayout";
-import useMultipleForm from "../hooks/useMultipleForm";
+import { useMultipleForm, useModal, useLocalStorage } from "../hooks";
 
-import { NextIcon, PrevIcon, ResetIcon } from "../assets/icons";
-import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
-
-import { useNavigate } from "react-router-dom";
 import applicantInitialValue from "../data/initialValue/applicantInit";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { createApplicant } from "../api/Applicant.Api";
-import useModal from "../hooks/useModal";
+import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 import OutroModal from "../containers/Steps/OutroModal";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useEffect } from "react";
+
 import {
-  OutroDetails,
+  RegistrationHeader,
+  RegistrationAction,
+} from "../containers/Admission";
+import {
+  handleApplicantMutation,
+  handleNextModal,
+  handleQuery,
+  OutroModalDetails,
   RegistrationStepper,
-} from "../helper/ApplicantionForm.Helper";
+} from "../helper/Admission.Helper";
+import applicantSchema from "../schema/applicant.Schema";
 
 const Register = () => {
-  // const { removeItem } = useLocalStorage("applicant_form");
-
-  const {
-    removeItem: FormRemove,
-    setItems,
-    getItem,
-  } = useLocalStorage("applicant_form");
-  const { removeItem: AddressRemove } = useLocalStorage("address_btn");
-
-  // Modal
-  const {
-    data: modalData,
-    currentIndex: modalIndex,
-
-    active: isActiveModal,
-    showModal,
-    hideModal,
-    lastIndex,
-    handleNext: handleNextIndex,
-    handleResetIndex: handleResetModalIndex,
-  } = useModal({ data: OutroDetails });
-
-  // Form Stepper
-  const {
-    steps,
-    next,
-    back,
-    isFirstStep,
-    isLastStep,
-    resetIndex: resetFormIndex,
-    currentIndex,
-  } = useMultipleForm(RegistrationStepper.map(({ component }) => component));
-
-  // Mutation Query
-  const { mutateAsync } = useMutation({
-    mutationKey: ["createApplicant"], // Optional, give your mutation a key
-    mutationFn: async (data: ApplicantModelProps) => {
-      const result = await createApplicant(data);
-      return result; // Return the variables for later use
-    },
-  });
-
-  // navigation
   const navigate = useNavigate();
 
-  // fomik
+  // Local Storage
+  const applicantStorage = useLocalStorage("applicant_form");
+  const addressStorage = useLocalStorage("address_btn");
 
-  // Reset Everything
-  const Reset = () => {
-    hideModal();
-    resetFormIndex();
-    handleResetModalIndex();
-    navigate("/");
-  };
+  // Outro Modal
+  const outroModal = useModal({ data: OutroModalDetails });
+  const { data: modalData } = outroModal;
 
-  // Handle Next Button for Modal
-  const handleNextModal = () => {
-    if (lastIndex) Reset();
-    return handleNextIndex();
-  };
+  // Form Stepper
+  const componentPackage = RegistrationStepper.map(
+    ({ component: Component }) => <Component />
+  ); // Unpackage
+  const multiStep = useMultipleForm(componentPackage);
+  const { Steps, currentIndex } = multiStep;
 
-  const handleQuery = async (
-    values: ApplicantModelProps,
-    actions: FormikHelpers<ApplicantModelProps>
-  ) => {
+  // Handling Submit
+  const handleSubmit = async (values: ApplicantModelProps) => {
     try {
-      await mutateAsync(values);
-      toast.success("Applicant Sent Successfully", {
-        toastId: "success1",
-      });
-      showModal();
-      actions.resetForm();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      const responseError = error.response.data;
-      toast.error(responseError.message);
+      console.log("handleSubmit called with values:", values);
+      if (!multiStep.isLastStep) {
+        applicantStorage.setItems(values);
+        return multiStep.nextStep();
+      }
+      handleQuery(values, mutateAsync);
+    } catch (error) {
+      console.error("Form submission error:", error);
     }
-  };
-
-  const handleSubmit = async (
-    values: ApplicantModelProps,
-    actions: FormikHelpers<ApplicantModelProps>
-  ) => {
-    if (!isLastStep) {
-      setItems(values);
-      return next();
-    }
-    handleQuery(values, actions);
   };
 
   useEffect(() => {
-    if (!getItem()) {
-      setItems(applicantInitialValue);
+    if (!applicantStorage.getItem()) {
+      applicantStorage.setItems(applicantInitialValue);
     }
+
+    if (!addressStorage.getItem()) {
+      addressStorage.setItems({ isPermanent: false, isCurr: false });
+    }
+
+    return () => {
+      applicantStorage.removeItem();
+      addressStorage.removeItem();
+    };
   }, []);
+
+  // Mutation Query
+  const { mutateAsync } = useMutation({
+    mutationFn: handleApplicantMutation,
+    mutationKey: ["createApplicant"], // Optional, give your mutation a key
+    onSuccess: () => {
+      outroModal.showModal();
+      toast.success("Applicant Send Succssfully");
+    },
+    onError: () => {
+      toast.error("Something went wrong, Please Try Again");
+    },
+  });
 
   return (
     <>
-      <RegistrationLayout activePanel={RegistrationStepper[currentIndex].title}>
-        <section className="flex items-center justify-between border-b p-2">
-          <Typography as="h3" className="font-semibold">
-            {RegistrationStepper[currentIndex].title}
-          </Typography>
-          <span>
-            {currentIndex + 1} / {RegistrationStepper.length}
-          </span>
-        </section>
+      <RegistrationLayout activePanel={"Title"}>
+        <RegistrationHeader steps={currentIndex} />
 
-        <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
+        <Formik
+          initialValues={applicantInitialValue}
+          onSubmit={handleSubmit}
+          validationSchema={applicantSchema}>
           <Form className="flex flex-col justify-between h-full">
-            {steps}
-
-            <div
-              className={`flex items-center ${
-                isFirstStep ? "justify-end" : "justify-between"
-              }`}>
-              {!isFirstStep && (
-                <Button
-                  as="button"
-                  type="outlined"
-                  dir="left"
-                  icon={PrevIcon}
-                  title="Prev"
-                  onClick={back}
-                />
-              )}
-
-              <div className="flex gap-4">
-                <IconButton
-                  icon={ResetIcon}
-                  onClick={() => {
-                    FormRemove();
-                    AddressRemove();
-                  }}
-                />
-
-                <Button
-                  as="submit"
-                  type="outlined"
-                  dir="right"
-                  icon={NextIcon}
-                  title={`${isLastStep ? "Finish" : "Next"}`}
-                />
-              </div>
-            </div>
-
-            {isActiveModal && (
-              <OutroModal
-                data={modalData[modalIndex]}
-                onNext={handleNextModal}
-              />
-            )}
+            {Steps}
+            <RegistrationAction stepper={multiStep} />
           </Form>
         </Formik>
       </RegistrationLayout>
+
+      {outroModal.active && (
+        <OutroModal
+          data={modalData[outroModal.currentIndex]}
+          onNext={() =>
+            handleNextModal(outroModal, multiStep.resetIndex, navigate)
+          }
+        />
+      )}
     </>
   );
 };

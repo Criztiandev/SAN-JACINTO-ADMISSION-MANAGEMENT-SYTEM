@@ -1,11 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import {
-  FetchLocalStorageFormData,
-  currentAddressInputModel,
-  permanentAddressInputModel,
-} from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { useFormikContext } from "formik";
 import { IconButton } from "../../components";
 import CloseIcon from "../../assets/icons/Close_round_light.svg";
@@ -13,8 +10,13 @@ import DoneIcon from "../../assets/icons/Done_light.svg";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { AcceptVariant, DeclineVariant } from "../../helper/Animation.Helper";
+import {
+  currentAddressInputModel,
+  personalDetailsInputModel,
+} from "../../data/Stepper.Data";
+import SwitchButton from "./SwitchButton";
 
 const PermanentAddress = () => {
   const { setItems, getItem } = useLocalStorage("address_btn");
@@ -40,12 +42,23 @@ const PermanentAddress = () => {
     });
   };
 
+  const handlePermanentAddress = () => {
+    updatePermanentToCurrent();
+    setIsPermanent(true);
+    setItems({ isPermanent: true, isCurrent: false });
+  };
+
+  const handleCurrentAddress = () => {
+    setIsCurrent((prev) => !prev);
+    setItems({ isPermanent: false, isCurrent: true });
+  };
+
   FetchLocalStorageFormData("applicant_form");
 
   return (
     <section>
       <div className="grid grid-cols-2 gap-4">
-        {currentAddressInputModel.map(props => (
+        {currentAddressInputModel.map((props) => (
           <motion.span key={props.label} whileHover={{ scale: 1.03 }}>
             <Input {...props} />
           </motion.span>
@@ -56,36 +69,23 @@ const PermanentAddress = () => {
         <span>Is this your Permanent Address ?</span>
         <div className="flex gap-2">
           {!isCurrent && (
-            <motion.button
-              type="button"
-              animate={isPermanent && "selected"}
-              variants={AcceptVariant}
-              disabled={isPermanent}
-              whileTap={{ scale: 0.7 }}
-              className="border rounded-full  hover:border-green-600 hover:bg-[#22f86275]"
-              onClick={() => {
-                updatePermanentToCurrent();
-                setIsPermanent(true);
-                setItems({ isPermanent: true, isCurrent: false });
-              }}>
-              <img src={DoneIcon} alt="Done" className="p-2" />
-            </motion.button>
+            <SwitchButton
+              icon={DoneIcon}
+              toggle={isPermanent}
+              variant={AcceptVariant}
+              color="#22f86275"
+              onClick={handlePermanentAddress}
+            />
           )}
 
           {!isPermanent && (
-            <motion.button
-              type="button"
-              animate={isCurrent ? "selected" : "unselected"}
-              disabled={isCurrent}
-              variants={DeclineVariant}
-              whileTap={{ scale: 0.7 }}
-              className="border rounded-full hover:border-red-500 hover:bg-[#f8222275]"
-              onClick={() => {
-                setIsCurrent(prev => !prev);
-                setItems({ isPermanent: false, isCurrent: true });
-              }}>
-              <img src={CloseIcon} alt="close" className="p-2" />
-            </motion.button>
+            <SwitchButton
+              icon={CloseIcon}
+              toggle={isCurrent}
+              variant={DeclineVariant}
+              color="#f8222275"
+              onClick={handleCurrentAddress}
+            />
           )}
         </div>
       </div>
@@ -103,7 +103,7 @@ const PermanentAddress = () => {
 
               <div className="flex gap-4">
                 <IconButton
-                  type="outlined"
+                  as="outlined"
                   icon={CloseIcon}
                   onClick={() => {
                     setIsCurrent(false);
@@ -113,7 +113,7 @@ const PermanentAddress = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
-              {permanentAddressInputModel.map(props => (
+              {personalDetailsInputModel.map((props) => (
                 <motion.span key={props.label} whileHover={{ scale: 1.05 }}>
                   <Input {...props} />
                 </motion.span>

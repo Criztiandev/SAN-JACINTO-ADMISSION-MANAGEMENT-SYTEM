@@ -12,7 +12,7 @@ import {
   ApplicationFormModelProps,
   ApplicantModelProps,
 } from "../../interface/ApplicantMode.Type";
-import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 
 const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   FetchLocalStorageFormData("applicant_form");
@@ -22,18 +22,18 @@ const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   return (
     <div>
       <div className="flex justify-between items-center border-b border-gray-300 pb-2 mb-4">
-        <h4 className="cursor-pointer" onClick={() => setHide(prev => !prev)}>
+        <h4 className="cursor-pointer" onClick={() => setHide((prev) => !prev)}>
           {title}
         </h4>
 
         <div className="flex gap-4">
           <IconButton
             icon={EditIcon}
-            onClick={() => setOnEdit(prev => !prev)}
+            onClick={() => setOnEdit((prev) => !prev)}
           />
           <IconButton
             icon={Expand_Down}
-            onClick={() => setHide(prev => !prev)}
+            onClick={() => setHide((prev) => !prev)}
           />
         </div>
       </div>
@@ -54,6 +54,7 @@ const ApplicationForm = () => {
   const { firstName, middleName, lastName, gender } =
     values?.personalDetails || {};
   const { yearLevel, track } = values?.studentDetails || {};
+
   return (
     <section>
       <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">
@@ -74,7 +75,7 @@ const ApplicationForm = () => {
       </div>
 
       <div className="flex flex-col gap-4">
-        {applicantInputMaps.map(section => (
+        {applicantInputMaps.map((section) => (
           <FormSection key={section.title} {...section} />
         ))}
       </div>

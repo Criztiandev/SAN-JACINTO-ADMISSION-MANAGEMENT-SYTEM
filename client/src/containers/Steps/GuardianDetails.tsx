@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Input from "../../components/Input";
 import Typography from "../../components/Typography";
-import {
-  FetchLocalStorageFormData,
-  GuardianInputs,
-  legalGuardianInputDetails,
-} from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
-import CopyIcon from "../../assets/icons/Copy_alt_light.svg";
-import EraseIcon from "../../assets/icons/Erase.svg";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
-import { Button, IconButton } from "../../components";
+import { IconButton } from "../../components";
+
+import { ResetIcon, FatherIcon, Mother } from "../../assets/icons";
+import {
+  GuardianInputs,
+  legalGuardianInputDetails,
+} from "../../data/Stepper.Data";
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -52,10 +52,11 @@ const GuardianDetails = () => {
           <Typography as="h5" className="pb-2  border-b mb-4">
             {title}
           </Typography>
+
           <div className="grid grid-cols-2 gap-4">
             {model.map((props: InputProps) => (
-              <motion.div whileHover={{ scale: 1.03 }}>
-                <Input key={props.label} {...props} />
+              <motion.div key={props.label} whileHover={{ scale: 1.03 }}>
+                <Input {...props} />
               </motion.div>
             ))}
           </div>
@@ -69,26 +70,20 @@ const GuardianDetails = () => {
           </Typography>
 
           <div className="flex gap-4">
-            <Button
-              icon={CopyIcon}
-              dir="left"
-              type="outlined"
-              className="bg-transparent text-black border-gray-400"
-              title="Father"
+            <IconButton
+              icon={FatherIcon}
+              as="outlined"
               onClick={() => setSelectedGuardian("Father")}
             />
-            <Button
-              icon={CopyIcon}
-              dir="left"
-              type="outlined"
-              className="bg-transparent text-black border-gray-400"
-              title="Mother"
-              onClick={() => setSelectedGuardian("Mother")}
-            />
-
             <IconButton
-              onClick={() => setSelectedGuardian("legal")}
-              icon={EraseIcon}
+              icon={Mother}
+              as="outlined"
+              onClick={() => setSelectedGuardian("Father")}
+            />
+            <IconButton
+              icon={ResetIcon}
+              as="outlined"
+              onClick={() => setSelectedGuardian("Father")}
             />
           </div>
         </div>

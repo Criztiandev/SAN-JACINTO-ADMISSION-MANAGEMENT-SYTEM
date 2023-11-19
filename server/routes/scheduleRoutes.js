@@ -1,11 +1,16 @@
-// import express from "express";
-// import createSchedule from "../controller/schedule/create.schedule.feature.js";
-// const router = express.Router();
+import express from "express";
+import {
+  createSchedule,
+  deleteSchedule,
+  fetchAllSchedule,
+  fetchScheduleByID,
+  updateScheduleById,
+} from "../controller/scheduleController.js";
+const router = express.Router();
 
-// router.post("/create", createSchedule);
-// router.get("/", (re, res) => ({}));
-// router.get("/:id", (req, res) => ({}));
-// router.put("/:id/update", (req, res) => ({}));
-// router.delete("/:id/delete", (req, res) => ({}));
-
-// export default router;
+router.get("/", fetchAllSchedule);
+router.post("/create", createSchedule);
+router.get("/:id", fetchScheduleByID);
+router.put("/:id", updateScheduleById);
+router.delete("/:id", deleteSchedule);
+export default router;

@@ -24,7 +24,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
         {dir === "left" && <img src={SearchIcon} alt="Magnifying Glass" />}
         <input
           ref={ref}
-          className="h-fit w-fit outline-none"
+          className="h-fit w-fit outline-none text-black"
           placeholder="Search here"
           value={value}
           onChange={onChange}

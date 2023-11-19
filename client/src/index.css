@@ -14,7 +14,6 @@
 
 body {
   background: #f9fafb;
-  /* color: #80808021; */
 }
 
 /* Headings */
@@ -50,22 +49,24 @@ h6 {
 
 /* Paragraphs */
 p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5; /* Use a unitless value for line-height */
 }
 
 input {
+  color: inherit;
+  outline: none;
   background: inherit;
 }
+
+/* input::placeholder {
+  color: #cccccc;
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
 }
 
 textarea {
@@ -96,4 +97,5 @@ textarea {
 }
 
 blockquote {
+  background: #00000080;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const useLocalStorage = (key: string) => {
+const useLocalStorage = (key: string) => {
   // store data to the local storage to
 
   const init = (value: any) => {
@@ -36,3 +36,5 @@ export const useLocalStorage = (key: string) => {
 
   return { setItems, getItem, removeItem, init };
 };
+
+export default useLocalStorage;

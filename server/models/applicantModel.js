@@ -67,9 +67,14 @@ const applicantSchema = mongoose.Schema(
       isLWD: { type: String, require: true },
     },
 
+    role: {
+      type: String,
+      enum: ["applicant", "examiniees", "regular"],
+      default: "applicant",
+    },
     status: {
       type: String,
-      enum: ["pending", "revision", "accepted"],
+      enum: ["pending", "revision", "accepted", "scheduled"],
       default: "pending",
     },
   },

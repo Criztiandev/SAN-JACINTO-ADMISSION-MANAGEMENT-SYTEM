@@ -2,9 +2,8 @@
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import { Typography } from "../../components";
-import ItemSelect from "../Form/ItemSelect";
-import { yearLevels } from "../../helper/GradeLevel.Helper";
-import { FetchLocalStorageFormData } from "../../helper/ApplicantionForm.Helper";
+import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
+import { yearLevelItem } from "../../data/Stepper.Data";
 
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
@@ -14,8 +13,8 @@ const GradeLevel = () => {
     <section className="flex justify-center items-center flex-col  h-full mb-4 overflow-hidden ">
       <div className="flex flex-col gap-4 justify-center items-center">
         <Carousel>
-          {yearLevels.map(props => (
-            <ItemSelect
+          {yearLevelItem.map((props) => (
+            <Carousel.Item
               key={props.title}
               {...props}
               select={selectedYearLevel}

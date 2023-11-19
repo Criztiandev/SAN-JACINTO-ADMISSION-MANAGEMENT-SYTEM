@@ -1,5 +1,6 @@
+import ItemSelect from "../containers/Form/ItemSelect";
 import useCarousel from "../hooks/useCarousel";
-import { BaseProps } from "../interface/Component.type";
+import { BaseProps } from "../interface/Common.Types";
 import { motion } from "framer-motion";
 import { RefObject } from "react";
 
@@ -26,5 +27,7 @@ const Carousel = ({ width = "700px", children, direction }: CarouselProps) => {
     </div>
   );
 };
+
+Carousel.Item = ItemSelect;
 
 export default Carousel;

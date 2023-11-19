@@ -1,155 +1,186 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, Table, SearchBar, Loading, IconButton } from "../components";
+// External Dependencies
+
+// Project Components
 import BaseLayout from "../layouts/BaseLayout";
-import CreateApplicantIcon from "../assets/icons/Create Applicant.svg";
+import Table from "../components/Table";
+import SearchBar from "../components/SearchBar";
+import Badge from "../components/Badge";
+import Applicants from "../assets/icons/Applicant_Dark.svg";
+// Context and Helpers
 import { useTableContext } from "../context/TableContext";
-import { useEffect, MouseEvent } from "react";
+import useFetch from "../hooks/useFetch";
 
-import { DrawerListProps } from "../interface/Drawer.Types";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+// React Table
+import { ColumnDef } from "@tanstack/react-table";
 
-import {
-  GradeFilterButton,
-  StatusFilterButton,
-  MoreOptionButton,
-} from "../containers/Applicants";
+// Containers
+import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
+import FirstColumn from "../containers/Table/FirstColumn";
+import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
-import { DrawerLists, TableConfig } from "../helper/Applicant.Helper";
-import useDrawer from "../hooks/useDrawer";
-import { fetchApplicants, updateStatusApplicant } from "../api/Applicant.Api";
-import { MessageIcon } from "../assets/icons";
+// Applicant Components
 
-const Annoucement = () => {
-  // Drawers
-  const viewToggle = useDrawer();
-  const createToggle = useDrawer();
-  const updateToggle = useDrawer();
-  const deleteToggle = useDrawer();
-  const messageToggle = useDrawer();
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+import ViewApplicant from "../containers/Applicants/ViewApplicant";
+import EditApplicant from "../containers/Applicants/EditApplicant";
+import CreateApplicant from "../containers/Applicants/CreateApplicant";
+import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
+import MessageApplicant from "../containers/Applicants/MessageApplicant";
+// Assets
+import useCustomMutation from "../hooks/useCustomMutation";
+import useURL from "../hooks/useURL";
+import Button from "../components/Button";
+import Dropdown from "../components/Dropdown";
 
-  const { isLoading, isError, error, refetch } = useQuery({
-    queryFn: async () => {
-      const { data } = await fetchApplicants();
-      handleMutateData(data.payload);
-      return data;
-    },
-    queryKey: ["applicants"],
+const Applicant = () => {
+  const { search, handleSearch, handleMutateData } = useTableContext();
+  const { updateURL, navigateTo } = useURL();
+
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
+    route: "/applicant",
+    overrideFn: handleMutateData,
+    key: ["applicants23"],
   });
 
-  const acceptApplicant = useMutation({
-    mutationFn: async ({ APID, value }: any) => {
-      return updateStatusApplicant(APID, value);
-    },
-    onSuccess: () => {
-      toast.success("Applicant is Accepted Successfully");
-    },
-
-    onError: () => {
-      toast.error("Failed, Please Try Again");
-    },
+  // mutation
+  const { mutateAsync } = useCustomMutation({
+    route: `/examiniees/create`,
+    overrideFn: () => refetch(),
   });
 
-  const {
-    tableData,
-    search,
-    selected,
-    handleSearch,
-    handleSelected,
-    handleColumnSearch,
-    setTableConfig,
-    handleMutateData,
-  } = useTableContext();
-
-  const toggleOptions = {
-    viewToggle,
-    createToggle,
-    updateToggle,
-    deleteToggle,
-    messageToggle,
+  const handleCreateApplicant = () => {
+    updateURL("state=create");
   };
 
-  const handleToggle = (data: object | string, toggle = () => {}) => {
-    handleSelected(data);
-    toggle();
+  const handleAction = async (id: string, currentStatus: string) => {
+    void mutateAsync({ UID: id, status: currentStatus });
   };
 
-  const handleAccept = async (id: string, status: string) => {
-    await acceptApplicant.mutateAsync({ APID: id, value: status });
-    refetch();
-  };
+  const ApplicantTableConfig: ColumnDef<any, any>[] = [
+    {
+      id: "select",
+      header: "Name",
+      accessorFn: ({ personalDetails }) =>
+        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+      cell: ({ row, getValue }) => {
+        console.log(row);
+        const { original } = row;
+        return (
+          <FirstColumn
+            UID={original?._id}
+            gender={original?.gender}
+            value={getValue()}
+          />
+        );
+      },
+    },
 
-  // Setting up the Table Config
-  useEffect(() => {
-    const config = TableConfig(toggleOptions, handleToggle, handleAccept);
-    if (!config) throw new Error("No Config");
-    setTableConfig(config);
+    { header: "LRN", accessorKey: "studentDetails.LRN" },
+    {
+      id: "yearLevel",
+      header: "Grade Level",
+      accessorFn: ({ studentDetails }) => {
+        const { yearLevel } = studentDetails;
+        return `${yearLevel.replace("Grade", "")}`;
+      },
+    },
+    { header: "Gender", accessorKey: "personalDetails.gender" },
+    { header: "BOD", accessorKey: "personalDetails.birthDate" },
+    { header: "Age", accessorKey: "personalDetails.age" },
+    {
+      header: "Guardian",
+      accessorKey: "studentDetails.legalGuardian",
+      accessorFn: ({ guardianDetails }) => {
+        const { firstName, middleName, lastName } =
+          guardianDetails.legalGuardian;
 
-    return () => {
-      setTableConfig([]);
-    };
-  }, []);
+        return `${lastName}, ${firstName} ${middleName[0]}.`;
+      },
+    },
 
-  // Checking if there us an error
-  if (isError) toast.error(error.message);
-  if (isLoading) return <Loading />;
+    { header: "Contact", accessorKey: "personalDetails.contact" },
+    { header: "Average", accessorKey: "gradeDetails.generalAve" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ getValue }: any) => (
+        <Badge as="neutral" type={getValue()} title={getValue()} />
+      ),
+    },
+    {
+      header: "Action",
+      cell: ({ row }) => {
+        return (
+          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+        );
+      },
+    },
+  ];
+
+  if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
   return (
     <>
       <BaseLayout
-        title="Annoucement"
-        header={
+        title="Applicants"
+        actions={
           <div className="flex gap-4">
-            <IconButton icon={MessageIcon} type="outlined" />
+            <Dropdown
+              as="outlined"
+              icon={"dfdf"}
+              option={[
+                {
+                  icon: Applicants,
+                  title: "Examiniees",
+                  onClick: () => navigateTo("/examiniees"),
+                },
+                {
+                  icon: Applicants,
+                  title: "Examiniees",
+                  onClick: () => navigateTo("/batch"),
+                },
+                {
+                  icon: Applicants,
+                  title: "Examiniees",
+                  onClick: () => navigateTo("/masterlist"),
+                },
+              ]}
+              className="px-3 py-2 w-[150px]"
+            />
             <Button
-              dir="left"
+              as="contained"
               title="Create"
-              icon={CreateApplicantIcon}
-              onClick={createToggle.toggleDrawer}
+              onClick={handleCreateApplicant}
             />
           </div>
-        }
-        action>
-        {tableData.length > 0 ? (
-          <div className="flex justify-between items-center">
-            <SearchBar value={search} onChange={handleSearch} />
+        }>
+        <div className="flex justify-between items-center">
+          <SearchBar
+            dir="left"
+            value={search}
+            onChange={handleSearch}
+            disabled={isPending}
+          />
 
-            <div className="flex gap-4">
-              <GradeFilterButton
-                title="Grade"
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch({
-                    id: "studentDetails.yearLevel",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-              <StatusFilterButton
-                title="Filter"
-                onSelect={(e: MouseEvent<HTMLButtonElement>) =>
-                  handleColumnSearch({
-                    id: "status",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-              <MoreOptionButton />
-            </div>
-          </div>
-        ) : (
-          <span></span>
-        )}
-        <Table layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 200px" />
+          <div className="flex justify-between gap-4"></div>
+        </div>
+
+        <Table
+          config={ApplicantTableConfig}
+          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+        />
       </BaseLayout>
 
-      {DrawerLists(selected, toggleOptions).map(
-        ({ id, Component, state, ...props }: DrawerListProps) =>
-          state ? <Component key={id} state={state} {...props} /> : null
-      )}
+      <DrawerWrapper state="create" Component={CreateApplicant} />
+      <DrawerWrapper state="edit" Component={EditApplicant} />
+      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );
 };
 
-export default Annoucement;
+export default Applicant;

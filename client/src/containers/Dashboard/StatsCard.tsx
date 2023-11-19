@@ -1,5 +1,7 @@
-import { Badge, Typography } from "../../components";
 import FetchLoader from "../General/FetchLoader";
+import Badge from "../../components/Badge";
+import Typography from "../../components/Typography";
+
 interface StatsCardProps {
   title?: string;
   count?: string | number;
@@ -21,7 +23,7 @@ const StatsCard = ({ count, title, increase, isLoading }: StatsCardProps) => {
             <Typography as="h5" className="cursor-default">
               Total
             </Typography>
-            <Badge as="stats" title={`+${increase}`} className="bg-red" />
+            <Badge as="stats" title={`+${increase}`} />
           </div>
 
           <div className="flex flex-col">

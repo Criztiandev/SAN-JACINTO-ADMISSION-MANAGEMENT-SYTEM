@@ -1,7 +1,7 @@
 import { createElement } from "react";
-import { TextProps } from "../interface/Component.Type";
+import { TypographyProps } from "../interface/Component.Type";
 
-const Typography = ({ as, className, children }: TextProps) => {
+const Typography = ({ as, className, children }: TypographyProps) => {
   return createElement(as, { className: className }, children);
 };
 

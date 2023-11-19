@@ -17,7 +17,7 @@ const OutroModal = ({ data, onNext }: OutrModalProps) => {
           <h2>{title}</h2>
           <p>{desc}</p>
         </div>
-        <Button as="button" title="Next" onClick={onNext} />
+        <Button type="button" title="Next" onClick={onNext} />
       </div>
     </div>
   );

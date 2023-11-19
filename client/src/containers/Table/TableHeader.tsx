@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { flexRender } from "@tanstack/react-table";
-import { Image } from "../../components";
 import AscIcon from "../../assets/icons/Expand_up_light.svg";
 import DescIcon from "../../assets/icons/Expand_down_light.svg";
+import Image from "../../components/Image";
 
 interface TableHeaderProps {
   headers: any;

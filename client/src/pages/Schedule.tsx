@@ -1,47 +1,91 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SearchBar, Button } from "../components";
 import BaseLayout from "../layouts/BaseLayout";
-import { useState } from "react";
-import BatchTable from "../containers/Schedule/BatchTable";
-import { ApplicantIcon, CalendarIcon } from "../assets/icons";
-import ScheduleCalendar from "../containers/Schedule/ScheduleCalendar";
+import { momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import Button from "../components/Button";
+import CalendarIcon from "../assets/icons/Calendar_Dark.svg";
+import useURL from "../hooks/useURL";
+import { useEffect } from "react";
+import useFetch from "../hooks/useFetch";
+import Calendar from "../components/Calendar";
+import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
+import CreateCalendar from "../containers/Schedule/CreateCalendar";
+import ViewCalendar from "../containers/Schedule/ViewCalendar";
+import FetchLoader from "../containers/General/FetchLoader";
+import DeleteNotice from "../containers/Drawers/DeleteNotice";
+
+const formatDate = (data: any) => {
+  return data?.map(({ schedule, ...items }: any) => {
+    const origDate = new Date(schedule?.end);
+    origDate.setDate(origDate.getDate() - 1);
+
+    const formatDate = origDate?.toISOString();
+
+    return {
+      start: new Date(schedule.start),
+      end: formatDate,
+      ...items,
+    };
+  });
+};
 
 const Schedule = () => {
-  const currentDate = new Date();
-  const [selectedTab, setSelectedTab] = useState("calendar");
+  const { updateURL, queryParams } = useURL();
+
+  const { data, isError, isLoading, refetch } = useFetch({
+    route: "/schedule",
+    key: ["schedules"],
+  });
+
+  const isRefetch = queryParams.get("refetch");
+  const handleCreateSchedule = (data: any) => {
+    const { start, end } = data;
+    updateURL(`state=create&start=${start}&end=${end}`);
+  };
+
+  const handleSelectSchedule = (data: any) => {
+    const { _id } = data;
+    updateURL(`state=view&APID=${_id}`);
+  };
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      updateURL("/");
+    }
+  }, [isRefetch]);
 
   return (
-    <BaseLayout title="Schedule">
-      <div className="flex justify-between items-center">
-        {selectedTab === "batch" ? (
-          <SearchBar dir="left" />
-        ) : (
-          <div>{currentDate.getDate()}</div>
-        )}
-
-        <div className="flex gap-4 items-center">
+    <>
+      <BaseLayout
+        title="Schedule"
+        actions={
           <Button
             icon={CalendarIcon}
-            as={"outlined"}
-            title="Calendar"
-            onClick={() => setSelectedTab("calendar")}
+            title="Create"
+            onClick={() => updateURL("state=create")}
           />
-          <Button
-            icon={ApplicantIcon}
-            title="Batch"
-            as={"outlined"}
-            onClick={() => setSelectedTab("batch")}
-          />
-          {/* <Dropdown /> */}
+        }
+        free>
+        <div className="relative  w-full rounded-[5px] flex flex-col gap-2 overflow-hidden  h-[78vh]">
+          {isLoading || isError ? (
+            <FetchLoader />
+          ) : (
+            <Calendar
+              events={formatDate(data)}
+              onSelectSlot={handleCreateSchedule}
+              onDoubleClickEvent={handleSelectSchedule}
+              localizer={momentLocalizer(moment)}
+            />
+          )}
         </div>
-      </div>
-      <section className="grid grid-cols-[auto_300px] gap-4">
-        {selectedTab === "calendar" ? <ScheduleCalendar /> : <BatchTable />}
+      </BaseLayout>
 
-        <aside className="border border-gray-400 rounded-[5px]"></aside>
-      </section>
-      <div></div>
-    </BaseLayout>
+      <DrawerWrapper state="create" Component={CreateCalendar} />
+      <DrawerWrapper state="view" Component={ViewCalendar} />
+      <DrawerWrapper state="delete" Component={DeleteNotice} />
+    </>
   );
 };
 
