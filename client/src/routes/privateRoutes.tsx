@@ -1,12 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 import { FC, ReactElement, Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { TableProvider, ScheduleProvider } from "../context";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import ErrorPage from "../pages/ErrorPage";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
 import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton.tsx";
+import TableProvider from "../context/TableContext.tsx";
+import ScheduleProvider from "../context/ScheduleContext.tsx";
 
 const ApplicantPage = lazy(() => import("../pages/Applicant"));
 const DashboardPage = lazy(() => import("../pages/Dashboard"));

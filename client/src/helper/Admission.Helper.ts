@@ -2,7 +2,6 @@
 import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
 import { toast } from "react-toastify";
 import { useModalOptions } from "../interface/Modal.Type";
-import { createApplicant } from "../api/Applicant.Api";
 import {
   GradeDetails,
   GradeLevel,
@@ -74,8 +73,4 @@ export const handleNextModal = (
 ) => {
   if (outro.isLastIndex) handleRegistrationReset(outro, resetIndex, navigate);
   return outro.handleNext();
-};
-
-export const handleApplicantMutation = async (data: ApplicantModelProps) => {
-  return await createApplicant(data);
 };

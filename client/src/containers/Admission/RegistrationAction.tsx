@@ -1,5 +1,8 @@
-import { Button, IconButton } from "../../components";
-import { ResetIcon, PrevIcon, NextIcon } from "../../assets/icons";
+import Button from "../../components/Button";
+import IconButton from "../../components/IconButton";
+import ResetIcon from "../../assets/icons/Reset.svg";
+import PrevIcon from "../../assets/icons/Expand_left_light.svg";
+import NextIcon from "../../assets/icons/Expand_right_light.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useMultipleFormOption } from "../../interface/MultiStep.Type";
 

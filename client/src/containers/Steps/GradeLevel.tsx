@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
-import { Typography } from "../../components";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { yearLevelItem } from "../../data/Stepper.Data";
-
+import Typography from "../../components/Typography";
 const GradeLevel = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState("");
   FetchLocalStorageFormData("applicant_form");

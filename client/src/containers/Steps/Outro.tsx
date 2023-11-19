@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Carousel from "../../components/Carousel";
-import { Typography } from "../../components";
-
+import Typography from "../../components/Typography";
 const Outro = () => {
   return (
     <div className="flex  justify-center items-center h-full">

@@ -7,13 +7,15 @@ import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
-import { IconButton } from "../../components";
+import ResetIcon from "../../assets/icons/Reset.svg";
+import FatherIcon from "../../assets/icons/Father.svg";
+import MotherIcon from "../../assets/icons/Mother.svg";
 
-import { ResetIcon, FatherIcon, Mother } from "../../assets/icons";
 import {
   GuardianInputs,
   legalGuardianInputDetails,
 } from "../../data/Stepper.Data";
+import IconButton from "../../components/IconButton";
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -76,7 +78,7 @@ const GuardianDetails = () => {
               onClick={() => setSelectedGuardian("Father")}
             />
             <IconButton
-              icon={Mother}
+              icon={MotherIcon}
               as="outlined"
               onClick={() => setSelectedGuardian("Father")}
             />

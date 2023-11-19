@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormikContext } from "formik";
-import { Typography, Input, Select } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
 
-import ItemSelect from "../Form/ItemSelect";
-import { OmitInputObject } from "../../utils/OmitUtils";
 import { motion } from "framer-motion";
 import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
 import { GradeLevelTrack } from "../../helper/GradeLevel.Helper";
 import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import CustomCarousel from "./CustomCarousel";
+import Typography from "../../components/Typography";
+import Input from "../../components/Input";
+import Select from "../../components/Select";
+import ItemSelect from "../Form/ItemSelect";
+import { OmitInputObject } from "../../utils/OmitUtils";
 
 const StudentDetails = () => {
   FetchLocalStorageFormData("applicant_form");

@@ -1,8 +1,7 @@
-import { Input } from "../../components";
+import Input from "../../components/Input";
 import { gradeDetailsInputModel } from "../../data/Stepper.Data";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { motion } from "framer-motion";
-
 const GradeDetails = () => {
   FetchLocalStorageFormData("applicant_form");
   return (

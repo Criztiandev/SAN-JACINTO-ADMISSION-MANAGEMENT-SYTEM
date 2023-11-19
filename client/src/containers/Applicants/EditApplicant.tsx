@@ -108,7 +108,7 @@ const EditApplicant = ({ APID }: { APID: string }) => {
             </div>
           </section>
           {ApplicationFormInputModel.map((props) => (
-            <InputSections key={props.title} {...props} isEdit={!isEdit} />
+            <InputSections key={props.title} {...props} disable={!isEdit} />
           ))}
         </main>
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { Typography } from "../../components";
 import Carousel from "../../components/Carousel";
+import Typography from "../../components/Typography";
 
 interface CustomCarouselProps {
   data: Array<object>;

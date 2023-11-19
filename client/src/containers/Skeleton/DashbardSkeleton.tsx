@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import FetchLoader from "../General/FetchLoader";
-import StatsLoader from "../Loaders/StatsLoader";
 import SkeletonLayout from "../../layouts/SkeletonLayout";
 import Skeleton from "react-loading-skeleton";
+import StatsLoader from "../General/StatsLoader";
 
 const DashboardSkeleton = () => {
   return (

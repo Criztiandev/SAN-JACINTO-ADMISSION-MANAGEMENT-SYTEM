@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "../../components";
+import Button from "../../components/Button";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface OutrModalProps {
   data: any;
   onNext: () => void;
