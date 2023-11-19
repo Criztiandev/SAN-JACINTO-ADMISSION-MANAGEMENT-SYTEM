@@ -17,7 +17,7 @@ export const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState("64cb92131f09b7706b48b3f5");
+  const [user, setUser] = useState("");
 
   const handleMutateUser = (UID: string) => setUser(UID);
 

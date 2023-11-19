@@ -1,8 +1,8 @@
-import { Drawer } from "../../components";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "../../assets/icons/Menu.svg";
 import { useState } from "react";
+import Drawer from "../../components/Drawer";
 
 interface SidebarProps {
   state: boolean;
