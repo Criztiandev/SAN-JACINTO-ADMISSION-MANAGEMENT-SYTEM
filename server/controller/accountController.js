@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler";
 import adminModel from "../models/adminModel.js";
 
 export const authenticatedController = asyncHandler(async (req, res) => {
-  // remember to change it to session
   const { UID } = req.params;
   const user = await adminModel
     .findById(UID)
@@ -16,3 +15,6 @@ export const authenticatedController = asyncHandler(async (req, res) => {
     messge: "Fetched Successfully",
   });
 });
+
+export const createUserAccount = asyncHandler(async (req, res) => {});
+export const createAdminAccount = asyncHandler(async (req, res) => {});

@@ -1,8 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-// External Dependencies
-
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
@@ -17,7 +13,6 @@ import useFetch from "../hooks/useFetch";
 import { ColumnDef } from "@tanstack/react-table";
 
 // Containers
-import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
@@ -25,7 +20,6 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
-import EditApplicant from "../containers/Applicants/EditApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
@@ -34,6 +28,10 @@ import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
+import IconButton from "../components/IconButton";
+import AcceptIcon from "../assets/icons/Done_light.svg";
+import MessageIcon from "../assets/icons/Message_light.svg";
+import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
@@ -46,27 +44,35 @@ const Applicant = () => {
   });
 
   // mutation
-  const { mutateAsync } = useCustomMutation({
+  const examiniesMutation = useCustomMutation({
     route: `/examiniees/create`,
     overrideFn: () => refetch(),
+  });
+
+  const archieveMutation = useCustomMutation({
+    route: "/applicant/status",
+    overrideFn: () => refetch(),
+    type: "put",
   });
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
   };
 
-  const handleAction = async (id: string, currentStatus: string) => {
-    void mutateAsync({ UID: id, status: currentStatus });
+  const handleAccept = (id: string) => {
+    examiniesMutation.mutate({ UID: id });
+  };
+
+  const handleArchive = (id: string, status: string) => {
+    archieveMutation.mutate({ _id: id, status });
   };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
-      id: "select",
       header: "Name",
       accessorFn: ({ personalDetails }) =>
         `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
       cell: ({ row, getValue }) => {
-        console.log(row);
         const { original } = row;
         return (
           <FirstColumn
@@ -113,8 +119,22 @@ const Applicant = () => {
     {
       header: "Action",
       cell: ({ row }) => {
+        const UID = row.original._id;
         return (
-          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+          <div className="flex gap-4">
+            <IconButton
+              icon={AcceptIcon}
+              as="outlined"
+              onClick={() => handleAccept(UID)}
+            />
+            <IconButton
+              icon={ArchieveIcon}
+              as="outlined"
+              onClick={() => handleArchive(UID, "archive")}
+            />
+            <IconButton icon={MessageIcon} as="outlined" />
+          </div>
+          // <ApplicantActionColumn data={row.original} onAction={handleAction} />
         );
       },
     },
@@ -175,7 +195,6 @@ const Applicant = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="edit" Component={EditApplicant} />
       <DrawerWrapper state="archive " Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />

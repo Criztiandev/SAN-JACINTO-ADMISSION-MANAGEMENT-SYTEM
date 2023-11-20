@@ -3,9 +3,8 @@ import applicantModel from "../models/applicantModel.js";
 import { sendEmail } from "../utils/email.uitls.js";
 
 export const createApplicant = asyncHandler(async (req, res) => {
-  const { studentDetails, personalDetails } = req.body;
-  const { LRN, PSA } = studentDetails;
-  const { email, contact } = personalDetails;
+  const { personalDetails } = req.body;
+  const { email } = personalDetails;
 
   // Check for existing records
   const fieldsToCheck = [
@@ -45,16 +44,17 @@ export const createApplicant = asyncHandler(async (req, res) => {
   });
 
   if (!currentEmail) throw new Error("Something went wrong, Please Try again");
-
   res.status(201).json({ message: "Applicant created successfully" });
 });
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
+  const { status } = req.query;
+
   const fields =
     "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
 
   const applicants = await applicantModel
-    .find({ status: "pending", role: "applicant" })
+    .find({ status: status || "pending", role: "applicant" })
     .select(fields);
 
   res.status(200).json({
@@ -107,6 +107,25 @@ export const updateApplicant = asyncHandler(async (req, res) => {
   res.status(200).json({
     payload: _applicant,
     message: "Updated Credentials Successfully",
+  });
+});
+
+export const updateApplicantByStatus = asyncHandler(async (req, res) => {
+  const { _id, status } = req.body;
+
+  const _applicant = await applicantModel.findById(_id).lean().select("_id");
+  if (!_applicant) throw new Error("Applicant Doesnt exist");
+
+  const _update = await applicantModel.findOneAndUpdate(
+    { _id: _id },
+    { status: status },
+    { new: true }
+  );
+  if (!_update) throw new Error("Failed to update");
+
+  res.status(200).json({
+    payload: null,
+    message: "Updated Successfully",
   });
 });
 

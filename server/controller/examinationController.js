@@ -42,66 +42,67 @@ export const promoteExaminiees = asyncHandler(async (req, res) => {
 
 export const createExaminiees = asyncHandler(async (req, res) => {
   const { UID } = req.body;
+  console.log(UID);
 
-  // find the applicant
-  const _applicant = await applicantModel
-    .findOne({ _id: UID })
-    .lean()
-    .select(" _id studentDetails.yearLevel studentDetails.track role status");
-  if (!_applicant) throw new Error("Applicant Doesnt Exist");
+  // // find the applicant
+  // const _applicant = await applicantModel
+  //   .findOne({ _id: UID })
+  //   .lean()
+  //   .select(" _id studentDetails.yearLevel studentDetails.track role status");
+  // if (!_applicant) throw new Error("Applicant Doesnt Exist");
 
-  const { yearLevel: level, track } = _applicant?.studentDetails;
+  // const { yearLevel: level, track } = _applicant?.studentDetails;
 
-  const prefrredLevels = ["Grade 7", "Grade 11", "Grade 12"].includes(level);
-  const prefrredTrack = ["SPE", "SPJ", "STEM"].includes(track);
+  // const prefrredLevels = ["Grade 7", "Grade 11", "Grade 12"].includes(level);
+  // const prefrredTrack = ["SPE", "SPJ", "STEM"].includes(track);
 
-  // Filter Examiniees
-  if (prefrredLevels && prefrredTrack) {
-    const query = { status: "accepted", role: "examiniees" };
+  // // Filter Examiniees
+  // if (prefrredLevels && prefrredTrack) {
+  //   const query = { status: "accepted", role: "examiniees" };
 
-    // Update the Applicant
-    const _accepted = await applicantModel
-      .findByIdAndUpdate(UID, query, { new: true })
-      .lean()
-      .select("_id personalDetails studentDetails.LRN");
+  //   // Update the Applicant
+  //   const _accepted = await applicantModel
+  //     .findByIdAndUpdate(UID, query, { new: true })
+  //     .lean()
+  //     .select("_id personalDetails studentDetails.LRN");
 
-    if (!_accepted) throw new Error("Something went wrong, Please Try again");
+  //   if (!_accepted) throw new Error("Something went wrong, Please Try again");
 
-    const { lastName, firstName, middleName, suffix, email, contact } =
-      _accepted?.personalDetails;
-    const { LRN } = _accepted?.studentDetails;
+  //   const { lastName, firstName, middleName, suffix, email, contact } =
+  //     _accepted?.personalDetails;
+  //   const { LRN } = _accepted?.studentDetails;
 
-    // generate permit
-    const currentDate = dayjs();
-    const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
-    const permit = `${LRN.substring(0, 6)}-${formatedDate}-${track}`;
+  //   // generate permit
+  //   const currentDate = dayjs();
+  //   const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
+  //   const permit = `${LRN.substring(0, 6)}-${formatedDate}-${track}`;
 
-    const _examiniees = await examinieesModel.create({
-      APID: UID,
-      permitID: permit,
-      fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
-      email,
-      contact,
-      track,
-    });
+  //   const _examiniees = await examinieesModel.create({
+  //     APID: UID,
+  //     permitID: permit,
+  //     fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
+  //     email,
+  //     contact,
+  //     track,
+  //   });
 
-    if (!_examiniees) throw new Error("Something went wrong,Please Try again");
+  //   if (!_examiniees) throw new Error("Something went wrong,Please Try again");
 
-    res.status(200).json({
-      payload: null,
-      message: "Accepted Applicant 123123",
-    });
+  //   res.status(200).json({
+  //     payload: null,
+  //     message: "Accepted Applicant 123123",
+  //   });
 
-    return;
-  }
+  //   return;
+  // }
 
-  // Regular student
-  const regular = await applicantModel.findOneAndUpdate(
-    { _id: UID },
-    { status: "accepted", role: "regular" },
-    { new: true }
-  );
-  if (!regular) throw new Error("Something went wrong");
+  // // Regular student
+  // const regular = await applicantModel.findOneAndUpdate(
+  //   { _id: UID },
+  //   { status: "accepted", role: "regular" },
+  //   { new: true }
+  // );
+  // if (!regular) throw new Error("Something went wrong");
 
   res.status(200).json({
     payload: null,

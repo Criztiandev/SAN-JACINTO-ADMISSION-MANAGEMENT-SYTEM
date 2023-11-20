@@ -1,8 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-// External Dependencies
-
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
@@ -17,7 +13,6 @@ import useFetch from "../hooks/useFetch";
 import { ColumnDef } from "@tanstack/react-table";
 
 // Containers
-import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
@@ -25,7 +20,6 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
-import EditApplicant from "../containers/Applicants/EditApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
@@ -34,39 +28,40 @@ import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
+import IconButton from "../components/IconButton";
+import MessageIcon from "../assets/icons/Message_light.svg";
+import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
   const { updateURL, navigateTo } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant",
+    route: "/applicant?status=archive",
     overrideFn: handleMutateData,
     key: ["applicants23"],
   });
 
-  // mutation
-  const { mutateAsync } = useCustomMutation({
-    route: `/examiniees/create`,
+  const archieveMutation = useCustomMutation({
+    route: "/applicant/status",
     overrideFn: () => refetch(),
+    type: "put",
   });
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
   };
 
-  const handleAction = async (id: string, currentStatus: string) => {
-    void mutateAsync({ UID: id, status: currentStatus });
+  const handleArchive = (id: string, status: string) => {
+    archieveMutation.mutate({ _id: id, status });
   };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
-      id: "select",
       header: "Name",
       accessorFn: ({ personalDetails }) =>
         `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
       cell: ({ row, getValue }) => {
-        console.log(row);
         const { original } = row;
         return (
           <FirstColumn
@@ -113,8 +108,17 @@ const Applicant = () => {
     {
       header: "Action",
       cell: ({ row }) => {
+        const UID = row.original._id;
         return (
-          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+          <div className="flex gap-4">
+            <IconButton
+              icon={ApplicantIcon}
+              as="outlined"
+              onClick={() => handleArchive(UID, "archive")}
+            />
+            <IconButton icon={MessageIcon} as="outlined" />
+          </div>
+          // <ApplicantActionColumn data={row.original} onAction={handleAction} />
         );
       },
     },
@@ -125,7 +129,7 @@ const Applicant = () => {
   return (
     <>
       <BaseLayout
-        title="Archieve"
+        title="Applicants"
         actions={
           <div className="flex gap-4">
             <Dropdown
@@ -175,8 +179,7 @@ const Applicant = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="edit" Component={EditApplicant} />
-      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="archive " Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>

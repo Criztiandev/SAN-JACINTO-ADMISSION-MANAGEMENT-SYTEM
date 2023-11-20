@@ -81,14 +81,6 @@ const Dashboard = () => {
             {/* // Action */}
             <Button title="Turn Off" className="hover:bg-red-500" />
           </div>
-          <div className="text-white">
-            <div className="flex gap-4 items-center">
-              <span>🟢 Status:</span>
-              <span className="bg-green-300 text-black px-3  py-1 rounded-full font-semibold cursor-default">
-                Active
-              </span>
-            </div>
-          </div>
         </section>
       </BaseLayout>
 
