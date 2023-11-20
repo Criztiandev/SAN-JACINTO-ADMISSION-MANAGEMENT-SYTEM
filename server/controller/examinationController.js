@@ -57,21 +57,17 @@ export const createExaminiees = asyncHandler(async (req, res) => {
 
   // Filter Examiniees
   if (prefrredLevels && prefrredTrack) {
-    console.log("Examinies");
-
     await acceptAsApplicant(_id, res);
     return;
   }
 
-  console.log("Regular");
-
   // Regular student
-  // const regular = await applicantModel.findByIdAndUpdate(
-  //   _id,
-  //   { status: "accepted", role: "regular" },
-  //   { new: true }
-  // );
-  // if (!regular) throw new Error("Something went wrong");
+  const regular = await applicantModel.findByIdAndUpdate(
+    _id,
+    { status: "accepted", role: "regular" },
+    { new: true }
+  );
+  if (!regular) throw new Error("Something went wrong");
 
   res.status(200).json({
     payload: null,

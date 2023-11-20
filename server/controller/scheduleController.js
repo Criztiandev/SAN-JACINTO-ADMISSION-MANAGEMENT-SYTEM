@@ -3,6 +3,7 @@ import scheduleModel from "../models/scheduleModel.js";
 import batchModel from "../models/batchModel.js";
 import examiniationModel from "../models/examiniationModel.js";
 import dayjs from "dayjs";
+import applicantModel from "../models/applicantModel.js";
 
 export const fetchAllSchedule = expressAsyncHandler(async (req, res) => {
   const schedules = await scheduleModel
@@ -101,22 +102,33 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
   updatedBatches.map(async (examinees) => {
     await Promise.all(
       examinees.map(async (ids) => {
-        const start = dayjs(create?.schedule?.start);
-        const end = dayjs(create?.schedule?.end);
+        const { start, end } = create?.schedule || {};
+        // check if the selected is examinnies
+        const _data = await applicantModel
+          .findOne({ _id: ids.toString() })
+          .lean()
+          .select("role");
 
-        // Format the start and end dates
-        const currentYear = new Date().getFullYear();
-        const formattedStartDate = start.format("MMM, D");
-        const formattedEndDate = end.format("MMM, D");
+        if (_data.role === "examiniees") {
+          await examiniationModel.findOneAndUpdate(
+            { APID: ids.toString() },
+            {
+              schedule: formatDate(dayjs(start), dayjs(end)),
+              status: "scheduled",
+            },
+            { new: true }
+          );
 
-        // Combine formatted start and end dates
-        const formattedDateRange = `${formattedStartDate} - ${formattedEndDate}, ${currentYear}`;
+          return;
+        }
 
-        await examiniationModel.findOneAndUpdate(
-          { APID: ids.toString() },
-          { schedule: formattedDateRange, status: "scheduled" },
+        await applicantModel.findOneAndUpdate(
+          { _id: ids.toString() },
+          { status: "scheduled" },
           { new: true }
         );
+
+        return;
       })
     );
   });
@@ -147,14 +159,32 @@ export const deleteSchedule = expressAsyncHandler(async (req, res) => {
   );
 
   // update all the examiniees
+
   updatedBatches.map(async (examinees) => {
     await Promise.all(
       examinees.map(async (ids) => {
-        await examiniationModel.findOneAndUpdate(
-          { APID: ids.toString() },
-          query,
+        const _data = await applicantModel
+          .findOne({ _id: ids.toString() })
+          .lean()
+          .select("role");
+
+        if (_data.role === "examiniees") {
+          await examiniationModel.findOneAndUpdate(
+            { APID: ids.toString() },
+            query,
+            { new: true }
+          );
+
+          return;
+        }
+
+        await applicantModel.findOneAndUpdate(
+          { _id: ids.toString() },
+          { status: "accepted" },
           { new: true }
         );
+
+        return;
       })
     );
   });
@@ -171,3 +201,17 @@ export const deleteSchedule = expressAsyncHandler(async (req, res) => {
     message: "Delete Schedule Successfully",
   });
 });
+
+// Utils
+
+const formatDate = (start, end) => {
+  // Format the start and end dates
+  const currentYear = new Date().getFullYear();
+  const formattedStartDate = start?.format("MMM, D");
+  const formattedEndDate = end?.format("MMM, D");
+
+  // Combine formatted start and end dates
+  const formattedDateRange = `${formattedStartDate} - ${formattedEndDate}, ${currentYear}`;
+
+  return formattedDateRange;
+};

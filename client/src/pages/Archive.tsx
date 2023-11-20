@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import Badge from "../components/Badge";
-import Applicants from "../assets/icons/Applicant_Dark.svg";
 // Context and Helpers
 import { useTableContext } from "../context/TableContext";
 import useFetch from "../hooks/useFetch";
@@ -21,25 +20,19 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
-import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
 import useCustomMutation from "../hooks/useCustomMutation";
-import useURL from "../hooks/useURL";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
 import IconButton from "../components/IconButton";
 import MessageIcon from "../assets/icons/Message_light.svg";
 import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
 
-const Applicant = () => {
+const Archive = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL, navigateTo } = useURL();
-
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant?status=archive",
     overrideFn: handleMutateData,
-    key: ["archieves"],
+    key: ["applicants"],
   });
 
   const archieveMutation = useCustomMutation({
@@ -47,10 +40,6 @@ const Applicant = () => {
     overrideFn: () => refetch(),
     type: "put",
   });
-
-  const handleCreateApplicant = () => {
-    updateURL("state=create");
-  };
 
   const handleArchive = (id: string, status: string) => {
     archieveMutation.mutate({ _id: id, status });
@@ -60,7 +49,7 @@ const Applicant = () => {
     {
       header: "Name",
       accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${personalDetails?.middleName}`,
       cell: ({ row, getValue }) => {
         const { original } = row;
         return (
@@ -78,8 +67,7 @@ const Applicant = () => {
       id: "yearLevel",
       header: "Grade Level",
       accessorFn: ({ studentDetails }) => {
-        const { yearLevel } = studentDetails;
-        return `${yearLevel.replace("Grade", "")}`;
+        return `${studentDetails?.yearLevel?.replace("Grade", "")}`;
       },
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
@@ -89,10 +77,7 @@ const Applicant = () => {
       header: "Guardian",
       accessorKey: "studentDetails.legalGuardian",
       accessorFn: ({ guardianDetails }) => {
-        const { firstName, middleName, lastName } =
-          guardianDetails.legalGuardian;
-
-        return `${lastName}, ${firstName} ${middleName[0]}.`;
+        return `${guardianDetails?.legalGuardian?.lastName}, ${guardianDetails?.legalGuardian?.firstName} ${guardianDetails?.legalGuardian?.middleName[0]}.`;
       },
     },
 
@@ -118,7 +103,6 @@ const Applicant = () => {
             />
             <IconButton icon={MessageIcon} as="outlined" />
           </div>
-          // <ApplicantActionColumn data={row.original} onAction={handleAction} />
         );
       },
     },
@@ -128,39 +112,7 @@ const Applicant = () => {
 
   return (
     <>
-      <BaseLayout
-        title="Applicants"
-        actions={
-          <div className="flex gap-4">
-            <Dropdown
-              as="outlined"
-              icon={"dfdf"}
-              option={[
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/examiniees"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/batch"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/masterlist"),
-                },
-              ]}
-              className="px-3 py-2 w-[150px]"
-            />
-            <Button
-              as="contained"
-              title="Create"
-              onClick={handleCreateApplicant}
-            />
-          </div>
-        }>
+      <BaseLayout title="Archive">
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
@@ -168,8 +120,6 @@ const Applicant = () => {
             onChange={handleSearch}
             disabled={isPending}
           />
-
-          <div className="flex justify-between gap-4"></div>
         </div>
 
         <Table
@@ -179,11 +129,10 @@ const Applicant = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="archive " Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );
 };
 
-export default Applicant;
+export default Archive;

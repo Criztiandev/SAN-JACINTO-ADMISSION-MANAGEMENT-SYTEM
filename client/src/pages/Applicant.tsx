@@ -40,7 +40,7 @@ const Applicant = () => {
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant",
     overrideFn: handleMutateData,
-    key: ["applicants23"],
+    key: ["applicants"],
   });
 
   // mutation
@@ -49,11 +49,11 @@ const Applicant = () => {
     overrideFn: () => refetch(),
   });
 
-  const archieveMutation = useCustomMutation({
-    route: "/applicant/status",
-    overrideFn: () => refetch(),
-    type: "put",
-  });
+  // const archieveMutation = useCustomMutation({
+  //   route: "/applicant/status",
+  //   overrideFn: () => refetch(),
+  //   type: "put",
+  // });
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
@@ -63,15 +63,15 @@ const Applicant = () => {
     examiniesMutation.mutate({ _id: id });
   };
 
-  const handleArchive = (id: string, status: string) => {
-    archieveMutation.mutate({ _id: id, status });
+  const handleArchive = (id: string) => {
+    updateURL(`APID=${id}&state=archive`);
   };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
       header: "Name",
       accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${personalDetails?.middleName}`,
       cell: ({ row, getValue }) => {
         const { original } = row;
         return (
@@ -89,8 +89,7 @@ const Applicant = () => {
       id: "yearLevel",
       header: "Grade Level",
       accessorFn: ({ studentDetails }) => {
-        const { yearLevel } = studentDetails;
-        return `${yearLevel.replace("Grade", "")}`;
+        return `${studentDetails?.yearLevel?.replace("Grade", "")}`;
       },
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
@@ -100,10 +99,7 @@ const Applicant = () => {
       header: "Guardian",
       accessorKey: "studentDetails.legalGuardian",
       accessorFn: ({ guardianDetails }) => {
-        const { firstName, middleName, lastName } =
-          guardianDetails.legalGuardian;
-
-        return `${lastName}, ${firstName} ${middleName[0]}.`;
+        return `${guardianDetails?.legalGuardian?.lastName}, ${guardianDetails?.legalGuardian?.firstName} ${guardianDetails?.legalGuardian?.middleName[0]}.`;
       },
     },
 
@@ -130,7 +126,7 @@ const Applicant = () => {
             <IconButton
               icon={ArchieveIcon}
               as="outlined"
-              onClick={() => handleArchive(UID, "archive")}
+              onClick={() => handleArchive(UID)}
             />
             <IconButton icon={MessageIcon} as="outlined" />
           </div>
@@ -195,7 +191,7 @@ const Applicant = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="archive " Component={ArchieveApplicant} />
+      <DrawerWrapper state="archive" Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
