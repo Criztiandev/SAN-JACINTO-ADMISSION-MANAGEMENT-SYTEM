@@ -72,12 +72,10 @@ export const verifyUserController = asyncHandler(async (req, res) => {
 
   // generate secret
   const secret = process.env.JWT_SECRET + _user.password;
-
-  console.log(UID);
-  console.log(token);
-
   try {
     const payload = jwt.verify(token, secret);
+
+    // remove token;
 
     const _sessionExist = await sessionModel.findOne({ UID: UID });
     if (_sessionExist) throw new Error("Applicant already logged in");

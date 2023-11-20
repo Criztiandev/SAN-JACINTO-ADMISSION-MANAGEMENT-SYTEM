@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { toast } from "react-toastify";
 import { handleAxiosError } from "../utils/Api.utils";
 
 interface useCustomMutationProps {
@@ -23,7 +22,6 @@ const useCustomMutation = ({
     },
 
     onSuccess: () => {
-      toast.success("Applicant Accepted Successfully");
       if (overrideFn) {
         overrideFn();
       }

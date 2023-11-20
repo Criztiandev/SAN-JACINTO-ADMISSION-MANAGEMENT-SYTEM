@@ -53,11 +53,7 @@ const useFormSubmit = ({
     setCurrentPayload(payload.data);
     toast.success(message);
 
-    if (redirect) {
-      // Wait for seconds (adjust timeout duration if needed)
-      const timeoutDuration = 1000;
-      await new Promise((resolve) => setTimeout(resolve, timeoutDuration));
-
+    if (redirect && isSuccess) {
       navigate(redirect);
     }
   };

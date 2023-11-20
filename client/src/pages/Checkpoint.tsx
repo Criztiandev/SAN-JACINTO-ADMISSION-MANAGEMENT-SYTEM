@@ -3,20 +3,28 @@ import { motion } from "framer-motion";
 import useFormSubmit from "../hooks/useFormSubmit";
 import Typography from "../components/Typography";
 import useURL from "../hooks/useURL";
+import { useAuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Checkpoint = () => {
-  const { queryParams } = useURL();
+  const { login } = useAuthContext();
+  const { queryParams, redirect } = useURL();
   const UID = queryParams.get("id");
   const token = queryParams.get("ver");
-  if (!UID || !token) throw new Error("Invalid Route, Please Try again");
 
   const { handleSubmit, isPending } = useFormSubmit({
     route: "/auth/verify",
-    overideFn: async () => {
-      sessionStorage.setItem("UID", UID);
+    overideFn: () => {
+      login(UID || "");
     },
     redirect: "/",
   });
+
+  if (!UID || !token) {
+    toast.error("Invalid Route, Please Try again later");
+    redirect("/");
+    return;
+  }
 
   return (
     <div className="h-[100vh] w-full bg-backgroundImage bg-cover flex justify-end">

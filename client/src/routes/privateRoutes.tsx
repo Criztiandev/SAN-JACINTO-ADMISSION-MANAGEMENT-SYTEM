@@ -8,6 +8,7 @@ import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
 import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton.tsx";
 import TableProvider from "../context/TableContext.tsx";
 import ScheduleProvider from "../context/ScheduleContext.tsx";
+import Redirect from "../pages/System/Redirect.tsx";
 
 const ApplicantPage = lazy(() => import("../pages/Applicant"));
 const DashboardPage = lazy(() => import("../pages/Dashboard"));
@@ -37,6 +38,11 @@ const ProviderWrapper: FC<ProviderWrapperProps> = ({ children, loader }) => {
 };
 
 const routes = [
+  {
+    path: "*",
+    element: <Redirect />,
+  },
+
   {
     path: "/",
     element: (
