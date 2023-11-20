@@ -53,7 +53,7 @@ const useFormSubmit = ({
     setCurrentPayload(payload.data);
     toast.success(message);
 
-    if (redirect && isSuccess) {
+    if (redirect || (redirect && isSuccess)) {
       navigate(redirect);
     }
   };

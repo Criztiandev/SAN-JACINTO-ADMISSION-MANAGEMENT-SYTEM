@@ -1,6 +1,8 @@
 import expressAsyncHandler from "express-async-handler";
 import scheduleModel from "../models/scheduleModel.js";
 import batchModel from "../models/batchModel.js";
+import examiniationModel from "../models/examiniationModel.js";
+import dayjs from "dayjs";
 
 export const fetchAllSchedule = expressAsyncHandler(async (req, res) => {
   const schedules = await scheduleModel
@@ -80,15 +82,44 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
   if (!create) throw new Error("Something wen wrong");
 
   // update all batch
-  await Promise.all(
+  const updatedBatches = await Promise.all(
     batches.map(async (id) => {
-      await batchModel.findOneAndUpdate(
-        { _id: id },
-        { schedule: create._id, status: "ongoing" },
-        { new: true }
-      );
+      const updatedBatch = await batchModel
+        .findByIdAndUpdate(
+          { _id: id },
+          { schedule: create._id, status: "ongoing" },
+          { new: true }
+        )
+        .lean()
+        .select("selected");
+
+      return updatedBatch.selected;
     })
   );
+
+  // update the applicant by schedule and status
+  updatedBatches.map(async (examinees) => {
+    await Promise.all(
+      examinees.map(async (ids) => {
+        const start = dayjs(create?.schedule?.start);
+        const end = dayjs(create?.schedule?.end);
+
+        // Format the start and end dates
+        const currentYear = new Date().getFullYear();
+        const formattedStartDate = start.format("MMM, D");
+        const formattedEndDate = end.format("MMM, D");
+
+        // Combine formatted start and end dates
+        const formattedDateRange = `${formattedStartDate} - ${formattedEndDate}, ${currentYear}`;
+
+        await examiniationModel.findOneAndUpdate(
+          { APID: ids.toString() },
+          { schedule: formattedDateRange, status: "scheduled" },
+          { new: true }
+        );
+      })
+    );
+  });
 
   res.status(200).json({
     payload: null,
@@ -99,19 +130,36 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
 export const deleteSchedule = expressAsyncHandler(async (req, res) => {
   const { id: APID } = req.params;
 
-  const _schedle = await scheduleModel.findOne({ _id: APID }).lean();
+  const _schedule = await scheduleModel.findOne({ _id: APID }).lean();
 
+  const { batches } = _schedule;
+  const query = { schedule: null, status: "pending" };
   // update all the batches to pending
-  await Promise.all(
-    _schedle.batches.map(async (id) => {
-      await batchModel.findOneAndUpdate(
-        { _id: id },
-        { schedule: null, status: "pending" },
-        { new: true }
-      );
+  const updatedBatches = await Promise.all(
+    batches.map(async (id) => {
+      const updatedBatch = await batchModel
+        .findByIdAndUpdate({ _id: id }, query, { new: true })
+        .lean()
+        .select("selected");
+
+      return updatedBatch.selected;
     })
   );
 
+  // update all the examiniees
+  updatedBatches.map(async (examinees) => {
+    await Promise.all(
+      examinees.map(async (ids) => {
+        await examiniationModel.findOneAndUpdate(
+          { APID: ids.toString() },
+          query,
+          { new: true }
+        );
+      })
+    );
+  });
+
+  //delete
   const schedule = await scheduleModel
     .findByIdAndDelete(APID)
     .lean()

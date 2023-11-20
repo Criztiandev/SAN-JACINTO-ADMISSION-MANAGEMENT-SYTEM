@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // External Imports
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { motion } from "framer-motion";
 import { useState, MouseEvent } from "react";
 
@@ -46,7 +46,7 @@ const CreateBatch = () => {
 
   const payload =
     type === "examinition"
-      ? examinationQuery?.data?.filter((field) => {
+      ? examinationQuery?.data?.filter((field: any) => {
           const { studentDetails } = field;
           return studentDetails.track === preferedLevel;
         })
@@ -136,8 +136,6 @@ const CreateBatch = () => {
                         { title: "STEM", icon: "" },
                       ]}
                     />
-                    {/* Step 2: Add "Select All" checkbox */}
-                    <Field type="checkbox" name="toggle" />
                   </div>
                 )}
               </div>
