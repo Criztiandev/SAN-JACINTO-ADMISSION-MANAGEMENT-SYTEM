@@ -60,7 +60,7 @@ const Applicant = () => {
   };
 
   const handleAccept = (id: string) => {
-    examiniesMutation.mutate({ UID: id });
+    examiniesMutation.mutate({ _id: id });
   };
 
   const handleArchive = (id: string, status: string) => {
