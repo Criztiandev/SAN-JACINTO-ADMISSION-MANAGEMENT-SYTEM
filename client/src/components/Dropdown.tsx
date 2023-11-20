@@ -21,8 +21,8 @@ const Dropdown = ({ className, option, ...props }: DropdownProps) => {
           }`}>
           {option.map(({ icon, title, onClick: optionClick }: OptionItem) => (
             <motion.button
-              type="button"
               key={title}
+              type="button"
               whileHover={{ scale: 1.05 }}
               className="flex gap-2 py-1"
               value={title}

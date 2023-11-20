@@ -39,7 +39,7 @@ const Applicant = () => {
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant?status=archive",
     overrideFn: handleMutateData,
-    key: ["applicants23"],
+    key: ["archieves"],
   });
 
   const archieveMutation = useCustomMutation({
@@ -114,7 +114,7 @@ const Applicant = () => {
             <IconButton
               icon={ApplicantIcon}
               as="outlined"
-              onClick={() => handleArchive(UID, "archive")}
+              onClick={() => handleArchive(UID, "pending")}
             />
             <IconButton icon={MessageIcon} as="outlined" />
           </div>

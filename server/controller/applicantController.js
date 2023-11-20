@@ -48,13 +48,13 @@ export const createApplicant = asyncHandler(async (req, res) => {
 });
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
-  const { status } = req.query;
+  const { status, role } = req.query;
 
   const fields =
-    "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
+    "_id studentDetails.LRN studentDetails.yearLevel studentDetails.track personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
 
   const applicants = await applicantModel
-    .find({ status: status || "pending", role: "applicant" })
+    .find({ status: status || "pending", role: role || "applicant" })
     .select(fields);
 
   res.status(200).json({
