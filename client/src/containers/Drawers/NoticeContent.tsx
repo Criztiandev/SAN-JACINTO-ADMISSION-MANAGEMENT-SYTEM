@@ -2,24 +2,41 @@ import Typography from "../../components/Typography";
 import Button from "../../components/Button";
 import useURL from "../../hooks/useURL";
 import { useAuthContext } from "../../context/AuthContext";
-import { toast } from "react-toastify";
+
+import useCustomMutation from "../../hooks/useCustomMutation";
 
 const NoticeContent = () => {
-  const { user, handleMutateUser } = useAuthContext();
-  const { navigateBack, queryParams, updateURL } = useURL();
-
+  const { user, logout } = useAuthContext();
+  const { navigateBack, queryParams, redirect } = useURL();
   const title = queryParams.get("state") || "title";
 
-  const handleCancel = () => {
-    navigateBack;
-  };
+  const mutation = useCustomMutation({
+    route: `/auth/session/${user}`,
+    type: "delete",
+  });
 
   const handleConfirm = () => {
-    if (user) {
-      handleMutateUser("");
-      updateURL("/");
-      toast.success("Log out Successfully");
-    }
+    const performLogout = async () => {
+      try {
+        if (user) {
+          await mutation?.mutateAsync({});
+          logout();
+
+          // Wait for seconds (adjust timeout duration if needed)
+          const timeoutDuration = 1000;
+          await new Promise((resolve) => setTimeout(resolve, timeoutDuration));
+
+          redirect("/");
+        }
+      } catch (error) {
+        console.error("Error during confirmation:", error);
+      }
+    };
+
+    performLogout();
+  };
+  const handleCancel = () => {
+    navigateBack();
   };
 
   return (

@@ -4,7 +4,6 @@ import Input from "../../components/Input";
 import Typography from "../../components/Typography";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { useFormikContext } from "formik";
-import { IconButton } from "../../components";
 import CloseIcon from "../../assets/icons/Close_round_light.svg";
 import DoneIcon from "../../assets/icons/Done_light.svg";
 
@@ -17,6 +16,7 @@ import {
   personalDetailsInputModel,
 } from "../../data/Stepper.Data";
 import SwitchButton from "./SwitchButton";
+import IconButton from "../../components/IconButton";
 
 const PermanentAddress = () => {
   const { setItems, getItem } = useLocalStorage("address_btn");

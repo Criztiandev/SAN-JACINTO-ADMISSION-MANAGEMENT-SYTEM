@@ -6,7 +6,7 @@ import { RefObject } from "react";
 
 interface CarouselProps extends BaseProps {
   width?: number | string;
-  direction?: "center";
+  direction?: "center" | "left";
 }
 
 const Carousel = ({ width = "700px", children, direction }: CarouselProps) => {

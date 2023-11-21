@@ -8,8 +8,6 @@ import StatsSection from "../containers/Dashboard/StatsSection";
 import TabAction from "../containers/Dashboard/TabAction";
 import TabContent from "../containers/Dashboard/TabContent";
 import useFetch from "../hooks/useFetch";
-import Button from "../components/Button";
-import Typography from "../components/Typography";
 import BaseLayout from "../layouts/BaseLayout";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import IconButton from "../components/IconButton";
@@ -65,30 +63,6 @@ const Dashboard = () => {
           />
 
           <TabContent selected={activePanel} pending={isPending} />
-        </section>
-
-        <section className="h-80vh bg-gray-500 p-4 rounded-[5px] grid grid-cols-[200px_auto]">
-          <div className="h-full flex flex-col items-center gap-4">
-            {/* //Profile */}
-            <div className="w-[128px] h-[128px] rounded-full border border-gray-400"></div>
-            {/* // Details */}
-            <div className="text-center text-gray-100">
-              <Typography as="h6">Criztian Jade M Tuplano</Typography>
-              <Typography as="span" className="text-sm">
-                @criztindev
-              </Typography>
-            </div>
-            {/* // Action */}
-            <Button title="Turn Off" className="hover:bg-red-500" />
-          </div>
-          <div className="text-white">
-            <div className="flex gap-4 items-center">
-              <span>🟢 Status:</span>
-              <span className="bg-green-300 text-black px-3  py-1 rounded-full font-semibold cursor-default">
-                Active
-              </span>
-            </div>
-          </div>
         </section>
       </BaseLayout>
 

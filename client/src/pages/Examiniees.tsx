@@ -15,10 +15,11 @@ import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
-
+import GridIcon from "../assets/icons/Group.svg";
 // Assets
 import Button from "../components/Button";
 import useURL from "../hooks/useURL";
+import IconButton from "../components/IconButton";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
@@ -59,21 +60,24 @@ const Examiniees = () => {
       header: "Schedule",
       accessorKey: "schedule",
       accessorFn: ({ schedule }) => {
-        console.log(schedule);
         return schedule === null ? "📅 Not Yet Specified" : schedule;
       },
     },
     {
       id: "action",
       header: "Status",
-      accessorKey: "schedule",
+      accessorKey: "status",
       cell: ({ getValue }) => {
         return (
           <div
             className={`px-4 py-2 border rounded-full capitalize text-black font-semibold ${
-              getValue() === null ? "bg-green-400 " : "bg-[#FFEE7D]"
+              getValue() === "finished"
+                ? "bg-green-400 "
+                : getValue() === "pending"
+                ? "bg-[#FFEE7D]"
+                : "bg-orange-400"
             }`}>
-            {getValue() === null ? "Available" : "Scheduled"}
+            {getValue()}
           </div>
         );
       },
@@ -92,6 +96,10 @@ const Examiniees = () => {
             onChange={handleSearch}
             disabled={isPending}
           />
+
+          <div>
+            <IconButton icon={GridIcon} />
+          </div>
         </div>
 
         <Table
@@ -101,7 +109,6 @@ const Examiniees = () => {
       </BaseLayout>
 
       <DrawerWrapper state="view" Component={ViewExaminiee} />
-      <DrawerWrapper state="promote" Component={ViewExaminiee} />
     </>
   );
 };

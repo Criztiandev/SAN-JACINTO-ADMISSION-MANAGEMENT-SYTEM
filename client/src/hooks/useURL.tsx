@@ -7,6 +7,10 @@ const useURL = () => {
 
   const { pathname } = location;
 
+  const redirect = (path: string) => {
+    navigate(path);
+  };
+
   const navigateBack = (route?: string) => {
     navigate(`${pathname}?${route}`);
   };
@@ -31,6 +35,7 @@ const useURL = () => {
   return {
     queryParams: searchParams,
     baseRoute: pathname,
+    redirect,
     navigateBack,
     navigateTo,
     updateURL,

@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { Typography } from "../../components";
 import { Suspense } from "react";
 import Logo from "../../assets/image/Logo.png";
 import Skeleton from "react-loading-skeleton";
-
+import Typography from "../../components/Typography";
 interface AdmissionSidebarProps {
   content: string;
   toggle: () => void;

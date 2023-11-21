@@ -2,53 +2,59 @@ import asyncHandler from "express-async-handler";
 import applicantModel from "../models/applicantModel.js";
 import { sendEmail } from "../utils/email.uitls.js";
 
-const validateFields = async (flagArray) => {
-  for (const flag of flagArray) {
-    const { field, value } = flag;
-    const credentials = await applicantModel.findOne({ [field]: value });
-    if (credentials)
-      throw new Error(
-        `Applicant with ${key.split(".")[1] || key} '${target}' already exist`
-      );
-  }
-};
-
 export const createApplicant = asyncHandler(async (req, res) => {
-  const { studentDetails, personalDetails } = req.body;
-  const { LRN, PSA } = studentDetails;
-  const { email, contact } = personalDetails;
+  const { personalDetails } = req.body;
+  const { email } = personalDetails;
 
   // Check for existing records
-  const flags = [
-    { field: "studentDetails.LRN", value: LRN },
-    { field: "studentDetails.PSA", value: PSA },
-    { field: "personalDetails.email", value: email },
-    { field: "personalDetails.contac", value: contact },
+  const fieldsToCheck = [
+    "studentDetails.LRN",
+    "studentDetails.PSA",
+    "personalDetails.email",
+    "personalDetails.contact",
   ];
 
-  // Validate Input
-  await validateFields(field);
-
-  // create Applicant
-  const newApplicant = await applicantModel.create(req.body);
-  if (!newApplicant) throw new Error("Server Error. Please Try again");
-
-  // Email
-  sendEmail({
-    target: email,
-    title: "Application Form Confirmation ",
-    body: "Hi Im Criztan This is the Test Email my Friend",
+  const existingApplicant = await applicantModel.findOne({
+    $or: fieldsToCheck.map((field) => ({ [field]: req.body[field] })),
   });
 
+  if (existingApplicant) {
+    const duplicateField = fieldsToCheck.find(
+      (field) => existingApplicant[field] === req.body[field]
+    );
+    console.log(
+      `Error: The ${duplicateField} already exists for another applicant.`
+    );
+    return res.status(400).json({
+      error: `The ${duplicateField} already exists for another applicant.`,
+    });
+  }
+
+  // Create Applicant
+  const newApplicant = await applicantModel.create(req.body);
+  if (!newApplicant) {
+    throw new Error("Server Error. Please Try again");
+  }
+
+  // Welcoming Email
+  const currentEmail = await sendEmail({
+    target: email,
+    title: "Admission Confirmation",
+    body: `Dear [Applicant's Name],\n\nI trust this message finds you well. On behalf of the [Your Organization] team, I extend our heartfelt appreciation for your application.\n\nWe have carefully reviewed your details, and we are pleased to inform you that your application has been accepted. Congratulations on your successful admission to [Your Program/Organization]!\n\nAs we move forward, we will keep you informed about any additional steps or updates regarding your schedule. Our aim is to ensure a smooth and seamless onboarding process for you.\n\nFeel free to reach out to us should you have any questions or require further information. We value open communication and are here to assist you in any way possible.\n\nOnce again, congratulations on this significant achievement, and we look forward to welcoming you to the [Your Organization] community.\n\nBest regards,\n\n[Your Full Name]\n[Your Position]\n[Your Organization] Team`,
+  });
+
+  if (!currentEmail) throw new Error("Something went wrong, Please Try again");
   res.status(201).json({ message: "Applicant created successfully" });
 });
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
+  const { status, role } = req.query;
+
   const fields =
-    "_id studentDetails.LRN studentDetails.yearLevel personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
+    "_id studentDetails.LRN studentDetails.yearLevel studentDetails.track personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
 
   const applicants = await applicantModel
-    .find({ status: "pending", role: "applicant" })
+    .find({ status: status || "pending", role: role || "applicant" })
     .select(fields);
 
   res.status(200).json({
@@ -101,6 +107,25 @@ export const updateApplicant = asyncHandler(async (req, res) => {
   res.status(200).json({
     payload: _applicant,
     message: "Updated Credentials Successfully",
+  });
+});
+
+export const updateApplicantByStatus = asyncHandler(async (req, res) => {
+  const { _id, status } = req.body;
+
+  const _applicant = await applicantModel.findById(_id).lean().select("_id");
+  if (!_applicant) throw new Error("Applicant Doesnt exist");
+
+  const _update = await applicantModel.findOneAndUpdate(
+    { _id: _id },
+    { status: status },
+    { new: true }
+  );
+  if (!_update) throw new Error("Failed to update");
+
+  res.status(200).json({
+    payload: null,
+    message: "Updated Successfully",
   });
 });
 

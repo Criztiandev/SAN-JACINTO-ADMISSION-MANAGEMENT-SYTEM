@@ -41,9 +41,10 @@ export interface PersonalDetailsProps extends NameBaseProps {
   birthDate: Date | string;
   age: number;
 
-  motherTounge: string;
+  motherTongue: string;
   email: string;
   facebookLink: string;
+  religion: string;
 }
 
 export interface AddressDetailsProps {

@@ -7,12 +7,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { handleAxiosError } from "../utils/Api.utils";
-
+import { useEffect } from "react";
 interface FormSubmitResult {
   payload: Array<object> | object;
   handleSubmit: (value: any, action: FormikHelpers<any>) => Promise<any>;
   isPending: boolean;
   isSuccess: boolean;
+  isThrottled?: boolean;
 }
 
 interface UseFormSubmitProps {
@@ -30,11 +31,11 @@ const useFormSubmit = ({
   overideFn,
   type = "post",
 }: UseFormSubmitProps): FormSubmitResult => {
+  const [isThrottled, setIsThrottled] = useState(false);
   const [currentPayload, setCurrentPayload] = useState<Array<object> | object>(
     {}
   );
   const navigate = useNavigate();
-
   const handleMutationError = (e: AxiosError) => {
     handleAxiosError(e);
 
@@ -43,7 +44,7 @@ const useFormSubmit = ({
     }
   };
 
-  const handleSuccessMutation = (payload: AxiosResponse) => {
+  const handleSuccessMutation = async (payload: AxiosResponse) => {
     const { message } = payload.data;
 
     if (overideFn) {
@@ -51,7 +52,8 @@ const useFormSubmit = ({
     }
     setCurrentPayload(payload.data);
     toast.success(message);
-    if (redirect) {
+
+    if (redirect || (redirect && isSuccess)) {
       navigate(redirect);
     }
   };
@@ -59,8 +61,11 @@ const useFormSubmit = ({
   // a breather to avoid spamming
   const handleSubmit = async (value: any, action: FormikHelpers<any>) => {
     try {
-      await mutateAsync(value);
-      action.resetForm();
+      if (!isThrottled) {
+        await mutateAsync(value);
+        action.resetForm();
+        setIsThrottled(true);
+      }
     } catch (e: any) {
       return e;
     }
@@ -73,7 +78,23 @@ const useFormSubmit = ({
     onError: handleMutationError,
   });
 
-  return { payload: currentPayload, handleSubmit, isPending, isSuccess };
+  useEffect(() => {
+    if (isThrottled) {
+      const timeoutId = setTimeout(() => {
+        setIsThrottled(false);
+      }, 5000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isThrottled]);
+
+  return {
+    payload: currentPayload,
+    handleSubmit,
+    isPending,
+    isSuccess,
+    isThrottled,
+  };
 };
 
 export default useFormSubmit;

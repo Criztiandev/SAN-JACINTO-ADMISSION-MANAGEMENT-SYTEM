@@ -25,7 +25,7 @@ const NavigationItem = ({
   const renderSubmenuItems = () => {
     return option.map(({ title, icon, path }) => (
       <motion.li
-        key={title}
+        key={path}
         className={`${
           location.pathname === path ? "bg-gray-400 border" : ""
         } rounded-full`}
@@ -52,6 +52,7 @@ const NavigationItem = ({
         whileTap={{ scale: 0.9 }}>
         {!selected && <img src={icon} alt="Main Link" className="p-2" />}
       </motion.span>
+
       {selected && (
         <motion.ul
           className="flex gap-2 flex-col"

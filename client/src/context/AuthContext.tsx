@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createContext, useContext, useState, ReactNode } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 interface AuthContextType {
   user: string;
-  handleMutateUser: (value: string) => void;
+  login: (value: string) => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,13 +20,23 @@ export const useAuthContext = () => {
 };
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState("");
+  const { setItems, removeItem, getItem } = useLocalStorage("auth");
+  const [user, setUser] = useState(getItem() || "");
 
-  const handleMutateUser = (UID: string) => setUser(UID);
+  const login = (UID: string) => {
+    setUser(UID);
+    setItems(UID);
+  };
+
+  const logout = () => {
+    removeItem();
+    setUser("");
+  };
 
   const value = {
-    user,
-    handleMutateUser,
+    user: user || "",
+    login,
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

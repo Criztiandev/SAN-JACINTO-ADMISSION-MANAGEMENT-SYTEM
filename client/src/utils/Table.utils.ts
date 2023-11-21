@@ -15,11 +15,3 @@ export const handleUpdate = (id: string, status: string) => {
 export const handleEdit = (id: string) => {
   toast.success(`${id} is successfully edited`);
 };
-
-export const handleMessage = (id: string) => {
-  toast.success("Message");
-};
-
-export const handleToggleDrawer = (credentials: object, toggle) => {
-  toggle();
-};

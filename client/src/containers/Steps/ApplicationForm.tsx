@@ -1,6 +1,4 @@
-import { Avatar, IconButton, Input, Typography } from "../../components";
 import { applicantInputMaps } from "../../models/applicantInitialValue";
-
 import EditIcon from "../../assets/icons/Edit_light.svg";
 import Expand_Down from "../../assets/icons/Expand_down_light.svg";
 import { useState } from "react";
@@ -13,6 +11,10 @@ import {
   ApplicantModelProps,
 } from "../../interface/ApplicantMode.Type";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
+import Avatar from "../../components/Avatar";
+import IconButton from "../../components/IconButton";
+import Input from "../../components/Input";
+import Typography from "../../components/Typography";
 
 const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   FetchLocalStorageFormData("applicant_form");
@@ -38,7 +40,7 @@ const FormSection = ({ title, model }: ApplicationFormModelProps) => {
         </div>
       </div>
 
-      {hide && (
+      {!hide && (
         <div className="grid grid-cols-2 gap-4">
           {model.map((props: InputProps) => (
             <Input key={props.label} {...props} disabled={onEdit} />

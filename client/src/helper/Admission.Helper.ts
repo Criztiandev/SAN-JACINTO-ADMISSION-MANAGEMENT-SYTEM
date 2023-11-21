@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApplicantModelProps } from "../interface/ApplicantMode.Type";
-import { toast } from "react-toastify";
 import { useModalOptions } from "../interface/Modal.Type";
-import { createApplicant } from "../api/Applicant.Api";
-import {
-  GradeDetails,
-  GradeLevel,
-  PermanentAddress,
-  PersonalDetails,
-  StudentDetails,
-  GuardianDetails,
-  OtherDetails,
-  ApplicationForm,
-} from "../containers/Steps";
+import GradeLevel from "../containers/Steps/GradeLevel";
+import GradeDetails from "../containers/Steps/GradeDetails";
+import StudentDetails from "../containers/Steps/StudentDetails";
+import PersonalDetails from "../containers/Steps/PersonalDetails";
+import PermanentAddress from "../containers/Steps/PermanentAddress";
+import GuardianDetails from "../containers/Steps/GuardianDetails";
+import OtherDetails from "../containers/Steps/OtherDetails";
+import ApplicationForm from "../containers/Steps/ApplicationForm";
 
 export const OutroModalDetails = [
   {
@@ -42,19 +37,6 @@ export const RegistrationStepper = [
   { title: "Application Form", component: ApplicationForm },
 ];
 
-export const handleQuery = async (
-  values: ApplicantModelProps,
-  mutation: any
-) => {
-  try {
-    await mutation(values);
-    toast.success("Applicant Sent Successfully");
-  } catch (error: any) {
-    const responseError = error.response.data;
-    toast.error(responseError.message);
-  }
-};
-
 export const handleRegistrationReset = (
   modal: useModalOptions,
   resetForm: () => void,
@@ -74,8 +56,4 @@ export const handleNextModal = (
 ) => {
   if (outro.isLastIndex) handleRegistrationReset(outro, resetIndex, navigate);
   return outro.handleNext();
-};
-
-export const handleApplicantMutation = async (data: ApplicantModelProps) => {
-  return await createApplicant(data);
 };

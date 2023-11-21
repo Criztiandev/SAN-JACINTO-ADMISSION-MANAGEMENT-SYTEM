@@ -30,7 +30,7 @@ const Nav = () => {
       title: "Applicant",
       options: [
         { title: "Applicant", icon: ApplicantIcon, path: "/applicants" },
-        { title: "archieve", icon: ArchieveIcon, path: "/archieve" },
+        { title: "archive", icon: ArchieveIcon, path: "/archive" },
       ],
     },
     {

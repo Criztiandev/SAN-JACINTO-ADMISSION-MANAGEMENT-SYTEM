@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Typography from "../../components/Typography";
 import Avatar from "../../components/Avatar";
-import { FemaleProfile, MaleProfile } from "../../assets/image";
 import Input from "../../components/Input";
-
+import MaleProfile from "../../assets/image/Male_profile.png";
+import FemaleProfile from "../../assets/image/Female_Profile.png";
 import { Form, Formik } from "formik";
 import FetchLoader from "../General/FetchLoader";
 import useFetch from "../../hooks/useFetch";
 import Button from "../../components/Button";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import Textarea from "../../components/Textarea";
+import useURL from "../../hooks/useURL";
 
 const ViewExaminiee = ({ APID }: { APID: string }) => {
-  const { data, isLoading, isError, refetch } = useFetch({
+  const { updateURL } = useURL();
+
+  const { data, isLoading, isError } = useFetch({
     route: `/examiniees/${APID}`,
     key: [`examiniees${APID}`],
   });
@@ -20,7 +23,9 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
   const { handleSubmit } = useFormSubmit({
     route: "/examiniees/promote",
     type: "post",
-    overideFn: refetch,
+    overideFn: () => {
+      updateURL("refetch=true");
+    },
   });
 
   if (isLoading || isError) return <FetchLoader />;
@@ -61,13 +66,7 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
               static
               disabled={true}
             />
-            <Input
-              label="Score"
-              type="text"
-              name="score"
-              disabled={true}
-              static
-            />
+            <Input label="Score" type="text" name="score" />
             {schedule !== null && (
               <Input
                 label="Schedule"
@@ -102,7 +101,7 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
           </section>
           {schedule !== null && (
             <section className="flex justify-end gap-4 my-4">
-              <Button as="outlined" title="Fail" />
+              <Button type="button" as="outlined" title="Fail" />
               <Button as="contained" title="Pass" />
             </section>
           )}

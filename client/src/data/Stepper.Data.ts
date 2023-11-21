@@ -1,7 +1,9 @@
 import { CardProps, InputProps } from "../interface/FormInterface";
 import { OmitInputObject } from "../utils/OmitUtils";
 import { ApplicationFormModelProps } from "../interface/ApplicantMode.Type";
-import { MaleProfile, FemaleProfile } from "../assets/image";
+// import { MaleProfile, FemaleProfile } from "../assets/image";
+import MaleProfile from "../assets/image/Male_profile.png";
+import FemaleProfile from "../assets/image/Female_Profile.png";
 import { ItemSelectProps } from "../interface/FormInterface";
 
 export const JrTracksItemModel: CardProps[] = [
@@ -52,6 +54,7 @@ export const yearLevelItem: CardProps[] = [
 ];
 
 export const suffixes: Array<string> = [
+  "N/A",
   "Jr.",
   "Sr.",
   "II",
@@ -165,6 +168,13 @@ export const personalDetailsInputModel: InputProps[] = [
   },
 
   {
+    type: "text",
+    label: "Religion",
+    name: "personalDetails.religion",
+    placeholder: "Enter your religion",
+  },
+
+  {
     type: "string",
     label: "Facebook Link",
     name: "personalDetails.facebookLink",
@@ -172,8 +182,8 @@ export const personalDetailsInputModel: InputProps[] = [
   },
 
   {
-    label: "Mother Tounge",
-    name: "personalDetails.motherTounge",
+    label: "Mother Tongue",
+    name: "personalDetails.motherTongue",
     placeholder: "Enter",
   },
 ];
@@ -214,6 +224,7 @@ export const currentAddressInputModel: InputProps[] = [
   },
 
   {
+    type: "number",
     label: "Zip Code",
     name: `addressDetails.current.zip`,
     placeholder: "Enter your Zip Code",
@@ -256,6 +267,7 @@ export const permanentAddressInputModel: InputProps[] = [
   },
 
   {
+    type: "number",
     label: "Zip Code",
     name: `addressDetails.permanent.zip`,
     placeholder: "Enter your Zip Code",
@@ -411,7 +423,7 @@ export const GuadianChoices: ItemSelectProps[] = [
 
 export const GuardianInputs: ApplicationFormModelProps[] = [
   { title: "Father Details", model: fatherInputDetails },
-  { title: "Mother Details", model: motherInputDetails },
+  { title: "Mother' Maiden Details", model: motherInputDetails },
 ];
 
 // Modified Data
@@ -425,6 +437,8 @@ export const PersonalDetailsFirstSection: InputProps[] = OmitInputObject(
     "Facebook Link",
     "Mother Tounge",
     "Gender",
+    "Mother Tongue",
+    "Religion",
   ],
   personalDetailsInputModel
 );

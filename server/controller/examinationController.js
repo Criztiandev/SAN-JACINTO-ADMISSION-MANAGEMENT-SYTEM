@@ -4,7 +4,7 @@ import applicantModel from "../models/applicantModel.js";
 import dayjs from "dayjs";
 
 export const fetchAllExaminiees = asyncHandler(async (req, res) => {
-  const { filter } = req.query || {};
+  const { filter } = req.query;
 
   const _examiniees = await examinieesModel.find(filter).lean();
 
@@ -29,23 +29,33 @@ export const fetchExaminieesById = asyncHandler(async (req, res) => {
 });
 
 export const promoteExaminiees = asyncHandler(async (req, res) => {
-  const { examDate, score } = req.body;
+  const { _id, APID, score, status } = req.body;
 
-  if (!examDate)
-    throw new Error("Examination Date is not specified, Please Try again");
+  const _applicant = await applicantModel.findById(APID).lean().select("_id");
+  if (!_applicant) throw new Error("Applicant doesnt exist");
+
+  // message
+
+  await applicantModel.findOneAndUpdate(
+    { _id: APID },
+    { role: "regular", status: "accepted" },
+    { new: true }
+  );
+
+  await examinieesModel.findOneAndDelete({ _id: _id }).lean().select("_id");
 
   res.status(200).json({
     payload: null,
-    message: "Test",
+    message: "Promoted Successfully",
   });
 });
 
 export const createExaminiees = asyncHandler(async (req, res) => {
-  const { UID } = req.body;
+  const { _id } = req.body;
 
   // find the applicant
   const _applicant = await applicantModel
-    .findOne({ _id: UID })
+    .findById(_id)
     .lean()
     .select(" _id studentDetails.yearLevel studentDetails.track role status");
   if (!_applicant) throw new Error("Applicant Doesnt Exist");
@@ -57,47 +67,13 @@ export const createExaminiees = asyncHandler(async (req, res) => {
 
   // Filter Examiniees
   if (prefrredLevels && prefrredTrack) {
-    const query = { status: "accepted", role: "examiniees" };
-
-    // Update the Applicant
-    const _accepted = await applicantModel
-      .findByIdAndUpdate(UID, query, { new: true })
-      .lean()
-      .select("_id personalDetails studentDetails.LRN");
-
-    if (!_accepted) throw new Error("Something went wrong, Please Try again");
-
-    const { lastName, firstName, middleName, suffix, email, contact } =
-      _accepted?.personalDetails;
-    const { LRN } = _accepted?.studentDetails;
-
-    // generate permit
-    const currentDate = dayjs();
-    const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
-    const permit = `${LRN.substring(0, 6)}-${formatedDate}-${track}`;
-
-    const _examiniees = await examinieesModel.create({
-      APID: UID,
-      permitID: permit,
-      fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
-      email,
-      contact,
-      track,
-    });
-
-    if (!_examiniees) throw new Error("Something went wrong,Please Try again");
-
-    res.status(200).json({
-      payload: null,
-      message: "Accepted Applicant 123123",
-    });
-
+    await acceptAsApplicant(_id, res);
     return;
   }
 
   // Regular student
-  const regular = await applicantModel.findOneAndUpdate(
-    { _id: UID },
+  const regular = await applicantModel.findByIdAndUpdate(
+    _id,
     { status: "accepted", role: "regular" },
     { new: true }
   );
@@ -108,3 +84,42 @@ export const createExaminiees = asyncHandler(async (req, res) => {
     message: "Applicant Accepted Successfully",
   });
 });
+
+const acceptAsApplicant = async (UID, res) => {
+  const query = { status: "accepted", role: "examiniees" };
+
+  // Update the Applicant
+  const _accepted = await applicantModel
+    .findByIdAndUpdate(UID, query, { new: true })
+    .lean()
+    .select("_id personalDetails studentDetails.LRN studentDetails.track");
+
+  if (!_accepted) throw new Error("Something went wrong, Please Try again");
+
+  const { lastName, firstName, middleName, suffix, email, contact } =
+    _accepted?.personalDetails;
+  const { LRN } = _accepted?.studentDetails;
+
+  // generate permit
+  const currentDate = dayjs();
+  const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
+  const permit = `${LRN.substring(0, 6)}-${formatedDate}-${
+    _accepted?.studentDetails?.track
+  }`;
+
+  const _examiniees = await examinieesModel.create({
+    APID: UID,
+    permitID: permit,
+    fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
+    email,
+    contact,
+    track: _accepted?.studentDetails?.track,
+  });
+
+  if (!_examiniees) throw new Error("Something went wrong,Please Try again");
+
+  res.status(200).json({
+    payload: null,
+    message: "Accepted Applicant 123123",
+  });
+};

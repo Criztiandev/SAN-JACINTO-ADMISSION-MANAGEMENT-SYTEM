@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface CardProps {
   cover: string;
   title: string;
@@ -24,8 +22,8 @@ export interface InputSectionProps {
 }
 
 export interface ItemSelectProps extends CardProps {
-  select?: string | null;
   name?: string;
   className?: string;
-  onSelect?: Dispatch<SetStateAction<string>> | undefined;
+  value?: string | number;
+  active?: boolean;
 }

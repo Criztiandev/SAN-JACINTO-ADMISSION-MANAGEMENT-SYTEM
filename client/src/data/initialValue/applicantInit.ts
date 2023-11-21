@@ -53,10 +53,11 @@ const personalDetails: PersonalDetailsProps = {
   gender: "",
   birthDate: "",
   age: 22,
-  motherTounge: "",
+  motherTongue: "",
   email: "",
   contact: "",
   facebookLink: "",
+  religion: "",
 };
 
 const addressDetails: AddressDetailsProps = {
