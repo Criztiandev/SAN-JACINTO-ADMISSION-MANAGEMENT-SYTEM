@@ -16,7 +16,7 @@ const examResultsSchema = new mongoose.Schema({
   track: { type: String, require: true },
   status: {
     type: String,
-    enum: ["pending", "passed", "failed", "scheduled"],
+    enum: ["pending", "passed", "failed", "scheduled", "finished"],
     default: "pending",
   },
   regitrationDate: { type: Date, default: Date.now() },

@@ -10,6 +10,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import FilterButton from "../Applicants/FilterButton";
+import IconButton from "../../components/IconButton";
+import DeleteIcon from "../../assets/icons/Delete.svg";
+import useCustomMutation from "../../hooks/useCustomMutation";
 
 const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   const today = new Date();
@@ -26,11 +29,11 @@ const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   return { currentDate, currentTime };
 };
 
-const ViewLevelList = () => {
+const ViewLevelList = ({ APID }: { APID: string }) => {
   const [isRefetch, setIsRefetch] = useState(false);
   const [selectedForm, setSelectedForm] = useState("");
   const [selectedFormat, setSelectedFormat] = useState("");
-  const { queryParams } = useURL();
+  const { queryParams, updateURL } = useURL();
   const level = queryParams.get("filter");
 
   const { data, isLoading, isError } = useFetch({
@@ -45,6 +48,14 @@ const ViewLevelList = () => {
     option: {
       enabled: isRefetch,
     },
+  });
+
+  const { mutate } = useCustomMutation({
+    route: "/masterlist",
+    overrideFn: () => {
+      // updateURL("/masterlist");
+    },
+    type: "delete",
   });
 
   const handleSelectFile = (file: string) => {
@@ -68,6 +79,12 @@ const ViewLevelList = () => {
     exportFromJSON({ data: formData, fileName, exportType });
     toast.success("Exported Successfully");
   };
+
+  const handleFlush = () => {
+    alert("hi");
+    mutate({ _id: APID, selected: level });
+  };
+
   if (isLoading || isError) return <FetchLoader />;
 
   return (
@@ -76,6 +93,10 @@ const ViewLevelList = () => {
         <div>
           <h1>Grade {level} List</h1>
           <span></span>
+        </div>
+
+        <div>
+          <IconButton as="outlined" icon={DeleteIcon} onClick={handleFlush} />
         </div>
       </header>
 
@@ -112,50 +133,54 @@ const ViewLevelList = () => {
 
         <div className="mt-8">
           <h5 className="text-xl mb-4">Applicants</h5>
-          {data?.map((students: any) => {
-            const { lastName, firstName, middleName, suffix } =
-              students.personalDetails;
-            return (
-              <motion.div
-                key={firstName}
-                whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.02 }}
-                className="border border-gray-400  p-4 rounded-[5px] ">
-                <div className="flex justify-between items-center mb-4 border-b border-gray-400 pb-3">
-                  <Typography as="h4">
-                    {lastName}, {firstName} {middleName[0]} {suffix}
-                  </Typography>
+          <div className="flex flex-col gap-4">
+            {data?.map((students: any) => {
+              const { lastName, firstName, middleName, suffix } =
+                students.personalDetails;
+              return (
+                <motion.div
+                  key={firstName}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="border border-gray-400  p-4 rounded-[5px] ">
+                  <div className="flex justify-between items-center mb-4 border-b border-gray-400 pb-3">
+                    <Typography as="h4">
+                      {lastName}, {firstName} {middleName[0]} {suffix}
+                    </Typography>
 
-                  <div className="capitalize px-4 py-1  rounded-full bg-green-400">
-                    {students.studentDetails?.track}
+                    <div className="capitalize px-4 py-1  rounded-full bg-green-400">
+                      {students.studentDetails?.track}
+                    </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-2">
-                  <span>LRN : {students?.studentDetails?.LRN}</span>
-                  <span>
-                    Email: @{students?.personalDetails?.email.split("@")[0]}
-                  </span>
-                  <span className="capitalize">
-                    Gender: {students?.personalDetails?.gender}
-                  </span>
-                  <span>
-                    General Average : {students?.gradeDetails?.generalAve}%
-                  </span>
-                  <span>
-                    School Year : {students?.studentDetails?.schoolYear}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
+                  <div className="grid grid-cols-2 gap-2">
+                    <span>LRN : {students?.studentDetails?.LRN}</span>
+                    <span>
+                      Email: @{students?.personalDetails?.email.split("@")[0]}
+                    </span>
+                    <span className="capitalize">
+                      Gender: {students?.personalDetails?.gender}
+                    </span>
+                    <span>
+                      General Average : {students?.gradeDetails?.generalAve}%
+                    </span>
+                    <span>
+                      School Year : {students?.studentDetails?.schoolYear}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
-        <Button
-          title="Download"
-          className="absolute bottom-3 right-5"
-          onClick={() => handleDownload(selectedFormat, selectedForm)}
-        />
+        <div className="sticky bottom-3 right-0 flex justify-end">
+          <Button
+            title="Download"
+            className=""
+            onClick={() => handleDownload(selectedFormat, selectedForm)}
+          />
+        </div>
       </main>
     </>
   );

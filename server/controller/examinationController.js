@@ -4,7 +4,7 @@ import applicantModel from "../models/applicantModel.js";
 import dayjs from "dayjs";
 
 export const fetchAllExaminiees = asyncHandler(async (req, res) => {
-  const { filter } = req.query || {};
+  const { filter } = req.query;
 
   const _examiniees = await examinieesModel.find(filter).lean();
 
@@ -29,14 +29,24 @@ export const fetchExaminieesById = asyncHandler(async (req, res) => {
 });
 
 export const promoteExaminiees = asyncHandler(async (req, res) => {
-  const { examDate, score } = req.body;
+  const { _id, APID, score, status } = req.body;
 
-  if (!examDate)
-    throw new Error("Examination Date is not specified, Please Try again");
+  const _applicant = await applicantModel.findById(APID).lean().select("_id");
+  if (!_applicant) throw new Error("Applicant doesnt exist");
+
+  // message
+
+  await applicantModel.findOneAndUpdate(
+    { _id: APID },
+    { role: "regular", status: "accepted" },
+    { new: true }
+  );
+
+  await examinieesModel.findOneAndDelete({ _id: _id }).lean().select("_id");
 
   res.status(200).json({
     payload: null,
-    message: "Test",
+    message: "Promoted Successfully",
   });
 });
 

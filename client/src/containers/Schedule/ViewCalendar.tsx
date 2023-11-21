@@ -15,6 +15,8 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 import { scheduleSchema } from "../../schema/schedule.Schema";
 import TrashIcon from "../../assets/icons/Delete.svg";
 import useURL from "../../hooks/useURL";
+import useCustomMutation from "../../hooks/useCustomMutation";
+import { toast } from "react-toastify";
 
 const ViewCalendar = ({ APID }: { APID: string }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -30,6 +32,22 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
     type: "put",
   });
 
+  const finishSchedule = useCustomMutation({
+    route: `${baseRoute}/finish/${APID}`,
+    overrideFn: () => {
+      toast.success("Schedule is Finished");
+    },
+    type: "post",
+  });
+
+  const deleteMutation = useCustomMutation({
+    route: `${baseRoute}/force/${APID}`,
+    overrideFn: () => {
+      updateURL("refetch=true");
+    },
+    type: "delete",
+  });
+
   useEffect(() => {
     if (isSuccess) {
       refetch();
@@ -37,11 +55,16 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
     }
   }, [isSuccess]);
 
-  if (isFetching) return <FetchLoader />;
+  const handleFinishSchedule = () => {
+    finishSchedule.mutate({ _id: APID, status: "Finished" });
+    deleteMutation.mutate({});
+  };
 
   const handleDeleteSchedule = () => {
     updateURL(`state=delete&APID=${APID}`);
   };
+
+  if (isFetching) return <FetchLoader />;
 
   return (
     <Formik
@@ -101,14 +124,17 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
             <div className="max-h-[350px] overflow-y-auto pr-4">
               {data?.batches?.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 ">
-                  {data?.batches?.map((props: any) => (
-                    <BatchCard
-                      key={props.title}
-                      {...props}
-                      schedule={"Settled"}
-                      disabled={true}
-                    />
-                  ))}
+                  {data?.batches?.map((props: any) => {
+                    return (
+                      <BatchCard
+                        key={props.title}
+                        examiniees={props?.selected?.length}
+                        {...props}
+                        schedule={"Settled"}
+                        disabled={true}
+                      />
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="w-full border rounded-[5px] p-4 bg-gray-200 h-[150px] text-bold flex justify-center items-center font-bold text-[28px] ">
@@ -165,7 +191,14 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
           {isEdit ? (
             <Button type="submit" as="contained" title="Submit" />
           ) : (
-            <Button type="button" as="contained" title="Announce" />
+            <div className="flex gap-4">
+              <Button
+                type="button"
+                as="contained"
+                title="Finish"
+                onClick={handleFinishSchedule}
+              />
+            </div>
           )}
         </footer>
       </Form>
@@ -199,7 +232,3 @@ const RenderSubtitle = ({ data, active }: { data: any; active: boolean }) => {
     </>
   );
 };
-
-// {!isEdit && (
-
-// )}

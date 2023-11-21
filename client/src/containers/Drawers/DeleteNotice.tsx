@@ -2,8 +2,8 @@
 import Typography from "../../components/Typography";
 import Button from "../../components/Button";
 import useURL from "../../hooks/useURL";
-import { handleAxiosError } from "../../utils/Api.utils";
-import axios from "axios";
+import useCustomMutation from "../../hooks/useCustomMutation";
+import { toast } from "react-toastify";
 
 const DeleteNotice = () => {
   const { navigateBack, queryParams, baseRoute } = useURL();
@@ -14,20 +14,17 @@ const DeleteNotice = () => {
     navigateBack();
   };
 
-  const handleConfirm = () => {
-    const performDelete = async () => {
-      try {
-        await axios.delete(
-          `${import.meta.env.VITE_SERVER_URL}${baseRoute}/${APID}`
-        );
-        navigateBack("refetch=true");
-      } catch (e: any) {
-        console.log(e);
-        handleAxiosError(e);
-      }
-    };
+  const { mutate } = useCustomMutation({
+    route: `${baseRoute}/${APID}`,
+    overrideFn: () => {
+      navigateBack("refetch=true");
+      toast.success("Deleted Successfully");
+    },
+    type: "delete",
+  });
 
-    performDelete();
+  const handleConfirm = () => {
+    mutate({});
   };
 
   return (
