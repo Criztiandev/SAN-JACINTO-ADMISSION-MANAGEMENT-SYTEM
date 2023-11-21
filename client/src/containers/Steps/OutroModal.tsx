@@ -1,6 +1,6 @@
+import Button from "../../components/Button";
+import NextButtom from "../../assets/icons/Expand_right_light.svg";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "../../components";
-
 interface OutrModalProps {
   data: any;
   onNext: () => void;
@@ -17,7 +17,15 @@ const OutroModal = ({ data, onNext }: OutrModalProps) => {
           <h2>{title}</h2>
           <p>{desc}</p>
         </div>
-        <Button type="button" title="Next" onClick={onNext} />
+
+        <Button
+          as="outlined"
+          dir="right"
+          icon={NextButtom}
+          type="button"
+          title="Next"
+          onClick={onNext}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 import expressAsyncHandler from "express-async-handler";
 import scheduleModel from "../models/scheduleModel.js";
 import batchModel from "../models/batchModel.js";
+import examiniationModel from "../models/examiniationModel.js";
+import dayjs from "dayjs";
+import applicantModel from "../models/applicantModel.js";
 
 export const fetchAllSchedule = expressAsyncHandler(async (req, res) => {
   const schedules = await scheduleModel
@@ -80,15 +83,55 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
   if (!create) throw new Error("Something wen wrong");
 
   // update all batch
-  await Promise.all(
+  const updatedBatches = await Promise.all(
     batches.map(async (id) => {
-      await batchModel.findOneAndUpdate(
-        { _id: id },
-        { schedule: create._id, status: "ongoing" },
-        { new: true }
-      );
+      const updatedBatch = await batchModel
+        .findByIdAndUpdate(
+          { _id: id },
+          { schedule: create._id, status: "ongoing" },
+          { new: true }
+        )
+        .lean()
+        .select("selected");
+
+      return updatedBatch.selected;
     })
   );
+
+  // update the applicant by schedule and status
+  updatedBatches.map(async (examinees) => {
+    await Promise.all(
+      examinees.map(async (ids) => {
+        const { start, end } = create?.schedule || {};
+        // check if the selected is examinnies
+        const _data = await applicantModel
+          .findOne({ _id: ids.toString() })
+          .lean()
+          .select("role");
+
+        if (_data.role === "examiniees") {
+          await examiniationModel.findOneAndUpdate(
+            { APID: ids.toString() },
+            {
+              schedule: formatDate(dayjs(start), dayjs(end)),
+              status: "scheduled",
+            },
+            { new: true }
+          );
+
+          return;
+        }
+
+        await applicantModel.findOneAndUpdate(
+          { _id: ids.toString() },
+          { status: "scheduled" },
+          { new: true }
+        );
+
+        return;
+      })
+    );
+  });
 
   res.status(200).json({
     payload: null,
@@ -98,20 +141,55 @@ export const createSchedule = expressAsyncHandler(async (req, res) => {
 
 export const deleteSchedule = expressAsyncHandler(async (req, res) => {
   const { id: APID } = req.params;
+  const query = { schedule: null, status: "pending" };
 
-  const _schedle = await scheduleModel.findOne({ _id: APID }).lean();
+  const _schedule = await scheduleModel.findOne({ _id: APID }).lean();
 
+  const { batches } = _schedule;
   // update all the batches to pending
-  await Promise.all(
-    _schedle.batches.map(async (id) => {
-      await batchModel.findOneAndUpdate(
-        { _id: id },
-        { schedule: null, status: "pending" },
-        { new: true }
-      );
+  const updatedBatches = await Promise.all(
+    batches?.map(async (id) => {
+      const updatedBatch = await batchModel
+        .findOneAndUpdate({ _id: id }, query, { new: true })
+        .lean()
+        .select("selected");
+
+      return updatedBatch.selected;
     })
   );
 
+  // update all the examiniees
+
+  updatedBatches.map(async (examinees) => {
+    await Promise.all(
+      examinees.map(async (ids) => {
+        const _data = await applicantModel
+          .findOne({ _id: ids.toString() })
+          .lean()
+          .select("role");
+
+        if (_data.role === "examiniees") {
+          await examiniationModel.findOneAndUpdate(
+            { APID: ids.toString() },
+            query,
+            { new: true }
+          );
+
+          return;
+        }
+
+        await applicantModel.findOneAndUpdate(
+          { _id: ids.toString() },
+          { status: "accepted" },
+          { new: true }
+        );
+
+        return;
+      })
+    );
+  });
+
+  //delete
   const schedule = await scheduleModel
     .findByIdAndDelete(APID)
     .lean()
@@ -123,3 +201,154 @@ export const deleteSchedule = expressAsyncHandler(async (req, res) => {
     message: "Delete Schedule Successfully",
   });
 });
+
+export const deleteScheduleByForce = expressAsyncHandler(async (req, res) => {
+  const { id: APID } = req.params;
+
+  const _schedule = await scheduleModel.findOne({ _id: APID }).lean();
+  if (!_schedule) throw new Error("Applicant Doesnt exist");
+
+  //delete
+  const schedule = await scheduleModel
+    .findByIdAndDelete(APID)
+    .lean()
+    .select("_id");
+  if (!schedule) throw new Error("Something went wrong");
+
+  res.status(200).json({
+    payload: null,
+    message: "Delete Schedule Successfully",
+  });
+});
+//
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+export const finishSchedule = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const _schedule = await scheduleModel
+    .findById(id)
+    .lean()
+    .select("batches status");
+  if (!_schedule) throw new Error("Schedule doesnt exist");
+
+  const { batches } = _schedule;
+
+  const updatedBatches = await Promise.all(
+    batches.map(async (id) => {
+      const updatedBatch = await batchModel
+        .findOneAndDelete({ _id: id })
+        .lean()
+        .select("selected");
+
+      return updatedBatch;
+    })
+  );
+
+  await Promise.all(
+    updatedBatches.map(async (props) => {
+      const { selected } = props;
+
+      await Promise.all(
+        selected.map(async (id) => {
+          const _data = await applicantModel
+            .findOne({ _id: id.toString() })
+            .lean()
+            .select("role");
+
+          if (_data?.role === "examiniees") {
+            console.log("Applicant");
+            await examiniationModel.findOneAndUpdate(
+              { APID: id.toString() },
+              {
+                schedule: "Done",
+                status: "finished",
+              },
+              { new: true }
+            );
+
+            return;
+          }
+
+          await applicantModel.findOneAndUpdate(
+            { _id: id.toString() },
+            { status: "regular" },
+            { new: true }
+          );
+          return;
+        })
+      );
+    })
+  );
+
+  res.status(200).json({
+    payload: null,
+    message: "Finished Schedule",
+  });
+});
+
+// Utils
+
+const formatDate = (start, end) => {
+  // Format the start and end dates
+  const currentYear = new Date().getFullYear();
+  const formattedStartDate = start?.format("MMM, D");
+  const formattedEndDate = end?.format("MMM, D");
+
+  // Combine formatted start and end dates
+  const formattedDateRange = `${formattedStartDate} - ${formattedEndDate}, ${currentYear}`;
+  return formattedDateRange;
+};

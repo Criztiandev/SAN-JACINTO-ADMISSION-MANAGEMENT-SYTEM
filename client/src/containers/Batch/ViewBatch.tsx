@@ -87,11 +87,11 @@ const ViewBatch = ({ APID }: { APID: string }) => {
             Examiniees
           </Typography>
 
-          <div className="flex max-h-[400px] overflow-y-auto">
+          <div className="flex gap-4 max-h-[400px] overflow-y-auto">
             {data?.length <= 0 ? (
               <EmptyCard title="No Examiniees Available" />
             ) : (
-              data?.examiniees?.map((props: any) => {
+              data?.selected?.map((props: any) => {
                 const { lastName, middleName, firstName } =
                   props.personalDetails;
                 const { track, yearLevel } = props.studentDetails;

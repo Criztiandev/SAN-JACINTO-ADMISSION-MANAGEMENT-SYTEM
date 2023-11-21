@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const batchSchema = mongoose.Schema({
   title: { type: String, required: true },
   schedule: { type: mongoose.Types.ObjectId, default: null, require: true },
-  examiniees: [{ type: mongoose.Types.ObjectId, required: true }],
+  selected: [{ type: mongoose.Types.ObjectId, required: true }],
   status: {
     type: String,
     enum: ["pending", "ongoing", "cancel", "finished"],

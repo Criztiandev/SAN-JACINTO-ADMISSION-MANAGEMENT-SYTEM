@@ -2,6 +2,7 @@
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Drawer from "../../components/Drawer";
+import { useEffect } from "react";
 
 interface ApplicantDrawerProps {
   state: string;
@@ -20,6 +21,18 @@ const DrawerWrapper = ({ state, refetch, Component }: ApplicantDrawerProps) => {
   const handleClose = () => {
     navigate(`${pathname}`);
   };
+
+  useEffect(() => {
+    if (currentState) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [currentState]);
 
   return (
     <>

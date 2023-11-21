@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext, useState } from "react";
-import { BaseProps } from "../interface/Component.Type";
+
 import {
   ScheduleContextValues,
   SelectedSlotProps,
 } from "../interface/Schedule.Types";
 import { ScheduleEventProps } from "../interface/Date.Type";
+import { BaseProps } from "../interface/Common.Types";
 
 const ScheduleContext = createContext<ScheduleContextValues | undefined>(
   undefined

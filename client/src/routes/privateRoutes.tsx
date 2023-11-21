@@ -1,12 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import { FC, ReactElement, Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { TableProvider, ScheduleProvider } from "../context";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import ErrorPage from "../pages/ErrorPage";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
 import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton.tsx";
+import TableProvider from "../context/TableContext.tsx";
+import ScheduleProvider from "../context/ScheduleContext.tsx";
+import Redirect from "../pages/System/Redirect.tsx";
 
 const ApplicantPage = lazy(() => import("../pages/Applicant"));
 const DashboardPage = lazy(() => import("../pages/Dashboard"));
@@ -18,7 +20,7 @@ const ProfilePage = lazy(() => import("../pages/Profile.tsx"));
 const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
 const UserPage = lazy(() => import("../pages/Users.tsx"));
 const BatchPage = lazy(() => import("../pages/Batch.tsx"));
-const ArchievePage = lazy(() => import("../pages/Archieve.tsx"));
+const ArchivePage = lazy(() => import("../pages/Archive.tsx"));
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -36,6 +38,11 @@ const ProviderWrapper: FC<ProviderWrapperProps> = ({ children, loader }) => {
 };
 
 const routes = [
+  {
+    path: "*",
+    element: <Redirect />,
+  },
+
   {
     path: "/",
     element: (
@@ -137,11 +144,11 @@ const routes = [
     ),
   },
   {
-    path: "/applicant/archieve",
+    path: "/archive",
     element: (
       <Suspense fallback={<TablePanelSkeleton />}>
         <TableProvider>
-          <ArchievePage />
+          <ArchivePage />
         </TableProvider>
       </Suspense>
     ),

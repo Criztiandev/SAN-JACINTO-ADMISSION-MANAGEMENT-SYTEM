@@ -33,28 +33,28 @@ export const fetchBatchById = expressAsyncHandler(async (req, res) => {
 
   // get all the data of the examiniees
   const examinieesDetails = await Promise.all(
-    (_batch.examiniees || []).map(async (examineeId) => {
-      const examineeDetails = await applicantModel
-        .findOne({ _id: examineeId })
+    (_batch.selected || []).map(async (SID) => {
+      const selectedDetails = await applicantModel
+        .findOne({ _id: SID })
         .lean()
         .select(
           "_id personalDetails.lastName personalDetails.firstName personalDetails.middleName studentDetails.track studentDetails.yearLevel gradeDetails.generalAve"
         );
-      return examineeDetails;
+      return selectedDetails;
     })
   );
 
   res.status(200).json({
-    payload: { ..._batch, examiniees: examinieesDetails },
+    payload: { ..._batch, selected: examinieesDetails },
     message: "Fetch Batch items",
   });
 });
 
 export const createBatch = expressAsyncHandler(async (req, res) => {
   try {
-    const { title, examiniees } = req.body;
+    const { title, selected } = req.body;
 
-    if (examiniees.length <= 0) {
+    if (selected?.length <= 0) {
       throw new Error("Please Select Batch");
     }
 
@@ -68,17 +68,17 @@ export const createBatch = expressAsyncHandler(async (req, res) => {
     }
 
     // Check if any examiniee already exists in another batch
-    const existingExaminees = await batchModel
-      .find({ examiniees: { $in: examiniees } })
+    const _applicantExistance = await batchModel
+      .find({ selected: { $in: selected } })
       .lean()
       .select("_id");
 
-    if (existingExaminees.length > 0) {
+    if (_applicantExistance.length > 0) {
       throw new Error("One of the Examinees already exists, Please try again");
     }
 
     // Create batch
-    const newBatch = await batchModel.create({ title, examiniees });
+    const newBatch = await batchModel.create({ title, selected });
     if (!newBatch) {
       throw new Error(
         "Something went wrong while creating the batch, please try again"
@@ -87,7 +87,7 @@ export const createBatch = expressAsyncHandler(async (req, res) => {
 
     // Update the status of examinees to 'scheduled'
     await Promise.all(
-      examiniees.map(async (id) => {
+      selected.map(async (id) => {
         await applicantModel.findOneAndUpdate(
           { _id: id },
           { status: "scheduled" },
@@ -143,7 +143,7 @@ export const deleteBatch = expressAsyncHandler(async (req, res) => {
 
   // update to examiniees
   await Promise.all(
-    _batch.examiniees.map(async (id) => {
+    _batch.selected.map(async (id) => {
       await applicantModel.findOneAndUpdate(
         { _id: id },
         { status: "accepted" },

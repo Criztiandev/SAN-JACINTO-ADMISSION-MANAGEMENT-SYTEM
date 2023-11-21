@@ -7,13 +7,12 @@ import { InputProps } from "../../interface/FormInterface";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
-import { IconButton } from "../../components";
 
-import { ResetIcon, FatherIcon, Mother } from "../../assets/icons";
 import {
   GuardianInputs,
   legalGuardianInputDetails,
 } from "../../data/Stepper.Data";
+import Dropdown from "../../components/Dropdown";
 
 const GuardianDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -70,21 +69,32 @@ const GuardianDetails = () => {
           </Typography>
 
           <div className="flex gap-4">
-            <IconButton
+            <Dropdown
+              type="button"
+              title="Guadian"
+              onClick={(e) => setSelectedGuardian(e.currentTarget.value)}
+              className="p-4"
+              option={[
+                { title: "Father", icon: "" },
+                { title: "Mother", icon: "" },
+                { title: "Reset", icon: "" },
+              ]}
+            />
+            {/* <IconButton
               icon={FatherIcon}
               as="outlined"
               onClick={() => setSelectedGuardian("Father")}
             />
             <IconButton
-              icon={Mother}
+              icon={MotherIcon}
               as="outlined"
-              onClick={() => setSelectedGuardian("Father")}
+              onClick={() => setSelectedGuardian("Mother")}
             />
             <IconButton
               icon={ResetIcon}
               as="outlined"
-              onClick={() => setSelectedGuardian("Father")}
-            />
+              onClick={() => setSelectedGuardian("Reset")}
+            /> */}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">

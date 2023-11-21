@@ -19,15 +19,7 @@ const ExamineesCard = ({ _id, ...props }: ExamineesCardProps) => {
       whileTap={{ scale: 0.9 }}
       className="relative border border-gray-400 p-4 rounded-[5px] select-none w-full h-full">
       <div className="flex gap-4">
-        {!disabled && (
-          <>
-            {props.selected ? (
-              <Field type="checkbox" name="examiniees" value={_id} checked />
-            ) : (
-              <Field type="checkbox" name="examiniees" value={_id} />
-            )}
-          </>
-        )}
+        {!disabled && <Field type="checkbox" name="selected" value={_id} />}
         <Typography as="h5">{name}</Typography>
       </div>
 

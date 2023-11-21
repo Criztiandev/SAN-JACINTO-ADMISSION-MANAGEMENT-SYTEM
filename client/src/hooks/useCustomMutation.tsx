@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { toast } from "react-toastify";
 import { handleAxiosError } from "../utils/Api.utils";
 
 interface useCustomMutationProps {
   route: string;
   overrideFn?: () => void;
-  type?: "post" | "put";
+  type?: "post" | "put" | "delete";
 }
 
 const useCustomMutation = ({
@@ -17,11 +16,12 @@ const useCustomMutation = ({
 }: useCustomMutationProps) => {
   const { mutateAsync, mutate } = useMutation({
     mutationFn: (payload: any) => {
-      return axios[type](`${import.meta.env.VITE_SERVER_URL}${route}`, payload);
+      return type === "delete"
+        ? axios.delete(`${import.meta.env.VITE_SERVER_URL}${route}`)
+        : axios[type](`${import.meta.env.VITE_SERVER_URL}${route}`, payload);
     },
 
     onSuccess: () => {
-      toast.success("Applicant Accepted Successfully");
       if (overrideFn) {
         overrideFn();
       }

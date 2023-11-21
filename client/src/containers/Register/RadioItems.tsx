@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
-import { cardSelection } from "../../animations/variants/selectionVariants";
-import { Radio, Typography } from "../../components";
+import Radio from "../../components/Radio";
+import Typography from "../../components/Typography";
 
 interface RadioItemsProps {
   title: string;
@@ -13,14 +13,7 @@ interface RadioItemsProps {
   className?: string;
 }
 
-const RadioItems = ({
-  title,
-  subtitle,
-  select,
-  onSelect,
-  name,
-  className,
-}: RadioItemsProps) => {
+const RadioItems = ({ title, subtitle, onSelect, name }: RadioItemsProps) => {
   return (
     <motion.label
       key={title}

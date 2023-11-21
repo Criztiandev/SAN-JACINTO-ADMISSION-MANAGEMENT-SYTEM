@@ -65,7 +65,7 @@ const BatchCard = ({
         <div className="mb-4">
           <h4 className="font-bold mt-4 mb-2">{title}</h4>
           <span className="text-gray-500">
-            📆:
+            📆:{" "}
             {schedule === null
               ? "Schedule Not yet Defined"
               : `${formatedStartDate} - ${formatedEndDate}, ${currentYear}`}

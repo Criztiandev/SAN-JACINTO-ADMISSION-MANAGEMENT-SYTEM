@@ -1,7 +1,6 @@
 import StatsCard from "./StatsCard";
-import StatsLoader from "../Loaders/StatsLoader";
 import useFetch from "../../hooks/useFetch";
-
+import Skeleton from "react-loading-skeleton";
 interface StatsDataProps {
   title: string;
   count: number;
@@ -14,7 +13,14 @@ const StatsSection = () => {
     key: ["stats"],
   });
 
-  if (isLoading || isError || isPending) return <StatsLoader />;
+  if (isLoading || isError || isPending)
+    return (
+      <div className="grid grid-cols-3 gap-4">
+        <Skeleton width={368} height={150} />
+        <Skeleton width={368} height={150} />
+        <Skeleton width={368} height={150} />
+      </div>
+    );
   return (
     <section className="grid grid-cols-3 gap-4">
       {data.map((props: StatsDataProps) => (

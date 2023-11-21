@@ -11,18 +11,15 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 // React Query config
-import ConfigProvider from "./context/ConfigContext";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
-    <ConfigProvider>
-      <AuthContextProvider>
-        <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
-          <Routes />
-          <ToastContainer />
-        </SkeletonTheme>
-      </AuthContextProvider>
-    </ConfigProvider>
+    <AuthContextProvider>
+      <SkeletonTheme baseColor="#cccccc" highlightColor="#eeeeee">
+        <Routes />
+        <ToastContainer />
+      </SkeletonTheme>
+    </AuthContextProvider>
   </QueryClientProvider>
 );

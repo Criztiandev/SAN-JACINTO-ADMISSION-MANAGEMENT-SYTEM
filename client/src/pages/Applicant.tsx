@@ -1,14 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-// External Dependencies
-
 // Project Components
 import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import Badge from "../components/Badge";
-import Applicants from "../assets/icons/Applicant_Dark.svg";
 // Context and Helpers
 import { useTableContext } from "../context/TableContext";
 import useFetch from "../hooks/useFetch";
@@ -17,7 +12,6 @@ import useFetch from "../hooks/useFetch";
 import { ColumnDef } from "@tanstack/react-table";
 
 // Containers
-import ApplicantActionColumn from "../containers/Applicants/ApplicantActionColumn";
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
@@ -25,7 +19,6 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
-import EditApplicant from "../containers/Applicants/EditApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
@@ -33,40 +26,51 @@ import MessageApplicant from "../containers/Applicants/MessageApplicant";
 import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
+import IconButton from "../components/IconButton";
+import AcceptIcon from "../assets/icons/Done_light.svg";
+import MessageIcon from "../assets/icons/Message_light.svg";
+import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL, navigateTo } = useURL();
+  const { updateURL } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant",
     overrideFn: handleMutateData,
-    key: ["applicants23"],
+    key: ["applicants"],
   });
 
   // mutation
-  const { mutateAsync } = useCustomMutation({
+  const examiniesMutation = useCustomMutation({
     route: `/examiniees/create`,
     overrideFn: () => refetch(),
   });
+
+  // const archieveMutation = useCustomMutation({
+  //   route: "/applicant/status",
+  //   overrideFn: () => refetch(),
+  //   type: "put",
+  // });
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
   };
 
-  const handleAction = async (id: string, currentStatus: string) => {
-    void mutateAsync({ UID: id, status: currentStatus });
+  const handleAccept = (id: string) => {
+    examiniesMutation.mutate({ _id: id });
+  };
+
+  const handleArchive = (id: string) => {
+    updateURL(`APID=${id}&state=archive`);
   };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
-      id: "select",
       header: "Name",
       accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
+        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${personalDetails?.middleName}`,
       cell: ({ row, getValue }) => {
-        console.log(row);
         const { original } = row;
         return (
           <FirstColumn
@@ -83,8 +87,7 @@ const Applicant = () => {
       id: "yearLevel",
       header: "Grade Level",
       accessorFn: ({ studentDetails }) => {
-        const { yearLevel } = studentDetails;
-        return `${yearLevel.replace("Grade", "")}`;
+        return `${studentDetails?.yearLevel?.replace("Grade", "")}`;
       },
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
@@ -94,10 +97,7 @@ const Applicant = () => {
       header: "Guardian",
       accessorKey: "studentDetails.legalGuardian",
       accessorFn: ({ guardianDetails }) => {
-        const { firstName, middleName, lastName } =
-          guardianDetails.legalGuardian;
-
-        return `${lastName}, ${firstName} ${middleName[0]}.`;
+        return `${guardianDetails?.legalGuardian?.lastName}, ${guardianDetails?.legalGuardian?.firstName} ${guardianDetails?.legalGuardian?.middleName[0]}.`;
       },
     },
 
@@ -113,8 +113,21 @@ const Applicant = () => {
     {
       header: "Action",
       cell: ({ row }) => {
+        const UID = row.original._id;
         return (
-          <ApplicantActionColumn data={row.original} onAction={handleAction} />
+          <div className="flex gap-4">
+            <IconButton
+              icon={AcceptIcon}
+              as="outlined"
+              onClick={() => handleAccept(UID)}
+            />
+            <IconButton
+              icon={ArchieveIcon}
+              as="outlined"
+              onClick={() => handleArchive(UID)}
+            />
+            <IconButton icon={MessageIcon} as="outlined" />
+          </div>
         );
       },
     },
@@ -128,28 +141,6 @@ const Applicant = () => {
         title="Applicants"
         actions={
           <div className="flex gap-4">
-            <Dropdown
-              as="outlined"
-              icon={"dfdf"}
-              option={[
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/examiniees"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/batch"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/masterlist"),
-                },
-              ]}
-              className="px-3 py-2 w-[150px]"
-            />
             <Button
               as="contained"
               title="Create"
@@ -175,8 +166,7 @@ const Applicant = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="edit" Component={EditApplicant} />
-      <DrawerWrapper state="archieve" Component={ArchieveApplicant} />
+      <DrawerWrapper state="archive" Component={ArchieveApplicant} />
       <DrawerWrapper state="message" Component={MessageApplicant} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>

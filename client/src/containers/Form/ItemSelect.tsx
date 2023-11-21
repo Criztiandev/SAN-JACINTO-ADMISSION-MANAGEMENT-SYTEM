@@ -1,56 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "../../components/Image";
-import Radio from "../../components/Radio";
 import Typography from "../../components/Typography";
 import { ItemSelectProps } from "../../interface/FormInterface";
 import { CardSelectionAnim } from "../../animations/Form/CardSelectVariant";
-import { useFormikContext } from "formik";
-import { ApplicantModelProps } from "../../interface/ApplicantMode.Type";
+import { useField, Field } from "formik";
 
 const ItemSelect = ({
   title,
   subtitle,
-  cover,
-  select,
-  onSelect = () => {},
   name = "",
+  value,
+  active,
 }: ItemSelectProps) => {
-  const [base, field] = name.split(".") || "";
-  const context: any = useFormikContext<ApplicantModelProps>().values;
-
-  const result =
-    context && context[base] && context[base][field]
-      ? context[base][field]
-      : "";
-
-  useEffect(() => {
-    if (result) {
-      onSelect(result);
-    }
-
-    return () => {
-      onSelect("");
-    };
-  }, [onSelect, result]);
+  const [field, meta] = useField({
+    name: name,
+  });
 
   return (
     <motion.label
       key={title}
-      animate={CardSelectionAnim.animate({
-        currVal: select || result,
-        value: title,
-      })}
       variants={CardSelectionAnim.variant}
       whileTap={{ scale: 0.9 }}
-      className={`cursor-pointer min-w-[200px] min-h-[250px] border border-gray rounded-[5px] p-4 flex justify-center items-center flex-col gap-4 text-center shadow-lg `}
-      onClick={() => onSelect(title)}>
-      <Image
-        src={cover}
-        className="w-24 h-24 rounded-full border bg-blue-500"
-        alt="cover"
-      />
+      className={`relative cursor-pointer min-w-[200px] min-h-[250px] border border-gray rounded-[5px] p-4 flex justify-center items-center flex-col gap-4 text-center shadow-lg border-gray-300 ${
+        active && "border-gray-700 border-2"
+      } ${meta.touched && meta.error && "border-red-500 border-2"}`}>
+      <div className="w-24 h-24 rounded-full border bg-blue-500"></div>
       <div>
         <Typography as="h4">{title}</Typography>
         <Typography as="small" className="opacity-50">
@@ -58,7 +32,10 @@ const ItemSelect = ({
         </Typography>
       </div>
       {name && (
-        <Radio className="hidden" name={name} id={title} value={title} />
+        <>
+          {/* <input {...field} type="radio" value={value} /> */}
+          <Field {...field} type="radio" value={value} className="hidden" />
+        </>
       )}
     </motion.label>
   );

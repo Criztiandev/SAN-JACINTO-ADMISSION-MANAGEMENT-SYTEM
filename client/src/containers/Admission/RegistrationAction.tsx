@@ -1,13 +1,17 @@
-import { Button, IconButton } from "../../components";
-import { ResetIcon, PrevIcon, NextIcon } from "../../assets/icons";
+import Button from "../../components/Button";
+import IconButton from "../../components/IconButton";
+import ResetIcon from "../../assets/icons/Reset.svg";
+import PrevIcon from "../../assets/icons/Expand_left_light.svg";
+import NextIcon from "../../assets/icons/Expand_right_light.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useMultipleFormOption } from "../../interface/MultiStep.Type";
 
 interface currentProps {
   stepper: useMultipleFormOption;
+  isThrottled: boolean;
 }
 
-const RegistrationAction = ({ stepper }: currentProps) => {
+const RegistrationAction = ({ stepper, isThrottled }: currentProps) => {
   const { removeItem: FormRemove } = useLocalStorage("applicant_form");
   const { removeItem: AddressRemove } = useLocalStorage("address_btn");
 
@@ -41,6 +45,7 @@ const RegistrationAction = ({ stepper }: currentProps) => {
           dir="right"
           icon={NextIcon}
           title={`${stepper.isLastStep ? "Finish" : "Next"}`}
+          disabled={isThrottled}
         />
       </div>
     </div>

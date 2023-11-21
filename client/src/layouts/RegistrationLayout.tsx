@@ -1,10 +1,9 @@
-import { Drawer } from "../components";
 import { panelTitleInterface } from "../interface/Registration.Type";
-import { useDrawer } from "../hooks";
 import { RegistrationLayoutProps } from "../interface/Layout.Types";
 import AdmissionSideBar from "../containers/Layout/AdmissionSideBar";
 import { CustomSideBarContent } from "../helper/Layout.Helper";
-
+import useDrawer from "../hooks/useDrawer";
+import Drawer from "../components/Drawer";
 const RegistrationLayout = ({
   activePanel,
   children,

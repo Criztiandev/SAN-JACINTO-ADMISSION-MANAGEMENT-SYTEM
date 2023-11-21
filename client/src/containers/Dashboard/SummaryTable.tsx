@@ -7,7 +7,6 @@ import FetchLoader from "../General/FetchLoader";
 import Table from "../../components/Table";
 import Badge from "../../components/Badge";
 
-import TitleHeader from "../Table/TitleHeader";
 import FirstColumn from "../Table/FirstColumn";
 import useFetch from "../../hooks/useFetch";
 
@@ -22,13 +21,19 @@ const SummaryTable = () => {
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
-      id: "select",
-      header: ({ table }) => <TitleHeader data={table} />,
+      header: "Name",
       accessorFn: ({ personalDetails }) =>
-        `${personalDetails.lastName}, ${personalDetails.firstName} ${personalDetails.middleName}`,
-      cell: ({ row, getValue }) => (
-        <FirstColumn data={row} value={getValue()} />
-      ),
+        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${personalDetails?.middleName}`,
+      cell: ({ row, getValue }) => {
+        const { original } = row;
+        return (
+          <FirstColumn
+            UID={original?._id}
+            gender={original?.gender}
+            value={getValue()}
+          />
+        );
+      },
     },
 
     { header: "LRN", accessorKey: "studentDetails.LRN" },

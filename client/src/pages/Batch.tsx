@@ -49,12 +49,8 @@ const Batch = () => {
     <>
       <BaseLayout title="Batch">
         <div className="grid grid-cols-4 gap-8">
-          {data?.map(({ examiniees, ...props }: any) => (
-            <BatchCard
-              key={props.title}
-              length={examiniees?.length}
-              {...props}
-            />
+          {data?.map(({ selected, ...props }: any) => (
+            <BatchCard key={props.title} length={selected?.length} {...props} />
           ))}
           <CreateBatchButton onClick={handleCreate} />
         </div>

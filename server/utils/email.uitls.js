@@ -1,14 +1,12 @@
 import mailer from "nodemailer";
 
-export const sendEmail = (target, content) => {
-  const { subject, text } = content;
-
+export const sendEmail = ({ target, title, body }) => {
   try {
     const message = {
       from: process.env.HOST_EMAIL,
       to: target,
-      subject,
-      text,
+      subject: title,
+      text: body,
     };
 
     const transporter = mailer.createTransport({
