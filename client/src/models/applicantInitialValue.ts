@@ -44,7 +44,7 @@ export const applicantInputMaps = [
     title: "Personal Details",
     model: [
       {
-        type: "text",
+        type: "date",
         label: "Birth Date",
         name: "personalDetails.birthDate",
       },

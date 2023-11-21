@@ -124,15 +124,15 @@ const personalDetailsSchema = Yup.object().shape({
   personalDetails: Yup.object().shape({
     firstName: Yup.string()
       .required("First name is required")
-      .matches(/^[A-Za-z]+$/, "First name should only contain letters"),
+      .matches(/^[A-Za-z\s]+$/, "First name should only contain letters"),
 
     middleName: Yup.string()
       .required("Middle name is required")
-      .matches(/^[A-Za-z]+$/, "Middle name should only contain letters"),
+      .matches(/^[A-Za-z\s]+$/, "Middle name should only contain letters"),
 
     lastName: Yup.string()
       .required("Last name is required")
-      .matches(/^[A-Za-z]+$/, "Last name should only contain letters"),
+      .matches(/^[A-Za-z\s]+$/, "Last name should only contain letters"),
 
     suffix: Yup.string().required("Suffix is required"),
     gender: Yup.string()
@@ -198,7 +198,7 @@ const otherDetailsSchema = Yup.object().shape({
   }),
 });
 
-const applicantSchema = Yup.object().shape({
+export const applicantSchema = Yup.object().shape({
   studentDetails: Yup.object().shape({
     LRN: Yup.string()
       .required("LRN is required")
@@ -340,7 +340,6 @@ export const preferedValidationSchema = (level: string) => {
     "4": addressDetailsSchema,
     "5": guardianDetailsSchema,
     "6": otherDetailsSchema,
-    "7": applicantSchema,
     // Add more validations for other levels if needed
   };
 

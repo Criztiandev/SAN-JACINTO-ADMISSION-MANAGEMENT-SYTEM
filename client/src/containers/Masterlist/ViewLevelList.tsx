@@ -4,7 +4,6 @@ import exportFromJSON from "export-from-json";
 import { motion } from "framer-motion";
 import useFetch from "../../hooks/useFetch";
 import useURL from "../../hooks/useURL";
-import FetchLoader from "../General/FetchLoader";
 import Typography from "../../components/Typography";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -13,6 +12,7 @@ import FilterButton from "../Applicants/FilterButton";
 import IconButton from "../../components/IconButton";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import useCustomMutation from "../../hooks/useCustomMutation";
+import EmptyCard from "../Common/EmptyCard";
 
 const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   const today = new Date();
@@ -29,7 +29,7 @@ const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   return { currentDate, currentTime };
 };
 
-const ViewLevelList = ({ APID }: { APID: string }) => {
+const ViewLevelList = () => {
   const [isRefetch, setIsRefetch] = useState(false);
   const [selectedForm, setSelectedForm] = useState("");
   const [selectedFormat, setSelectedFormat] = useState("");
@@ -51,9 +51,10 @@ const ViewLevelList = ({ APID }: { APID: string }) => {
   });
 
   const { mutate } = useCustomMutation({
-    route: "/masterlist",
+    route: `/masterlist?level=${level}`,
     overrideFn: () => {
-      // updateURL("/masterlist");
+      updateURL("/masterlist");
+      toast.success("Master List Deleted Successfully");
     },
     type: "delete",
   });
@@ -81,11 +82,24 @@ const ViewLevelList = ({ APID }: { APID: string }) => {
   };
 
   const handleFlush = () => {
-    alert("hi");
-    mutate({ _id: APID, selected: level });
+    mutate({});
   };
 
-  if (isLoading || isError) return <FetchLoader />;
+  if (isLoading || isError)
+    return (
+      <div>
+        <header className="pb-4 mb-4 border-b border-gray-400 flex justify-between items-start">
+          <div>
+            <h1>Grade {level} List</h1>
+            <span></span>
+          </div>
+        </header>
+
+        <main>
+          <EmptyCard title="Student Not Available" />
+        </main>
+      </div>
+    );
 
   return (
     <>

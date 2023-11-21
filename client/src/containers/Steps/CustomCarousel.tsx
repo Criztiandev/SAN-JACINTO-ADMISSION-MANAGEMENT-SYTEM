@@ -7,13 +7,19 @@ interface CustomCarouselProps {
   data: Array<object>;
   name: string;
   state: string;
+  display?: "left" | "center";
 }
 
-const CustomCarousel = ({ data, name, state }: CustomCarouselProps) => {
+const CustomCarousel = ({
+  data,
+  name,
+  state,
+  display = "left",
+}: CustomCarouselProps) => {
   const [selectedTrack, setSelectedTrack] = useState(state || "");
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
-      <Carousel direction="center">
+    <div className="border ">
+      <Carousel direction={display}>
         {data.map((props: any) => (
           <div onClick={() => setSelectedTrack(props.title)}>
             <Carousel.Item

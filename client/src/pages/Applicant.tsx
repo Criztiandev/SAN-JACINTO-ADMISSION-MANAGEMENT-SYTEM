@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout";
 import Table from "../components/Table";
 import SearchBar from "../components/SearchBar";
 import Badge from "../components/Badge";
-import Applicants from "../assets/icons/Applicant_Dark.svg";
 // Context and Helpers
 import { useTableContext } from "../context/TableContext";
 import useFetch from "../hooks/useFetch";
@@ -27,7 +26,6 @@ import MessageApplicant from "../containers/Applicants/MessageApplicant";
 import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
 import IconButton from "../components/IconButton";
 import AcceptIcon from "../assets/icons/Done_light.svg";
 import MessageIcon from "../assets/icons/Message_light.svg";
@@ -35,7 +33,7 @@ import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL, navigateTo } = useURL();
+  const { updateURL } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant",
@@ -130,7 +128,6 @@ const Applicant = () => {
             />
             <IconButton icon={MessageIcon} as="outlined" />
           </div>
-          // <ApplicantActionColumn data={row.original} onAction={handleAction} />
         );
       },
     },
@@ -144,28 +141,6 @@ const Applicant = () => {
         title="Applicants"
         actions={
           <div className="flex gap-4">
-            <Dropdown
-              as="outlined"
-              icon={"dfdf"}
-              option={[
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/examiniees"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/batch"),
-                },
-                {
-                  icon: Applicants,
-                  title: "Examiniees",
-                  onClick: () => navigateTo("/masterlist"),
-                },
-              ]}
-              className="px-3 py-2 w-[150px]"
-            />
             <Button
               as="contained"
               title="Create"

@@ -4,7 +4,7 @@ const nameSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   middleName: { type: String, required: true },
   lastName: { type: String, required: true },
-  contact: { type: String, require: true, unique: true },
+  contact: { type: String, require: true },
 });
 
 const addressSchema = new mongoose.Schema({
@@ -63,7 +63,7 @@ const applicantSchema = mongoose.Schema(
         firstName: { type: String, required: true },
         middleName: { type: String, required: true },
         lastName: { type: String, required: true },
-        contact: { type: String, require: true, unique: true },
+        contact: { type: String, require: true },
         relationship: { type: String, require: true },
       },
     },

@@ -268,7 +268,17 @@ export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
 });
 
 export const deleteSelectedList = expressAsyncHandler(async (req, res) => {
-  console.log(req.body);
+  const { level } = req.query;
+
+  // Find and delete all applicants with the specified year level
+  const result = await applicantModel.deleteMany({
+    "studentDetails.yearLevel": `Grade ${level}`,
+  });
+
+  // Check if any documents were deleted
+  if (result.deletedCount <= 0) {
+    throw new Error("Invalid Action, No matching applicants found");
+  }
 
   res.status(200).json({ payload: null, message: "Deleted Successfully" });
 });

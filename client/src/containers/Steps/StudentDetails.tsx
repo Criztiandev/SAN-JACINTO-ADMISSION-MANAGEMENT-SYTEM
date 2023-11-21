@@ -25,6 +25,8 @@ const StudentDetails = () => {
   const { yearLevel: currentYearLevel } = studentDetails;
   const preferedTrack = GradeLevelTrack(gradeDetails, currentYearLevel);
 
+  console.log(currentYearLevel);
+
   return (
     <section>
       {preferedTrack.length > 0 ? (
@@ -32,6 +34,7 @@ const StudentDetails = () => {
           state={getItem()?.studentDetails?.track}
           name="studentDetails.track"
           data={preferedTrack}
+          display="center"
         />
       ) : (
         <InvalidTrack />

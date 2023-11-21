@@ -19,6 +19,7 @@ import useCustomMutation from "../../hooks/useCustomMutation";
 import { toast } from "react-toastify";
 
 const ViewCalendar = ({ APID }: { APID: string }) => {
+  const [isAnnouce, setIsAnnouce] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const { updateURL, baseRoute } = useURL();
 
@@ -62,6 +63,11 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
 
   const handleDeleteSchedule = () => {
     updateURL(`state=delete&APID=${APID}`);
+  };
+
+  const handleAnnouce = () => {
+    setIsAnnouce((prev) => !prev);
+    toast.success("Annouced Successfully");
   };
 
   if (isFetching) return <FetchLoader />;
@@ -187,17 +193,46 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
           </section>
         </main>
 
+        {isAnnouce && (
+          <section>
+            <Textarea
+              label="Message"
+              name="message"
+              placeholder="Enter the details of this schedule"
+              className="h-[250px]"
+            />
+          </section>
+        )}
+
         <footer className="flex gap-4 justify-end mt-4">
           {isEdit ? (
             <Button type="submit" as="contained" title="Submit" />
           ) : (
             <div className="flex gap-4">
-              <Button
-                type="button"
-                as="contained"
-                title="Finish"
-                onClick={handleFinishSchedule}
-              />
+              {isAnnouce ? (
+                <Button
+                  type="button"
+                  as={isAnnouce ? "contained" : "outlined"}
+                  title="Confirm"
+                  onClick={handleAnnouce}
+                />
+              ) : (
+                <Button
+                  type="button"
+                  as={isAnnouce ? "contained" : "outlined"}
+                  title="Announce"
+                  onClick={() => setIsAnnouce((prev) => !prev)}
+                />
+              )}
+
+              {!isAnnouce && (
+                <Button
+                  type="button"
+                  as="contained"
+                  title="Finish"
+                  onClick={handleFinishSchedule}
+                />
+              )}
             </div>
           )}
         </footer>
