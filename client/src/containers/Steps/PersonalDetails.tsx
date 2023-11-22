@@ -10,6 +10,7 @@ import {
 } from "../../data/Stepper.Data";
 import CustomCarousel from "./CustomCarousel";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { OmitInputObject } from "../../utils/OmitUtils";
 
 const PersonalDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -41,10 +42,36 @@ const PersonalDetails = () => {
         </Select>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 items-center justify-center mb-4">
-        {PersonalDetailsSectionSection.map((props) => (
+      <div className="grid grid-cols-2 gap-6 items-center justify-center ">
+        {OmitInputObject(
+          ["Religion", "Mother Tongue"],
+          PersonalDetailsSectionSection
+        ).map((props) => (
           <Input key={props.label} {...props} />
         ))}
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 items-center justify-center">
+        <Select label="Religion" name="personalDetails.religion">
+          <option value=" ">Select Religion</option>
+          <option value="ROMAN CATHOLIC">Roman Catholic</option>
+          <option value="IGLESIA NI CRISTO">Iglesia Ni Cristo</option>
+          <option value="BAPTIST">Baptist</option>
+          <option value="SAKSI NI JEHOVA">Saksi ni Jehova</option>
+          <option value="OTHER">Other</option>
+        </Select>
+
+        <Select label="Mother Tongue" name="personalDetails.motherTongue">
+          <option value=" ">Select Mother Tongue</option>
+          <option value="FILIPINO">Filipino</option>
+          <option value="TAGALOG">Tagalog</option>
+          <option value="CEBUANO">Cebuano</option>
+          <option value="ILONGGO">Ilonggo</option>
+          <option value="WARAY">Waray</option>
+          <option value="BICOLANO">Bicolano</option>
+          <option value="PANGASINENSE">Pangasinense</option>
+          <option value="ILOCANO">Ilocano</option>
+        </Select>
       </div>
     </section>
   );

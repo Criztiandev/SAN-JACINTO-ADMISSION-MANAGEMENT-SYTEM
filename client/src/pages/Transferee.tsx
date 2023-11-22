@@ -37,9 +37,9 @@ const Applicant = () => {
   const { updateURL } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant",
+    route: "/applicant?role=transferee",
     overrideFn: handleMutateData,
-    key: ["applicants"],
+    key: ["transferees"],
   });
 
   // mutation

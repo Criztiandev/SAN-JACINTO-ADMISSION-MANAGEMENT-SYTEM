@@ -12,7 +12,6 @@ import { InputProps } from "../../interface/FormInterface";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
 import { PersonalDetailsFirstSection, suffixes } from "../../data/Stepper.Data";
-import { applicantSchema } from "../../schema/applicant.Schema";
 
 const FormSection = ({ title, model }: ApplicationFormModelProps) => {
   const [hide, setHide] = useState(true);
@@ -55,10 +54,7 @@ const CreateApplicant = () => {
   });
 
   return (
-    <Formik
-      initialValues={applicantInitialValue}
-      onSubmit={handleSubmit}
-      validationSchema={applicantSchema}>
+    <Formik initialValues={applicantInitialValue} onSubmit={handleSubmit}>
       <Form className="">
         <section className="">
           <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end"></div>

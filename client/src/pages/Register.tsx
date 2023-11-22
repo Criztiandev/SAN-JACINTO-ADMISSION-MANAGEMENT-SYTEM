@@ -23,6 +23,7 @@ import useModal from "../hooks/useModal";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { preferedValidationSchema } from "../schema/applicant.Schema";
 import useFormSubmit from "../hooks/useFormSubmit";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ const Register = () => {
       return nextStep();
     }
 
+    toast.info("Please Wait a second");
     mutationSubmit(values, action);
   };
 

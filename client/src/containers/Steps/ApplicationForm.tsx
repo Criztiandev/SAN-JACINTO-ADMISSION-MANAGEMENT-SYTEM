@@ -30,10 +30,12 @@ const FormSection = ({ title, model }: ApplicationFormModelProps) => {
 
         <div className="flex gap-4">
           <IconButton
+            as="outlined"
             icon={EditIcon}
             onClick={() => setOnEdit((prev) => !prev)}
           />
           <IconButton
+            as="outlined"
             icon={Expand_Down}
             onClick={() => setHide((prev) => !prev)}
           />

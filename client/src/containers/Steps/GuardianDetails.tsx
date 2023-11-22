@@ -71,7 +71,7 @@ const GuardianDetails = () => {
           <div className="flex gap-4">
             <Dropdown
               type="button"
-              title="Guadian"
+              title="Prefered Guardian"
               onClick={(e) => setSelectedGuardian(e.currentTarget.value)}
               className="p-4"
               option={[

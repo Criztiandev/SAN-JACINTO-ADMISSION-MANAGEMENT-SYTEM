@@ -11,18 +11,18 @@ import ApplicationForm from "../containers/Steps/ApplicationForm";
 
 export const OutroModalDetails = [
   {
-    title: "Congratulations",
-    desc: " Thank you on your admission to our school! Your examination schedule has been sent to your Facebook account.",
+    title: "Congratulations 🎉",
+    desc: " Congratulations on your admission to our school! 🎉🎉 We have sent you a link to your private user account to keep you connected. Please remember not to share it with others.",
   },
 
   {
-    title: "Exciting Journey",
-    desc: "  As you embark on this exciting journey, please keep in mind that your registered Facebook account will serve as the primary channel for receiving all school updates.",
+    title: "Exciting Journey 🗻",
+    desc: "As you embark on this exciting journey, please bear in mind that your private account, email, contact, and Facebook will serve as the primary channels for receiving all school updates related to admission.",
   },
 
   {
-    title: "Stay Tuned",
-    desc: " Stay connected to stay informed about events and important announcements. If you ever have any questions, don't hesitate to use your private account to get in touch. We're here to support you every step of the way!",
+    title: "Stay Tuned 💪💪",
+    desc: " Stay connected with us on our Facebook account to stay informed about events and important announcements. If you ever have any questions, don't hesitate to use your facebook to get in touch. We're here to support you every step of the way!",
   },
 ];
 

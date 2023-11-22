@@ -46,23 +46,24 @@ const StudentDetails = () => {
             model
           ).map((props) => (
             <motion.div key={props.label} whileHover={{ scale: 1.03 }}>
-              <Input type="number" {...props} />
+              <Input type="number" {...props} className="uppercase" />
             </motion.div>
           ))}
 
-          <motion.div whileHover={{ scale: 1.03 }}>
+          <motion.div whileHover={{ scale: 1.03 }} className="my-6">
             <Select label="School Year" name="studentDetails.schoolYear">
               <option value={""}>Select Year Level</option>
-              {GenerateSchoolYearOpt(2005)}
+              {GenerateSchoolYearOpt(2010)}
             </Select>
           </motion.div>
 
-          <motion.div whileHover={{ scale: 1.03 }}>
+          <motion.div whileHover={{ scale: 1.03 }} className="my-6">
             <Input
               type="text"
               label="Last School Attended"
               name="studentDetails.lastSchoolAttended"
               placeholder="Enter your Last School Attended"
+              className="uppercase border"
             />
           </motion.div>
         </div>
