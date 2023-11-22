@@ -3,8 +3,6 @@
 import BaseLayout from "../layouts/BaseLayout";
 import { momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import Button from "../components/Button";
-import CalendarIcon from "../assets/icons/Calendar_Dark.svg";
 import useURL from "../hooks/useURL";
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
@@ -58,16 +56,7 @@ const Schedule = () => {
 
   return (
     <>
-      <BaseLayout
-        title="Schedule"
-        actions={
-          <Button
-            icon={CalendarIcon}
-            title="Create"
-            onClick={() => updateURL("state=create")}
-          />
-        }
-        free>
+      <BaseLayout title="Schedule" free>
         <div className="relative  w-full rounded-[5px] flex flex-col gap-2 overflow-hidden  h-[78vh]">
           {isLoading || isError ? (
             <FetchLoader />

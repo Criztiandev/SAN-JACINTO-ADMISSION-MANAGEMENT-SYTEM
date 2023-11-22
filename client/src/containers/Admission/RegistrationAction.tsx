@@ -1,9 +1,6 @@
 import Button from "../../components/Button";
-import IconButton from "../../components/IconButton";
-import ResetIcon from "../../assets/icons/Reset.svg";
 import PrevIcon from "../../assets/icons/Expand_left_light.svg";
 import NextIcon from "../../assets/icons/Expand_right_light.svg";
-import useLocalStorage from "../../hooks/useLocalStorage";
 import { useMultipleFormOption } from "../../interface/MultiStep.Type";
 
 interface currentProps {
@@ -12,14 +9,6 @@ interface currentProps {
 }
 
 const RegistrationAction = ({ stepper, isThrottled }: currentProps) => {
-  const { removeItem: FormRemove } = useLocalStorage("applicant_form");
-  const { removeItem: AddressRemove } = useLocalStorage("address_btn");
-
-  const handleReset = () => {
-    FormRemove();
-    AddressRemove();
-  };
-
   return (
     <div
       className={`flex items-center ${
@@ -37,8 +26,6 @@ const RegistrationAction = ({ stepper, isThrottled }: currentProps) => {
       )}
 
       <div className="flex gap-4">
-        <IconButton icon={ResetIcon} onClick={handleReset} />
-
         <Button
           type="submit"
           as="outlined"

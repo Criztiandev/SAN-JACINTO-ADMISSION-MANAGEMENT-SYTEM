@@ -16,7 +16,7 @@ const PersonalDetails = () => {
   const { getItem } = useLocalStorage("applicant_form");
   return (
     <section className="flex flex-col gap-4 mb-4">
-      <div className="flex">
+      <div className="flex mb-2">
         <CustomCarousel
           state={getItem()?.personalDetails?.gender}
           name="personalDetails.gender"
@@ -36,7 +36,7 @@ const PersonalDetails = () => {
           className="bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-[100px]">
           <option value={""}>Suffix</option>
           {suffixes.map((suff) => (
-            <option value={suff}>{suff}</option>
+            <option value={suff === "N/A" ? " " : suff}>{suff}</option>
           ))}
         </Select>
       </div>

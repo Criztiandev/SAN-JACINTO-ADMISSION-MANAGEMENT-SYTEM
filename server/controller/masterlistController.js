@@ -8,7 +8,7 @@ export const fetchMasterListByLevel = expressAsyncHandler(async (req, res) => {
     .find({
       "studentDetails.yearLevel": `Grade ${level}`,
       role: "regular",
-      status: "accepted",
+      status: "done",
     })
     .lean()
     .select(
@@ -31,7 +31,7 @@ export const fetchSF1List = expressAsyncHandler(async (req, res) => {
   const _applicant = await applicantModel
     .find({
       "studentDetails.yearLevel": `Grade ${level}`,
-      status: "accepted",
+      status: "done",
     })
     .lean()
     .select(
@@ -112,7 +112,7 @@ export const fetchApplicationForm = expressAsyncHandler(async (req, res) => {
   const _applicant = await applicantModel
     .find({
       "studentDetails.yearLevel": `Grade ${level}`,
-      status: "accepted",
+      status: "done",
     })
     .lean()
     .select("-createdAt -updatedAt -status -__v -role");
@@ -236,7 +236,7 @@ export const fetchApplicationForm = expressAsyncHandler(async (req, res) => {
 
 export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
   const _applicants = await applicantModel
-    .find({ role: "regular", status: "accepted" })
+    .find({ role: "regular", status: "done" })
     .lean()
     .select("_id studentDetails.yearLevel");
 

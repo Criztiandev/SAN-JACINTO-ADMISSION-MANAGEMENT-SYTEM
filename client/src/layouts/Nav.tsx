@@ -31,6 +31,7 @@ const Nav = () => {
       options: [
         { title: "Applicant", icon: ApplicantIcon, path: "/applicants" },
         { title: "Archive", icon: ArchieveIcon, path: "/archive" },
+        { title: "Transferee", icon: ApplicantIcon, path: "/transferee" },
       ],
     },
     {

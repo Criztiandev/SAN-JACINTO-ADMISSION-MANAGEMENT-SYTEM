@@ -13,6 +13,10 @@ import IconButton from "../../components/IconButton";
 import DeleteIcon from "../../assets/icons/Delete.svg";
 import useCustomMutation from "../../hooks/useCustomMutation";
 import EmptyCard from "../Common/EmptyCard";
+import Files from "../../assets/icons/Form_fill.svg";
+import CreateFile from "../../assets/icons/File_dock_add_fill.svg";
+import FileIcon from "../../assets/icons/Batch.svg";
+import DownloadIcon from "../../assets/icons/Download_circle_fill.svg";
 
 const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   const today = new Date();
@@ -109,8 +113,18 @@ const ViewLevelList = () => {
           <span></span>
         </div>
 
-        <div>
-          <IconButton as="outlined" icon={DeleteIcon} onClick={handleFlush} />
+        <div className="flex gap-4">
+          <IconButton
+            icon={DeleteIcon}
+            as="outlined"
+            className="opacity-70 hover:opacity-100 hover:border-gray-500"
+            onClick={handleFlush}
+          />
+          <Button
+            title="Download"
+            icon={DownloadIcon}
+            onClick={() => handleDownload(selectedFormat, selectedForm)}
+          />
         </div>
       </header>
 
@@ -122,25 +136,27 @@ const ViewLevelList = () => {
               title="SF1"
               onClick={() => handleSelectFile("SF1")}
               disabled={isFormLoading}
+              icon={Files}
             />
             <Button
               title="Form"
               as={selectedForm === "Form" ? "contained" : "outlined"}
               onClick={() => handleSelectFile("Form")}
               disabled={isFormLoading}
+              icon={Files}
             />
           </div>
 
           <FilterButton
             title="Format"
-            icon=""
+            icon={CreateFile}
             as={selectedFormat ? "contained" : "outlined"}
             onToggle={(e) => {
               setSelectedFormat(e.currentTarget.value);
             }}
             option={[
-              { title: "CSV", icon: "" },
-              { title: "Excel", icon: "" },
+              { title: "CSV", icon: FileIcon },
+              { title: "Excel", icon: FileIcon },
             ]}
           />
         </div>
@@ -186,14 +202,6 @@ const ViewLevelList = () => {
               );
             })}
           </div>
-        </div>
-
-        <div className="sticky bottom-3 right-0 flex justify-end">
-          <Button
-            title="Download"
-            className=""
-            onClick={() => handleDownload(selectedFormat, selectedForm)}
-          />
         </div>
       </main>
     </>

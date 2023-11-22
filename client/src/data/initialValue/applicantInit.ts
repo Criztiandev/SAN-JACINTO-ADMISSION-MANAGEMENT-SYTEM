@@ -52,7 +52,7 @@ const personalDetails: PersonalDetailsProps = {
   suffix: "",
   gender: "",
   birthDate: "",
-  age: 22,
+  age: 0,
   motherTongue: "",
   email: "",
   contact: "",

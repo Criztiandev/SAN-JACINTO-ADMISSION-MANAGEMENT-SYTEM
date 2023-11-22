@@ -23,8 +23,13 @@ const StatsSection = () => {
     );
   return (
     <section className="grid grid-cols-3 gap-4">
-      {data.map((props: StatsDataProps) => (
-        <StatsCard key={props.title} {...props} />
+      {data.map((props: StatsDataProps, index: number) => (
+        <StatsCard
+          key={props.title}
+          {...props}
+          icon={["🎒", "👔", "👥"]}
+          index={index}
+        />
       ))}
     </section>
   );

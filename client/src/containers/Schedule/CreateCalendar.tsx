@@ -11,6 +11,7 @@ import { scheduleSchema } from "../../schema/schedule.Schema";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import useFetch from "../../hooks/useFetch";
 import FetchLoader from "../General/FetchLoader";
+import SubmitIcon from "../../assets/icons/Submit_Icon_White.svg";
 
 const CreateCalendar = () => {
   const { queryParams, baseRoute } = useURL();
@@ -67,7 +68,7 @@ const CreateCalendar = () => {
               <Typography
                 as="h4"
                 className="pb-2 border-b border-gray-200 mb-4">
-                Batches
+                👥 Batches
               </Typography>
 
               <div className="max-h-[350px] overflow-y-auto pr-4">
@@ -85,11 +86,11 @@ const CreateCalendar = () => {
               </div>
             </section>
 
-            <section>
+            <section className="my-4">
               <Typography
                 as="h4"
                 className="pb-2 border-b border-gray-400 mb-4">
-                Schedule
+                📅 Schedule
               </Typography>
               <div className="grid grid-cols-2 gap-4">
                 <Input label="Start" name="schedule.start" disabled={true} />
@@ -101,7 +102,7 @@ const CreateCalendar = () => {
               <Typography
                 as="h4"
                 className="pb-2 border-b border-gray-400 mb-4">
-                Time
+                🕐 Time
               </Typography>
               <div className="grid grid-cols-2 gap-4">
                 <Input
@@ -120,8 +121,8 @@ const CreateCalendar = () => {
             </section>
 
             <section>
+              <h4 className="mb-4 ">📄 Description</h4>
               <Textarea
-                label="Details"
                 name="details"
                 placeholder="Enter the details of this schedule"
                 className="h-[250px]"
@@ -131,6 +132,7 @@ const CreateCalendar = () => {
               <Button
                 type="submit"
                 title="Submit"
+                icon={SubmitIcon}
                 disabled={data?.length <= 0 && true}
               />
             </section>

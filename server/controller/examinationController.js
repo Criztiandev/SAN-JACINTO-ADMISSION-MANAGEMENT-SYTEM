@@ -38,7 +38,7 @@ export const promoteExaminiees = asyncHandler(async (req, res) => {
 
   await applicantModel.findOneAndUpdate(
     { _id: APID },
-    { role: "regular", status: "accepted" },
+    { role: "regular", status: "done" },
     { new: true }
   );
 

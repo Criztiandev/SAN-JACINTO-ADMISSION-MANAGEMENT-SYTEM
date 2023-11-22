@@ -41,12 +41,12 @@ const Input = ({
       <input
         {...field}
         {...props}
-        className={`w-full px-4 py-3 border rounded-[5px] text-gray-600${
+        className={` w-full px-4 py-3 border rounded-[5px] text-gray-600${
           className && className
         } ${
           props.disabled
             ? ` ${props.static ? "bg-gray-100" : "bg-gray-300"} text-gray-600  `
-            : "bg-gray-100 text-black select-none"
+            : "bg-gray-100 text-black select-none "
         }`}
       />
       {meta.error && (

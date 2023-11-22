@@ -325,7 +325,7 @@ export const finishSchedule = expressAsyncHandler(async (req, res) => {
 
           await applicantModel.findOneAndUpdate(
             { _id: id.toString() },
-            { status: "regular" },
+            { status: "done" },
             { new: true }
           );
           return;

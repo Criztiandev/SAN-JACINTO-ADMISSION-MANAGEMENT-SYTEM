@@ -139,7 +139,7 @@ const Applicant = () => {
   return (
     <>
       <BaseLayout
-        title="Applicants"
+        title="Transferee"
         actions={
           <div className="flex gap-4">
             <Button

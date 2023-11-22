@@ -18,7 +18,7 @@ const CustomCarousel = ({
 }: CustomCarouselProps) => {
   const [selectedTrack, setSelectedTrack] = useState(state || "");
   return (
-    <div className="border ">
+    <div className="flex flex-col gap-4 justify-center items-center ">
       <Carousel direction={display}>
         {data.map((props: any) => (
           <div onClick={() => setSelectedTrack(props.title)}>

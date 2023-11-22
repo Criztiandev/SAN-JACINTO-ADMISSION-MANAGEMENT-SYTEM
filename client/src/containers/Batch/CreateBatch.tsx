@@ -16,6 +16,8 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 import EmptyCard from "../Common/EmptyCard";
 import Dropdown from "../../components/Dropdown";
 import ExamineesCard from "./ExamineesCard";
+import ApplicantList from "../../assets/icons/Status_list.svg";
+import SubmitIcon from "../../assets/icons/Submit_Icon_White.svg";
 
 const CreateBatch = () => {
   const [preferedLevel, setPreferedLevel] = useState("SPJ");
@@ -126,7 +128,8 @@ const CreateBatch = () => {
                   <div className="flex gap-2">
                     <Dropdown
                       type="button"
-                      as="outlined"
+                      as="contained"
+                      icon={ApplicantList}
                       title={preferedLevel || "Grade level"}
                       className="p-4 flex gap-2 flex-col w-[120px]"
                       onClick={handleSelectLevel}
@@ -171,6 +174,7 @@ const CreateBatch = () => {
 
             <section className="sticky bottom-0 right-5 flex justify-end gap-4">
               <Button
+                icon={SubmitIcon}
                 type="submit"
                 title="Submit"
                 disabled={payload?.length <= 0 && true}

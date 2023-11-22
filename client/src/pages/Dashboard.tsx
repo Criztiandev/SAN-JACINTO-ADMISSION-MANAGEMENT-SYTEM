@@ -46,6 +46,7 @@ const Dashboard = () => {
         title={`Hello, ${data?.fullName} 👋`}
         actions={
           <IconButton
+            as="outlined"
             icon={LogoutIcon}
             onClick={() => navigate("?state=logout")}
           />

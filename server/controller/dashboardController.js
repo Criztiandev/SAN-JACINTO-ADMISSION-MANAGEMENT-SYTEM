@@ -23,7 +23,7 @@ export const fetchSchoolStats = asyncHandler(async (req, res) => {
   const payload = [
     { title: "Junior", count: juniorCount, increase: 0 },
     { title: "Senior", count: seniorCount, increase: 0 },
-    { title: "Total Applicants", count: totalApplicantsCount, increase: 0 },
+    { title: "Applicants", count: totalApplicantsCount, increase: 0 },
   ];
 
   res.status(200).json({ payload });

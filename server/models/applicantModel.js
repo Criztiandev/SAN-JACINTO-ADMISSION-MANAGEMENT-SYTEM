@@ -76,12 +76,12 @@ const applicantSchema = mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["applicant", "examiniees", "regular"],
+      enum: ["applicant", "examiniees", "regular", "transferee"],
       default: "applicant",
     },
     status: {
       type: String,
-      enum: ["pending", "archive", "accepted", "scheduled", "waiting"],
+      enum: ["pending", "archive", "accepted", "scheduled", "waiting", "done"],
       default: "pending",
     },
   },

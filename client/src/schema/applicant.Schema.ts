@@ -134,7 +134,7 @@ const personalDetailsSchema = Yup.object().shape({
       .required("Last name is required")
       .matches(/^[A-Za-z\s]+$/, "Last name should only contain letters"),
 
-    suffix: Yup.string().required("Suffix is required"),
+    suffix: Yup.string().notRequired(),
     gender: Yup.string()
       .required("Gender is required")
       .oneOf(

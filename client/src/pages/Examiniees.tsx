@@ -15,24 +15,15 @@ import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
-import GridIcon from "../assets/icons/Group.svg";
 // Assets
-import Button from "../components/Button";
-import useURL from "../hooks/useURL";
-import IconButton from "../components/IconButton";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL } = useURL();
   const { isLoading, isPending, isFetched } = useFetch({
     route: "/examiniees",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
-
-  const handleToggleUpdate = () => {
-    updateURL("state=promote");
-  };
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
@@ -86,9 +77,7 @@ const Examiniees = () => {
 
   return (
     <>
-      <BaseLayout
-        title="Examiniees"
-        actions={<Button title="Promite" onClick={handleToggleUpdate} />}>
+      <BaseLayout title="Examiniees">
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
@@ -96,10 +85,6 @@ const Examiniees = () => {
             onChange={handleSearch}
             disabled={isPending}
           />
-
-          <div>
-            <IconButton icon={GridIcon} />
-          </div>
         </div>
 
         <Table

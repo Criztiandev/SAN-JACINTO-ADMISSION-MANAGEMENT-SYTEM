@@ -34,7 +34,6 @@ const StudentDetails = () => {
           state={getItem()?.studentDetails?.track}
           name="studentDetails.track"
           data={preferedTrack}
-          display="center"
         />
       ) : (
         <InvalidTrack />

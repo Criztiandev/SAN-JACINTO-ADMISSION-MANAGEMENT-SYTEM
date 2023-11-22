@@ -21,6 +21,8 @@ const MasterListPage = lazy(() => import("../pages/MasterList.tsx"));
 const UserPage = lazy(() => import("../pages/Users.tsx"));
 const BatchPage = lazy(() => import("../pages/Batch.tsx"));
 const ArchivePage = lazy(() => import("../pages/Archive.tsx"));
+const TransfereePage = lazy(() => import("../pages/Transferee.tsx"));
+
 interface ProviderWrapperProps {
   children: React.ReactNode;
   loader: ReactElement;
@@ -122,6 +124,17 @@ const routes = [
       <Suspense fallback={<TablePanelSkeleton />}>
         <TableProvider>
           <UserPage />
+        </TableProvider>
+      </Suspense>
+    ),
+  },
+
+  {
+    path: "/transferee",
+    element: (
+      <Suspense fallback={<TablePanelSkeleton />}>
+        <TableProvider>
+          <TransfereePage />
         </TableProvider>
       </Suspense>
     ),

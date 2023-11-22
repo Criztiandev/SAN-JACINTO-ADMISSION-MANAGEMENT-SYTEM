@@ -8,7 +8,7 @@ const Redirect = () => {
     redirect("/");
   }, []);
 
-  return <div>Redirect</div>;
+  return <></>;
 };
 
 export default Redirect;
