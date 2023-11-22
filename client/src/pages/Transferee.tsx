@@ -23,48 +23,20 @@ import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
-import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import AcceptIcon from "../assets/icons/Done_light.svg";
-import MessageIcon from "../assets/icons/Message_light.svg";
-import ArchieveIcon from "../assets/icons/Arhive_light.svg";
+
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL } = useURL();
+  const { navigateTo } = useURL();
 
-  const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant?role=transferee",
+  const { isLoading, isPending, isFetched } = useFetch({
+    route: "/applicant?role=transferee&status=accepted",
     overrideFn: handleMutateData,
     key: ["transferees"],
   });
-
-  // mutation
-  const examiniesMutation = useCustomMutation({
-    route: `/examiniees/create`,
-    overrideFn: () => refetch(),
-  });
-
-  // const archieveMutation = useCustomMutation({
-  //   route: "/applicant/status",
-  //   overrideFn: () => refetch(),
-  //   type: "put",
-  // });
-
-  const handleCreateApplicant = () => {
-    updateURL("state=create");
-  };
-
-  const handleAccept = (id: string) => {
-    examiniesMutation.mutate({ _id: id });
-  };
-
-  const handleArchive = (id: string) => {
-    updateURL(`APID=${id}&state=archive`);
-  };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -111,27 +83,6 @@ const Applicant = () => {
         <Badge as="neutral" type={getValue()} title={getValue()} />
       ),
     },
-    {
-      header: "Action",
-      cell: ({ row }) => {
-        const UID = row.original._id;
-        return (
-          <div className="flex gap-4">
-            <IconButton
-              icon={AcceptIcon}
-              as="outlined"
-              onClick={() => handleAccept(UID)}
-            />
-            <IconButton
-              icon={ArchieveIcon}
-              as="outlined"
-              onClick={() => handleArchive(UID)}
-            />
-            <IconButton icon={MessageIcon} as="outlined" />
-          </div>
-        );
-      },
-    },
   ];
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
@@ -144,9 +95,9 @@ const Applicant = () => {
           <div className="flex gap-4">
             <Button
               as="contained"
-              title="Create"
+              title="Batch"
               icon={CreateApplicantIcon}
-              onClick={handleCreateApplicant}
+              onClick={() => navigateTo("/batch?state=create")}
             />
           </div>
         }>

@@ -74,7 +74,7 @@ export const createExaminiees = asyncHandler(async (req, res) => {
   // Regular student
   const regular = await applicantModel.findByIdAndUpdate(
     _id,
-    { status: "accepted", role: "regular" },
+    { status: "accepted", role: "transferee" },
     { new: true }
   );
   if (!regular) throw new Error("Something went wrong");

@@ -15,6 +15,7 @@ import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
+import ViewApplicant from "../containers/Applicants/ViewApplicant";
 // Assets
 
 const Examiniees = () => {
@@ -94,6 +95,7 @@ const Examiniees = () => {
       </BaseLayout>
 
       <DrawerWrapper state="view" Component={ViewExaminiee} />
+      <DrawerWrapper state="viewApp" Component={ViewApplicant} />
     </>
   );
 };

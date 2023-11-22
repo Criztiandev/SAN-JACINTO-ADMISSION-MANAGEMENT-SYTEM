@@ -39,7 +39,7 @@ const CreateBatch = () => {
   });
 
   const regularApplicantQuery = useFetch({
-    route: "/applicant?role=regular&&status=accepted",
+    route: "/applicant?role=transferee&&status=accepted",
     key: ["regular"],
     option: {
       enabled: type === "schedule",

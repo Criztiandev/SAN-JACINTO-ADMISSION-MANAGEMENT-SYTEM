@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import IconButton from "../../components/IconButton";
 import Button from "../../components/Button";
 
@@ -14,6 +14,7 @@ import Input from "../../components/Input";
 import Select from "../../components/Select";
 import GenerateSchoolYearOpt from "../Helpers/GenerateSchoolYearOpt";
 import useURL from "../../hooks/useURL";
+import { suffixes } from "../../data/Stepper.Data";
 
 const ViewApplicant = ({ APID }: { APID: string }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -59,10 +60,9 @@ const ViewApplicant = ({ APID }: { APID: string }) => {
           <header className="flex justify-between items-center border-b border-gray-400 pb-2 mb-4">
             <div className="flex flex-col">
               {isEdit ? (
-                <Field
-                  name="fullName"
-                  className="border-b border-gray-400 text-black px-2 text-[30px] font-bold"
-                />
+                <div>
+                  <h1>Update Credentials</h1>
+                </div>
               ) : (
                 <h2 className="font-bold">
                   {values?.personalDetails.lastName},{" "}
@@ -71,12 +71,7 @@ const ViewApplicant = ({ APID }: { APID: string }) => {
                   {values?.personalDetails.suffix}
                 </h2>
               )}
-              {isEdit ? (
-                <Field
-                  name="personalDetails.email"
-                  className=" my-2 px-2 border-b border-gray-500 text-black"
-                />
-              ) : (
+              {!isEdit && (
                 <span className="text-gray-400 my-2">
                   @{values?.personalDetails?.email.split("@")[0]}
                 </span>
@@ -93,6 +88,124 @@ const ViewApplicant = ({ APID }: { APID: string }) => {
             />
           </header>
           <section className="">
+            <div className="flex flex-col gap-4 mb-8">
+              <h4 className="pb-4 border-b border-gray-400">
+                Personal Details
+              </h4>
+
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="First Name"
+                  type="text"
+                  name="personalDetails.firstName"
+                  disabled={!isEdit}
+                  placeholder="Enter your First name"
+                />
+
+                <Input
+                  label="Middle Name"
+                  type="text"
+                  name="personalDetails.middleName"
+                  disabled={!isEdit}
+                  placeholder="Enter your Middle Name"
+                />
+
+                <Input
+                  type="text"
+                  name="personalDetails.lastName"
+                  label="Last Name"
+                  disabled={!isEdit}
+                  placeholder="Enter your Last Name"
+                />
+
+                <Select
+                  disabled={!isEdit}
+                  label="Suffix"
+                  name="personalDetails.suffix">
+                  <option value={""}>Suffix</option>
+                  {suffixes.map((suff) => (
+                    <option key={suff} value={suff === "N/A" ? " " : suff}>
+                      {suff}
+                    </option>
+                  ))}
+                </Select>
+
+                <Select
+                  label="Gender"
+                  name="personalDetails.gender"
+                  disabled={!isEdit}>
+                  <option value=" ">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </Select>
+
+                <Input
+                  type="date"
+                  name="personalDetails.birthDate"
+                  label="Birth Date"
+                  disabled={!isEdit}
+                />
+
+                <Input
+                  type="number"
+                  name="personalDetails.age"
+                  label="Age"
+                  disabled={!isEdit}
+                />
+
+                <Input
+                  label="Email"
+                  type="email"
+                  name="personalDetails.email"
+                  placeholder="Enter your Email"
+                  disabled={!isEdit}
+                />
+
+                <Input
+                  label="Contact"
+                  type="number"
+                  name="personalDetails.contact"
+                  placeholder="Enter your Contact Number"
+                  disabled={!isEdit}
+                />
+
+                <Input
+                  label="Facebook Link"
+                  type="text"
+                  name="personalDetails.facebookLink"
+                  placeholder="Enter your Facebook Link"
+                  disabled={!isEdit}
+                />
+
+                <Select
+                  label="Religion"
+                  name="personalDetails.religion"
+                  disabled={!isEdit}>
+                  <option value=" ">Select Religion</option>
+                  <option value="ROMAN CATHOLIC">Roman Catholic</option>
+                  <option value="IGLESIA NI CRISTO">Iglesia Ni Cristo</option>
+                  <option value="BAPTIST">Baptist</option>
+                  <option value="SAKSI NI JEHOVA">Saksi ni Jehova</option>
+                  <option value="OTHER">Other</option>
+                </Select>
+
+                <Select
+                  label="Mother Tongue"
+                  name="personalDetails.motherTongue"
+                  disabled={!isEdit}>
+                  <option value=" ">Select Mother Tongue</option>
+                  <option value="FILIPINO">Filipino</option>
+                  <option value="TAGALOG">Tagalog</option>
+                  <option value="CEBUANO">Cebuano</option>
+                  <option value="ILONGGO">Ilonggo</option>
+                  <option value="WARAY">Waray</option>
+                  <option value="BICOLANO">Bicolano</option>
+                  <option value="PANGASINENSE">Pangasinense</option>
+                  <option value="ILOCANO">Ilocano</option>
+                </Select>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-4 mb-8">
               <h4 className="pb-4 border-b border-gray-400">Student Details</h4>
               <div className="grid grid-cols-2 gap-6 items-center justify-center">
@@ -176,87 +289,6 @@ const ViewApplicant = ({ APID }: { APID: string }) => {
                   placeholder="Enter your Last School Attended"
                   disabled={!isEdit}
                 />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4 mb-8">
-              <h4 className="pb-4 border-b border-gray-400">
-                Personal Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4">
-                <Select
-                  label="Gender"
-                  name="personalDetails.gender"
-                  disabled={!isEdit}>
-                  <option value=" ">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </Select>
-
-                <Input
-                  type="date"
-                  name="personalDetails.birthDate"
-                  label="Birth Date"
-                  disabled={!isEdit}
-                />
-
-                <Input
-                  type="number"
-                  name="personalDetails.age"
-                  label="Age"
-                  disabled={!isEdit}
-                />
-
-                <Input
-                  label="Email"
-                  type="email"
-                  name="personalDetails.email"
-                  placeholder="Enter your Email"
-                  disabled={!isEdit}
-                />
-
-                <Input
-                  label="Contact"
-                  type="number"
-                  name="personalDetails.contact"
-                  placeholder="Enter your Contact Number"
-                  disabled={!isEdit}
-                />
-
-                <Input
-                  label="Facebook Link"
-                  type="text"
-                  name="personalDetails.facebookLink"
-                  placeholder="Enter your Facebook Link"
-                  disabled={!isEdit}
-                />
-
-                <Select
-                  label="Religion"
-                  name="personalDetails.religion"
-                  disabled={!isEdit}>
-                  <option value=" ">Select Religion</option>
-                  <option value="ROMAN CATHOLIC">Roman Catholic</option>
-                  <option value="IGLESIA NI CRISTO">Iglesia Ni Cristo</option>
-                  <option value="BAPTIST">Baptist</option>
-                  <option value="SAKSI NI JEHOVA">Saksi ni Jehova</option>
-                  <option value="OTHER">Other</option>
-                </Select>
-
-                <Select
-                  label="Mother Tongue"
-                  name="personalDetails.motherTongue"
-                  disabled={!isEdit}>
-                  <option value=" ">Select Mother Tongue</option>
-                  <option value="FILIPINO">Filipino</option>
-                  <option value="TAGALOG">Tagalog</option>
-                  <option value="CEBUANO">Cebuano</option>
-                  <option value="ILONGGO">Ilonggo</option>
-                  <option value="WARAY">Waray</option>
-                  <option value="BICOLANO">Bicolano</option>
-                  <option value="PANGASINENSE">Pangasinense</option>
-                  <option value="ILOCANO">Ilocano</option>
-                </Select>
               </div>
             </div>
 
