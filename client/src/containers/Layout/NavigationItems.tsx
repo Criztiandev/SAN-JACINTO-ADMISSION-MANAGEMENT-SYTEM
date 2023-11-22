@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-
+import Image from "../../components/Image";
 interface OptionItems {
   title: string;
   icon: string;
@@ -27,12 +27,12 @@ const NavigationItem = ({
       <motion.li
         key={path}
         className={`${
-          location.pathname === path ? "bg-gray-400 border" : ""
+          location.pathname === path ? "bg-gray-300 border" : ""
         } rounded-full`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}>
         <Link to={`${path}`}>
-          <img src={icon} alt={`${title} Link`} className="p-2" />
+          <Image src={icon} alt={`${title} Link`} className="p-2" />
         </Link>
       </motion.li>
     ));
@@ -41,7 +41,7 @@ const NavigationItem = ({
   return (
     <div
       className={`${
-        selected ? "bg-gray-300 border" : "opacity-70"
+        selected ? "bg-slate-400 border" : "opacity-70"
       } flex justify-center items-center flex-col gap-2 pb-2 px-1 rounded-full`}>
       <motion.span
         className={`${
@@ -54,11 +54,7 @@ const NavigationItem = ({
       </motion.span>
 
       {selected && (
-        <motion.ul
-          className="flex gap-2 flex-col"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}>
+        <motion.ul className="flex gap-2 flex-col">
           {renderSubmenuItems()}
         </motion.ul>
       )}
