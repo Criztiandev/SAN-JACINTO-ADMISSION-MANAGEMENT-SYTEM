@@ -6,10 +6,8 @@ import { ProfileInputSection } from "../data/profile.Data";
 import FetchLoader from "../containers/General/FetchLoader";
 import useFormSubmit from "../hooks/useFormSubmit";
 import useFetch from "../hooks/useFetch";
-import EditIcon from "../assets/icons/Edit_light.svg";
 import BaseLayout from "../layouts/BaseLayout";
 import Button from "../components/Button";
-import IconButton from "../components/IconButton";
 import Input from "../components/Input";
 import Typography from "../components/Typography";
 import useURL from "../hooks/useURL";
@@ -35,11 +33,7 @@ const Profile = () => {
 
   return (
     <>
-      <BaseLayout
-        title={`Hello, ${data?.fullName} 👋`}
-        actions={<IconButton />}
-        className="h-full"
-        free>
+      <BaseLayout title={`Hello, ${data?.fullName} 👋`} className="h-full" free>
         <Formik
           initialValues={{
             fullName: data?.fullName,
@@ -49,14 +43,6 @@ const Profile = () => {
           }}
           onSubmit={handleSubmit}>
           <Form>
-            <div className="flex justify-end">
-              <IconButton
-                icon={EditIcon}
-                as={"outlined"}
-                onClick={() => setIsEdit((prev) => !prev)}
-              />
-            </div>
-
             {ProfileInputSection.map((props) => (
               <div
                 className="grid grid-cols-2 items-center justify-center gap-8 border-b border-b-gray-200 pb-6 mb-4"
