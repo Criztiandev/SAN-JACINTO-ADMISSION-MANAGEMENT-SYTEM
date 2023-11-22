@@ -6,6 +6,8 @@ export const createApplicant = asyncHandler(async (req, res) => {
   const { personalDetails } = req.body;
   const { email } = personalDetails;
 
+  console.log("Temp");
+
   // Check for existing records
   const fieldsToCheck = [
     "studentDetails.LRN",

@@ -7,9 +7,9 @@ import FemaleProfile from "../assets/image/Female_Profile.png";
 import { ItemSelectProps } from "../interface/FormInterface";
 
 export const JrTracksItemModel: CardProps[] = [
-  { cover: "null", title: "Regular", subtitle: "General Academic Strand" },
+  { cover: "null", title: "Regular", subtitle: "Regular" },
   { cover: "null", title: "SPE", subtitle: "General Academic Strand" },
-  { cover: "null", title: "SPJ", subtitle: "General Academic Strand" },
+  { cover: "null", title: "SPJ", subtitle: "Special Journalism" },
 ];
 
 export const SHSTracksItemModel: CardProps[] = [
@@ -28,7 +28,7 @@ export const SHSTracksItemModel: CardProps[] = [
   {
     cover: "null",
     title: "EIM",
-    subtitle: "EIM",
+    subtitle: "Electrical Installation and Maintenance",
   },
 
   {
@@ -40,7 +40,7 @@ export const SHSTracksItemModel: CardProps[] = [
   {
     cover: "null",
     title: "BPP",
-    subtitle: "BPP",
+    subtitle: "Bread and Pastry Production ",
   },
 ];
 

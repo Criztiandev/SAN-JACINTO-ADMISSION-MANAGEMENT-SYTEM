@@ -196,7 +196,13 @@ const personalDetailsSchema = Yup.object().shape({
       .required("Contact is required")
       .min(3, "Too Short")
       .max(13, "Too long"),
-    facebookLink: Yup.string().url("Invalid URL format"),
+    facebookLink: Yup.string().test(
+      "is-N/A-or-URL",
+      'Invalid input. Please enter "N/A" or a valid URL',
+      function (value) {
+        return value === "N/A" || Yup.string().url().isValidSync(value);
+      }
+    ),
   }),
 });
 
@@ -216,6 +222,154 @@ const guardianDetailsSchema = Yup.object().shape({
 });
 
 const otherDetailsSchema = Yup.object().shape({
+  otherDetails: Yup.object().shape({
+    is4psBeneficiary: Yup.string()
+      .required("is4psBeneficiary is required")
+      .matches(/^[a-zA-Z ]+$/, "is4psBeneficiary should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(2, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+
+    isIndigenousPerson: Yup.string()
+      .required("This Field is requried")
+      .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(2, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+
+    isLWD: Yup.string()
+      .required("This Field is requried")
+      .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(2, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+  }),
+});
+
+export const finalApplicantSchmea = Yup.object().shape({
+  studentDetails: Yup.object().shape({
+    LRN: Yup.string()
+      .required("LRN is required")
+      .max(12, "Too Long")
+      .min(3, "Too Short"),
+    PSA: Yup.string()
+      .required("PSA is required")
+      .max(12, "Too Long")
+      .min(3, "Too Short"),
+    track: Yup.string().required("Track is required"),
+    yearLevel: Yup.string()
+      .required("Required Field")
+      .oneOf(
+        ["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"],
+        "Please select a year level"
+      ),
+    schoolYear: Yup.string()
+      .required("School year is required")
+      .test(
+        "is-at-least-10-years",
+        "School year should be at least 10 years from the current year",
+        function (value) {
+          // Check if the value is a valid year and is at least 5 years from the current year
+          const currentYear = new Date().getFullYear();
+          const selectedYear = parseInt(value, 10);
+          return !isNaN(selectedYear) && selectedYear >= currentYear - 10;
+        }
+      ),
+    lastSchoolAttended: Yup.string()
+      .required("Last School Name is required")
+      .matches(/^[a-zA-Z ]+$/, "Last School Name  should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(3, "Too short")
+      .max(32, "Too Long")
+      .trim("Trimmed"),
+  }),
+  personalDetails: Yup.object().shape({
+    firstName: Yup.string()
+      .required("First name is required")
+      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(3, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+
+    middleName: Yup.string()
+      .required("Middle name is required")
+      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(3, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+
+    lastName: Yup.string()
+      .required("Last name is required")
+      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
+      .matches(/^[A-Z ]+$/, "It should be in uppercase / Big letter")
+      .min(3, "Too short")
+      .max(20, "Too Long")
+      .trim("Trimmed"),
+
+    suffix: Yup.string().notRequired(),
+    gender: Yup.string()
+      .required("Gender is required")
+      .oneOf(
+        ["male", "female", "Male", "Female"],
+        "Gender must be Male or Female only"
+      ),
+    birthDate: Yup.string(),
+    age: Yup.number().required("Age is required"),
+    religion: Yup.string().required("Religion is Required"),
+    motherTongue: Yup.string().required("Mother tongue is required"),
+    email: Yup.string().email("Invalid email address"),
+    contact: Yup.string()
+      .required("Contact is required")
+      .min(3, "Too Short")
+      .max(12, "Too long"),
+    facebookLink: Yup.string().test(
+      "is-N/A-or-URL",
+      'Invalid input. Please enter "N/A" or a valid URL',
+      function (value) {
+        return value === "N/A" || Yup.string().url().isValidSync(value);
+      }
+    ),
+  }),
+  gradeDetails: Yup.object().shape({
+    english: Yup.number()
+      .required("English grade is required")
+      .min(60, "English grade must be at least 60")
+      .max(100, "English grade must be at most 100"),
+
+    filipino: Yup.number()
+      .required("Filipino grade is required")
+      .min(60, "Filipino grade must be at least 60")
+      .max(100, "Filipino grade must be at most 100"),
+
+    math: Yup.number()
+      .required("Math grade is required")
+      .min(60, "Math grade must be at least 60")
+      .max(100, "Math grade must be at most 100"),
+
+    science: Yup.number()
+      .required("Science grade is required")
+      .min(60, "Science grade must be at least 60")
+      .max(100, "Science grade must be at most 100"),
+
+    generalAve: Yup.number()
+      .required("General average is required")
+      .min(60, "General average must be at least 60")
+      .max(100, "General average must be at most 100"),
+  }),
+  addressDetails: Yup.object().shape({
+    permanent: addressTemplateSchema,
+    current: addressTemplateSchema,
+  }),
+  guardianDetails: Yup.object().shape({
+    father: guardianTemplateSchema,
+    mother: guardianTemplateSchema,
+    legalGuardian: guardianTemplateSchema,
+  }),
   otherDetails: Yup.object().shape({
     is4psBeneficiary: Yup.string()
       .required("is4psBeneficiary is required")

@@ -8,9 +8,11 @@ interface FieldProps extends BaseProps {
   type?: string;
   placeholder?: string;
   label?: string;
+  disabled?: boolean;
+  static?: boolean;
 }
 
-const Select = ({ label, name = "", ...props }: FieldProps) => {
+const Select = ({ label, name = "", disabled, ...props }: FieldProps) => {
   const [field, meta] = useField<any>({
     name: name,
     type: props.type,
@@ -27,10 +29,15 @@ const Select = ({ label, name = "", ...props }: FieldProps) => {
         </label>
       )}
       <select
-        className={`bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass} `}
+        className={` ${
+          disabled
+            ? ` ${props.static ? "bg-gray-100" : "bg-gray-300 text-gray-700"}`
+            : "bg-gray-100 text-black select-none "
+        } px-4 py-3 rounded-[5px] mb-2 w-full ${errorClass}`}
         {...field}
         {...props}
         id={name}
+        disabled={disabled}
       />
       <Typography as="p" className="text-sm text-red-400">
         {meta.error}
