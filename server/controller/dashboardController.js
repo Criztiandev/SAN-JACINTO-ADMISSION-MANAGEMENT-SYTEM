@@ -10,8 +10,6 @@ export const fetchSchoolStats = asyncHandler(async (req, res) => {
   // Assuming applicantModel is a Mongoose model
   const applicants = await applicantModel.find({}).lean();
 
-  console.log(applicants);
-
   const juniorCount = applicants.filter((applicant) => {
     const current = applicant?.studentDetails?.yearLevel;
     return ["Grade 7", "Grade 8", "Grade 9", "Grade 10"].includes(current);

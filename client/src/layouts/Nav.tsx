@@ -11,8 +11,9 @@ import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 import OverviewIcon from "../assets/icons/Overview_Dark.svg";
 import OtherIcon from "../assets/icons/Structure_Dark.svg";
 import MasterlistIcon from "../assets/icons/Folder_light.svg";
-
+import MaleProfile from "../assets/image/Male_profile.png";
 import NavigationItem from "../containers/Layout/NavigationItems";
+import BatchIcon from "../assets/icons/Group.svg";
 
 const Nav = () => {
   const { getItem, setItems } = useLocalStorage("navigation");
@@ -86,7 +87,7 @@ const Nav = () => {
       </ul>
 
       <button onClick={() => navigate("/profile")}>
-        <Avatar src="" />
+        <Avatar src={MaleProfile} />
       </button>
     </nav>
   );
