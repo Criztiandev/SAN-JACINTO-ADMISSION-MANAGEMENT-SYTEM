@@ -74,11 +74,13 @@ const ViewBatch = ({ APID }: { APID: string }) => {
           </div>
 
           <div className="flex gap-4">
-            <IconButton
-              icon={DeleteIcon}
-              as="outlined"
-              onClick={handleDelete}
-            />
+            {data?.status !== "ongoing" && (
+              <IconButton
+                icon={DeleteIcon}
+                as="outlined"
+                onClick={handleDelete}
+              />
+            )}
           </div>
         </header>
 
@@ -113,9 +115,11 @@ const ViewBatch = ({ APID }: { APID: string }) => {
             )}
           </div>
 
-          <div className="absolute bottom-3 right-5">
-            <Button title="Annouce" onClick={handleAnnouce} />
-          </div>
+          {data?.status === "ongoing" && (
+            <div className="absolute bottom-3 right-5">
+              <Button title="Annouce" onClick={handleAnnouce} />
+            </div>
+          )}
         </main>
       </Form>
     </Formik>

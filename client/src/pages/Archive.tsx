@@ -20,14 +20,17 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
-import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
 import useCustomMutation from "../hooks/useCustomMutation";
 import IconButton from "../components/IconButton";
-import MessageIcon from "../assets/icons/Message_light.svg";
+import MessageIcon from "../assets/icons/Message_Dark.svg";
 import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
+import Message from "../containers/Annoucement/Message";
+import useURL from "../hooks/useURL";
+import { toast } from "react-toastify";
 
 const Archive = () => {
+  const { updateURL } = useURL();
   const { search, handleSearch, handleMutateData } = useTableContext();
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant?status=archive",
@@ -37,7 +40,10 @@ const Archive = () => {
 
   const archieveMutation = useCustomMutation({
     route: "/applicant/status",
-    overrideFn: () => refetch(),
+    overrideFn: () => {
+      refetch();
+      toast.success("Converted Applicant Successfully");
+    },
     type: "put",
   });
 
@@ -101,7 +107,11 @@ const Archive = () => {
               as="outlined"
               onClick={() => handleArchive(UID, "pending")}
             />
-            <IconButton icon={MessageIcon} as="outlined" />
+            <IconButton
+              icon={MessageIcon}
+              as="outlined"
+              onClick={() => updateURL(`state=message&&APID=${UID}`)}
+            />
           </div>
         );
       },
@@ -129,7 +139,7 @@ const Archive = () => {
       </BaseLayout>
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
-      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="message" Component={Message} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );

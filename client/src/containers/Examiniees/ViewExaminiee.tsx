@@ -21,7 +21,7 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
     key: [`examiniees${APID}`],
   });
 
-  const { handleSubmit } = useFormSubmit({
+  const { handleSubmit, isPending } = useFormSubmit({
     route: "/examiniees/promote",
     type: "post",
     overideFn: () => {
@@ -76,7 +76,6 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
               static
               disabled={true}
             />
-            <Input label="Score" type="text" name="score" />
             {schedule !== null && (
               <Input
                 label="Schedule"
@@ -111,8 +110,13 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
           </section>
           {schedule !== null && (
             <section className="flex justify-end gap-4 my-4">
-              <Button type="button" as="outlined" title="Fail" />
-              <Button as="contained" title="Pass" />
+              <Button
+                type="button"
+                as="outlined"
+                title="Fail"
+                disabled={isPending}
+              />
+              <Button as="contained" title="Pass" disabled={isPending} />
             </section>
           )}
         </section>

@@ -19,7 +19,6 @@ import useCustomMutation from "../../hooks/useCustomMutation";
 import { toast } from "react-toastify";
 
 const ViewCalendar = ({ APID }: { APID: string }) => {
-  const [isAnnouce, setIsAnnouce] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const { updateURL, baseRoute } = useURL();
 
@@ -63,11 +62,6 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
 
   const handleDeleteSchedule = () => {
     updateURL(`state=delete&APID=${APID}`);
-  };
-
-  const handleAnnouce = () => {
-    setIsAnnouce((prev) => !prev);
-    toast.success("Annouced Successfully");
   };
 
   if (isFetching) return <FetchLoader />;
@@ -193,46 +187,17 @@ const ViewCalendar = ({ APID }: { APID: string }) => {
           </section>
         </main>
 
-        {isAnnouce && (
-          <section>
-            <Textarea
-              label="Message"
-              name="message"
-              placeholder="Enter the details of this schedule"
-              className="h-[250px]"
-            />
-          </section>
-        )}
-
         <footer className="flex gap-4 justify-end mt-4">
           {isEdit ? (
             <Button type="submit" as="contained" title="Submit" />
           ) : (
             <div className="flex gap-4">
-              {isAnnouce ? (
-                <Button
-                  type="button"
-                  as={isAnnouce ? "contained" : "outlined"}
-                  title="Confirm"
-                  onClick={handleAnnouce}
-                />
-              ) : (
-                <Button
-                  type="button"
-                  as={isAnnouce ? "contained" : "outlined"}
-                  title="Announce"
-                  onClick={() => setIsAnnouce((prev) => !prev)}
-                />
-              )}
-
-              {!isAnnouce && (
-                <Button
-                  type="button"
-                  as="contained"
-                  title="Finish"
-                  onClick={handleFinishSchedule}
-                />
-              )}
+              <Button
+                type="button"
+                as="contained"
+                title="Finish"
+                onClick={handleFinishSchedule}
+              />
             </div>
           )}
         </footer>
@@ -258,10 +223,10 @@ const RenderSubtitle = ({ data, active }: { data: any; active: boolean }) => {
   return (
     <>
       {active && (
-        <div className="flex items-center gap-4 text-gray-400 my-2">
-          <span className="">Facilitator: {data?.facilitator}</span>
+        <div className="flex items-center gap-2 text-gray-400 my-2">
+          <span className="">{data?.facilitator}</span>
           <span>||</span>
-          <span className="">Venue: {data?.venue}</span>
+          <span className="">{data?.venue}</span>
         </div>
       )}
     </>

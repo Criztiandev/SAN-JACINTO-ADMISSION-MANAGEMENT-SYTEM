@@ -21,38 +21,34 @@ import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
-import MessageApplicant from "../containers/Applicants/MessageApplicant";
+import { useEffect } from "react";
 // Assets
 import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
 import IconButton from "../components/IconButton";
 import AcceptIcon from "../assets/icons/Done_light.svg";
-import MessageIcon from "../assets/icons/Message_light.svg";
+import MessageIcon from "../assets/icons/Message_Dark.svg";
 import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
+import Message from "../containers/Annoucement/Message";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL } = useURL();
+  const { updateURL, queryParams } = useURL();
 
   const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
+  const isRefetch = queryParams.get("refetch");
 
   // mutation
   const examiniesMutation = useCustomMutation({
     route: `/examiniees/create`,
     overrideFn: () => refetch(),
   });
-
-  // const archieveMutation = useCustomMutation({
-  //   route: "/applicant/status",
-  //   overrideFn: () => refetch(),
-  //   type: "put",
-  // });
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
@@ -61,6 +57,13 @@ const Applicant = () => {
   const handleAccept = (id: string) => {
     examiniesMutation.mutate({ _id: id });
   };
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      updateURL("/");
+    }
+  }, [isRefetch]);
 
   const handleArchive = (id: string) => {
     updateURL(`APID=${id}&state=archive`);
@@ -127,7 +130,11 @@ const Applicant = () => {
               as="outlined"
               onClick={() => handleArchive(UID)}
             />
-            <IconButton icon={MessageIcon} as="outlined" />
+            <IconButton
+              icon={MessageIcon}
+              as="outlined"
+              onClick={() => updateURL(`state=message&&APID=${UID}`)}
+            />
           </div>
         );
       },
@@ -169,7 +176,7 @@ const Applicant = () => {
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
       <DrawerWrapper state="archive" Component={ArchieveApplicant} />
-      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="message" Component={Message} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );

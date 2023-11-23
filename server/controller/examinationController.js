@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import examinieesModel from "../models/examiniationModel.js";
 import applicantModel from "../models/applicantModel.js";
 import dayjs from "dayjs";
+import { sendEmail } from "../utils/email.uitls.js";
 
 export const fetchAllExaminiees = asyncHandler(async (req, res) => {
   const { filter } = req.query;
@@ -29,12 +30,31 @@ export const fetchExaminieesById = asyncHandler(async (req, res) => {
 });
 
 export const promoteExaminiees = asyncHandler(async (req, res) => {
-  const { _id, APID, score, status } = req.body;
+  const { _id, APID, score, status, email, track, message } = req.body;
 
-  const _applicant = await applicantModel.findById(APID).lean().select("_id");
+  if (status !== "finished")
+    throw new Error("Invalid Action, Please Try again later");
+
+  const _applicant = await applicantModel
+    .findById(APID)
+    .lean()
+    .select(
+      "_id personalDetails.lastName  personalDetails.firstName  personalDetails.middleName  personalDetails.suffix"
+    );
   if (!_applicant) throw new Error("Applicant doesnt exist");
+  const { firstName, middleName, lastName, suffix } =
+    _applicant?.personalDetails;
+  const fullName = `${lastName}, ${firstName} ${middleName[0]} ${suffix}`;
 
   // message
+
+  const currentEmail = await sendEmail({
+    target: email,
+    title: `Congratulations for Passing the ${track} Examination 🎉🎉`,
+    body: message,
+  });
+
+  if (!currentEmail) throw new Error("Something went wrong, Please Try again");
 
   await applicantModel.findOneAndUpdate(
     { _id: APID },

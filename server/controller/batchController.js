@@ -38,7 +38,7 @@ export const fetchBatchById = expressAsyncHandler(async (req, res) => {
         .findOne({ _id: SID })
         .lean()
         .select(
-          "_id personalDetails.lastName personalDetails.firstName personalDetails.middleName studentDetails.track studentDetails.yearLevel gradeDetails.generalAve"
+          "_id personalDetails.lastName personalDetails.firstName personalDetails.email personalDetails.middleName studentDetails.track studentDetails.yearLevel gradeDetails.generalAve"
         );
       return selectedDetails;
     })

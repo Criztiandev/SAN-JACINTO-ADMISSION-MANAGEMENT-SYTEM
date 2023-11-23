@@ -14,6 +14,7 @@ import { ColumnDef } from "@tanstack/react-table";
 // Containers
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import MessageIcon from "../assets/icons/Message_Dark.svg";
 
 // Applicant Components
 
@@ -21,19 +22,19 @@ import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
-import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
-
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
+import IconButton from "../components/IconButton";
+import Message from "../containers/Annoucement/Message";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { navigateTo } = useURL();
+  const { navigateTo, updateURL } = useURL();
 
   const { isLoading, isPending, isFetched } = useFetch({
-    route: "/applicant?role=transferee&status=accepted",
+    route: "/applicant?role=transferee&status=accepted&extend=scheduled",
     overrideFn: handleMutateData,
     key: ["transferees"],
   });
@@ -83,6 +84,21 @@ const Applicant = () => {
         <Badge as="neutral" type={getValue()} title={getValue()} />
       ),
     },
+    {
+      header: "Action",
+      cell: ({ row }) => {
+        const UID = row?.original?._id;
+        return (
+          <div className="flex gap-4">
+            <IconButton
+              icon={MessageIcon}
+              as="outlined"
+              onClick={() => updateURL(`state=message&&APID=${UID}`)}
+            />
+          </div>
+        );
+      },
+    },
   ];
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
@@ -120,7 +136,7 @@ const Applicant = () => {
 
       <DrawerWrapper state="create" Component={CreateApplicant} />
       <DrawerWrapper state="archive" Component={ArchieveApplicant} />
-      <DrawerWrapper state="message" Component={MessageApplicant} />
+      <DrawerWrapper state="message" Component={Message} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
     </>
   );

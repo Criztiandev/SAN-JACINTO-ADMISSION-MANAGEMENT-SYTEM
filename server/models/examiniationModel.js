@@ -12,7 +12,6 @@ const examResultsSchema = new mongoose.Schema({
   contact: { type: String, require: true },
   fbID: { type: String },
   schedule: { type: String, require: true, default: null },
-  score: { type: Number, default: 0 },
   track: { type: String, require: true },
   status: {
     type: String,

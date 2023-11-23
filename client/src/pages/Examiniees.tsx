@@ -16,10 +16,15 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
+import Button from "../components/Button";
+import PromoteBatch from "../containers/Examiniees/PromoteBatch";
+import useURL from "../hooks/useURL";
 // Assets
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
+  const { updateURL } = useURL();
+
   const { isLoading, isPending, isFetched } = useFetch({
     route: "/examiniees",
     overrideFn: handleMutateData,
@@ -78,7 +83,11 @@ const Examiniees = () => {
 
   return (
     <>
-      <BaseLayout title="Examiniees">
+      <BaseLayout
+        title="Examiniees"
+        actions={
+          <Button title="Promote" onClick={() => updateURL("state=promote")} />
+        }>
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"
@@ -96,6 +105,7 @@ const Examiniees = () => {
 
       <DrawerWrapper state="view" Component={ViewExaminiee} />
       <DrawerWrapper state="viewApp" Component={ViewApplicant} />
+      <DrawerWrapper state="promote" Component={PromoteBatch} />
     </>
   );
 };

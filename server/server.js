@@ -13,6 +13,7 @@ import accountRoute from "./routes/accountRoutes.js";
 import batchRoute from "./routes/batchRoutes.js";
 import examinieesRoute from "./routes/examinieesRoute.js";
 import masterlistRoute from "./routes/masterlistRoutes.js";
+import messageRoute from "./routes/messageRoute.js";
 
 import { errorHandler, notFound } from "./middleware/_index.js";
 import cors from "cors";
@@ -42,6 +43,7 @@ app.use("/api/schedule", scheduleRoute);
 app.use("/api/account", accountRoute);
 app.use("/api/examiniees", examinieesRoute);
 app.use("/api/masterlist", masterlistRoute);
+app.use("/api/message", messageRoute);
 
 // Error Handlers
 app.use(notFound);

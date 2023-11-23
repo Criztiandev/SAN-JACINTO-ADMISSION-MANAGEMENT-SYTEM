@@ -14,7 +14,7 @@ const useCustomMutation = ({
   overrideFn,
   type = "post",
 }: useCustomMutationProps) => {
-  const { mutateAsync, mutate } = useMutation({
+  const mutation = useMutation({
     mutationFn: (payload: any) => {
       return type === "delete"
         ? axios.delete(`${import.meta.env.VITE_SERVER_URL}${route}`)
@@ -33,8 +33,7 @@ const useCustomMutation = ({
   });
 
   return {
-    mutateAsync,
-    mutate,
+    ...mutation,
   };
 };
 

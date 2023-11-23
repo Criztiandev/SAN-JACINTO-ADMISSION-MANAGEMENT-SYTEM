@@ -28,7 +28,7 @@ const ArchieveApplicant: React.FC<ArchieveApplicantProps> = ({ APID }) => {
     route: "/applicant/status",
     overrideFn: () => {
       toast.success("Archive Successfully");
-      updateURL("/");
+      updateURL("refetch=true");
     },
     type: "put",
   });

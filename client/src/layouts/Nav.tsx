@@ -30,8 +30,8 @@ const Nav = () => {
       title: "Applicant",
       options: [
         { title: "Applicant", icon: ApplicantIcon, path: "/applicants" },
-        { title: "Archive", icon: ArchieveIcon, path: "/archive" },
         { title: "Transferee", icon: ApplicantIcon, path: "/transferee" },
+        { title: "Archive", icon: ArchieveIcon, path: "/archive" },
       ],
     },
     {
@@ -48,7 +48,7 @@ const Nav = () => {
       icon: FolterIcon,
       title: "Masterlist",
       options: [
-        { title: "Users", icon: FolterIcon, path: "/masterlist" },
+        { title: "MasterList", icon: FolterIcon, path: "/masterlist" },
         { title: "Users", icon: ApplicantIcon, path: "/users" },
       ],
     },

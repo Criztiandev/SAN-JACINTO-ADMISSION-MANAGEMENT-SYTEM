@@ -135,7 +135,7 @@ const CreateApplicant = () => {
                   className="bg-inherit border border-gray-500 px-4 py-3 rounded-[5px] mb-2 w-[100px]">
                   <option value={""}>Suffix</option>
                   {suffixes.map((suff) => (
-                    <option key={suff} value={suff}>
+                    <option key={suff} value={suff === "N/A" ? " " : suff}>
                       {suff}
                     </option>
                   ))}
