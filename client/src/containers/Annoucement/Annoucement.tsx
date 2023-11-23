@@ -41,7 +41,7 @@ const BatchAnnoucement = ({ APID }: { APID: string }) => {
     },
   });
 
-  const handleCancell = () => {
+  const handleCancel = () => {
     updateURL(`/`);
   };
 
@@ -100,7 +100,7 @@ const BatchAnnoucement = ({ APID }: { APID: string }) => {
         </div>
 
         <div className="flex justify-end gap-4">
-          <Button title="Cancel" as="outlined" onClick={handleCancell} />
+          <Button title="Cancel" as="outlined" onClick={handleCancel} />
           <Button
             title="Annouce"
             icon={MessageIcon}

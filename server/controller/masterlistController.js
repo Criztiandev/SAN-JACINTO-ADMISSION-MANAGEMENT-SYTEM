@@ -1,5 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import applicantModel from "../models/applicantModel.js";
+import examinieesModel from "../models/examiniationModel.js";
+import dayjs from "dayjs";
 
 export const fetchMasterListByLevel = expressAsyncHandler(async (req, res) => {
   const { level } = req.query;
@@ -234,6 +236,29 @@ export const fetchApplicationForm = expressAsyncHandler(async (req, res) => {
   });
 });
 
+export const fetchExaminieesCredentials = expressAsyncHandler(
+  async (req, res) => {
+    const _examiniees = await examinieesModel.find({}).lean();
+
+    const _examinieesTemplate = _examiniees.map((field) => {
+      return {
+        "PERMIT ID": field?.permitID,
+        "FULL NAME": field?.fullName,
+        EMAIL: field?.email,
+        CONTACT: field?.contact,
+        SCHEDULE: field?.schedule,
+        TRACK: field?.track,
+        "REGISTERED DATE": dayjs(field?.regitrationDate).format("MM/DD/YYYY"),
+      };
+    });
+
+    res.status(200).json({
+      payload: _examinieesTemplate,
+      message: null,
+    });
+  }
+);
+
 export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
   const _applicants = await applicantModel
     .find({ role: "regular", status: "done" })
@@ -262,8 +287,16 @@ export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
     count: (countsByYearLevel[title] || 0) + count,
   }));
 
+  const _examinees = await examinieesModel.find({}).lean().select("_id");
+
+  const finalPayload = [
+    ...combinedPayload,
+    { title: "Examinees", count: _examinees?.length },
+  ];
+
   res.status(200).json({
-    payload: combinedPayload,
+    payload: finalPayload,
+    message: "Fetched Successfully",
   });
 });
 

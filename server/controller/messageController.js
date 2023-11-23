@@ -19,30 +19,30 @@ export const messageApplicant = expressAsyncHandler(async (req, res) => {
 });
 
 export const annoucementBatch = expressAsyncHandler(async (req, res) => {
-  const { applicants, title, message } = req.body;
+  const { applicants, title, message, examiniees } = req.body;
 
   // get the emails of applicants
   const emails = applicants?.map((applicant) => {
     return applicant?.personalDetails?.email; // fix variable name here
   });
 
-  // send email message per applicant
-  const emailPromises = emails.map((email) =>
-    sendEmail({
-      target: email,
-      title: title,
-      body: message,
-    })
-  );
+  // // send email message per applicant
+  // const emailPromises = emails.map((email) =>
+  //   sendEmail({
+  //     target: email,
+  //     title: title,
+  //     body: message,
+  //   })
+  // );
 
-  const results = await Promise.all(emailPromises);
+  // const results = await Promise.all(emailPromises);
 
-  // Check if all emails were sent successfully
-  const allEmailsSent = results.every((result) => result);
+  // // Check if all emails were sent successfully
+  // const allEmailsSent = results.every((result) => result);
 
-  if (!allEmailsSent) {
-    throw new Error("Something went wrong. Please try again.");
-  }
+  // if (!allEmailsSent) {
+  //   throw new Error("Something went wrong. Please try again.");
+  // }
 
   res.status(200).json({
     payload: null,

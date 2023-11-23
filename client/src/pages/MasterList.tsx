@@ -1,5 +1,6 @@
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import FetchLoader from "../containers/General/FetchLoader";
+import ViewExaminiees from "../containers/Masterlist/ViewExaminiees";
 import ViewLevelList from "../containers/Masterlist/ViewLevelList";
 import useFetch from "../hooks/useFetch";
 import useURL from "../hooks/useURL";
@@ -13,6 +14,10 @@ const MasterList = () => {
     route: "/masterlist/stats",
     key: ["masterlist"],
   });
+
+  const handleToggleExaminies = () => {
+    updateURL(`state=examinees`);
+  };
 
   const handleToggleList = (level: string) => {
     updateURL(`state=view&filter=${level}`);
@@ -32,7 +37,13 @@ const MasterList = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.9 }}
               className="relative  border border-gray-400 rounded-[10px] overflow-hidden select-none min-h-[320px]"
-              onClick={() => handleToggleList(title?.split(" ")[1])}>
+              onClick={() => {
+                if (title === "Examinees") {
+                  handleToggleExaminies();
+                  return;
+                }
+                handleToggleList(title?.split(" ")[1]);
+              }}>
               <div className="relative bg-coverImage bg-center h-[120px]">
                 <span className="absolute bottom-[-25px] left-1/2 transform -translate-x-1/2 font-medium rounded-full border w-[64px] h-[64px] flex justify-center items-center bg-green-300">
                   <span className="text-[32px] select-none">{count}</span>
@@ -52,6 +63,7 @@ const MasterList = () => {
       </BaseLayout>
 
       <DrawerWrapper state="view" Component={ViewLevelList} />
+      <DrawerWrapper state="examinees" Component={ViewExaminiees} />
     </>
   );
 };
