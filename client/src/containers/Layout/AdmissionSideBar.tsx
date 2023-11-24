@@ -35,10 +35,11 @@ const AdmissionSideBar = ({ content, toggle }: AdmissionSidebarProps) => {
           </Typography>
 
           <Typography className="text-white" as="p">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In odit
-            minus molestias rem, quod laborum recusandae mollitia animi
-            consectetur debitis soluta vel deserunt error reiciendis voluptate
-            voluptatum eaque ipsam optio repellat necessitatibus
+            Hey 👋, I just wanted to take a moment to express my heartfelt
+            gratitude to you. Your kindness and support have meant the world to
+            me. Thank you for being there, for your generosity, and for making a
+            positive difference in my life. I am truly grateful, and I feel
+            blessed to have you in my life.
           </Typography>
         </section>
 

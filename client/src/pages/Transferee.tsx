@@ -28,16 +28,30 @@ import Button from "../components/Button";
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
 import IconButton from "../components/IconButton";
 import Message from "../containers/Annoucement/Message";
+import ArchiveIcon from "../assets/icons/Arhive_light.svg";
+import { useEffect } from "react";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { navigateTo, updateURL } = useURL();
+  const { navigateTo, updateURL, queryParams } = useURL();
 
-  const { isLoading, isPending, isFetched } = useFetch({
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/applicant?role=transferee&status=accepted&extend=scheduled",
     overrideFn: handleMutateData,
     key: ["transferees"],
   });
+  const isRefetch = queryParams.get("refetch");
+
+  const handleArchive = (id: string) => {
+    updateURL(`APID=${id}&state=archive`);
+  };
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      updateURL("/");
+    }
+  }, [isRefetch]);
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
     {
@@ -94,6 +108,12 @@ const Applicant = () => {
               icon={MessageIcon}
               as="outlined"
               onClick={() => updateURL(`state=message&&APID=${UID}`)}
+            />
+
+            <IconButton
+              icon={ArchiveIcon}
+              as="outlined"
+              onClick={() => handleArchive(UID)}
             />
           </div>
         );

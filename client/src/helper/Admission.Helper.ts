@@ -8,6 +8,7 @@ import PermanentAddress from "../containers/Steps/PermanentAddress";
 import GuardianDetails from "../containers/Steps/GuardianDetails";
 import OtherDetails from "../containers/Steps/OtherDetails";
 import ApplicationForm from "../containers/Steps/ApplicationForm";
+import OnBoarding from "../containers/Steps/OnBoarding";
 
 export const OutroModalDetails = [
   {

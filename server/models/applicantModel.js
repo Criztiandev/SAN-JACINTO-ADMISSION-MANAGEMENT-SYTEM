@@ -39,7 +39,7 @@ const applicantSchema = mongoose.Schema(
       motherTongue: { type: String, required: true }, // Corrected typo
       email: { type: String, require: true, unique: true },
       contact: { type: String, require: true, unique: true },
-      facebookLink: { type: String, require: true, unique: true },
+      facebookLink: { type: String },
       religion: { type: String, require: true },
     },
 

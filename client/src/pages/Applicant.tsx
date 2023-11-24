@@ -32,6 +32,7 @@ import MessageIcon from "../assets/icons/Message_Dark.svg";
 import ArchieveIcon from "../assets/icons/Arhive_light.svg";
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
 import Message from "../containers/Annoucement/Message";
+import { toast } from "react-toastify";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
@@ -47,7 +48,10 @@ const Applicant = () => {
   // mutation
   const examiniesMutation = useCustomMutation({
     route: `/examiniees/create`,
-    overrideFn: () => refetch(),
+    overrideFn: () => {
+      refetch();
+      toast.success("Applicant Accepted Successfully");
+    },
   });
 
   const handleCreateApplicant = () => {
@@ -90,9 +94,7 @@ const Applicant = () => {
     {
       id: "yearLevel",
       header: "Grade Level",
-      accessorFn: ({ studentDetails }) => {
-        return `${studentDetails?.yearLevel?.replace("Grade", "")}`;
-      },
+      accessorKey: "studentDetails.yearLevel",
     },
     { header: "Gender", accessorKey: "personalDetails.gender" },
     { header: "BOD", accessorKey: "personalDetails.birthDate" },
@@ -170,7 +172,7 @@ const Applicant = () => {
 
         <Table
           config={ApplicantTableConfig}
-          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px"
+          layout="350px 150px 150px 100px 150px 100px 250px 200px 100px 150px 250px auto"
         />
       </BaseLayout>
 

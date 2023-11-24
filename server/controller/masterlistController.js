@@ -238,7 +238,10 @@ export const fetchApplicationForm = expressAsyncHandler(async (req, res) => {
 
 export const fetchExaminieesCredentials = expressAsyncHandler(
   async (req, res) => {
-    const _examiniees = await examinieesModel.find({}).lean();
+    const { track } = req.query || {};
+    const _examiniees = await examinieesModel
+      .find({ track: track, schedule: { $ne: null } })
+      .lean();
 
     const _examinieesTemplate = _examiniees.map((field) => {
       return {

@@ -14,7 +14,7 @@ const DeleteNotice = () => {
     navigateBack();
   };
 
-  const { mutate } = useCustomMutation({
+  const { mutate, isPending } = useCustomMutation({
     route: `${baseRoute}/${APID}`,
     overrideFn: () => {
       navigateBack("refetch=true");
@@ -52,8 +52,9 @@ const DeleteNotice = () => {
           type="button"
           as="outlined"
           onClick={handleCancel}
+          disabled={isPending}
         />
-        <Button title="Confirm" onClick={handleConfirm} />
+        <Button title="Confirm" onClick={handleConfirm} disabled={isPending} />
       </div>
     </div>
   );

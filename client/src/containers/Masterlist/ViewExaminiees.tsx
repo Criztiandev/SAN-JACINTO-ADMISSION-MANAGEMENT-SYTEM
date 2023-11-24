@@ -3,21 +3,19 @@
 import exportFromJSON from "export-from-json";
 import { motion } from "framer-motion";
 import useFetch from "../../hooks/useFetch";
-import useURL from "../../hooks/useURL";
 import Typography from "../../components/Typography";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { toast } from "react-toastify";
 import Button from "../../components/Button";
 import FilterButton from "../Applicants/FilterButton";
-import IconButton from "../../components/IconButton";
-import DeleteIcon from "../../assets/icons/Delete.svg";
-import useCustomMutation from "../../hooks/useCustomMutation";
 import EmptyCard from "../Common/EmptyCard";
 import Files from "../../assets/icons/Form_fill.svg";
 import CreateFile from "../../assets/icons/File_dock_add_fill.svg";
 import FileIcon from "../../assets/icons/Batch.svg";
 import DownloadIcon from "../../assets/icons/Download_circle_fill.svg";
 import dayjs from "dayjs";
+import Dropdown from "../../components/Dropdown";
+import ApplicantList from "../../assets/icons/Status_list.svg";
 
 const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   const today = new Date();
@@ -35,10 +33,11 @@ const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
 };
 
 const ViewExaminiees = () => {
+  const [preferedLevel, setPreferedLevel] = useState("SPJ");
+  const [finalData, setFinalData] = useState([]);
   const [isRefetch, setIsRefetch] = useState(false);
   const [selectedForm, setSelectedForm] = useState("");
   const [selectedFormat, setSelectedFormat] = useState("");
-  const { updateURL } = useURL();
 
   const { data, isLoading, isError } = useFetch({
     route: `/examiniees`,
@@ -46,7 +45,7 @@ const ViewExaminiees = () => {
   });
 
   const { data: formData, isLoading: isFormLoading } = useFetch({
-    route: `/masterlist/examiniees`,
+    route: `/masterlist/examiniees?track=${preferedLevel}`,
     key: ["examiniees-masterlist-data"],
     overrideFn: () => setIsRefetch(false),
     option: {
@@ -57,6 +56,15 @@ const ViewExaminiees = () => {
   const handleSelectFile = (file: string) => {
     setSelectedForm(file);
     setIsRefetch(true);
+  };
+
+  const handleSelectLevel = (e: MouseEvent<HTMLButtonElement>) => {
+    const _current = e.currentTarget.value;
+    const filteredTrack = data?.filter(
+      (field: any) => field.track === _current && field?.schedule !== null
+    );
+    setPreferedLevel(e.currentTarget.value);
+    setFinalData(filteredTrack);
   };
 
   const handleDownload = (format: string, file: string) => {
@@ -114,109 +122,98 @@ const ViewExaminiees = () => {
           <div className="flex gap-4">
             <Button
               as={selectedForm === "SF1" ? "contained" : "outlined"}
-              title="Examniee Data"
+              title="Lock Data"
               onClick={() => handleSelectFile("SF1")}
               disabled={isFormLoading}
               icon={Files}
             />
           </div>
 
-          <FilterButton
-            title="Format"
-            icon={CreateFile}
-            as={selectedFormat ? "contained" : "outlined"}
-            onToggle={(e) => {
-              setSelectedFormat(e.currentTarget.value);
-            }}
-            option={[
-              { title: "CSV", icon: FileIcon },
-              { title: "Excel", icon: FileIcon },
-            ]}
-          />
+          <div className="flex gap-4">
+            <FilterButton
+              title="Format"
+              icon={CreateFile}
+              as={selectedFormat ? "contained" : "outlined"}
+              onToggle={(e) => {
+                setSelectedFormat(e.currentTarget.value);
+              }}
+              option={[
+                { title: "CSV", icon: FileIcon },
+                { title: "Excel", icon: FileIcon },
+              ]}
+            />
+
+            <Dropdown
+              type="button"
+              as="contained"
+              icon={ApplicantList}
+              title={preferedLevel || "Grade level"}
+              className="p-4 flex gap-2 flex-col w-[120px]"
+              onClick={handleSelectLevel}
+              option={[
+                { title: "SPJ", icon: "" },
+                { title: "SPE", icon: "" },
+                { title: "STEM", icon: "" },
+              ]}
+            />
+          </div>
         </div>
 
         <div className="mt-8">
-          <h5 className="text-xl mb-4">Examiniees</h5>
+          <div className="flex justify-between items-center mb-4">
+            <h5 className="text-xl mb-4">Examiniees</h5>
+          </div>
           <div className="flex flex-col gap-4">
-            {data?.map((examinee: any) => {
-              return (
-                <motion.div
-                  key={examinee?.fullName}
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="border border-gray-400  p-4 rounded-[5px] ">
-                  <div className="flex justify-between items-center mb-4 border-b border-gray-400 pb-3">
-                    <Typography as="h4">{examinee?.fullName}</Typography>
+            {finalData?.length <= 0 ? (
+              <EmptyCard title="No Examiniee Data" />
+            ) : (
+              <>
+                {finalData?.map((examinee: any) => {
+                  return (
+                    <motion.div
+                      key={examinee?.fullName}
+                      whileTap={{ scale: 0.9 }}
+                      whileHover={{ scale: 1.02 }}
+                      className="border border-gray-400  p-4 rounded-[5px] ">
+                      <div className="flex justify-between items-center mb-4 border-b border-gray-400 pb-3">
+                        <Typography as="h4">{examinee?.fullName}</Typography>
 
-                    <div className="capitalize px-4 py-1  rounded-full bg-green-400">
-                      {examinee?.track}
-                    </div>
-                  </div>
+                        <div className="capitalize px-4 py-1  rounded-full bg-green-400">
+                          {examinee?.track}
+                        </div>
+                      </div>
 
-                  <div className="grid grid-cols-1 gap-4">
-                    <span>
-                      📄 <span className="font-semibold">Permit ID:</span>{" "}
-                      {examinee?.permitID}
-                    </span>
-                    <span>
-                      <span className="font-semibold">📧 Email:</span> @
-                      {examinee?.email.split("@")[0]}
-                    </span>
-                    <span className="capitalize">
-                      <span className="font-semibold">📞 Contact:</span> +63
-                      {examinee?.contact}
-                    </span>
-                    <span>
-                      <span className="font-semibold">⌚ Schedule:</span>{" "}
-                      {examinee?.schedule}
-                    </span>
-                    <span>
-                      <span className="font-semibold">📅 Registered At: </span>
-                      {`${dayjs(examinee?.regitrationDate).format(
-                        "MMM DD"
-                      )}, ${dayjs().year()}`}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
-            {/* {data?.map((students: any) => {
-              const { lastName, firstName, middleName, suffix } =
-                students.personalDetails;
-              return (
-                <motion.div
-                  key={firstName}
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="border border-gray-400  p-4 rounded-[5px] ">
-                  <div className="flex justify-between items-center mb-4 border-b border-gray-400 pb-3">
-                    <Typography as="h4">
-                      {lastName}, {firstName} {middleName[0]} {suffix}
-                    </Typography>
-
-                    <div className="capitalize px-4 py-1  rounded-full bg-green-400">
-                      {students.studentDetails?.track}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <span>LRN : {students?.studentDetails?.LRN}</span>
-                    <span>
-                      Email: @{students?.personalDetails?.email.split("@")[0]}
-                    </span>
-                    <span className="capitalize">
-                      Gender: {students?.personalDetails?.gender}
-                    </span>
-                    <span>
-                      General Average : {students?.gradeDetails?.generalAve}%
-                    </span>
-                    <span>
-                      School Year : {students?.studentDetails?.schoolYear}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })} */}
+                      <div className="grid grid-cols-1 gap-4">
+                        <span>
+                          📄 <span className="font-semibold">Permit ID:</span>{" "}
+                          {examinee?.permitID}
+                        </span>
+                        <span>
+                          <span className="font-semibold">📧 Email:</span> @
+                          {examinee?.email.split("@")[0]}
+                        </span>
+                        <span className="capitalize">
+                          <span className="font-semibold">📞 Contact:</span> +63
+                          {examinee?.contact}
+                        </span>
+                        <span>
+                          <span className="font-semibold">⌚ Schedule:</span>{" "}
+                          {examinee?.schedule}
+                        </span>
+                        <span>
+                          <span className="font-semibold">
+                            📅 Registered At:{" "}
+                          </span>
+                          {`${dayjs(examinee?.regitrationDate).format(
+                            "MMM DD"
+                          )}, ${dayjs().year()}`}
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
       </main>

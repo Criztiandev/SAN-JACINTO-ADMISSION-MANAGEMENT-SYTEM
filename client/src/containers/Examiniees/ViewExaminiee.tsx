@@ -11,7 +11,6 @@ import Button from "../../components/Button";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import Textarea from "../../components/Textarea";
 import useURL from "../../hooks/useURL";
-import IconButton from "../../components/IconButton";
 
 const ViewExaminiee = ({ APID }: { APID: string }) => {
   const { updateURL } = useURL();
@@ -37,19 +36,6 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
       <Form className="h-full">
         <section className="relative flex justify-between flex-col ">
           {/* Badge */}
-
-          <div className="absolute top-3 right-3 flex gap-4">
-            <span
-              className={` ${
-                schedule === null ? "bg-green-400" : "bg-[#FFEE7D]"
-              } text-[#1e1e1e]  font-semibold px-4 py-2 border rounded-full capitalize`}>
-              {schedule === null ? "Available" : "Scheduled"}
-            </span>
-
-            <IconButton
-              onClick={() => updateURL(`state=viewApp&APID=${data?.APID}`)}
-            />
-          </div>
 
           {/* Cover */}
           <div className="bg-coverImage bg-cover  bg-no-repeat bg-center w-full h-[200px] rounded-[5px] mb-4 p-4 flex items-end">

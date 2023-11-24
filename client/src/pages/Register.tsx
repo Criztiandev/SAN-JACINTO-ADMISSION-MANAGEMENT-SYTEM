@@ -85,7 +85,7 @@ const Register = () => {
 
   return (
     <>
-      <RegistrationLayout activePanel={"Title"}>
+      <RegistrationLayout activePanel={"yourself"}>
         <RegistrationHeader steps={currentIndex} />
 
         <Formik

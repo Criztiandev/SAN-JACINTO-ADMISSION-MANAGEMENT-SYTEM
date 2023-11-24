@@ -49,7 +49,7 @@ const Nav = () => {
       title: "Masterlist",
       options: [
         { title: "MasterList", icon: FolterIcon, path: "/masterlist" },
-        { title: "Users", icon: ApplicantIcon, path: "/users" },
+        // { title: "Users", icon: ApplicantIcon, path: "/users" },
       ],
     },
   ];

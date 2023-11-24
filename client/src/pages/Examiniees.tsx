@@ -19,17 +19,26 @@ import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import Button from "../components/Button";
 import PromoteBatch from "../containers/Examiniees/PromoteBatch";
 import useURL from "../hooks/useURL";
-// Assets
+import { useEffect } from "react";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL } = useURL();
+  const { updateURL, queryParams, redirect } = useURL();
 
-  const { isLoading, isPending, isFetched } = useFetch({
+  const isRefetch = queryParams.get("refetch");
+
+  const { isLoading, isPending, isFetched, refetch } = useFetch({
     route: "/examiniees",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      updateURL("/");
+    }
+  }, [isRefetch]);
 
   if (isLoading || isPending || !isFetched) return <TablePanelSkeleton />;
 
@@ -49,7 +58,6 @@ const Examiniees = () => {
         );
       },
     },
-    { header: "Score", accessorKey: "score" },
     { header: "Track", accessorKey: "track" },
     { header: "Email", accessorKey: "email" },
     { header: "Contact", accessorKey: "contact" },
@@ -86,7 +94,17 @@ const Examiniees = () => {
       <BaseLayout
         title="Examiniees"
         actions={
-          <Button title="Promote" onClick={() => updateURL("state=promote")} />
+          <>
+            <Button
+              as="outlined"
+              title="Promote"
+              onClick={() => updateURL("state=promote")}
+            />
+            <Button
+              title="Download"
+              onClick={() => redirect("/masterlist?state=examinees")}
+            />
+          </>
         }>
         <div className="flex justify-between items-center">
           <SearchBar
@@ -99,7 +117,7 @@ const Examiniees = () => {
 
         <Table
           config={ApplicantTableConfig}
-          layout="320px 100px 250px 200px 200px 200px 150px "
+          layout="320px 250px 200px 200px 200px auto "
         />
       </BaseLayout>
 

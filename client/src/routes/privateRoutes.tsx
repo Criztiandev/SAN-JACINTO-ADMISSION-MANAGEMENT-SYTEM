@@ -2,7 +2,6 @@
 import { FC, ReactElement, Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
-import ErrorPage from "../pages/ErrorPage";
 import DashboardSkeleton from "../containers/Skeleton/DashbardSkeleton";
 import ScheduleSkeleton from "../containers/Skeleton/ScheduleSkeleton";
 import ProfileSkeleton from "../containers/Skeleton/ProfileSkeleton.tsx";
@@ -172,6 +171,6 @@ export const privateRoutes = createBrowserRouter(
   routes.map((route) => ({
     path: route.path,
     element: route.element,
-    errorElement: <ErrorPage />,
+    errorElement: <Redirect />,
   }))
 );

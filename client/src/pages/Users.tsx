@@ -23,29 +23,19 @@ import CreateApplicant from "../containers/Applicants/CreateApplicant";
 import ArchieveApplicant from "../containers/Applicants/ArchieveApplicant";
 import MessageApplicant from "../containers/Applicants/MessageApplicant";
 // Assets
-import useCustomMutation from "../hooks/useCustomMutation";
 import useURL from "../hooks/useURL";
 import Button from "../components/Button";
-import IconButton from "../components/IconButton";
-import AcceptIcon from "../assets/icons/Done_light.svg";
-import MessageIcon from "../assets/icons/Message_light.svg";
-import ArchieveIcon from "../assets/icons/Arhive_light.svg";
+
 import CreateApplicantIcon from "../assets/icons/Create_Applicant_white.svg";
 
 const Applicant = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
   const { updateURL } = useURL();
 
-  const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant",
+  const { isLoading, isPending, isFetched } = useFetch({
+    route: "/applicants",
     overrideFn: handleMutateData,
     key: ["applicants"],
-  });
-
-  // mutation
-  const examiniesMutation = useCustomMutation({
-    route: `/examiniees/create`,
-    overrideFn: () => refetch(),
   });
 
   // const archieveMutation = useCustomMutation({
@@ -56,14 +46,6 @@ const Applicant = () => {
 
   const handleCreateApplicant = () => {
     updateURL("state=create");
-  };
-
-  const handleAccept = (id: string) => {
-    examiniesMutation.mutate({ _id: id });
-  };
-
-  const handleArchive = (id: string) => {
-    updateURL(`APID=${id}&state=archive`);
   };
 
   const ApplicantTableConfig: ColumnDef<any, any>[] = [
@@ -110,27 +92,6 @@ const Applicant = () => {
       cell: ({ getValue }: any) => (
         <Badge as="neutral" type={getValue()} title={getValue()} />
       ),
-    },
-    {
-      header: "Action",
-      cell: ({ row }) => {
-        const UID = row.original._id;
-        return (
-          <div className="flex gap-4">
-            <IconButton
-              icon={AcceptIcon}
-              as="outlined"
-              onClick={() => handleAccept(UID)}
-            />
-            <IconButton
-              icon={ArchieveIcon}
-              as="outlined"
-              onClick={() => handleArchive(UID)}
-            />
-            <IconButton icon={MessageIcon} as="outlined" />
-          </div>
-        );
-      },
     },
   ];
 

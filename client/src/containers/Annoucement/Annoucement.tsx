@@ -12,7 +12,7 @@ import useCustomMutation from "../../hooks/useCustomMutation";
 import { toast } from "react-toastify";
 
 const BatchAnnoucement = ({ APID }: { APID: string }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("[SJNHS] ");
   const [message, setMessage] = useState("");
   const { updateURL } = useURL();
 

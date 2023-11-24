@@ -52,18 +52,22 @@ export const createApplicant = asyncHandler(async (req, res) => {
 });
 
 export const fetchAllApplicant = asyncHandler(async (req, res) => {
-  const { status, role, extend } = req.query;
+  const { status, role, extend, roleExtend } = req.query;
 
   const fields =
-    "_id studentDetails.LRN studentDetails.yearLevel studentDetails.track personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status";
+    "_id studentDetails.LRN studentDetails.yearLevel studentDetails.track personalDetails guardianDetails.legalGuardian gradeDetails.generalAve status role";
 
   let query = {
     status: status || "pending",
     role: role || "applicant",
   };
 
-  if (extend) {
+  if (extend && !roleExtend) {
     query.status = { $in: [status, extend] };
+  }
+
+  if (roleExtend) {
+    query.role = { $in: [role, roleExtend] };
   }
 
   const applicants = await applicantModel.find(query).select(fields);

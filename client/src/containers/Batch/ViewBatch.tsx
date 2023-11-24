@@ -81,6 +81,10 @@ const ViewBatch = ({ APID }: { APID: string }) => {
                 onClick={handleDelete}
               />
             )}
+
+            {data?.status === "ongoing" && (
+              <Button title="Annouce" onClick={handleAnnouce} />
+            )}
           </div>
         </header>
 
@@ -89,7 +93,7 @@ const ViewBatch = ({ APID }: { APID: string }) => {
             Examiniees
           </Typography>
 
-          <div className="flex gap-4 max-h-[400px] overflow-y-auto">
+          <div className="flex gap-4 flex-col  overflow-y-auto">
             {data?.length <= 0 ? (
               <EmptyCard title="No Examiniees Available" />
             ) : (
@@ -114,12 +118,6 @@ const ViewBatch = ({ APID }: { APID: string }) => {
               })
             )}
           </div>
-
-          {data?.status === "ongoing" && (
-            <div className="absolute bottom-3 right-5">
-              <Button title="Annouce" onClick={handleAnnouce} />
-            </div>
-          )}
         </main>
       </Form>
     </Formik>

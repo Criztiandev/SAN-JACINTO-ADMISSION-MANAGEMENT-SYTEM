@@ -14,6 +14,7 @@ import { ColumnDef } from "@tanstack/react-table";
 // Containers
 import FirstColumn from "../containers/Table/FirstColumn";
 import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
+import DeleteIcon from "../assets/icons/Delete.svg";
 
 // Applicant Components
 
@@ -28,12 +29,13 @@ import ApplicantIcon from "../assets/icons/Applicant_Dark.svg";
 import Message from "../containers/Annoucement/Message";
 import useURL from "../hooks/useURL";
 import { toast } from "react-toastify";
+import DeleteNotice from "../containers/Drawers/DeleteNotice";
 
 const Archive = () => {
   const { updateURL } = useURL();
   const { search, handleSearch, handleMutateData } = useTableContext();
   const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant?status=archive",
+    route: "/applicant?status=archive&roleExtend=transferee",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });
@@ -100,17 +102,27 @@ const Archive = () => {
       header: "Action",
       cell: ({ row }) => {
         const UID = row.original._id;
+        const role = row?.original?.role;
+
+        const prefRole = role === "transferee" ? "accepted" : "ending";
+
         return (
           <div className="flex gap-4">
             <IconButton
               icon={ApplicantIcon}
               as="outlined"
-              onClick={() => handleArchive(UID, "pending")}
+              onClick={() => handleArchive(UID, prefRole)}
             />
             <IconButton
               icon={MessageIcon}
               as="outlined"
               onClick={() => updateURL(`state=message&&APID=${UID}`)}
+            />
+
+            <IconButton
+              icon={DeleteIcon}
+              as="outlined"
+              onClick={() => updateURL(`state=delete&&APID=${UID}`)}
             />
           </div>
         );
@@ -141,6 +153,7 @@ const Archive = () => {
       <DrawerWrapper state="create" Component={CreateApplicant} />
       <DrawerWrapper state="message" Component={Message} />
       <DrawerWrapper state="view" Component={ViewApplicant} />
+      <DrawerWrapper state="delete" Component={DeleteNotice} />
     </>
   );
 };
