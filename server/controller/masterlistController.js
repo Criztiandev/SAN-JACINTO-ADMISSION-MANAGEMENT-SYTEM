@@ -9,7 +9,7 @@ export const fetchMasterListByLevel = expressAsyncHandler(async (req, res) => {
   const applicants = await applicantModel
     .find({
       "studentDetails.yearLevel": `Grade ${level}`,
-      role: "regular",
+      role: { $in: ["transferee", "regular"] },
       status: "done",
     })
     .lean()
@@ -239,8 +239,9 @@ export const fetchApplicationForm = expressAsyncHandler(async (req, res) => {
 export const fetchExaminieesCredentials = expressAsyncHandler(
   async (req, res) => {
     const { track } = req.query || {};
+
     const _examiniees = await examinieesModel
-      .find({ track: track, schedule: { $ne: null } })
+      .find({ track: track, status: "scheduled" })
       .lean();
 
     const _examinieesTemplate = _examiniees.map((field) => {
@@ -264,7 +265,7 @@ export const fetchExaminieesCredentials = expressAsyncHandler(
 
 export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
   const _applicants = await applicantModel
-    .find({ role: "regular", status: "done" })
+    .find({ status: "done" })
     .lean()
     .select("_id studentDetails.yearLevel");
 
@@ -290,7 +291,10 @@ export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
     count: (countsByYearLevel[title] || 0) + count,
   }));
 
-  const _examinees = await examinieesModel.find({}).lean().select("_id");
+  const _examinees = await examinieesModel
+    .find({ status: "scheduled" })
+    .lean()
+    .select("_id");
 
   const finalPayload = [
     ...combinedPayload,

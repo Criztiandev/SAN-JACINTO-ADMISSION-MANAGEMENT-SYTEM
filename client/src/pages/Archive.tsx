@@ -35,7 +35,7 @@ const Archive = () => {
   const { updateURL } = useURL();
   const { search, handleSearch, handleMutateData } = useTableContext();
   const { isLoading, isPending, isFetched, refetch } = useFetch({
-    route: "/applicant?status=archive&roleExtend=transferee",
+    route: "/applicant/archive",
     overrideFn: handleMutateData,
     key: ["applicants"],
   });

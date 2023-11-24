@@ -5,9 +5,15 @@ import dayjs from "dayjs";
 import { sendEmail } from "../utils/email.uitls.js";
 
 export const fetchAllExaminiees = asyncHandler(async (req, res) => {
-  const { filter } = req.query;
+  const { status } = req.query;
 
-  const _examiniees = await examinieesModel.find(filter).lean();
+  const initialQuery = {};
+
+  if (status) {
+    initialQuery.status = status;
+  }
+
+  const _examiniees = await examinieesModel.find(initialQuery).lean();
 
   res.status(200).json({
     payload: _examiniees,

@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import applicantModel from "../models/applicantModel.js";
 import { sendEmail } from "../utils/email.uitls.js";
+import expressAsyncHandler from "express-async-handler";
 
 export const createApplicant = asyncHandler(async (req, res) => {
   const { personalDetails } = req.body;
@@ -157,5 +158,14 @@ export const deleteApplicant = asyncHandler(async (req, res) => {
   res.status(200).json({
     payload: _applicant._id,
     message: "Applicant is Deleted Successfully",
+  });
+});
+
+export const fetchAllArchive = expressAsyncHandler(async (req, res) => {
+  const _applicnat = await applicantModel.find({ status: "archive" }).lean();
+
+  res.status(200).json({
+    payload: _applicnat,
+    message: "Archive Fetched successfully",
   });
 });

@@ -268,6 +268,15 @@ export const finishSchedule = expressAsyncHandler(async (req, res) => {
             return;
           }
 
+          if (_data?.role === "transferee") {
+            await applicantModel.findOneAndUpdate(
+              { _id: id.toString() },
+              { status: "done" },
+              { new: true }
+            );
+            return;
+          }
+
           await applicantModel.findOneAndUpdate(
             { _id: id.toString() },
             { status: "done" },

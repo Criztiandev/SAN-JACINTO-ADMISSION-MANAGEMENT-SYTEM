@@ -3,6 +3,7 @@ import {
   createApplicant,
   deleteApplicant,
   fetchAllApplicant,
+  fetchAllArchive,
   fetchAllRegularStudents,
   fetchApplicantByID,
   updateApplicant,
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.post("/create", createApplicant);
 
+router.get("/archive", fetchAllArchive);
 router.get("/", fetchAllApplicant);
 router.get("/regular", fetchAllRegularStudents);
 

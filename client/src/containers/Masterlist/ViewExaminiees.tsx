@@ -40,7 +40,7 @@ const ViewExaminiees = () => {
   const [selectedFormat, setSelectedFormat] = useState("");
 
   const { data, isLoading, isError } = useFetch({
-    route: `/examiniees`,
+    route: `/examiniees?status=scheduled`,
     key: [`examiniees-masterlist`],
   });
 
