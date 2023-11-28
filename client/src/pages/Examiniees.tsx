@@ -19,6 +19,7 @@ import ViewApplicant from "../containers/Applicants/ViewApplicant";
 import PromoteBatch from "../containers/Examiniees/PromoteBatch";
 import useURL from "../hooks/useURL";
 import { useEffect } from "react";
+import Button from "../components/Button";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
@@ -48,8 +49,6 @@ const Examiniees = () => {
       accessorKey: "fullName",
       cell: ({ row, getValue }) => {
         const { original } = row;
-
-        console.log(original);
         return (
           <FirstColumn
             UID={original?._id}
@@ -92,7 +91,16 @@ const Examiniees = () => {
 
   return (
     <>
-      <BaseLayout title="Examiniees">
+      <BaseLayout
+        title="Examiniees"
+        actions={
+          <Button
+            title="Promote"
+            onClick={() => {
+              updateURL("state=promote");
+            }}
+          />
+        }>
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"

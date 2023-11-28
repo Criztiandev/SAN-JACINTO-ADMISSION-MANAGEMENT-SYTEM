@@ -66,14 +66,15 @@ export const annoucementBatch = expressAsyncHandler(async (req, res) => {
 
 const generateMessage = (fullName, schedule, permit, track, message) => {
   return `
-  Dear ${fullName},
+  Dear ${fullName},\n
   We hope this message finds you well. This is to inform you that your examination schedule has been finalized, and we are excited to confirm your participation in the upcoming examination.
   
-  To ensure a smooth examination process, we kindly request you to submit the following documents at your earliest convenience:
-
+  [❗ DETAILS]
   📅 Schedule: ${schedule}
   📜 Permit ID: ${permit}
   🎒 Track: ${track}
+
+  To ensure a smooth examination process, we kindly request you to submit the following documents at your earliest convenience:
 
   ${message}
 

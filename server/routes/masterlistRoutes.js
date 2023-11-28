@@ -16,5 +16,5 @@ router.get("/SF1", fetchSF1List);
 router.get("/FORM", fetchApplicationForm);
 router.get("/examiniees", fetchExaminieesCredentials);
 
-router.delete("/", deleteSelectedList);
+router.post("/", deleteSelectedList);
 export default router;

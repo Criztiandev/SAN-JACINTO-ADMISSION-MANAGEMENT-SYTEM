@@ -308,16 +308,25 @@ export const fetchMasterListLevels = expressAsyncHandler(async (req, res) => {
 });
 
 export const deleteSelectedList = expressAsyncHandler(async (req, res) => {
-  const { level } = req.query;
+  const { selected } = req.body;
 
-  // Find and delete all applicants with the specified year level
+  // Check if selected is provided in the request body
+  if (!selected || !Array.isArray(selected) || selected.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "Invalid request. No items selected for deletion." });
+  }
+
+  // Use the identifiers in the selected array to delete records
   const result = await applicantModel.deleteMany({
-    "studentDetails.yearLevel": `Grade ${level}`,
+    _id: { $in: selected }, // Assuming _id is the identifier for your records
   });
 
   // Check if any documents were deleted
   if (result.deletedCount <= 0) {
-    throw new Error("Invalid Action, No matching applicants found");
+    return res
+      .status(404)
+      .json({ message: "No matching applicants found for deletion." });
   }
 
   res.status(200).json({ payload: null, message: "Deleted Successfully" });

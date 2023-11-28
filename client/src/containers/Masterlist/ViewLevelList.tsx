@@ -47,7 +47,7 @@ const ViewLevelList = () => {
 
   const { data: formData, isLoading: isFormLoading } = useFetch({
     route: `/masterlist/${selectedForm}?level=${level}`,
-    key: ["temp"],
+    key: ["masterlist-finals"],
     overrideFn: () => setIsRefetch(false),
     option: {
       enabled: isRefetch,
@@ -55,12 +55,12 @@ const ViewLevelList = () => {
   });
 
   const { mutate } = useCustomMutation({
-    route: `/masterlist?level=${level}`,
+    route: `/masterlist`,
     overrideFn: () => {
       updateURL("/masterlist");
       toast.success("Master List Deleted Successfully");
     },
-    type: "delete",
+    type: "post",
   });
 
   const handleSelectFile = (file: string) => {
@@ -86,7 +86,9 @@ const ViewLevelList = () => {
   };
 
   const handleFlush = () => {
-    mutate({});
+    mutate({
+      selected: data?.map((field: any) => field?._id),
+    });
   };
 
   if (isLoading || isError)
