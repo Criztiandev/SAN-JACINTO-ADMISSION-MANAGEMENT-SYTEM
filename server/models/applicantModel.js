@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
 const nameSchema = new mongoose.Schema({
-  firstName: { type: String, required: true },
-  middleName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  contact: { type: String, require: true },
+  firstName: { type: String, default: "N/A" },
+  middleName: { type: String, default: "N/A" },
+  lastName: { type: String, default: "N/A" },
+  contact: { type: String, default: "N/A" },
 });
 
 const addressSchema = new mongoose.Schema({
-  houseNo: { type: String, required: true },
-  street: { type: String, required: true },
+  houseNo: { type: String, default: "N/A" },
+  street: { type: String, default: "N/A" },
   barangay: { type: String, required: true },
   municipality: { type: String, required: true },
   province: { type: String, required: true },
@@ -20,8 +20,8 @@ const addressSchema = new mongoose.Schema({
 const applicantSchema = mongoose.Schema(
   {
     studentDetails: {
-      LRN: { type: String, required: true, unique: true },
-      PSA: { type: String, required: true, unique: true },
+      LRN: { type: String, default: "N/A" },
+      PSA: { type: String, default: "N/A" },
       yearLevel: { type: String, required: true },
       track: { type: String, require: true },
       schoolYear: { type: String, require: true },
@@ -30,16 +30,15 @@ const applicantSchema = mongoose.Schema(
 
     personalDetails: {
       firstName: { type: String, required: true },
-      middleName: { type: String, required: true },
+      middleName: { type: String, default: "" },
       lastName: { type: String, required: true },
-      suffix: { type: String, default: "N/A" },
+      suffix: { type: String, default: "" },
       gender: { type: String, required: true },
       birthDate: { type: String },
       age: { type: Number, required: true },
       motherTongue: { type: String, required: true }, // Corrected typo
       email: { type: String, require: true, unique: true },
       contact: { type: String, require: true, unique: true },
-      facebookLink: { type: String },
       religion: { type: String, require: true },
     },
 
@@ -61,17 +60,16 @@ const applicantSchema = mongoose.Schema(
       mother: nameSchema,
       legalGuardian: {
         firstName: { type: String, required: true },
-        middleName: { type: String, required: true },
+        middleName: { type: String, default: "N/A" },
         lastName: { type: String, required: true },
-        contact: { type: String, require: true },
-        relationship: { type: String, require: true },
+        contact: { type: String, default: "N/A" },
       },
     },
 
     otherDetails: {
-      is4psBeneficiary: { type: String, require: true },
-      isIndigenousPerson: { type: String, require: true },
-      isLWD: { type: String, require: true },
+      is4psBeneficiary: { type: String, default: "N/A" },
+      isIndigenousPerson: { type: String, default: "N/A" },
+      isLWD: { type: String, default: "N/A" },
     },
 
     role: {

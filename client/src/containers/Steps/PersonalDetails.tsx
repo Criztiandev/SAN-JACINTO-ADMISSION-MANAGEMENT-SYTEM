@@ -44,7 +44,7 @@ const PersonalDetails = () => {
 
       <div className="grid grid-cols-2 gap-6 items-center justify-center ">
         {OmitInputObject(
-          ["Religion", "Mother Tongue"],
+          ["Religion", "Mother Tongue", "Facebook Link"],
           PersonalDetailsSectionSection
         ).map((props) => (
           <Input key={props.label} {...props} />

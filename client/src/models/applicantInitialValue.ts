@@ -3,13 +3,11 @@ export const applicantInputMaps = [
     title: "Student Details",
     model: [
       {
-        type: "number",
         label: "LRN",
         name: "studentDetails.LRN",
         placeholder: "Enter your LRN",
       },
       {
-        type: "number",
         label: "PSA Ref#",
         name: "studentDetails.PSA",
         placeholder: "Enter your PSA Reference",

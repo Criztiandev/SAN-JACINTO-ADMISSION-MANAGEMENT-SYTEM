@@ -20,7 +20,7 @@ export const messageApplicant = expressAsyncHandler(async (req, res) => {
 });
 
 export const annoucementBatch = expressAsyncHandler(async (req, res) => {
-  const { applicants, title, message, examiniees } = req.body;
+  const { applicants, title, message } = req.body;
 
   // get the emails of applicants
   const emails = applicants?.map((applicant) => {
@@ -29,16 +29,16 @@ export const annoucementBatch = expressAsyncHandler(async (req, res) => {
 
   const APIDS = applicants?.map((field) => field?._id);
 
-  const _examiniees = await examiniationModel
+  const _examinees = await examiniationModel
     .find({ APID: { $in: APIDS } })
     .lean()
     .select("schedule track permitID fullName");
 
-  console.log(_examiniees);
+  console.log(_examinees);
 
   // // send email message per applicant
-  const emailPromises = emails.map((email, index) => {
-    const { fullName, schedule, permitID, track } = _examiniees[index];
+  const emailPromises = _examinees.map(async (examinee, index) => {
+    const { fullName, schedule, permitID, track } = examinee;
     const template = generateMessage(
       fullName,
       schedule,
@@ -47,25 +47,20 @@ export const annoucementBatch = expressAsyncHandler(async (req, res) => {
       message
     );
 
-    sendEmail({
-      target: email,
+    await sendEmail({
+      target: emails[index],
       title: title,
       body: template,
     });
   });
 
-  const results = await Promise.all(emailPromises);
+  await Promise.all(emailPromises);
 
-  // Check if all emails were sent successfully
-  const allEmailsSent = results.every((result) => result);
-
-  if (!allEmailsSent) {
-    throw new Error("Something went wrong. Please try again.");
-  }
+  if (!emailPromises) throw new Error("Something went wrong, Please Try again");
 
   res.status(200).json({
     payload: null,
-    message: "Annouced Successfully",
+    message: "Announced Successfully",
   });
 });
 

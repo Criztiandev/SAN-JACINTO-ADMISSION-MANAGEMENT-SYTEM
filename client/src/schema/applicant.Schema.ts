@@ -4,42 +4,50 @@ import * as Yup from "yup";
 export const addressTemplateSchema = Yup.object().shape({
   houseNo: Yup.string()
     .required("House number is required")
-    .matches(/^[1-9A-Za-z\s]+$/, "Invalid house number")
-    .max(50, "Too long"),
+    .matches(/^(N\/A|\d+)$/, 'House No must be a number or "N/A"')
+    .max(50, "Too long")
+    .required("House Number is required"),
 
   street: Yup.string()
     .required("Street is required")
-    .matches(/^[a-zA-Z0-9 -]+$/, "Should only contain Number, Space and Hypen")
-    .matches(/^[A-Z0-9 -]+$/, "It should everything is UPPERCASE")
+    .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Street must be a string or "N/A"')
+    .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
     .min(3, "Too short")
     .max(20, "Too Long")
-    .trim("Trimmed"),
+    .trim("Trimmed")
+    .notRequired(),
 
   barangay: Yup.string()
     .required("Barangay is required")
-    .matches(/^[a-zA-Z0-9 -]+$/, "Should only contain Number, Space and Hypen")
-    .matches(/^[A-Z0-9 -]+$/, "It should everything is UPPERCASE")
+    .matches(
+      /^(N\/A|[a-zA-Z0-9 -]+)$/,
+      "Should only contain Number, Space and Hypen or N/A"
+    )
+    .matches(/(N\/A|^[A-Z0-9 -]+)$/, "Everything should be UPPERCASE")
     .min(3, "Too short")
     .max(20, "Too Long")
     .trim("Trimmed"),
   municipality: Yup.string()
     .required("Municipality is required")
     .matches(/^[a-zA-Z0-9 -]+$/, "Should only contain Number, Space and Hypen")
-    .matches(/^[A-Z0-9 -]+$/, "It should everything is UPPERCASE")
+    .matches(/^[A-Z0-9 -]+$/, "Everything should be UPPERCASE")
     .min(5, "Too Short")
     .max(50, "Too long"),
+
   province: Yup.string()
     .required("Province is required")
     .matches(/^[a-zA-Z0-9 -]+$/, "Should only contain Number, Space and Hypen")
-    .matches(/^[A-Z0-9 -]+$/, "It should everything is UPPERCASE")
+    .matches(/^[A-Z0-9 -]+$/, "Everything should be UPPERCASE")
     .min(5, "Too Short")
     .max(50, "Too long"),
+
   country: Yup.string()
     .required("Country is required")
     .matches(/^[a-zA-Z0-9 -]+$/, "Should only contain Number, Space and Hypen")
-    .matches(/^[A-Z0-9 -]+$/, "It should everything is UPPERCASE")
+    .matches(/^[A-Z0-9 -]+$/, "Everything should be UPPERCASE")
     .min(5, "Too Short")
     .max(50, "Too long"),
+
   zip: Yup.string()
     .required("ZIP code is required")
     .min(3, "Too short")
@@ -49,27 +57,29 @@ export const addressTemplateSchema = Yup.object().shape({
 const guardianTemplateSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name is required")
-    .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-    .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+    .matches(/^(N\/A|[a-zA-Z ]+)$/, 'First name must be a string or "N/A"')
+    .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
     .min(3, "Too short")
     .max(20, "Too Long")
-    .trim("Trimmed"),
+    .trim("Trimmed")
+    .required("First name is required"),
 
   middleName: Yup.string()
     .required("Middle name is required")
-    .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-    .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+    .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Middle name must be a string or "N/A"')
+    .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
     .min(3, "Too short")
     .max(20, "Too Long")
-    .trim("Trimmed"),
+    .trim("Trimmed")
+    .required("Middle Name is required"),
 
   lastName: Yup.string()
-    .required("Last name is required")
-    .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-    .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+    .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Last name must be a string or "N/A"')
+    .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
     .min(3, "Too short")
     .max(20, "Too Long")
-    .trim("Trimmed"),
+    .trim("Trimmed")
+    .required("Last name is required"),
 
   contact: Yup.string()
     .required("Contact is required")
@@ -77,8 +87,8 @@ const guardianTemplateSchema = Yup.object().shape({
       /^(09\d*|N\/A)$/,
       "Invalid contact. Should start with 09 or be N/A"
     )
-    .matches(/^(09\d*|N\/A|\d+)$/, "Invalid contact. Only numbers are allowed")
-    .max(12, "Contact must not exceed 12 characters"),
+    .max(11, "Contact must not exceed 12 characters")
+    .required("Contact is required"),
 });
 
 export const studentDetailsSchema = Yup.object().shape({
@@ -86,11 +96,14 @@ export const studentDetailsSchema = Yup.object().shape({
     LRN: Yup.string()
       .required("LRN is required")
       .max(12, "Too Long")
-      .min(3, "Too Short"),
+      .min(3, "Too Short")
+      .matches(/^(N\/A|\d+)$/, 'LRN must be a number or "N/A"')
+      .required("LRN is required"),
     PSA: Yup.string()
       .required("PSA is required")
       .max(12, "Too Long")
-      .min(3, "Too Short"),
+      .matches(/^(N\/A|\d+)$/, 'PSA must be a number or "N/A"')
+      .required("PSA is Required"),
     track: Yup.string().required("Track is required"),
     schoolYear: Yup.string()
       .required("School year is required")
@@ -107,7 +120,7 @@ export const studentDetailsSchema = Yup.object().shape({
     lastSchoolAttended: Yup.string()
       .required("Last School Name is required")
       .matches(/^[a-zA-Z ]+$/, "Last School Name  should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(32, "Too Long")
       .trim("Trimmed"),
@@ -158,24 +171,25 @@ const personalDetailsSchema = Yup.object().shape({
   personalDetails: Yup.object().shape({
     firstName: Yup.string()
       .required("First name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'First name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
 
     middleName: Yup.string()
       .required("Middle name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Middle name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
-      .trim("Trimmed"),
+      .trim("Trimmed")
+      .notRequired(),
 
     lastName: Yup.string()
       .required("Last name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Last name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -195,14 +209,7 @@ const personalDetailsSchema = Yup.object().shape({
     contact: Yup.string()
       .required("Contact is required")
       .min(3, "Too Short")
-      .max(13, "Too long"),
-    facebookLink: Yup.string().test(
-      "is-N/A-or-URL",
-      'Invalid input. Please enter "N/A" or a valid URL',
-      function (value) {
-        return value === "N/A" || Yup.string().url().isValidSync(value);
-      }
-    ),
+      .max(10, "Too long"),
   }),
 });
 
@@ -226,7 +233,7 @@ const otherDetailsSchema = Yup.object().shape({
     is4psBeneficiary: Yup.string()
       .required("is4psBeneficiary is required")
       .matches(/^[a-zA-Z ]+$/, "is4psBeneficiary should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -234,7 +241,7 @@ const otherDetailsSchema = Yup.object().shape({
     isIndigenousPerson: Yup.string()
       .required("This Field is requried")
       .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -242,7 +249,7 @@ const otherDetailsSchema = Yup.object().shape({
     isLWD: Yup.string()
       .required("This Field is requried")
       .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -254,11 +261,14 @@ export const finalApplicantSchmea = Yup.object().shape({
     LRN: Yup.string()
       .required("LRN is required")
       .max(12, "Too Long")
-      .min(3, "Too Short"),
+      .min(3, "Too Short")
+      .matches(/^(N\/A|\d+)$/, 'LRN must be a number or "N/A"')
+      .notRequired(),
     PSA: Yup.string()
       .required("PSA is required")
       .max(12, "Too Long")
-      .min(3, "Too Short"),
+      .matches(/^(N\/A|\d+)$/, 'PSA must be a number or "N/A"')
+      .notRequired(),
     track: Yup.string().required("Track is required"),
     yearLevel: Yup.string()
       .required("Required Field")
@@ -281,7 +291,7 @@ export const finalApplicantSchmea = Yup.object().shape({
     lastSchoolAttended: Yup.string()
       .required("Last School Name is required")
       .matches(/^[a-zA-Z ]+$/, "Last School Name  should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(32, "Too Long")
       .trim("Trimmed"),
@@ -289,24 +299,24 @@ export const finalApplicantSchmea = Yup.object().shape({
   personalDetails: Yup.object().shape({
     firstName: Yup.string()
       .required("First name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'First name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
 
     middleName: Yup.string()
       .required("Middle name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Middle name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
 
     lastName: Yup.string()
       .required("Last name is required")
-      .matches(/^[a-zA-Z ]+$/, "First name should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^(N\/A|[a-zA-Z ]+)$/, 'Last name must be a string or "N/A"')
+      .matches(/^(N\/A|[A-Z ]+)$/, "Everything should be UPPERCASE")
       .min(3, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -327,13 +337,6 @@ export const finalApplicantSchmea = Yup.object().shape({
       .required("Contact is required")
       .min(3, "Too Short")
       .max(12, "Too long"),
-    facebookLink: Yup.string().test(
-      "is-N/A-or-URL",
-      'Invalid input. Please enter "N/A" or a valid URL',
-      function (value) {
-        return value === "N/A" || Yup.string().url().isValidSync(value);
-      }
-    ),
   }),
   gradeDetails: Yup.object().shape({
     english: Yup.number()
@@ -374,7 +377,7 @@ export const finalApplicantSchmea = Yup.object().shape({
     is4psBeneficiary: Yup.string()
       .required("is4psBeneficiary is required")
       .matches(/^[a-zA-Z ]+$/, "is4psBeneficiary should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -382,7 +385,7 @@ export const finalApplicantSchmea = Yup.object().shape({
     isIndigenousPerson: Yup.string()
       .required("This Field is requried")
       .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),
@@ -390,7 +393,7 @@ export const finalApplicantSchmea = Yup.object().shape({
     isLWD: Yup.string()
       .required("This Field is requried")
       .matches(/^[a-zA-Z ]+$/, "isIndigenousPerson should only contain letters")
-      .matches(/^[A-Z ]+$/, "It should everything is UPPERCASE")
+      .matches(/^[A-Z ]+$/, "Everything should be UPPERCASE")
       .min(2, "Too short")
       .max(20, "Too Long")
       .trim("Trimmed"),

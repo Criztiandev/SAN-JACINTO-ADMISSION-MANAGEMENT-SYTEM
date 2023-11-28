@@ -33,7 +33,7 @@ const CustomCarousel = ({
         ))}
       </Carousel>
       <Typography as="span" className="text-gray-400 pb-2 mt-4">
-        Please Select Your Gender
+        Please Select Your Preference
       </Typography>
     </div>
   );

@@ -14,6 +14,8 @@ import Select from "../../components/Select";
 import ItemSelect from "../Form/ItemSelect";
 import { OmitInputObject } from "../../utils/OmitUtils";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const StudentDetails = () => {
   FetchLocalStorageFormData("applicant_form");
@@ -25,7 +27,18 @@ const StudentDetails = () => {
   const { yearLevel: currentYearLevel } = studentDetails;
   const preferedTrack = GradeLevelTrack(gradeDetails, currentYearLevel);
 
-  console.log(currentYearLevel);
+  useEffect(() => {
+    toast.info("❗ Tips: 👋 If you dont know the answer just type N/A '", {
+      theme: "colored",
+    });
+
+    setTimeout(() => {
+      toast.info(
+        "❗ Tips: 👋By the way, make sure all the text is BIG LETTER to proceed'",
+        { theme: "colored" }
+      );
+    }, 7000);
+  }, []);
 
   return (
     <section>
@@ -46,7 +59,7 @@ const StudentDetails = () => {
             model
           ).map((props) => (
             <motion.div key={props.label} whileHover={{ scale: 1.03 }}>
-              <Input type="number" {...props} className="uppercase" />
+              <Input {...props} className="uppercase" />
             </motion.div>
           ))}
 

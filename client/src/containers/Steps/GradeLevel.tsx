@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from "../../components/Carousel";
 import { FetchLocalStorageFormData } from "../../helper/Stepper.Helper";
 import { yearLevelItem } from "../../data/Stepper.Data";
 import Typography from "../../components/Typography";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { toast } from "react-toastify";
 const GradeLevel = () => {
   FetchLocalStorageFormData("applicant_form");
   const { getItem } = useLocalStorage("applicant_form");
   const [selected, setSelected] = useState(
     getItem()?.studentDetails?.yearLevel || ""
   );
+
+  useEffect(() => {
+    toast.info(
+      "❗ Tips: 👋 You can click and drag the cards to view all the Year Level '",
+      { theme: "colored" }
+    );
+  }, []);
 
   return (
     <section className="flex justify-center items-center flex-col  h-full mb-4 overflow-hidden ">

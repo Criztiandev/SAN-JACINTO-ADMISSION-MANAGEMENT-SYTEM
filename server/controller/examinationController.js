@@ -122,23 +122,21 @@ const acceptAsApplicant = async (UID, res) => {
 
   if (!_accepted) throw new Error("Something went wrong, Please Try again");
 
-  const { lastName, firstName, middleName, suffix, email, contact } =
+  const { lastName, firstName, middleName, email, contact, gender } =
     _accepted?.personalDetails;
-  const { LRN } = _accepted?.studentDetails;
 
   // generate permit
   const currentDate = dayjs();
   const formatedDate = currentDate.format("DD/MM/YY").split("/").join("");
-  const permit = `${LRN.substring(0, 6)}-${formatedDate}-${
-    _accepted?.studentDetails?.track
-  }`;
+  const permit = `${formatedDate}-${_accepted?.studentDetails?.track}`;
 
   const _examiniees = await examinieesModel.create({
     APID: UID,
     permitID: permit,
-    fullName: `${lastName}, ${firstName} ${middleName[0]} ${suffix}`,
+    fullName: `${lastName}, ${firstName} ${middleName && middleName[0]}`,
     email,
     contact,
+    gender,
     track: _accepted?.studentDetails?.track,
   });
 

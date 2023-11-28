@@ -8,8 +8,12 @@ import { ItemSelectProps } from "../interface/FormInterface";
 
 export const JrTracksItemModel: CardProps[] = [
   { cover: "null", title: "Regular", subtitle: "Regular" },
-  { cover: "null", title: "SPE", subtitle: "General Academic Strand" },
-  { cover: "null", title: "SPJ", subtitle: "Special Journalism" },
+  {
+    cover: "null",
+    title: "SPE",
+    subtitle: "Special Program of Science and Technology",
+  },
+  { cover: "null", title: "SPJ", subtitle: "Special Program for Journalism" },
 ];
 
 export const SHSTracksItemModel: CardProps[] = [
@@ -104,11 +108,31 @@ export const studenDetailsInputModel: InputProps[] = [
 ];
 
 export const gradeDetailsInputModel: InputProps[] = [
-  { label: "English", name: "gradeDetails.english" },
-  { label: "Filipino", name: "gradeDetails.filipino" },
-  { label: "Science", name: "gradeDetails.science" },
-  { label: "Math", name: "gradeDetails.math" },
-  { label: "General Average", name: "gradeDetails.generalAve" },
+  {
+    label: "English",
+    name: "gradeDetails.english",
+    placeholder: "Enter your English Grades",
+  },
+  {
+    label: "Filipino",
+    name: "gradeDetails.filipino",
+    placeholder: "Enter your Filipino Grades",
+  },
+  {
+    label: "Science",
+    name: "gradeDetails.science",
+    placeholder: "Enter your Science Grades",
+  },
+  {
+    label: "Math",
+    name: "gradeDetails.math",
+    placeholder: "Enter your Math Grades",
+  },
+  {
+    label: "General Weighted Average",
+    name: "gradeDetails.generalAve",
+    placeholder: "Enter your GWA",
+  },
 ];
 
 export const personalDetailsInputModel: InputProps[] = [

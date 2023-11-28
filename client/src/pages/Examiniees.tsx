@@ -16,14 +16,13 @@ import TablePanelSkeleton from "../containers/Skeleton/ApplicantSkeleton";
 import DrawerWrapper from "../containers/Drawers/DrawerWrapper";
 import ViewExaminiee from "../containers/Examiniees/ViewExaminiee";
 import ViewApplicant from "../containers/Applicants/ViewApplicant";
-import Button from "../components/Button";
 import PromoteBatch from "../containers/Examiniees/PromoteBatch";
 import useURL from "../hooks/useURL";
 import { useEffect } from "react";
 
 const Examiniees = () => {
   const { search, handleSearch, handleMutateData } = useTableContext();
-  const { updateURL, queryParams, redirect } = useURL();
+  const { updateURL, queryParams } = useURL();
 
   const isRefetch = queryParams.get("refetch");
 
@@ -49,10 +48,12 @@ const Examiniees = () => {
       accessorKey: "fullName",
       cell: ({ row, getValue }) => {
         const { original } = row;
+
+        console.log(original);
         return (
           <FirstColumn
             UID={original?._id}
-            gender={original?.gender}
+            gender={original?.personalDetails?.gender}
             value={getValue()}
           />
         );
@@ -91,21 +92,7 @@ const Examiniees = () => {
 
   return (
     <>
-      <BaseLayout
-        title="Examiniees"
-        actions={
-          <>
-            <Button
-              as="outlined"
-              title="Promote"
-              onClick={() => updateURL("state=promote")}
-            />
-            <Button
-              title="Download"
-              onClick={() => redirect("/masterlist?state=examinees")}
-            />
-          </>
-        }>
+      <BaseLayout title="Examiniees">
         <div className="flex justify-between items-center">
           <SearchBar
             dir="left"

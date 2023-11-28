@@ -8,22 +8,21 @@ import PermanentAddress from "../containers/Steps/PermanentAddress";
 import GuardianDetails from "../containers/Steps/GuardianDetails";
 import OtherDetails from "../containers/Steps/OtherDetails";
 import ApplicationForm from "../containers/Steps/ApplicationForm";
-import OnBoarding from "../containers/Steps/OnBoarding";
 
 export const OutroModalDetails = [
   {
     title: "Congratulations 🎉",
-    desc: " Congratulations on your admission to our school! 🎉🎉 We have sent you a link to your private user account to keep you connected. Please remember not to share it with others.",
+    desc: " Your admission is a recognition of your dedication and academic accomplishments. We're excited to welcome you to our vibrant and diverse community of learners.",
   },
 
   {
     title: "Exciting Journey 🗻",
-    desc: "As you embark on this exciting journey, please bear in mind that your private account, email, contact, and Facebook will serve as the primary channels for receiving all school updates related to admission.",
+    desc: "As you start this exciting journey, connect with us on Facebook for updates, events, and community engagement. Simply visit SAN JACINTO NATIONAL HIGHSCHOOL on Facebook and hit 'Like' to stay connected.",
   },
 
   {
     title: "Stay Tuned 💪💪",
-    desc: " Stay connected with us on our Facebook account to stay informed about events and important announcements. If you ever have any questions, don't hesitate to use your facebook to get in touch. We're here to support you every step of the way!",
+    desc: "Stay connected on our Facebook account for event updates and important announcements. If you have questions, feel free to reach out via Facebook. We're here to support you every step of the way! 🌐📢🤝, Welcome aboard",
   },
 ];
 

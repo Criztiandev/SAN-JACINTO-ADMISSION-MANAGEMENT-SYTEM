@@ -15,6 +15,3 @@ export const authenticatedController = asyncHandler(async (req, res) => {
     messge: "Fetched Successfully",
   });
 });
-
-export const createUserAccount = asyncHandler(async (req, res) => {});
-export const createAdminAccount = asyncHandler(async (req, res) => {});

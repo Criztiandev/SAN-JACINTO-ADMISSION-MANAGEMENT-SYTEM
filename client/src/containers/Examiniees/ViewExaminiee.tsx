@@ -96,12 +96,7 @@ const ViewExaminiee = ({ APID }: { APID: string }) => {
           </section>
           {schedule !== null && (
             <section className="flex justify-end gap-4 my-4">
-              <Button
-                type="button"
-                as="outlined"
-                title="Fail"
-                disabled={isPending}
-              />
+              <Button as="outlined" title="Fail" disabled={isPending} />
               <Button as="contained" title="Pass" disabled={isPending} />
             </section>
           )}

@@ -10,6 +10,7 @@ const examResultsSchema = new mongoose.Schema({
   fullName: { type: String, require: true },
   email: { type: String, require: true },
   contact: { type: String, require: true },
+  gender: { type: String, require: true },
   fbID: { type: String },
   schedule: { type: String, require: true, default: null },
   track: { type: String, require: true },

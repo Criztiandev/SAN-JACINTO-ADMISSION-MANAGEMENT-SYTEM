@@ -30,6 +30,7 @@ const NoticeContent = () => {
         }
       } catch (error) {
         console.error("Error during confirmation:", error);
+        logout();
       }
     };
 

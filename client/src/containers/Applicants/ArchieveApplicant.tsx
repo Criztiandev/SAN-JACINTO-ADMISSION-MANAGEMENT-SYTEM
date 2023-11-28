@@ -62,11 +62,10 @@ const ArchieveApplicant: React.FC<ArchieveApplicantProps> = ({ APID }) => {
               personalDetails?.suffix || "Suffix"
             }`}
           </span>
-          's data? Archiving is an irreversible action and can lead to permanent
-          loss of information. Please take a moment to consider the potential
-          consequences before confirming this action. If you proceed, the data
-          will be removed from the system, and any associated records or
-          references may be lost.
+          's data? Archiving is a reversible action within the Archive table.
+          However, it's important to note that this process may lead to the
+          storage of applicant data, rendering it inaccessible for further
+          processing.
         </section>
 
         <section>

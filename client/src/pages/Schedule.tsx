@@ -12,6 +12,7 @@ import CreateCalendar from "../containers/Schedule/CreateCalendar";
 import ViewCalendar from "../containers/Schedule/ViewCalendar";
 import FetchLoader from "../containers/General/FetchLoader";
 import DeleteNotice from "../containers/Drawers/DeleteNotice";
+import { toast } from "react-toastify";
 
 const formatDate = (data: any) => {
   return data?.map(({ schedule, ...items }: any) => {
@@ -39,7 +40,15 @@ const Schedule = () => {
   const isRefetch = queryParams.get("refetch");
   const handleCreateSchedule = (data: any) => {
     const { start, end } = data;
-    updateURL(`state=create&start=${start}&end=${end}`);
+    const currentDate = new Date();
+    const startTime = new Date(start);
+
+    // Check if the start date is in the future or the same as the current date
+    if (startTime >= currentDate) {
+      updateURL(`state=create&start=${start}&end=${end}`);
+    } else {
+      toast.error("Invalid Date");
+    }
   };
 
   const handleSelectSchedule = (data: any) => {
