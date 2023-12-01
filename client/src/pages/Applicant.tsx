@@ -77,13 +77,17 @@ const Applicant = () => {
     {
       header: "Name",
       accessorFn: ({ personalDetails }) =>
-        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${personalDetails?.middleName}`,
+        `${personalDetails?.lastName}, ${personalDetails?.firstName} ${
+          personalDetails?.middleName === "N/A"
+            ? ""
+            : personalDetails?.middleName
+        }`,
       cell: ({ row, getValue }) => {
         const { original } = row;
         return (
           <FirstColumn
             UID={original?._id}
-            gender={original?.gender}
+            gender={original?.personalDetails?.gender}
             value={getValue()}
           />
         );

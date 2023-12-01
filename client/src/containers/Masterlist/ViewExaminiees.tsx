@@ -16,6 +16,7 @@ import DownloadIcon from "../../assets/icons/Download_circle_fill.svg";
 import dayjs from "dayjs";
 import Dropdown from "../../components/Dropdown";
 import ApplicantList from "../../assets/icons/Status_list.svg";
+import ApplicantIcon from "../../assets/icons/Applicant_Dark.svg";
 
 const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
   const today = new Date();
@@ -33,7 +34,7 @@ const getCurrentDateTime = (): { currentDate: string; currentTime: string } => {
 };
 
 const ViewExaminiees = () => {
-  const [preferedLevel, setPreferedLevel] = useState("SPJ");
+  const [preferedLevel, setPreferedLevel] = useState("Track");
   const [finalData, setFinalData] = useState([]);
   const [isRefetch, setIsRefetch] = useState(false);
   const [selectedForm, setSelectedForm] = useState("");
@@ -145,8 +146,8 @@ const ViewExaminiees = () => {
 
             <Dropdown
               type="button"
-              as="contained"
-              icon={ApplicantList}
+              as={preferedLevel === "Track" ? "outlined" : "contained"}
+              icon={preferedLevel === "Track" ? ApplicantIcon : ApplicantList}
               title={preferedLevel || "Grade level"}
               className="p-4 flex gap-2 flex-col w-[120px]"
               onClick={handleSelectLevel}

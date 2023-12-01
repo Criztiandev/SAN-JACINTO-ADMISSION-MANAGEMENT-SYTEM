@@ -16,13 +16,19 @@ import ExpandDownIcon from "../../assets/icons/Expand_down_light.svg";
 import ExpandUp from "../../assets/icons/Expand_up_light.svg";
 import { toast } from "react-toastify";
 import Select from "../../components/Select";
+import SeachIcon from "../../assets/icons/Search.svg";
 
 const PromoteBatch = () => {
+  const [filtered, setFilter] = useState([]);
+  const [search, setSearch] = useState("");
   const [hide, setHide] = useState(true);
   const { updateURL } = useURL();
   const { data } = useFetch({
     route: "/examiniees?status=finished",
     key: ["promite-examinies"],
+    overrideFn: (data: any) => {
+      setFilter(data);
+    },
   });
 
   const { handleSubmit, isPending } = useFormSubmit({
@@ -32,6 +38,19 @@ const PromoteBatch = () => {
       toast.success("Batch Examiniees Promoted Successfully");
     },
   });
+
+  const handleFilter = () => {
+    const filteredData = data?.filter((field: any) => {
+      if (field?.permitID === search) {
+        return true;
+      }
+
+      if (search === "" || search === null) {
+        return field;
+      }
+    });
+    setFilter(filteredData);
+  };
 
   return (
     <Formik
@@ -55,7 +74,34 @@ const PromoteBatch = () => {
 
         <main>
           <div className="my-4 ">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between gap-4 my-4">
+              <div className="flex">
+                <input
+                  type="text"
+                  placeholder="Search Permit ID"
+                  value={search}
+                  onChange={(e) => setSearch(e.currentTarget.value)}
+                  className="border border-gray-400 p-4 py-3 rounded-full"
+                />
+                <IconButton
+                  type="button"
+                  icon={SeachIcon}
+                  as="outlined"
+                  className="ml-4"
+                  onClick={handleFilter}
+                />
+              </div>
+              <Select
+                name="track"
+                className="rounded-full px-4 py-3 border-gray-400 border">
+                <option value="">Track</option>
+                <option value="Regular">Regular</option>
+                <option value="STE">STE</option>
+                <option value="SPJ">SPJ</option>
+                <option value="STEM">STEM</option>
+              </Select>
+            </div>
+            <div className="flex justify-between items-center mb-4 border-b border-gray-300 pb-4">
               <h4>Details</h4>
               <IconButton
                 as={hide ? "contained" : "outlined"}
@@ -65,17 +111,6 @@ const PromoteBatch = () => {
             </div>
             {hide && (
               <div>
-                <div className="flex justify-end">
-                  <Select
-                    name="track"
-                    className="rounded-full p-4 py-3 border-gray-400 border">
-                    <option value="">Track</option>
-                    <option value="Regular">Regular</option>
-                    <option value="STE">STE</option>
-                    <option value="SPJ">SPJ</option>
-                    <option value="STEM">STEM</option>
-                  </Select>
-                </div>
                 <Input
                   label="Title"
                   name="title"
@@ -97,10 +132,10 @@ const PromoteBatch = () => {
           </Typography>
 
           <div className="flex flex-col gap-4 max-h-[400px] overflow-y-auto h-full">
-            {data?.length <= 0 ? (
-              <EmptyCard title="No Exminees yet!!" />
+            {filtered?.length <= 0 ? (
+              <EmptyCard title="No Credentails Found" />
             ) : (
-              data?.map((props: any) => {
+              filtered?.map((props: any) => {
                 return (
                   <PromoteCard
                     key={props._id}
